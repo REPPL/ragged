@@ -1,0 +1,87 @@
+# Git files
+.git
+.gitignore
+.gitattributes
+
+# Claude Code / AI IDE files
+.claude/
+.claude-code.json
+.cursorrules
+.aider*
+
+# Python cache and build artefacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Testing
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Documentation build artefacts
+docs/_build/
+site/
+
+# Data directories (mounted as volumes)
+data/
+.chroma/
+.ollama/
+models/
+docker-data/
+
+# Docker files (avoid recursive builds)
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db

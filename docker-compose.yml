@@ -1,0 +1,62 @@
+services:
+  # Main ragged application
+  ragged-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ragged-app
+    ports:
+      - "${RAGGED_PORT:-8000}:8000"  # FastAPI default port
+    volumes:
+      - ./src:/app/src:ro  # Source code (read-only for safety)
+      - ./docs:/app/docs:ro  # Documentation (read-only)
+      - ./data:/app/data  # Runtime data (read-write)
+      - ./tests:/app/tests:ro  # Tests (read-only)
+    environment:
+      - OLLAMA_URL=${OLLAMA_URL:-http://host.docker.internal:11434}
+      - CHROMA_URL=${CHROMA_URL:-http://chromadb:8001}
+      - PYTHONUNBUFFERED=${PYTHONUNBUFFERED:-1}
+      - ENVIRONMENT=${ENVIRONMENT:-development}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      chromadb:
+        condition: service_healthy
+    networks:
+      - ragged-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # ChromaDB vector database
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: ragged-chromadb
+    ports:
+      - "${CHROMA_PORT:-8001}:8000"  # ChromaDB default port (mapped to 8001 to avoid conflict)
+    volumes:
+      - chroma-data:/chroma/chroma  # Persistent vector storage
+    environment:
+      - IS_PERSISTENT=${IS_PERSISTENT:-TRUE}
+      - ANONYMIZED_TELEMETRY=${ANONYMIZED_TELEMETRY:-FALSE}
+    networks:
+      - ragged-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "timeout 2 bash -c '</dev/tcp/localhost/8000' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+networks:
+  ragged-network:
+    driver: bridge
+
+volumes:
+  chroma-data:
+    name: ragged-chroma-data
