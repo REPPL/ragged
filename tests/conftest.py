@@ -8,6 +8,15 @@ from typing import Generator
 import pytest
 
 
+def pytest_configure(config):
+    """Register custom pytest markers."""
+    config.addinivalue_line("markers", "unit: Unit tests")
+    config.addinivalue_line("markers", "integration: Integration tests")
+    config.addinivalue_line("markers", "slow: Slow-running tests")
+    config.addinivalue_line("markers", "requires_ollama: Tests requiring Ollama service")
+    config.addinivalue_line("markers", "requires_chromadb: Tests requiring ChromaDB service")
+
+
 @pytest.fixture
 def temp_dir() -> Generator[Path, None, None]:
     """Create a temporary directory for test files."""
