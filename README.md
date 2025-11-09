@@ -1,61 +1,38 @@
 # ragged - Privacy-First Local RAG System
 
-**Version:** 0.1.0 (In Development)
-**Status:** Implementation Phase 2/14
+**Version:** 0.1.0
 **License:** GPL-3.0
 
 A privacy-first document question-answering system that runs entirely locally using Retrieval-Augmented Generation (RAG) technology. No cloud, no tracking, no compromises.
 
 ---
 
-## 🚧 Development Status
+## What is ragged?
 
-**ragged v0.1 is currently under development.** This README reflects the target state. See implementation status below.
+ragged is a local RAG (Retrieval-Augmented Generation) system that lets you ask questions about your documents and get accurate answers with citations - all while keeping your data completely private and local.
 
-### What's Complete ✅
+### Key Features
 
-- **Phase 1: Foundation** (100% Complete)
-  - Type-safe configuration system (Pydantic)
-  - Privacy-safe structured logging
-  - Security utilities (path validation, file checks)
-  - Document models with validation
-  - Test infrastructure (44 tests passing, 96% coverage)
+- 📚 **Multi-Format Support**: Ingest PDF, TXT, Markdown, and HTML documents
+- 🧠 **Semantic Understanding**: Uses embeddings to understand meaning, not just keywords
+- 🔍 **Smart Retrieval**: Finds relevant information across all your documents
+- 💬 **Accurate Answers**: Generates natural language responses with source citations
+- 🔒 **100% Private**: Everything runs locally - no data leaves your machine
+- ⚡ **Hardware Optimized**: Supports CPU, CUDA, and Apple Silicon (MPS)
+- 🎨 **Beautiful CLI**: Intuitive command-line interface with progress bars and colors
 
-### What's In Progress 🔄
+### How It Works
 
-- **Phase 2: Document Ingestion** (Partial)
-  - Models complete
-  - Loaders needed (PDF, TXT, Markdown, HTML)
-
-### What's Planned 📋
-
-Comprehensive implementation skeletons exist for:
-- Phase 3: Chunking System
-- Phase 4: Dual Embedding Models (sentence-transformers + Ollama)
-- Phase 5: Vector Storage (ChromaDB)
-- Phase 6: Retrieval System
-- Phase 7: LLM Generation (Ollama)
-- Phase 8: CLI Interface
-- Phases 9-14: Integration, Docker, Documentation, Security, Release
-
-**See `SKELETON_SUMMARY.md` for complete status.**
+1. **Ingest**: Add documents to ragged's knowledge base
+2. **Process**: Documents are chunked and embedded for semantic search
+3. **Store**: Embeddings are stored in a local vector database
+4. **Query**: Ask questions in natural language
+5. **Retrieve**: ragged finds the most relevant document chunks
+6. **Generate**: A local LLM generates an answer with citations
 
 ---
 
-## 🎯 Project Vision
-
-ragged will be a local RAG system that:
-
-- 📚 **Ingests documents** (PDF, TXT, Markdown, HTML)
-- 🧠 **Understands questions** using local AI models
-- 🔍 **Finds relevant information** via semantic search
-- 💬 **Generates accurate answers** with citations
-- 🔒 **Protects your privacy** (100% local, no cloud)
-- ⚡ **Runs on your hardware** (Mac Studio M4 Max optimised)
-
----
-
-## 🏗️ Architecture (Planned)
+## Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -78,29 +55,38 @@ ragged will be a local RAG system that:
    │ System  │      │  Store   │     │   LLM    │
    └─────────┘      │(ChromaDB)│     └──────────┘
         │           └──────────┘
-        │                 │
-   ┌─────────────────────────┐
-   │  Embedding Models       │
-   │  - SentenceTransformers │
-   │  - Ollama (nomic-embed) │
-   └─────────────────────────┘
+        ▼
+   ┌─────────┐
+   │Embedding│
+   │ Models  │
+   └─────────┘
 ```
+
+**Core Components:**
+
+- **Document Ingestion**: Loads and converts documents to a common format
+- **Chunking System**: Splits documents into semantic chunks with overlap
+- **Embedding Models**: Converts text to vectors (sentence-transformers or Ollama)
+- **Vector Store**: ChromaDB for semantic similarity search
+- **Retrieval System**: Finds relevant chunks using cosine similarity
+- **Generation System**: Ollama LLM generates answers with citations
+- **CLI Interface**: User-friendly command-line tool
 
 ---
 
-## 🚀 Quick Start (When Complete)
+## Quick Start
 
 ### Prerequisites
 
-- Python 3.10+
-- Docker Desktop (for ChromaDB)
-- Ollama installed and running
+- Python 3.14+ (or 3.11+)
+- [Ollama](https://ollama.ai) installed and running
+- ChromaDB (via Docker or pip)
 
 ### Installation
 
 ```bash
-# Clone repository
-git clone <repo-url>
+# Clone the repository
+git clone https://github.com/REPPL/ragged.git
 cd ragged
 
 # Create virtual environment
@@ -108,71 +94,131 @@ python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
 # Install dependencies
-pip install -e ".[dev]"
+pip install -e .
 
 # Start services
-docker-compose up -d
-
-# Install Ollama models
-ollama pull llama3.2:3b
-ollama pull nomic-embed-text
+docker-compose up -d  # Starts ChromaDB (if using Docker)
+ollama serve          # Start Ollama (in separate terminal)
 ```
 
 ### Basic Usage
 
 ```bash
-# Add documents
-ragged add documents/paper.pdf
-ragged add documents/notes.md
+# Add documents to your knowledge base
+ragged add /path/to/document.pdf
+ragged add /path/to/notes.txt
 
 # Ask questions
-ragged query "What are the main findings?"
+ragged query "What are the key findings?"
+ragged query "Explain the methodology"
 
-# List documents
-ragged list
+# Manage your knowledge base
+ragged list    # Show collection statistics
+ragged clear   # Clear all documents
 
-# Check health
+# Check configuration and health
+ragged config show
 ragged health
 ```
 
 ---
 
-## 📖 Documentation
+## Configuration
 
-### For Developers
+ragged uses environment variables for configuration. Create a `.env` file:
 
-- **[SKELETON_SUMMARY.md](SKELETON_SUMMARY.md)** - Overview of all created files
-- **[IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md)** - How to implement remaining features
-- **[IMPLEMENTATION_CHECKLIST.md](IMPLEMENTATION_CHECKLIST.md)** - Phase-by-phase checklist
-- **[PHASE2_COMPLETION.md](PHASE2_COMPLETION.md)** - Next steps guide
-- **[docs/development/plans/v0.1-implementation-plan.md](docs/development/plans/v0.1-implementation-plan.md)** - Comprehensive 41-day plan
+```bash
+# Environment
+RAGGED_ENVIRONMENT=development
+RAGGED_LOG_LEVEL=INFO
 
-### For Users (Coming in Phase 11)
+# Embedding Model
+RAGGED_EMBEDDING_MODEL=sentence-transformers  # or: ollama
+RAGGED_EMBEDDING_MODEL_NAME=all-MiniLM-L6-v2
 
-- Installation Guide
-- Quick Start Tutorial
-- CLI Reference
-- Configuration Guide
-- Troubleshooting
+# LLM
+RAGGED_LLM_MODEL=llama3.2
+
+# Chunking
+RAGGED_CHUNK_SIZE=500
+RAGGED_CHUNK_OVERLAP=100
+
+# Services
+RAGGED_CHROMA_URL=http://localhost:8001
+RAGGED_OLLAMA_URL=http://localhost:11434
+```
+
+### Embedding Models
+
+Two embedding backends are supported:
+
+1. **sentence-transformers** (default)
+   - Runs locally on CPU/GPU
+   - Model: `all-MiniLM-L6-v2` (384 dimensions)
+   - No external service required
+
+2. **Ollama**
+   - Requires Ollama service
+   - Model: `nomic-embed-text` (768 dimensions)
+   - Consistent with LLM backend
 
 ---
 
-## 🔧 Development
+## Privacy & Security
+
+ragged is designed with privacy as a core principle:
+
+- ✅ **100% Local Processing**: No data leaves your machine
+- ✅ **No External APIs**: All models run locally
+- ✅ **No Telemetry**: No tracking, analytics, or phone-home
+- ✅ **PII Filtering**: Automatic filtering in logs
+- ✅ **Secure File Handling**: Path validation and size limits
+- ✅ **Open Source**: GPL-3.0 licensed, fully auditable
+
+### Security Features
+
+- Path traversal protection
+- File size validation (100MB limit)
+- MIME type checking
+- Input sanitization
+- No hardcoded credentials
+- Secure defaults
+
+---
+
+## Development
+
+### Project Structure
+
+```
+ragged/
+├── src/                    # Source code
+│   ├── config/            # Configuration system
+│   ├── ingestion/         # Document loading
+│   ├── chunking/          # Text splitting
+│   ├── embeddings/        # Embedding generation
+│   ├── storage/           # Vector database
+│   ├── retrieval/         # Semantic search
+│   ├── generation/        # LLM integration
+│   ├── utils/             # Utilities
+│   └── main.py            # CLI entry point
+├── tests/                 # Test suite
+├── docs/                  # Documentation
+└── pyproject.toml         # Project metadata
+```
 
 ### Running Tests
 
 ```bash
-# All tests
-pytest -v
+# Run all tests
+pytest
 
-# With coverage
-pytest --cov=src
+# Run with coverage
+pytest --cov=src --cov-report=html
 
-# Specific module
-pytest tests/config/ -v
-
-# Watch mode (requires pytest-watch)
-ptw
+# Run specific test suite
+pytest tests/integration/
+pytest tests/unit/
 ```
 
 ### Code Quality
@@ -182,182 +228,114 @@ ptw
 black src/ tests/
 
 # Lint
-ruff src/ tests/
+ruff check src/ tests/
 
 # Type check
 mypy src/
-
-# Run all checks
-pre-commit run --all-files
 ```
 
-### Project Structure
+---
 
-```
-ragged/
-├── src/                    # Source code
-│   ├── config/            # ✅ Configuration system
-│   ├── ingestion/         # 🔄 Document loading
-│   ├── chunking/          # 📝 Text splitting
-│   ├── embeddings/        # 📝 Vector embeddings
-│   ├── storage/           # 📝 ChromaDB interface
-│   ├── retrieval/         # 📝 Semantic search
-│   ├── generation/        # 📝 LLM responses
-│   ├── utils/             # ✅ Logging, security
-│   └── main.py            # 📝 CLI interface
-├── tests/                 # Test suite
-├── docs/                  # Documentation
-└── pyproject.toml         # ✅ Project config
+## Troubleshooting
+
+### ChromaDB Connection Issues
+
+```bash
+# Check ChromaDB is running
+docker ps | grep chromadb
+
+# Restart ChromaDB
+docker-compose restart chromadb
 ```
 
-**Legend:** ✅ Complete | 🔄 In Progress | 📝 Skeleton/Planned
+### Ollama Issues
 
----
+```bash
+# Check Ollama is running
+ollama list
 
-## 🛠️ Technology Stack
-
-### Core
-- **Python 3.10+** - Modern Python with type hints
-- **Pydantic** - Data validation and settings
-- **Click** - CLI framework
-- **Rich** - Terminal formatting
-
-### RAG Pipeline
-- **tiktoken** - Token counting
-- **sentence-transformers** - Local embeddings
-- **Ollama** - Local LLM inference
-- **ChromaDB** - Vector database
-
-### Document Processing
-- **PyMuPDF4LLM** - PDF extraction
-- **Trafilatura** - HTML content extraction
-- **chardet** - Encoding detection
-
-### Development
-- **pytest** - Testing framework
-- **black** - Code formatting
-- **ruff** - Fast linting
-- **mypy** - Type checking
-- **pre-commit** - Git hooks
-
----
-
-## 🔐 Privacy & Security
-
-ragged is built with privacy as the top priority:
-
-- ✅ **100% Local Processing** - No cloud APIs (unless explicitly configured)
-- ✅ **No Telemetry** - Zero data collection or tracking
-- ✅ **Input Validation** - Path traversal prevention, file size limits
-- ✅ **Privacy-Safe Logging** - Automatic PII redaction
-- ✅ **Open Source** - Fully auditable code (GPL-3.0)
-
-**Security Features:**
-- Path traversal prevention
-- File size validation (default 100MB limit)
-- MIME type verification
-- Safe HTML parsing (XSS prevention)
-- Filename sanitization
-- Content length limits
-
----
-
-## 📊 Current Test Coverage
-
-```
-Module                      Stmts   Coverage
-─────────────────────────────────────────────
-src/config/settings.py        60      92%
-src/utils/logging.py          56     100%
-src/utils/security.py         45     TBD
-src/ingestion/models.py       61      97%
-─────────────────────────────────────────────
-TOTAL (completed modules)    222      96%
+# Pull required model
+ollama pull llama3.2
+ollama pull nomic-embed-text
 ```
 
-**Target for v0.1:** 60-70% overall, 90%+ core logic
+### Performance
+
+- For faster embeddings, use a GPU (CUDA or MPS)
+- Reduce `RAGGED_CHUNK_SIZE` for better precision
+- Increase `RAGGED_CHUNK_SIZE` for better recall
 
 ---
 
-## 🎯 Version 0.1 Goals
+## FAQ
 
-When v0.1 is complete, ragged will:
+**Q: Does ragged send my data to the cloud?**
+A: No. Everything runs 100% locally on your machine.
 
-### Functionality
-- ✅ Ingest PDF, TXT, Markdown, HTML files
-- ✅ Chunk documents intelligently (500 token chunks, 100 overlap)
-- ✅ Generate embeddings (choice of 2 models)
-- ✅ Store in ChromaDB vector database
-- ✅ Retrieve relevant chunks (top-k semantic search)
-- ✅ Generate answers with citations (via Ollama)
-- ✅ Provide CLI for all operations
+**Q: What file formats are supported?**
+A: PDF, TXT, Markdown (.md), and HTML.
 
-### Quality
-- ✅ 60-70% test coverage
-- ✅ Query latency <5 seconds
-- ✅ Retrieval relevance >70%
-- ✅ Answer faithfulness >80%
-- ✅ Security audit passed
+**Q: Can I use my own LLM?**
+A: Yes! ragged uses Ollama, which supports many models (llama, mistral, etc.)
 
-### Future Versions
-- **v0.2:** Hybrid retrieval, web UI, RAGAS evaluation
-- **v0.3:** Personal memory, personas, semantic chunking
-- **v0.4:** Self-RAG, adaptive retrieval
-- **v0.5:** GraphRAG, Svelte UI
-- **v1.0:** Production ready, PWA, plugins
+**Q: How much RAM do I need?**
+A: Minimum 8GB recommended. More for larger document collections.
+
+**Q: Can I use this commercially?**
+A: Check the GPL-3.0 license terms. Commercial use permitted with source disclosure.
 
 ---
 
-## 🤝 Contributing
+## Roadmap
 
-ragged is in active development. Once v0.1 is complete:
+### v0.1 (Current)
+- ✅ Core RAG pipeline
+- ✅ Multi-format document support
+- ✅ Dual embedding backends
+- ✅ CLI interface
+- ✅ Privacy-first architecture
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests
-5. Submit a pull request
+### v0.2 (Planned)
+- [ ] Web UI (FastAPI + React)
+- [ ] Enhanced retrieval (reranking, context windows)
+- [ ] Few-shot prompting
+- [ ] Document metadata management
+- [ ] Performance optimizations
+- [ ] Docker improvements
 
-**Development Guide:** See `docs/developer/contributing.md` (coming in Phase 11)
+### v0.3 (Future)
+- [ ] Multi-modal support (images, tables)
+- [ ] Knowledge graph integration
+- [ ] Advanced query processing
+- [ ] Collaborative filtering
 
 ---
 
-## 📝 License
+## Contributing
 
-GPL-3.0 - See [LICENSE](LICENSE) file for details.
+Contributions welcome! Please see `docs/development/` for development guidelines.
 
 ---
 
-## 🙏 Acknowledgements
+## License
+
+GPL-3.0 License - see LICENSE file for details.
+
+---
+
+## Acknowledgments
 
 Built with:
-- [Ollama](https://ollama.ai/) - Local LLM inference
+- [Ollama](https://ollama.ai) - Local LLM inference
 - [ChromaDB](https://www.trychroma.com/) - Vector database
-- [sentence-transformers](https://www.sbert.net/) - Embedding models
-- [Anthropic Claude](https://claude.ai/) - Implementation assistant
+- [sentence-transformers](https://www.sbert.net/) - Embeddings
+- [PyMuPDF4LLM](https://github.com/pymupdf/RAG) - PDF processing
+- [Click](https://click.palletsprojects.com/) & [Rich](https://rich.readthedocs.io/) - CLI
 
 ---
 
-## 📬 Contact
+## Contact
 
-**Project Status:** Pre-release (v0.1 in development)
-**Issues:** See GitHub Issues (when repository is public)
-**Discussions:** See GitHub Discussions (when repository is public)
+For development documentation, see `docs/development/devlog/v0.1/README.md`
 
----
-
-## 🗺️ Roadmap
-
-- [x] **Phase 1:** Foundation (Complete)
-- [ ] **Phase 2:** Document Ingestion (In Progress)
-- [ ] **Phases 3-8:** Core RAG Pipeline
-- [ ] **Phases 9-10:** Integration & Docker
-- [ ] **Phase 11:** Documentation
-- [ ] **Phases 12-14:** Security, Testing, Release
-- [ ] **v0.1.0:** First Release! 🎉
-
-**Track Progress:** See `IMPLEMENTATION_CHECKLIST.md`
-
----
-
-**ragged** - Your documents, your privacy, your AI.
+**Created by REPPL** | **Powered by Claude Code**
