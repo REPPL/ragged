@@ -1,0 +1,40 @@
+# ragged Development Dependencies (v0.1 MVP)
+# Based on docs/implementation/plan/architecture/README.md
+
+# Web Framework
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.5.0
+
+# RAG Core Dependencies
+chromadb>=0.4.18
+sentence-transformers>=2.2.2
+
+# Document Processing
+pymupdf>=1.23.0  # PDF parsing
+python-docx>=1.1.0  # DOCX support
+beautifulsoup4>=4.12.0  # HTML parsing
+lxml>=4.9.0  # XML/HTML parser
+markdown>=3.5.0  # Markdown support
+
+# Ollama Client
+ollama>=0.1.0
+
+# Utilities
+python-dotenv>=1.0.0
+pyyaml>=6.0
+
+# Development Tools
+pytest>=7.4.0
+pytest-cov>=4.1.0
+pytest-asyncio>=0.21.0
+black>=23.11.0
+ruff>=0.1.6
+mypy>=1.7.0
+
+# API Testing
+httpx>=0.25.0
+requests>=2.31.0
+
+# Logging and Monitoring
+python-json-logger>=2.0.7

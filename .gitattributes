@@ -1,0 +1,7 @@
+*.png filter=lfs diff=lfs merge=lfs -text
+docs/research/background/personal-memory-systems.md filter=lfs diff=lfs merge=lfs -text
+docs/implementation/plan/architecture/README.md filter=lfs diff=lfs merge=lfs -text
+docs/implementation/plan/core-concepts/hardware-optimisation.md filter=lfs diff=lfs merge=lfs -text
+docs/implementation/plan/core-concepts/model-selection.md filter=lfs diff=lfs merge=lfs -text
+docs/implementation/plan/core-concepts/personal-memory-personas.md filter=lfs diff=lfs merge=lfs -text
+docs/implementation/plan/core-concepts/testing-strategy.md filter=lfs diff=lfs merge=lfs -text
