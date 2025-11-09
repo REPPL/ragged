@@ -4,10 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ragged"
-version = "0.1.0"
+version = "0.2.0"
 description = "Privacy-first local RAG system for document question-answering"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.10,<3.13"
 license = {text = "GPL-3.0"}
 authors = [
     {name = "ragged contributors"}
@@ -26,6 +26,7 @@ classifiers = [
 ]
 
 dependencies = [
+    # v0.1 dependencies
     "pydantic>=2.5.0",
     "pydantic-settings>=2.1.0",
     "python-dotenv>=1.0.0",
@@ -46,6 +47,14 @@ dependencies = [
     "chardet>=5.2.0",
     "httpx>=0.25.0",
     "requests>=2.31.0",
+    # v0.2 new dependencies
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    "sse-starlette>=1.8.0",
+    "python-multipart>=0.0.6",
+    "gradio>=4.9.0",
+    "rank-bm25>=0.2.2",
+    "aiofiles>=23.2.0",
 ]
 
 [project.optional-dependencies]
@@ -133,6 +142,9 @@ module = [
     "trafilatura.*",
     "tiktoken.*",
     "chardet.*",
+    "gradio.*",
+    "sse_starlette.*",
+    "rank_bm25.*",
 ]
 ignore_missing_imports = true
 
@@ -142,9 +154,15 @@ addopts = "-ra -q --strict-markers --cov=src --cov-report=term-missing --cov-rep
 testpaths = ["tests"]
 pythonpath = ["."]
 markers = [
-    "integration: marks tests as integration tests (deselect with '-m \"not integration\"')",
-    "e2e: marks tests as end-to-end tests (deselect with '-m \"not e2e\"')",
-    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "unit: Unit tests (fast, isolated)",
+    "integration: Integration tests (medium speed)",
+    "e2e: End-to-end tests (slow)",
+    "web: Web UI tests",
+    "retrieval: Retrieval system tests",
+    "performance: Performance benchmarks",
+    "slow: Slow-running tests",
+    "requires_ollama: Tests requiring Ollama service",
+    "requires_chromadb: Tests requiring ChromaDB service",
 ]
 
 [tool.coverage.run]
