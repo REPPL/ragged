@@ -1,15 +1,23 @@
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![Status: Planning](https://img.shields.io/badge/status-planning-yellow.svg)]()
+
+
 # ragged - Privacy-First Local RAG System
 
-**Version:** 0.1.0
-**License:** GPL-3.0
+**Your private, intelligent document assistant that runs entirely on your computer.**
 
-A privacy-first document question-answering system that runs entirely locally using Retrieval-Augmented Generation (RAG) technology. No cloud, no tracking, no compromises.
+`ragged` is a local RAG *(Retrieval-Augmented Generation)* system that lets you ask questions about your documents and get accurate answers with citations - all while keeping your data completely private and local.
 
----
+	**Developer Beta Notice**: Before v1.0, we may make breaking changes to improve the product. After v1.0, we commit to stability and backward compatibility.
 
-## What is ragged?
+### Project Principles
 
-ragged is a local RAG (Retrieval-Augmented Generation) system that lets you ask questions about your documents and get accurate answers with citations - all while keeping your data completely private and local.
+1. **Privacy First**: 100% local by default. External services only with explicit user consent.
+2. **User-Friendly**: Simple for beginners, powerful for experts (progressive disclosure).
+3. **Transparent**: Open source, well-documented, educational.
+4. **Quality-Focused**: Built-in evaluation and testing from the start.
+5. **Continuous Improvement**: Each version adds value while maintaining stability.
 
 ### Key Features
 
@@ -18,10 +26,14 @@ ragged is a local RAG (Retrieval-Augmented Generation) system that lets you ask 
 - 🔍 **Smart Retrieval**: Finds relevant information across all your documents
 - 💬 **Accurate Answers**: Generates natural language responses with source citations
 - 🔒 **100% Private**: Everything runs locally - no data leaves your machine
-- ⚡ **Hardware Optimized**: Supports CPU, CUDA, and Apple Silicon (MPS)
-- 🎨 **Beautiful CLI**: Intuitive command-line interface with progress bars and colors
+- ⚡ **Hardware Optimised**: Supports CPU, Apple Silicon (MLX), and CUDA (planned)
+- 🎨 **Intuitive CLI**: Command-line interface with progress bars and colors
 
-### How It Works
+### How `ragged` Works
+
+*It's simple:* Upload your documents (PDFs, text files, web pages), ask questions, and `ragged` finds the most relevant information to respond -— all running locally on your machine.
+
+![ragged Architecture](docs/assets/img/architecture-diagram.png)
 
 1. **Ingest**: Add documents to ragged's knowledge base
 2. **Process**: Documents are chunked and embedded for semantic search
@@ -30,55 +42,12 @@ ragged is a local RAG (Retrieval-Augmented Generation) system that lets you ask 
 5. **Retrieve**: ragged finds the most relevant document chunks
 6. **Generate**: A local LLM generates an answer with citations
 
----
-
-## Architecture
-
-```
-┌─────────────────────────────────────────────────────────┐
-│  CLI Interface (Click + Rich)                           │
-│  - ragged add <file>                                    │
-│  - ragged query "<question>"                            │
-│  - ragged list / clear / config / health                │
-└─────────────────────────────────────────────────────────┘
-                          │
-        ┌─────────────────┼─────────────────┐
-        ▼                 ▼                 ▼
-   ┌─────────┐      ┌──────────┐     ┌──────────┐
-   │Document │      │Retrieval │     │Generation│
-   │Ingestion│      │ System   │     │  System  │
-   └─────────┘      └──────────┘     └──────────┘
-        │                 │                 │
-        │                 │                 │
-   ┌─────────┐      ┌──────────┐     ┌──────────┐
-   │Chunking │      │ Vector   │     │  Ollama  │
-   │ System  │      │  Store   │     │   LLM    │
-   └─────────┘      │(ChromaDB)│     └──────────┘
-        │           └──────────┘
-        ▼
-   ┌─────────┐
-   │Embedding│
-   │ Models  │
-   └─────────┘
-```
-
-**Core Components:**
-
-- **Document Ingestion**: Loads and converts documents to a common format
-- **Chunking System**: Splits documents into semantic chunks with overlap
-- **Embedding Models**: Converts text to vectors (sentence-transformers or Ollama)
-- **Vector Store**: ChromaDB for semantic similarity search
-- **Retrieval System**: Finds relevant chunks using cosine similarity
-- **Generation System**: Ollama LLM generates answers with citations
-- **CLI Interface**: User-friendly command-line tool
-
----
 
 ## Quick Start
 
 ### Prerequisites
 
-- Python 3.14+ (or 3.11+)
+- Python 3.11+
 - [Ollama](https://ollama.ai) installed and running
 - ChromaDB (via Docker or pip)
 
@@ -125,7 +94,7 @@ ragged health
 
 ## Configuration
 
-ragged uses environment variables for configuration. Create a `.env` file:
+`ragged` uses environment variables for configuration. Create a `.env` file:
 
 ```bash
 # Environment
@@ -162,7 +131,6 @@ Two embedding backends are supported:
    - Model: `nomic-embed-text` (768 dimensions)
    - Consistent with LLM backend
 
----
 
 ## Privacy & Security
 
@@ -175,7 +143,7 @@ ragged is designed with privacy as a core principle:
 - ✅ **Secure File Handling**: Path validation and size limits
 - ✅ **Open Source**: GPL-3.0 licensed, fully auditable
 
-### Security Features
+### Planned Security Features
 
 - Path traversal protection
 - File size validation (100MB limit)
@@ -184,9 +152,49 @@ ragged is designed with privacy as a core principle:
 - No hardcoded credentials
 - Secure defaults
 
----
 
 ## Development
+
+### Architecture
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  CLI Interface (Click + Rich)                           │
+│  - ragged add <file>                                    │
+│  - ragged query "<question>"                            │
+│  - ragged list / clear / config / health                │
+└─────────────────────────────────────────────────────────┘
+                          │
+        ┌─────────────────┼─────────────────┐
+        ▼                 ▼                 ▼
+   ┌─────────┐      ┌──────────┐     ┌──────────┐
+   │Document │      │Retrieval │     │Generation│
+   │Ingestion│      │ System   │     │  System  │
+   └─────────┘      └──────────┘     └──────────┘
+        │                 │                 │
+        │                 │                 │
+   ┌─────────┐      ┌──────────┐     ┌──────────┐
+   │Chunking │      │ Vector   │     │  Ollama  │
+   │ System  │      │  Store   │     │   LLM    │
+   └─────────┘      │(ChromaDB)│     └──────────┘
+        │           └──────────┘
+        ▼
+   ┌─────────┐
+   │Embedding│
+   │ Models  │
+   └─────────┘
+```
+
+**Core Components:**
+
+- **Document Ingestion**: Loads and converts documents to a common format
+- **Chunking System**: Splits documents into semantic chunks with overlap
+- **Embedding Models**: Converts text to vectors (sentence-transformers or Ollama)
+- **Vector Store**: ChromaDB for semantic similarity search
+- **Retrieval System**: Finds relevant chunks using cosine similarity
+- **Generation System**: Ollama LLM generates answers with citations
+- **CLI Interface**: User-friendly command-line tool
+
 
 ### Project Structure
 
@@ -265,26 +273,6 @@ ollama pull nomic-embed-text
 - Reduce `RAGGED_CHUNK_SIZE` for better precision
 - Increase `RAGGED_CHUNK_SIZE` for better recall
 
----
-
-## FAQ
-
-**Q: Does ragged send my data to the cloud?**
-A: No. Everything runs 100% locally on your machine.
-
-**Q: What file formats are supported?**
-A: PDF, TXT, Markdown (.md), and HTML.
-
-**Q: Can I use my own LLM?**
-A: Yes! ragged uses Ollama, which supports many models (llama, mistral, etc.)
-
-**Q: How much RAM do I need?**
-A: Minimum 8GB recommended. More for larger document collections.
-
-**Q: Can I use this commercially?**
-A: Check the GPL-3.0 license terms. Commercial use permitted with source disclosure.
-
----
 
 ## Roadmap
 
@@ -309,33 +297,19 @@ A: Check the GPL-3.0 license terms. Commercial use permitted with source disclos
 - [ ] Advanced query processing
 - [ ] Collaborative filtering
 
----
 
 ## Contributing
 
 Contributions welcome! Please see `docs/development/` for development guidelines.
 
----
-
-## License
-
-GPL-3.0 License - see LICENSE file for details.
-
----
 
 ## Acknowledgments
 
 Built with:
+
 - [Ollama](https://ollama.ai) - Local LLM inference
 - [ChromaDB](https://www.trychroma.com/) - Vector database
 - [sentence-transformers](https://www.sbert.net/) - Embeddings
 - [PyMuPDF4LLM](https://github.com/pymupdf/RAG) - PDF processing
 - [Click](https://click.palletsprojects.com/) & [Rich](https://rich.readthedocs.io/) - CLI
 
----
-
-## Contact
-
-For development documentation, see `docs/development/devlog/v0.1/README.md`
-
-**Created by REPPL** | **Powered by Claude Code**
