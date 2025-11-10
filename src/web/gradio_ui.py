@@ -403,13 +403,39 @@ def create_ui() -> gr.Blocks:
 
         # Event handlers
         def respond(message, history, collection, method, k, stream):
-            """Handle query submission."""
-            if stream:
-                # Use streaming generator
-                return query_with_streaming(message, history, collection, method, k)
-            else:
-                # Use non-streaming
-                return query_non_streaming(message, history, collection, method, k)
+            """Handle query submission with error handling."""
+            try:
+                if stream:
+                    # Use streaming generator
+                    return query_with_streaming(message, history, collection, method, k)
+                else:
+                    # Use non-streaming
+                    return query_non_streaming(message, history, collection, method, k)
+            except requests.exceptions.RequestException as e:
+                error_msg = f"❌ API Error: {str(e)}"
+                logger.error(f"API request failed in respond: {e}", exc_info=True)
+                # Append error to history
+                if history:
+                    history.append((message, error_msg))
+                else:
+                    history = [(message, error_msg)]
+                return history, ""
+            except json.JSONDecodeError as e:
+                error_msg = f"❌ Stream parsing error: {str(e)}"
+                logger.error(f"JSON decode failed in respond: {e}", exc_info=True)
+                if history:
+                    history.append((message, error_msg))
+                else:
+                    history = [(message, error_msg)]
+                return history, ""
+            except Exception as e:
+                error_msg = f"❌ Error: {str(e)}"
+                logger.error(f"Query failed in respond: {e}", exc_info=True)
+                if history:
+                    history.append((message, error_msg))
+                else:
+                    history = [(message, error_msg)]
+                return history, ""
 
         # Submit message (Enter or click)
         submit_event = msg.submit(
