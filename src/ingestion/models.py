@@ -64,6 +64,12 @@ class ChunkMetadata(BaseModel):
     overlap_with_next: int = Field(
         ge=0, description="Number of characters overlapping with next chunk"
     )
+    page_number: Optional[int] = Field(
+        default=None, ge=1, description="Page number where this chunk starts (for PDFs)"
+    )
+    page_range: Optional[str] = Field(
+        default=None, description="Page range if chunk spans multiple pages (e.g., '5-7')"
+    )
 
     @model_validator(mode="after")
     def validate_position_vs_total(self) -> "ChunkMetadata":

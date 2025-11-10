@@ -5,6 +5,40 @@ All notable changes to ragged will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.1] - 2025-11-10
+
+### Fixed
+- **Ollama Model Verification**: Fixed Ollama Python library API compatibility (ListResponse object vs dictionary)
+  - Updated `ollama_client.py` to use `.models` attribute and `.model` property
+  - Updated `ollama_embedder.py` with same API fixes
+- **Document Ingestion**: Fixed chunk_document return value and Chunk model field name
+  - `chunk_document()` now returns Document with chunks attached
+  - Changed `chunk.content` to `chunk.text` throughout codebase
+  - Added Path→string serialization for ChromaDB metadata compatibility
+- **Default Model**: Updated default LLM model from `llama3.2:3b` to `llama3.2:latest`
+- **Docker Health Check**: Corrected FastAPI health check endpoint from `/health` to `/api/health`
+- **Metadata Field**: Fixed retriever to use `document_path` instead of `source_path`
+
+### Added
+- **IEEE Citation System**: Academic-quality numbered citations with formatted reference lists
+  - New `citation_formatter.py` module with 4 citation formatting functions
+  - Page tracking in PDF documents with `<!-- PAGE N -->` markers
+  - Character-level position mapping for precise page number extraction
+  - ChunkMetadata now includes `page_number` and `page_range` fields
+  - 7 new page mapping helper functions in `splitters.py`
+  - Updated RAG prompts to request numbered citations [1], [2], [3]
+  - CLI query command now displays formatted references automatically
+- **Enhanced Context**: Document chunking now preserves page information for citations
+
+### Changed
+- PDF loader now processes pages individually to enable precise citation tracking
+- System prompts updated to guide LLM toward numbered citation format
+- Response formatting now includes IEEE-style reference lists
+
+### Testing
+- 261 tests passing (v0.2 test suite maintained)
+- All bug fixes verified on separate installation
+
 ## [0.2.0] - 2025-11-10
 
 ### Added

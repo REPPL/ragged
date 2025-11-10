@@ -65,14 +65,13 @@ def add(file_path: Path, format: Optional[str]) -> None:
 
             # Chunk document
             progress.update(task, description="Chunking document...", advance=10)
-            chunks = chunk_document(document)
-            document.chunks = chunks
+            document = chunk_document(document)
             progress.update(task, advance=20)
 
             # Generate embeddings
             progress.update(task, description="Generating embeddings...", advance=10)
             embedder = get_embedder()
-            chunk_texts = [chunk.content for chunk in chunks]
+            chunk_texts = [chunk.text for chunk in document.chunks]
             embeddings = embedder.embed_batch(chunk_texts)
             progress.update(task, advance=30)
 
@@ -80,8 +79,15 @@ def add(file_path: Path, format: Optional[str]) -> None:
             progress.update(task, description="Storing in database...", advance=10)
             vector_store = VectorStore()
 
-            ids = [chunk.chunk_id for chunk in chunks]
-            metadatas = [chunk.metadata.model_dump() for chunk in chunks]
+            ids = [chunk.chunk_id for chunk in document.chunks]
+            # Serialize Path objects to strings for ChromaDB
+            metadatas = []
+            for chunk in document.chunks:
+                metadata = chunk.metadata.model_dump()
+                # Convert Path to string if present
+                if "document_path" in metadata and hasattr(metadata["document_path"], "__fspath__"):
+                    metadata["document_path"] = str(metadata["document_path"])
+                metadatas.append(metadata)
 
             vector_store.add(
                 ids=ids,
@@ -92,7 +98,7 @@ def add(file_path: Path, format: Optional[str]) -> None:
             progress.update(task, advance=10)
 
         console.print(f"[bold green]✓[/bold green] Document ingested: {document.document_id}")
-        console.print(f"  Chunks: {len(chunks)}")
+        console.print(f"  Chunks: {len(document.chunks)}")
         console.print(f"  Path: {file_path}")
 
     except Exception as e:
@@ -112,6 +118,7 @@ def query(query: str, k: int, show_sources: bool) -> None:
     from src.generation.ollama_client import OllamaClient
     from src.generation.prompts import RAG_SYSTEM_PROMPT, build_rag_prompt
     from src.generation.response_parser import parse_response
+    from src.generation.citation_formatter import format_response_with_references
     from src.retrieval.retriever import Retriever
 
     console.print(f"[bold blue]Question:[/bold blue] {query}")
@@ -147,17 +154,17 @@ def query(query: str, k: int, show_sources: bool) -> None:
             response_text = ollama_client.generate(prompt, system=RAG_SYSTEM_PROMPT)
             progress.update(task, advance=40)
 
-            response = parse_response(response_text)
+            # Format response with IEEE-style references
+            formatted_response = format_response_with_references(
+                response_text,
+                chunks,
+                show_file_path=True,
+                include_unused_refs=False
+            )
             progress.update(task, advance=10)
 
         console.print("[bold]Answer:[/bold]")
-        console.print(response.answer)
-
-        if response.citations:
-            console.print()
-            console.print("[bold]Sources:[/bold]")
-            for source in response.citations:
-                console.print(f"  - {source}")
+        console.print(formatted_response)
 
     except Exception as e:
         console.print(f"[bold red]✗[/bold red] Query failed: {e}")

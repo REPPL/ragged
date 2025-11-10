@@ -71,7 +71,7 @@ class OllamaEmbedder(BaseEmbedder):
         """Verify that the embedding model is available in Ollama."""
         try:
             models = self.client.list()
-            model_names = [m['name'] for m in models.get('models', [])]
+            model_names = [m.model for m in models.models]
 
             if not any(self._model_name in name for name in model_names):
                 logger.warning(

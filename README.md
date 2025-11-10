@@ -284,7 +284,7 @@ ollama pull nomic-embed-text
 - ✅ CLI interface
 - ✅ Privacy-first architecture
 
-### v0.2 (Current - Released 2025-11-10)
+### v0.2 (Released 2025-11-10)
 - ✅ Web UI (FastAPI + Gradio with SSE streaming)
 - ✅ Hybrid retrieval (BM25 + Vector with RRF fusion)
 - ✅ Few-shot prompting with example storage
@@ -293,6 +293,13 @@ ollama pull nomic-embed-text
 - ✅ Docker deployment (API + UI + ChromaDB)
 - ✅ Comprehensive testing (262 tests, 68% coverage)
 - ✅ Performance benchmarking utilities
+
+### v0.2.1 (Current - Released 2025-11-10)
+- ✅ Critical bug fixes (Ollama API, document ingestion, Docker health checks)
+- ✅ IEEE citation system (numbered citations with page tracking)
+- ✅ PDF page-level citation tracking
+- ✅ Enhanced response formatting with reference lists
+- ✅ Improved metadata handling for ChromaDB compatibility
 
 ### v0.3 (Future)
 - [ ] Multi-modal support (images, tables)
