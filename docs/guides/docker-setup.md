@@ -22,11 +22,19 @@ This guide explains how to run ragged using a hybrid architecture that maximises
 │   │  Docker Containers                │         │
 │   │                                   │         │
 │   │  ┌──────────────────────────┐    │         │
-│   │  │  ragged-app              │    │         │
-│   │  │  - FastAPI application   │    │         │
+│   │  │  ragged-ui               │    │         │
+│   │  │  - Gradio web interface  │    │         │
+│   │  │  - Port: 7860            │    │         │
+│   │  └──────────────────────────┘    │         │
+│   │            │                      │         │
+│   │            ↓ HTTP                 │         │
+│   │  ┌──────────────────────────┐    │         │
+│   │  │  ragged-api              │    │         │
+│   │  │  - FastAPI backend       │    │         │
 │   │  │  - Port: 8000            │    │         │
 │   │  └──────────────────────────┘    │         │
-│   │                                   │         │
+│   │            │                      │         │
+│   │            ↓                      │         │
 │   │  ┌──────────────────────────┐    │         │
 │   │  │  chromadb                │    │         │
 │   │  │  - Vector database       │    │         │
@@ -120,7 +128,8 @@ docker-compose up -d
 ```
 
 This starts:
-- `ragged-app`: Main application (port 8000)
+- `ragged-api`: FastAPI backend (port 8000)
+- `ragged-ui`: Gradio web interface (port 7860)
 - `chromadb`: Vector database (port 8001)
 
 ### 3. Verify Services
@@ -133,8 +142,11 @@ curl http://localhost:11434/api/tags
 # ChromaDB (Docker)
 curl http://localhost:8001/api/v1/heartbeat
 
-# ragged app (Docker) - once implemented
+# ragged API (Docker)
 curl http://localhost:8000/health
+
+# ragged UI (Docker) - open in browser
+open http://localhost:7860
 ```
 
 ## Viewing Logs
@@ -148,7 +160,7 @@ Ollama logs appear in the terminal where `ollama serve` is running.
 docker-compose logs -f
 
 # Specific service
-docker-compose logs -f ragged-app
+docker-compose logs -f ragged-api  # or ragged-ui
 docker-compose logs -f chromadb
 ```
 
@@ -171,7 +183,7 @@ killall ollama
 
 ### Issue: "Connection refused" to Ollama
 
-**Symptom**: ragged-app can't connect to Ollama at `host.docker.internal:11434`
+**Symptom**: ragged-api can't connect to Ollama at `host.docker.internal:11434`
 
 **Solutions:**
 1. Verify Ollama is running: `curl http://localhost:11434/api/tags`
@@ -243,8 +255,8 @@ The Dockerfile runs uvicorn with `--reload` for hot-reloading.
 ### 3. Adding Dependencies
 After updating `requirements-dev.txt`:
 ```bash
-docker-compose build ragged-app
-docker-compose up -d ragged-app
+docker-compose build ragged-api ragged-ui
+docker-compose up -d ragged-api ragged-ui
 ```
 
 ### 4. Daily Shutdown
