@@ -5,10 +5,14 @@ Provides a wrapper around ChromaDB for storing and retrieving document embedding
 with automatic connection management and error handling.
 """
 
+import os
 from typing import Any, Dict, List, Optional
 from urllib.parse import urlparse
 
 import numpy as np
+
+# Disable ChromaDB telemetry for privacy
+os.environ['ANONYMIZED_TELEMETRY'] = 'FALSE'
 
 try:
     import chromadb

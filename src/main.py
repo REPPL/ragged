@@ -87,6 +87,10 @@ def add(file_path: Path, format: Optional[str]) -> None:
                 # Convert Path to string if present
                 if "document_path" in metadata and hasattr(metadata["document_path"], "__fspath__"):
                     metadata["document_path"] = str(metadata["document_path"])
+
+                # Remove None values - ChromaDB only supports str, int, float, bool
+                metadata = {k: v for k, v in metadata.items() if v is not None}
+
                 metadatas.append(metadata)
 
             vector_store.add(
