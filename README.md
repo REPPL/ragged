@@ -294,7 +294,15 @@ ollama pull nomic-embed-text
 - ✅ Comprehensive testing (262 tests, 68% coverage)
 - ✅ Performance benchmarking utilities
 
-### v0.2.1 (Current - Released 2025-11-10)
+### v0.2.2 (Current - Released 2025-11-10)
+- ✅ Folder ingestion with recursive directory scanning and batch processing
+- ✅ Interactive model selection with RAG suitability scoring
+- ✅ Duplicate document detection with interactive overwrite prompts
+- ✅ Python 3.12 compatibility fixes for Path.is_dir()
+- ✅ Web UI error display improvements (actual error messages)
+- ✅ CLI duplicate detection bug fixes
+
+### v0.2.1 (Released 2025-11-10)
 - ✅ Critical bug fixes (Ollama API, document ingestion, Docker health checks)
 - ✅ IEEE citation system (numbered citations with page tracking)
 - ✅ PDF page-level citation tracking
