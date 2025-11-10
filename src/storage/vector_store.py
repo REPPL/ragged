@@ -141,6 +141,28 @@ class VectorStore:
         )
         return results
 
+    def get_documents_by_metadata(self, where: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Get documents matching metadata filter.
+
+        Useful for duplicate detection by querying for existing documents
+        with the same file_hash or document_path.
+
+        Args:
+            where: Metadata filter (e.g., {"file_hash": "abc123..."})
+
+        Returns:
+            Dict with 'ids', 'documents', 'metadatas' of matching documents
+            Returns empty dict if no matches found.
+        """
+        try:
+            results = self.collection.get(where=where)
+            logger.debug(f"Found {len(results.get('ids', []))} documents matching filter")
+            return results
+        except Exception as e:
+            logger.error(f"Failed to get documents by metadata: {e}")
+            return {"ids": [], "documents": [], "metadatas": []}
+
     def delete(
         self,
         ids: Optional[List[str]] = None,

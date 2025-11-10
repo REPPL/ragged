@@ -63,6 +63,50 @@ def add(file_path: Path, format: Optional[str]) -> None:
             document = load_document(file_path, format=format)
             progress.update(task, advance=10)
 
+            # Check for duplicates
+            progress.update(task, description="Checking for duplicates...", advance=5)
+            vector_store = VectorStore()
+            file_hash = document.metadata.file_hash
+            existing = vector_store.get_documents_by_metadata(where={"file_hash": file_hash})
+
+            if existing and existing.get("ids"):
+                # Document already exists
+                existing_count = len(existing["ids"])
+                existing_doc_id = existing["metadatas"][0].get("document_id", "unknown")
+                existing_path = existing["metadatas"][0].get("document_path", "unknown")
+
+                # Exit progress context to show prompt
+                progress.update(task, completed=100)
+
+        # Show duplicate warning outside progress context
+        console.print()
+        console.print(f"[yellow]⚠ Document already exists:[/yellow]")
+        console.print(f"  Document ID: {existing_doc_id}")
+        console.print(f"  Existing path: {existing_path}")
+        console.print(f"  Current path:  {file_path}")
+        console.print(f"  Chunks: {existing_count}")
+        console.print()
+
+        # Interactive confirmation
+        overwrite = click.confirm("Document already exists. Overwrite?", default=False)
+
+        if not overwrite:
+            console.print("[yellow]Cancelled. No changes made.[/yellow]")
+            return
+
+        # Delete old chunks
+        console.print(f"[yellow]Removing {existing_count} old chunks...[/yellow]")
+        vector_store.delete(ids=existing["ids"])
+        console.print(f"[green]✓[/green] Removed old chunks")
+        console.print()
+
+        # Preserve document_id for continuity
+        document.document_id = existing_doc_id
+
+        # Continue with new progress context
+        with Progress() as progress:
+            task = progress.add_task("Processing...", total=80, completed=20)
+
             # Chunk document
             progress.update(task, description="Chunking document...", advance=10)
             document = chunk_document(document)
@@ -73,11 +117,10 @@ def add(file_path: Path, format: Optional[str]) -> None:
             embedder = get_embedder()
             chunk_texts = [chunk.text for chunk in document.chunks]
             embeddings = embedder.embed_batch(chunk_texts)
-            progress.update(task, advance=30)
+            progress.update(task, advance=20)
 
             # Store in vector database
             progress.update(task, description="Storing in database...", advance=10)
-            vector_store = VectorStore()
 
             ids = [chunk.chunk_id for chunk in document.chunks]
             # Serialize Path objects to strings for ChromaDB
