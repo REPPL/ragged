@@ -119,6 +119,11 @@ def add(
     # Single file ingestion (existing logic)
     console.print(f"[bold blue]Ingesting document:[/bold blue] {path}")
 
+    # Initialize duplicate tracking variables
+    existing_doc_id = None
+    existing_path = None
+    existing_count = 0
+
     try:
         with Progress() as progress:
             task = progress.add_task("Processing...", total=100)
@@ -143,32 +148,34 @@ def add(
                 # Exit progress context to show prompt
                 progress.update(task, completed=100)
 
-        # Show duplicate warning outside progress context
-        console.print()
-        console.print(f"[yellow]⚠ Document already exists:[/yellow]")
-        console.print(f"  Document ID: {existing_doc_id}")
-        console.print(f"  Existing path: {existing_path}")
-        console.print(f"  Current path:  {path}")
-        console.print(f"  Chunks: {existing_count}")
-        console.print()
+        # Handle duplicate if found
+        if existing_doc_id is not None:
+            # Show duplicate warning outside progress context
+            console.print()
+            console.print(f"[yellow]⚠ Document already exists:[/yellow]")
+            console.print(f"  Document ID: {existing_doc_id}")
+            console.print(f"  Existing path: {existing_path}")
+            console.print(f"  Current path:  {path}")
+            console.print(f"  Chunks: {existing_count}")
+            console.print()
 
-        # Interactive confirmation
-        overwrite = click.confirm("Document already exists. Overwrite?", default=False)
+            # Interactive confirmation
+            overwrite = click.confirm("Document already exists. Overwrite?", default=False)
 
-        if not overwrite:
-            console.print("[yellow]Cancelled. No changes made.[/yellow]")
-            return
+            if not overwrite:
+                console.print("[yellow]Cancelled. No changes made.[/yellow]")
+                return
 
-        # Delete old chunks
-        console.print(f"[yellow]Removing {existing_count} old chunks...[/yellow]")
-        vector_store.delete(ids=existing["ids"])
-        console.print(f"[green]✓[/green] Removed old chunks")
-        console.print()
+            # Delete old chunks
+            console.print(f"[yellow]Removing {existing_count} old chunks...[/yellow]")
+            vector_store.delete(ids=existing["ids"])
+            console.print(f"[green]✓[/green] Removed old chunks")
+            console.print()
 
-        # Preserve document_id for continuity
-        document.document_id = existing_doc_id
+            # Preserve document_id for continuity
+            document.document_id = existing_doc_id
 
-        # Continue with new progress context
+        # Continue with chunking and storing (for both new documents and overwrites)
         with Progress() as progress:
             task = progress.add_task("Processing...", total=80, completed=20)
 
