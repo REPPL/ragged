@@ -1,5 +1,5 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
 [![Status: Alpha](https://img.shields.io/badge/status-alpha-red.svg)]()
 
 
@@ -12,7 +12,7 @@
 
 **Your private, intelligent document assistant that runs entirely on your computer:** `ragged` is a local RAG *(Retrieval-Augmented Generation)* system that lets you ask questions about your documents and get accurate answers with citations - all while keeping your data completely private and local.
 
-### Project Principles
+### Principles
 
 1. **Privacy First**: 100% local by default. External services only with explicit user consent.
 2. **User-Friendly**: Simple for beginners, powerful for experts (progressive disclosure).
@@ -48,8 +48,8 @@
 
 ### Prerequisites
 
-- Python 3.11+
-- [Ollama](https://ollama.ai) installed and running
+- Python 3.12+
+- [Ollama](https://ollama.ai) installed and running (optional for v0.2 web UI)
 - ChromaDB (via Docker or pip)
 
 ### Installation
@@ -270,7 +270,7 @@ ollama pull nomic-embed-text
 
 ### Performance
 
-- For faster embeddings, use a GPU (CUDA or MPS)
+- For faster embeddings, use a GPU
 - Reduce `RAGGED_CHUNK_SIZE` for better precision
 - Increase `RAGGED_CHUNK_SIZE` for better recall
 
@@ -284,13 +284,15 @@ ollama pull nomic-embed-text
 - ✅ CLI interface
 - ✅ Privacy-first architecture
 
-### v0.2 (Planned)
-- [ ] Web UI (FastAPI + React)
-- [ ] Enhanced retrieval (reranking, context windows)
-- [ ] Few-shot prompting
-- [ ] Document metadata management
-- [ ] Performance optimizations
-- [ ] Docker improvements
+### v0.2 (In Progress - 50% Complete)
+- ✅ Web UI (FastAPI + Gradio with SSE streaming)
+- ✅ Hybrid retrieval (BM25 + Vector with RRF fusion)
+- ✅ Few-shot prompting with example storage
+- ✅ Contextual chunking (document + section headers)
+- 🚧 Document metadata management
+- 🚧 Performance optimizations (caching, async)
+- 🚧 Docker deployment improvements
+- 🚧 Comprehensive testing & documentation
 
 ### v0.3 (Future)
 - [ ] Multi-modal support (images, tables)
