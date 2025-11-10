@@ -1,5 +1,5 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![Status: Alpha](https://img.shields.io/badge/status-alpha-red.svg)]()
 
 
@@ -7,6 +7,7 @@
 
 
 # `ragged`
+
 ## Privacy-First Local RAG System
 
 **Your private, intelligent document assistant that runs entirely on your computer:** `ragged` is a local RAG *(Retrieval-Augmented Generation)* system that lets you ask questions about your documents and get accurate answers with citations - all while keeping your data completely private and local.
@@ -19,7 +20,7 @@
 4. **Quality-Focused**: Built-in evaluation and testing from the start.
 5. **Continuous Improvement**: Each version adds value while maintaining stability.
 
-### Key Features
+### Aspirations
 
 - 📚 **Multi-Format Support**: Ingest PDF, TXT, Markdown, and HTML documents
 - 🧠 **Semantic Understanding**: Uses embeddings to understand meaning, not just keywords
@@ -29,18 +30,18 @@
 - ⚡ **Hardware Optimised**: Supports CPU, Apple Silicon (MLX), and CUDA (planned)
 - 🎨 **Intuitive CLI**: Command-line interface with progress bars and colors
 
-### How `ragged` Works
+### How It Works
 
 *It's simple:* Upload your documents (PDFs, text files, web pages), ask questions, and `ragged` finds the most relevant information to respond -— all running locally on your machine.
 
 ![ragged Architecture](docs/assets/img/architecture-diagram.png)
 
-1. **Ingest**: Add documents to ragged's knowledge base
+1. **Ingest**: Add documents to the knowledge base ('library')
 2. **Process**: Documents are chunked and embedded for semantic search
 3. **Store**: Embeddings are stored in a local vector database
 4. **Query**: Ask questions in natural language
-5. **Retrieve**: ragged finds the most relevant document chunks
-6. **Generate**: A local LLM generates an answer with citations
+5. **Retrieve**: `ragged` finds the most relevant document chunks
+6. **Generate**: A local LLM generates an answer with citations (planned)
 
 
 ## Quick Start
