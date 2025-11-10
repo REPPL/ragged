@@ -51,7 +51,7 @@ This directory contains the complete development documentation for ragged v0.2, 
 3. **Few-Shot Prompting**: Dynamic example selection
 4. **Enhanced Metadata**: Rich document tracking
 5. **Performance**: Caching and async operations
-6. **Docker**: Production-ready deployment (Python 3.11)
+6. **Docker**: Production-ready deployment (Python 3.12)
 
 ### Improvements from v0.1
 - ✅ 8 phases instead of 14 (reduced overhead)
@@ -59,7 +59,7 @@ This directory contains the complete development documentation for ragged v0.2, 
 - ✅ Documentation parallel to development
 - ✅ Docker early (Phase 6, not Phase 10)
 - ✅ Security continuous (not end-phase)
-- ✅ Python 3.11 (ChromaDB compatible)
+- ✅ Python 3.12 (ChromaDB compatible, excellent support)
 
 ---
 
