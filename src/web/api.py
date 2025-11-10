@@ -157,12 +157,13 @@ async def upload(file: UploadFile = File(...)):
     # Read file content
     content = await file.read()
 
-    # Placeholder: In production, this would process and ingest the document
+    # TODO: Actually process and ingest the document into the vector database
+    # For now, file is uploaded but not yet ingested
     return UploadResponse(
         filename=file.filename,
         size=len(content),
         status="success",
-        message=f"File {file.filename} uploaded successfully (placeholder)"
+        message=f"File {file.filename} uploaded successfully. Note: Document ingestion not yet implemented - use CLI for now."
     )
 
 
