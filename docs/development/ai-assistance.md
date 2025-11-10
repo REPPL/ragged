@@ -1,25 +1,30 @@
 # AI Assistance in ragged Development
 
-**Last Updated**: 2025-11-09
+**Last Updated**: 2025-11-10
 **Purpose**: Transparent documentation of AI tool usage in ragged development
 **Status**: Active policy from v0.1 onwards
 
----
+	The aim of the `ragged` project is to learn about **transparent use of AI coding assistants**. This document explains which tools are used, how they're used, and the policies around AI-assisted development.
 
-## Overview
-
-ragged is developed with **transparent use of AI coding assistants**. This document explains which tools are used, how they're used, and our policies around AI-assisted development.
 
 ## Philosophy
 
-**AI as Aid, Not Substitute**
+**AI as a synthetic teammate**
+
+In the original [paper](https://doi.org/10.1016/j.bushor.2025.02.008), we argued for AI to be treated as a junior teammate. In this project, my aim is to to push the concept of a `synthetic teammate` further. Instead of a junior collaborator, I am treating an AI coding assistant as the main (i.e., only) developer, while my role is to direct the project.
+
+In other words, I want to see whether it is possible for a non-programmer (i.e., me) (a) to develop a fairly sophisticated software and (b) to document the use of AI in a transparent and (to some extend) reproducible way.
+
+*Source:* [https://doi.org/10.1016/j.bushor.2025.02.008](https://doi.org/10.1016/j.bushor.2025.02.008)
+
+Consequently, instead of a junior developer where:
 
 - AI tools **amplify human expertise**, they don't replace it
 - All AI-generated code is **reviewed and understood** by human developers
 - Developers are **fully accountable** for all submitted code
 - Critical code paths (security, core algorithms) are **written manually**
 
-**Transparency First**
+This project treats the AI coding assistant as a senior developer with:
 
 - AI usage is **disclosed openly** in commits, PRs, and documentation
 - We track **what works and what doesn't** with AI assistance
@@ -28,58 +33,70 @@ ragged is developed with **transparent use of AI coding assistants**. This docum
 
 ---
 
-## Tools Used
+## Tools
 
-### Primary Tools
-
-#### Claude Code (Anthropic)
+### Claude Code (Primary tool)
 
 **Version**: claude-sonnet-4-5-20250929
-**Usage**: Primary AI assistant for ragged development
+**Usage**: Primary AI assistant for `ragged` development
 
-**Used For**:
-- Code scaffolding and boilerplate generation
-- Documentation drafting (docstrings, markdown)
-- Architectural design discussions
-- Debugging assistance (error interpretation)
-- Research synthesis
-- Test case generation (initial drafts)
+**Owns**:
 
-**Not Used For**:
-- Final decision-making (human makes all architectural decisions)
-- Security-critical code (written manually)
-- Direct code commits without human review
+- Code (incl. docstrings)
+- Documentation (implementation plan)
+- Debugging (error interpretation)
+- Architectural design (proposals & discussion)
+- Initial research (SOTA)
+- Test cases
 
-**Effectiveness** (based on tracked data):
-- Boilerplate code: ⭐⭐⭐⭐⭐ (60% time saved)
-- Documentation: ⭐⭐⭐⭐⭐ (70% time saved)
-- Complex logic: ⭐⭐⭐ (30% time saved)
-- Testing: ⭐⭐ (15% time saved)
-- Debugging: ⭐⭐⭐ (25% time saved)
+**Supports**:
 
-See [Time Tracking](./time-tracking-methodology.md) for detailed metrics.
+- Architectural decisions
+- Documentation (user facing)
 
-#### GitHub Copilot (Optional)
+*(See also [Time Tracking](./time-tracking-methodology.md) for detailed metrics.)*
 
-**Usage**: Code completions within IDE
 
-**Used For**:
-- In-line code suggestions
-- Auto-completing common patterns
-- Suggesting function signatures
+## Learnings (so far)
 
-**Effectiveness**:
-- Helpful for reducing typing, not strategic coding
-- Most suggestions require modification
-- Not tracked separately from manual coding
+### What AI is and is not good at
 
----
+**AI is Exceptionally Good At**:
 
-## Use Cases and Guidelines
+- Boilerplate and repetitive code
+- Documentation first drafts
+- Suggesting libraries and patterns
+- Explaining error messages
+- Generating initial test structures
 
-### When to Use AI
+**AI Struggles With**:
+
+- Domain-specific logic
+- Complex error handling
+- Edge cases
+
+**AI Sometimes Struggles With**:
+
+- Understanding project context
+- Performance optimisation
+
+**Human Essential For**:
+
+- Understanding user needs
+- Architectural decisions (balancing trade-offs)
+- Creative problem solving
+- Performance tuning (real-world testing)
+- Security review (ignored in this project)
+
+### Current DOs and DON'Ts
+
+1. Give AI clear, specific prompts
+2. Provide project context in prompts
+3. Use AI output as starting point, not end
+4. Iterate with AI (don't accept first try)
 
 ✅ **DO use AI for**:
+
 - Initial code structure and boilerplate
 - Documentation first drafts
 - Researching libraries and APIs
@@ -88,43 +105,46 @@ See [Time Tracking](./time-tracking-methodology.md) for detailed metrics.
 - Refactoring suggestions
 
 ✅ **DO disclose AI usage** in:
-- Pull request descriptions
-- Commit messages (for significant AI use)
+
+- Commit messages
 - Development logs
 - Time tracking records
 
-### When NOT to Use AI
-
 ❌ **DO NOT use AI for**:
-- Security-critical authentication/authorization code
-- Cryptographic implementations
+
 - Final architectural decisions
 - Accepting code you don't understand
 - Critical algorithms without deep review
 
-❌ **DO NOT**:
-- Submit AI code without reviewing and understanding it
-- Use AI as excuse for lower code quality
-- Hide or obscure AI usage
-- Trust AI blindly for correctness
+### Best Practice (ignored in this Project)
 
-### Review Requirements
+1. Code reviewed line-by-line by a human
+2. Code understood by the reviewer
+3. Tests written manually
+4. Security code written 100% manually
 
-**All AI-generated code must**:
-1. Be reviewed line-by-line by a human
-2. Be understood by the reviewer
-3. Have tests written (often manually)
-4. Meet the same quality standards as manual code
-5. Be modified where necessary
+### Planned Evolution of AI Use
 
-**Critical Code Requirements**:
-- Security code: 100% manual
-- Core algorithms: >75% manual, AI only for boilerplate
-- Tests for critical code: 100% manual
+**v0.1** (learning phase):
 
----
+- AI: ~45% of time
+- Time saved: ~25% (learning overhead)
+- Lots of trial and error
 
-## Disclosure Standards
+**v0.2** (improving):
+
+- AI: ~54% of time
+- Time saved: ~31% (better prompting)
+- Clear patterns emerging
+
+**v0.3+** (expected):
+
+- AI: ~55-60% of time
+- Time saved: ~35-40% (optimized workflow)
+- Know exactly when/how to use AI
+
+
+## Disclosure Statements
 
 ### In Pull Requests
 
@@ -185,7 +205,8 @@ Implemented Redis-based query caching.
 Time: 2.0h"
 ```
 
-(Minor AI assistance doesn't require explicit mention)
+*(Minor AI assistance doesn't require explicit mention.)*
+
 
 ### In Development Logs
 
@@ -214,13 +235,12 @@ Time: 2.0h"
 | Testing | 4.0 | No | Manual test writing |
 ```
 
----
 
-## AI Effectiveness Tracking
+## Tracking of AI Use
 
 ### By Task Type
 
-Based on actual ragged development data:
+Based on actual `ragged` development data:
 
 | Task | AI Tool | Time Saved | Quality | Best For |
 |------|---------|------------|---------|----------|
@@ -232,198 +252,70 @@ Based on actual ragged development data:
 | **Research** | Claude Code | ~50% | ⭐⭐⭐⭐ | Summarizing docs, comparisons |
 | **Code completion** | GitHub Copilot | ~10% | ⭐⭐ | Reducing typing, minor help |
 
+
 ### Overall Metrics (Target)
 
-Based on ragged's time tracking methodology:
+Based on `ragged`'s [Time Tracking Methodology](./time-tracking-methodology.md):
 
 - **Overall AI-assisted time**: ~50-55% of development
 - **Overall time saved**: ~30-35% faster than manual
 - **Code quality**: Same or better than manual (due to forced review)
 - **Learning**: Slower initially, faster as patterns emerge
 
-See [`time-logs/`](./time-logs/) for actual version-by-version data.
+*(See [`time-logs/`](./time-logs/) for actual version-by-version data.)*
 
----
 
-## Contributor Guidelines
+## Code Review Standards
 
-### If You Use AI Tools
-
-**Required**:
-
-1. **Disclose in PR**: Use PR template to indicate AI usage
-2. **Understand the code**: You must be able to explain every line
-3. **Review carefully**: AI code is starting point, not final product
-4. **Test thoroughly**: Especially AI-generated code
-5. **Document honestly**: What AI did vs. what you did
-
-**Best Practices**:
-
-- Use AI for scaffolding, human for refinement
-- Write tests manually for complex code
-- Review AI suggestions critically
-- Modify AI code to fit ragged's patterns
-- Learn from AI suggestions, don't blindly accept
-
-### If You Don't Use AI Tools
-
-**That's completely fine!**
-
-- Manual coding is always welcome
-- No pressure to use AI
-- Sometimes manual is better (security, algorithms)
-- Disclose "no AI used" in PR for transparency
-
-### Code Review Standards
-
-**All code** (AI-assisted or manual) must meet:
+**All code** must meet:
 
 - ✅ Passes all tests (>80% coverage)
 - ✅ Follows PEP 8 (black, ruff)
 - ✅ Type hints (mypy strict mode)
 - ✅ Documented (Google-style docstrings)
 - ✅ Understandable to reviewers
-
-**AI-assisted code** gets extra scrutiny:
-
-- ✅ Reviewer confirms contributor understands code
 - ✅ Edge cases are handled (AI often misses these)
 - ✅ Error handling is robust
-- ✅ Performance is acceptable
-- ✅ Code fits ragged's architecture
 
----
 
-## Learning from AI Assistance
-
-### What We've Learned
-
-**AI is Good At**:
-- Boilerplate and repetitive code
-- Documentation first drafts
-- Suggesting libraries and patterns
-- Explaining error messages
-- Generating initial test structures
-
-**AI Struggles With**:
-- Domain-specific logic
-- Complex error handling
-- Edge cases and corner cases
-- Performance optimization
-- Understanding project context
-
-**Human Essential For**:
-- Architectural decisions
-- Security review
-- Performance tuning
-- Understanding user needs
-- Creative problem solving
-
-### Improving AI Effectiveness
-
-**Over time, we've learned to**:
-1. Give AI clear, specific prompts
-2. Provide project context in prompts
-3. Use AI output as starting point, not end
-4. Iterate with AI (don't accept first try)
-5. Know when to switch to manual coding
-
-### Evolution of AI Use
-
-**v0.1** (learning phase):
-- AI: ~45% of time
-- Time saved: ~25% (learning overhead)
-- Lots of trial and error
-
-**v0.2** (improving):
-- AI: ~54% of time
-- Time saved: ~31% (better prompting)
-- Clear patterns emerging
-
-**v0.3+** (expected):
-- AI: ~55-60% of time
-- Time saved: ~35-40% (optimized workflow)
-- Know exactly when/how to use AI
-
----
-
-## Research Contribution
+## Further Research
 
 ### Data for AI Coding Research
 
-ragged's development provides **quantitative data** on:
+`ragged`'s development provides quantitative and qualitative data on:
 
 - Time savings per task type
-- Quality comparison (AI vs. manual)
 - Learning curve with AI tools
 - Effectiveness across project phases
 - Real-world AI coding patterns
-
-**Available to researchers**:
-- Aggregated time tracking data
-- Task-level AI effectiveness ratings
 - Qualitative observations in devlogs
-- Version-to-version evolution
+- Version-to-version changes
 
-See [`time-logs/`](./time-logs/) and [`devlog/`](./devlog/).
+See also [`time-logs/`](./time-logs/) and [`devlog/`](./devlog/).
+
 
 ### Academic Context
 
 **Disclosure Standards**:
+
 - Follows ICMJE 2024 guidelines
 - AI usage in acknowledgments (writing assistance)
 - AI usage in methods (if applicable to research)
 
 **Transparency Goal**:
+
 - Contribute to understanding AI-assisted development
 - Provide reproducible case study
 - Share lessons learned openly
 
----
 
-## Policy Updates
-
-This policy may be updated as:
-- New AI tools emerge
-- We learn better practices
-- Community provides feedback
-- Research standards evolve
-
-**Changes will be**:
-- Documented in git history
-- Announced in changelogs
-- Applied to future contributions
-- Not retroactively applied to past work
-
----
-
-## Questions and Discussion
-
-### FAQs
-
-**Q: Do I have to use AI tools to contribute?**
-A: No! Manual contributions are always welcome.
-
-**Q: What if I use AI but forget to disclose?**
-A: Update your PR description when you remember. Honest mistake.
-
-**Q: Can I use other AI tools besides those listed?**
-A: Yes! Disclose which tools you used in your PR.
-
-**Q: How detailed should AI disclosure be?**
-A: Enough for reviewers to understand scope. See PR template.
-
-**Q: What if AI generated most of the code?**
-A: That's okay if you reviewed, understood, and tested it thoroughly. Disclose percentage and review depth.
-
-### Feedback
+## Feedback
 
 Have suggestions for improving AI usage transparency?
 
 - **Discuss**: [GitHub Discussions](https://github.com/REPPL/ragged/discussions)
 - **Propose Changes**: [GitHub Issues](https://github.com/REPPL/ragged/issues)
 
----
 
 ## Related Documentation
 
@@ -431,21 +323,16 @@ Have suggestions for improving AI usage transparency?
 - [Development Logs](./devlog/) - Daily AI effectiveness ratings
 - [Contributing Guide](../contributing/README.md) - General contribution guidelines
 
----
 
-## Acknowledgment
+## Acknowledgments
 
-This AI assistance policy was developed with assistance from **Claude Code** (Anthropic, model: claude-sonnet-4-5-20250929) during ragged's planning phase (November 2025).
+This AI assistance policy was developed with assistance from **Claude Code** (Anthropic, model: claude-sonnet-4-5-20250929) during `ragged`'s planning phase (November 2025). This project is informed by:
 
-The policy is informed by:
 - Ghostty project's AI disclosure requirements
 - AIDA (AI Included Disclosure Acknowledgment) framework
 - Academic AI disclosure standards (ICMJE 2024)
 - GitHub's AI governance best practices
-- ragged development team's experience
-
----
 
 **Status**: Active policy from v0.1 onwards
-**Last Updated**: 2025-11-09
-**Next Review**: After v0.3 completion (assess effectiveness and refine)
+**Last Updated**: 2025-11-10
+**Next planned Review**: After v0.3 completion (assess effectiveness and refine)
