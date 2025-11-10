@@ -2,8 +2,11 @@
 
 **Last Updated**: 2025-11-10
 
+**Next planned Review**: After v0.3 completion (assess effectiveness and refine)
+
 *The aim of the `ragged` project is to learn about **transparent use of AI coding assistants**. This document explains which tools are used, how they're used, and the policies around AI-assisted development.*
 
+---
 
 ## Philosophy
 
@@ -31,6 +34,17 @@ This project treats the AI coding assistant as a senior developer where:
 
 ---
 
+## Acknowledgments
+
+This AI assistance policy was developed with assistance from **Claude Code** (Anthropic, model: claude-sonnet-4-5-20250929) during `ragged`'s planning phase (November 2025). This project is informed by:
+
+- Ghostty project's AI disclosure requirements
+- AIDA (AI Included Disclosure Acknowledgment) framework
+- Academic AI disclosure standards (ICMJE 2024)
+- GitHub's AI governance best practices
+
+---
+
 ## Tools
 
 ### Claude Code (Primary tool)
@@ -54,6 +68,7 @@ This project treats the AI coding assistant as a senior developer where:
 
 *(See also [Time Tracking](./time-tracking-methodology.md) for detailed metrics.)*
 
+---
 
 ## Learnings (so far)
 
@@ -141,6 +156,7 @@ This project treats the AI coding assistant as a senior developer where:
 - Time saved: ~35-40% (optimized workflow)
 - Know exactly when/how to use AI
 
+---
 
 ## Disclosure Statements
 
@@ -233,6 +249,7 @@ Time: 2.0h"
 | Testing | 4.0 | No | Manual test writing |
 ```
 
+---
 
 ## Tracking of AI Use
 
@@ -262,6 +279,7 @@ Based on `ragged`'s [Time Tracking Methodology](./time-tracking-methodology.md):
 
 *(See [`time-logs/`](./time-logs/) for actual version-by-version data.)*
 
+---
 
 ## Code Review Standards
 
@@ -275,6 +293,7 @@ Based on `ragged`'s [Time Tracking Methodology](./time-tracking-methodology.md):
 - ✅ Edge cases are handled (AI often misses these)
 - ✅ Error handling is robust
 
+---
 
 ## Further Research
 
@@ -291,7 +310,6 @@ Based on `ragged`'s [Time Tracking Methodology](./time-tracking-methodology.md):
 
 See also [`time-logs/`](./time-logs/) and [`devlog/`](./devlog/).
 
-
 ### Academic Context
 
 **Disclosure Standards**:
@@ -306,6 +324,7 @@ See also [`time-logs/`](./time-logs/) and [`devlog/`](./devlog/).
 - Provide reproducible case study
 - Share lessons learned openly
 
+---
 
 ## Feedback
 
@@ -314,6 +333,7 @@ Have suggestions for improving AI usage transparency?
 - **Discuss**: [GitHub Discussions](https://github.com/REPPL/ragged/discussions)
 - **Propose Changes**: [GitHub Issues](https://github.com/REPPL/ragged/issues)
 
+---
 
 ## Related Documentation
 
@@ -322,15 +342,3 @@ Have suggestions for improving AI usage transparency?
 - [Contributing Guide](../contributing/README.md) - General contribution guidelines
 
 
-## Acknowledgments
-
-This AI assistance policy was developed with assistance from **Claude Code** (Anthropic, model: claude-sonnet-4-5-20250929) during `ragged`'s planning phase (November 2025). This project is informed by:
-
-- Ghostty project's AI disclosure requirements
-- AIDA (AI Included Disclosure Acknowledgment) framework
-- Academic AI disclosure standards (ICMJE 2024)
-- GitHub's AI governance best practices
-
-**Status**: Active policy from v0.1 onwards
-**Last Updated**: 2025-11-10
-**Next planned Review**: After v0.3 completion (assess effectiveness and refine)
