@@ -21,15 +21,50 @@ API_UPLOAD = f"{API_BASE_URL}/api/upload"
 API_COLLECTIONS = f"{API_BASE_URL}/api/collections"
 
 
-def check_api_health() -> dict:
-    """Check if API is healthy."""
-    try:
-        response = requests.get(API_HEALTH, timeout=5)
-        response.raise_for_status()
-        return response.json()
-    except Exception as e:
-        logger.error(f"API health check failed: {e}")
-        return {"status": "unhealthy", "error": str(e)}
+def check_api_health(max_retries: int = 10, retry_delay: float = 2.0) -> dict:
+    """Check if API is healthy with retry logic.
+
+    Args:
+        max_retries: Maximum number of retry attempts (default: 10)
+        retry_delay: Delay in seconds between retries (default: 2.0)
+
+    Returns:
+        API health status dict
+    """
+    import time
+
+    for attempt in range(max_retries):
+        try:
+            response = requests.get(API_HEALTH, timeout=5)
+            response.raise_for_status()
+            health_data = response.json()
+            logger.info(f"API health check successful on attempt {attempt + 1}")
+            return health_data
+        except Exception as e:
+            if attempt < max_retries - 1:
+                logger.warning(f"API health check failed (attempt {attempt + 1}/{max_retries}): {e}. Retrying in {retry_delay}s...")
+                time.sleep(retry_delay)
+            else:
+                logger.error(f"API health check failed after {max_retries} attempts: {e}")
+                return {"status": "unhealthy", "error": str(e)}
+
+    return {"status": "unhealthy", "error": "Max retries exceeded"}
+
+
+def get_api_status_display() -> str:
+    """Get formatted API status for display.
+
+    Returns:
+        Formatted markdown string with API status
+    """
+    health = check_api_health(max_retries=1, retry_delay=0.5)
+    status = health.get("status", "unknown")
+
+    if status == "healthy" or status == "degraded":
+        return "**API Status**: ✅ Connected"
+    else:
+        error = health.get("error", "Unknown error")
+        return f"**API Status**: ❌ Unavailable ({error[:50]}...)"
 
 
 def query_with_streaming(
@@ -260,9 +295,10 @@ def create_ui() -> gr.Blocks:
     Returns:
         Gradio Blocks app
     """
-    # Check API health on startup
-    health = check_api_health()
+    # Check API health on startup (with retries)
+    health = check_api_health(max_retries=10, retry_delay=2.0)
     api_status = health.get("status", "unknown")
+    initial_status = "✅ Connected" if api_status in ["healthy", "degraded"] else "❌ Unavailable"
 
     with gr.Blocks(
         title="ragged - Privacy-First RAG",
@@ -276,11 +312,12 @@ def create_ui() -> gr.Blocks:
             """
         )
 
-        # API Status indicator
+        # API Status indicator with refresh button
         with gr.Row():
             api_status_display = gr.Markdown(
-                f"**API Status**: {'✅ Healthy' if api_status == 'healthy' else '❌ Unavailable'}"
+                f"**API Status**: {initial_status}"
             )
+            refresh_btn = gr.Button("🔄 Refresh Status", scale=0, size="sm")
 
         with gr.Row():
             # Left column: Chat
@@ -380,6 +417,12 @@ def create_ui() -> gr.Blocks:
         clear_btn.click(
             lambda: ([], ""),
             outputs=[chatbot, sources_display]
+        )
+
+        # Refresh API status
+        refresh_btn.click(
+            get_api_status_display,
+            outputs=[api_status_display]
         )
 
         # Upload document
