@@ -1,12 +1,12 @@
 services:
-  # Main ragged application
-  ragged-app:
+  # FastAPI backend
+  ragged-api:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: ragged-app
+    container_name: ragged-api
     ports:
-      - "${RAGGED_PORT:-8000}:8000"  # FastAPI default port
+      - "${RAGGED_API_PORT:-8000}:8000"  # FastAPI default port
     volumes:
       - ./src:/app/src:ro  # Source code (read-only for safety)
       - ./docs:/app/docs:ro  # Documentation (read-only)
@@ -25,8 +25,38 @@ services:
     networks:
       - ragged-network
     restart: unless-stopped
+    command: ["python", "-m", "uvicorn", "src.web.api:app", "--host", "0.0.0.0", "--port", "8000"]
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Gradio web UI
+  ragged-ui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ragged-ui
+    ports:
+      - "${RAGGED_UI_PORT:-7860}:7860"  # Gradio default port
+    volumes:
+      - ./src:/app/src:ro  # Source code (read-only for safety)
+      - ./data:/app/data  # Runtime data (read-write)
+    environment:
+      - RAGGED_API_URL=${RAGGED_API_URL:-http://ragged-api:8000}
+      - PYTHONUNBUFFERED=${PYTHONUNBUFFERED:-1}
+      - ENVIRONMENT=${ENVIRONMENT:-development}
+    depends_on:
+      ragged-api:
+        condition: service_healthy
+    networks:
+      - ragged-network
+    restart: unless-stopped
+    command: ["python", "-m", "src.web.gradio_ui"]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7860"]
       interval: 30s
       timeout: 10s
       retries: 3
