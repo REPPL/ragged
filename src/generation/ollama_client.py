@@ -56,17 +56,49 @@ class OllamaClient:
 
     def _verify_model_available(self) -> None:
         """
-        Verify model is available in Ollama.
+        Verify model is available in Ollama with helpful error messages.
+
+        Raises:
+            RuntimeError: If model not found, with actionable suggestions
         """
         try:
-            models = self.client.list()
-            model_names = [m.model for m in models.models]
+            from src.config.model_manager import ModelManager
 
-            if not any(self.model in name for name in model_names):
-                logger.warning(
-                    f"Model {self.model} not found. "
-                    f"Install with: ollama pull {self.model}"
+            manager = ModelManager(self.base_url)
+
+            if not manager.verify_model(self.model):
+                available = manager.list_available_models()
+
+                if not available:
+                    raise RuntimeError(
+                        f"No models available in Ollama.\n\n"
+                        f"Install a model with:\n"
+                        f"  ollama pull llama3.2:latest\n\n"
+                        f"See available models at: https://ollama.com/library"
+                    )
+
+                recommended = manager.get_recommended_model()
+                model_list = "\n  ".join([m.name for m in available[:3]])
+
+                raise RuntimeError(
+                    f"Model '{self.model}' not found in Ollama.\n\n"
+                    f"Available models:\n  {model_list}\n\n"
+                    f"Recommended for RAG: {recommended}\n\n"
+                    f"To use a different model:\n"
+                    f"  1. Set environment variable: export RAGGED_LLM_MODEL={recommended}\n"
+                    f"  2. Or run: ragged config set-model {recommended}\n"
+                    f"  3. Or install this model: ollama pull {self.model}"
                 )
+
+        except ImportError:
+            # Fall back to simple warning if ModelManager not available
+            logger.warning(
+                f"Model {self.model} not found. "
+                f"Install with: ollama pull {self.model}"
+            )
+        except RuntimeError:
+            # Re-raise RuntimeError to propagate helpful error messages
+            raise
         except Exception as e:
             logger.warning(f"Could not verify model availability: {e}")
 
