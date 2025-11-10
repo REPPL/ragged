@@ -110,6 +110,7 @@ def query_with_streaming(
         response.raise_for_status()
 
         # Process SSE stream
+        event_type = None  # Initialize to avoid UnboundLocalError
         answer_tokens = []
         sources = []
 
@@ -123,6 +124,10 @@ def query_with_streaming(
             if line.startswith('event: '):
                 event_type = line[7:].strip()
             elif line.startswith('data: '):
+                # Skip data lines if we don't have an event type yet
+                if event_type is None:
+                    continue
+
                 data = json.loads(line[6:])
 
                 if event_type == 'token':
@@ -148,11 +153,18 @@ def query_with_streaming(
         yield history, sources_md
 
     except requests.exceptions.RequestException as e:
-        error_msg = f"❌ Error querying API: {str(e)}"
+        error_msg = f"❌ API Error: {str(e)}"
+        logger.error(f"API request failed: {e}", exc_info=True)
+        history[-1] = (message, error_msg)
+        yield history, ""
+    except json.JSONDecodeError as e:
+        error_msg = f"❌ Stream parsing error: {str(e)}"
+        logger.error(f"JSON decode failed: {e}", exc_info=True)
         history[-1] = (message, error_msg)
         yield history, ""
     except Exception as e:
-        error_msg = f"❌ Unexpected error: {str(e)}"
+        error_msg = f"❌ Unexpected error ({type(e).__name__}): {str(e)}"
+        logger.error(f"Query failed: {e}", exc_info=True)
         history[-1] = (message, error_msg)
         yield history, ""
 
