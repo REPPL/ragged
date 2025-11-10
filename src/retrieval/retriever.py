@@ -120,7 +120,7 @@ class Retriever:
                     score=score,
                     chunk_id=chunk_id,
                     document_id=metadata.get("document_id", ""),
-                    document_path=metadata.get("source_path", ""),
+                    document_path=metadata.get("document_path", ""),
                     chunk_position=metadata.get("chunk_position", 0),
                     metadata=metadata,
                 )

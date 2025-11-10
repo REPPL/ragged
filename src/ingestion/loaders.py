@@ -125,18 +125,25 @@ def load_pdf(file_path: Path) -> Document:
 
     logger.debug(f"Extracting text from PDF: {file_path}")
 
-    # Extract text and structure as markdown
-    md_text = pymupdf4llm.to_markdown(str(file_path))
-
-    # Get metadata
+    # Get metadata first to know page count
     doc = fitz.open(file_path)
     metadata = doc.metadata or {}
+    page_count = len(doc)
+    doc.close()
+
+    # Extract text page by page with page markers for citation tracking
+    pages_text = []
+    for page_num in range(page_count):
+        # Extract markdown for this page only
+        page_md = pymupdf4llm.to_markdown(str(file_path), pages=[page_num])
+        # Add page marker before the page content
+        pages_text.append(f"<!-- PAGE {page_num + 1} -->\n{page_md}")
+
+    # Join all pages with double newlines
+    md_text = "\n\n".join(pages_text)
 
     title = metadata.get("title") or file_path.stem
     author = metadata.get("author")
-    page_count = len(doc)
-
-    doc.close()
 
     logger.info(f"Loaded PDF: {page_count} pages, {len(md_text)} characters")
 

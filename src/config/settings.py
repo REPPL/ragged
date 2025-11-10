@@ -49,7 +49,7 @@ class Settings(BaseSettings):
     retrieval_k: int = Field(default=5, gt=0, description="Number of chunks to retrieve")
 
     # Generation Configuration
-    llm_model: str = Field(default="llama3.2:3b", description="Ollama model for generation")
+    llm_model: str = Field(default="llama3.2:latest", description="Ollama model for generation")
 
     # Storage Configuration
     data_dir: Path = Field(

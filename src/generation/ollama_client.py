@@ -60,7 +60,7 @@ class OllamaClient:
         """
         try:
             models = self.client.list()
-            model_names = [m['name'] for m in models.get('models', [])]
+            model_names = [m.model for m in models.models]
 
             if not any(self.model in name for name in model_names):
                 logger.warning(
