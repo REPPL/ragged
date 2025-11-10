@@ -1,30 +1,28 @@
-# AI Assistance in ragged Development
+# Policy for using AI Assistance
 
 **Last Updated**: 2025-11-10
-**Purpose**: Transparent documentation of AI tool usage in ragged development
-**Status**: Active policy from v0.1 onwards
 
-	The aim of the `ragged` project is to learn about **transparent use of AI coding assistants**. This document explains which tools are used, how they're used, and the policies around AI-assisted development.
+*The aim of the `ragged` project is to learn about **transparent use of AI coding assistants**. This document explains which tools are used, how they're used, and the policies around AI-assisted development.*
 
 
 ## Philosophy
 
 **AI as a synthetic teammate**
 
-In the original [paper](https://doi.org/10.1016/j.bushor.2025.02.008), we argued for AI to be treated as a junior teammate. In this project, my aim is to to push the concept of a `synthetic teammate` further. Instead of a junior collaborator, I am treating an AI coding assistant as the main (i.e., only) developer, while my role is to direct the project.
+I used to view AI [as a synthetic teammate](https://doi.org/10.1016/j.bushor.2025.02.008) to be treated as a junior colleage. While this remains a useful framing, my aim for this project is to push the concept of a `synthetic teammate` further. Instead of a junior collaborator, I am treating an AI coding assistant as the main (i.e., only) developer, while my role is to direct the project.
 
-In other words, I want to see whether it is possible for a non-programmer (i.e., me) (a) to develop a fairly sophisticated software and (b) to document the use of AI in a transparent and (to some extend) reproducible way.
+In other words, my aim is to explore whether it is possible for a non-programmer (i.e., me) (a) to develop a fairly sophisticated software and (b) to document the use of AI in a transparent and (to some extend) reproducible way.
 
 *Source:* [https://doi.org/10.1016/j.bushor.2025.02.008](https://doi.org/10.1016/j.bushor.2025.02.008)
 
 Consequently, instead of a junior developer where:
 
-- AI tools **amplify human expertise**, they don't replace it
+- AI tools **amplify human expertise** but don't replace it
 - All AI-generated code is **reviewed and understood** by human developers
 - Developers are **fully accountable** for all submitted code
 - Critical code paths (security, core algorithms) are **written manually**
 
-This project treats the AI coding assistant as a senior developer with:
+This project treats the AI coding assistant as a senior developer where:
 
 - AI usage is **disclosed openly** in commits, PRs, and documentation
 - We track **what works and what doesn't** with AI assistance
