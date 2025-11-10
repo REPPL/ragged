@@ -60,7 +60,7 @@ git clone https://github.com/REPPL/ragged.git
 cd ragged
 
 # Create virtual environment
-python -m venv .venv
+python3 -m venv .venv. # or python, depending on your system
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
 # Install dependencies
