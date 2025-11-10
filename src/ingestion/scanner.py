@@ -109,12 +109,24 @@ class DocumentScanner:
                     logger.debug(f"Ignoring: {entry.name}")
                     continue
 
+                # Manual symlink handling for Python 3.12 compatibility
+                # (follow_symlinks parameter only available in Python 3.13+)
+                is_symlink = entry.is_symlink()
+
                 # Handle directories
-                if entry.is_dir(follow_symlinks=self.follow_symlinks):
+                if entry.is_dir():
+                    # Skip if it's a symlink and we're not following them
+                    if is_symlink and not self.follow_symlinks:
+                        logger.debug(f"Skipping directory symlink: {entry.name}")
+                        continue
                     self._scan_recursive(entry, depth + 1, results)
 
                 # Handle files
-                elif entry.is_file(follow_symlinks=self.follow_symlinks):
+                elif entry.is_file():
+                    # Skip if it's a symlink and we're not following them
+                    if is_symlink and not self.follow_symlinks:
+                        logger.debug(f"Skipping file symlink: {entry.name}")
+                        continue
                     if self._is_supported_format(entry):
                         results.append(entry.resolve())
 
