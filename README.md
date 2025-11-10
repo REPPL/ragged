@@ -1,5 +1,5 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
 [![Status: Alpha](https://img.shields.io/badge/status-alpha-red.svg)]()
 
 
@@ -48,7 +48,7 @@
 
 ### Prerequisites
 
-- Python 3.12+
+- Python 3.12
 - [Ollama](https://ollama.ai) installed and running (optional for v0.2 web UI)
 - ChromaDB (via Docker or pip)
 
