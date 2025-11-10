@@ -41,18 +41,83 @@ def cli(verbose: bool, debug: bool) -> None:
 
 
 @cli.command()
-@click.argument("file_path", type=click.Path(exists=True, path_type=Path))
+@click.argument("path", type=click.Path(exists=True, path_type=Path))
 @click.option("--format", "-f", type=str, help="Force document format (pdf, txt, md, html)")
-def add(file_path: Path, format: Optional[str]) -> None:
+@click.option("--recursive/--no-recursive", default=True, help="Scan subdirectories (default: True)")
+@click.option("--max-depth", type=int, help="Maximum directory depth (unlimited by default)")
+@click.option("--fail-fast", is_flag=True, help="Stop on first error instead of continuing")
+def add(
+    path: Path,
+    format: Optional[str],
+    recursive: bool,
+    max_depth: Optional[int],
+    fail_fast: bool,
+) -> None:
     """
-    Ingest a document into the system.
+    Ingest document(s) into the system.
+
+    PATH can be a single file or directory.
+    When PATH is a directory, all supported documents are ingested recursively.
+    Supported formats: PDF, TXT, MD, HTML
     """
     from src.chunking.splitters import chunk_document
     from src.embeddings.factory import get_embedder
     from src.ingestion.loaders import load_document
+    from src.ingestion.scanner import DocumentScanner
+    from src.ingestion.batch import BatchIngester, IngestionStatus
     from src.storage.vector_store import VectorStore
 
-    console.print(f"[bold blue]Ingesting document:[/bold blue] {file_path}")
+    # Determine if we're processing a single file or directory
+    is_directory = path.is_dir()
+
+    if is_directory:
+        # Folder ingestion with batch processing
+        console.print(f"[bold blue]Scanning:[/bold blue] {path}")
+
+        scanner = DocumentScanner(
+            follow_symlinks=False,
+            max_depth=max_depth if not recursive else None,
+        )
+
+        file_paths = scanner.scan(path)
+
+        if not file_paths:
+            console.print("[yellow]No supported documents found.[/yellow]")
+            console.print("Supported formats: PDF, TXT, MD, HTML")
+            return
+
+        console.print(f"Found {len(file_paths)} documents")
+
+        # Batch ingestion
+        batch_ingester = BatchIngester(
+            console=console,
+            continue_on_error=not fail_fast,
+            skip_duplicates=True,  # Auto-skip duplicates in batch mode
+        )
+
+        with Progress() as progress:
+            summary = batch_ingester.ingest_batch(file_paths, progress)
+
+        # Display summary
+        console.print()
+        console.print("[bold]Summary:[/bold]")
+        console.print(f"  ✓ Successful: {summary.successful}")
+        console.print(f"  ⊗ Duplicates: {summary.duplicates} (skipped)")
+        console.print(f"  ✗ Failed: {summary.failed}")
+        console.print(f"  📊 Total chunks: {summary.total_chunks}")
+
+        # Show failed documents if any
+        if summary.failed > 0:
+            console.print()
+            console.print("[bold red]Failed documents:[/bold red]")
+            for result in summary.results:
+                if result.status == IngestionStatus.FAILED:
+                    console.print(f"  • {result.file_path.name}: {result.error}")
+
+        return
+
+    # Single file ingestion (existing logic)
+    console.print(f"[bold blue]Ingesting document:[/bold blue] {path}")
 
     try:
         with Progress() as progress:
@@ -60,7 +125,7 @@ def add(file_path: Path, format: Optional[str]) -> None:
 
             # Load document
             progress.update(task, description="Loading document...", advance=10)
-            document = load_document(file_path, format=format)
+            document = load_document(path, format=format)
             progress.update(task, advance=10)
 
             # Check for duplicates
@@ -83,7 +148,7 @@ def add(file_path: Path, format: Optional[str]) -> None:
         console.print(f"[yellow]⚠ Document already exists:[/yellow]")
         console.print(f"  Document ID: {existing_doc_id}")
         console.print(f"  Existing path: {existing_path}")
-        console.print(f"  Current path:  {file_path}")
+        console.print(f"  Current path:  {path}")
         console.print(f"  Chunks: {existing_count}")
         console.print()
 
@@ -146,7 +211,7 @@ def add(file_path: Path, format: Optional[str]) -> None:
 
         console.print(f"[bold green]✓[/bold green] Document ingested: {document.document_id}")
         console.print(f"  Chunks: {len(document.chunks)}")
-        console.print(f"  Path: {file_path}")
+        console.print(f"  Path: {path}")
 
     except Exception as e:
         console.print(f"[bold red]✗[/bold red] Failed to ingest document: {e}")
