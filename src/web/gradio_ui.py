@@ -6,6 +6,7 @@ Privacy-first local RAG system with streaming responses and document upload.
 import gradio as gr
 import requests
 import json
+import os
 from typing import Generator, List, Tuple
 from pathlib import Path
 import logging
@@ -13,7 +14,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 # API configuration
-API_BASE_URL = "http://localhost:8000"
+API_BASE_URL = os.getenv("RAGGED_API_URL", "http://localhost:8000")
 API_HEALTH = f"{API_BASE_URL}/api/health"
 API_QUERY = f"{API_BASE_URL}/api/query"
 API_UPLOAD = f"{API_BASE_URL}/api/upload"
