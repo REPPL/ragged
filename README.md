@@ -1,15 +1,13 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![Status: Planning](https://img.shields.io/badge/status-planning-yellow.svg)]()
+[![Status: Alpha](https://img.shields.io/badge/status-alpha-red.svg)]()
+
+	Before v1.0, we may make breaking changes. Backward compatibility is the goal for after v1.0.
 
 
 # ragged - Privacy-First Local RAG System
 
-**Your private, intelligent document assistant that runs entirely on your computer.**
-
-`ragged` is a local RAG *(Retrieval-Augmented Generation)* system that lets you ask questions about your documents and get accurate answers with citations - all while keeping your data completely private and local.
-
-	**Developer Beta Notice**: Before v1.0, we may make breaking changes to improve the product. After v1.0, we commit to stability and backward compatibility.
+**Your private, intelligent document assistant that runs entirely on your computer:** `ragged` is a local RAG *(Retrieval-Augmented Generation)* system that lets you ask questions about your documents and get accurate answers with citations - all while keeping your data completely private and local.
 
 ### Project Principles
 
