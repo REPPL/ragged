@@ -56,6 +56,7 @@ class ChunkMetadata(BaseModel):
 
     document_id: str
     document_path: Path
+    file_hash: str = Field(description="SHA256 hash of source document (for duplicate detection)")
     chunk_position: int = Field(ge=0, description="0-indexed position in document")
     total_chunks: int = Field(gt=0, description="Total number of chunks in document")
     overlap_with_previous: int = Field(

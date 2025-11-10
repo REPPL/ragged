@@ -346,6 +346,7 @@ def chunk_document(document: Document, splitter: RecursiveCharacterTextSplitter 
         chunk_metadata = ChunkMetadata(
             document_id=document.document_id,
             document_path=document.metadata.file_path,
+            file_hash=document.metadata.file_hash,
             chunk_position=i,
             total_chunks=total_chunks,
             overlap_with_previous=0 if i == 0 else splitter.chunk_overlap,
@@ -372,6 +373,7 @@ def chunk_document(document: Document, splitter: RecursiveCharacterTextSplitter 
 def create_chunk_metadata(
     document_id: str,
     document_path,
+    file_hash: str,
     position: int,
     total_chunks: int,
     previous_text: str = "",
@@ -391,6 +393,7 @@ def create_chunk_metadata(
     return ChunkMetadata(
         document_id=document_id,
         document_path=document_path,
+        file_hash=file_hash,
         chunk_position=position,
         total_chunks=total_chunks,
         overlap_with_previous=overlap_prev,
