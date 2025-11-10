@@ -67,7 +67,7 @@ source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 pip install -e .
 
 # Start services
-docker-compose up -d  # Starts ChromaDB (if using Docker)
+docker compose up -d  # Starts ChromaDB (if using Docker)
 ollama serve          # Start Ollama (in separate terminal)
 ```
 
