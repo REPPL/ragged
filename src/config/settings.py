@@ -130,8 +130,26 @@ class Settings(BaseSettings):
         return self
 
     def model_post_init(self, __context) -> None:
-        """Create data directory if it doesn't exist."""
+        """Create data directory and load user config if available."""
         self.data_dir.mkdir(parents=True, exist_ok=True)
+
+        # Check for user config file
+        config_file = self.data_dir / "config.yml"
+        if config_file.exists():
+            try:
+                import yaml
+                import os
+
+                with open(config_file, "r") as f:
+                    user_config = yaml.safe_load(f) or {}
+
+                # Override with user config (if not set by environment variable)
+                if "llm_model" in user_config and not os.getenv("RAGGED_LLM_MODEL"):
+                    self.llm_model = user_config["llm_model"]
+                    logger.info(f"Loaded LLM model from user config: {self.llm_model}")
+
+            except Exception as e:
+                logger.warning(f"Failed to load user config: {e}")
 
 
 @functools.lru_cache()
