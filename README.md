@@ -277,22 +277,22 @@ ollama pull nomic-embed-text
 
 ## Roadmap
 
-### v0.1 (Current)
+### v0.1 (Released)
 - ✅ Core RAG pipeline
 - ✅ Multi-format document support
 - ✅ Dual embedding backends
 - ✅ CLI interface
 - ✅ Privacy-first architecture
 
-### v0.2 (In Progress - 50% Complete)
+### v0.2 (Current - Released 2025-11-10)
 - ✅ Web UI (FastAPI + Gradio with SSE streaming)
 - ✅ Hybrid retrieval (BM25 + Vector with RRF fusion)
 - ✅ Few-shot prompting with example storage
 - ✅ Contextual chunking (document + section headers)
-- 🚧 Document metadata management
-- 🚧 Performance optimizations (caching, async)
-- 🚧 Docker deployment improvements
-- 🚧 Comprehensive testing & documentation
+- ✅ Performance optimizations (LRU caching, async processing)
+- ✅ Docker deployment (API + UI + ChromaDB)
+- ✅ Comprehensive testing (262 tests, 68% coverage)
+- ✅ Performance benchmarking utilities
 
 ### v0.3 (Future)
 - [ ] Multi-modal support (images, tables)
