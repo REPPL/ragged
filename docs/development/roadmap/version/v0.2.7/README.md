@@ -1,10 +1,14 @@
 # Ragged v0.2.7 Roadmap - UX & Performance
 
-**Status**: Planned
-**Timeline**: 3-4 weeks
-**Estimated Hours**: 80-100 hours (with AI assistance)
-**Focus**: User experience, performance optimization, quality of life
-**Breaking Changes**: Multi-collection system (migration provided)
+**Status:** Planned
+
+**Total Hours:** 80-100 hours (AI implementation)
+
+**Focus:** User experience, performance optimisation, quality of life
+
+**Breaking Changes:** Multi-collection system (migration provided)
+
+**Implementation Note:** Due to size (80-100 hours), implement in 3-4 focused sessions of 20-30 hours each
 
 ## Overview
 
@@ -1149,21 +1153,21 @@ ragged query "..." --profile fast
 
 ### Recommended Implementation Order
 
-**Week 1: Core UX** (30 hours)
+**Session 1: Core UX** (30 hours)
 1. UX-001: Model switching (8h)
 2. UX-002: Multi-collection support (10h)
 3. UX-003: Enhanced progress (4h)
 4. PERF-001: Embedding caching (5h)
 5. Testing and bug fixes (3h)
 
-**Week 2: Performance** (30 hours)
+**Session 2: Performance** (30 hours)
 1. PERF-002: Async processing (12h)
 2. PERF-003: Lazy model loading (6h)
 3. PERF-004: BM25 persistence (3h)
 4. UX-006: Better error messages (6h)
-5. Testing and optimization (3h)
+5. Testing and optimisation (3h)
 
-**Week 3: Polish** (30 hours)
+**Session 3: Polish** (30 hours)
 1. CONFIG-001: Runtime config (4h)
 2. CONFIG-002: Config profiles (6h)
 3. UX-004: Query suggestions (6h)
@@ -1171,9 +1175,9 @@ ragged query "..." --profile fast
 5. UX-007: Document preview (4h)
 6. Final testing and documentation (2h)
 
-**Week 4: Optimization & Testing** (20 hours)
-1. PERF-005: Chunking optimization (5h)
-2. PERF-006: Query optimization (6h)
+**Session 4: Optimisation & Testing** (20 hours)
+1. PERF-005: Chunking optimisation (5h)
+2. PERF-006: Query optimisation (6h)
 3. Comprehensive testing (6h)
 4. Documentation updates (3h)
 

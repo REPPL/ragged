@@ -1,10 +1,14 @@
 # Ragged v0.4.0 Roadmap - Personal Memory & Knowledge Graphs
 
-**Status**: Planned
-**Timeline**: 6-8 weeks
-**Estimated Hours**: 160-200 hours (with AI assistance)
-**Focus**: Personal memory system, knowledge graphs, personalization
-**Breaking Changes**: None - All features are additive and optional
+**Status:** Planned
+
+**Total Hours:** 160-200 hours (AI implementation)
+
+**Focus:** Personal memory system, knowledge graphs, personalisation
+
+**Breaking Changes:** None - All features are additive and optional
+
+**Implementation Note:** Due to size (160-200 hours), implement in 5-7 focused sessions of 25-35 hours each
 
 ## Overview
 
