@@ -1,8 +1,10 @@
 # ragged Development Roadmap - All Versions
 
 **Current Version:** v0.2.2
+
 **Last Updated:** 2025-11-12
-**Planning Horizon:** v0.7.0 (~15 months)
+
+**Planning Horizon:** v0.7.0 (~850-1050 total hours)
 
 ---
 

@@ -2497,20 +2497,20 @@ Improvements to citation system:
 
 ### Recommended Implementation Order
 
-**Phase 1: Core Improvements** (4-5 weeks)
+**Phase 1: Core Improvements** (70-90 hours)
 1. FEAT-009: RAGAS evaluation (establish baseline)
 2. FEAT-003: Reranking (quick win)
 3. FEAT-002: HyDE retrieval
 4. FEAT-001: Query decomposition
 5. FEAT-005: Semantic chunking
 
-**Phase 2: Multi-Modal & Advanced Features** (2-3 weeks)
+**Phase 2: Multi-Modal & Advanced Features** (50-70 hours)
 6. FEAT-007: Image processing
 7. FEAT-008: Table extraction
 8. FEAT-010: Confidence scores
 9. FEAT-014: Chain-of-thought
 
-**Phase 3: Production Features** (2 weeks)
+**Phase 3: Production Features** (50-60 hours)
 10. FEAT-006: Hierarchical chunking
 11. FEAT-011: Version tracking
 12. FEAT-012: Metadata filtering
