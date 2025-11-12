@@ -24,42 +24,102 @@ This document provides a unified view of all planned ragged versions. Each versi
 ## Timeline Summary
 
 ```
-Current     v0.2.2 ━━━━━━━━━━━━━━━━━━━━┓
-                                        │ Bug Fixes Phase
-Next        v0.2.5 ━━━━━━━━━━━━━━━━━━━━┫ (40-50 hours)
-            v0.2.7 ━━━━━━━━━━━━━━━━━━━━┛ (80-100 hours)
-            ══════════════════════════════ STABILITY ═══════════
-            v0.3.0 ━━━━━━━━━━━━━━━━━━━━┓ Multi-Embedding
-                                        │ (180-220 hours)
-            ══════════════════════════════ FOUNDATION ══════════
-            v0.4.0 ━━━━━━━━━━━━━━━━━━━━┓ ColPali Vision
-                                        │ (160-200 hours)
-            ══════════════════════════════ MULTIMODAL ══════════
-Future      v0.5.0+━━━━━━━━━━━━━━━━━━━━┛ Advanced Features
+Current     v0.2.2 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+                                                         │ Bug Fixes
+Next        v0.2.3 ━━━ P0 Critical (12-15h)             │ (44-59h)
+            v0.2.4 ━━━ P1 High Priority (20-25h)        │
+            v0.2.6 ━━━ P2 Quality (12-19h)              ┛
+            ═════════════════════════════════════════ STABILITY
+            v0.2.7 ━━━━━━━━━━━━━ UX & Performance (80-100h)
+            ═════════════════════════════════════════ FOUNDATION
+            v0.3.0 ━━━━━━━━━━━━━ Advanced RAG (180-220h)
+            ═════════════════════════════════════════ ADVANCED
+            v0.4.0 ━━━━━━━━━━━━━ Personal Memory (160-200h)
+            v0.5.0 ━━━━━━━━━━━━━ ColPali Vision (140-180h)
+            v0.6.0 ━━━━━━━━━━━━━ Optimisation (120-150h)
+            ═════════════════════════════════════════ PRODUCTION
+Future      v0.7.0 ━━━━━━━━━━━━━ Production Ready (150-200h)
 ```
 
 ---
 
 ## Version Overview
 
-### v0.2.5 - Bug Fixes & Quality (40-50 hours)
+### v0.2.3 - Critical Bugs (P0) (12-15 hours)
 
-**Status:** Planning
-**Focus:** Critical bugs, no new features
+**Status:** Planned
+**Priority:** P0 - Must complete first
+**Focus:** Blocking issues that prevent core functionality
 
 **Key Issues:**
 - BUG-001: API endpoints non-functional (blocks Web UI)
 - BUG-002: Logger undefined in settings.py
-- BUG-003: Duplicate detection I/O blocking
-- BUG-004-013: Error handling, validation, memory leaks
+- BUG-003: Zero test coverage for new modules (606 lines)
 
 **Success Criteria:**
-- Zero crashes on valid inputs
-- Web UI functional for real use
-- All documented bugs resolved
-- Test coverage ≥80%
+- Web UI functional for uploads and queries
+- No NameError in config loading
+- Test coverage ≥80% for scanner, batch, model_manager
 
-**See:** [v0.2.5/README.md](./v0.2.5/README.md)
+**See:** [v0.2.3/README.md](./v0.2.3/README.md)
+
+---
+
+### v0.2.4 - High Priority Bugs (P1) (20-25 hours)
+
+**Status:** Planned
+**Priority:** P1 - Complete after v0.2.3
+**Focus:** Significant quality and functionality improvements
+
+**Key Issues:**
+- BUG-004: Inconsistent error handling
+- BUG-005: Path handling edge cases
+- BUG-006: Memory leaks in batch processing
+- BUG-007: ChromaDB metadata type restrictions
+- BUG-008: Incomplete hybrid retrieval integration
+- BUG-009: Few-shot examples unused
+- BUG-010: Duplicate detection incomplete
+- BUG-011: Page tracking edge cases
+
+**Success Criteria:**
+- Error handling consistent across codebase
+- Memory stable during large batches
+- Hybrid retrieval works correctly
+- All P1 bugs resolved
+
+**See:** [v0.2.4/README.md](./v0.2.4/README.md)
+
+---
+
+### v0.2.5 - Bug Fixes Overview (Split)
+
+**Status:** Split into v0.2.3, v0.2.4, v0.2.6
+**Note:** This version was split into three priority-based versions for token-efficient implementation.
+
+**See:** [v0.2.5/README.md](./v0.2.5/README.md) for split overview
+
+---
+
+### v0.2.6 - Quality Improvements (P2) (12-19 hours)
+
+**Status:** Planned
+**Priority:** P2 - Complete after v0.2.4
+**Focus:** Code quality and maintainability
+
+**Key Improvements:**
+- QUALITY-001: Type hint coverage
+- QUALITY-002: Docstring completeness
+- QUALITY-003: TODO comments cleanup
+- QUALITY-004: Code duplication removal
+- QUALITY-005: Magic numbers replacement
+
+**Success Criteria:**
+- mypy --strict passes
+- All public functions documented
+- No TODO comments without issue references
+- Code quality metrics improved
+
+**See:** [v0.2.6/README.md](./v0.2.6/README.md)
 
 ---
 
@@ -134,22 +194,73 @@ Future      v0.5.0+━━━━━━━━━━━━━━━━━━━━�
 
 ---
 
-## Future Versions (Beyond v0.4.0)
+### v0.5.0 - ColPali Vision Integration (140-180 hours)
 
-**v0.5.0 - ColPali Vision Integration**
-- Multi-modal document understanding
-- Vision-based retrieval for PDFs
-- GPU-accelerated processing
+**Status:** Planned
+**Focus:** Multi-modal document understanding with vision-based retrieval
 
-**v0.6.0 - Intelligent Optimization**
-- Auto-routing queries to optimal models
-- Domain adaptation
-- Advanced analytics
+**Key Features:**
+- ColPali model integration for vision embeddings
+- Dual embedding storage (text + vision)
+- Vision-enhanced retrieval
+- GPU memory management
+- Web UI vision support
 
-**v0.7.0 - Production Ready**
-- Scalability improvements
-- Enterprise features
-- Stable API guarantee
+**Success Criteria:**
+- Vision embeddings generated for PDF pages
+- Hybrid text+vision retrieval works
+- GPU memory managed efficiently
+- CPU fallback functional
+
+**See:** [v0.5.0/README.md](./v0.5.0/README.md)
+
+---
+
+### v0.6.0 - Intelligent Optimisation (120-150 hours)
+
+**Status:** Planned
+**Focus:** Automatic query routing, domain adaptation, advanced analytics
+
+**Key Features:**
+- Query classification and routing
+- Automatic model routing (30-50% latency reduction)
+- Domain adaptation for specialised terminology
+- Performance analytics and monitoring
+- Smart caching strategies
+
+**Success Criteria:**
+- Query routing reduces latency for simple queries
+- Domain adaptation improves domain-specific retrieval
+- Analytics provide actionable insights
+- Cache hit rate improved 20-30%
+
+**See:** [v0.6.0/README.md](./v0.6.0/README.md)
+
+---
+
+### v0.7.0 - Production Readiness (150-200 hours)
+
+**Status:** Planned
+**Focus:** Scalability, enterprise features, stable API guarantee
+
+**Key Features:**
+- API stability and versioning
+- Horizontal scalability (load balancing)
+- Enterprise authentication (JWT, RBAC)
+- Monitoring and observability
+- Data backup and recovery
+- Rate limiting and quotas
+- Security hardening
+- Production deployment guides
+
+**Success Criteria:**
+- API stability guaranteed for v1.0
+- System scales horizontally
+- Enterprise-ready authentication
+- Production monitoring comprehensive
+- Security audit passed
+
+**See:** [v0.7.0/README.md](./v0.7.0/README.md)
 
 ---
 
@@ -179,20 +290,26 @@ Hour estimates reflect autonomous AI coding assistant capabilities. Clear marker
 
 ## Version Comparison
 
-| Feature | v0.2.2 | v0.2.5 | v0.2.7 | v0.3.0 | v0.4.0 |
-|---------|--------|--------|--------|--------|--------|
-| **Status** | Current | Planning | Planning | Planning | Planning |
-| **Hours** | - | 40-50 | 80-100 | 180-220 | 160-200 |
-| **Focus** | - | Bugs | UX/Perf | RAG | Memory |
-| Web UI | ⚠️ Degraded | ✅ Fixed | ✅ Enhanced | ✅ | ✅ |
-| Model Switching | ❌ | ❌ | ✅ | ✅ | ✅ |
-| Collections | ❌ | ❌ | ✅ | ✅ | ✅ |
-| Caching | ❌ | ❌ | ✅ | ✅ | ✅ |
-| HyDE | ❌ | ❌ | ❌ | ✅ | ✅ |
-| Reranking | ❌ | ❌ | ❌ | ✅ | ✅ |
-| RAGAS Eval | ❌ | ❌ | ❌ | ✅ | ✅ |
-| Knowledge Graph | ❌ | ❌ | ❌ | ❌ | ✅ |
-| Personal Memory | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Feature | v0.2.2 | v0.2.3-6 | v0.2.7 | v0.3.0 | v0.4.0 | v0.5.0 | v0.6.0 | v0.7.0 |
+|---------|--------|----------|--------|--------|--------|--------|--------|--------|
+| **Status** | Current | Planned | Planned | Planned | Planned | Planned | Planned | Planned |
+| **Hours** | - | 44-59 | 80-100 | 180-220 | 160-200 | 140-180 | 120-150 | 150-200 |
+| **Focus** | - | Bugs | UX/Perf | RAG | Memory | Vision | Optimise | Production |
+| Web UI | ⚠️ Degraded | ✅ Fixed | ✅ Enhanced | ✅ | ✅ | ✅ Vision | ✅ | ✅ Enterprise |
+| Model Switching | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ Auto | ✅ |
+| Collections | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Caching | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ Smart | ✅ |
+| HyDE | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Reranking | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| RAGAS Eval | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ Analytics | ✅ |
+| Knowledge Graph | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ |
+| Personal Memory | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ |
+| Vision Retrieval | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Query Routing | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Domain Adaptation | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| API Versioning | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Enterprise Auth | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Horizontal Scale | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
 
 ---
 
