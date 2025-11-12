@@ -1,10 +1,14 @@
 # Ragged v0.3.0 Roadmap - Advanced RAG Features
 
-**Status**: Planned
-**Timeline**: 6-8 weeks
-**Estimated Hours**: 180-220 hours (with AI assistance)
-**Focus**: State-of-the-art RAG capabilities, advanced features
-**Breaking Changes**: Minimal - mostly additive features
+**Status:** Planned
+
+**Total Hours:** 180-220 hours (AI implementation)
+
+**Focus:** State-of-the-art RAG capabilities, advanced features
+
+**Breaking Changes:** Minimal - mostly additive features
+
+**Implementation Note:** Due to size (180-220 hours), implement in 6-8 focused sessions of 25-35 hours each
 
 ## Overview
 
