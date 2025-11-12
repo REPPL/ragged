@@ -187,7 +187,7 @@ The **complete technical plan** for building ragged from v0.1 (MVP) to v1.0 (pro
 → Read [Implementation Plan](./implementation/plan/README.md) and [Architecture 2025](./implementation/plan/architecture/README.md)
 
 **Study AI-assisted development**
-→ Check [Time Tracking](./development/time-tracking-methodology.md) and [Development Logs](./development/devlog/)
+→ Check [Time Tracking](./development/methodology/time-tracking.md) and [Development Logs](./development/devlog/)
 
 **See research materials**
 → Browse [Research Documentation](./research/)
@@ -220,7 +220,7 @@ The **complete technical plan** for building ragged from v0.1 (MVP) to v1.0 (pro
 - v0.5: 5-6 weeks (knowledge graphs)
 - v1.0: 4-6 weeks (production ready)
 
-**Note**: These are preliminary estimates. **Actual time tracking** will replace estimates with empirical data. See [Time Tracking Methodology](./development/time-tracking-methodology.md).
+**Note**: These are preliminary estimates. **Actual time tracking** will replace estimates with empirical data. See [Time Tracking Methodology](./development/methodology/time-tracking.md).
 
 ---
 
@@ -374,7 +374,7 @@ See [`../LICENSE`](../LICENSE) for full text.
 1. **New users**: Wait for v0.1 release, then start with [Tutorials](./tutorials/)
 2. **Contributors**: Review [Implementation Plan](./implementation/plan/) and [Contributing Guide](./contributing/)
 3. **Developers**: Explore [Development Process](./development/) and [Architecture](./implementation/plan/architecture/README.md)
-4. **Researchers**: Check [Research Materials](./research/) and [Time Tracking](./development/time-tracking-methodology.md)
+4. **Researchers**: Check [Research Materials](./research/) and [Time Tracking](./development/methodology/time-tracking.md)
 
 ---
 

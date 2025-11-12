@@ -97,7 +97,7 @@ We will follow:
 
 **Why**: Helps maintainers assess review effort and ensures quality
 
-See [AI Assistance Guidelines](../development/ai-assistance.md) for details.
+See [AI Assistance Guidelines](../development/methodology/ai-assistance.md) for details.
 
 ## Communication
 
