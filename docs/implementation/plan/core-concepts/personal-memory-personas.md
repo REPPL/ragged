@@ -24,7 +24,7 @@
 
 ### Purpose
 
-ragged's personal memory and persona system transforms it from a simple RAG tool into a personalized research assistant that:
+ragged's personal memory and persona system transforms it from a simple RAG tool into a personalised research assistant that:
 
 - **Remembers** user preferences, behaviours, and interaction history
 - **Adapts** to individual working styles and research areas
@@ -92,7 +92,7 @@ ragged's personal memory and persona system transforms it from a simple RAG tool
                      │  Integration with RAG    │
                      │  - Query rewriting       │
                      │  - Context filtering     │
-                     │  - Personalized ranking  │
+                     │  - Personalised ranking  │
                      └──────────────────────────┘
 ```
 
@@ -453,7 +453,7 @@ class SemanticMemory:
 - "Show me topics I've been researching"
 - Detect topic drift and new interests
 - Surface related past queries
-- Personalize retrieval based on topic preferences
+- Personalise retrieval based on topic preferences
 
 ### 3. Temporal Graph
 
@@ -991,7 +991,7 @@ class PIIHandler:
 - Encryption at rest
 - PII detection and handling
 - Memory analytics and insights
-- Automatic memory optimization
+- Automatic memory optimisation
 
 **Effort**: 20-25 hours
 
@@ -1057,12 +1057,12 @@ Focus on topics related to user's current research areas: RAG evaluation metrics
 Response: "Based on your recent focus on RAG evaluation metrics, here are the latest papers..."
 ```
 
-### Personalized Retrieval
+### Personalised Retrieval
 
 **Filter by Relevance to User's Interests**:
 ```python
 def personalized_retrieval(query: str, persona: str, k: int = 5) -> list:
-    """Retrieve documents with personalization"""
+    """Retrieve documents with personalisation"""
 
     # Standard retrieval
     candidates = standard_retriever.retrieve(query, k=k*3)  # Get 3x candidates
@@ -1199,7 +1199,7 @@ Memory records:
 - Focusing on faithfulness specifically
 - Retrieved documents: ragas_paper.pdf (high relevance - user accessed before)
 
-[Personalized response with code examples, references to papers user already read]
+[Personalised response with code examples, references to papers user already read]
 
 Memory records:
 - Topic: "RAG evaluation metrics" (reinforced)
@@ -1477,7 +1477,7 @@ The personal memory and persona system transforms ragged from a simple RAG tool 
 **Implementation Priority**: v0.3+ (after core RAG features are solid)
 
 **Key Benefits**:
-- More relevant responses (personalized retrieval)
+- More relevant responses (personalised retrieval)
 - Better UX (remembers context across sessions)
 - Increased productivity (no need to repeat context)
 - Privacy-preserving (all local, no cloud)
@@ -1491,7 +1491,7 @@ The personal memory and persona system transforms ragged from a simple RAG tool 
 ---
 
 **Related Documentation**:
-- [Document Normalization](./document-normalization.md)
+- [Document Normalisation](./document-normalisation.md)
 - [Metadata Schema](./metadata-schema.md)
 - [Privacy Architecture](./privacy-architecture.md)
 - [Model Selection System](./model-selection.md)

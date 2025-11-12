@@ -59,7 +59,7 @@ How to set up the ragged development environment using Docker with native Ollama
 - [ ] Debugging OCR issues
 - [ ] Improving retrieval quality
 - [ ] Handling duplicate documents
-- [ ] Performance optimization
+- [ ] Performance optimisation
 
 ## Guide Structure
 

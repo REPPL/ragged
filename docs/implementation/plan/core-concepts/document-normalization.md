@@ -1,4 +1,4 @@
-# Document Normalization Pipeline
+# Document Normalisation Pipeline
 
 **Last Updated**: 2025-11-09
 **Purpose**: Design specification for converting all input formats to standardized Markdown
@@ -8,9 +8,9 @@
 
 ## Overview
 
-**ragged** implements a document normalization pipeline that converts all input formats (PDF, HTML, DOCX, images, etc.) into a standardized **Markdown format** before chunking and embedding. This approach significantly enhances retrieval quality, consistency, and user experience.
+**ragged** implements a document normalisation pipeline that converts all input formats (PDF, HTML, DOCX, images, etc.) into a standardized **Markdown format** before chunking and embedding. This approach significantly enhances retrieval quality, consistency, and user experience.
 
-## Why Normalize to Markdown?
+## Why Normalise to Markdown?
 
 ### 1. **Consistent Chunking Across All Document Types**
 - **Problem**: Different formats (PDF, HTML, DOCX) have different structures
@@ -79,7 +79,7 @@
                    │
                    ▼
           ┌──────────────────┐
-          │ Normalize to MD  │
+          │ Normalise to MD  │
           │ Clean + Structure│
           └────────┬─────────┘
                    │
@@ -272,7 +272,7 @@ result = engine("scanned_magazine.pdf")
 
 **Processor**: **Direct ingestion** (minimal processing)
 
-- **Markdown**: Validate and normalize (consistent heading levels, etc.)
+- **Markdown**: Validate and normalise (consistent heading levels, etc.)
 - **Plain Text**: Auto-detect structure (blank lines = paragraphs, etc.)
 - **Code Files**: Wrap in code blocks with language detection
 
@@ -336,7 +336,7 @@ See [metadata-schema.md](./metadata-schema.md) for complete specification.
 See [duplicate-detection.md](./duplicate-detection.md) for complete strategy.
 
 **Summary**:
-1. **SHA256 hash** of normalized markdown (exact duplicates)
+1. **SHA256 hash** of normalised markdown (exact duplicates)
 2. **MinHash+LSH** for near-duplicates (different filenames, minor edits)
 3. **Embedding similarity** for semantic duplicates (rewrites, paraphrases)
 
@@ -350,7 +350,7 @@ ragged_data/
 │   ├── abc123.pdf
 │   ├── def456.html
 │   └── ghi789.jpg
-├── normalized/         # Converted markdown files
+├── normalised/         # Converted markdown files
 │   ├── abc123.md       # From abc123.pdf
 │   ├── def456.md       # From def456.html
 │   └── ghi789.md       # From ghi789.jpg (OCR)
@@ -429,7 +429,7 @@ def generate_document_id(file_path: str) -> str:
   "ocr_metadata": null,  // Only if OCR was performed
 
   "processing_metadata": {
-    "markdown_path": "normalized/abc123.md",
+    "markdown_path": "normalised/abc123.md",
     "image_paths": ["images/abc123_fig1.png", "images/abc123_fig2.png"],
     "processing_time_seconds": 15.3,
     "ocr_performed": false,
@@ -492,7 +492,7 @@ def generate_document_id(file_path: str) -> str:
 
 **CPU-Only Setup**:
 - RAM: 8GB minimum (16GB recommended)
-- Storage: 2x input file size (originals + normalized)
+- Storage: 2x input file size (originals + normalised)
 - Expected: 2-5 seconds/page for PDFs
 
 **GPU Setup**:
@@ -540,7 +540,7 @@ def generate_document_id(file_path: str) -> str:
 
 **Rationale**: Get working system quickly, validate architecture
 
-### v0.2 (Document Normalization) ⭐ **KEY FEATURE**
+### v0.2 (Document Normalisation) ⭐ **KEY FEATURE**
 **Goal**: Production-quality document processing
 
 **Supported**:
@@ -550,7 +550,7 @@ def generate_document_id(file_path: str) -> str:
 - DOCX/PPTX: Docling
 - **Full metadata extraction**: GROBID + Trafilatura
 - **Duplicate detection**: SHA256 + MinHash
-- **Markdown normalization**: All formats → clean MD
+- **Markdown normalisation**: All formats → clean MD
 
 **Timeline**: +2 weeks to v0.2 (total 6-7 weeks)
 
@@ -608,8 +608,8 @@ def test_full_pipeline_academic_paper():
     # Wait for processing
     wait_for_processing(doc_id)
 
-    # Check normalized markdown exists
-    assert os.path.exists(f"normalized/{doc_id}.md")
+    # Check normalised markdown exists
+    assert os.path.exists(f"normalised/{doc_id}.md")
 
     # Check metadata extracted
     metadata = load_metadata(doc_id)
@@ -632,7 +632,7 @@ def test_full_pipeline_academic_paper():
 - **Faithfulness**: Do answers match source markdown?
 - **Answer Relevance**: Do answers address the question?
 
-**Normalization Quality**:
+**Normalisation Quality**:
 - Manual review of 100 random documents
 - Structure preservation score (headings, tables, lists intact)
 - Metadata completeness score

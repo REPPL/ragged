@@ -147,7 +147,7 @@ async def query_endpoint(request: QueryRequest):
 
 2. **Performance Concerns**
    - Larger bundle than custom solutions
-   - Not optimized for production
+   - Not optimised for production
 
 3. **Advanced Features Difficult**
    - Graph visualization challenging
@@ -509,7 +509,7 @@ demo.launch(
 - [ ] Add SSE streaming client
 - [ ] Build graph visualization
 - [ ] Configure service worker
-- [ ] Optimize bundle size
+- [ ] Optimise bundle size
 - [ ] Test PWA functionality
 
 ---

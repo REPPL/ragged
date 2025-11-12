@@ -169,7 +169,7 @@ Use ChromaDB as the vector store with HTTP client mode.
 
 **Negative**:
 - May need to migrate to Qdrant for v0.3+ (scale)
-- Limited query optimization options
+- Limited query optimisation options
 - HTTP overhead (vs in-process)
 
 **Future Considerations**: Re-evaluate for v0.3 when performance becomes critical (10k+ chunks).
@@ -246,7 +246,7 @@ Use PyMuPDF4LLM for PDF processing, which converts PDFs to markdown.
 
 ### Rationale
 - **Structure Preservation**: Maintains headings, lists, tables
-- **LLM-Optimized**: Output format designed for LLM processing
+- **LLM-Optimised**: Output format designed for LLM processing
 - **Quality**: Better than raw text extraction
 - **Simple API**: Single function call
 - **Active Development**: pymupdf ecosystem is well-maintained
@@ -553,7 +553,7 @@ Use Ollama as the LLM backend with llama3.2 as default model.
 - **Simple**: Clean API, easy integration
 - **Model Choice**: Access to llama3.2, mistral, others
 - **Active Development**: Regular updates, growing ecosystem
-- **Performance**: Optimized for local inference
+- **Performance**: Optimised for local inference
 - **Streaming Support**: Can stream responses for better UX
 
 ### Alternatives Considered
@@ -732,7 +732,7 @@ Use Markdown as the intermediate format for all documents:
    - **Pros**: Rich structure
    - **Cons**: Noisy tags, harder for LLMs
 3. **Custom structured format**
-   - **Pros**: Optimized for RAG
+   - **Pros**: Optimised for RAG
    - **Cons**: More work, less compatible
 
 ### Consequences

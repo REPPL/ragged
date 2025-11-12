@@ -8,7 +8,7 @@ The Personal Research Service architecture is built around three specialised rol
 
 ### Capabilities
 - Load documents from various formats
-- Normalize to markdown
+- Normalise to markdown
 - Extract tables and structure
 - Chunk documents intelligently
 - Track quality metrics
@@ -119,7 +119,7 @@ quality:
 ```
 User adds document
   ↓
-Wrangler processes (load, normalize, chunk)
+Wrangler processes (load, normalise, chunk)
   ↓
 Librarian indexes (embed, store)
   ↓
@@ -146,7 +146,7 @@ See [ADR-007: Role-Based System](../decisions/adr-007-role-based-system.md) for 
 **Key Benefits**:
 - **Separation of Concerns**: Each role has a focused responsibility
 - **Configurability**: Independent tuning for each role
-- **Scalability**: Roles can be optimized independently
+- **Scalability**: Roles can be optimised independently
 - **Maintainability**: Clear boundaries reduce complexity
 - **Testability**: Roles can be tested in isolation
 

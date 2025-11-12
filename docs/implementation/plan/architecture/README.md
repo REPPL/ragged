@@ -105,11 +105,11 @@ graph TD
 
 ---
 
-## Document Processing & Normalization
+## Document Processing & Normalisation
 
-**Critical Design Decision**: ragged normalizes ALL input formats to standardized Markdown before chunking and embedding. This significantly enhances retrieval quality, consistency, and user experience.
+**Critical Design Decision**: ragged normalises ALL input formats to standardised Markdown before chunking and embedding. This significantly enhances retrieval quality, consistency, and user experience.
 
-### Why Markdown Normalization?
+### Why Markdown Normalisation?
 
 1. **Consistent Chunking**: Same chunking algorithms work across all document types
 2. **Structure Preservation**: Headings, lists, tables, code blocks maintained
@@ -142,7 +142,7 @@ Format Detection (MIME type + magic bytes)
            Trafilatura for web articles)
                     │
                     ▼
-          Normalize to Markdown
+          Normalise to Markdown
           (Clean, validate structure)
                     │
                     ▼
@@ -151,7 +151,7 @@ Format Detection (MIME type + magic bytes)
                     │
                     ▼
           Store Markdown + Metadata
-          (normalized/ + metadata/ directories)
+          (normalised/ + metadata/ directories)
                     │
                     ▼
           Chunking (version-specific strategy)
@@ -220,7 +220,7 @@ Format Detection (MIME type + magic bytes)
    - Detects same paper uploaded as "deep-learning.pdf" and "2301.12345v1.pdf"
 
 2. **Level 2: Near-Duplicates (MinHash + LSH)**
-   - Applied to normalized markdown
+   - Applied to normalised markdown
    - Detects ~80-95% similarity (minor edits, formatting changes)
    - Web-scale performance (sub-second queries for 10K+ documents)
    - Detects arXiv preprint vs. published version
@@ -263,11 +263,11 @@ Format Detection (MIME type + magic bytes)
 | Version | Document Processing Features |
 |---------|------------------------------|
 | **v0.1** | Basic ingestion: PyMuPDF4LLM (PDF), Trafilatura (HTML), direct TXT/MD. No OCR, minimal metadata. |
-| **v0.2** | ⭐ **Full normalization pipeline**: Docling, PaddleOCR, GROBID, Trafilatura. SHA256 + MinHash duplicate detection. Complete metadata extraction. |
+| **v0.2** | ⭐ **Full normalisation pipeline**: Docling, PaddleOCR, GROBID, Trafilatura. SHA256 + MinHash duplicate detection. Complete metadata extraction. |
 | **v0.3** | Enhanced metadata (references, funding), semantic duplicate detection (embeddings), batch deduplication, collection management. |
 | **v1.0** | Metadata UI (visual editor, bulk editing), export (BibTeX, RIS), citation management, processing monitoring, plugin architecture for custom processors. |
 
-**Critical Note**: v0.2 document normalization is a **key differentiator** for ragged. Most RAG systems process PDFs/HTML directly, losing structure. ragged's markdown-first approach enables superior chunking, retrieval, and user experience.
+**Critical Note**: v0.2 document normalisation is a **key differentiator** for ragged. Most RAG systems process PDFs/HTML directly, losing structure. ragged's markdown-first approach enables superior chunking, retrieval, and user experience.
 
 ---
 
@@ -326,14 +326,14 @@ class RecursiveTextSplitter:
 
 ---
 
-### Version 0.2: Document Normalization + Enhanced Retrieval
+### Version 0.2: Document Normalisation + Enhanced Retrieval
 
-**Timeline**: 6-7 weeks (+2 weeks for document normalization)
+**Timeline**: 6-7 weeks (+2 weeks for document normalisation)
 **Complexity**: Medium-High
 
 #### Core Features
 
-**Document Normalization Pipeline** (NEW - Key Feature):
+**Document Normalisation Pipeline** (NEW - Key Feature):
 - **All-format-to-Markdown conversion**: PDF, HTML, DOCX, scanned images → standardized MD
 - **Format-specific processors**:
   - PDF/DOCX: IBM Docling (97.9% table accuracy, structure preservation)
@@ -350,7 +350,7 @@ class RecursiveTextSplitter:
 - Cross-encoder reranking for improved relevance
 - Query expansion and reformulation
 - Metadata filtering and faceted search
-- Context window optimization
+- Context window optimisation
 - Basic caching layer
 
 **Web UI** (Basic Gradio):
@@ -791,7 +791,7 @@ class LocalGraphStore:
 - Complete integration of all previous versions
 - Production monitoring and observability
 - A/B testing framework
-- Auto-tuning and optimization
+- Auto-tuning and optimisation
 - Comprehensive evaluation suite
 - Plugin architecture for extensions
 
@@ -836,7 +836,7 @@ class ProductionRAG:
                 query, response, trace
             )
 
-            # Store for optimization
+            # Store for optimisation
             self.optimizer.record(query, response, metrics)
 
             return response
@@ -1041,7 +1041,7 @@ class ModelManager:
         return model
 
     def optimize_for_hardware(self):
-        """Detect and optimize for available hardware"""
+        """Detect and optimise for available hardware"""
         if self.has_cuda():
             return "cuda"
         elif self.has_mps():  # Apple Silicon
@@ -1146,9 +1146,9 @@ class ConfigManager:
 
 ---
 
-## Performance Optimization
+## Performance Optimisation
 
-### Memory Optimization Strategies
+### Memory Optimisation Strategies
 
 ```python
 class MemoryOptimizer:
@@ -1177,16 +1177,16 @@ class MemoryOptimizer:
         }
 ```
 
-### Query Optimization
+### Query Optimisation
 
 ```python
 class QueryOptimizer:
-    def optimize(self, query: str) -> OptimizedQuery:
+    def optimise(self, query: str) -> OptimizedQuery:
         # Query analysis
         complexity = self.analyze_complexity(query)
         intent = self.classify_intent(query)
 
-        # Optimization strategies
+        # Optimisation strategies
         if complexity < 0.3:
             # Simple query - use cache aggressively
             return OptimizedQuery(
@@ -2288,7 +2288,7 @@ ragged development is driven by **user stories** that define functional requirem
 
 Each architectural component maps to specific user story acceptance criteria:
 
-**Document Normalization** (v0.2):
+**Document Normalisation** (v0.2):
 - US-001 AC-001: Multi-format document ingestion
 - US-003 AC-001: Technical format support
 

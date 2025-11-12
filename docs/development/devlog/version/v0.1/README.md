@@ -8,7 +8,7 @@
 
 ## Quick Overview
 
-ragged v0.1 establishes the foundation for a privacy-first local RAG (Retrieval-Augmented Generation) system. This development log documents the complete journey from planning through implementation, organized by concerns for easy navigation and future reference.
+ragged v0.1 establishes the foundation for a privacy-first local RAG (Retrieval-Augmented Generation) system. This development log documents the complete journey from planning through implementation, organised by concerns for easy navigation and future reference.
 
 ### What Was Delivered
 
@@ -46,7 +46,7 @@ ragged v0.1 establishes the foundation for a privacy-first local RAG (Retrieval-
 
 ## Navigation by Concern
 
-This development log is organized by three primary concerns: **Planning**, **Implementation**, and **Retrospective**. This structure separates what we intended to do, what we actually did, and what we learned.
+This development log is organised by three primary concerns: **Planning**, **Implementation**, and **Retrospective**. This structure separates what we intended to do, what we actually did, and what we learned.
 
 ### 📋 Planning (What We Intended)
 
@@ -63,7 +63,7 @@ Documents tracking actual development work and decisions:
 
 | Document | Description |
 |----------|-------------|
-| **[structure.md](structure.md)** | Project structure, organization, and module layout |
+| **[structure.md](structure.md)** | Project structure, organisation, and module layout |
 | **[decisions.md](decisions.md)** | Architecture Decision Records (why key choices were made) |
 | **[implementation-notes.md](implementation-notes.md)** | Technical implementation details, patterns, and solutions |
 
@@ -82,7 +82,7 @@ Documents reflecting on the process, quality, and outcomes:
 
 ### 🎯 Current Status
 - **Status**: See "Implementation Status Summary" section above
-- **Structure**: [structure.md](structure.md) - Understand the codebase organization
+- **Structure**: [structure.md](structure.md) - Understand the codebase organisation
 
 ### 📚 Key Resources
 - **Decisions**: [decisions.md](decisions.md) - Why we made key architectural choices
@@ -165,4 +165,4 @@ When updating v0.1 documentation:
 
 ---
 
-**About This Structure**: This development log uses a concern-based organization (Planning/Implementation/Retrospective) to separate what was intended, what was done, and what was learned. This structure is designed to serve as a reusable template for all future ragged versions.
+**About This Structure**: This development log uses a concern-based organisation (Planning/Implementation/Retrospective) to separate what was intended, what was done, and what was learned. This structure is designed to serve as a reusable template for all future ragged versions.

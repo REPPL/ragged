@@ -15,9 +15,9 @@ Academic papers and technical publications on RAG architectures, retrieval metho
 
 **Topics covered:**
 - Advanced RAG patterns (GraphRAG, Self-RAG, Adaptive RAG)
-- Retrieval optimization techniques
+- Retrieval optimisation techniques
 - Evaluation methodologies
-- Context window optimization
+- Context window optimisation
 - Embedding model research
 - Memory systems for LLMs
 

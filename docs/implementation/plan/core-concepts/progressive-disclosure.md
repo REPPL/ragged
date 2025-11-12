@@ -330,7 +330,7 @@ with gr.Accordion("Advanced Settings", open=False):
 - Custom chunking strategy definition
 - Embedding model comparison
 - Reranking strategy selection
-- Performance optimization tools
+- Performance optimisation tools
 - System monitoring (Prometheus/Grafana integration)
 
 **Implementation (v1.0):**
@@ -452,7 +452,7 @@ with gr.Accordion("Advanced Settings", open=False):
 
 ✅ **Access to power features**
 - Query debugging available when needed
-- Performance optimization tools
+- Performance optimisation tools
 - Configuration flexibility
 - System visibility
 

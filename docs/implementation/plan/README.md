@@ -124,12 +124,12 @@ Core features:
 
 → **See [versions/v0.1/](./versions/v0.1/)**
 
-### Version 0.2: Document Normalization + Enhanced Retrieval + Web UI (6-7 weeks)
+### Version 0.2: Document Normalisation + Enhanced Retrieval + Web UI (6-7 weeks)
 **Status**: Not started
 **Goal**: ⭐ **Production-quality document processing** + improved retrieval + basic web interface
 
 Core features:
-- **🔑 Document Normalization Pipeline** (+2 weeks - KEY FEATURE):
+- **🔑 Document Normalisation Pipeline** (+2 weeks - KEY FEATURE):
   - All formats → Markdown (PDF, HTML, DOCX, scanned images)
   - Format-specific processors: Docling (PDF), Trafilatura (HTML), PaddleOCR (scanned)
   - Metadata extraction: GROBID (academic papers), Trafilatura (web articles)
@@ -147,11 +147,11 @@ Core features:
   - Basic citations with page numbers
   - FastAPI backend
 
-→ **See [versions/v0.2/](./versions/v0.2/)** | **[Web UI Specs](./versions/v0.2/web-ui-basic.md)** | **[Doc Processing](./core-concepts/document-normalization.md)**
+→ **See [versions/v0.2/](./versions/v0.2/)** | **[Web UI Specs](./versions/v0.2/web-ui-basic.md)** | **[Doc Processing](./core-concepts/document-normalisation.md)**
 
 ### Version 0.3: Advanced Chunking + Enhanced UI (3-4 weeks)
 **Status**: Not started
-**Goal**: Optimize chunking + progressive disclosure
+**Goal**: Optimise chunking + progressive disclosure
 
 Core features:
 - Semantic chunking
@@ -208,7 +208,7 @@ Core features:
 Core features:
 - Plugin architecture
 - Monitoring and logging
-- Performance optimization
+- Performance optimisation
 - Deployment automation
 - Comprehensive documentation
 - **Production Web UI**:
@@ -268,7 +268,7 @@ Code should be readable and educational. Prioritize clarity over cleverness. Com
 
 ### Code Style
 - **Language**: Python 3.10+
-- **Formatter**: black (--skip-string-normalization)
+- **Formatter**: black (--skip-string-normalisation)
 - **Linter**: ruff
 - **Type Checker**: mypy
 - **Quotes**: Single quotes for strings, double for docstrings

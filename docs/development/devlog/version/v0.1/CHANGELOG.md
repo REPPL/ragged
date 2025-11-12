@@ -36,7 +36,7 @@ All notable changes to ragged v0.1 documented here, following [Keep a Changelog]
 - RecursiveCharacterTextSplitter for semantic-aware chunking
 - Configurable chunk size (default: 500 tokens) and overlap (default: 100)
 - Metadata preservation through chunking pipeline
-- LRU cache optimization for tokenizer access
+- LRU cache optimisation for tokenizer access
 
 #### Embeddings (Phase 4)
 - BaseEmbedder abstract interface
@@ -81,7 +81,7 @@ All notable changes to ragged v0.1 documented here, following [Keep a Changelog]
 #### Documentation
 - README.md updates with current status
 - Development log structure (Planning/Implementation/Retrospective)
-- Comprehensive devlog with 12 organized files
+- Comprehensive devlog with 12 organised files
 - Implementation plans and checklists
 - Architecture decision records (14 decisions)
 - Technical implementation notes

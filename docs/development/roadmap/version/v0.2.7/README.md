@@ -18,7 +18,7 @@ Version 0.2.7 transforms ragged from a functional RAG system into a **delightful
 - 2-4x faster batch processing (async operations)
 - 50-90% faster queries (caching)
 - Seamless model switching without restarts
-- Multi-collection document organization
+- Multi-collection document organisation
 - Better user guidance and feedback
 
 ---
@@ -239,12 +239,12 @@ def query(query_text: str, model: str, fast: bool, accurate: bool):
 
 **Priority**: High
 **Estimated Time**: 10 hours
-**Impact**: High - Organize documents by project/topic
+**Impact**: High - Organise documents by project/topic
 
 #### Current Limitation
 - Single "default" collection only
 - Can't separate work/personal documents
-- No way to organize by project or topic
+- No way to organise by project or topic
 - Switching contexts requires separate ragged installs
 
 #### Improvement
@@ -252,7 +252,7 @@ def query(query_text: str, model: str, fast: bool, accurate: bool):
 **Collection Management System**:
 ```python
 # src/collection/manager.py (NEW FILE)
-"""Collection management for organizing documents."""
+"""Collection management for organising documents."""
 from typing import List, Optional, Dict
 from pathlib import Path
 from src.vectorstore.chroma_store import ChromaStore
@@ -262,7 +262,7 @@ class CollectionManager:
     """
     Manage multiple document collections.
 
-    Collections allow organizing documents by project, topic, or context.
+    Collections allow organising documents by project, topic, or context.
     Each collection has its own vector store and BM25 index.
     """
 
@@ -841,7 +841,7 @@ def ingest_batch(files: List[Path]):
 **Impact**: Medium - Help users discover capabilities
 
 #### Concept
-After ingestion, analyze documents and suggest relevant queries to help users get started.
+After ingestion, analyse documents and suggest relevant queries to help users get started.
 
 #### Implementation
 
@@ -1106,12 +1106,12 @@ class BaseEmbedder:
 - Instant startup vs 10-30s rebuild
 - Incremental index updates
 
-**PERF-005: Chunking Optimization** (5 hours)
+**PERF-005: Chunking Optimisation** (5 hours)
 - Batch token counting
 - Estimate-then-verify approach
 - 2x faster chunking
 
-**PERF-006: Vector Store Query Optimization** (6 hours)
+**PERF-006: Vector Store Query Optimisation** (6 hours)
 - Query batching where possible
 - Connection pooling for ChromaDB
 - 30% faster multi-query scenarios

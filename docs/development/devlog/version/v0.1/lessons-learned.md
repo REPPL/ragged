@@ -132,7 +132,7 @@
 
 5. **Security from Day 1**: Audit continuously, not at end
 
-6. **Performance Baselines Early**: Benchmark early to guide optimization
+6. **Performance Baselines Early**: Benchmark early to guide optimisation
 
 7. **AI for Specific Tasks**: Use AI for boilerplate, human judgment for architecture
 

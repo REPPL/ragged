@@ -6,7 +6,7 @@ The Personal Research Service uses two distinct storage systems with different o
 
 **Location**: `~/.ragged/library/`
 
-The Library uses a collection-based architecture for organizing documents.
+The Library uses a collection-based architecture for organising documents.
 
 ### Directory Structure
 
@@ -54,7 +54,7 @@ The Library uses a collection-based architecture for organizing documents.
 ### Ownership
 
 - **Populated by**: Wrangler (processes and adds documents)
-- **Managed by**: Librarian (indexes, retrieves, organizes)
+- **Managed by**: Librarian (indexes, retrieves, organises)
 - **Nature**: Shareable, can be backed up and transferred
 
 ## Private Vault (User's Domain)

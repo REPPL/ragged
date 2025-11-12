@@ -269,9 +269,9 @@ Each skeleton file includes:
 
 ---
 
-## 📊 Test Organization
+## 📊 Test Organisation
 
-Tests are organized by type using markers:
+Tests are organised by type using markers:
 
 - `@pytest.mark.unit` - Fast, isolated tests
 - `@pytest.mark.integration` - Multiple component tests

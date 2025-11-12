@@ -445,7 +445,7 @@ def get_settings() -> Settings:
 
 Could use in-process client for better performance:
 ```python
-# Future optimization
+# Future optimisation
 client = chromadb.Client()  # In-process, faster
 ```
 
@@ -563,7 +563,7 @@ def sample_document():
     )
 ```
 
-### Test Organization
+### Test Organisation
 Mirror source structure:
 ```
 tests/

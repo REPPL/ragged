@@ -23,7 +23,7 @@ This directory preserves original working documents, rough drafts, and intermedi
 3. **Learning** - See how planning changed during implementation
 4. **Research** - Provide complete development history
 
-## Organization
+## Organisation
 
 Files are archived with their original names and dates preserved.
 
