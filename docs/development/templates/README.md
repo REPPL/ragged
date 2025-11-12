@@ -56,7 +56,7 @@ Templates ensure consistent documentation practices and make it easy to capture 
 **When to use:**
 - Tracking time for specific features
 - Estimating future work
-- Analyzing development velocity
+- Analysing development velocity
 - Retrospective analysis
 
 **Output location:** `/docs/development/time-logs/feature-name-YYYY-MM-DD.md`

@@ -12,15 +12,15 @@
 
 ## Overview
 
-Version 0.4.0 introduces a **Personal Memory System** that transforms ragged from a document retrieval tool into an intelligent personal knowledge assistant. This release implements cutting-edge personalization techniques while maintaining ragged's privacy-first philosophy.
+Version 0.4.0 introduces a **Personal Memory System** that transforms ragged from a document retrieval tool into an intelligent personal knowledge assistant. This release implements cutting-edge personalisation techniques while maintaining ragged's privacy-first philosophy.
 
-**Vision**: Ragged remembers what you care about, learns from your interactions, and provides increasingly personalized responses over time—all locally, with zero cloud dependencies.
+**Vision**: Ragged remembers what you care about, learns from your interactions, and provides increasingly personalised responses over time—all locally, with zero cloud dependencies.
 
 **Key Capabilities**:
 - **Persona Management**: Switch between work, research, personal contexts
 - **Behavior Learning**: Automatically learn interests from query patterns
 - **Temporal Memory**: Track what you worked on when
-- **Personalized Ranking**: Boost relevant documents based on your interests
+- **Personalised Ranking**: Boost relevant documents based on your interests
 - **Knowledge Graphs**: Connect topics, documents, and concepts over time
 
 **Research Foundation**: Based on state-of-the-art memory systems (Zep/Graphiti, Mem0, Letta) adapted for fully local operation.
@@ -54,11 +54,11 @@ Version 0.4.0 introduces a **Personal Memory System** that transforms ragged fro
          │   Hybrid Retrieval        │
          │   - Vector (semantic)     │
          │   - BM25 (keyword)        │
-         │   - Memory (personalized) │
+         │   - Memory (personalised) │
          └────────────┬──────────────┘
                       │
          ┌────────────▼──────────────┐
-         │   Personalized Ranking    │
+         │   Personalised Ranking    │
          │   - Interest boost        │
          │   - Recency boost         │
          │   - Project relevance     │
@@ -115,7 +115,7 @@ Version 0.4.0 introduces a **Personal Memory System** that transforms ragged fro
 - In-process (no network latency)
 - Works in browser via WASM (future-proof)
 - 1st-class Python integration
-- Optimized for RAG use cases
+- Optimised for RAG use cases
 
 **No external services**: All components run locally, privacy-guaranteed.
 
@@ -728,7 +728,7 @@ ragged memory get <key> --persona researcher
 
 ### Milestone 2: Behaviour Learning (60 hours)
 
-**Goal**: Automatic interest profiling and personalized ranking
+**Goal**: Automatic interest profiling and personalised ranking
 
 #### FEAT-105: Topic Extraction
 
@@ -902,7 +902,7 @@ class BehaviorLearner:
 
 ---
 
-#### FEAT-107: Personalized Ranking
+#### FEAT-107: Personalised Ranking
 
 **Priority**: P0 - Core Feature
 **Time**: 10 hours
@@ -915,7 +915,7 @@ class BehaviorLearner:
 
 **Implementation**:
 ```python
-# src/memory/personalization.py (NEW FILE)
+# src/memory/personalisation.py (NEW FILE)
 class PersonalizedRanker:
     """Re-rank retrieval results using personal context"""
 
@@ -990,12 +990,12 @@ class PersonalizedRanker:
 ```
 
 **Testing**:
-- [ ] Personalization improves relevance (manual verification)
+- [ ] Personalisation improves relevance (manual verification)
 - [ ] Boosts apply correctly
 - [ ] Edge cases (no profile, empty results)
 
 **Files to Create**:
-- `src/memory/personalization.py` (~200 lines)
+- `src/memory/personalisation.py` (~200 lines)
 - `tests/memory/test_personalization.py` (~150 lines)
 
 ---
@@ -1046,7 +1046,7 @@ class EnhancedRAGPipeline:
             top_k=k * 2
         )
 
-        # 4. Personalized reranking
+        # 4. Personalised reranking
         if use_memory:
             ranked = self.memory.personalized_ranker.rerank(
                 raw_results,
@@ -1175,7 +1175,7 @@ class TemporalQueryEngine:
 - Memory update: <100ms (async)
 
 **Quality**:
-- Personalization improvement: +15% relevance (user feedback)
+- Personalisation improvement: +15% relevance (user feedback)
 - Topic extraction accuracy: 80% (vs manual labeling)
 - Interest profile accuracy: 85% (user confirms top interests)
 
@@ -1191,7 +1191,7 @@ class TemporalQueryEngine:
 v0.4.0 is successful if:
 1. ✅ Persona system works seamlessly
 2. ✅ Memory tracking is transparent
-3. ✅ Personalization improves relevance (measurable)
+3. ✅ Personalisation improves relevance (measurable)
 4. ✅ All interactions stored locally
 5. ✅ Users can view/edit/delete memory
 6. ✅ Performance targets met
@@ -1206,7 +1206,7 @@ v0.4.0 is successful if:
 - Interaction recording
 - Graph operations (CRUD)
 - Topic extraction
-- Personalized ranking algorithm
+- Personalised ranking algorithm
 
 ### 4.2 Integration Tests
 
@@ -1266,7 +1266,7 @@ v0.4.0 is successful if:
 v0.4.0 represents a major evolution for ragged:
 - From **document retrieval** to **personal knowledge assistant**
 - From **stateless** to **memory-aware**
-- From **generic** to **personalized**
+- From **generic** to **personalised**
 
 All while maintaining ragged's core values:
 - **Privacy-first**: 100% local, zero cloud dependencies

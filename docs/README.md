@@ -17,7 +17,7 @@ This is the complete documentation for **ragged**, a privacy-first local RAG (Re
 
 ---
 
-## Documentation Organization
+## Documentation Organisation
 
 ragged uses the **Diataxis framework** for user-facing documentation, plus additional sections for contributors, developers, and researchers.
 
@@ -138,7 +138,7 @@ The **complete technical plan** for building ragged from v0.1 (MVP) to v1.0 (pro
 
 **Version Plans**:
 - [v0.1: MVP Foundation](./implementation/plan/versions/v0.1/)
-- [v0.2: Document Normalization + Enhanced Retrieval](./implementation/plan/versions/v0.2/)
+- [v0.2: Document Normalisation + Enhanced Retrieval](./implementation/plan/versions/v0.2/)
 - [v0.3: Advanced Chunking](./implementation/plan/versions/v0.3/)
 - [v0.4: Adaptive Systems](./implementation/plan/versions/v0.4/)
 - [v0.5: Knowledge Graphs](./implementation/plan/versions/v0.5/)
@@ -146,7 +146,7 @@ The **complete technical plan** for building ragged from v0.1 (MVP) to v1.0 (pro
 
 **Core Concepts**:
 - [RAG Fundamentals](./implementation/plan/core-concepts/rag-fundamentals.md)
-- [Document Normalization](./implementation/plan/core-concepts/document-normalization.md) ⭐ KEY FEATURE
+- [Document Normalisation](./implementation/plan/core-concepts/document-normalisation.md) ⭐ KEY FEATURE
 - [Duplicate Detection](./implementation/plan/core-concepts/duplicate-detection.md)
 - [Metadata Schema](./implementation/plan/core-concepts/metadata-schema.md)
 - [Progressive Disclosure](./implementation/plan/core-concepts/progressive-disclosure.md)
@@ -214,7 +214,7 @@ The **complete technical plan** for building ragged from v0.1 (MVP) to v1.0 (pro
 
 **Timeline**:
 - v0.1: 2-3 weeks (basic functionality)
-- v0.2: 6-7 weeks (⭐ **document normalization** + enhanced retrieval + web UI)
+- v0.2: 6-7 weeks (⭐ **document normalisation** + enhanced retrieval + web UI)
 - v0.3: 3-4 weeks (advanced chunking)
 - v0.4: 4-5 weeks (adaptive systems)
 - v0.5: 5-6 weeks (knowledge graphs)
@@ -319,7 +319,7 @@ Documentation contributions are welcome!
 - [ ] First time-tracked feature logs
 
 ### v0.2 Release
-- [ ] Document normalization guides
+- [ ] Document normalisation guides
 - [ ] Web UI tutorials
 - [ ] Advanced configuration reference
 - [ ] Version time summary
@@ -342,9 +342,9 @@ Documentation contributions are welcome!
 
 ## Migrated Content
 
-**From `project-setup/` (reorganized 2025-11-09)**:
+**From `project-setup/` (reorganised 2025-11-09)**:
 
-Content has been reorganized into the new Diataxis-based structure:
+Content has been reorganised into the new Diataxis-based structure:
 
 - `architecture/` → [`implementation/plan/architecture/`](./implementation/plan/architecture/)
 - `background/` → [`research/background/`](./research/background/)
@@ -380,4 +380,4 @@ See [`../LICENSE`](../LICENSE) for full text.
 
 **Status**: Planning complete. Ready to begin v0.1 implementation.
 **Last Updated**: 2025-11-09
-**Documentation Version**: 2.0 (reorganized with Diataxis framework + transparency layers)
+**Documentation Version**: 2.0 (reorganised with Diataxis framework + transparency layers)

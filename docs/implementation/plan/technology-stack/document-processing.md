@@ -8,7 +8,7 @@
 
 ## Overview
 
-This document evaluates state-of-the-art (2025) technologies for converting various document formats to Markdown, extracting metadata, and handling OCR. These tools form the foundation of ragged's document normalization pipeline.
+This document evaluates state-of-the-art (2025) technologies for converting various document formats to Markdown, extracting metadata, and handling OCR. These tools form the foundation of ragged's document normalisation pipeline.
 
 ## Document-to-Markdown Converters
 
@@ -80,7 +80,7 @@ metadata = {
 - **CPU**: 2-5 pages/second
 - **GPU**: 10-20 pages/second (with OCR)
 - **Memory**: ~2GB RAM minimum
-- **Docker**: 500MB (CPU-optimized) to 8GB (full models)
+- **Docker**: 500MB (CPU-optimised) to 8GB (full models)
 
 ---
 
@@ -96,7 +96,7 @@ metadata = {
 - **Multi-format**: PDF, images, PPTX, DOCX, XLSX, HTML, EPUB
 - **Quality**: Superior to LlamaParse, Mathpix in benchmarks
 - **OCR**: Uses Surya OCR (optional ocrmypdf for speed)
-- **GPU acceleration**: Optimized for CUDA
+- **GPU acceleration**: Optimised for CUDA
 
 #### Installation
 
@@ -214,7 +214,7 @@ markdown = pymupdf4llm.to_markdown(
 - **80+ languages** supported
 - **PP-Structure**: Layout analysis (tables, multi-column, images)
 - **Best open-source accuracy** (benchmarks)
-- **GPU acceleration**: TensorRT optimization
+- **GPU acceleration**: TensorRT optimisation
 - **Reading order detection**
 
 #### Installation

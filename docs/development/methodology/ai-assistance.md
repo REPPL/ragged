@@ -153,7 +153,7 @@ This AI assistance policy was developed with assistance from **Claude Code** (An
 **v0.3+** (expected):
 
 - AI: ~55-60% of time
-- Time saved: ~35-40% (optimized workflow)
+- Time saved: ~35-40% (optimised workflow)
 - Know exactly when/how to use AI
 
 ---
@@ -201,12 +201,12 @@ If AI was used, please describe:
 **For significant AI use** (>30% of commit content):
 
 ```bash
-git commit -m "feat: Add document normalization pipeline
+git commit -m "feat: Add document normalisation pipeline
 
 Implemented markdown conversion for PDF, HTML, DOCX formats.
 
 AI-Assisted: Claude Code (initial structure)
-Human: Error handling, edge cases, optimization
+Human: Error handling, edge cases, optimisation
 Time: 3.5h (1.5h AI scaffolding + 2h human work)"
 ```
 

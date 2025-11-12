@@ -155,7 +155,7 @@ Best practices and proven patterns for building RAG systems, extracted from rese
 ### Modular Design
 
 **Six Core Modules**:
-1. **Indexing**: Chunking, structure organization
+1. **Indexing**: Chunking, structure organisation
 2. **Pre-Retrieval**: Query expansion, transformation
 3. **Retrieval**: Vector search, algorithm selection
 4. **Post-Retrieval**: Reranking, compression
@@ -258,11 +258,11 @@ researcher:
 **Act On**:
 - Retrieval failures → Improve chunking or embeddings
 - Poor generation → Adjust prompts or model
-- High latency → Optimize retrieval or reduce context
+- High latency → Optimise retrieval or reduce context
 
 ## Memory and Performance
 
-### M4 Max Optimization
+### M4 Max Optimisation
 
 **Unified Memory Advantages**:
 - Zero-copy operations between components
@@ -300,11 +300,11 @@ researcher:
 
 **Vector Database Capacity** (M4 Max 128GB):
 
-**Without Optimization**:
+**Without Optimisation**:
 - 15-20 million vectors (1536 dimensions)
 - Sub-50ms query latency
 
-**With Optimization**:
+**With Optimisation**:
 - Scalar quantization: 4x memory reduction
 - Disk offloading: Hot data in RAM, cold on SSD
 - 50-100 million vectors possible
@@ -435,12 +435,12 @@ researcher:
 **Phase 4**: Production Hardening
 - Add monitoring
 - Implement error handling
-- Optimize hot paths
+- Optimise hot paths
 - Plan scaling strategy
 
 ### Key Success Factors
 
-1. **Measure First**: Establish baseline metrics before optimizing
+1. **Measure First**: Establish baseline metrics before optimising
 2. **Start Simple**: Linear pipeline, proven components
 3. **Modular Design**: Independent component evolution
 4. **Configuration-Driven**: Experiments without code changes

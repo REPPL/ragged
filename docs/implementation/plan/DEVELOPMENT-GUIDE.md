@@ -20,7 +20,7 @@ docs/implementation/plan/  (originally .claude/)
 ├── prompts/                            # AI assistant instructions
 │   ├── 01-github-setup.md             # GitHub repository configuration
 │   ├── 02-documentation-guide.md      # Writing public documentation
-│   ├── 03-project-structure.md        # Code organization guidelines
+│   ├── 03-project-structure.md        # Code organisation guidelines
 │   └── templates/                      # Reusable documentation templates
 │       ├── readme-template.md
 │       ├── contributing-template.md

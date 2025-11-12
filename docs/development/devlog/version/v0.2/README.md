@@ -5,7 +5,7 @@
 **Started**: 2025-11-09
 **Estimated Completion**: 2-3 weeks
 
-This directory contains the complete development documentation for ragged v0.2, organized by separation of concerns (Planning → Implementation → Retrospective).
+This directory contains the complete development documentation for ragged v0.2, organised by separation of concerns (Planning → Implementation → Retrospective).
 
 ---
 

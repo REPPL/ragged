@@ -416,7 +416,7 @@ export default defineConfig({
       }
     },
 
-    // Optimize for size (privacy: less data)
+    // Optimise for size (privacy: less data)
     minify: 'terser',
     terserOptions: {
       compress: {
@@ -596,7 +596,7 @@ test('works offline', async ({ page, context }) => {
 
 ---
 
-## Performance Optimization
+## Performance Optimisation
 
 ### Lazy Loading (Still Offline)
 
@@ -681,7 +681,7 @@ app.add_middleware(GZipMiddleware, minimum_size=1000)
 - [ ] Offline mode indicator
 
 ### v0.5: Svelte + Better Bundling
-- [ ] Optimized asset bundling
+- [ ] Optimised asset bundling
 - [ ] Font subsetting
 - [ ] Code splitting for performance
 

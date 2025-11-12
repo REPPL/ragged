@@ -134,7 +134,7 @@ Curated collection of papers, articles, tools, and resources for building RAG sy
   - Lots of integrations
 
 - **LlamaIndex**: https://github.com/jerryjliu/llama_index
-  - Specialized for RAG and indexing
+  - Specialised for RAG and indexing
   - Good documentation
 
 - **Haystack**: https://haystack.deepset.ai/

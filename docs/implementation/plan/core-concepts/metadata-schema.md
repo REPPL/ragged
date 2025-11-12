@@ -30,10 +30,10 @@ ragged maintains extensive metadata for every ingested document to enable:
 
   "upload_date": "ISO8601",           // When first uploaded
   "upload_by": "string",              // User ID (if multi-user mode)
-  "processing_date": "ISO8601",       // When normalization completed
+  "processing_date": "ISO8601",       // When normalisation completed
 
   "content_hash": "string",           // SHA256 of original file
-  "normalized_hash": "string",        // SHA256 of normalized markdown
+  "normalized_hash": "string",        // SHA256 of normalised markdown
   "minhash_signature": "array",       // MinHash for near-duplicate detection
 
   "duplicate_of": "string|null",      // Document ID if this is a duplicate
@@ -45,7 +45,7 @@ ragged maintains extensive metadata for every ingested document to enable:
   "collection": "string",             // User-assigned collection/folder
   "tags": ["string"],                 // User-assigned tags
 
-  "markdown_path": "string",          // Path to normalized .md file
+  "markdown_path": "string",          // Path to normalised .md file
   "images_paths": ["string"],         // Extracted images
 
   "processing_metadata": {
@@ -594,7 +594,7 @@ def format_web_citation(metadata: dict) -> str:
 ### v0.1
 - **Basic metadata only**: filename, file_type, upload_date
 - No duplicate detection
-- No specialized metadata (academic, web, etc.)
+- No specialised metadata (academic, web, etc.)
 
 ### v0.2
 - **Full metadata extraction**: GROBID + Trafilatura

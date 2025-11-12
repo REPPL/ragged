@@ -130,7 +130,7 @@ Future      v0.7.0 ━━━━━━━━━━━━━ Production Ready (150
 
 **Key Features:**
 - Seamless model switching with model pool
-- Multi-collection document organization
+- Multi-collection document organisation
 - Query result caching (50-90% speedup)
 - Async batch processing (2-4x faster)
 - Enhanced CLI feedback

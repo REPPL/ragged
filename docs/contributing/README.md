@@ -81,7 +81,7 @@ Planned setup will include:
 ## Code Standards (Planned)
 
 We will follow:
-- **PEP 8** via `black` formatter (--skip-string-normalization)
+- **PEP 8** via `black` formatter (--skip-string-normalisation)
 - **Type hints** checked with `mypy` (strict mode)
 - **Linting** with `ruff`
 - **Testing** with `pytest` (>80% coverage)

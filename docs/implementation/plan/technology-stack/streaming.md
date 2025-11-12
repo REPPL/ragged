@@ -664,7 +664,7 @@ uvicorn.run(app, host="127.0.0.1", port=8443, ssl=ssl_context)
 - [ ] Stream timing data
 
 ### v0.5: Production Streaming
-- [ ] Optimize token batching
+- [ ] Optimise token batching
 - [ ] Add Svelte SSE client
 - [ ] Implement connection pooling
 - [ ] Add comprehensive error handling

@@ -9,7 +9,7 @@ This document describes how data flows through the Personal Research Service for
 ```
 User adds document
   ↓
-Wrangler processes (load, normalize, chunk)
+Wrangler processes (load, normalise, chunk)
   ↓
 Librarian indexes (embed, store in vectors)
   ↓
@@ -30,7 +30,7 @@ ragged add document.pdf --collection research --topic research
 - Apply appropriate loader
 - Extract raw content
 
-**Step 2.2**: Normalize
+**Step 2.2**: Normalise
 - Convert to markdown
 - Extract tables (if enabled)
 - Apply OCR (if needed for images/scanned PDFs)
@@ -191,16 +191,16 @@ Researcher detects low-quality retrieval
   ↓
 Logs audit finding (chunk quality, relevance issues)
   ↓
-Wrangler analyzes audit patterns
+Wrangler analyses audit patterns
   ↓
-Wrangler optimizes processing (chunking, normalization)
+Wrangler optimises processing (chunking, normalisation)
   ↓
 Future documents processed with improvements
 ```
 
 This enables:
 - Continuous improvement
-- Automatic optimization
+- Automatic optimisation
 - Quality monitoring
 - No user intervention required
 
@@ -209,7 +209,7 @@ This enables:
 The data flow is designed to ensure:
 
 1. **Clear Separation**: Each role handles its domain
-2. **Modularity**: Steps can be optimized independently
+2. **Modularity**: Steps can be optimised independently
 3. **Traceability**: Every step is logged and traceable
 4. **Configurability**: Each step respects configuration hierarchy
 5. **Quality**: Multiple quality checks throughout the flow

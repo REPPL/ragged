@@ -42,7 +42,7 @@ Bundled configurations for all three roles, optimised for specific domains:
 - **legal**: Legal documents, precise citations, hybrid search
 - **technical**: Technical documentation, code-aware chunking
 
-**Purpose**: Domain-specific optimization across all roles
+**Purpose**: Domain-specific optimisation across all roles
 
 **Location**: `~/.ragged/profiles/topic/`
 
@@ -132,7 +132,7 @@ if persona:
 ```bash
 ragged add document.pdf --topic research
 ```
-Applies research-optimized settings for all three roles.
+Applies research-optimised settings for all three roles.
 
 ### Using a Persona
 ```bash
@@ -158,7 +158,7 @@ See [ADR-012: Configuration Inheritance](../decisions/adr-012-configuration-inhe
 
 **Key Benefits**:
 - **Layered Customization**: Start with sensible defaults, override as needed
-- **Domain Optimization**: Topic profiles provide out-of-the-box optimization
+- **Domain Optimisation**: Topic profiles provide out-of-the-box optimisation
 - **Context Awareness**: Personas enable appropriate communication style
 - **Flexibility**: Every layer can be customized independently
 - **Simplicity**: Simple cases work with defaults, complex cases support deep customization

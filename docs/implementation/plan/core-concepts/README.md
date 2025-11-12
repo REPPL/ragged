@@ -4,13 +4,13 @@ This folder contains the foundational concepts and design principles that guide 
 
 ## Overview
 
-The core concepts define how Ragged achieves its goals of being a privacy-first, locally-run RAG system optimized for personal knowledge management and research assistance. Each concept addresses a specific aspect of the system's design.
+The core concepts define how Ragged achieves its goals of being a privacy-first, locally-run RAG system optimised for personal knowledge management and research assistance. Each concept addresses a specific aspect of the system's design.
 
 ---
 
 ## Concepts by Category
 
-### User Experience & Personalization
+### User Experience & Personalisation
 
 **[Personal Memory & Personas](./personal-memory-personas.md)**
 - Multi-persona system (Researcher, Developer, Casual)
@@ -32,7 +32,7 @@ The core concepts define how Ragged achieves its goals of being a privacy-first,
 
 ### Data Processing & Management
 
-**[Document Normalization](./document-normalization.md)**
+**[Document Normalisation](./document-normalisation.md)**
 - Unified document representation
 - Format-agnostic processing pipeline
 - Content extraction and standardization
@@ -61,7 +61,7 @@ The core concepts define how Ragged achieves its goals of being a privacy-first,
 - Resource-aware model selection
 - Performance vs. quality trade-offs
 - Hardware requirement tiers
-- Memory and compute optimization
+- Memory and compute optimisation
 
 ---
 

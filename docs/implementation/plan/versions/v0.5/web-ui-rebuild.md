@@ -8,7 +8,7 @@
 
 ## Goals
 
-Rebuild UI with production framework, optimized for:
+Rebuild UI with production framework, optimised for:
 - GraphRAG visualization
 - Better performance
 - Production polish
@@ -112,12 +112,12 @@ Add Svelte-specific features:
 ### Phase 3: Polish (Weeks 5-6)
 
 Production readiness:
-- Performance optimization
-- Bundle size optimization
+- Performance optimisation
+- Bundle size optimisation
 - Lighthouse score > 90
 - Comprehensive testing
 
-## Bundle Optimization
+## Bundle Optimisation
 
 ```javascript
 // vite.config.js

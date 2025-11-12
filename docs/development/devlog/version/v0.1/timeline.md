@@ -1,6 +1,6 @@
 # v0.1 Development Timeline
 
-**Planning Phase**: Concern-based organization (Planning → Implementation → Retrospective)
+**Planning Phase**: Concern-based organisation (Planning → Implementation → Retrospective)
 
 This document captures the planned timeline, estimated effort, and actual progress for ragged v0.1 development.
 

@@ -5,7 +5,7 @@ This directory tracks the planning and eventual implementation of the ragged pro
 ## Structure
 
 ### [plan/](./plan/)
-**Complete implementation plan** organized by version (v0.1 through v1.0).
+**Complete implementation plan** organised by version (v0.1 through v1.0).
 
 Contains:
 - State-of-the-art RAG architecture for 2025
@@ -17,7 +17,7 @@ Contains:
 **Status**: Planning phase - no code implemented yet
 
 ### actual/ (Not yet created)
-**Will be created during implementation** to document what was actually built, organized by version.
+**Will be created during implementation** to document what was actually built, organised by version.
 
 Will contain:
 - Implementation notes for each version

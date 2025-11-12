@@ -281,7 +281,7 @@ def chunk_document_enhanced(document):
 ## Related Documentation
 
 - **[Document Processing](document-processing.md)** - Document ingestion pipeline
-- **[Document Normalisation](../core-concepts/document-normalization.md)** - Text normalisation
+- **[Document Normalisation](../core-concepts/document-normalisation.md)** - Text normalisation
 - **[Embeddings](embeddings.md)** - Embedding generation
 - **[RAG Fundamentals](../core-concepts/rag-fundamentals.md)** - RAG technical background
 

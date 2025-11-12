@@ -12,7 +12,7 @@ Comprehensive research on state-of-the-art RAG systems for Mac M4.
 - Document processing and chunking strategies
 - Framework selection and modular architecture
 - Monitoring, evaluation, and production deployment
-- Memory optimization for M4 Max
+- Memory optimisation for M4 Max
 - Emerging patterns and future directions
 
 This document captures the research foundation for ragged's architecture.
@@ -39,7 +39,7 @@ Industry best practices for RAG systems.
 - **Generation**: Prompt engineering, response quality
 - **Configuration**: Modular design, progressive enhancement
 - **Evaluation**: Metrics, frameworks, continuous monitoring
-- **Memory & Performance**: M4 Max optimization, scalability
+- **Memory & Performance**: M4 Max optimisation, scalability
 - **Production**: Architecture patterns, API design, observability
 - **Advanced Patterns**: Multi-modal RAG, graph integration, agentic RAG
 

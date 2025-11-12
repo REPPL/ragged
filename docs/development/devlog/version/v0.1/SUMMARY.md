@@ -40,7 +40,7 @@ ragged v0.1 successfully delivers a privacy-first, local RAG (Retrieval-Augmente
 4. **Embeddings** (Phase 4) ✅
    - Factory pattern for model selection
    - SentenceTransformers + Ollama support
-   - Device detection and optimization
+   - Device detection and optimisation
 
 5. **Vector Storage** (Phase 5) ✅
    - ChromaDB integration

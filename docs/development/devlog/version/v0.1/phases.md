@@ -4,7 +4,7 @@ This document provides detailed breakdowns of all 14 phases in the v0.1 implemen
 
 ## Overview
 
-ragged v0.1 is implemented in 14 incremental phases, organized into three groups:
+ragged v0.1 is implemented in 14 incremental phases, organised into three groups:
 
 1. **Foundation** (Phase 1): Core infrastructure
 2. **Core Features** (Phases 2-8): RAG pipeline implementation
@@ -554,11 +554,11 @@ pip install click rich
 ### Goals
 - Complete user documentation
 - Finish developer documentation
-- Organize development logs
+- Organise development logs
 
 ### Deliverables
 - [x] README.md updates
-- [x] Development log organization
+- [x] Development log organisation
 - [ ] User guide (`docs/user-guide.md`)
 - [ ] Installation instructions
 - [ ] Configuration guide

@@ -162,7 +162,7 @@ async def protected_query(...):
 
 - Response caching
 - Query result caching
-- Asset optimization
+- Asset optimisation
 - Lazy loading
 - Code splitting
 
@@ -189,7 +189,7 @@ async def protected_query(...):
 - [ ] PWA installable
 - [ ] Lighthouse score > 90
 - [ ] All security features enabled
-- [ ] Performance optimized
+- [ ] Performance optimised
 - [ ] **APIs frozen** (semver begins)
 
 ## Timeline

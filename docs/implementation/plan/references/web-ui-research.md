@@ -348,9 +348,9 @@ This document captures the research conducted to inform ragged's web interface d
 - Best Practices: > 90
 - SEO: > 90 (if applicable)
 
-**Optimization**:
+**Optimisation**:
 - v0.5: Initial Lighthouse audit
-- v1.0: Optimized to > 90
+- v1.0: Optimised to > 90
 
 ### Time to Interactive (TTI)
 
@@ -358,7 +358,7 @@ This document captures the research conducted to inform ragged's web interface d
 
 **Strategy**:
 - Minimize JavaScript bundle
-- Optimize critical rendering path
+- Optimise critical rendering path
 - Lazy load non-essential features
 
 ## Accessibility
@@ -414,7 +414,7 @@ This document captures the research conducted to inform ragged's web interface d
 
 **v0.5-v1.0 (Svelte)**:
 - Full responsive design
-- Touch-optimized interface
+- Touch-optimised interface
 - Mobile-friendly graph visualization
 
 ## Dark Mode
@@ -438,7 +438,7 @@ const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 **Timeline**:
 - v0.3: Basic dark mode
 - v0.5: Refined dark mode with Svelte
-- v1.0: OLED-optimized dark mode
+- v1.0: OLED-optimised dark mode
 
 ## Design System
 

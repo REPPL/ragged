@@ -12,7 +12,7 @@ The field of personal memory and context management for AI applications has matu
 
 1. **Virtual Context Management (MemGPT/Letta)**: Inspired by operating system memory hierarchies, treating context windows like limited RAM and using external storage
 2. **Graph-Based Memory (Mem0, Zep)**: Leveraging knowledge graphs to capture relationships and temporal evolution of facts
-3. **Hybrid RAG + Memory**: Combining document retrieval with personalized user context
+3. **Hybrid RAG + Memory**: Combining document retrieval with personalised user context
 
 ### Key State-of-the-Art Findings
 
@@ -111,7 +111,7 @@ agent_state = client.agents.create(
         },
         {
             "label": "persona",
-            "value": "I am a technical assistant specializing in AI architecture. "
+            "value": "I am a technical assistant specialising in AI architecture. "
                     "I provide detailed, code-focused responses with security considerations."
         },
         {
@@ -183,10 +183,10 @@ const agentState = await client.agents.create({
 
 ---
 
-### 1.2 Mem0 - Personalized AI Memory Layer
+### 1.2 Mem0 - Personalised AI Memory Layer
 
 **Overview:**
-Mem0 (pronounced "mem-zero") provides a universal memory layer that sits between your application and LLM, automatically extracting and managing personalized context across conversations. The enhanced version uses graph memory to capture complex relationships.
+Mem0 (pronounced "mem-zero") provides a universal memory layer that sits between your application and LLM, automatically extracting and managing personalised context across conversations. The enhanced version uses graph memory to capture complex relationships.
 
 **Technical Architecture:**
 
@@ -752,7 +752,7 @@ def enrich_profile_from_interaction(
 
 **Research Findings (2025):**
 
-From "Enabling Personalized Long-term Interactions in LLM-based Agents":
+From "Enabling Personalised Long-term Interactions in LLM-based Agents":
 - User profiles should be **implicitly generated** and **continuously refined**
 - Include: demographics, preferences, interests, personality traits
 - Dynamic profiles outperform static personas by 30% engagement
@@ -810,7 +810,7 @@ Modern AI systems support multiple personas that can be switched dynamically or 
 
 3. **Multi-Persona Teams** (Agentic):
    - Multiple personas collaborate
-   - Each has specialized role
+   - Each has specialised role
    - Example: Product Manager + Architect + Implementer
 
 **Implementation Pattern:**
@@ -852,7 +852,7 @@ class PersonaManager:
 
     def create_persona_team(self, task: str) -> list[Persona]:
         """Create multi-persona team for complex task"""
-        # Analyze task requirements
+        # Analyse task requirements
         required_expertise = analyze_task_requirements(task)
 
         # Compose team
@@ -881,7 +881,7 @@ manager.add_persona(Persona(
 manager.add_persona(Persona(
     id="performance_optimizer",
     name="Performance Engineer",
-    role="Optimize for speed and efficiency",
+    role="Optimise for speed and efficiency",
     expertise=["caching", "indexing", "profiling"],
     communication_style={"formality": "medium", "detail": "focused"}
 ))
@@ -1024,7 +1024,7 @@ class PrivatePatternLearner:
                 noise = np.random.laplace(0, scale)
                 topic_counts[topic] += noise
 
-        # Normalize to probabilities
+        # Normalise to probabilities
         total = sum(topic_counts.values())
         return {
             topic: count / total
@@ -1325,10 +1325,10 @@ class InsightTracker:
 
 ### 3.4 Project/Research Area Context
 
-**Namespace-Based Organization:**
+**Namespace-Based Organisation:**
 
 ```python
-# Organize memory by project
+# Organise memory by project
 class ProjectContextManager:
     def __init__(self, memory_store):
         self.store = memory_store
@@ -1473,7 +1473,7 @@ class InteractionPatternLearner:
             }
         }
 
-# Use patterns to personalize responses
+# Use patterns to personalise responses
 class PatternAwareResponseGenerator:
     def __init__(self, pattern_learner):
         self.patterns = pattern_learner
@@ -1606,7 +1606,7 @@ class MemoryStore:
             self.add_fact(user_id, fact)
 
     def get_user_context(self, user_id: str) -> str:
-        """Retrieve personalized context"""
+        """Retrieve personalised context"""
         profile = self.get_profile(user_id)
         recent = self.get_recent_interactions(user_id, limit=10)
         facts = self.get_relevant_facts(user_id)
@@ -1668,7 +1668,7 @@ from enum import Enum
 
 class PrivacyLevel(Enum):
     PUBLIC = 0      # Shareable with anyone
-    SHARED = 1      # Shareable within organization
+    SHARED = 1      # Shareable within organisation
     PRIVATE = 2     # User-only
     SENSITIVE = 3   # Encrypted, minimal retention
 
@@ -2106,7 +2106,7 @@ class PersonalizedFilter:
         return filtered
 ```
 
-### 5.2 Personalizing LLM Interactions
+### 5.2 Personalising LLM Interactions
 
 **Dynamic System Prompts:**
 
@@ -2282,7 +2282,7 @@ class ContextBlender:
     def __init__(self):
         self.weights = {
             "documents": 0.6,      # Primary source of facts
-            "user_memory": 0.3,    # Personalization layer
+            "user_memory": 0.3,    # Personalisation layer
             "general_knowledge": 0.1  # LLM base knowledge
         }
 
@@ -3096,7 +3096,7 @@ if __name__ == "__main__":
 4. **Local-First**: Privacy concerns driving local deployment
 5. **Production Ready**: LangGraph becoming standard for state management
 6. **Automatic Extraction**: LLM-based fact extraction from conversations
-7. **Persona-Based**: Multi-persona systems for specialized tasks
+7. **Persona-Based**: Multi-persona systems for specialised tasks
 8. **Context Engineering**: The "#1 job of AI engineers"
 
 ### 7.4 Privacy Techniques
@@ -3184,8 +3184,8 @@ The research shows that effective personal memory systems can provide 20-30% acc
 - "Zep: A Temporal Knowledge Graph Architecture for Agent Memory" (arXiv:2501.13956)
 - "LongMemEval: Benchmarking Chat Assistants on Long-Term Interactive Memory" (arXiv:2410.10813)
 - "Evaluating Very Long-Term Conversational Memory of LLM Agents" (arXiv:2402.17753)
-- "A Survey of Personalization: From RAG to Agent" (arXiv:2504.10147)
-- "Enabling Personalized Long-term Interactions in LLM-based Agents" (arXiv:2510.07925)
+- "A Survey of Personalisation: From RAG to Agent" (arXiv:2504.10147)
+- "Enabling Personalised Long-term Interactions in LLM-based Agents" (arXiv:2510.07925)
 
 ### Open Source Projects
 - Letta: github.com/letta-ai/letta

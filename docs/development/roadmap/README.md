@@ -4,7 +4,7 @@ This directory contains detailed roadmaps for upcoming ragged versions, created 
 
 ## Overview
 
-The roadmaps are organized into three major versions, each with distinct focus areas:
+The roadmaps are organised into three major versions, each with distinct focus areas:
 
 | Version | Focus | Timeline | Estimated Hours |
 |---------|-------|----------|-----------------|
@@ -36,7 +36,7 @@ The roadmaps are organized into three major versions, each with distinct focus a
 
 **Key Improvements**:
 - Runtime model switching without restarts
-- Multi-collection support for organizing documents
+- Multi-collection support for organising documents
 - Enhanced progress indicators and error messages
 - Embedding caching (50-90% faster queries)
 - Async document processing (2-4x faster batch ingestion)

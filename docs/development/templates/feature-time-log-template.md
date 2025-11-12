@@ -1,6 +1,6 @@
 # Feature Time Log: [Feature Name]
 
-**Feature ID**: [e.g., v0.2-doc-normalization]
+**Feature ID**: [e.g., v0.2-doc-normalisation]
 
 **Version**: vX.X
 

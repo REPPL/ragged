@@ -7,7 +7,7 @@ This folder documents the technology choices and implementation approaches for k
 The technology stack is designed to support Ragged's core requirements:
 - **Privacy-first**: Local execution, no cloud dependencies
 - **Offline-capable**: Complete functionality without internet connectivity
-- **Resource-efficient**: Optimized for consumer hardware
+- **Resource-efficient**: Optimised for consumer hardware
 - **Extensible**: Modular architecture supporting future enhancements
 
 ---
@@ -87,7 +87,7 @@ Technology choices are evaluated based on:
 
 - **Core Concepts**: [../core-concepts/](../core-concepts/)
 - **Architecture**: [../architecture/](../architecture/)
-- **Hardware Optimization**: [../core-concepts/hardware-optimisation.md](../core-concepts/hardware-optimisation.md)
+- **Hardware Optimisation**: [../core-concepts/hardware-optimisation.md](../core-concepts/hardware-optimisation.md)
 - **Model Selection**: [../core-concepts/model-selection.md](../core-concepts/model-selection.md)
 
 ---

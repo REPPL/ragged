@@ -1,16 +1,16 @@
 # v0.1 Project Structure
 
-**Purpose**: Explain project organization, module layout, and file conventions
+**Purpose**: Explain project organisation, module layout, and file conventions
 
-This document provides a comprehensive overview of ragged's project structure, explaining how code is organized and why.
+This document provides a comprehensive overview of ragged's project structure, explaining how code is organised and why.
 
 ## Table of Contents
 1. [Directory Tree](#directory-tree)
 2. [Module Purposes](#module-purposes)
-3. [File Organization Principles](#file-organization-principles)
+3. [File Organisation Principles](#file-organisation-principles)
 4. [Import Patterns](#import-patterns)
 5. [Configuration Structure](#configuration-structure)
-6. [Test Organization](#test-organization)
+6. [Test Organisation](#test-organisation)
 
 ---
 
@@ -315,7 +315,7 @@ ragged/
 
 ---
 
-## File Organization Principles
+## File Organisation Principles
 
 ### 1. **Separation by Concern**
 Each module handles one aspect of RAG:
@@ -459,7 +459,7 @@ chunk_size = settings.chunk_size  # Type-safe access
 
 ---
 
-## Test Organization
+## Test Organisation
 
 ### Structure Mirrors Source
 ```
@@ -596,7 +596,7 @@ Strict hierarchy:
 ### For v1.0
 - Add `src/deploy/` for deployment utilities
 - Add `src/monitoring/` for metrics
-- Add `src/optimization/` for performance tuning
+- Add `src/optimisation/` for performance tuning
 
 ---
 

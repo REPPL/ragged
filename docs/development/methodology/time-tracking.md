@@ -67,7 +67,7 @@ To enhance transparency and reproducibility of ragged's development process, we 
 - **09:00-10:30** (1.5h): Research document processing tools
   - AI: Web search for comparisons
   - Manual: Evaluated trade-offs
-- **14:00-15:30** (1.5h): Design normalization pipeline
+- **14:00-15:30** (1.5h): Design normalisation pipeline
   - AI: Generated architecture diagram
   - Manual: Refined based on requirements
 
@@ -113,7 +113,7 @@ To enhance transparency and reproducibility of ragged's development process, we 
 ### What Didn't Work
 - AI-generated tests too simplistic, rewrote most
 - Edge case handling required manual implementation
-- Performance optimization needed human expertise
+- Performance optimisation needed human expertise
 
 ## Comparison to Estimates
 
@@ -122,7 +122,7 @@ To enhance transparency and reproducibility of ragged's development process, we 
 **Actual Time**: 21.5 hours
 
 **Context**:
-- This specific feature (document normalization pipeline)
+- This specific feature (document normalisation pipeline)
 - Solo developer
 - Part-time work (evenings/weekends)
 - First time implementing this type of system
@@ -184,7 +184,7 @@ To enhance transparency and reproducibility of ragged's development process, we 
 ```markdown
 # Version 0.2 Development Time Summary
 
-**Version**: v0.2 (Document Normalization + Enhanced Retrieval + Web UI)
+**Version**: v0.2 (Document Normalisation + Enhanced Retrieval + Web UI)
 **Status**: Completed
 **Start Date**: 2025-11-10
 **Completion Date**: 2025-12-22
@@ -196,7 +196,7 @@ To enhance transparency and reproducibility of ragged's development process, we 
 
 | Feature | Hours | AI % | Status |
 |---------|-------|------|--------|
-| Document normalization pipeline | 21.5 | 49% | ✅ Complete |
+| Document normalisation pipeline | 21.5 | 49% | ✅ Complete |
 | Docling integration | 8.5 | 60% | ✅ Complete |
 | Trafilatura integration | 4.0 | 70% | ✅ Complete |
 | PaddleOCR integration | 12.5 | 40% | ✅ Complete |
@@ -322,7 +322,7 @@ To enhance transparency and reproducibility of ragged's development process, we 
 ```markdown
 # Development Log - 2025-11-09
 
-**Focus**: Document normalization pipeline design
+**Focus**: Document normalisation pipeline design
 **Time Spent**: 4.5 hours
 **Status**: On track
 
@@ -338,11 +338,11 @@ To enhance transparency and reproducibility of ragged's development process, we 
 - **AI Used**: Claude Code for web search synthesis
 - **Decision**: Use Docling as primary (best table extraction)
 
-#### Designed normalization pipeline
+#### Designed normalisation pipeline
 - Created architecture diagram
 - Identified format-specific processors
 - **AI Used**: Claude Code generated initial diagram, I refined
-- **Output**: `docs/implementation/plan/core-concepts/document-normalization.md`
+- **Output**: `docs/implementation/plan/core-concepts/document-normalisation.md`
 
 ### Afternoon Session (14:00-16:00) - 1.5 hours
 
@@ -541,7 +541,7 @@ Trend: AI effectiveness improving as I learn to use it better
 
 1. **Start version**: Note start date
 2. **Complete version**: Create version summary
-3. **Analyze**: Compare to estimates, document learnings
+3. **Analyse**: Compare to estimates, document learnings
 
 ### Quarterly Review
 
@@ -610,7 +610,7 @@ Trend: AI effectiveness improving as I learn to use it better
 Include time in relevant commits:
 
 ```
-feat: Add document normalization pipeline
+feat: Add document normalisation pipeline
 
 Implemented Docling integration for PDF processing.
 
@@ -632,7 +632,7 @@ git tag -a v0.2-complete -m "v0.2 development complete (127.5 hours)"
 Include tracking reference:
 
 ```
-feature/document-normalization-TL-2025-11
+feature/document-normalisation-TL-2025-11
 ```
 
 Where `TL-2025-11` = Time Log November 2025
@@ -649,7 +649,7 @@ Where `TL-2025-11` = Time Log November 2025
 
 ### After (Transparent)
 
-> **v0.2: Document Normalization + Enhanced Retrieval**
+> **v0.2: Document Normalisation + Enhanced Retrieval**
 >
 > **Actual Development Time**: 127.5 hours (tracked)
 > **Calendar Time**: 42 days (part-time, weekends + evenings)
@@ -657,7 +657,7 @@ Where `TL-2025-11` = Time Log November 2025
 > **AI Assistance**: 54% of time (~31% faster than manual)
 >
 > **Features Completed** (with individual time logs):
-> - Document normalization: [21.5h](./time-logs/2025-11-doc-normalization.md)
+> - Document normalisation: [21.5h](./time-logs/2025-11-doc-normalisation.md)
 > - Hybrid search: [11.0h](./time-logs/2025-11-hybrid-search.md)
 > - Web UI: [12.0h](./time-logs/2025-12-web-ui.md)
 > - [Full breakdown](./time-logs/v0.2-summary.md)

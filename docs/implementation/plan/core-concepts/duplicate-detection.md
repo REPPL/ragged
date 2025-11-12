@@ -61,7 +61,7 @@ This is critical because your data collection (~2,000+ documents) may contain th
             ▼ Low similarity
 ┌────────────────────────┐
 │   Process Document     │
-│   (Normalize to MD)    │
+│   (Normalise to MD)    │
 └───────────┬────────────┘
             │
             ▼
@@ -144,16 +144,16 @@ These require Level 2 or Level 3.
 
 ### Algorithm
 
-**MinHash with Locality Sensitive Hashing (LSH)** on normalized markdown.
+**MinHash with Locality Sensitive Hashing (LSH)** on normalised markdown.
 
-#### Step 1: Normalize Document to Markdown
+#### Step 1: Normalise Document to Markdown
 
 ```python
-# After document normalization (v0.2+)
+# After document normalisation (v0.2+)
 markdown_text = convert_to_markdown(uploaded_file)  # Docling, Trafilatura, etc.
 
-# Normalize whitespace, lowercase
-normalized = normalize_text(markdown_text)
+# Normalise whitespace, lowercase
+normalised = normalize_text(markdown_text)
 ```
 
 #### Step 2: Generate MinHash Signature
@@ -441,7 +441,7 @@ benchmarks such as ImageNet.
 **Limitations**:
 - **Computationally expensive**: Requires embedding every document
 - **Storage overhead**: 1.5KB per document for embeddings
-- **Not suitable for large-scale** (>100K documents) without optimization
+- **Not suitable for large-scale** (>100K documents) without optimisation
 - **May miss exact duplicates** if semantic content differs (tables, code)
 
 **Recommendation**: Use as **targeted tool** in v0.3+, not default for all documents.
@@ -556,7 +556,7 @@ file_paths = [
 
 **Advantages**:
 - No wasted storage (original file stored once)
-- No wasted processing (normalize/chunk/embed once)
+- No wasted processing (normalise/chunk/embed once)
 - User can see all filenames that map to this document
 
 **Option 2: Separate Documents, Linked**
@@ -667,7 +667,7 @@ async def deduplicate_collection(collection_id: str):
     return duplicates  # User can review and merge
 ```
 
-## Performance Optimization
+## Performance Optimisation
 
 ### Incremental Indexing
 
@@ -804,4 +804,4 @@ def test_semantic_duplicate_detection():
 
 ---
 
-**Next Steps**: Implement in v0.2 alongside document normalization pipeline.
+**Next Steps**: Implement in v0.2 alongside document normalisation pipeline.

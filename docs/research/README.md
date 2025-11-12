@@ -108,8 +108,8 @@ Documentation and Research. GitHub. https://github.com/REPPL/ragged/tree/main/do
 For citing specific research documents, use git commit hash:
 
 ```
-ragged Project. (2025). Document Normalization Pipeline Design [commit abc123].
-Retrieved from https://github.com/REPPL/ragged/blob/abc123/docs/implementation/plan/core-concepts/document-normalization.md
+ragged Project. (2025). Document Normalisation Pipeline Design [commit abc123].
+Retrieved from https://github.com/REPPL/ragged/blob/abc123/docs/implementation/plan/core-concepts/document-normalisation.md
 ```
 
 ## Research Questions ragged Addresses
@@ -125,7 +125,7 @@ Retrieved from https://github.com/REPPL/ragged/blob/abc123/docs/implementation/p
 
 ### RAG Architecture
 
-1. Does markdown normalization improve retrieval quality?
+1. Does markdown normalisation improve retrieval quality?
 2. How do different chunking strategies affect accuracy?
 3. What's the optimal chunk size for different document types?
 4. How effective is duplicate detection in real datasets?
@@ -226,7 +226,7 @@ For each research claim in ragged documentation:
 **Status**: Research materials being collected during planning and development.
 
 **Next Steps**:
-1. Organize migrated background research
+1. Organise migrated background research
 2. Design evaluation framework (v0.2)
 3. Conduct first benchmarks (v0.2)
 4. Document experimental methodology
