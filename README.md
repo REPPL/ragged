@@ -118,103 +118,34 @@ RAGGED_CHROMA_URL=http://localhost:8001
 RAGGED_OLLAMA_URL=http://localhost:11434
 ```
 
-### Embedding Models
+---
 
-Two embedding backends are supported:
+## Troubleshooting
 
-1. **sentence-transformers** (default)
-   - Runs locally on CPU/GPU
-   - Model: `all-MiniLM-L6-v2` (384 dimensions)
-   - No external service required
+**ChromaDB Connection Issues:**
 
-2. **Ollama**
-   - Requires Ollama service
-   - Model: `nomic-embed-text` (768 dimensions)
-   - Consistent with LLM backend
+```bash
+# Check ChromaDB is running
+docker ps | grep chromadb
 
-
-## Privacy & Security
-
-ragged is designed with privacy as a core principle:
-
-- ✅ **100% Local Processing**: No data leaves your machine
-- ✅ **No External APIs**: All models run locally
-- ✅ **No Telemetry**: No tracking, analytics, or phone-home
-- ✅ **PII Filtering**: Automatic filtering in logs
-- ✅ **Secure File Handling**: Path validation and size limits
-- ✅ **Open Source**: GPL-3.0 licensed, fully auditable
-
-### Planned Security Features
-
-- Path traversal protection
-- File size validation (100MB limit)
-- MIME type checking
-- Input sanitization
-- No hardcoded credentials
-- Secure defaults
-
-
-## Development
-
-### Architecture
-
-```
-┌─────────────────────────────────────────────────────────┐
-│  CLI Interface (Click + Rich)                           │
-│  - ragged add <file>                                    │
-│  - ragged query "<question>"                            │
-│  - ragged list / clear / config / health                │
-└─────────────────────────────────────────────────────────┘
-                          │
-        ┌─────────────────┼─────────────────┐
-        ▼                 ▼                 ▼
-   ┌─────────┐      ┌──────────┐     ┌──────────┐
-   │Document │      │Retrieval │     │Generation│
-   │Ingestion│      │ System   │     │  System  │
-   └─────────┘      └──────────┘     └──────────┘
-        │                 │                 │
-        │                 │                 │
-   ┌─────────┐      ┌──────────┐     ┌──────────┐
-   │Chunking │      │ Vector   │     │  Ollama  │
-   │ System  │      │  Store   │     │   LLM    │
-   └─────────┘      │(ChromaDB)│     └──────────┘
-        │           └──────────┘
-        ▼
-   ┌─────────┐
-   │Embedding│
-   │ Models  │
-   └─────────┘
+# Restart ChromaDB
+docker-compose restart chromadb
 ```
 
-**Core Components:**
+**Ollama Issues:**
 
-- **Document Ingestion**: Loads and converts documents to a common format
-- **Chunking System**: Splits documents into semantic chunks with overlap
-- **Embedding Models**: Converts text to vectors (sentence-transformers or Ollama)
-- **Vector Store**: ChromaDB for semantic similarity search
-- **Retrieval System**: Finds relevant chunks using cosine similarity
-- **Generation System**: Ollama LLM generates answers with citations
-- **CLI Interface**: User-friendly command-line tool
+```bash
+# Check Ollama is running
+ollama list
 
-
-### Project Structure
-
+# Pull required model
+ollama pull llama3.2
+ollama pull nomic-embed-text
 ```
-ragged/
-├── src/                    # Source code
-│   ├── config/            # Configuration system
-│   ├── ingestion/         # Document loading
-│   ├── chunking/          # Text splitting
-│   ├── embeddings/        # Embedding generation
-│   ├── storage/           # Vector database
-│   ├── retrieval/         # Semantic search
-│   ├── generation/        # LLM integration
-│   ├── utils/             # Utilities
-│   └── main.py            # CLI entry point
-├── tests/                 # Test suite
-├── docs/                  # Documentation
-└── pyproject.toml         # Project metadata
-```
+
+---
+
+## Tests
 
 ### Running Tests
 
@@ -244,82 +175,6 @@ mypy src/
 ```
 
 ---
-
-## Troubleshooting
-
-### ChromaDB Connection Issues
-
-```bash
-# Check ChromaDB is running
-docker ps | grep chromadb
-
-# Restart ChromaDB
-docker-compose restart chromadb
-```
-
-### Ollama Issues
-
-```bash
-# Check Ollama is running
-ollama list
-
-# Pull required model
-ollama pull llama3.2
-ollama pull nomic-embed-text
-```
-
-### Performance
-
-- For faster embeddings, use a GPU
-- Reduce `RAGGED_CHUNK_SIZE` for better precision
-- Increase `RAGGED_CHUNK_SIZE` for better recall
-
-
-## Roadmap
-
-### v0.1 (Released)
-- ✅ Core RAG pipeline
-- ✅ Multi-format document support
-- ✅ Dual embedding backends
-- ✅ CLI interface
-- ✅ Privacy-first architecture
-
-### v0.2 (Released 2025-11-10)
-- ✅ Web UI (FastAPI + Gradio with SSE streaming)
-- ✅ Hybrid retrieval (BM25 + Vector with RRF fusion)
-- ✅ Few-shot prompting with example storage
-- ✅ Contextual chunking (document + section headers)
-- ✅ Performance optimizations (LRU caching, async processing)
-- ✅ Docker deployment (API + UI + ChromaDB)
-- ✅ Comprehensive testing (262 tests, 68% coverage)
-- ✅ Performance benchmarking utilities
-
-### v0.2.2 (Current - Released 2025-11-10)
-- ✅ Folder ingestion with recursive directory scanning and batch processing
-- ✅ Interactive model selection with RAG suitability scoring
-- ✅ Duplicate document detection with interactive overwrite prompts
-- ✅ Python 3.12 compatibility fixes for Path.is_dir()
-- ✅ Web UI error display improvements (actual error messages)
-- ✅ CLI duplicate detection bug fixes
-
-### v0.2.1 (Released 2025-11-10)
-- ✅ Critical bug fixes (Ollama API, document ingestion, Docker health checks)
-- ✅ IEEE citation system (numbered citations with page tracking)
-- ✅ PDF page-level citation tracking
-- ✅ Enhanced response formatting with reference lists
-- ✅ Improved metadata handling for ChromaDB compatibility
-
-### v0.3 (Future)
-- [ ] Multi-modal support (images, tables)
-- [ ] Knowledge graph integration
-- [ ] Advanced query processing
-- [ ] Collaborative filtering
-
-
-## Contributing
-
-Contributions welcome! Please see `docs/development/` for development guidelines.
-
 
 ## Acknowledgments
 
