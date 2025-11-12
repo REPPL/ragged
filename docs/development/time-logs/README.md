@@ -1,71 +1,78 @@
-# Feature Time Logs
+# Time Logs
 
-**Status**: 🚧 Awaiting Content
-**Last Updated**: 2025-11-09
+**Purpose:** Transparent tracking of actual development time per version and feature.
+
+---
 
 ## Overview
 
-This directory contains detailed time tracking logs for specific features and implementations, providing transparency about development effort and AI assistance.
+This directory contains time logs documenting actual hours spent on ragged development. Unlike estimates in roadmaps, these are empirical measurements of completed work.
+
+**Philosophy:**
+- Track reality, not estimates
+- Include all time: implementation, debugging, testing, documentation
+- Distinguish AI-assisted vs. manual work
+- Share what worked and what didn't
 
 ---
 
-## Purpose
+## Structure
 
-Feature time logs provide:
-- **Effort Estimation**: Actual time spent on features
-- **AI Transparency**: AI vs human effort breakdown
-- **Learning**: Efficiency insights and improvements
-- **Planning**: Better estimation for future features
-
----
-
-## Log Format
-
-Each log follows the template at [feature-time-log-template.md](../templates/feature-time-log-template.md) and includes:
-
-1. **Feature Name**: What was built
-2. **Version**: Which version it's part of
-3. **Status**: In Progress, Complete, On Hold
-4. **Total Time**: Hours spent
-5. **AI Breakdown**: AI vs human time split
-6. **Sessions**: Detailed session logs
-7. **Outcomes**: What was delivered
-
----
-
-## File Naming
-
-Feature logs are named descriptively:
 ```
-feature-name.md
+time-logs/
+├── README.md (this file)
+└── version/
+    ├── v0.1/
+    │   └── v0.1-time-log.md
+    ├── v0.2/
+    │   ├── v0.2.0-time-log.md
+    │   ├── v0.2.1-time-log.md
+    │   └── v0.2.2-time-log.md
+    └── vX.X/
+        └── vX.X-time-log.md
 ```
 
-For example:
-- `document-processor.md`
-- `web-ui-basic.md`
-- `hybrid-retrieval.md`
+**Naming Convention:**
+- Major/minor versions get folders: `version/v0.1/`, `version/v0.2/`
+- Individual time logs: `vX.X.X-time-log.md`
 
 ---
 
-## Coming Soon
+## What We Track
 
-Feature logs will be created as significant features are implemented, starting with v0.1.
+### Time Breakdown
 
-Expected logs:
-- Document ingestion pipeline
-- Embedding and vector storage
-- Basic retrieval engine
-- CLI interface
-- Web UI foundation (v0.2)
+For each version/feature:
+- **Implementation:** Writing code
+- **Debugging:** Fixing issues
+- **Testing:** Writing and running tests
+- **Documentation:** Writing docs
+- **Total Hours:** Sum of all time
+
+### AI Assistance Tracking
+
+- **AI-Assisted Time:** Hours using AI coding tools
+- **Manual Time:** Hours without AI assistance
+- **AI Percentage:** % of time with AI help
+- **Effectiveness:** What AI did well, what needed manual work
+
+### Context
+
+- **Task Type:** Scaffolding, implementation, refactoring, testing, docs
+- **Challenges:** Problems encountered and how resolved
+- **Learning:** Insights and discoveries
+- **Would Do Differently:** Retrospective improvements
 
 ---
 
 ## Related Documentation
 
-- **[Feature Time Log Template](../templates/feature-time-log-template.md)** - Template for new logs
-- **[Time Tracking Methodology](../time-tracking-methodology.md)** - Methodology explanation
-- **[DevLogs](../devlog/README.md)** - Daily development logs
+- [Methodology](../methodology/) - How we develop with AI
+- [Development Logs](../devlog/) - Daily progress logs
+- [Roadmap](../roadmap/) - Planned work (estimates)
+- [Templates](../templates/) - Document templates
 
 ---
 
-*This directory will be populated with feature-specific time logs during development*
+**Last Updated:** 2025-11-12
+**Status:** Active - all development time tracked from v0.1 onwards
