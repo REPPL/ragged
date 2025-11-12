@@ -123,7 +123,7 @@ Version 0.4.0 introduces a **Personal Memory System** that transforms ragged fro
 
 ## Part 2: Implementation Milestones
 
-### Milestone 1: Personal Memory Foundation (Weeks 1-2, 40 hours)
+### Milestone 1: Personal Memory Foundation (40 hours)
 
 **Goal**: Basic persona system and interaction tracking
 
@@ -726,7 +726,7 @@ ragged memory get <key> --persona researcher
 
 ---
 
-### Milestone 2: Behavior Learning (Weeks 3-4, 60 hours)
+### Milestone 2: Behaviour Learning (60 hours)
 
 **Goal**: Automatic interest profiling and personalized ranking
 
@@ -1088,7 +1088,7 @@ class EnhancedRAGPipeline:
 
 ---
 
-### Milestone 3: Temporal Memory (Weeks 5-6, 60 hours)
+### Milestone 3: Temporal Memory (60 hours)
 
 **Goal**: Track information over time, support temporal queries
 
@@ -1273,7 +1273,7 @@ All while maintaining ragged's core values:
 - **Transparent**: Users see and control their memory
 - **Open**: Extensible architecture, open source
 
-**Total Implementation**: 160-200 hours over 6-8 weeks
+**Total Implementation:** 160-200 hours
 
 **Next Version** (v0.5):
 - Enhanced NLP for topic extraction
