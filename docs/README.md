@@ -1,193 +1,379 @@
 # ragged Documentation
 
-**Status**: Planning Phase - Comprehensive architecture and implementation plan complete
-**Version**: v0.0 (pre-implementation)
-**Last Updated**: 2025-11-09
+**Status:** Early Development (v0.2.2)
+
+**Last Updated:** 2025-11-13
+
+**Documentation Version:** 3.0 (restructured for industry standards)
+
+---
+
+## Table of Contents
+
+- [Welcome](#welcome)
+- [Documentation Structure](#documentation-structure)
+- [For Users: Diátaxis Framework](#for-users-diátaxis-framework)
+  - [Tutorials - Learning by Doing](#tutorials---learning-by-doing)
+  - [Guides - Solving Problems](#guides---solving-problems)
+  - [Reference - Looking Up Details](#reference---looking-up-details)
+  - [Explanation - Understanding Concepts](#explanation---understanding-concepts)
+- [For Product & Planning](#for-product--planning)
+  - [Vision - Long-Term Strategy](#vision---long-term-strategy)
+  - [Requirements - User Needs](#requirements---user-needs)
+- [For Technical Design](#for-technical-design)
+  - [Design - Technical Architecture](#design---technical-architecture)
+  - [ADR - Architecture Decision Records](#adr---architecture-decision-records)
+  - [RFCs - Request for Comments](#rfcs---request-for-comments)
+- [For Implementation Records](#for-implementation-records)
+  - [Implementation - What Was Actually Built](#implementation---what-was-actually-built)
+- [For Development Process](#for-development-process)
+  - [Process - Development Transparency](#process---development-transparency)
+- [For Research & Community](#for-research--community)
+  - [Research - Academic Materials](#research---academic-materials)
+  - [Contributing - Contribution Guidelines](#contributing---contribution-guidelines)
+- [I Want To...](#i-want-to)
+- [Current Project Status](#current-project-status)
+- [Documentation Standards](#documentation-standards)
+- [Project Principles](#project-principles)
+- [Contributing to Documentation](#contributing-to-documentation)
+- [External Resources](#external-resources)
+- [Questions?](#questions)
+- [License](#license)
 
 ---
 
 ## Welcome
 
-This is the complete documentation for **ragged**, a privacy-first local RAG (Retrieval-Augmented Generation) system. The documentation serves multiple audiences and purposes:
+This is the complete documentation for **ragged**, a privacy-first local RAG (Retrieval-Augmented Generation) system. The documentation serves multiple audiences:
 
-- **End Users**: Learn to use ragged for document question-answering
-- **Contributors**: Understand how to contribute code and documentation
-- **Developers**: See how ragged is designed and built
-- **Researchers**: Study AI-assisted development and RAG architecture
+- **End Users:** Learn to use ragged for document question-answering
+- **Contributors:** Understand how to contribute code and documentation
+- **Developers:** See how ragged is designed and built
+- **Researchers:** Study AI-assisted development and RAG architecture
 
 ---
 
-## Documentation Organisation
+## Documentation Structure
 
-ragged uses the **Diataxis framework** for user-facing documentation, plus additional sections for contributors, developers, and researchers.
+ragged's documentation follows industry-standard patterns with some unique additions for development transparency and research.
 
-### 📖 For Users (Diataxis Framework)
+### Quick Navigation Map
 
-These sections help you **learn and use** ragged:
+```
+docs/
+├── 📘 User Documentation (Diátaxis)
+│   ├── tutorials/     → Learning-oriented lessons
+│   ├── guides/        → Task-oriented how-tos
+│   ├── reference/     → Information-oriented specs
+│   └── explanation/   → Understanding-oriented concepts
+│
+├── 🎯 Product & Planning
+│   ├── vision/        → Long-term product strategy
+│   └── requirements/  → User stories and needs
+│
+├── 🏗️ Technical Design
+│   ├── design/        → Architecture and technical design
+│   ├── adr/           → Architecture Decision Records
+│   └── rfcs/          → Request for Comments proposals
+│
+├── ⚙️ Implementation Records
+│   └── implementation/ → What was actually built
+│
+├── 📊 Development Process (Unique to ragged)
+│   └── process/       → How ragged is being built
+│
+├── 🔬 Research & Community
+│   ├── research/      → Academic materials
+│   └── contributing/  → Contribution guidelines
+│
+└── 📋 This file         → Navigation and overview
+```
 
-#### [**Tutorials**](./tutorials/) - Learning by Doing
-*Learning-oriented - Build skills through hands-on exercises*
+---
 
-- For beginners with no RAG experience
+## For Users: [Diátaxis](https://diataxis.fr/) Framework
+
+ragged uses the Diátaxis documentation system to help you learn and use the system effectively.
+
+### [Tutorials](./tutorials/) - Learning by Doing
+
+**Purpose:** Build skills through hands-on exercises
+
+**Audience:** Beginners with no RAG experience
+
+**Content:**
 - Step-by-step practical lessons
 - Safe-to-fail learning environment
+- Conceptual explanations alongside practice
 
-**Status**: Coming with v0.1 release
-
----
-
-#### [**Guides**](./guides/) - Solving Problems
-*Task-oriented - How to accomplish specific goals*
-
-- For users with basic familiarity
-- Solve real-world problems
-- Step-by-step instructions for common tasks
-
-**Status**: Coming with v0.1 release
+**Status:** Coming with v0.1 release
 
 ---
 
-#### [**Reference**](./reference/) - Looking Up Details
-*Information-oriented - Technical specifications*
+### [Guides](./guides/) - Solving Problems
 
-- API documentation
+**Purpose:** Accomplish specific goals
+
+**Audience:** Users with basic familiarity
+
+**Content:**
+- Real-world problem solutions
+- Step-by-step instructions
+- Common tasks and workflows
+
+**Status:** Coming with v0.1 release
+
+**Available Now:**
+- [Docker Setup Guide](./guides/docker-setup.md)
+
+---
+
+### [Reference](./reference/) - Looking Up Details
+
+**Purpose:** Technical specifications and API documentation
+
+**Audience:** Users needing precise information
+
+**Content:**
+- API documentation (auto-generated from code)
 - Configuration options
 - Terminology and definitions
 
-**Status**: Reference materials will be auto-generated from code (v0.1+)
+**Status:** Reference materials will be auto-generated from code docstrings (v0.1+)
 
-**Available Now**:
-- [Terminology](./reference/terminology/) - RAG and ragged-specific terms
+**Available Now:**
+- [Terminology Glossary](./reference/terminology/)
 
 ---
 
-#### [**Explanation**](./explanation/) - Understanding Concepts
-*Understanding-oriented - Deepen your knowledge*
+### [Explanation](./explanation/) - Understanding Concepts
 
-- Why ragged works the way it does
+**Purpose:** Deepen your understanding of how and why ragged works
+
+**Audience:** Users wanting conceptual knowledge
+
+**Content:**
 - RAG concepts and theory
 - Design philosophy and trade-offs
+- Why ragged works the way it does
 
-**Available Now**:
-- [Architecture](./implementation/plan/architecture/) - System design principles
-- [Design Principles](./explanation/design-principles/) - Core philosophy
-
-**Also see**: Many explanatory documents in [Implementation Plan](./implementation/plan/core-concepts/)
-
----
-
-### 🤝 For Contributors
-
-#### [**Contributing Guide**](./contributing/)
-
-- How to contribute to ragged (post-v0.1)
-- Development setup instructions
-- Code standards and review process
-- AI assistance disclosure guidelines
-
-**Status**: Pre-v0.1 - Contributions welcomed after v0.1 release
+**Available Now:**
+- [Architecture Overview](./explanation/architecture-overview.md) - High-level system design
+- [RAG Fundamentals](./explanation/rag-fundamentals.md) - Core RAG concepts
+- [Privacy Design](./explanation/privacy-design.md) - Privacy-first architecture
+- [Design Principles](./explanation/design-principles.md) - Core philosophy
+- [User Personas](./explanation/user-personas.md) - Who ragged serves
 
 ---
 
-### 🔬 For Developers & Researchers
+## For Product & Planning
 
-#### [**Development Process**](./development/) ⭐ NEW
+### [Vision](./vision/) - Long-Term Strategy
 
-*Transparency in AI-assisted software development*
+**Purpose:** Define what ragged will become
 
-**Purpose**: Document **how ragged is being built**, not just what it does.
+**Content:**
+- [Product Vision](./vision/product-vision.md) - Goals, principles, success criteria
 
-**Contents**:
-- **Daily Development Logs** (`devlog/`) - Chronicle of actual development
-- **Architecture Decision Records** (`decisions/`) - Why we made specific choices
-- **Time Tracking** (`time-logs/`) - Actual hours spent (not vague "weeks")
-- **AI Assistance Documentation** - How AI tools are used transparently
-
-**Why**: Supports reproducibility, transparency, research, and accountability.
-
-**See**: [Development Documentation Index](./development/README.md)
+**Audience:** Product stakeholders, contributors, researchers
 
 ---
 
-#### [**Research Materials**](./research/)
+### [Requirements](./requirements/) - User Needs
 
-*Academic and research-oriented documentation*
+**Purpose:** Define what users need from ragged
 
-- Research methodology
-- Background materials (RAG landscape, comparisons)
-- Experimental results and benchmarks (coming in v0.2+)
-- Citations and bibliography
+**Content:**
+- [User Stories](./requirements/user-stories/) - Feature requirements by persona
 
-**Purpose**: Support academic reproducibility and evidence-based design.
-
-**See**: [Research Documentation Index](./research/README.md)
+**Audience:** Product and engineering teams
 
 ---
 
-#### [**Implementation Plan**](./implementation/plan/) ⭐ COMPREHENSIVE
+## For Technical Design
 
-*Detailed version-by-version implementation roadmap*
+### [Design](./design/) - Technical Architecture
 
-The **complete technical plan** for building ragged from v0.1 (MVP) to v1.0 (production-ready).
+**Purpose:** Design decisions **before** implementation
 
-**Key Documents**:
-- [Implementation Plan Overview](./implementation/plan/README.md)
-- [State-of-the-Art Architecture 2025](./implementation/plan/architecture/README.md)
-- [Project Vision & Goals](./implementation/plan/PROJECT-VISION.md)
-- [Development Guide](./implementation/plan/DEVELOPMENT-GUIDE.md)
+**Content:**
+- [Design Overview](./design/README.md) - Complete design documentation
+- [Architecture](./design/architecture/) - System architecture design
+- [Core Concepts](./design/core-concepts/) - Foundational technical concepts
+- [Technology Stack](./design/technology-stack/) - Technology evaluations
+- [Version Plans](./design/versions/) - Version-specific designs (v0.1-v1.0)
+- [Development Guide](./design/DEVELOPMENT-GUIDE.md) - How to use the design docs
 
-**Version Plans**:
-- [v0.1: MVP Foundation](./implementation/plan/versions/v0.1/)
-- [v0.2: Document Normalisation + Enhanced Retrieval](./implementation/plan/versions/v0.2/)
-- [v0.3: Advanced Chunking](./implementation/plan/versions/v0.3/)
-- [v0.4: Adaptive Systems](./implementation/plan/versions/v0.4/)
-- [v0.5: Knowledge Graphs](./implementation/plan/versions/v0.5/)
-- [v1.0: Production Ready](./implementation/plan/versions/v1.0/)
+**Key Documents:**
+- [Architecture README](./design/architecture/README.md) - State-of-the-art RAG architecture
+- [RAG Fundamentals](./design/core-concepts/rag-fundamentals.md) - RAG theory
+- [Privacy Architecture](./design/core-concepts/privacy-architecture.md) - Privacy-first design
+- [Modularity](./design/core-concepts/modularity.md) - Plugin architecture
 
-**Core Concepts**:
-- [RAG Fundamentals](./implementation/plan/core-concepts/rag-fundamentals.md)
-- [Document Normalisation](./implementation/plan/core-concepts/document-normalisation.md) ⭐ KEY FEATURE
-- [Duplicate Detection](./implementation/plan/core-concepts/duplicate-detection.md)
-- [Metadata Schema](./implementation/plan/core-concepts/metadata-schema.md)
-- [Progressive Disclosure](./implementation/plan/core-concepts/progressive-disclosure.md)
-- [Privacy Architecture](./implementation/plan/core-concepts/privacy-architecture.md)
-
-**Technology Stack**:
-- [Document Processing Tools](./implementation/plan/technology-stack/document-processing.md)
-- [Web Frameworks](./implementation/plan/technology-stack/web-frameworks.md)
-- [Embeddings](./implementation/plan/technology-stack/embeddings.md)
-- [Vector Stores](./implementation/plan/technology-stack/vector-stores.md)
-- [And more...](./implementation/plan/technology-stack/)
+**Audience:** Engineering team, technical contributors
 
 ---
 
-## Quick Navigation
+### [ADR](./adr/) - Architecture Decision Records
 
-### I Want to...
+**Purpose:** Document **why** specific architectural choices were made
+
+**Format:** Numbered ADRs (0001-decision-name.md)
+
+**Available ADRs:**
+- [ADR-0001: Local-Only Processing](./adr/0001-local-only-processing.md) - Privacy-first principle
+- [ADR-0002: Pydantic for Configuration](./adr/0002-pydantic-for-configuration.md) - Data validation
+- [ADR-0003: ChromaDB for Vector Storage](./adr/0003-chromadb-for-vector-storage.md) - Vector database choice
+- [ADR-0004: Factory Pattern for Embedders](./adr/0004-factory-pattern-for-embedders.md) - Design pattern
+
+**Audience:** Engineering team, technical contributors
+
+**Standard:** Follows [Michael Nygard's ADR format](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions)
+
+---
+
+### [RFCs](./rfcs/) - Request for Comments
+
+**Purpose:** Propose and discuss significant changes
+
+**Content:**
+- [RFC README](./rfcs/README.md) - RFC process and template
+
+**Status:** Empty (placeholder for future proposals)
+
+**Audience:** Engineering team, contributors
+
+---
+
+## For Implementation Records
+
+### [Implementation](./implementation/) - What Was Actually Built
+
+**Purpose:** Document **actual** implementation vs. design
+
+**Content:**
+- [v0.1 Implementation](./implementation/v0.1/) - What was actually built in v0.1
+- [v0.2 Implementation](./implementation/v0.2/) - What was actually built in v0.2
+
+**Key Documents:**
+- [v0.1 Summary](./implementation/v0.1/summary.md) - Results and outcomes
+- [v0.1 Implementation Notes](./implementation/v0.1/implementation-notes.md) - Technical details
+- [v0.1 Testing Results](./implementation/v0.1/testing.md) - Test coverage and quality
+
+**Distinction:**
+- **design/** = What we **planned** to build
+- **implementation/** = What we **actually built**
+- **process/** = **How** we built it (narrative)
+
+**Audience:** Engineering team, researchers, future maintainers
+
+---
+
+## For Development Process
+
+### [Process](./process/) - Development Transparency
+
+**Purpose:** Document **how ragged is being built** with full transparency
+
+**Unique to ragged:** This structure is a novel contribution to open-source practices, supporting AI-assisted development transparency and research reproducibility.
+
+**Content:**
+- [Process Overview](./process/README.md) - Why this structure exists
+- [Methodology](./process/methodology/) - How we develop (AI assistance, time tracking)
+- [Roadmap](./process/roadmap/) - Near-term detailed plans (next 2-3 versions)
+- [Development Logs](./process/devlog/) - Daily and version-based narratives
+- [Time Logs](./process/time-logs/) - Actual hours spent (empirical data)
+- [Templates](./process/templates/) - Templates for various documents
+
+**Key Documents:**
+- [AI Assistance Guidelines](./process/methodology/ai-assistance.md) - How we use AI transparently
+- [Time Tracking Methodology](./process/methodology/time-tracking.md) - How we track time
+- [Daily Devlogs](./process/devlog/daily/) - Day-by-day development chronicle
+- [Version Devlogs](./process/devlog/version/) - Version-specific narratives
+
+**Why this exists:**
+- **Transparency:** Full disclosure of AI-assisted development
+- **Research:** Support academic reproducibility
+- **Learning:** Help others understand the development journey
+- **Accountability:** Track estimates vs. actuals
+
+**Audience:** Researchers, contributors, future developers
+
+---
+
+## For Research & Community
+
+### [Research](./research/) - Academic Materials
+
+**Purpose:** Support academic reproducibility and evidence-based design
+
+**Content:**
+- [Research Overview](./research/README.md)
+- [Background Materials](./research/background/) - RAG landscape, comparisons
+- Methodology (coming)
+- Experiments (coming)
+- Benchmarks (coming)
+
+**Audience:** Researchers, academics, evidence-based practitioners
+
+---
+
+### [Contributing](./contributing/) - Contribution Guidelines
+
+**Purpose:** Help contributors participate in ragged development
+
+**Content:**
+- [Contributing Guide](./contributing/README.md)
+- Development setup
+- Code standards
+- Review process
+- AI assistance disclosure
+
+**Status:** Contributions welcomed after v0.1 release
+
+**Audience:** Contributors, developers
+
+---
+
+## I Want To...
 
 **Learn how to use ragged**
 → Start with [Tutorials](./tutorials/) (coming with v0.1)
+→ Or read [Architecture Overview](./explanation/architecture-overview.md) for concepts
 
 **Solve a specific problem**
 → Check [Guides](./guides/) (coming with v0.1)
 
-**Look up API details**
-→ See [Reference](./reference/) (auto-generated from code)
+**Look up API or configuration details**
+→ See [Reference](./reference/) (auto-generated from code with v0.1)
 
 **Understand RAG concepts**
-→ Read [Explanation](./explanation/) and [Core Concepts](./implementation/plan/core-concepts/)
+→ Read [Explanation](./explanation/) and [Core Concepts](./design/core-concepts/)
 
-**Contribute to ragged**
-→ See [Contributing Guide](./contributing/)
+**Understand the architecture**
+→ Read [Architecture Overview](./explanation/architecture-overview.md) (user-facing)
+→ Then [Design Architecture](./design/architecture/) (technical details)
 
-**Understand the development process**
-→ Explore [Development Documentation](./development/)
+**Understand a specific decision**
+→ Check [ADR](./adr/) for numbered architectural decisions
+→ Or [Version Decisions](./process/devlog/version/) for narrative context
 
-**Review the technical architecture**
-→ Read [Implementation Plan](./implementation/plan/README.md) and [Architecture 2025](./implementation/plan/architecture/README.md)
+**See what's planned next**
+→ Check [Process Roadmap](./process/roadmap/) for near-term plans
+→ Or [Design Version Plans](./design/versions/) for long-term vision
 
-**Study AI-assisted development**
-→ Check [Time Tracking](./development/methodology/time-tracking.md) and [Development Logs](./development/devlog/)
+**Contribute code or documentation**
+→ See [Contributing Guide](./contributing/README.md)
+
+**Study the development process**
+→ Explore [Process Documentation](./process/)
+→ Read [Time Logs](./process/time-logs/) for empirical data
+→ Check [Development Logs](./process/devlog/) for narratives
+
+**Research AI-assisted development**
+→ Review [AI Assistance Guidelines](./process/methodology/ai-assistance.md)
+→ Compare [Design Plans](./design/versions/) vs. [Actual Implementation](./implementation/)
+→ Study [Time Logs](./process/time-logs/) for AI effectiveness data
 
 **See research materials**
 → Browse [Research Documentation](./research/)
@@ -196,31 +382,25 @@ The **complete technical plan** for building ragged from v0.1 (MVP) to v1.0 (pro
 
 ## Current Project Status
 
-**Phase**: Planning → Early Development
+**Version:** v0.2.2 (Early Development)
 
-**What Exists**:
-- ✅ Comprehensive implementation plan (v0.1 through v1.0)
-- ✅ State-of-the-art RAG architecture design (2025)
-- ✅ Technology stack evaluation and decisions
-- ✅ Core concepts documentation
+**Date:** 2025-11-13
+
+**What Exists:**
+- ✅ Comprehensive technical design (v0.1 through v1.0)
+- ✅ State-of-the-art RAG architecture (2025)
+- ✅ Technology stack evaluations
+- ✅ Core v0.1 implementation (basic RAG pipeline)
 - ✅ Development process transparency framework
+- ✅ Partial v0.2 implementation
 
-**What's Next**:
-- 🔄 **v0.1 Implementation** (Starting soon - 2-3 weeks estimated)
-  - Basic RAG pipeline
-  - Simple CLI
-  - ChromaDB + Ollama integration
-  - PDF, TXT, MD, HTML support
+**Current Focus:**
+- 🔄 **v0.2 Development** - Document normalisation + enhanced retrieval + web UI
 
-**Timeline**:
-- v0.1: 2-3 weeks (basic functionality)
-- v0.2: 6-7 weeks (⭐ **document normalisation** + enhanced retrieval + web UI)
-- v0.3: 3-4 weeks (advanced chunking)
-- v0.4: 4-5 weeks (adaptive systems)
-- v0.5: 5-6 weeks (knowledge graphs)
-- v1.0: 4-6 weeks (production ready)
-
-**Note**: These are preliminary estimates. **Actual time tracking** will replace estimates with empirical data. See [Time Tracking Methodology](./development/methodology/time-tracking.md).
+**Recent Updates:**
+- Documentation restructured to industry standards (2025-11-13)
+- ADR system implemented for architectural decisions
+- Clear separation of design vs. implementation vs. process
 
 ---
 
@@ -228,50 +408,76 @@ The **complete technical plan** for building ragged from v0.1 (MVP) to v1.0 (pro
 
 ### Language
 
-**British English** throughout all documentation (organise, colour, behaviour).
+**British English** throughout all documentation:
+- "organise" not "organize"
+- "colour" not "color"
+- "behaviour" not "behavior"
 
-### Formats
+### Formatting
 
-- **Markdown**: GitHub-flavored for all documents
-- **Diagrams**: Mermaid for architecture, ASCII for simple flows
-- **Code**: Python 3.10+ with type hints
+**Metadata formatting:**
+```markdown
+**Status:** Active
+
+**Date:** 2025-11-13
+
+**Owner:** Engineering
+```
+
+Each metadata field on its own line for readability.
+
+**File naming:**
+- Lowercase with hyphens: `architecture-overview.md`
+- README.md exception: All caps (standard convention)
+- Avoid capitals for normal files: `summary.md` not `summary.md`
 
 ### Version Control
 
 - All documentation version-controlled in git
-- Major milestones tagged (e.g., `v0.1-plan-complete`)
-- Plans compared against actual implementation
+- Major milestones tagged (e.g., `v0.1-complete`)
+- Compare plans ([design/](./design/)) against actuals ([implementation/](./implementation/))
 
 ### AI Transparency
 
-ragged development uses AI tools (Claude Code, GitHub Copilot) transparently:
+ragged development uses AI tools (Claude Code) transparently:
 - AI usage disclosed in commits and documentation
 - Time tracking distinguishes AI-assisted vs. manual work
 - All AI-generated code reviewed and understood by humans
-
-See [Development Process](./development/) for full transparency framework.
+- See [AI Assistance Guidelines](./process/methodology/ai-assistance.md)
 
 ---
 
 ## Project Principles
 
 ### 1. Privacy-First
+
 All processing 100% local by default. No external APIs unless explicitly configured.
 
+**See:** [ADR-0001: Local-Only Processing](./adr/0001-local-only-processing.md)
+
 ### 2. Learning-Focused
-Documentation prioritizes educational value. Explain "why", not just "what".
+
+Documentation prioritises educational value. Explain "why", not just "what".
 
 ### 3. State-of-the-Art
+
 Incorporate latest 2025 RAG research and best practices.
 
 ### 4. Modular Architecture
+
 Pluggable components with clear interfaces. Easy to experiment and extend.
 
+**See:** [Modularity](./design/core-concepts/modularity.md)
+
 ### 5. Progressive Enhancement
+
 Build incrementally. Each version adds capabilities without breaking previous work.
 
 ### 6. Transparent Development
+
 Document the actual development process, including AI assistance, for reproducibility.
+
+**See:** [Process Documentation](./process/)
 
 ---
 
@@ -279,19 +485,19 @@ Document the actual development process, including AI assistance, for reproducib
 
 Documentation contributions are welcome!
 
-**Types of contributions**:
+**Types of contributions:**
 - Tutorials for new users
 - How-to guides for specific tasks
 - Explanations of RAG concepts
 - Corrections and clarifications
 - Examples and use cases
 
-**Process**:
-1. Check [Contributing Guide](./contributing/README.md)
+**Process:**
+1. Review [Contributing Guide](./contributing/README.md)
 2. Create an issue to discuss your contribution
 3. Submit a pull request
 
-**Note**: Post-v0.1 for code contributions, but documentation improvements welcome anytime!
+**Note:** Documentation improvements welcome anytime! Code contributions welcome after v0.1.
 
 ---
 
@@ -299,66 +505,22 @@ Documentation contributions are welcome!
 
 ### Community
 
-- **GitHub Repository**: https://github.com/REPPL/ragged
-- **Discussions**: https://github.com/REPPL/ragged/discussions
-- **Issues**: https://github.com/REPPL/ragged/issues
+- **GitHub Repository:** https://github.com/REPPL/ragged
+- **Discussions:** https://github.com/REPPL/ragged/discussions
+- **Issues:** https://github.com/REPPL/ragged/issues
 
 ### Related Documentation
 
-- **Project README**: [`../README.md`](../README.md) - User-facing project introduction
-- **Code Documentation**: Auto-generated from docstrings (coming with v0.1)
-
----
-
-## Documentation Roadmap
-
-### v0.1 Release
-- [ ] Tutorials for basic usage
-- [ ] API reference (auto-generated)
-- [ ] Installation and setup guide
-- [ ] First time-tracked feature logs
-
-### v0.2 Release
-- [ ] Document normalisation guides
-- [ ] Web UI tutorials
-- [ ] Advanced configuration reference
-- [ ] Version time summary
-- [ ] First benchmarks
-
-### v0.3+ Releases
-- [ ] Advanced chunking explanations
-- [ ] Performance tuning guides
-- [ ] Experimental results
-- [ ] User studies (if conducted)
-
-### v1.0 Release
-- [ ] Complete user documentation
-- [ ] Comprehensive API reference
-- [ ] Production deployment guides
-- [ ] Migration guides
-- [ ] Full research documentation
-
----
-
-## Migrated Content
-
-**From `project-setup/` (reorganised 2025-11-09)**:
-
-Content has been reorganised into the new Diataxis-based structure:
-
-- `architecture/` → [`implementation/plan/architecture/`](./implementation/plan/architecture/)
-- `background/` → [`research/background/`](./research/background/)
-- `decisions/` → [`development/decisions/`](./development/decisions/)
-- `design-principles/` → [`explanation/design-principles/`](./explanation/design-principles/)
-- `terminology/` → [`reference/terminology/`](./reference/terminology/)
+- **Project README:** [`../README.md`](../README.md) - User-facing project introduction
+- **Code Documentation:** Auto-generated from docstrings (coming with v0.1)
 
 ---
 
 ## Questions?
 
-- **General Questions**: [GitHub Discussions](https://github.com/REPPL/ragged/discussions)
-- **Documentation Issues**: [GitHub Issues](https://github.com/REPPL/ragged/issues)
-- **Contributing**: See [Contributing Guide](./contributing/README.md)
+- **General Questions:** [GitHub Discussions](https://github.com/REPPL/ragged/discussions)
+- **Documentation Issues:** [GitHub Issues](https://github.com/REPPL/ragged/issues)
+- **Contributing:** See [Contributing Guide](./contributing/README.md)
 
 ---
 
@@ -370,14 +532,9 @@ See [`../LICENSE`](../LICENSE) for full text.
 
 ---
 
-**Next Steps**:
-1. **New users**: Wait for v0.1 release, then start with [Tutorials](./tutorials/)
-2. **Contributors**: Review [Implementation Plan](./implementation/plan/) and [Contributing Guide](./contributing/)
-3. **Developers**: Explore [Development Process](./development/) and [Architecture](./implementation/plan/architecture/README.md)
-4. **Researchers**: Check [Research Materials](./research/) and [Time Tracking](./development/methodology/time-tracking.md)
+**Next Steps:**
 
----
-
-**Status**: Planning complete. Ready to begin v0.1 implementation.
-**Last Updated**: 2025-11-09
-**Documentation Version**: 2.0 (reorganised with Diataxis framework + transparency layers)
+1. **New users:** Wait for v0.1 release, then start with [Tutorials](./tutorials/)
+2. **Contributors:** Review [Design](./design/) and [Contributing Guide](./contributing/)
+3. **Developers:** Explore [Process](./process/) and [Architecture](./design/architecture/)
+4. **Researchers:** Check [Research](./research/) and [Time Tracking](./process/methodology/time-tracking.md)
