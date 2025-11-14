@@ -7,7 +7,7 @@
 **Area:** Architecture, Privacy
 
 **Related:**
-- [Privacy Architecture](../development/design/core-concepts/privacy-architecture.md)
+- [Privacy Architecture](../core-concepts/privacy-architecture.md)
 - [Product Vision](../vision/product-vision.md)
 
 ---

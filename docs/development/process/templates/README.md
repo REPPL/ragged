@@ -78,7 +78,7 @@ Templates ensure consistent documentation practices and make it easy to capture 
 - Planning persona-specific capabilities
 - Establishing testable acceptance criteria
 
-**Output location:** `/docs/development/design/requirements/user-stories/US-XXX-title.md`
+**Output location:** `/docs/development/requirements/user-stories/US-XXX-title.md`
 
 **Key sections:**
 - Overview with persona mapping
@@ -97,7 +97,7 @@ Templates ensure consistent documentation practices and make it easy to capture 
 - Summarizing changes and improvements
 - Planning next version
 
-**Output location:** `/docs/development/design/versions/vX.Y/README.md`
+**Output location:** `/docs/development/versions/vX.Y/README.md`
 
 **Key sections:**
 - Version goals and completion status
@@ -173,8 +173,8 @@ Templates can be adapted for project-specific needs:
 
 ## Cross-References
 
-- **Development Guide**: [../../development/design/DEVELOPMENT-GUIDE.md](../../development/design/DEVELOPMENT-GUIDE.md)
-- **Version Roadmap**: [../../development/design/versions/](../../development/design/versions/)
+- **Development Guide**: [This guide is no longer available (removed during restructuring)](This guide is no longer available (removed during restructuring))
+- **Version Roadmap**: [../../versions/](../../versions/)
 - **User Stories**: [../../requirements/user-stories/](../../requirements/user-stories/)
 
 ---
@@ -191,6 +191,6 @@ Templates can be adapted for project-specific needs:
 
 1. **Creating an ADR**: Copy `adr-template.md` → `/docs/development/adr/XXXX-title.md`
 2. **Daily Devlog**: Copy `devlog-template.md` → `/docs/development/process/devlog/daily/YYYY-MM-DD.md`
-3. **New User Story**: Copy `user-story-template.md` → `/docs/development/design/requirements/user-stories/US-XXX-title.md`
-4. **Version Summary**: Copy `version-summary-template.md` → `/docs/development/design/versions/vX.Y/README.md`
+3. **New User Story**: Copy `user-story-template.md` → `/docs/development/requirements/user-stories/US-XXX-title.md`
+4. **Version Summary**: Copy `version-summary-template.md` → `/docs/development/versions/vX.Y/README.md`
 5. **Time Tracking**: Copy `feature-time-log-template.md` → `/docs/development/process/time-logs/feature-name.md`
