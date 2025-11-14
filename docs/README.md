@@ -192,23 +192,23 @@ ragged uses the Diátaxis documentation system to help you learn and use the sys
 
 ## For Technical Design
 
-### [Design](./design/) - Technical Architecture
+### [Design](./development/design/) - Technical Architecture
 
 **Purpose:** Design decisions **before** implementation
 
 **Content:**
-- [Design Overview](./design/README.md) - Complete design documentation
-- [Architecture](./design/architecture/) - System architecture design
-- [Core Concepts](./design/core-concepts/) - Foundational technical concepts
-- [Technology Stack](./design/technology-stack/) - Technology evaluations
-- [Version Plans](./design/versions/) - Version-specific designs (v0.1-v1.0)
-- [Development Guide](./design/DEVELOPMENT-GUIDE.md) - How to use the design docs
+- [Design Overview](./development/design/README.md) - Complete design documentation
+- [Architecture](./development/design/architecture/) - System architecture design
+- [Core Concepts](./development/design/core-concepts/) - Foundational technical concepts
+- [Technology Stack](./development/design/technology-stack/) - Technology evaluations
+- [Version Plans](./development/design/versions/) - Version-specific designs (v0.1-v1.0)
+- [Development Guide](./development/design/DEVELOPMENT-GUIDE.md) - How to use the design docs
 
 **Key Documents:**
-- [Architecture README](./design/architecture/README.md) - State-of-the-art RAG architecture
-- [RAG Fundamentals](./design/core-concepts/rag-fundamentals.md) - RAG theory
-- [Privacy Architecture](./design/core-concepts/privacy-architecture.md) - Privacy-first design
-- [Modularity](./design/core-concepts/modularity.md) - Plugin architecture
+- [Architecture README](./development/design/architecture/README.md) - State-of-the-art RAG architecture
+- [RAG Fundamentals](./development/design/core-concepts/rag-fundamentals.md) - RAG theory
+- [Privacy Architecture](./development/design/core-concepts/privacy-architecture.md) - Privacy-first design
+- [Modularity](./development/design/core-concepts/modularity.md) - Plugin architecture
 
 **Audience:** Engineering team, technical contributors
 
@@ -348,11 +348,11 @@ ragged uses the Diátaxis documentation system to help you learn and use the sys
 → See [Reference](./reference/) (auto-generated from code with v0.1)
 
 **Understand RAG concepts**
-→ Read [Explanation](./explanation/) and [Core Concepts](./design/core-concepts/)
+→ Read [Explanation](./explanation/) and [Core Concepts](./development/design/core-concepts/)
 
 **Understand the architecture**
 → Read [Architecture Overview](./explanation/architecture-overview.md) (user-facing)
-→ Then [Design Architecture](./design/architecture/) (technical details)
+→ Then [Design Architecture](./development/design/architecture/) (technical details)
 
 **Understand a specific decision**
 → Check [ADR](./adr/) for numbered architectural decisions
@@ -360,7 +360,7 @@ ragged uses the Diátaxis documentation system to help you learn and use the sys
 
 **See what's planned next**
 → Check [Process Roadmap](./process/roadmap/) for near-term plans
-→ Or [Design Version Plans](./design/versions/) for long-term vision
+→ Or [Design Version Plans](./development/design/versions/) for long-term vision
 
 **Contribute code or documentation**
 → See [Contributing Guide](./contributing/README.md)
@@ -372,7 +372,7 @@ ragged uses the Diátaxis documentation system to help you learn and use the sys
 
 **Research AI-assisted development**
 → Review [AI Assistance Guidelines](./process/methodology/ai-assistance.md)
-→ Compare [Design Plans](./design/versions/) vs. [Actual Implementation](./implementation/)
+→ Compare [Design Plans](./development/design/versions/) vs. [Actual Implementation](./implementation/)
 → Study [Time Logs](./process/time-logs/) for AI effectiveness data
 
 **See research materials**
@@ -435,7 +435,7 @@ Each metadata field on its own line for readability.
 
 - All documentation version-controlled in git
 - Major milestones tagged (e.g., `v0.1-complete`)
-- Compare plans ([design/](./design/)) against actuals ([implementation/](./implementation/))
+- Compare plans ([design/](./development/design/)) against actuals ([implementation/](./implementation/))
 
 ### AI Transparency
 
@@ -467,7 +467,7 @@ Incorporate latest 2025 RAG research and best practices.
 
 Pluggable components with clear interfaces. Easy to experiment and extend.
 
-**See:** [Modularity](./design/core-concepts/modularity.md)
+**See:** [Modularity](./development/design/core-concepts/modularity.md)
 
 ### 5. Progressive Enhancement
 
@@ -535,6 +535,6 @@ See [`../LICENSE`](../LICENSE) for full text.
 **Next Steps:**
 
 1. **New users:** Wait for v0.1 release, then start with [Tutorials](./tutorials/)
-2. **Contributors:** Review [Design](./design/) and [Contributing Guide](./contributing/)
-3. **Developers:** Explore [Process](./process/) and [Architecture](./design/architecture/)
+2. **Contributors:** Review [Design](./development/design/) and [Contributing Guide](./contributing/)
+3. **Developers:** Explore [Process](./process/) and [Architecture](./development/design/architecture/)
 4. **Researchers:** Check [Research](./research/) and [Time Tracking](./process/methodology/time-tracking.md)
