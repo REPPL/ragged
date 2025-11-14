@@ -126,7 +126,7 @@
 ## Related Personas
 
 ### Primary: [Persona Name]
-**Definition**: [Link to persona definition](../../design/core-concepts/personal-memory-personas.md#[persona-name]-persona)
+**Definition**: [Link to persona definition](../../development/design/core-concepts/personal-memory-personas.md#[persona-name]-persona)
 
 **Characteristics**:
 - [Characteristic 1]
@@ -153,16 +153,16 @@ focus_areas:
 ## Cross-References
 
 ### Implementation
-- [Link to related implementation doc](../../design/core-concepts/[doc-name].md)
-- [Link to related architecture doc](../../design/architecture/README.md#[section])
+- [Link to related implementation doc](../../development/design/core-concepts/[doc-name].md)
+- [Link to related architecture doc](../../development/design/architecture/README.md#[section])
 
 ### Architecture
-- [Link to architectural decision](../../design/architecture/README.md#[component])
-- [Link to system design](../../design/core-concepts/[doc-name].md#[section])
+- [Link to architectural decision](../../development/design/architecture/README.md#[component])
+- [Link to system design](../../development/design/core-concepts/[doc-name].md#[section])
 
 ### Testing
-- [Link to test strategy](../../design/core-concepts/testing-strategy.md#[section])
-- [Link to golden dataset](../../design/testing/golden-dataset/)
+- [Link to test strategy](../../development/design/core-concepts/testing-strategy.md#[section])
+- [Link to golden dataset](../../development/design/testing/golden-dataset/)
 
 ---
 
@@ -256,7 +256,7 @@ Create a new user story when:
 
 ### How to Use This Template
 
-1. **Copy template** to `docs/requirements/user-stories/`
+1. **Copy template** to `docs/development/design/requirements/user-stories/`
 2. **Rename** following convention: `US-XXX-brief-description.md`
 3. **Fill in all sections**:
    - Use British English throughout

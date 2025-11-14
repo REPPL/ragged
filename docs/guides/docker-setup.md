@@ -85,7 +85,7 @@ You should see a JSON response with available models.
 
 ### 3. Pull Required Models
 
-For ragged v0.1 (see `docs/design/architecture/README.md` for model selection):
+For ragged v0.1 (see `docs/development/design/architecture/README.md` for model selection):
 ```bash
 # Embedding model (required)
 ollama pull nomic-embed-text
@@ -289,8 +289,8 @@ The hybrid architecture makes local development fast while maintaining deploymen
 
 - Ollama documentation: https://github.com/ollama/ollama
 - Docker Desktop for Mac: https://docs.docker.com/desktop/mac/
-- ragged architecture: `docs/design/architecture/README.md`
-- Model selection guide: `docs/design/core-concepts/model-selection.md`
+- ragged architecture: `docs/development/design/architecture/README.md`
+- Model selection guide: `docs/development/design/core-concepts/model-selection.md`
 
 ---
 

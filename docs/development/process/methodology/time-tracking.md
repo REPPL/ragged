@@ -342,7 +342,7 @@ To enhance transparency and reproducibility of ragged's development process, we 
 - Created architecture diagram
 - Identified format-specific processors
 - **AI Used**: Claude Code generated initial diagram, I refined
-- **Output**: `docs/implementation/plan/core-concepts/document-normalisation.md`
+- **Output**: `docs/development/implementation/plan/core-concepts/document-normalisation.md`
 
 ### Afternoon Session (14:00-16:00) - 1.5 hours
 

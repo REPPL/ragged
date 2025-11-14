@@ -46,7 +46,7 @@ This implementation plan serves multiple purposes:
 ## Structure
 
 ```
-docs/implementation/plan/
+docs/development/implementation/plan/
 ├── README.md                      # This file - overview and navigation
 ├── architecture/                  # State-of-the-art RAG architecture
 │   └── README.md                  # Main architecture document

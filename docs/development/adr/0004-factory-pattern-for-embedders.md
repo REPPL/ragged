@@ -7,8 +7,8 @@
 **Area:** Software Architecture, Design Patterns
 
 **Related:**
-- [Embeddings Technology](../design/technology-stack/embeddings.md)
-- [Modularity Concept](../design/core-concepts/modularity.md)
+- [Embeddings Technology](../development/design/technology-stack/embeddings.md)
+- [Modularity Concept](../development/design/core-concepts/modularity.md)
 
 ---
 

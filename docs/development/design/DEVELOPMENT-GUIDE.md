@@ -1,6 +1,6 @@
 # Implementation Plan - Archived Development Documentation
 
-**Note**: This documentation was originally created in a private `.claude/` folder (gitignored) during development. It has been archived here at `docs/implementation/plan/` for **academic reproducibility and transparency**. References to `.claude/` throughout these documents are preserved for historical accuracy but now refer to this location.
+**Note**: This documentation was originally created in a private `.claude/` folder (gitignored) during development. It has been archived here at `docs/development/implementation/plan/` for **academic reproducibility and transparency**. References to `.claude/` throughout these documents are preserved for historical accuracy but now refer to this location.
 
 ## Purpose
 
@@ -12,10 +12,10 @@ This archived planning documentation served as the blueprint for building the ra
 
 ## Original Folder Structure
 
-This was the structure when located at `.claude/` during development. Now archived at `docs/implementation/plan/`:
+This was the structure when located at `.claude/` during development. Now archived at `docs/development/implementation/plan/`:
 
 ```
-docs/implementation/plan/  (originally .claude/)
+docs/development/implementation/plan/  (originally .claude/)
 ├── README.md                           # This file - overview & navigation
 ├── prompts/                            # AI assistant instructions
 │   ├── 01-github-setup.md             # GitHub repository configuration
@@ -98,7 +98,7 @@ During development, planning documentation was kept separate from public documen
 - CODE_OF_CONDUCT.md for community standards
 - Actual source code and tests
 
-**After Phase 5C**: Planning documentation was archived to `docs/implementation/plan/` for academic reproducibility while actual development continues using a private `.claude/` folder (gitignored).
+**After Phase 5C**: Planning documentation was archived to `docs/development/implementation/plan/` for academic reproducibility while actual development continues using a private `.claude/` folder (gitignored).
 
 ## Maintenance
 

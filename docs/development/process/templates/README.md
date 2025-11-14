@@ -23,7 +23,7 @@ Templates ensure consistent documentation practices and make it easy to capture 
 - Significant design changes
 - Trade-off evaluations
 
-**Output location:** `/docs/adr/XXXX-title.md`
+**Output location:** `/docs/development/adr/XXXX-title.md`
 
 **Example decisions:**
 - Choosing ChromaDB vs. other vector databases
@@ -41,7 +41,7 @@ Templates ensure consistent documentation practices and make it easy to capture 
 - Documenting challenges and solutions
 - Planning next steps
 
-**Output location:** `/docs/process/devlog/daily/YYYY-MM-DD.md`
+**Output location:** `/docs/development/process/devlog/daily/YYYY-MM-DD.md`
 
 **Benefits:**
 - Historical record of development progress
@@ -59,7 +59,7 @@ Templates ensure consistent documentation practices and make it easy to capture 
 - Analysing development velocity
 - Retrospective analysis
 
-**Output location:** `/docs/process/time-logs/feature-name-YYYY-MM-DD.md`
+**Output location:** `/docs/development/process/time-logs/feature-name-YYYY-MM-DD.md`
 
 **Metrics tracked:**
 - Time per development phase
@@ -78,7 +78,7 @@ Templates ensure consistent documentation practices and make it easy to capture 
 - Planning persona-specific capabilities
 - Establishing testable acceptance criteria
 
-**Output location:** `/docs/requirements/user-stories/US-XXX-title.md`
+**Output location:** `/docs/development/design/requirements/user-stories/US-XXX-title.md`
 
 **Key sections:**
 - Overview with persona mapping
@@ -97,7 +97,7 @@ Templates ensure consistent documentation practices and make it easy to capture 
 - Summarizing changes and improvements
 - Planning next version
 
-**Output location:** `/docs/design/versions/vX.Y/README.md`
+**Output location:** `/docs/development/design/versions/vX.Y/README.md`
 
 **Key sections:**
 - Version goals and completion status
@@ -173,8 +173,8 @@ Templates can be adapted for project-specific needs:
 
 ## Cross-References
 
-- **Development Guide**: [../../design/DEVELOPMENT-GUIDE.md](../../design/DEVELOPMENT-GUIDE.md)
-- **Version Roadmap**: [../../design/versions/](../../design/versions/)
+- **Development Guide**: [../../development/design/DEVELOPMENT-GUIDE.md](../../development/design/DEVELOPMENT-GUIDE.md)
+- **Version Roadmap**: [../../development/design/versions/](../../development/design/versions/)
 - **User Stories**: [../../requirements/user-stories/](../../requirements/user-stories/)
 
 ---
@@ -189,8 +189,8 @@ Templates can be adapted for project-specific needs:
 
 ## Quick Start
 
-1. **Creating an ADR**: Copy `adr-template.md` → `/docs/adr/XXXX-title.md`
-2. **Daily Devlog**: Copy `devlog-template.md` → `/docs/process/devlog/daily/YYYY-MM-DD.md`
-3. **New User Story**: Copy `user-story-template.md` → `/docs/requirements/user-stories/US-XXX-title.md`
-4. **Version Summary**: Copy `version-summary-template.md` → `/docs/design/versions/vX.Y/README.md`
-5. **Time Tracking**: Copy `feature-time-log-template.md` → `/docs/process/time-logs/feature-name.md`
+1. **Creating an ADR**: Copy `adr-template.md` → `/docs/development/adr/XXXX-title.md`
+2. **Daily Devlog**: Copy `devlog-template.md` → `/docs/development/process/devlog/daily/YYYY-MM-DD.md`
+3. **New User Story**: Copy `user-story-template.md` → `/docs/development/design/requirements/user-stories/US-XXX-title.md`
+4. **Version Summary**: Copy `version-summary-template.md` → `/docs/development/design/versions/vX.Y/README.md`
+5. **Time Tracking**: Copy `feature-time-log-template.md` → `/docs/development/process/time-logs/feature-name.md`
