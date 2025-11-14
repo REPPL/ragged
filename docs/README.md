@@ -62,31 +62,35 @@ ragged's documentation follows industry-standard patterns with some unique addit
 ```
 docs/
 ├── 📘 User Documentation (Diátaxis)
-│   ├── tutorials/     → Learning-oriented lessons
-│   ├── guides/        → Task-oriented how-tos
-│   ├── reference/     → Information-oriented specs
-│   └── explanation/   → Understanding-oriented concepts
+│   ├── tutorials/       → Learning-oriented lessons
+│   ├── guides/          → Task-oriented how-tos
+│   ├── reference/       → Information-oriented specs
+│   └── explanation/     → Understanding-oriented concepts
 │
-├── 🎯 Product & Planning
-│   ├── vision/        → Long-term product strategy
-│   └── requirements/  → User stories and needs
-│
-├── 🏗️ Technical Design
-│   ├── design/        → Architecture and technical design
-│   ├── adr/           → Architecture Decision Records
-│   └── rfcs/          → Request for Comments proposals
-│
-├── ⚙️ Implementation Records
-│   └── implementation/ → What was actually built
-│
-├── 📊 Development Process (Unique to ragged)
-│   └── process/       → How ragged is being built
+├── 👨‍💻 Development Documentation
+│   └── development/     → All developer-facing documentation
+│       ├── design/      → Architecture and technical design
+│       │   ├── vision/         → Long-term product strategy
+│       │   ├── requirements/   → User stories and needs
+│       │   ├── architecture/   → System architecture
+│       │   ├── core-concepts/  → Foundational concepts
+│       │   ├── technology-stack/ → Technology choices
+│       │   └── versions/       → Version-specific designs
+│       ├── rfcs/        → Request for Comments proposals
+│       ├── adr/         → Architecture Decision Records
+│       ├── implementation/ → What was actually built
+│       └── process/     → How ragged is being built
+│           ├── methodology/    → Development methods
+│           ├── roadmap/        → Near-term plans
+│           ├── devlog/         → Development narratives
+│           ├── time-logs/      → Time tracking
+│           └── templates/      → Document templates
 │
 ├── 🔬 Research & Community
-│   ├── research/      → Academic materials
-│   └── contributing/  → Contribution guidelines
+│   ├── research/        → Academic materials
+│   └── contributing/    → Contribution guidelines
 │
-└── 📋 This file         → Navigation and overview
+└── 📋 This file          → Navigation and overview
 ```
 
 ---
@@ -166,138 +170,31 @@ ragged uses the Diátaxis documentation system to help you learn and use the sys
 
 ---
 
-## For Product & Planning
+## For Developers
 
-### [Vision](./vision/) - Long-Term Strategy
+All developer-facing documentation is now organised under [development/](./development/).
 
-**Purpose:** Define what ragged will become
+**Navigation:** See [Development Documentation README](./development/README.md) for complete navigation guide
 
-**Content:**
-- [Product Vision](./vision/product-vision.md) - Goals, principles, success criteria
+### [Development Overview](./development/) - Complete Developer Documentation
 
-**Audience:** Product stakeholders, contributors, researchers
+**Purpose:** Central hub for all development-related documentation
 
----
+**Structure:**
+- **design/** - Architecture and planning (vision, requirements, technical design)
+- **rfcs/** - Proposals for significant changes
+- **adr/** - Architecture Decision Records
+- **implementation/** - What was actually built
+- **process/** - How it was built (methodology, roadmap, devlogs, time tracking)
 
-### [Requirements](./requirements/) - User Needs
+**Quick Links:**
+- [Product Vision](./development/design/vision/product-vision.md) - Goals and principles
+- [Architecture Overview](./development/design/architecture/README.md) - System architecture
+- [Roadmap](./development/process/roadmap/README.md) - Near-term plans and CLI enhancements
+- [CLI Enhancements Catalogue](./development/design/core-concepts/cli-enhancements.md) - Complete CLI feature catalogue
+- [ADRs](./development/adr/) - Key architectural decisions
 
-**Purpose:** Define what users need from ragged
-
-**Content:**
-- [User Stories](./requirements/user-stories/) - Feature requirements by persona
-
-**Audience:** Product and engineering teams
-
----
-
-## For Technical Design
-
-### [Design](./development/design/) - Technical Architecture
-
-**Purpose:** Design decisions **before** implementation
-
-**Content:**
-- [Design Overview](./development/design/README.md) - Complete design documentation
-- [Architecture](./development/design/architecture/) - System architecture design
-- [Core Concepts](./development/design/core-concepts/) - Foundational technical concepts
-- [Technology Stack](./development/design/technology-stack/) - Technology evaluations
-- [Version Plans](./development/design/versions/) - Version-specific designs (v0.1-v1.0)
-- [Development Guide](./development/design/DEVELOPMENT-GUIDE.md) - How to use the design docs
-
-**Key Documents:**
-- [Architecture README](./development/design/architecture/README.md) - State-of-the-art RAG architecture
-- [RAG Fundamentals](./development/design/core-concepts/rag-fundamentals.md) - RAG theory
-- [Privacy Architecture](./development/design/core-concepts/privacy-architecture.md) - Privacy-first design
-- [Modularity](./development/design/core-concepts/modularity.md) - Plugin architecture
-
-**Audience:** Engineering team, technical contributors
-
----
-
-### [ADR](./adr/) - Architecture Decision Records
-
-**Purpose:** Document **why** specific architectural choices were made
-
-**Format:** Numbered ADRs (0001-decision-name.md)
-
-**Available ADRs:**
-- [ADR-0001: Local-Only Processing](./adr/0001-local-only-processing.md) - Privacy-first principle
-- [ADR-0002: Pydantic for Configuration](./adr/0002-pydantic-for-configuration.md) - Data validation
-- [ADR-0003: ChromaDB for Vector Storage](./adr/0003-chromadb-for-vector-storage.md) - Vector database choice
-- [ADR-0004: Factory Pattern for Embedders](./adr/0004-factory-pattern-for-embedders.md) - Design pattern
-
-**Audience:** Engineering team, technical contributors
-
-**Standard:** Follows [Michael Nygard's ADR format](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions)
-
----
-
-### [RFCs](./rfcs/) - Request for Comments
-
-**Purpose:** Propose and discuss significant changes
-
-**Content:**
-- [RFC README](./rfcs/README.md) - RFC process and template
-
-**Status:** Empty (placeholder for future proposals)
-
-**Audience:** Engineering team, contributors
-
----
-
-## For Implementation Records
-
-### [Implementation](./implementation/) - What Was Actually Built
-
-**Purpose:** Document **actual** implementation vs. design
-
-**Content:**
-- [v0.1 Implementation](./implementation/v0.1/) - What was actually built in v0.1
-- [v0.2 Implementation](./implementation/v0.2/) - What was actually built in v0.2
-
-**Key Documents:**
-- [v0.1 Summary](./implementation/v0.1/summary.md) - Results and outcomes
-- [v0.1 Implementation Notes](./implementation/v0.1/implementation-notes.md) - Technical details
-- [v0.1 Testing Results](./implementation/v0.1/testing.md) - Test coverage and quality
-
-**Distinction:**
-- **design/** = What we **planned** to build
-- **implementation/** = What we **actually built**
-- **process/** = **How** we built it (narrative)
-
-**Audience:** Engineering team, researchers, future maintainers
-
----
-
-## For Development Process
-
-### [Process](./process/) - Development Transparency
-
-**Purpose:** Document **how ragged is being built** with full transparency
-
-**Unique to ragged:** This structure is a novel contribution to open-source practices, supporting AI-assisted development transparency and research reproducibility.
-
-**Content:**
-- [Process Overview](./process/README.md) - Why this structure exists
-- [Methodology](./process/methodology/) - How we develop (AI assistance, time tracking)
-- [Roadmap](./process/roadmap/) - Near-term detailed plans (next 2-3 versions)
-- [Development Logs](./process/devlog/) - Daily and version-based narratives
-- [Time Logs](./process/time-logs/) - Actual hours spent (empirical data)
-- [Templates](./process/templates/) - Templates for various documents
-
-**Key Documents:**
-- [AI Assistance Guidelines](./process/methodology/ai-assistance.md) - How we use AI transparently
-- [Time Tracking Methodology](./process/methodology/time-tracking.md) - How we track time
-- [Daily Devlogs](./process/devlog/daily/) - Day-by-day development chronicle
-- [Version Devlogs](./process/devlog/version/) - Version-specific narratives
-
-**Why this exists:**
-- **Transparency:** Full disclosure of AI-assisted development
-- **Research:** Support academic reproducibility
-- **Learning:** Help others understand the development journey
-- **Accountability:** Track estimates vs. actuals
-
-**Audience:** Researchers, contributors, future developers
+**Audience:** Contributors, developers, technical stakeholders
 
 ---
 

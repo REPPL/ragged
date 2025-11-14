@@ -2,13 +2,13 @@
 
 **Status:** Planned
 
-**Total Hours:** 160-200 hours (AI implementation)
+**Total Hours:** 180-225 hours (AI implementation)
 
-**Focus:** Personal memory system, knowledge graphs, personalisation
+**Focus:** Personal memory system, knowledge graphs, personalisation, plugin architecture
 
 **Breaking Changes:** None - All features are additive and optional
 
-**Implementation Note:** Due to size (160-200 hours), implement in 5-7 focused sessions of 25-35 hours each
+**Implementation Note:** Due to size (180-225 hours), implement in 6-8 focused sessions of 25-35 hours each
 
 ## Overview
 
@@ -1261,6 +1261,281 @@ v0.4.0 is successful if:
 
 ---
 
+## Part 7: Plugin Architecture (20-25 hours)
+
+This part introduces a comprehensive plugin system that enables users and developers to extend ragged with custom functionality while maintaining security and privacy guarantees.
+
+**Related Documentation:** [CLI Enhancements Catalogue](../../../design/core-concepts/cli-enhancements.md#23-plugin-system)
+
+---
+
+### CLI-023: Plugin System
+
+**Priority**: High
+
+**Estimated Time**: 20-25 hours
+
+**Impact**: Very High - Enables extensibility for all future features
+
+**Description:**
+Extensible plugin architecture allowing custom embedders, retrievers, processors, and CLI commands. Supports dynamic loading, configuration, and management of plugins while maintaining security boundaries.
+
+**Command Syntax:**
+```bash
+# List available plugins
+ragged plugin list
+
+# List installed plugins
+ragged plugin list --installed
+
+# Install plugin from PyPI
+ragged plugin install ragged-custom-embedder
+
+# Install plugin from local path
+ragged plugin install ./my-plugin
+
+# Enable/disable plugins
+ragged plugin enable custom-embedder
+ragged plugin disable custom-embedder
+
+# Configure plugin
+ragged plugin config custom-embedder --key value
+ragged plugin config custom-embedder --file config.yaml
+
+# Show plugin info
+ragged plugin info custom-embedder
+
+# Uninstall plugin
+ragged plugin uninstall custom-embedder
+```
+
+**Plugin Interfaces:**
+
+1. **Embedder Interface** - Custom embedding models
+```python
+from ragged.plugins import EmbedderPlugin
+
+class CustomEmbedder(EmbedderPlugin):
+    """Custom embedding model plugin."""
+
+    name = "custom-embedder"
+    version = "1.0.0"
+
+    def embed(self, texts: List[str]) -> np.ndarray:
+        """Generate embeddings for texts."""
+        pass
+
+    def embed_query(self, query: str) -> np.ndarray:
+        """Generate embedding for query."""
+        pass
+```
+
+2. **Retriever Interface** - Custom retrieval strategies
+```python
+from ragged.plugins import RetrieverPlugin
+
+class CustomRetriever(RetrieverPlugin):
+    """Custom retrieval strategy plugin."""
+
+    name = "custom-retriever"
+    version = "1.0.0"
+
+    def retrieve(
+        self,
+        query: str,
+        top_k: int = 5
+    ) -> List[Document]:
+        """Retrieve documents using custom strategy."""
+        pass
+```
+
+3. **Processor Interface** - Custom document processors
+```python
+from ragged.plugins import ProcessorPlugin
+
+class CustomProcessor(ProcessorPlugin):
+    """Custom document processor plugin."""
+
+    name = "custom-processor"
+    version = "1.0.0"
+
+    def process(self, document: Document) -> List[Chunk]:
+        """Process document into chunks."""
+        pass
+```
+
+4. **Command Interface** - Custom CLI commands
+```python
+from ragged.plugins import CommandPlugin
+import click
+
+class CustomCommand(CommandPlugin):
+    """Custom CLI command plugin."""
+
+    name = "custom-command"
+    version = "1.0.0"
+
+    @click.command()
+    @click.argument("input")
+    def command(self, input: str):
+        """Custom command implementation."""
+        click.echo(f"Processing: {input}")
+```
+
+**Implementation:**
+
+- **Files to Create**:
+  - `ragged/plugins/` - New plugin module
+  - `ragged/plugins/manager.py` - Plugin management (~300 lines)
+  - `ragged/plugins/loader.py` - Plugin loading and discovery (~250 lines)
+  - `ragged/plugins/registry.py` - Plugin registry (~200 lines)
+  - `ragged/plugins/interfaces.py` - Plugin base classes (~400 lines)
+  - `ragged/plugins/validator.py` - Plugin validation and security (~150 lines)
+  - `ragged/cli/commands/plugin.py` - Plugin management commands (~350 lines)
+  - `ragged/config/plugin_schema.py` - Plugin configuration schema (~100 lines)
+  - `tests/plugins/test_manager.py` - Manager tests (~200 lines)
+  - `tests/plugins/test_loader.py` - Loader tests (~150 lines)
+  - `tests/plugins/test_interfaces.py` - Interface tests (~250 lines)
+  - `tests/plugins/fixtures/` - Sample test plugins
+
+- **Files to Modify**:
+  - `ragged/core/interfaces.py` - Add plugin hooks
+  - `ragged/cli/main.py` - Register plugin commands
+  - `ragged/config/settings.py` - Plugin configuration
+  - `pyproject.toml` - Plugin entry points
+
+- **Dependencies**:
+  - Entry points (setuptools) - Already included
+  - importlib.metadata - Python standard library
+  - Plugin discovery and loading
+  - Configuration validation (Pydantic v2)
+  - Security sandboxing
+
+**Plugin Discovery:**
+Plugins are discovered through Python entry points in `setup.py` or `pyproject.toml`:
+
+```toml
+[project.entry-points."ragged.embedders"]
+custom = "my_plugin.embedders:CustomEmbedder"
+
+[project.entry-points."ragged.retrievers"]
+custom = "my_plugin.retrievers:CustomRetriever"
+
+[project.entry-points."ragged.processors"]
+custom = "my_plugin.processors:CustomProcessor"
+
+[project.entry-points."ragged.commands"]
+mycmd = "my_plugin.commands:CustomCommand"
+```
+
+**Security Features:**
+1. **Sandboxing**: Plugins run in isolated environments
+2. **Permissions**: Plugins declare required permissions
+3. **Validation**: Plugin code validated before loading
+4. **Auditing**: All plugin actions logged
+5. **Privacy**: Plugins cannot access data without explicit permission
+
+**Configuration:**
+Plugins are configured via YAML or CLI:
+
+```yaml
+# .ragged/plugins/custom-embedder/config.yaml
+enabled: true
+model_path: ./models/custom-model.bin
+cache_size: 1000
+batch_size: 32
+```
+
+**Testing Requirements:**
+- Unit tests for plugin system components
+- Integration tests with sample plugins
+- Security tests (plugin isolation, permission enforcement)
+- Performance tests (plugin loading overhead, runtime impact)
+- Compatibility tests (plugin versioning, dependencies)
+- Edge cases: missing dependencies, malformed plugins, conflicts
+
+**Documentation Requirements:**
+
+1. **Tutorial**: "Creating Your First Plugin"
+   - Step-by-step guide to building a simple embedder plugin
+   - Publishing to PyPI
+   - Best practices
+
+2. **Guide**: "Plugin Development Guide"
+   - Complete interface documentation
+   - Security guidelines
+   - Testing strategies
+   - Distribution methods
+
+3. **Reference**: "Plugin API Documentation"
+   - Complete API reference for all interfaces
+   - Configuration schema
+   - Lifecycle hooks
+   - Event system
+
+4. **Examples**: Sample plugins
+   - Custom embedder (using Hugging Face model)
+   - Custom retriever (hybrid search)
+   - Custom processor (LaTeX document support)
+   - Custom command (batch analysis)
+
+**Acceptance Criteria:**
+- ✅ Can discover and load plugins via entry points
+- ✅ All four plugin interfaces work correctly
+- ✅ Plugin configuration persists and loads
+- ✅ Security sandboxing prevents unauthorized access
+- ✅ Plugin dependencies managed correctly
+- ✅ Comprehensive error handling and validation
+- ✅ CLI commands for plugin management functional
+- ✅ Documentation complete and tested
+- ✅ Sample plugins demonstrate all interfaces
+- ✅ Performance overhead < 50ms for plugin loading
+- ✅ Backward compatibility maintained
+- ✅ Can install/uninstall plugins without restart
+
+**Example Use Cases:**
+
+1. **Custom Embedding Model**
+   - User wants to use a specialized medical domain model
+   - Creates embedder plugin with custom model
+   - Installs and configures via CLI
+   - ragged uses custom embeddings transparently
+
+2. **Custom Document Processor**
+   - User needs to process LaTeX documents
+   - Creates processor plugin for .tex files
+   - Plugin handles LaTeX-specific parsing
+   - Integrates with existing ingestion pipeline
+
+3. **Custom Retrieval Strategy**
+   - User wants graph-based retrieval for citations
+   - Creates retriever plugin using knowledge graph
+   - Plugin queries graph during retrieval
+   - Combines with existing vector/BM25 results
+
+4. **Custom CLI Command**
+   - User needs batch document analysis
+   - Creates command plugin for analysis
+   - Adds `ragged analyze` command
+   - Available alongside built-in commands
+
+**Integration with v0.4.0 Features:**
+- Memory system can be extended with custom memory stores
+- Knowledge graph can use custom graph algorithms
+- Persona system can load custom persona types
+- All existing features remain plugin-extensible
+
+**Future Extensions (v0.5+):**
+- GUI plugin support
+- Web UI plugin system
+- Plugin marketplace (ragged plugin search)
+- Remote plugin repositories
+- Plugin sandboxing with containers
+
+**See:** [CLI Enhancements Catalogue](../../../design/core-concepts/cli-enhancements.md#23-plugin-system) for full specification
+
+---
+
 ## Summary
 
 v0.4.0 represents a major evolution for ragged:
@@ -1272,8 +1547,9 @@ All while maintaining ragged's core values:
 - **Privacy-first**: 100% local, zero cloud dependencies
 - **Transparent**: Users see and control their memory
 - **Open**: Extensible architecture, open source
+- **Extensible**: Plugin system enables unlimited customization
 
-**Total Implementation:** 160-200 hours
+**Total Implementation:** 180-225 hours (Memory: 160-200h + Plugin System: 20-25h)
 
 **Next Version** (v0.5):
 - Enhanced NLP for topic extraction
