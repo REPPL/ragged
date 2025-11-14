@@ -69,17 +69,18 @@ docs/
 │
 ├── 👨‍💻 Development Documentation
 │   └── development/     → All developer-facing documentation
-│       ├── design/      → Architecture and technical design
-│       │   ├── vision/         → Long-term product strategy
-│       │   ├── requirements/   → User stories and needs
-│       │   ├── architecture/   → System architecture
-│       │   ├── core-concepts/  → Foundational concepts
-│       │   ├── technology-stack/ → Technology choices
-│       │   └── versions/       → Version-specific designs
-│       ├── rfcs/        → Request for Comments proposals
-│       ├── adr/         → Architecture Decision Records
+│       ├── vision/         → Long-term product strategy
+│       ├── requirements/   → User stories and needs
+│       ├── architecture/   → System architecture
+│       ├── core-concepts/  → Foundational concepts
+│       ├── technology-stack/ → Technology choices
+│       ├── UI/             → User interface design (CLI & web)
+│       ├── versions/       → Version-specific designs
+│       ├── references/     → Research papers and resources
+│       ├── rfcs/           → Request for Comments proposals
+│       ├── adr/            → Architecture Decision Records
 │       ├── implementation/ → What was actually built
-│       └── process/     → How ragged is being built
+│       └── process/        → How ragged is being built
 │           ├── methodology/    → Development methods
 │           ├── roadmap/        → Near-term plans
 │           ├── devlog/         → Development narratives
@@ -181,17 +182,25 @@ All developer-facing documentation is now organised under [development/](./devel
 **Purpose:** Central hub for all development-related documentation
 
 **Structure:**
-- **design/** - Architecture and planning (vision, requirements, technical design)
+- **vision/** - Product strategy and principles
+- **requirements/** - User stories and needs
+- **architecture/** - System architecture and design
+- **core-concepts/** - Foundational concepts
+- **technology-stack/** - Technology choices and evaluations
+- **UI/** - User interface design (CLI & web)
+- **versions/** - Version-specific design plans
+- **references/** - Research papers and resources
 - **rfcs/** - Proposals for significant changes
 - **adr/** - Architecture Decision Records
 - **implementation/** - What was actually built
 - **process/** - How it was built (methodology, roadmap, devlogs, time tracking)
 
 **Quick Links:**
-- [Product Vision](./development/design/vision/product-vision.md) - Goals and principles
-- [Architecture Overview](./development/design/architecture/README.md) - System architecture
+- [Product Vision](./development/vision/product-vision.md) - Goals and principles
+- [Architecture Overview](./development/architecture/README.md) - System architecture
 - [Roadmap](./development/process/roadmap/README.md) - Near-term plans and CLI enhancements
-- [CLI Enhancements Catalogue](./development/design/core-concepts/cli-enhancements.md) - Complete CLI feature catalogue
+- [CLI Enhancements Catalogue](./development/UI/cli/enhancements.md) - Complete CLI feature catalogue
+- [Web UI Design](./development/UI/web/) - Web interface evolution
 - [ADRs](./development/adr/) - Key architectural decisions
 
 **Audience:** Contributors, developers, technical stakeholders
@@ -245,32 +254,32 @@ All developer-facing documentation is now organised under [development/](./devel
 → See [Reference](./reference/) (auto-generated from code with v0.1)
 
 **Understand RAG concepts**
-→ Read [Explanation](./explanation/) and [Core Concepts](./development/design/core-concepts/)
+→ Read [Explanation](./explanation/) and [Core Concepts](./development/core-concepts/)
 
 **Understand the architecture**
 → Read [Architecture Overview](./explanation/architecture-overview.md) (user-facing)
-→ Then [Design Architecture](./development/design/architecture/) (technical details)
+→ Then [Architecture Documentation](./development/architecture/) (technical details)
 
 **Understand a specific decision**
-→ Check [ADR](./adr/) for numbered architectural decisions
-→ Or [Version Decisions](./process/devlog/version/) for narrative context
+→ Check [ADR](./development/adr/) for numbered architectural decisions
+→ Or [Version Decisions](./development/process/devlog/version/) for narrative context
 
 **See what's planned next**
-→ Check [Process Roadmap](./process/roadmap/) for near-term plans
-→ Or [Design Version Plans](./development/design/versions/) for long-term vision
+→ Check [Process Roadmap](./development/process/roadmap/) for near-term plans
+→ Or [Version Design Plans](./development/versions/) for long-term vision
 
 **Contribute code or documentation**
 → See [Contributing Guide](./contributing/README.md)
 
 **Study the development process**
-→ Explore [Process Documentation](./process/)
-→ Read [Time Logs](./process/time-logs/) for empirical data
-→ Check [Development Logs](./process/devlog/) for narratives
+→ Explore [Process Documentation](./development/process/)
+→ Read [Time Logs](./development/process/time-logs/) for empirical data
+→ Check [Development Logs](./development/process/devlog/) for narratives
 
 **Research AI-assisted development**
-→ Review [AI Assistance Guidelines](./process/methodology/ai-assistance.md)
-→ Compare [Design Plans](./development/design/versions/) vs. [Actual Implementation](./implementation/)
-→ Study [Time Logs](./process/time-logs/) for AI effectiveness data
+→ Review [AI Assistance Guidelines](./development/process/methodology/ai-assistance.md)
+→ Compare [Design Plans](./development/versions/) vs. [Actual Implementation](./development/implementation/)
+→ Study [Time Logs](./development/process/time-logs/) for AI effectiveness data
 
 **See research materials**
 → Browse [Research Documentation](./research/)
@@ -332,7 +341,7 @@ Each metadata field on its own line for readability.
 
 - All documentation version-controlled in git
 - Major milestones tagged (e.g., `v0.1-complete`)
-- Compare plans ([design/](./development/design/)) against actuals ([implementation/](./implementation/))
+- Compare plans ([versions/](./development/versions/)) against actuals ([implementation/](./development/implementation/))
 
 ### AI Transparency
 
@@ -364,7 +373,7 @@ Incorporate latest 2025 RAG research and best practices.
 
 Pluggable components with clear interfaces. Easy to experiment and extend.
 
-**See:** [Modularity](./development/design/core-concepts/modularity.md)
+**See:** [Modularity](./development/core-concepts/modularity.md)
 
 ### 5. Progressive Enhancement
 
@@ -432,6 +441,6 @@ See [`../LICENSE`](../LICENSE) for full text.
 **Next Steps:**
 
 1. **New users:** Wait for v0.1 release, then start with [Tutorials](./tutorials/)
-2. **Contributors:** Review [Design](./development/design/) and [Contributing Guide](./contributing/)
-3. **Developers:** Explore [Process](./process/) and [Architecture](./development/design/architecture/)
-4. **Researchers:** Check [Research](./research/) and [Time Tracking](./process/methodology/time-tracking.md)
+2. **Contributors:** Review [Architecture](./development/architecture/) and [Contributing Guide](./contributing/)
+3. **Developers:** Explore [Process](./development/process/) and [Version Plans](./development/versions/)
+4. **Researchers:** Check [Research](./research/) and [Time Tracking](./development/process/methodology/time-tracking.md)

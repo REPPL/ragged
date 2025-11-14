@@ -2486,7 +2486,7 @@ Improvements to citation system:
 
 This part adds 11 advanced CLI capabilities that transform ragged into an interactive, automation-ready, and developer-friendly tool. These enhancements focus on interactive workflows, automation, performance analysis, and developer productivity.
 
-**Related Documentation:** [CLI Enhancements Catalogue](../../../design/core-concepts/cli-enhancements.md)
+**Related Documentation:** [CLI Enhancements Catalogue](../../../UI/cli/enhancements.md)
 
 ---
 
@@ -2529,7 +2529,7 @@ ragged interactive
 - ✅ Command history persists
 - ✅ All ragged commands available interactively
 
-**See:** [CLI Enhancements Catalogue](../../../design/core-concepts/cli-enhancements.md#12-interactive-mode) for full specification
+**See:** [CLI Enhancements Catalogue](../../../UI/cli/enhancements.md#12-interactive-mode) for full specification
 
 ---
 
@@ -2576,7 +2576,7 @@ ragged template delete research-query
 - ✅ Templates persist across sessions
 - ✅ Validation prevents invalid parameters
 
-**See:** [CLI Enhancements Catalogue](../../../design/core-concepts/cli-enhancements.md#13-query-templates--saved-queries) for full specification
+**See:** [CLI Enhancements Catalogue](../../../UI/cli/enhancements.md#13-query-templates--saved-queries) for full specification
 
 ---
 
@@ -2617,7 +2617,7 @@ ragged profile report --format html
 - ✅ Minimal performance overhead
 - ✅ HTML and JSON output supported
 
-**See:** [CLI Enhancements Catalogue](../../../design/core-concepts/cli-enhancements.md#14-performance-profiling) for full specification
+**See:** [CLI Enhancements Catalogue](../../../UI/cli/enhancements.md#14-performance-profiling) for full specification
 
 ---
 
@@ -2659,7 +2659,7 @@ ragged metrics report --format html
 - ✅ Reports generated in multiple formats
 - ✅ Integration with RAGAS works
 
-**See:** [CLI Enhancements Catalogue](../../../design/core-concepts/cli-enhancements.md#15-quality-metrics) for full specification
+**See:** [CLI Enhancements Catalogue](../../../UI/cli/enhancements.md#15-quality-metrics) for full specification
 
 ---
 
@@ -2700,7 +2700,7 @@ ragged watch stop
 - ✅ Can start/stop watching
 - ✅ Handles file operations (move, delete) gracefully
 
-**See:** [CLI Enhancements Catalogue](../../../design/core-concepts/cli-enhancements.md#16-watch-mode) for full specification
+**See:** [CLI Enhancements Catalogue](../../../UI/cli/enhancements.md#16-watch-mode) for full specification
 
 ---
 
@@ -2745,7 +2745,7 @@ ragged schedule remove schedule_id
 - ✅ Can list and remove schedules
 - ✅ Daemon runs reliably in background
 
-**See:** [CLI Enhancements Catalogue](../../../design/core-concepts/cli-enhancements.md#17-scheduled-operations) for full specification
+**See:** [CLI Enhancements Catalogue](../../../UI/cli/enhancements.md#17-scheduled-operations) for full specification
 
 ---
 
@@ -2789,7 +2789,7 @@ ragged debug logs --tail 100
 - ✅ Logs captured and viewable
 - ✅ Minimal performance impact when not debugging
 
-**See:** [CLI Enhancements Catalogue](../../../design/core-concepts/cli-enhancements.md#18-debug-mode) for full specification
+**See:** [CLI Enhancements Catalogue](../../../UI/cli/enhancements.md#18-debug-mode) for full specification
 
 ---
 
@@ -2831,7 +2831,7 @@ ragged test config config.yaml
 - ✅ Configuration validation works
 - ✅ Clear feedback on test results
 
-**See:** [CLI Enhancements Catalogue](../../../design/core-concepts/cli-enhancements.md#19-testing-utilities) for full specification
+**See:** [CLI Enhancements Catalogue](../../../UI/cli/enhancements.md#19-testing-utilities) for full specification
 
 ---
 
@@ -2874,7 +2874,7 @@ ragged serve --docs
 - ✅ API documentation accessible
 - ✅ Only binds to localhost (security)
 
-**See:** [CLI Enhancements Catalogue](../../../design/core-concepts/cli-enhancements.md#20-api-server-mode) for full specification
+**See:** [CLI Enhancements Catalogue](../../../UI/cli/enhancements.md#20-api-server-mode) for full specification
 
 ---
 
@@ -2915,7 +2915,7 @@ ragged query "machne lerning" --auto-correct
 - ✅ Suggestions improve query quality
 - ✅ All processing stays local
 
-**See:** [CLI Enhancements Catalogue](../../../design/core-concepts/cli-enhancements.md#21-smart-suggestions) for full specification
+**See:** [CLI Enhancements Catalogue](../../../UI/cli/enhancements.md#21-smart-suggestions) for full specification
 
 ---
 
@@ -2957,7 +2957,7 @@ ragged config theme create my-theme --config theme.yaml
 - ✅ Themes persist across sessions
 - ✅ Accessibility themes included
 
-**See:** [CLI Enhancements Catalogue](../../../design/core-concepts/cli-enhancements.md#22-color-themes--customisation) for full specification
+**See:** [CLI Enhancements Catalogue](../../../UI/cli/enhancements.md#22-color-themes--customisation) for full specification
 
 ---
 

@@ -2,7 +2,7 @@
 
 **Purpose:** All documentation for developers working on ragged
 
-**Last Updated:** 2025-11-13
+**Last Updated:** 2025-11-14
 
 ---
 
@@ -17,44 +17,100 @@
 
 ## Structure Overview
 
-This directory contains all development-related documentation, organized by phase and purpose:
+This directory contains all development-related documentation, organized by purpose:
 
 ```
 development/
-├── design/          → What to build (planning phase)
-├── rfcs/            → Proposals for significant changes
-├── adr/             → Architecture Decision Records
-├── implementation/  → What was actually built
-└── process/         → How it was built (transparency)
+├── vision/           → Long-term product strategy
+├── requirements/     → User needs and user stories
+├── architecture/     → System architecture design
+├── core-concepts/    → Foundational technical concepts
+├── technology-stack/ → Technology evaluations
+├── UI/               → User interface design (CLI & web)
+├── versions/         → Version-specific design plans
+├── references/       → Research papers and resources
+├── rfcs/             → Proposals for significant changes
+├── adr/              → Architecture Decision Records
+├── implementation/   → What was actually built
+└── process/          → How it was built (transparency)
 ```
 
 ---
 
-## [design/](./design/) - What to Build
+## Planning & Design Documentation
 
-**Purpose:** Planning-phase documentation created **before** implementation
+### [vision/](./vision/) - Product Strategy
 
-**Status:** Planning complete for v0.1-v1.0
-
-**Contains:**
-- **[vision/](./design/vision/)** - Long-term product strategy and goals
-- **[requirements/](./design/requirements/)** - User needs and user stories
-- **[architecture/](./design/architecture/)** - System architecture design
-- **[core-concepts/](./design/core-concepts/)** - Foundational technical concepts
-- **[technology-stack/](./design/technology-stack/)** - Technology evaluations
-- **[versions/](./design/versions/)** - Version-specific design plans (v0.1-v1.0)
-
-**When to use:**
-- Planning a new feature or version
-- Understanding the intended architecture
-- Evaluating technology choices
-- Studying design rationale
+**Purpose:** Long-term product goals and principles
 
 **Key documents:**
-- [Product Vision](./design/vision/product-vision.md) - Goals and principles
-- [Architecture README](./design/architecture/README.md) - State-of-the-art RAG architecture
-- [RAG Fundamentals](./design/core-concepts/rag-fundamentals.md) - Core concepts
-- [Privacy Architecture](./design/core-concepts/privacy-architecture.md) - Privacy-first design
+- [Product Vision](./vision/product-vision.md) - Goals, principles, success criteria
+
+### [requirements/](./requirements/) - User Needs
+
+**Purpose:** User stories and functional requirements
+
+**Contains:**
+- User stories organized by feature area
+- Persona definitions
+
+### [architecture/](./architecture/) - System Design
+
+**Purpose:** State-of-the-art RAG architecture and system design
+
+**Key documents:**
+- [Architecture README](./architecture/README.md) - Complete architecture overview
+- [Storage Model](./architecture/storage-model.md)
+- [Configuration System](./architecture/configuration-system.md)
+
+### [core-concepts/](./core-concepts/) - Foundational Concepts
+
+**Purpose:** Core technical concepts and patterns
+
+**Key documents:**
+- [RAG Fundamentals](./core-concepts/rag-fundamentals.md) - Core RAG concepts
+- [Privacy Architecture](./core-concepts/privacy-architecture.md) - Privacy-first design
+- [Modularity](./core-concepts/modularity.md) - Plugin architecture
+
+### [technology-stack/](./technology-stack/) - Technology Choices
+
+**Purpose:** Technology evaluations and selections
+
+**Contains:**
+- Embedding models comparison
+- Vector store evaluations
+- LLM backend options
+- Chunking strategies
+
+### [UI/](./UI/) - User Interface Design
+
+**Purpose:** Design documentation for all user interfaces
+
+**Contains:**
+- **[cli/](./UI/cli/)** - CLI enhancements catalogue (23 features across v0.2.7-v0.4.0)
+- **[web/](./UI/web/)** - Web UI evolution (v0.2-v1.0 designs)
+
+**Key documents:**
+- [CLI Enhancements](./UI/cli/enhancements.md) - Complete CLI feature specifications
+- [UI README](./UI/README.md) - Navigation and overview
+
+### [versions/](./versions/) - Version Plans
+
+**Purpose:** Version-specific high-level design plans
+
+**Contains:**
+- v0.1-v1.0 version overviews
+- Feature roadmaps per version
+- Long-term vision
+
+### [references/](./references/) - Research Materials
+
+**Purpose:** Academic papers, research, and external resources
+
+**Contains:**
+- Research papers on RAG, retrieval, and LLMs
+- Web UI research and best practices
+- Curated reference materials
 
 ---
 
@@ -128,7 +184,7 @@ development/
 - [v0.1 Testing Results](./implementation/v0.1/testing.md) - Test coverage and quality
 
 **Distinction:**
-- **design/** = What we **planned** to build
+- **vision/architecture/versions/** = What we **planned** to build
 - **implementation/** = What we **actually built**
 - **process/** = **How** we built it (narrative)
 
@@ -173,19 +229,19 @@ development/
 ### I Want To...
 
 **Plan a new feature**
-1. Start with [design/vision/](./design/vision/) to ensure alignment
+1. Start with [vision/](./vision/) to ensure alignment
 2. Create RFC in [rfcs/](./rfcs/) if significant
-3. Design in [design/versions/](./design/versions/)
+3. Design in [versions/](./versions/) or [architecture/](./architecture/)
 4. Document decision in [adr/](./adr/)
 
 **Understand a past decision**
 1. Check [adr/](./adr/) for architectural decisions
 2. Or [process/devlog/version/](./process/devlog/version/) for narrative context
-3. Or [design/](./design/) for original planning
+3. Or [architecture/](./architecture/) for original planning
 
 **See what's planned next**
 1. Check [process/roadmap/](./process/roadmap/) for near-term plans
-2. Or [design/versions/](./design/versions/) for long-term vision
+2. Or [versions/](./versions/) for long-term vision
 
 **Study how ragged is built**
 1. Read [process/README.md](./process/README.md) for overview
@@ -193,14 +249,14 @@ development/
 3. Study [process/time-logs/](./process/time-logs/) for empirical data
 
 **Implement a feature**
-1. Follow design in [design/versions/](./design/versions/)
+1. Follow design in [versions/](./versions/) or [architecture/](./architecture/)
 2. Track work in [process/devlog/](./process/devlog/)
 3. Document actual in [implementation/](./implementation/)
 4. Create ADR in [adr/](./adr/) for key decisions
 
 **Research AI-assisted development**
 1. Read [process/methodology/](./process/methodology/)
-2. Compare [design/](./design/) vs. [implementation/](./implementation/)
+2. Compare [versions/](./versions/) vs. [implementation/](./implementation/)
 3. Study [process/time-logs/](./process/time-logs/) for AI effectiveness
 
 ---
@@ -213,7 +269,7 @@ development/
 **Outcome:** Accept or reject
 
 ### 2. Planning Phase
-**Location:** [design/](./design/)
+**Location:** [vision/](./vision/), [architecture/](./architecture/), [versions/](./versions/)
 **Purpose:** Detail what to build
 **Output:** Architecture, specs, plans
 
@@ -238,16 +294,16 @@ development/
 
 ### Getting Started
 
-1. **Read** [design/vision/product-vision.md](./design/vision/product-vision.md) - Understand goals
+1. **Read** [vision/product-vision.md](./vision/product-vision.md) - Understand goals
 2. **Review** [process/roadmap/](./process/roadmap/) - See what's planned
 3. **Study** [adr/](./adr/) - Understand key decisions
-4. **Follow** [design/versions/](./design/versions/) - Implementation guides
+4. **Follow** [versions/](./versions/) or [UI/](./UI/) - Implementation guides
 5. **Document** [process/devlog/](./process/devlog/) - Share your journey
 
 ### Contributing
 
 **For code:**
-- Follow design in [design/](./design/)
+- Follow design in [architecture/](./architecture/) and [versions/](./versions/)
 - Document decisions in [adr/](./adr/)
 - Track time in [process/time-logs/](./process/time-logs/)
 - Write devlog in [process/devlog/](./process/devlog/)
@@ -287,6 +343,6 @@ development/
 
 ---
 
-**Last Updated:** 2025-11-13
+**Last Updated:** 2025-11-14
 **Maintained By:** ragged development team
 **License:** GPL-3.0 (same as project)
