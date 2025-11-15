@@ -1,44 +1,123 @@
 # Implementation Documentation
 
-This directory tracks the planning and eventual implementation of the ragged project.
+**Purpose:** Document what was actually built (vs. what was planned)
 
-## Structure
-
-### [plan/](./plan/)
-**Complete implementation plan** organised by version (v0.1 through v1.0).
-
-Contains:
-- State-of-the-art RAG architecture for 2025
-- Version-specific implementation guides
-- Technology stack decisions
-- Core concepts and fundamentals
-- Advanced features documentation
-
-**Status**: Planning phase - no code implemented yet
-
-### actual/ (Not yet created)
-**Will be created during implementation** to document what was actually built, organised by version.
-
-Will contain:
-- Implementation notes for each version
-- Deviations from the plan
-- Lessons learned
-- Performance metrics
-- Testing results
-
-**Status**: Not yet created - will be added when implementation begins
-
-## Current Phase
-
-**Phase**: Planning
-**Version**: v0.0 (pre-implementation)
-**Next Step**: Begin v0.1 implementation
-
-## Navigation
-
-- **[Implementation Plan →](./plan/)** - Complete planning documentation
-- **[← Back to docs](../README.md)** - Main documentation index
+**Last Updated:** 2025-11-15
 
 ---
 
-**Note**: The implementation will follow the plan in [plan/](./plan/), with each version's actual implementation documented as it's completed.
+## Overview
+
+This directory tracks the **actual implementation** of ragged features, organised by version. It documents what was built, how it differs from the plan, lessons learned, and implementation outcomes.
+
+**Distinction:**
+- **planning/** = What we **planned** to build (design phase)
+- **implementations/** = What we **actually built** (retrospective)
+- **process/devlogs/** = **How** we built it (narrative)
+
+---
+
+## Structure
+
+```
+implementations/
+├── README.md           ← This file
+└── versions/           ← Version-specific implementation records
+    ├── v0.1/          ← MVP implementation (complete)
+    └── v0.2/          ← Enhanced retrieval (in progress)
+```
+
+---
+
+## Version Implementation Records
+
+### [versions/v0.1/](./versions/v0.1/) - MVP Implementation
+
+**Status:** Complete (November 2025)
+
+**What was built:**
+- Local-only RAG system with CLI
+- PDF ingestion and processing
+- Dual embedding support (sentence-transformers + Ollama)
+- ChromaDB vector storage
+- Ollama LLM generation with citations
+- Basic CLI interface
+
+**Key documents:**
+- [Summary](./versions/v0.1/summary.md) - Results and retrospective
+- [Implementation Notes](./versions/v0.1/implementation-notes.md) - Technical details
+- [Testing Results](./versions/v0.1/testing.md) - Test coverage and quality
+
+### [versions/v0.2/](./versions/v0.2/) - Enhanced Retrieval
+
+**Status:** In progress
+
+**What's being built:**
+- Advanced retrieval strategies
+- Query understanding improvements
+- Enhanced chunking methods
+- Multi-query retrieval
+
+**Key documents:**
+- [Implementation Plan](./versions/v0.2/implementation-plan.md) - Development guide
+- [v0.2.1 Release Notes](./versions/v0.2/v0.2.1-release-notes.md) - Chunking enhancements
+- [v0.2.2 Release Notes](./versions/v0.2/v0.2.2-release-notes.md) - Retrieval enhancements
+
+---
+
+## How to Use This Documentation
+
+### Understanding What Was Built
+
+1. Navigate to the version directory (e.g., `versions/v0.1/`)
+2. Read the summary for high-level outcomes
+3. Review implementation notes for technical details
+4. Compare with original plans in `planning/versions/`
+
+### Planning Future Versions
+
+1. Review lessons learned from completed versions
+2. Identify patterns in deviations from plan
+3. Apply learnings to future planning
+4. Document decision rationale in ADRs
+
+### Contributing
+
+When completing a version:
+1. Create version directory under `versions/`
+2. Document what was actually built
+3. Note deviations from the plan
+4. Record lessons learned
+5. Include metrics and outcomes
+
+---
+
+## Relationship to Other Documentation
+
+**Planning documentation:**
+- [planning/versions/](../planning/versions/) - Original design plans
+- [planning/architecture/](../planning/architecture/) - System architecture
+
+**Decision documentation:**
+- [decisions/adrs/](../decisions/adrs/) - Architecture decisions made
+
+**Process documentation:**
+- [process/devlogs/version/](../process/devlogs/version/) - Development narratives
+- [process/time-logs/version/](../process/time-logs/version/) - Time tracking
+
+**Roadmap documentation:**
+- [roadmaps/version/](../roadmaps/version/) - Feature roadmaps
+
+---
+
+## Navigation
+
+- **[← Development Documentation](../README.md)** - Back to development docs
+- **[Planning Documentation →](../planning/)** - Original design plans
+- **[Process Documentation →](../process/)** - Development narratives
+
+---
+
+**Maintained By:** ragged development team
+
+**License:** GPL-3.0

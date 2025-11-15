@@ -177,8 +177,8 @@ All decision documentation is now grouped under `decisions/` for easier navigati
 **Status:** Active (v0.1 complete, v0.2 in progress)
 
 **Contains:**
-- **[v0.1/](./implementations/v0.1/)** - MVP implementation records
-- **[v0.2/](./implementations/v0.2/)** - Enhanced retrieval implementation
+- **[versions/v0.1/](./implementations/versions/v0.1/)** - MVP implementation records
+- **[versions/v0.2/](./implementations/versions/v0.2/)** - Enhanced retrieval implementation
 
 **When to use:**
 - Understanding what was actually built (vs. what was planned)
@@ -187,9 +187,9 @@ All decision documentation is now grouped under `decisions/` for easier navigati
 - Planning future versions based on learnings
 
 **Key documents:**
-- [v0.1 Summary](./implementations/v0.1/summary.md) - Results and retrospective
-- [v0.1 Implementation Notes](./implementations/v0.1/implementation-notes.md) - Technical details
-- [v0.1 Testing Results](./implementations/v0.1/testing.md) - Test coverage and quality
+- [v0.1 Summary](./implementations/versions/v0.1/summary.md) - Results and retrospective
+- [v0.1 Implementation Notes](./implementations/versions/v0.1/implementation-notes.md) - Technical details
+- [v0.1 Testing Results](./implementations/versions/v0.1/testing.md) - Test coverage and quality
 
 **Distinction:**
 - **planning/** = What we **planned** to build
