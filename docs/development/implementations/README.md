@@ -47,6 +47,7 @@ implementations/
 - [Summary](./versions/v0.1/summary.md) - Results and retrospective
 - [Implementation Notes](./versions/v0.1/implementation-notes.md) - Technical details
 - [Testing Results](./versions/v0.1/testing.md) - Test coverage and quality
+- [Lineage](./versions/v0.1/lineage.md) - Complete traceability from planning to implementation
 
 ### [versions/v0.2/](./versions/v0.2/) - Enhanced Retrieval
 
@@ -62,6 +63,7 @@ implementations/
 - [Implementation Plan](./versions/v0.2/implementation-plan.md) - Development guide
 - [v0.2.1 Release Notes](./versions/v0.2/v0.2.1-release-notes.md) - Chunking enhancements
 - [v0.2.2 Release Notes](./versions/v0.2/v0.2.2-release-notes.md) - Retrieval enhancements
+- [Lineage](./versions/v0.2/lineage.md) - Traceability from planning to implementation (partial)
 
 ---
 

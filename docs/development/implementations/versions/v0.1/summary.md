@@ -245,6 +245,15 @@ See [decisions.md](decisions.md) for full rationale.
 
 See [lessons-learned.md](lessons-learned.md) for full analysis.
 
+## Traceability
+
+For complete traceability from planning through decisions to implementation:
+- **[lineage.md](lineage.md)** - Full v0.1 lineage mapping
+  - Planning documents → Architectural decisions → Implementation records
+  - Traceability matrix showing all relationships
+  - Deviations from plan with rationale
+  - Lessons learned for future versions
+
 ## Next Steps
 
 ### Immediate (Complete v0.1)
