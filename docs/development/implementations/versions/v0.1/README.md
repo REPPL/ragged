@@ -77,6 +77,7 @@ Documents reflecting on the process, quality, and outcomes:
 | **[lessons-learned.md](lessons-learned.md)** | Retrospective: what went well, what could improve |
 | **[CHANGELOG.md](CHANGELOG.md)** | Detailed changelog of all changes during v0.1 |
 | **[summary.md](summary.md)** | Executive summary and final version retrospective |
+| **[lineage.md](lineage.md)** | Complete traceability from planning → decisions → implementation |
 
 ## Quick Links
 

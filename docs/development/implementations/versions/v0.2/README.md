@@ -40,6 +40,7 @@ This directory contains the complete development documentation for ragged v0.2, 
 - **[lessons-learned.md](lessons-learned.md)** - What worked, what didn't
 - **[CHANGELOG.md](CHANGELOG.md)** - Detailed version changelog
 - **[summary.md](summary.md)** - Executive summary (end of development)
+- **[lineage.md](lineage.md)** - Complete traceability from planning → decisions → implementation
 
 ---
 
