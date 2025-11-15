@@ -52,14 +52,6 @@ development/
 │   ├── ai-assistance.md
 │   └── time-tracking.md
 │
-├── roadmap/                      # What we plan to do
-│   ├── README.md
-│   └── version/
-│       ├── README.md            # All versions overview
-│       ├── v0.2.5/README.md     # Detailed roadmap per version
-│       ├── v0.2.7/README.md
-│       └── v0.3.0/README.md
-│
 ├── devlog/                       # What we're doing & did
 │   ├── README.md
 │   ├── daily/                   # Daily development logs
@@ -83,13 +75,6 @@ development/
 │       │   └── v0.1-time-log.md
 │       └── v0.2/
 │           └── v0.2.x-time-log.md
-│
-├── decisions/                    # Why we chose
-│   ├── README.md
-│   └── 0001-decision-name.md   # Architecture Decision Records
-│
-├── rfcs/                         # What we're proposing
-│   └── (Major feature proposals)
 │
 └── templates/                    # How to document
     ├── adr-template.md
@@ -121,24 +106,7 @@ Documents **how** we develop ragged with AI assistance and transparent time trac
 
 ---
 
-### 2. Roadmap (`roadmap/`)
-
-Documents **what we plan to do** in future versions.
-
-**[roadmap/README.md](./roadmap/README.md)** - How to use roadmaps
-
-**[roadmap/version/README.md](./roadmap/version/README.md)** - Unified overview of all versions
-
-**Per-Version Roadmaps** (`roadmap/version/vX.X/README.md`):
-- Features and bugs to implement
-- Hour estimates for AI coding assistant
-- Manual testing requirements (⚠️ markers)
-- Success criteria
-- No migration/rollback content (fresh clone testing)
-
----
-
-### 3. Development Logs (`devlog/`)
+### 2. Development Logs (`devlog/`)
 
 Documents **what we're doing and did** during development.
 
@@ -160,7 +128,7 @@ Documents **what we're doing and did** during development.
 
 ---
 
-### 4. Time Logs (`time-logs/`)
+### 3. Time Logs (`time-logs/`)
 
 Documents **how long development actually took** per version and feature.
 
@@ -177,37 +145,7 @@ Documents **how long development actually took** per version and feature.
 
 ---
 
-### 5. Architecture Decision Records (`decisions/`)
-
-Documents **why we made specific architectural choices**.
-
-**[decisions/README.md](./decisions/README.md)** - ADR overview
-
-**Individual ADRs** (`decisions/NNNN-decision-name.md`):
-- Why a decision was needed (context)
-- What alternatives were considered
-- What was chosen and why
-- Consequences (positive and negative)
-
-**Format**: Numbered sequentially (0001, 0002, etc.)
-
----
-
-### 6. Request for Comments (`rfcs/`)
-
-Documents **major feature proposals** seeking community feedback.
-
-**When to use**: Substantial changes that need discussion (not bug fixes)
-
-**Contents**:
-- Technical design
-- Trade-offs and alternatives
-- Community feedback
-- Implementation timeline
-
----
-
-### 7. Templates (`templates/`)
+### 4. Templates (`templates/`)
 
 Documents **how to create** consistent development documentation.
 
@@ -221,8 +159,8 @@ Documents **how to create** consistent development documentation.
 
 ## Document Lifecycle
 
-### Phase 1: Planning (roadmap/)
-1. Create roadmap: `roadmap/version/vX.X/README.md`
+### Phase 1: Planning (../roadmaps/)
+1. Create roadmap: `../roadmaps/version/vX.X/README.md`
 2. Document features, bugs, hour estimates
 3. Mark manual testing points (⚠️ MANUAL TEST REQUIRED)
 4. Review and approve
@@ -231,7 +169,7 @@ Documents **how to create** consistent development documentation.
 5. Start work → Daily logs in `devlog/daily/`
 6. Create version folder: `devlog/version/vX.X/`
 7. Track implementation in `implementation-notes.md`
-8. Document decisions in `decisions/` (ADRs)
+8. Document decisions in `../decisions/adrs/` (ADRs)
 
 ### Phase 3: Completion (time-logs/ + devlog/)
 9. Complete → Create `summary.md` retrospective
@@ -249,15 +187,15 @@ Documents **how to create** consistent development documentation.
 ### For Users
 
 - **Curious about AI development?** Read [methodology/ai-assistance.md](./methodology/ai-assistance.md)
-- **Want to understand decisions?** Check ADRs in [decisions/](./decisions/)
+- **Want to understand decisions?** Check ADRs in [../decisions/adrs/](../decisions/adrs/)
 - **See actual progress?** Read [devlog/daily/](./devlog/daily/)
-- **View planned features?** Check [roadmap/version/](./roadmap/version/)
+- **View planned features?** Check [../roadmaps/version/](../roadmaps/version/)
 
 ### For Contributors
 
 - **Using AI tools?** Follow guidelines in [methodology/ai-assistance.md](./methodology/ai-assistance.md)
-- **Making architectural decisions?** Create ADR in [decisions/](./decisions/)
-- **Proposing major features?** Write RFC in [rfcs/](./rfcs/)
+- **Making architectural decisions?** Create ADR in [../decisions/adrs/](../decisions/adrs/)
+- **Proposing major features?** Write RFC in [../decisions/rfcs/](../decisions/rfcs/)
 - **Tracking your time?** Use templates in [templates/](./templates/)
 
 ### For Researchers
@@ -269,10 +207,10 @@ Documents **how to create** consistent development documentation.
 
 ### For Future You
 
-- **"Why did we do X?"** → Check [decisions/](./decisions/) (ADRs)
+- **"Why did we do X?"** → Check [../decisions/adrs/](../decisions/adrs/) (ADRs)
 - **"How long did Y take?"** → Check [time-logs/version/](./time-logs/version/)
 - **"What happened on date Z?"** → Check [devlog/daily/](./devlog/daily/)
-- **"What's planned next?"** → Check [roadmap/version/](./roadmap/version/)
+- **"What's planned next?"** → Check [../roadmaps/version/](../roadmaps/version/)
 
 ---
 
@@ -360,8 +298,8 @@ This gives:
 When contributing to ragged:
 
 1. **Use AI tools?** Disclose in PR (see [methodology/ai-assistance.md](./methodology/ai-assistance.md))
-2. **Making architectural decisions?** Create ADR in [decisions/](./decisions/)
-3. **Proposing major features?** Write RFC in [rfcs/](./rfcs/)
+2. **Making architectural decisions?** Create ADR in [../decisions/adrs/](../decisions/adrs/)
+3. **Proposing major features?** Write RFC in [../decisions/rfcs/](../decisions/rfcs/)
 4. **Significant time investment?** Create time log in [time-logs/](./time-logs/)
 5. **Daily development?** Log in [devlog/daily/](./devlog/daily/)
 
@@ -372,9 +310,9 @@ See [Contributing Guide](../contributing/README.md) for details.
 ## Questions?
 
 - **About development process**: [GitHub Discussions](https://github.com/REPPL/ragged/discussions)
-- **About specific decisions**: Check [decisions/](./decisions/)
+- **About specific decisions**: Check [../decisions/adrs/](../decisions/adrs/)
 - **About time tracking**: See [methodology/time-tracking.md](./methodology/time-tracking.md)
-- **About roadmap**: See [roadmap/version/README.md](./roadmap/version/README.md)
+- **About roadmap**: See [../roadmaps/version/README.md](../roadmaps/version/README.md)
 
 ---
 

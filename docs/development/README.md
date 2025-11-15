@@ -30,8 +30,10 @@ development/
 │   ├── versions/     → Version-specific design plans
 │   ├── technologies/ → Technology evaluations
 │   └── references/   → Research papers and resources
-├── rfcs/             → Proposals for significant changes
-├── adrs/             → Architecture Decision Records
+├── decisions/        → Decision records (grouped)
+│   ├── adrs/        → Architecture Decision Records
+│   └── rfcs/        → Request for Comments
+├── roadmaps/         → Development timelines and feature plans
 ├── implementations/  → What was actually built
 └── process/          → How it was built (transparency)
 ```
@@ -117,7 +119,11 @@ All design and planning documents are now organised under `planning/` for clarit
 
 ---
 
-## [rfcs/](./rfcs/) - Request for Comments
+## [decisions/](./decisions/) - Decision Records
+
+All decision documentation is now grouped under `decisions/` for easier navigation.
+
+### [decisions/rfcs/](./decisions/rfcs/) - Request for Comments
 
 **Purpose:** Propose and discuss significant changes **before** design phase
 
@@ -139,20 +145,18 @@ All design and planning documents are now organised under `planning/` for clarit
 
 **Format:** Numbered RFCs (0001-title.md, 0002-title.md)
 
----
-
-## [adrs/](./adrs/) - Architecture Decision Records
+### [decisions/adrs/](./decisions/adrs/) - Architecture Decision Records
 
 **Purpose:** Document **why** specific architectural choices were made
 
 **Status:** Active (14+ ADRs documented)
 
 **Contains:**
-- [ADR-0001: Local-Only Processing](./adrs/0001-local-only-processing.md)
-- [ADR-0002: Pydantic for Configuration](./adrs/0002-pydantic-for-configuration.md)
-- [ADR-0003: ChromaDB for Vector Storage](./adrs/0003-chromadb-for-vector-storage.md)
-- [ADR-0004: Factory Pattern for Embedders](./adrs/0004-factory-pattern-for-embedders.md)
-- And more (see [ADRs README](./adrs/README.md))
+- [ADR-0001: Local-Only Processing](./decisions/adrs/0001-local-only-processing.md)
+- [ADR-0002: Pydantic for Configuration](./decisions/adrs/0002-pydantic-for-configuration.md)
+- [ADR-0003: ChromaDB for Vector Storage](./decisions/adrs/0003-chromadb-for-vector-storage.md)
+- [ADR-0004: Factory Pattern for Embedders](./decisions/adrs/0004-factory-pattern-for-embedders.md)
+- And more (see [ADRs README](./decisions/adrs/README.md))
 
 **When to use:**
 - Understanding why a decision was made
@@ -194,6 +198,22 @@ All design and planning documents are now organised under `planning/` for clarit
 
 ---
 
+## [roadmaps/](./roadmaps/) - Development Timelines
+
+**Purpose:** Version roadmaps and feature planning
+
+**Status:** Active (v0.2-v0.7 planned)
+
+**Contains:**
+- **[version/](./roadmaps/version/)** - Version-specific roadmaps (v0.2.3-v0.7.0)
+- **[features/](./roadmaps/features/)** - Cross-version feature roadmaps
+
+**Key documents:**
+- [Roadmap Overview](./roadmaps/README.md)
+- [All Versions Overview](./roadmaps/version/README.md)
+
+---
+
 ## [process/](./process/) - How It Was Built
 
 **Purpose:** Development transparency layer (unique to ragged)
@@ -202,7 +222,6 @@ All design and planning documents are now organised under `planning/` for clarit
 
 **Contains:**
 - **[methodology/](./process/methodology/)** - How we develop (AI assistance, time tracking)
-- **[roadmap/](./process/roadmap/)** - Near-term detailed plans (next 2-3 versions)
 - **[devlog/](./process/devlog/)** - Daily and version-based development narratives
 - **[time-logs/](./process/time-logs/)** - Actual hours spent (empirical data)
 - **[templates/](./process/templates/)** - Templates for various document types
@@ -223,7 +242,6 @@ All design and planning documents are now organised under `planning/` for clarit
 **Key documents:**
 - [AI Assistance Guidelines](./process/methodology/ai-assistance.md)
 - [Time Tracking Methodology](./process/methodology/time-tracking.md)
-- [Roadmap Overview](./process/roadmap/README.md)
 - [v0.1 Time Log](./process/time-logs/version/v0.1/v0.1.0-time-log.md)
 
 ---
@@ -234,17 +252,17 @@ All design and planning documents are now organised under `planning/` for clarit
 
 **Plan a new feature**
 1. Start with [planning/vision/](./planning/vision/) to ensure alignment
-2. Create RFC in [rfcs/](./rfcs/) if significant
+2. Create RFC in [decisions/rfcs/](./decisions/rfcs/) if significant
 3. Design in [planning/versions/](./planning/versions/) or [planning/architecture/](./planning/architecture/)
-4. Document decision in [adrs/](./adrs/)
+4. Document decision in [decisions/adrs/](./decisions/adrs/)
 
 **Understand a past decision**
-1. Check [adrs/](./adrs/) for architectural decisions
+1. Check [decisions/adrs/](./decisions/adrs/) for architectural decisions
 2. Or [process/devlogs/version/](./process/devlogs/version/) for narrative context
 3. Or [planning/architecture/](./planning/architecture/) for original planning
 
 **See what's planned next**
-1. Check [process/roadmap/](./process/roadmap/) for near-term plans
+1. Check [roadmaps/](./roadmaps/) for near-term plans
 2. Or [planning/versions/](./planning/versions/) for long-term vision
 
 **Study how ragged is built**
@@ -256,7 +274,7 @@ All design and planning documents are now organised under `planning/` for clarit
 1. Follow design in [planning/versions/](./planning/versions/) or [planning/architecture/](./planning/architecture/)
 2. Track work in [process/devlogs/](./process/devlogs/)
 3. Document actual in [implementations/](./implementations/)
-4. Create ADR in [adrs/](./adrs/) for key decisions
+4. Create ADR in [decisions/adrs/](./decisions/adrs/) for key decisions
 
 **Research AI-assisted development**
 1. Read [process/methodology/](./process/methodology/)
@@ -268,7 +286,7 @@ All design and planning documents are now organised under `planning/` for clarit
 ## Document Lifecycle
 
 ### 1. Proposal Phase
-**Location:** [rfcs/](./rfcs/)
+**Location:** [decisions/rfcs/](./decisions/rfcs/)
 **Purpose:** Discuss significant changes
 **Outcome:** Accept or reject
 
@@ -278,7 +296,7 @@ All design and planning documents are now organised under `planning/` for clarit
 **Output:** Architecture, specs, plans
 
 ### 3. Decision Phase
-**Location:** [adrs/](./adrs/)
+**Location:** [decisions/adrs/](./decisions/adrs/)
 **Purpose:** Document why choices made
 **Output:** Numbered ADRs
 
@@ -299,8 +317,8 @@ All design and planning documents are now organised under `planning/` for clarit
 ### Getting Started
 
 1. **Read** [planning/vision/product-vision.md](./planning/vision/product-vision.md) - Understand goals
-2. **Review** [process/roadmap/](./process/roadmap/) - See what's planned
-3. **Study** [adrs/](./adrs/) - Understand key decisions
+2. **Review** [roadmaps/](./roadmaps/) - See what's planned
+3. **Study** [decisions/adrs/](./decisions/adrs/) - Understand key decisions
 4. **Follow** [planning/versions/](./planning/versions/) or [planning/interfaces/](./planning/interfaces/) - Implementation guides
 5. **Document** [process/devlogs/](./process/devlogs/) - Share your journey
 
@@ -308,7 +326,7 @@ All design and planning documents are now organised under `planning/` for clarit
 
 **For code:**
 - Follow design in [planning/architecture/](./planning/architecture/) and [planning/versions/](./planning/versions/)
-- Document decisions in [adrs/](./adrs/)
+- Document decisions in [decisions/adrs/](./decisions/adrs/)
 - Track time in [process/time-logs/](./process/time-logs/)
 - Write devlog in [process/devlogs/](./process/devlogs/)
 

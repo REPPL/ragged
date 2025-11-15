@@ -23,7 +23,7 @@ Templates ensure consistent documentation practices and make it easy to capture 
 - Significant design changes
 - Trade-off evaluations
 
-**Output location:** `/docs/development/adr/XXXX-title.md`
+**Output location:** `/docs/development/decisions/adrs/XXXX-title.md`
 
 **Example decisions:**
 - Choosing ChromaDB vs. other vector databases
@@ -150,11 +150,14 @@ docs/development/
 │       │   └── README.md
 │       ├── v0.2/
 │       └── ...
-├── adrs/                   # ADRs go here
+├── decisions/
+│   ├── adrs/              # ADRs go here
+│   └── rfcs/              # RFCs go here
+├── roadmaps/              # Version roadmaps
 └── process/
-    ├── devlogs/            # Daily logs go here
-    ├── time-logs/          # Feature time logs go here
-    └── templates/          # Templates (this folder)
+    ├── devlogs/           # Daily logs go here
+    ├── time-logs/         # Feature time logs go here
+    └── templates/         # Templates (this folder)
 ```
 
 ---
@@ -189,7 +192,7 @@ Templates can be adapted for project-specific needs:
 
 ## Quick Start
 
-1. **Creating an ADR**: Copy `adr-template.md` → `/docs/development/adrs/XXXX-title.md`
+1. **Creating an ADR**: Copy `adr-template.md` → `/docs/development/decisions/adrs/XXXX-title.md`
 2. **Daily Devlog**: Copy `devlog-template.md` → `/docs/development/process/devlogs/daily/YYYY-MM-DD.md`
 3. **New User Story**: Copy `user-story-template.md` → `/docs/development/planning/requirements/user-stories/US-XXX-title.md`
 4. **Version Summary**: Copy `version-summary-template.md` → `/docs/development/planning/versions/vX.Y/README.md`
