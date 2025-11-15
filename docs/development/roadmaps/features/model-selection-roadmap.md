@@ -14,7 +14,7 @@
 
 This roadmap details the phased implementation of dynamic model selection and intelligent routing for ragged. The implementation spans from single-model support in v0.1 through advanced learning-based routing and cloud integration in v2.0+.
 
-**Related Design:** [Dynamic Model Selection Strategy](../../../core-concepts/model-selection.md)
+**Related Design:** [Dynamic Model Selection Strategy](../../planning/core-concepts/model-selection.md)
 
 ---
 

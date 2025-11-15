@@ -329,7 +329,7 @@
 ## Related Personas
 
 ### Primary: Casual
-**Definition**: [Casual Persona](../../implementation/plan/core-concepts/personal-memory-personas.md#casual-persona)
+**Definition**: [Casual Persona](../../core-concepts/personal-memory-personas.md#casual-persona)
 
 **Characteristics**:
 - Non-technical user
@@ -356,16 +356,16 @@ auto_features:
 ## Cross-References
 
 ### Implementation
-- [Casual Persona](../../implementation/plan/core-concepts/personal-memory-personas.md#casual-persona)
-- [Fast Tier Models](../../implementation/plan/core-concepts/hardware-optimisation.md#performance-tiers)
+- [Casual Persona](../../core-concepts/personal-memory-personas.md#casual-persona)
+- [Fast Tier Models](../../core-concepts/hardware-optimisation.md#performance-tiers)
 
 ### Architecture
-- [Simple UI/CLI](../../implementation/plan/architecture/README.md)
-- [Web Content Extraction](../../implementation/plan/core-concepts/)
+- [Simple UI/CLI](../../architecture/README.md)
+- [Web Content Extraction](../../core-concepts/)
 
 ### Testing
-- [User Experience Testing](../../implementation/plan/core-concepts/testing-strategy.md)
-- [Performance Testing](../../implementation/plan/core-concepts/testing-strategy.md#performance-testing)
+- [User Experience Testing](../../core-concepts/testing-strategy.md)
+- [Performance Testing](../../core-concepts/testing-strategy.md#performance-testing)
 
 ---
 

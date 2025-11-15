@@ -1265,7 +1265,7 @@ v0.4.0 is successful if:
 
 This part introduces a comprehensive plugin system that enables users and developers to extend ragged with custom functionality while maintaining security and privacy guarantees.
 
-**Related Documentation:** [CLI Enhancements Catalogue](../../../UI/cli/enhancements.md#23-plugin-system)
+**Related Documentation:** [CLI Enhancements Catalogue](../../planning/interfaces/cli/enhancements.md#23-plugin-system)
 
 ---
 
@@ -1532,7 +1532,7 @@ batch_size: 32
 - Remote plugin repositories
 - Plugin sandboxing with containers
 
-**See:** [CLI Enhancements Catalogue](../../../UI/cli/enhancements.md#23-plugin-system) for full specification
+**See:** [CLI Enhancements Catalogue](../../planning/interfaces/cli/enhancements.md#23-plugin-system) for full specification
 
 ---
 

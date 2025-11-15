@@ -80,7 +80,7 @@ The core concepts define how Ragged achieves its goals of being a privacy-first,
 
 These core concepts are referenced throughout the implementation plan and inform:
 - Architecture decisions (see [architecture/](../architecture/))
-- Technology selection (see [technology-stack/](../technology-stack/))
+- Technology selection (see [technologies/](../technologies/))
 - Version-specific features (see [versions/](../versions/))
 - User story requirements (see [../../requirements/user-stories/](../../requirements/user-stories/))
 
@@ -89,7 +89,7 @@ These core concepts are referenced throughout the implementation plan and inform
 ## Cross-References
 
 - **Architecture**: [architecture/README.md](../architecture/README.md)
-- **Technology Stack**: [technology-stack/](../technology-stack/)
+- **Technology Stack**: [technologies/](../technologies/)
 - **Version Roadmap**: [versions/](../versions/)
 - **User Stories**: [../../requirements/user-stories/](../../requirements/user-stories/)
 

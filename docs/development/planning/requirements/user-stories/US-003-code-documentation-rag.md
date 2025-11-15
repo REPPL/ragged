@@ -313,7 +313,7 @@
 ## Related Personas
 
 ### Primary: Developer
-**Definition**: [Developer Persona](../../implementation/plan/core-concepts/personal-memory-personas.md#developer-persona)
+**Definition**: [Developer Persona](../../core-concepts/personal-memory-personas.md#developer-persona)
 
 **Characteristics**:
 - Software developer/engineer
@@ -344,15 +344,15 @@ focus_areas:
 ## Cross-References
 
 ### Implementation
-- [Model Selection - Code Generation](../../implementation/plan/core-concepts/model-selection.md#task-based-routing)
-- [Developer Persona](../../implementation/plan/core-concepts/personal-memory-personas.md#developer-persona)
+- [Model Selection - Code Generation](../../core-concepts/model-selection.md#task-based-routing)
+- [Developer Persona](../../core-concepts/personal-memory-personas.md#developer-persona)
 
 ### Architecture
-- [Code-Specific Routing](../../implementation/plan/core-concepts/model-selection.md#routing-strategies)
-- [Specialised Models](../../implementation/plan/core-concepts/hardware-optimisation.md#model-recommendations)
+- [Code-Specific Routing](../../core-concepts/model-selection.md#routing-strategies)
+- [Specialised Models](../../core-concepts/hardware-optimisation.md#model-recommendations)
 
 ### Testing
-- [Code Generation Testing](../../implementation/plan/core-concepts/testing-strategy.md#component-level-testing)
+- [Code Generation Testing](../../core-concepts/testing-strategy.md#component-level-testing)
 
 ---
 

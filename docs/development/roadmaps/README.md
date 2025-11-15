@@ -83,7 +83,7 @@ The roadmaps are organised into three major versions, each with distinct focus a
 
 ragged's CLI receives comprehensive enhancements across versions v0.2.7-v0.4.0, adding 23 new capabilities distributed strategically by version.
 
-**Related Documentation:** [CLI Enhancements Catalogue](../../UI/cli/enhancements.md)
+**Related Documentation:** [CLI Enhancements Catalogue](../planning/interfaces/cli/enhancements.md)
 
 ### Enhancement Distribution by Version
 

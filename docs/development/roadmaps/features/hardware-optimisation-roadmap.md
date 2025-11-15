@@ -14,7 +14,7 @@
 
 This roadmap details the phased implementation of hardware optimisation features for ragged. The implementation spans from basic hardware detection in v0.1 through dynamic performance monitoring in v1.0.
 
-**Related Design:** [Hardware Optimisation Strategy](../../../core-concepts/hardware-optimisation.md)
+**Related Design:** [Hardware Optimisation Strategy](../../planning/core-concepts/hardware-optimisation.md)
 
 ---
 
@@ -394,10 +394,10 @@ performance:
 
 ## Related Documentation
 
-- [Hardware Optimisation Strategy](../../../core-concepts/hardware-optimisation.md) - Complete design specification
-- [Model Selection](../../../core-concepts/model-selection.md) - Model selection strategies
-- [Configuration System](../../../architecture/configuration-system.md) - Configuration architecture
-- [v0.2 Roadmap](../versions/v0.2/) - Overall v0.2 features
+- [Hardware Optimisation Strategy](../../planning/core-concepts/hardware-optimisation.md) - Complete design specification
+- [Model Selection](../../planning/core-concepts/model-selection.md) - Model selection strategies
+- [Configuration System](../../planning/architecture/configuration-system.md) - Configuration architecture
+- [v0.2 Roadmap](../version/v0.2/) - Overall v0.2 features
 
 ---
 

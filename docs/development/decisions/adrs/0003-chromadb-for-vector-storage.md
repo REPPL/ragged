@@ -7,7 +7,7 @@
 **Area:** Vector Database, Storage
 
 **Related:**
-- [Vector Stores Evaluation](../technology-stack/vector-stores.md)
+- [Vector Stores Evaluation](../../planning/technologies/vector-stores.md)
 - [Storage Model](../architecture/storage-model.md)
 
 ---

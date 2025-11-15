@@ -86,7 +86,7 @@ User stories are organised by **persona** and linked to **implementation version
 
 ### Researcher
 **Primary Stories**: US-001, US-002
-**Persona Definition**: [Personal Memory & Personas](../../implementation/plan/core-concepts/personal-memory-personas.md#researcher-persona)
+**Persona Definition**: [Personal Memory & Personas](../../core-concepts/personal-memory-personas.md#researcher-persona)
 
 **Key Needs**:
 - Academic paper management
@@ -101,7 +101,7 @@ User stories are organised by **persona** and linked to **implementation version
 
 ### Developer
 **Primary Stories**: US-003
-**Persona Definition**: [Personal Memory & Personas](../../implementation/plan/core-concepts/personal-memory-personas.md#developer-persona)
+**Persona Definition**: [Personal Memory & Personas](../../core-concepts/personal-memory-personas.md#developer-persona)
 
 **Key Needs**:
 - Code documentation search
@@ -116,7 +116,7 @@ User stories are organised by **persona** and linked to **implementation version
 
 ### Casual
 **Primary Stories**: US-004
-**Persona Definition**: [Personal Memory & Personas](../../implementation/plan/core-concepts/personal-memory-personas.md#casual-persona)
+**Persona Definition**: [Personal Memory & Personas](../../core-concepts/personal-memory-personas.md#casual-persona)
 
 **Key Needs**:
 - Personal note management
@@ -214,19 +214,18 @@ Where:
 ## Cross-References
 
 ### Implementation
-- [Architecture Overview](../../implementation/plan/architecture/README.md)
-- [Personal Memory & Personas](../../implementation/plan/core-concepts/personal-memory-personas.md)
-- [Hardware Optimisation](../../implementation/plan/core-concepts/hardware-optimisation.md)
-- [Model Selection](../../implementation/plan/core-concepts/model-selection.md)
-- [Testing Strategy](../../implementation/plan/core-concepts/testing-strategy.md)
+- [Architecture Overview](../../architecture/README.md)
+- [Personal Memory & Personas](../../core-concepts/personal-memory-personas.md)
+- [Hardware Optimisation](../../core-concepts/hardware-optimisation.md)
+- [Model Selection](../../core-concepts/model-selection.md)
+- [Testing Strategy](../../core-concepts/testing-strategy.md)
 
 ### Development
-- [Version Roadmap](../../implementation/plan/versions/)
-- [Feature Timeline](../../implementation/plan/TIMELINE.md)
+- [Version Roadmap](../../versions/)
+- [Roadmaps](../../../roadmaps/README.md)
 
 ### Testing
-- [Golden Dataset](../../implementation/plan/testing/golden-dataset/)
-- [E2E Test Scenarios](../../implementation/plan/testing/e2e-scenarios.md)
+- [Testing Process](../../../process/testing/README.md)
 
 ---
 

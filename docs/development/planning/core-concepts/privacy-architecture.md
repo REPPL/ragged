@@ -109,8 +109,7 @@ Optional: Cloud Extension Layer (Opt-in)
 
 ## Related Documentation
 
-- **[Privacy Design (Explanation)](../../../explanation/privacy-design.md)** - Conceptual overview
-- **[Offline Capability](../technology-stack/offline-capability.md)** - Technical implementation
+- **[Offline Capability](../technologies/offline-capability.md)** - Technical implementation
 - **[Architecture](../architecture/README.md)** - Overall system architecture
 - **[Best Practices](../../../research/background/best-practices.md)** - Privacy best practices
 
