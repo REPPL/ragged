@@ -325,7 +325,7 @@
 ## Related Personas
 
 ### Primary: Researcher
-**Definition**: [Researcher Persona](../../implementation/plan/core-concepts/personal-memory-personas.md#researcher-persona)
+**Definition**: [Researcher Persona](../../core-concepts/personal-memory-personas.md#researcher-persona)
 
 **Characteristics**:
 - Academic or professional researcher
@@ -351,17 +351,17 @@ focus_areas:
 ## Cross-References
 
 ### Implementation
-- [Personal Memory & Personas](../../implementation/plan/core-concepts/personal-memory-personas.md)
-- [Hardware Optimisation](../../implementation/plan/core-concepts/hardware-optimisation.md)
-- [Testing Strategy](../../implementation/plan/core-concepts/testing-strategy.md)
+- [Personal Memory & Personas](../../core-concepts/personal-memory-personas.md)
+- [Hardware Optimisation](../../core-concepts/hardware-optimisation.md)
+- [Testing Strategy](../../core-concepts/testing-strategy.md)
 
 ### Architecture
-- [Citation Management System](../../implementation/plan/architecture/README.md#citation-management)
-- [Memory Coordinator](../../implementation/plan/core-concepts/personal-memory-personas.md#memory-coordinator)
+- [Citation Management System](../../architecture/README.md#citation-management)
+- [Memory Coordinator](../../core-concepts/personal-memory-personas.md#memory-coordinator)
 
 ### Testing
-- [Golden Dataset - Research Queries](../../implementation/plan/testing/golden-dataset/)
-- [RAGAS Evaluation](../../implementation/plan/core-concepts/testing-strategy.md#ragas-metrics)
+- [Golden Dataset - Research Queries](../../../process/testing/golden-dataset/)
+- [RAGAS Evaluation](../../core-concepts/testing-strategy.md#ragas-metrics)
 
 ---
 

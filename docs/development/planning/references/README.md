@@ -74,7 +74,7 @@ When adding new reference materials:
 
 - **Architecture**: [../architecture/](../architecture/)
 - **Core Concepts**: [../core-concepts/](../core-concepts/)
-- **Technology Stack**: [../technology-stack/](../technology-stack/)
+- **Technology Stack**: [../technologies/](../technologies/)
 - **Testing Strategy**: [../core-concepts/testing-strategy.md](../core-concepts/testing-strategy.md)
 
 ---

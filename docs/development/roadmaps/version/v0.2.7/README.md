@@ -1154,7 +1154,7 @@ ragged query "..." --profile fast
 
 This part adds 11 new CLI capabilities that transform ragged into a comprehensive, production-ready tool. These enhancements focus on usability, document management, and troubleshooting.
 
-**Related Documentation:** [CLI Enhancements Catalogue](../../../UI/cli/enhancements.md)
+**Related Documentation:** [CLI Enhancements Catalogue](../../planning/interfaces/cli/enhancements.md)
 
 ---
 
@@ -1208,7 +1208,7 @@ ragged search --tag research --type pdf --after 2025-01-01 \
 - ✅ Results sorted and limited appropriately
 - ✅ Clear error messages for invalid filters
 
-**See:** [CLI Enhancements Catalogue](../../../UI/cli/enhancements.md#1-advanced-search--filtering) for full specification
+**See:** [CLI Enhancements Catalogue](../../planning/interfaces/cli/enhancements.md#1-advanced-search--filtering) for full specification
 
 ---
 
@@ -1264,7 +1264,7 @@ ragged metadata delete doc_id_123 --field custom_field
 - ✅ Validation prevents invalid metadata
 - ✅ Changes persist across restarts
 
-**See:** [CLI Enhancements Catalogue](../../../UI/cli/enhancements.md#2-metadata-management) for full specification
+**See:** [CLI Enhancements Catalogue](../../planning/interfaces/cli/enhancements.md#2-metadata-management) for full specification
 
 ---
 
@@ -1316,7 +1316,7 @@ ragged re-embed --collection research --model new-model
 - ✅ Errors don't crash entire batch
 - ✅ --dry-run shows what would happen
 
-**See:** [CLI Enhancements Catalogue](../../../UI/cli/enhancements.md#3-bulk-operations) for full specification
+**See:** [CLI Enhancements Catalogue](../../planning/interfaces/cli/enhancements.md#3-bulk-operations) for full specification
 
 ---
 
@@ -1372,7 +1372,7 @@ ragged export metadata.csv --metadata-only --format csv
 - ✅ Merge mode preserves existing data
 - ✅ Replace mode with safety confirmation
 
-**See:** [CLI Enhancements Catalogue](../../../UI/cli/enhancements.md#4-exportimport-utilities) for full specification
+**See:** [CLI Enhancements Catalogue](../../planning/interfaces/cli/enhancements.md#4-exportimport-utilities) for full specification
 
 ---
 
@@ -1428,7 +1428,7 @@ ragged query "machine learning" --template custom.jinja2
 - ✅ Field selection in CSV works
 - ✅ Special characters handled properly
 
-**See:** [CLI Enhancements Catalogue](../../../UI/cli/enhancements.md#5-output-format-options) for full specification
+**See:** [CLI Enhancements Catalogue](../../planning/interfaces/cli/enhancements.md#5-output-format-options) for full specification
 
 ---
 
@@ -1482,7 +1482,7 @@ ragged history clear --before 2025-01-01
 - ✅ Search works across history
 - ✅ Clear removes old queries
 
-**See:** [CLI Enhancements Catalogue](../../../UI/cli/enhancements.md#6-query-history--replay) for full specification
+**See:** [CLI Enhancements Catalogue](../../planning/interfaces/cli/enhancements.md#6-query-history--replay) for full specification
 
 ---
 
@@ -1534,7 +1534,7 @@ ragged -vv ingest document.pdf
 - ✅ -vv shows trace-level logs
 - ✅ Works consistently across all commands
 
-**See:** [CLI Enhancements Catalogue](../../../UI/cli/enhancements.md#7-verbose--quiet-modes) for full specification
+**See:** [CLI Enhancements Catalogue](../../planning/interfaces/cli/enhancements.md#7-verbose--quiet-modes) for full specification
 
 ---
 
@@ -1587,7 +1587,7 @@ ragged config show --format json
 - ✅ Provides helpful error messages
 - ✅ Shows current config in readable format
 
-**See:** [CLI Enhancements Catalogue](../../../UI/cli/enhancements.md#8-configuration-validation) for full specification
+**See:** [CLI Enhancements Catalogue](../../planning/interfaces/cli/enhancements.md#8-configuration-validation) for full specification
 
 ---
 
@@ -1639,7 +1639,7 @@ ragged info --format json > bug-report.json
 - ✅ Shows ragged configuration
 - ✅ Can export as JSON for bug reports
 
-**See:** [CLI Enhancements Catalogue](../../../UI/cli/enhancements.md#9-environment-information) for full specification
+**See:** [CLI Enhancements Catalogue](../../planning/interfaces/cli/enhancements.md#9-environment-information) for full specification
 
 ---
 
@@ -1694,7 +1694,7 @@ ragged cache warm --collection research
 - ✅ Cache warming improves performance
 - ✅ Statistics accurate and helpful
 
-**See:** [CLI Enhancements Catalogue](../../../UI/cli/enhancements.md#10-cache-management) for full specification
+**See:** [CLI Enhancements Catalogue](../../planning/interfaces/cli/enhancements.md#10-cache-management) for full specification
 
 ---
 
@@ -1744,7 +1744,7 @@ ragged completion install --shell bash
 - ✅ Dynamic completions (collections, etc.) work
 - ✅ Easy installation process
 
-**See:** [CLI Enhancements Catalogue](../../../UI/cli/enhancements.md#11-shell-completion) for full specification
+**See:** [CLI Enhancements Catalogue](../../planning/interfaces/cli/enhancements.md#11-shell-completion) for full specification
 
 ---
 

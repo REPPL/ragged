@@ -210,7 +210,7 @@ rag = Ragged(embedding_provider=MockEmbeddingProvider())
 - **[Architecture](../architecture/README.md)** - Overall system design
 - **[Configuration System](../architecture/configuration-system.md)** - Configuration details
 - **[Testing Strategy](testing-strategy.md)** - Testing approach
-- **[Technology Stack](../technology-stack/README.md)** - Technology choices
+- **[Technology Stack](../technologies/README.md)** - Technology choices
 
 ---
 

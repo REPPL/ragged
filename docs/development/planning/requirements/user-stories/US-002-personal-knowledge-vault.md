@@ -414,7 +414,7 @@ This suggests that...
 ## Related Personas
 
 ### Primary: Researcher
-**Definition**: [Researcher Persona](../../implementation/plan/core-concepts/personal-memory-personas.md#researcher-persona)
+**Definition**: [Researcher Persona](../../core-concepts/personal-memory-personas.md#researcher-persona)
 
 **Use Case**: Personal research notes, hypotheses, observations
 
@@ -429,7 +429,7 @@ memory_scope: persona_only
 ```
 
 ### Secondary: Casual
-**Definition**: [Casual Persona](../../implementation/plan/core-concepts/personal-memory-personas.md#casual-persona)
+**Definition**: [Casual Persona](../../core-concepts/personal-memory-personas.md#casual-persona)
 
 **Use Case**: Personal knowledge management, meeting notes, ideas
 
@@ -448,17 +448,17 @@ response_style: conversational
 ## Cross-References
 
 ### Implementation
-- [Personal Memory & Personas](../../implementation/plan/core-concepts/personal-memory-personas.md)
-- [Temporal Memory (Kuzu)](../../implementation/plan/core-concepts/personal-memory-personas.md#temporal-memory-kuzu)
-- [Privacy & Security](../../implementation/plan/core-concepts/personal-memory-personas.md#privacy-security)
+- [Personal Memory & Personas](../../core-concepts/personal-memory-personas.md)
+- [Temporal Memory (Kuzu)](../../core-concepts/personal-memory-personas.md#temporal-memory-kuzu)
+- [Privacy & Security](../../core-concepts/personal-memory-personas.md#privacy-security)
 
 ### Architecture
-- [Memory Coordinator](../../implementation/plan/core-concepts/personal-memory-personas.md#memory-coordinator)
-- [Encryption Strategy](../../implementation/plan/architecture/README.md#encryption)
+- [Memory Coordinator](../../core-concepts/personal-memory-personas.md#memory-coordinator)
+- [Encryption Strategy](../../architecture/README.md#encryption)
 
 ### Testing
-- [Security Testing](../../implementation/plan/core-concepts/testing-strategy.md#safety-and-security-testing)
-- [Privacy Testing](../../implementation/plan/core-concepts/testing-strategy.md#pii-detection)
+- [Security Testing](../../core-concepts/testing-strategy.md#safety-and-security-testing)
+- [Privacy Testing](../../core-concepts/testing-strategy.md#pii-detection)
 
 ---
 

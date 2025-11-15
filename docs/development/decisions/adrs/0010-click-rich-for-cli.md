@@ -149,5 +149,5 @@ Early testing shows users significantly appreciate:
 
 ## Related
 
-- [UI Design: CLI Interface](../interfaces/cli/)
-- [User Stories: CLI Experience](../requirements/user-stories/cli-usage.md)
+- [UI Design: CLI Interface](../../planning/interfaces/cli/)
+- [User Stories](../../planning/requirements/user-stories/README.md)

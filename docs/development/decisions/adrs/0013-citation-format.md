@@ -177,4 +177,4 @@ v0.3+:
 ## Related
 
 - [ADR-0012: Ollama for LLM Generation](./0012-ollama-for-llm-generation.md)
-- [User Stories: Trust and Verification](../requirements/user-stories/trust.md)
+- [User Stories](../../planning/requirements/user-stories/README.md)

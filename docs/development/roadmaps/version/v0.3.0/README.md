@@ -92,7 +92,7 @@ Version 0.3.0 represents a major evolution of ragged, focusing on **advanced ret
 
 **Features:** 11 advanced CLI capabilities
 
-**Related:** [CLI Enhancements Catalogue](../../../UI/cli/enhancements.md)
+**Related:** [CLI Enhancements Catalogue](../../planning/interfaces/cli/enhancements.md)
 
 ---
 
@@ -228,10 +228,10 @@ Features deferred to v0.4.0 and beyond:
 
 ## Related Documentation
 
-- [v0.1 Roadmap](../v0.1/) - MVP implementation  
+- [v0.1 Roadmap](../v0.1/) - MVP implementation
 - [v0.2 Roadmap](../v0.2/) - Enhanced retrieval
-- [CLI Enhancements Catalogue](../../../UI/cli/enhancements.md) - Detailed CLI specs
-- [Architecture](../../../architecture/) - System architecture
+- [CLI Enhancements Catalogue](../../planning/interfaces/cli/enhancements.md) - Detailed CLI specs
+- [Architecture](../../planning/architecture/) - System architecture
 
 ---
 

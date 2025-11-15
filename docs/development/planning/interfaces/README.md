@@ -230,12 +230,12 @@ CLI and web UI share the **same ragged core**:
 - [Core Concepts](../core-concepts/README.md) - Fundamental concepts
 
 ### Requirements
-- [User Stories](../requirements/user-stories.md) - User needs and workflows
-- [User Personas](../../explanation/user-personas.md) - Who ragged serves
+- [User Stories](../requirements/user-stories/README.md) - User needs and workflows
+- [Vision](../vision/README.md) - Who ragged serves and why
 
 ### Process
 - [Roadmap Overview](../../roadmaps/README.md) - Development timeline
-- [Methodology](../process/methodology/README.md) - Development approach
+- [Methodology](../../process/methodology/README.md) - Development approach
 
 ---
 

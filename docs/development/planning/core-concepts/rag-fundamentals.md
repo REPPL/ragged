@@ -77,9 +77,8 @@ This document will cover:
 
 ## Related Documentation
 
-- **[RAG Fundamentals (Explanation)](../../../explanation/rag-fundamentals.md)** - Conceptual overview
-- **[RAG Research](../../../research/background/rag.md)** - Research papers and resources
 - **[Architecture](../architecture/README.md)** - System architecture
+- **[Technologies](../technologies/README.md)** - Technology stack
 - **[Model Selection](model-selection.md)** - Model selection criteria
 
 ---
