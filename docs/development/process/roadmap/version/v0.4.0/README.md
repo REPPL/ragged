@@ -1516,7 +1516,7 @@ batch_size: 32
 4. **Custom CLI Command**
    - User needs batch document analysis
    - Creates command plugin for analysis
-   - Adds `ragged analyze` command
+   - Adds `ragged analyse` command
    - Available alongside built-in commands
 
 **Integration with v0.4.0 Features:**
