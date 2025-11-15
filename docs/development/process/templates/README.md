@@ -78,7 +78,7 @@ Templates ensure consistent documentation practices and make it easy to capture 
 - Planning persona-specific capabilities
 - Establishing testable acceptance criteria
 
-**Output location:** `/docs/development/requirements/user-stories/US-XXX-title.md`
+**Output location:** `/docs/development/planning/requirements/user-stories/US-XXX-title.md`
 
 **Key sections:**
 - Overview with persona mapping
@@ -97,7 +97,7 @@ Templates ensure consistent documentation practices and make it easy to capture 
 - Summarizing changes and improvements
 - Planning next version
 
-**Output location:** `/docs/development/versions/vX.Y/README.md`
+**Output location:** `/docs/development/planning/versions/vX.Y/README.md`
 
 **Key sections:**
 - Version goals and completion status
@@ -141,20 +141,20 @@ Templates include placeholders for cross-references:
 Templates support this documentation structure:
 
 ```
-docs/
-├── process/
-│   ├── devlog/             # Daily logs go here
-│   ├── time-logs/          # Feature time logs go here
-│   └── templates/          # Templates (this folder)
-├── adr/                    # ADRs go here
-├── requirements/
-│   └── user-stories/       # User stories go here
-└── design/
-    └── versions/           # Version summaries go here
-        ├── v0.1/
-        │   └── README.md
-        ├── v0.2/
-        └── ...
+docs/development/
+├── planning/
+│   ├── requirements/
+│   │   └── user-stories/   # User stories go here
+│   └── versions/           # Version summaries go here
+│       ├── v0.1/
+│       │   └── README.md
+│       ├── v0.2/
+│       └── ...
+├── adrs/                   # ADRs go here
+└── process/
+    ├── devlogs/            # Daily logs go here
+    ├── time-logs/          # Feature time logs go here
+    └── templates/          # Templates (this folder)
 ```
 
 ---
@@ -173,9 +173,9 @@ Templates can be adapted for project-specific needs:
 
 ## Cross-References
 
-- **Development Guide**: [This guide is no longer available (removed during restructuring)](This guide is no longer available (removed during restructuring))
-- **Version Roadmap**: [../../versions/](../../versions/)
-- **User Stories**: [../../requirements/user-stories/](../../requirements/user-stories/)
+- **Development Guide**: [../../README.md](../../README.md)
+- **Version Roadmap**: [../../planning/versions/](../../planning/versions/)
+- **User Stories**: [../../planning/requirements/user-stories/](../../planning/requirements/user-stories/)
 
 ---
 
@@ -189,8 +189,8 @@ Templates can be adapted for project-specific needs:
 
 ## Quick Start
 
-1. **Creating an ADR**: Copy `adr-template.md` → `/docs/development/adr/XXXX-title.md`
-2. **Daily Devlog**: Copy `devlog-template.md` → `/docs/development/process/devlog/daily/YYYY-MM-DD.md`
-3. **New User Story**: Copy `user-story-template.md` → `/docs/development/requirements/user-stories/US-XXX-title.md`
-4. **Version Summary**: Copy `version-summary-template.md` → `/docs/development/versions/vX.Y/README.md`
+1. **Creating an ADR**: Copy `adr-template.md` → `/docs/development/adrs/XXXX-title.md`
+2. **Daily Devlog**: Copy `devlog-template.md` → `/docs/development/process/devlogs/daily/YYYY-MM-DD.md`
+3. **New User Story**: Copy `user-story-template.md` → `/docs/development/planning/requirements/user-stories/US-XXX-title.md`
+4. **Version Summary**: Copy `version-summary-template.md` → `/docs/development/planning/versions/vX.Y/README.md`
 5. **Time Tracking**: Copy `feature-time-log-template.md` → `/docs/development/process/time-logs/feature-name.md`

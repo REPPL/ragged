@@ -21,17 +21,18 @@ This directory contains all development-related documentation, organised by purp
 
 ```
 development/
-├── vision/           → Long-term product strategy
-├── requirements/     → User needs and user stories
-├── architecture/     → System architecture design
-├── core-concepts/    → Foundational technical concepts
-├── technology-stack/ → Technology evaluations
-├── UI/               → User interface design (CLI & web)
-├── versions/         → Version-specific design plans
-├── references/       → Research papers and resources
+├── planning/         → All design and planning documents
+│   ├── vision/       → Long-term product strategy
+│   ├── requirements/ → User needs and user stories
+│   ├── architecture/ → System architecture design
+│   ├── core-concepts/→ Foundational technical concepts
+│   ├── interfaces/   → User interface design (CLI & web)
+│   ├── versions/     → Version-specific design plans
+│   ├── technologies/ → Technology evaluations
+│   └── references/   → Research papers and resources
 ├── rfcs/             → Proposals for significant changes
-├── adr/              → Architecture Decision Records
-├── implementation/   → What was actually built
+├── adrs/             → Architecture Decision Records
+├── implementations/  → What was actually built
 └── process/          → How it was built (transparency)
 ```
 
@@ -39,14 +40,16 @@ development/
 
 ## Planning & Design Documentation
 
-### [vision/](./vision/) - Product Strategy
+All design and planning documents are now organised under `planning/` for clarity:
+
+### [planning/vision/](./planning/vision/) - Product Strategy
 
 **Purpose:** Long-term product goals and principles
 
 **Key documents:**
-- [Product Vision](./vision/product-vision.md) - Goals, principles, success criteria
+- [Product Vision](./planning/vision/product-vision.md) - Goals, principles, success criteria
 
-### [requirements/](./requirements/) - User Needs
+### [planning/requirements/](./planning/requirements/) - User Needs
 
 **Purpose:** User stories and functional requirements
 
@@ -54,25 +57,25 @@ development/
 - User stories organised by feature area
 - Persona definitions
 
-### [architecture/](./architecture/) - System Design
+### [planning/architecture/](./planning/architecture/) - System Design
 
 **Purpose:** State-of-the-art RAG architecture and system design
 
 **Key documents:**
-- [Architecture README](./architecture/README.md) - Complete architecture overview
-- [Storage Model](./architecture/storage-model.md)
-- [Configuration System](./architecture/configuration-system.md)
+- [Architecture README](./planning/architecture/README.md) - Complete architecture overview
+- [Storage Model](./planning/architecture/storage-model.md)
+- [Configuration System](./planning/architecture/configuration-system.md)
 
-### [core-concepts/](./core-concepts/) - Foundational Concepts
+### [planning/core-concepts/](./planning/core-concepts/) - Foundational Concepts
 
 **Purpose:** Core technical concepts and patterns
 
 **Key documents:**
-- [RAG Fundamentals](./core-concepts/rag-fundamentals.md) - Core RAG concepts
-- [Privacy Architecture](./core-concepts/privacy-architecture.md) - Privacy-first design
-- [Modularity](./core-concepts/modularity.md) - Plugin architecture
+- [RAG Fundamentals](./planning/core-concepts/rag-fundamentals.md) - Core RAG concepts
+- [Privacy Architecture](./planning/core-concepts/privacy-architecture.md) - Privacy-first design
+- [Modularity](./planning/core-concepts/modularity.md) - Plugin architecture
 
-### [technology-stack/](./technology-stack/) - Technology Choices
+### [planning/technologies/](./planning/technologies/) - Technology Choices
 
 **Purpose:** Technology evaluations and selections
 
@@ -82,19 +85,19 @@ development/
 - LLM backend options
 - Chunking strategies
 
-### [UI/](./UI/) - User Interface Design
+### [planning/interfaces/](./planning/interfaces/) - User Interface Design
 
 **Purpose:** Design documentation for all user interfaces
 
 **Contains:**
-- **[cli/](./UI/cli/)** - CLI enhancements catalogue (23 features across v0.2.7-v0.4.0)
-- **[web/](./UI/web/)** - Web UI evolution (v0.2-v1.0 designs)
+- **[cli/](./planning/interfaces/cli/)** - CLI enhancements catalogue
+- **[web/](./planning/interfaces/web/)** - Web UI evolution (v0.2-v1.0 designs)
 
 **Key documents:**
-- [CLI Enhancements](./UI/cli/enhancements.md) - Complete CLI feature specifications
-- [UI README](./UI/README.md) - Navigation and overview
+- [CLI Enhancements](./planning/interfaces/cli/enhancements.md) - Complete CLI feature specifications
+- [Interfaces README](./planning/interfaces/README.md) - Navigation and overview
 
-### [versions/](./versions/) - Version Plans
+### [planning/versions/](./planning/versions/) - Version Plans
 
 **Purpose:** Version-specific high-level design plans
 
@@ -103,7 +106,7 @@ development/
 - Feature roadmaps per version
 - Long-term vision
 
-### [references/](./references/) - Research Materials
+### [planning/references/](./planning/references/) - Research Materials
 
 **Purpose:** Academic papers, research, and external resources
 
@@ -138,17 +141,18 @@ development/
 
 ---
 
-## [adr/](./adr/) - Architecture Decision Records
+## [adrs/](./adrs/) - Architecture Decision Records
 
 **Purpose:** Document **why** specific architectural choices were made
 
-**Status:** Active (4 ADRs documented)
+**Status:** Active (14+ ADRs documented)
 
 **Contains:**
-- [ADR-0001: Local-Only Processing](./adr/0001-local-only-processing.md)
-- [ADR-0002: Pydantic for Configuration](./adr/0002-pydantic-for-configuration.md)
-- [ADR-0003: ChromaDB for Vector Storage](./adr/0003-chromadb-for-vector-storage.md)
-- [ADR-0004: Factory Pattern for Embedders](./adr/0004-factory-pattern-for-embedders.md)
+- [ADR-0001: Local-Only Processing](./adrs/0001-local-only-processing.md)
+- [ADR-0002: Pydantic for Configuration](./adrs/0002-pydantic-for-configuration.md)
+- [ADR-0003: ChromaDB for Vector Storage](./adrs/0003-chromadb-for-vector-storage.md)
+- [ADR-0004: Factory Pattern for Embedders](./adrs/0004-factory-pattern-for-embedders.md)
+- And more (see [ADRs README](./adrs/README.md))
 
 **When to use:**
 - Understanding why a decision was made
@@ -162,15 +166,15 @@ development/
 
 ---
 
-## [implementation/](./implementation/) - What Was Actually Built
+## [implementations/](./implementations/) - What Was Actually Built
 
 **Purpose:** Document **actual** implementation vs. design plans
 
 **Status:** Active (v0.1 complete, v0.2 in progress)
 
 **Contains:**
-- **[v0.1/](./implementation/v0.1/)** - MVP implementation records
-- **[v0.2/](./implementation/v0.2/)** - Enhanced retrieval implementation
+- **[v0.1/](./implementations/v0.1/)** - MVP implementation records
+- **[v0.2/](./implementations/v0.2/)** - Enhanced retrieval implementation
 
 **When to use:**
 - Understanding what was actually built (vs. what was planned)
@@ -179,13 +183,13 @@ development/
 - Planning future versions based on learnings
 
 **Key documents:**
-- [v0.1 Summary](./implementation/v0.1/summary.md) - Results and retrospective
-- [v0.1 Implementation Notes](./implementation/v0.1/implementation-notes.md) - Technical details
-- [v0.1 Testing Results](./implementation/v0.1/testing.md) - Test coverage and quality
+- [v0.1 Summary](./implementations/v0.1/summary.md) - Results and retrospective
+- [v0.1 Implementation Notes](./implementations/v0.1/implementation-notes.md) - Technical details
+- [v0.1 Testing Results](./implementations/v0.1/testing.md) - Test coverage and quality
 
 **Distinction:**
-- **vision/architecture/versions/** = What we **planned** to build
-- **implementation/** = What we **actually built**
+- **planning/** = What we **planned** to build
+- **implementations/** = What we **actually built**
 - **process/** = **How** we built it (narrative)
 
 ---
@@ -229,34 +233,34 @@ development/
 ### I Want To...
 
 **Plan a new feature**
-1. Start with [vision/](./vision/) to ensure alignment
+1. Start with [planning/vision/](./planning/vision/) to ensure alignment
 2. Create RFC in [rfcs/](./rfcs/) if significant
-3. Design in [versions/](./versions/) or [architecture/](./architecture/)
-4. Document decision in [adr/](./adr/)
+3. Design in [planning/versions/](./planning/versions/) or [planning/architecture/](./planning/architecture/)
+4. Document decision in [adrs/](./adrs/)
 
 **Understand a past decision**
-1. Check [adr/](./adr/) for architectural decisions
-2. Or [process/devlog/version/](./process/devlog/version/) for narrative context
-3. Or [architecture/](./architecture/) for original planning
+1. Check [adrs/](./adrs/) for architectural decisions
+2. Or [process/devlogs/version/](./process/devlogs/version/) for narrative context
+3. Or [planning/architecture/](./planning/architecture/) for original planning
 
 **See what's planned next**
 1. Check [process/roadmap/](./process/roadmap/) for near-term plans
-2. Or [versions/](./versions/) for long-term vision
+2. Or [planning/versions/](./planning/versions/) for long-term vision
 
 **Study how ragged is built**
 1. Read [process/README.md](./process/README.md) for overview
-2. Explore [process/devlog/](./process/devlog/) for narratives
+2. Explore [process/devlogs/](./process/devlogs/) for narratives
 3. Study [process/time-logs/](./process/time-logs/) for empirical data
 
 **Implement a feature**
-1. Follow design in [versions/](./versions/) or [architecture/](./architecture/)
-2. Track work in [process/devlog/](./process/devlog/)
-3. Document actual in [implementation/](./implementation/)
-4. Create ADR in [adr/](./adr/) for key decisions
+1. Follow design in [planning/versions/](./planning/versions/) or [planning/architecture/](./planning/architecture/)
+2. Track work in [process/devlogs/](./process/devlogs/)
+3. Document actual in [implementations/](./implementations/)
+4. Create ADR in [adrs/](./adrs/) for key decisions
 
 **Research AI-assisted development**
 1. Read [process/methodology/](./process/methodology/)
-2. Compare [versions/](./versions/) vs. [implementation/](./implementation/)
+2. Compare [planning/versions/](./planning/versions/) vs. [implementations/](./implementations/)
 3. Study [process/time-logs/](./process/time-logs/) for AI effectiveness
 
 ---
@@ -269,22 +273,22 @@ development/
 **Outcome:** Accept or reject
 
 ### 2. Planning Phase
-**Location:** [vision/](./vision/), [architecture/](./architecture/), [versions/](./versions/)
+**Location:** [planning/](./planning/) (vision, architecture, versions, etc.)
 **Purpose:** Detail what to build
 **Output:** Architecture, specs, plans
 
 ### 3. Decision Phase
-**Location:** [adr/](./adr/)
+**Location:** [adrs/](./adrs/)
 **Purpose:** Document why choices made
 **Output:** Numbered ADRs
 
 ### 4. Implementation Phase
-**Location:** [process/devlog/](./process/devlog/)
+**Location:** [process/devlogs/](./process/devlogs/)
 **Purpose:** Chronicle the build
 **Output:** Daily logs, narratives, time tracking
 
 ### 5. Retrospective Phase
-**Location:** [implementation/](./implementation/)
+**Location:** [implementations/](./implementations/)
 **Purpose:** Document what was built
 **Output:** Summaries, comparisons to design
 
@@ -294,19 +298,19 @@ development/
 
 ### Getting Started
 
-1. **Read** [vision/product-vision.md](./vision/product-vision.md) - Understand goals
+1. **Read** [planning/vision/product-vision.md](./planning/vision/product-vision.md) - Understand goals
 2. **Review** [process/roadmap/](./process/roadmap/) - See what's planned
-3. **Study** [adr/](./adr/) - Understand key decisions
-4. **Follow** [versions/](./versions/) or [UI/](./UI/) - Implementation guides
-5. **Document** [process/devlog/](./process/devlog/) - Share your journey
+3. **Study** [adrs/](./adrs/) - Understand key decisions
+4. **Follow** [planning/versions/](./planning/versions/) or [planning/interfaces/](./planning/interfaces/) - Implementation guides
+5. **Document** [process/devlogs/](./process/devlogs/) - Share your journey
 
 ### Contributing
 
 **For code:**
-- Follow design in [architecture/](./architecture/) and [versions/](./versions/)
-- Document decisions in [adr/](./adr/)
+- Follow design in [planning/architecture/](./planning/architecture/) and [planning/versions/](./planning/versions/)
+- Document decisions in [adrs/](./adrs/)
 - Track time in [process/time-logs/](./process/time-logs/)
-- Write devlog in [process/devlog/](./process/devlog/)
+- Write devlog in [process/devlogs/](./process/devlogs/)
 
 **For documentation:**
 - See [../contributing/README.md](../contributing/README.md)

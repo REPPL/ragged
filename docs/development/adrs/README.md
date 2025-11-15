@@ -47,9 +47,9 @@ Example decisions that may be documented:
 
 ## Related Documentation
 
-- **[ADR Template](../templates/adr-template.md)** - Template for new ADRs
+- **[ADR Template](../process/templates/adr-template.md)** - Template for new ADRs
 - **[Development Guide](../README.md)** - Development process
-- **[Architecture](../../implementation/plan/architecture/README.md)** - Current architecture
+- **[Architecture](../planning/architecture/README.md)** - Current architecture
 
 ---
 
