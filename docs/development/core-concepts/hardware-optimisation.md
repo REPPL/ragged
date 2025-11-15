@@ -1,9 +1,12 @@
 # Hardware Optimisation Strategy
 
-**Version**: 2.0
-**Last Updated**: 2025-11-09
-**Status**: Design Complete
-**Implementation Target**: v0.2+
+**Version:** 2.0
+
+**Last Updated:** 2025-11-15
+
+**Status:** Design Complete
+
+**Implementation Target:** v0.2+
 
 ---
 
@@ -16,7 +19,6 @@
 5. [Model Selection by Hardware](#model-selection-by-hardware)
 6. [Memory Management](#memory-management)
 7. [Performance Optimisation](#performance-optimisation)
-8. [Implementation Roadmap](#implementation-roadmap)
 
 ---
 
@@ -842,225 +844,9 @@ class EmbeddingOptimiser:
 
 ---
 
-## Implementation Roadmap
+## Related Documentation
 
-### Phase 1: Basic Detection (v0.1)
-
-**Goal**: Detect hardware and display capabilities
-
-**Features**:
-- Detect CPU, RAM, GPU using `psutil` and `torch`
-- Identify Apple Silicon vs. NVIDIA vs. CPU
-- Display hardware summary on startup
-- Basic Ollama integration
-
-**Implementation**:
-```python
-# On startup
-hardware = HardwareDetector.detect()
-print(f"Detected: {hardware}")
-
-# Use single recommended model
-if hardware.accelerator == 'mps' and hardware.total_ram_gb >= 100:
-    default_model = "llama3.3:70b-q4"
-elif hardware.accelerator == 'cuda' and hardware.gpu_memory_gb >= 20:
-    default_model = "qwen2.5:32b-q4"
-else:
-    default_model = "llama3.2:8b-q6"
-```
-
-**Effort**: 5-8 hours
-
-### Phase 2: Model Recommendations (v0.2)
-
-**Goal**: Recommend optimal models for detected hardware
-
-**Features**:
-- Calculate effective memory
-- Recommend Fast/Balanced/Quality tiers
-- Display model recommendations with expected performance
-- Warn if insufficient resources
-
-**Implementation**:
-```python
-# Get recommendations
-recommendations = ModelSelector.recommend_models(hardware)
-
-# Display
-print("\nRecommended models for your hardware:")
-for tier, config in recommendations['recommendations'].items():
-    print(f"  {tier.title()}: {config['model']} "
-          f"(~{config['expected_tokens_per_sec']:.0f} t/s, "
-          f"{config['memory_gb']}GB)")
-```
-
-**Effort**: 8-12 hours
-
-### Phase 3: Automatic Configuration (v0.3)
-
-**Goal**: Configure Ollama and ChromaDB automatically
-
-**Features**:
-- Generate Ollama environment variables
-- Configure ChromaDB for hardware
-- Adjust batch sizes for embedding generation
-- Context window recommendations
-
-**Implementation**:
-```python
-# Generate configuration
-config = ConfigGenerator.generate(hardware, recommendations)
-
-# Save to ~/.ragged/config.yaml
-config_path = Path.home() / ".ragged" / "config.yaml"
-config_path.write_text(yaml.dump(config))
-
-# Apply to environment
-for key, value in config['environment'].items():
-    os.environ[key] = str(value)
-```
-
-**Effort**: 10-15 hours
-
-### Phase 4: Dynamic Optimisation (v1.0)
-
-**Goal**: Monitor and optimise performance in production
-
-**Features**:
-- Memory usage monitoring
-- Performance metrics (latency, throughput)
-- Automatic model unloading under memory pressure
-- Adaptive batch sizing
-- Performance regression detection
-
-**Implementation**:
-```python
-class PerformanceMonitor:
-    """Monitor and optimise RAG performance"""
-
-    def __init__(self):
-        self.metrics = {
-            'retrieval_latency': [],
-            'generation_latency': [],
-            'memory_usage': [],
-            'throughput': [],
-        }
-
-    def record_query(self, latency: float, memory_used: float):
-        """Record query metrics"""
-        self.metrics['generation_latency'].append(latency)
-        self.metrics['memory_usage'].append(memory_used)
-
-        # Check for issues
-        if latency > 10.0:
-            logger.warning(f"High latency detected: {latency:.2f}s")
-
-        if memory_used > 100:  # GB
-            logger.warning("High memory usage, consider unloading models")
-
-    def get_summary(self) -> dict:
-        """Get performance summary"""
-        return {
-            'avg_latency': np.mean(self.metrics['generation_latency']),
-            'p95_latency': np.percentile(self.metrics['generation_latency'], 95),
-            'avg_memory': np.mean(self.metrics['memory_usage']),
-        }
-```
-
-**Effort**: 15-20 hours
-
----
-
-## Configuration File Format
-
-### Hardware Configuration (Auto-Generated)
-
-```yaml
-# ~/.ragged/hardware.yaml
-hardware:
-  platform: Darwin
-  cpu_cores: 16
-  total_ram_gb: 128.0
-  accelerator: mps
-  gpu_type: Apple Silicon
-  effective_memory_gb: 89.6
-
-models:
-  quality:
-    name: llama3.3:70b-instruct-q4_K_M
-    memory_gb: 45
-    expected_tokens_per_sec: 10-12
-    context_window: 32768
-
-  balanced:
-    name: qwen2.5:32b-instruct-q5_K_M
-    memory_gb: 22
-    expected_tokens_per_sec: 22-25
-    context_window: 32768
-
-  fast:
-    name: llama3.2:8b-instruct-q6_K
-    memory_gb: 6
-    expected_tokens_per_sec: 65-70
-    context_window: 32768
-
-embedding:
-  name: nomic-embed-text
-  dimensions: 768
-  context_window: 8192
-  batch_size: 100
-
-ollama:
-  environment:
-    OLLAMA_METAL: "1"
-    OLLAMA_MAX_LOADED_MODELS: "2"
-    OLLAMA_NUM_THREADS: "16"
-    OLLAMA_NUM_PARALLEL: "4"
-
-chromadb:
-  persist_directory: ~/.ragged/chroma_db
-  hnsw_construction_ef: 200
-  hnsw_search_ef: 100
-  hnsw_M: 16
-
-performance:
-  embedding_batch_size: 100
-  max_concurrent_models: 2
-  memory_safety_margin_gb: 10
-  context_window_limits:
-    70b_q4: 32768
-    34b_q5: 65536
-    13b_q6: 131072
-```
-
----
-
-## Conclusion
-
-ragged's hardware optimisation strategy ensures:
-
-- **Optimal Performance**: Automatic configuration for Mac Studio M4 Max 128GB
-- **Broad Compatibility**: Supports Mac mini, MacBook Pro, Windows/NVIDIA, CPU-only
-- **Transparent Trade-offs**: Users understand speed vs. quality for their hardware
-- **Future-Proof**: Architecture supports upcoming models and hardware
-
-**Implementation Priority**: v0.2 (after basic RAG functionality in v0.1)
-
-**Key Benefits**:
-- Maximise performance on available hardware
-- Prevent out-of-memory errors
-- User doesn't need to understand technical details
-- Graceful degradation on modest hardware
-
-**Next Steps**:
-1. Implement hardware detection (v0.1)
-2. Add model recommendations (v0.2)
-3. Automatic configuration (v0.3)
-4. Performance monitoring (v1.0)
-
----
-
-**Related Documentation**:
-- [Dynamic Model Selection](./model-selection.md)
-- [Personal Memory & Personas](./personal-memory-personas.md)
-- [Privacy Architecture](./privacy-architecture.md)
+- [Hardware Optimisation Roadmap](../process/roadmap/features/hardware-optimisation-roadmap.md) - Implementation timeline
+- [Dynamic Model Selection](./model-selection.md) - Model selection strategies
+- [Personal Memory & Personas](./personal-memory-personas.md) - User context features
+- [Privacy Architecture](./privacy-architecture.md) - Privacy-first design principles
