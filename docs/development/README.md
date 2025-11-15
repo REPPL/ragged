@@ -17,7 +17,7 @@
 
 ## Structure Overview
 
-This directory contains all development-related documentation, organized by purpose:
+This directory contains all development-related documentation, organised by purpose:
 
 ```
 development/
@@ -51,7 +51,7 @@ development/
 **Purpose:** User stories and functional requirements
 
 **Contains:**
-- User stories organized by feature area
+- User stories organised by feature area
 - Persona definitions
 
 ### [architecture/](./architecture/) - System Design

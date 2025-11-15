@@ -1224,7 +1224,7 @@ Response:
    - Documents: ragas_paper.pdf, rag_survey.pdf, implementation_guide.md
 2. Prompt engineering (medium intensity)
 
-Your research seems to be evolving from general RAG evaluation toward
+Your research seems to be evolving from general RAG evaluation towards
 implementation-specific details."
 ```
 
