@@ -69,22 +69,28 @@ docs/
 │
 ├── 👨‍💻 Development Documentation
 │   └── development/     → All developer-facing documentation
-│       ├── vision/         → Long-term product strategy
-│       ├── requirements/   → User stories and needs
-│       ├── architecture/   → System architecture
-│       ├── core-concepts/  → Foundational concepts
-│       ├── technology-stack/ → Technology choices
-│       ├── UI/             → User interface design (CLI & web)
-│       ├── versions/       → Version-specific designs
-│       ├── references/     → Research papers and resources
-│       ├── rfcs/           → Request for Comments proposals
-│       ├── adr/            → Architecture Decision Records
-│       ├── implementation/ → What was actually built
-│       └── process/        → How ragged is being built
+│       ├── planning/       → Future design (what to build)
+│       │   ├── vision/         → Long-term product strategy
+│       │   ├── requirements/   → User stories and needs
+│       │   ├── architecture/   → System architecture
+│       │   ├── core-concepts/  → Foundational concepts
+│       │   ├── technologies/   → Technology choices
+│       │   ├── interfaces/     → User interface design (CLI & web)
+│       │   ├── versions/       → Version-specific designs
+│       │   └── references/     → Research papers and resources
+│       ├── decisions/      → Rationale (why we chose)
+│       │   ├── adrs/           → Architecture Decision Records
+│       │   └── rfcs/           → Request for Comments proposals
+│       ├── roadmaps/       → Timelines (when to build)
+│       │   ├── features/       → Feature roadmaps
+│       │   └── version/        → Version roadmaps
+│       ├── implementations/ → Past reality (what was built)
+│       │   └── versions/       → Implementation by version
+│       └── process/        → Methodology (how we built)
 │           ├── methodology/    → Development methods
-│           ├── roadmap/        → Near-term plans
-│           ├── devlog/         → Development narratives
+│           ├── devlogs/        → Development narratives
 │           ├── time-logs/      → Time tracking
+│           ├── testing/        → Testing documentation
 │           └── templates/      → Document templates
 │
 ├── 🔬 Research & Community
@@ -182,26 +188,25 @@ All developer-facing documentation is now organised under [development/](./devel
 **Purpose:** Central hub for all development-related documentation
 
 **Structure:**
-- **vision/** - Product strategy and principles
-- **requirements/** - User stories and needs
-- **architecture/** - System architecture and design
-- **core-concepts/** - Foundational concepts
-- **technology-stack/** - Technology choices and evaluations
-- **UI/** - User interface design (CLI & web)
-- **versions/** - Version-specific design plans
-- **references/** - Research papers and resources
-- **rfcs/** - Proposals for significant changes
-- **adr/** - Architecture Decision Records
-- **implementation/** - What was actually built
-- **process/** - How it was built (methodology, roadmap, devlogs, time tracking)
+- **planning/** - Future design documentation (what to build)
+  - vision/, requirements/, architecture/, core-concepts/, technologies/, interfaces/, versions/, references/
+- **decisions/** - Decision rationale (why we chose)
+  - adrs/ (Architecture Decision Records), rfcs/ (Request for Comments)
+- **roadmaps/** - Development timelines (when to build)
+  - features/, version/ (with current symlink → v0.3.0)
+- **implementations/** - Implementation records (what was built)
+  - versions/ (v0.1/, v0.2/)
+- **process/** - Development methodology (how we built)
+  - methodology/, devlogs/, time-logs/, testing/, templates/
 
 **Quick Links:**
-- [Product Vision](./development/vision/product-vision.md) - Goals and principles
-- [Architecture Overview](./development/architecture/README.md) - System architecture
-- [Roadmap](./development/process/roadmap/README.md) - Near-term plans and CLI enhancements
-- [CLI Enhancements Catalogue](./development/UI/cli/enhancements.md) - Complete CLI feature catalogue
-- [Web UI Design](./development/UI/web/) - Web interface evolution
-- [ADRs](./development/adr/) - Key architectural decisions
+- [Product Vision](./development/planning/vision/product-vision.md) - Goals and principles
+- [Architecture Overview](./development/planning/architecture/README.md) - System architecture
+- [Roadmaps](./development/roadmaps/README.md) - Version roadmaps and timelines
+- [Current Roadmap](./development/roadmaps/version/current/) - Active development plan (v0.3.0)
+- [CLI Enhancements Catalogue](./development/planning/interfaces/cli/enhancements.md) - Complete CLI feature catalogue
+- [Web UI Design](./development/planning/interfaces/web/) - Web interface evolution
+- [ADRs](./development/decisions/adrs/) - Key architectural decisions
 
 **Audience:** Contributors, developers, technical stakeholders
 
@@ -254,19 +259,20 @@ All developer-facing documentation is now organised under [development/](./devel
 → See [Reference](./reference/) (auto-generated from code with v0.1)
 
 **Understand RAG concepts**
-→ Read [Explanation](./explanation/) and [Core Concepts](./development/core-concepts/)
+→ Read [Explanation](./explanation/) and [Core Concepts](./development/planning/core-concepts/)
 
 **Understand the architecture**
 → Read [Architecture Overview](./explanation/architecture-overview.md) (user-facing)
-→ Then [Architecture Documentation](./development/architecture/) (technical details)
+→ Then [Architecture Documentation](./development/planning/architecture/) (technical details)
 
 **Understand a specific decision**
-→ Check [ADR](./development/adr/) for numbered architectural decisions
-→ Or [Version Decisions](./development/process/devlog/version/) for narrative context
+→ Check [ADRs](./development/decisions/adrs/) for numbered architectural decisions
+→ Or [Version Devlogs](./development/process/devlogs/version/) for narrative context
 
 **See what's planned next**
-→ Check [Process Roadmap](./development/process/roadmap/) for near-term plans
-→ Or [Version Design Plans](./development/versions/) for long-term vision
+→ Check [Roadmaps](./development/roadmaps/) for version plans and timelines
+→ Or [Current Roadmap](./development/roadmaps/version/current/) for active development (v0.3.0)
+→ Or [Version Design Plans](./development/planning/versions/) for detailed feature specifications
 
 **Contribute code or documentation**
 → See [Contributing Guide](./contributing/README.md)
@@ -274,11 +280,11 @@ All developer-facing documentation is now organised under [development/](./devel
 **Study the development process**
 → Explore [Process Documentation](./development/process/)
 → Read [Time Logs](./development/process/time-logs/) for empirical data
-→ Check [Development Logs](./development/process/devlog/) for narratives
+→ Check [Development Logs](./development/process/devlogs/) for narratives
 
 **Research AI-assisted development**
 → Review [AI Assistance Guidelines](./development/process/methodology/ai-assistance.md)
-→ Compare [Design Plans](./development/versions/) vs. [Actual Implementation](./development/implementation/)
+→ Compare [Design Plans](./development/planning/versions/) vs. [Actual Implementation](./development/implementations/)
 → Study [Time Logs](./development/process/time-logs/) for AI effectiveness data
 
 **See research materials**
@@ -341,7 +347,7 @@ Each metadata field on its own line for readability.
 
 - All documentation version-controlled in git
 - Major milestones tagged (e.g., `v0.1-complete`)
-- Compare plans ([versions/](./development/versions/)) against actuals ([implementation/](./development/implementation/))
+- Compare plans ([planning/versions/](./development/planning/versions/)) against actuals ([implementations/](./development/implementations/))
 
 ### AI Transparency
 
@@ -349,7 +355,7 @@ ragged development uses AI tools (Claude Code) transparently:
 - AI usage disclosed in commits and documentation
 - Time tracking distinguishes AI-assisted vs. manual work
 - All AI-generated code reviewed and understood by humans
-- See [AI Assistance Guidelines](./process/methodology/ai-assistance.md)
+- See [AI Assistance Guidelines](./development/process/methodology/ai-assistance.md)
 
 ---
 
@@ -359,7 +365,7 @@ ragged development uses AI tools (Claude Code) transparently:
 
 All processing 100% local by default. No external APIs unless explicitly configured.
 
-**See:** [ADR-0001: Local-Only Processing](./adr/0001-local-only-processing.md)
+**See:** [ADR-0001: Local-Only Processing](./development/decisions/adrs/0001-local-only-processing.md)
 
 ### 2. Learning-Focused
 
@@ -373,7 +379,7 @@ Incorporate latest 2025 RAG research and best practices.
 
 Pluggable components with clear interfaces. Easy to experiment and extend.
 
-**See:** [Modularity](./development/core-concepts/modularity.md)
+**See:** [Modularity](./development/planning/core-concepts/modularity.md)
 
 ### 5. Progressive Enhancement
 
@@ -383,7 +389,7 @@ Build incrementally. Each version adds capabilities without breaking previous wo
 
 Document the actual development process, including AI assistance, for reproducibility.
 
-**See:** [Process Documentation](./process/)
+**See:** [Process Documentation](./development/process/)
 
 ---
 
@@ -441,6 +447,6 @@ See [`../LICENSE`](../LICENSE) for full text.
 **Next Steps:**
 
 1. **New users:** Wait for v0.1 release, then start with [Tutorials](./tutorials/)
-2. **Contributors:** Review [Architecture](./development/architecture/) and [Contributing Guide](./contributing/)
-3. **Developers:** Explore [Process](./development/process/) and [Version Plans](./development/versions/)
+2. **Contributors:** Review [Architecture](./development/planning/architecture/) and [Contributing Guide](./contributing/)
+3. **Developers:** Explore [Process](./development/process/) and [Version Plans](./development/planning/versions/)
 4. **Researchers:** Check [Research](./research/) and [Time Tracking](./development/process/methodology/time-tracking.md)
