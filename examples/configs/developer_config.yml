@@ -1,0 +1,30 @@
+# Developer Configuration
+# Optimised for software development and API documentation
+
+# LLM Configuration
+llm_model: "codellama:34b"  # Code-specialised model
+
+# Embedding Configuration
+embedding_model: "sentence-transformers"
+embedding_model_name: "all-MiniLM-L6-v2"  # Fast embeddings (384 dims)
+
+# Chunking Configuration
+chunk_size: 400  # Smaller chunks for code snippets
+chunk_overlap: 80  # Less overlap for efficiency
+
+# Retrieval Configuration
+retrieval_k: 5  # Balanced retrieval
+
+# Generation preferences (v0.3+)
+# persona: "developer"
+# citation_style: "inline"
+# detail_level: "medium"
+# tone: "concise"
+# code_highlighting: true
+
+# Notes:
+# - Uses CodeLlama for better code understanding
+# - Smaller chunks work better for code snippets
+# - Fast embeddings for quick responses
+# - Concise, practical answers
+# - Focus on code examples and API docs

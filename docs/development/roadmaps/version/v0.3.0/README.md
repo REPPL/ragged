@@ -12,6 +12,8 @@
 
 ## Overview
 
+📋 **Status: PLANNED** - This version is in planning phase. Features described here are not yet implemented in v0.2.2.
+
 Version 0.3.0 represents a major evolution of ragged, focusing on **advanced retrieval techniques**, **multi-modal support**, and **quality evaluation**. This version transforms ragged from a functional RAG system into a **production-ready, state-of-the-art** document intelligence platform.
 
 ### Key Themes

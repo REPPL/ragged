@@ -318,6 +318,30 @@ All developer-facing documentation is now organised under [development/](./devel
 
 ## Documentation Standards
 
+### Status Indicators
+
+All documentation uses consistent status indicators to show implementation state:
+
+- ✅ **Implemented** - Feature is complete and available in current version
+- 🚧 **In Progress** - Feature is being actively developed in current version
+- 📋 **Planned** - Feature is designed and scheduled for a future version
+- 🔬 **Research** - Feature is in exploratory/experimental phase
+- ⚠️ **Deprecated** - Feature is legacy and will be removed in future version
+- 🔄 **Current Focus** - Highlighted area of active development
+
+**Usage Examples:**
+```markdown
+## Features
+
+- ✅ Basic RAG pipeline (v0.1)
+- ✅ Web UI with Gradio (v0.2)
+- 🚧 Document normalisation (v0.2 - in progress)
+- 📋 Personal memory system (v0.3 - planned)
+- 🔬 Self-RAG evaluation (v0.4 - research)
+```
+
+When documenting planned features, always indicate which version they target.
+
 ### Language
 
 **British English** throughout all documentation:

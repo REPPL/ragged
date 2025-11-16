@@ -131,6 +131,11 @@ class Settings(BaseSettings):
 
     def model_post_init(self, __context) -> None:
         """Create data directory and load user config if available."""
+        # Import here to avoid circular dependency
+        from src.utils.logging import get_logger
+
+        logger = get_logger(__name__)
+
         self.data_dir.mkdir(parents=True, exist_ok=True)
 
         # Check for user config file

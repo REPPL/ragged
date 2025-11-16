@@ -1,0 +1,29 @@
+# Researcher Configuration
+# Optimised for academic research and detailed analysis
+
+# LLM Configuration
+llm_model: "llama3.1:70b"  # Larger model for better quality
+
+# Embedding Configuration
+embedding_model: "sentence-transformers"
+embedding_model_name: "all-mpnet-base-v2"  # Higher quality embeddings (768 dims)
+
+# Chunking Configuration
+chunk_size: 600  # Larger chunks for more context
+chunk_overlap: 150  # More overlap to preserve context
+
+# Retrieval Configuration
+retrieval_k: 7  # More sources for comprehensive answers
+
+# Generation preferences (v0.3+)
+# persona: "researcher"
+# citation_style: "ieee"
+# detail_level: "high"
+# tone: "academic"
+
+# Notes:
+# - Uses larger 70B model for better reasoning
+# - Higher quality embeddings (768 dims vs 384)
+# - Larger chunks capture more context
+# - More retrieval chunks for comprehensive citations
+# - Academic tone and detailed responses

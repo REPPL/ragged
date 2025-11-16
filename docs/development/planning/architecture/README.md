@@ -11,6 +11,38 @@
 
 This document presents a comprehensive architecture for evolving the ragged project into a state-of-the-art RAG system incorporating the latest 2025 techniques while maintaining its core privacy-first, local-processing principles. The architecture implements a phased approach from MVP (v0.1) to production-ready (v1.0), introducing advanced capabilities including GraphRAG, Self-RAG, Adaptive RAG, and hybrid retrieval strategies.
 
+### Implementation Status (v0.2.2)
+
+This document describes the **complete vision** for ragged v1.0. Current implementation status:
+
+**Core Components:**
+- ✅ Basic RAG pipeline (vector search + generation)
+- ✅ Hybrid retrieval (BM25 + vector + fusion)
+- ✅ Multi-format document loading (PDF, TXT, MD, HTML)
+- ✅ Web UI (Gradio) and FastAPI backend
+- ✅ Contextual chunking
+- 🚧 Document normalisation to Markdown (v0.2 - partial)
+- 📋 Semantic chunking (v0.3)
+- 📋 Late chunking (v0.3)
+- 📋 Cross-encoder reranking (v0.3)
+
+**Advanced Features:**
+- 📋 Personal memory system (v0.3)
+- 📋 Persona-based interactions (v0.3)
+- 📋 Knowledge graph (GraphRAG) (v0.4-v0.5)
+- 📋 Self-RAG with confidence scoring (v0.4)
+- 📋 Adaptive routing (v0.3-v0.4)
+- 📋 Multi-hop reasoning (v0.5)
+
+**Infrastructure:**
+- ✅ ChromaDB vector store
+- ✅ Ollama LLM integration
+- 📋 Graph database (NetworkX → Neo4j/Kuzu) (v0.4-v0.5)
+- 📋 Advanced caching (v0.3)
+- 📋 Production deployment (v1.0)
+
+See version roadmaps in `docs/development/roadmaps/version/` for detailed timelines.
+
 ### Core Design Principles
 
 1. **Privacy-First**: All processing remains 100% local by default
