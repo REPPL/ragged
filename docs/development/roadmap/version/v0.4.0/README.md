@@ -1536,6 +1536,522 @@ batch_size: 32
 
 ---
 
+## Part 8: LEANN Vector Store Backend (38-54 hours)
+
+This part introduces LEANN as an optional vector storage backend, offering 97% storage savings through graph-based selective recomputation. Built upon the Plugin Architecture foundation from Part 7.
+
+**Related Documentation:**
+- [LEANN Integration Analysis](../../../decisions/2025-11-16-leann-integration-analysis.md)
+- [ADR-0015: VectorStore Abstraction](../../../decisions/adrs/0015-vectorstore-abstraction.md)
+
+---
+
+### FEAT-111: VectorStore Backend System
+
+**Priority**: P0 - Foundation (prerequisite from v0.3)
+
+**Estimated Time**: 8-10 hours (foundation work)
+
+**Description:**
+Implements the VectorStore abstraction layer designed in v0.3, enabling pluggable vector storage backends. This foundation enables both ChromaDB (current) and LEANN (new) to coexist.
+
+**Implementation:**
+
+```python
+# ragged/vectorstore/__init__.py (NEW)
+from abc import ABC, abstractmethod
+from typing import List, Dict, Any, Optional
+from dataclasses import dataclass
+
+@dataclass
+class VectorStoreDocument:
+    """Unified document representation across backends."""
+    id: str
+    content: str
+    embedding: Optional[List[float]] = None
+    metadata: Dict[str, Any] = None
+
+class VectorStore(ABC):
+    """Abstract base class for vector store backends."""
+
+    @abstractmethod
+    def add(self, documents: List[VectorStoreDocument], collection_name: str = "default") -> List[str]:
+        pass
+
+    @abstractmethod
+    def search(self, query_embedding: List[float], n_results: int = 10,
+               collection_name: str = "default") -> QueryResult:
+        pass
+
+    # ... other methods (delete, update, get_stats, etc.)
+```
+
+**Files to Create:**
+- `ragged/vectorstore/__init__.py` - Interface definitions (~200 lines)
+- `ragged/vectorstore/chromadb.py` - ChromaDB implementation (~300 lines)
+- `ragged/vectorstore/factory.py` - Backend factory (~100 lines)
+- `tests/vectorstore/test_interface.py` - Interface tests (~150 lines)
+
+**Files to Modify:**
+- `ragged/core/retrieval.py` - Use VectorStore interface
+- `ragged/cli/commands/ingest.py` - Backend selection
+- `pyproject.toml` - Add optional LEANN dependency
+
+**Testing:**
+- ✅ ChromaDBStore passes all existing tests
+- ✅ Interface contract validated
+- ✅ Factory creates correct backends
+- ✅ No regression in existing functionality
+
+---
+
+### FEAT-112: LEANN Backend Implementation
+
+**Priority**: P1 - Alternative Backend
+
+**Estimated Time**: 12-16 hours
+
+**Description:**
+Implements LeannVectorStore as an alternative to ChromaDB, offering 97% storage savings with graph-based selective recomputation. Uses LEANN library for on-demand embedding computation.
+
+**Background:**
+- **Storage**: 97% reduction (5% of raw data volume)
+- **Performance**: 90% top-3 recall with <2s latency
+- **Architecture**: Graph-based index with on-demand computation
+- **License**: MIT (compatible with ragged's GPL-3.0)
+
+**Implementation:**
+
+```python
+# ragged/vectorstore/leann.py (NEW)
+from ragged.vectorstore import VectorStore, VectorStoreDocument, QueryResult
+from leann import LeannBuilder, LeannSearcher
+from pathlib import Path
+
+class LeannVectorStore(VectorStore):
+    """LEANN implementation of VectorStore interface.
+
+    Provides 97% storage savings through graph-based selective
+    recomputation instead of storing all embeddings.
+    """
+
+    def __init__(
+        self,
+        persist_directory: str = "./data/leann",
+        graph_degree: int = 32,
+        search_complexity: int = 100
+    ):
+        self.persist_directory = Path(persist_directory)
+        self.persist_directory.mkdir(parents=True, exist_ok=True)
+
+        self.graph_degree = graph_degree
+        self.search_complexity = search_complexity
+
+        self._builders = {}  # Collection name -> LeannBuilder
+        self._searchers = {}  # Collection name -> LeannSearcher
+
+    def add(
+        self,
+        documents: List[VectorStoreDocument],
+        collection_name: str = "default"
+    ) -> List[str]:
+        """Add documents to LEANN index."""
+        builder = self._get_builder(collection_name)
+
+        # Convert to LEANN format
+        doc_texts = [doc.content for doc in documents]
+        doc_ids = [doc.id for doc in documents]
+        metadatas = [doc.metadata or {} for doc in documents]
+
+        # Build graph-based index
+        builder.add_documents(
+            texts=doc_texts,
+            ids=doc_ids,
+            metadatas=metadatas
+        )
+
+        # Save index
+        builder.save(self._get_index_path(collection_name))
+
+        return doc_ids
+
+    def search(
+        self,
+        query_embedding: List[float],
+        n_results: int = 10,
+        collection_name: str = "default",
+        filter_dict: Optional[Dict[str, Any]] = None
+    ) -> QueryResult:
+        """Search using LEANN's graph-based retrieval."""
+        searcher = self._get_searcher(collection_name)
+
+        # LEANN computes embeddings on-demand during search
+        results = searcher.search(
+            query_embedding=query_embedding,
+            k=n_results,
+            search_complexity=self.search_complexity,
+            metadata_filter=filter_dict
+        )
+
+        # Convert LEANN format to unified format
+        return QueryResult(
+            documents=[
+                VectorStoreDocument(
+                    id=r['id'],
+                    content=r['text'],
+                    metadata=r['metadata']
+                )
+                for r in results
+            ],
+            distances=[r['distance'] for r in results],
+            metadatas=[r['metadata'] for r in results]
+        )
+
+    def _get_builder(self, collection_name: str) -> LeannBuilder:
+        """Get or create LEANN builder for collection."""
+        if collection_name not in self._builders:
+            self._builders[collection_name] = LeannBuilder(
+                graph_degree=self.graph_degree
+            )
+        return self._builders[collection_name]
+
+    def _get_searcher(self, collection_name: str) -> LeannSearcher:
+        """Get or create LEANN searcher for collection."""
+        if collection_name not in self._searchers:
+            index_path = self._get_index_path(collection_name)
+            if not index_path.exists():
+                raise ValueError(f"Collection '{collection_name}' not found")
+
+            self._searchers[collection_name] = LeannSearcher.load(index_path)
+
+        return self._searchers[collection_name]
+
+    def _get_index_path(self, collection_name: str) -> Path:
+        """Get path to LEANN index for collection."""
+        return self.persist_directory / f"{collection_name}.leann"
+
+    # ... implement other VectorStore methods
+```
+
+**Dependencies:**
+
+```toml
+# pyproject.toml
+[project.optional-dependencies]
+leann = [
+    "leann>=1.0.0",
+    "sentence-transformers>=3.0.0"  # LEANN requirement
+]
+```
+
+**Installation:**
+
+```bash
+# Simple installation (ChromaDB only)
+pip install ragged
+
+# Advanced installation (with LEANN support)
+pip install ragged[leann]
+```
+
+**Files to Create:**
+- `ragged/vectorstore/leann.py` - LEANN implementation (~400 lines)
+- `tests/vectorstore/test_leann.py` - LEANN-specific tests (~250 lines)
+- `docs/guides/leann-backend.md` - User guide (~150 lines)
+
+**Testing:**
+- ✅ LEANN backend passes interface contract tests
+- ✅ Storage savings verified (97% reduction)
+- ✅ Retrieval quality acceptable (90% recall)
+- ✅ Query latency <2s
+- ✅ Metadata filtering works
+- ✅ Collection isolation verified
+
+---
+
+### FEAT-113: Backend Selection & Configuration
+
+**Priority**: P1 - User Interface
+
+**Estimated Time**: 4-6 hours
+
+**Description:**
+Adds CLI options and configuration for backend selection, allowing users to choose between ChromaDB (default) and LEANN based on their storage vs accuracy needs.
+
+**Configuration:**
+
+```yaml
+# ~/.ragged/config.yaml
+vectorstore:
+  backend: "chromadb"  # or "leann"
+
+  chromadb:
+    persist_directory: "./data/chroma"
+
+  leann:
+    persist_directory: "./data/leann"
+    graph_degree: 32          # Higher = better quality, more storage
+    search_complexity: 100    # Higher = better recall, slower search
+```
+
+**CLI Usage:**
+
+```bash
+# Specify backend during ingestion
+ragged ingest docs/ --backend leann
+
+# Use default backend from config
+ragged ingest docs/
+
+# Query with specific backend
+ragged query "What is RAG?" --backend chromadb
+
+# Show backend statistics
+ragged stats --backend leann
+```
+
+**Backend Comparison Command:**
+
+```bash
+# Compare storage usage
+ragged backend compare
+
+# Output:
+# Backend    Collection    Docs    Storage    Index Size
+# ChromaDB   default       1000    201 MB     201 MB
+# LEANN      default       1000    6 MB       6 MB (97% savings)
+```
+
+**Files to Modify:**
+- `ragged/cli/commands/ingest.py` - Add --backend option
+- `ragged/cli/commands/query.py` - Add --backend option
+- `ragged/cli/commands/stats.py` - Backend-specific stats
+- `ragged/config/settings.py` - Backend configuration schema
+
+**Files to Create:**
+- `ragged/cli/commands/backend.py` - Backend management commands (~200 lines)
+- `tests/cli/test_backend_selection.py` - CLI tests (~150 lines)
+
+**Testing:**
+- ✅ Backend selection from CLI works
+- ✅ Configuration loading correct
+- ✅ Default backend used when not specified
+- ✅ Error handling for missing LEANN
+- ✅ Compare command shows accurate stats
+
+---
+
+### FEAT-114: Migration Tools
+
+**Priority**: P2 - Utility
+
+**Estimated Time**: 8-12 hours
+
+**Description:**
+Provides tools to migrate collections between backends, enabling users to switch from ChromaDB to LEANN (or vice versa) without losing data.
+
+**Migration Command:**
+
+```bash
+# Migrate collection from ChromaDB to LEANN
+ragged migrate chromadb-to-leann \
+    --collection default \
+    --verify
+
+# Migrate with progress reporting
+ragged migrate chromadb-to-leann \
+    --collection default \
+    --batch-size 100 \
+    --show-progress
+
+# Reverse migration (LEANN to ChromaDB)
+ragged migrate leann-to-chromadb \
+    --collection default
+```
+
+**Implementation:**
+
+```python
+# ragged/vectorstore/migration.py (NEW)
+class VectorStoreMigrator:
+    """Migrate collections between vector store backends."""
+
+    def migrate(
+        self,
+        source_backend: VectorStore,
+        target_backend: VectorStore,
+        collection_name: str,
+        batch_size: int = 100,
+        verify: bool = True
+    ) -> dict:
+        """Migrate collection from source to target backend."""
+
+        stats = {
+            "total_docs": 0,
+            "migrated_docs": 0,
+            "failed_docs": 0,
+            "start_time": datetime.now()
+        }
+
+        # Get all documents from source
+        source_docs = source_backend.get_all_documents(collection_name)
+        stats["total_docs"] = len(source_docs)
+
+        # Migrate in batches
+        for batch in self._batch(source_docs, batch_size):
+            try:
+                target_backend.add(batch, collection_name)
+                stats["migrated_docs"] += len(batch)
+            except Exception as e:
+                logger.error(f"Batch migration failed: {e}")
+                stats["failed_docs"] += len(batch)
+
+        # Verify migration if requested
+        if verify:
+            verification = self._verify_migration(
+                source_backend,
+                target_backend,
+                collection_name
+            )
+            stats["verification"] = verification
+
+        stats["end_time"] = datetime.now()
+        stats["duration"] = (stats["end_time"] - stats["start_time"]).total_seconds()
+
+        return stats
+
+    def _verify_migration(
+        self,
+        source: VectorStore,
+        target: VectorStore,
+        collection_name: str
+    ) -> dict:
+        """Verify migration completed successfully."""
+
+        source_stats = source.get_collection_stats(collection_name)
+        target_stats = target.get_collection_stats(collection_name)
+
+        return {
+            "doc_count_match": source_stats["count"] == target_stats["count"],
+            "source_count": source_stats["count"],
+            "target_count": target_stats["count"]
+        }
+```
+
+**Files to Create:**
+- `ragged/vectorstore/migration.py` - Migration utilities (~300 lines)
+- `ragged/cli/commands/migrate.py` - Migration CLI (~200 lines)
+- `tests/vectorstore/test_migration.py` - Migration tests (~250 lines)
+
+**Testing:**
+- ✅ ChromaDB → LEANN migration works
+- ✅ LEANN → ChromaDB migration works
+- ✅ Metadata preserved during migration
+- ✅ Verification detects issues
+- ✅ Batch processing handles large collections
+- ✅ Progress reporting accurate
+
+---
+
+### FEAT-115: Documentation & User Guides
+
+**Priority**: P1 - Essential
+
+**Estimated Time**: 6-8 hours
+
+**Description:**
+Comprehensive documentation for LEANN backend, including installation, configuration, migration, and performance comparison.
+
+**Documentation Structure:**
+
+1. **Backend Comparison Guide** (`docs/guides/backend-comparison.md`)
+   - ChromaDB vs LEANN feature matrix
+   - Storage efficiency comparison
+   - Performance benchmarks
+   - Use case recommendations
+
+2. **LEANN Installation Guide** (`docs/guides/leann-installation.md`)
+   - Platform-specific installation (macOS, Linux)
+   - Dependency requirements
+   - Docker setup with LEANN
+   - Troubleshooting common issues
+
+3. **Migration Guide** (`docs/guides/backend-migration.md`)
+   - When to migrate
+   - Migration process walkthrough
+   - Verification procedures
+   - Rollback strategies
+
+4. **Configuration Reference** (`docs/reference/backend-configuration.md`)
+   - All backend configuration options
+   - Performance tuning guide
+   - Advanced LEANN parameters
+
+**Backend Comparison Matrix:**
+
+| Feature | ChromaDB | LEANN |
+|---------|----------|-------|
+| Storage Efficiency | Standard | 97% savings |
+| Retrieval Accuracy | ~100% | 90% top-3 |
+| Query Latency | <500ms | <2s |
+| Build Complexity | Simple (pip) | Complex (C++) |
+| Memory Usage | High | Low |
+| Best For | Accuracy-critical | Storage-constrained |
+
+**Files to Create:**
+- `docs/guides/backend-comparison.md` (~300 lines)
+- `docs/guides/leann-installation.md` (~250 lines)
+- `docs/guides/backend-migration.md` (~200 lines)
+- `docs/reference/backend-configuration.md` (~150 lines)
+- Update `docs/README.md` with backend docs links
+
+**Testing:**
+- ✅ All documentation examples work
+- ✅ Installation guides tested on macOS/Linux
+- ✅ Migration guides accurate
+- ✅ Configuration examples valid
+
+---
+
+### Part 8 Summary
+
+**Total Effort**: 38-54 hours
+
+**Breakdown:**
+- VectorStore Foundation: 8-10 hours
+- LEANN Implementation: 12-16 hours
+- Backend Selection & Config: 4-6 hours
+- Migration Tools: 8-12 hours
+- Documentation: 6-8 hours
+
+**Value Proposition:**
+- 97% storage savings for large collections
+- User choice (accuracy vs storage)
+- Future-proof architecture (easy to add more backends)
+- Smooth migration path
+
+**Success Criteria:**
+- ✅ Both backends pass all tests
+- ✅ <5% performance regression with abstraction layer
+- ✅ LEANN achieves 97% storage savings
+- ✅ Migration tools preserve all data
+- ✅ Documentation complete and accurate
+- ✅ Platform-specific builds successful
+- ✅ Optional dependency doesn't break core install
+
+**Integration with v0.4:**
+- Plugin Architecture (Part 7) provides foundation
+- Personal Memory (Parts 1-3) uses VectorStore interface
+- Knowledge Graphs (Part 4-6) benefit from storage savings
+
+**Trade-offs Communicated:**
+- Storage (LEANN wins): 97% reduction
+- Accuracy (ChromaDB wins): 100% vs 90% recall
+- Latency (ChromaDB wins): 500ms vs 2s
+- Complexity (ChromaDB wins): Simple vs C++ build
+
+---
+
 ## Summary
 
 v0.4.0 represents a major evolution for ragged:
