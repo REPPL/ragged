@@ -20,6 +20,11 @@ except ImportError:
     chromadb = None
 
 from src.config.settings import get_settings
+from src.storage.metadata_serialiser import (
+    deserialise_batch_metadata,
+    deserialise_metadata,
+    serialise_batch_metadata,
+)
 from src.utils.logging import get_logger
 
 logger = get_logger(__name__)
@@ -107,11 +112,14 @@ class VectorStore:
         """
         embeddings_list = embeddings.tolist() if isinstance(embeddings, np.ndarray) else embeddings
 
+        # Serialise metadata for ChromaDB compatibility
+        serialised_metadatas = serialise_batch_metadata(metadatas)
+
         self.collection.add(
             ids=ids,
             embeddings=embeddings_list,
             documents=documents,
-            metadatas=metadatas,
+            metadatas=serialised_metadatas,
         )
         logger.info(f"Added {len(ids)} embeddings to collection {self._collection_name}")
 
@@ -132,13 +140,33 @@ class VectorStore:
         Returns:
             Dict with 'ids', 'documents', 'metadatas', 'distances'
         """
-        query_list = query_embedding.tolist() if isinstance(query_embedding, np.ndarray) else [query_embedding.tolist()]
+        if isinstance(query_embedding, np.ndarray):
+            query_list = [query_embedding.tolist()]
+        elif isinstance(query_embedding, list):
+            # Already a list - wrap in outer list for ChromaDB batch format
+            query_list = [query_embedding]
+        else:
+            # Single value - convert to nested list
+            query_list = [[float(query_embedding)]]
 
         results = self.collection.query(
             query_embeddings=query_list,
             n_results=k,
             where=where,
         )
+
+        # Deserialise metadata in results
+        if results and results.get("metadatas"):
+            # ChromaDB returns nested lists for batch queries
+            if isinstance(results["metadatas"][0], list):
+                # Batch query: list of lists
+                results["metadatas"] = [
+                    deserialise_batch_metadata(batch) for batch in results["metadatas"]
+                ]
+            else:
+                # Single query: list of dicts
+                results["metadatas"] = deserialise_batch_metadata(results["metadatas"])
+
         return results
 
     def get_documents_by_metadata(self, where: Dict[str, Any]) -> Dict[str, Any]:
@@ -158,6 +186,11 @@ class VectorStore:
         try:
             results = self.collection.get(where=where)
             logger.debug(f"Found {len(results.get('ids', []))} documents matching filter")
+
+            # Deserialise metadata in results
+            if results and results.get("metadatas"):
+                results["metadatas"] = deserialise_batch_metadata(results["metadatas"])
+
             return results
         except Exception as e:
             logger.error(f"Failed to get documents by metadata: {e}")

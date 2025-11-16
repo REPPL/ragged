@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **BUG-007: ChromaDB Metadata Serialisation**: Added support for complex metadata types in ChromaDB storage
+  - New `metadata_serialiser.py` module with serialisation/deserialisation utilities
+  - Automatic conversion of complex types to ChromaDB-compatible simple types:
+    - Path objects → str
+    - datetime objects → ISO format str
+    - lists/dicts → JSON str with `__json__:` prefix for round-trip deserialisation
+    - None values → removed during serialisation
+  - Transparent deserialisation on retrieval restores original types
+  - Integrated into VectorStore `add()`, `query()`, and `get_documents_by_metadata()` methods
+  - Fixed `query()` method to handle list inputs correctly
+  - All 44 storage tests passing (30 serialiser + 14 vector store)
+  - 95% test coverage for serialisation module
+
 ### Fixed
 - **BUG-006: Memory Leaks in Batch Processing**: Fixed memory accumulation during large batch document processing
   - Added memory monitoring using psutil to track process memory usage
