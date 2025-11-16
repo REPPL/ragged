@@ -111,7 +111,7 @@ The following structural improvements were evaluated for v0.2.x but deferred to 
 
 ### Benchmarks Directory
 - **Status:** ❌ Deferred to v0.3.0+
-- **Dependencies:** Requires v0.3.0 Evaluation & Quality framework (FEAT-004)
+- **Dependencies:** Requires v0.3.0 Evaluation & Quality framework (Part 4)
 - **Rationale:** Benchmark infrastructure exists (src/utils/benchmarks.py) but should align with evaluation metrics
 - **Implementation:** Create tests/benchmarks/ with performance regression tests
 - **Estimated Effort:** 24 hours
@@ -124,7 +124,7 @@ The following structural improvements were evaluated for v0.2.x but deferred to 
 
 ### When to Revisit
 - **CLI Modular Structure:** If src/main.py exceeds 800 lines OR plugin system needed
-- **Benchmarks Directory:** After v0.3.0 evaluation framework (FEAT-004) is complete
+- **Benchmarks Directory:** After v0.3.0 evaluation framework (Part 4) is complete
 - **Architecture Diagrams:** After v0.3.0 features stabilise (v0.3.1 or later)
 
 ---
