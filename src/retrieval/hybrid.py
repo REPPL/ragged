@@ -78,7 +78,7 @@ class HybridRetriever:
     def _vector_only(self, query: str, top_k: int) -> List[RetrievedChunk]:
         """Vector search only."""
         logger.debug(f"Vector-only retrieval for: {query}")
-        return self.vector.retrieve(query, top_k=top_k)
+        return self.vector.retrieve(query, k=top_k)
 
     def _bm25_only(self, query: str, top_k: int) -> List[RetrievedChunk]:
         """BM25 search only."""

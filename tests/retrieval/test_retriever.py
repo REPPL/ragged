@@ -40,8 +40,8 @@ class TestRetriever:
             "distances": [[0.1, 0.2]],
             "documents": [["Content 1", "Content 2"]],
             "metadatas": [[
-                {"source_file": "file1.txt", "chunk_index": 0},
-                {"source_file": "file2.txt", "chunk_index": 1}
+                {"document_id": "doc1", "document_path": "file1.txt", "chunk_position": 0},
+                {"document_id": "doc2", "document_path": "file2.txt", "chunk_position": 1}
             ]]
         }
 
@@ -50,7 +50,7 @@ class TestRetriever:
             vector_store=mock_vector_store
         )
 
-        results = retriever.retrieve("test query", top_k=2)
+        results = retriever.retrieve("test query", k=2)
 
         # Should embed the query
         mock_embedder.embed_text.assert_called_once_with("test query")
@@ -63,8 +63,8 @@ class TestRetriever:
         assert all(isinstance(chunk, RetrievedChunk) for chunk in results)
 
         # Check first result
-        assert results[0].content == "Content 1"
-        assert results[0].source_file == "file1.txt"
+        assert results[0].text == "Content 1"
+        assert results[0].document_path == "file1.txt"
         assert results[0].score > 0
 
     def test_retrieve_empty_results(self, mock_embedder, mock_vector_store):
@@ -82,7 +82,7 @@ class TestRetriever:
             vector_store=mock_vector_store
         )
 
-        results = retriever.retrieve("test query", top_k=5)
+        results = retriever.retrieve("test query", k=5)
 
         assert len(results) == 0
 
@@ -103,8 +103,8 @@ class TestRetriever:
         metadata_filter = {"source_file": "file1.txt"}
         results = retriever.retrieve(
             "test query",
-            top_k=5,
-            metadata_filter=metadata_filter
+            k=5,
+            filter_metadata=metadata_filter
         )
 
         # Should pass filter to vector store
@@ -116,11 +116,11 @@ class TestRetriever:
         # ChromaDB returns distances (lower is better)
         mock_vector_store.query.return_value = {
             "ids": [["chunk1", "chunk2"]],
-            "distances": [[0.1, 0.5]],  # Lower distance = higher similarity
+            "distances": [[0.1, 0.5]],  # Lower distance = better match
             "documents": [["Content 1", "Content 2"]],
             "metadatas": [[
-                {"source_file": "file1.txt", "chunk_index": 0},
-                {"source_file": "file2.txt", "chunk_index": 1}
+                {"document_id": "doc1", "document_path": "file1.txt", "chunk_position": 0},
+                {"document_id": "doc2", "document_path": "file2.txt", "chunk_position": 1}
             ]]
         }
 
@@ -129,10 +129,12 @@ class TestRetriever:
             vector_store=mock_vector_store
         )
 
-        results = retriever.retrieve("test query", top_k=2)
+        results = retriever.retrieve("test query", k=2)
 
-        # First result should have higher score (lower distance)
-        assert results[0].score > results[1].score
+        # First result should have lower score (lower distance = better match)
+        assert results[0].score < results[1].score
+        assert results[0].score == 0.1
+        assert results[1].score == 0.5
 
     def test_deduplicate_chunks(self, mock_embedder, mock_vector_store):
         """Test deduplication of identical chunks."""
@@ -153,24 +155,24 @@ class TestRetriever:
             vector_store=mock_vector_store
         )
 
-        results = retriever.retrieve("test query", top_k=3)
+        results = retriever.retrieve("test query", k=3)
 
         # Should deduplicate (if deduplication is implemented)
         # Check if we get unique content or all results
-        contents = [chunk.content for chunk in results]
+        contents = [chunk.text for chunk in results]
         # This depends on whether deduplication is implemented
         # For now, just verify we get results
         assert len(results) >= 2
 
     def test_retrieve_respects_top_k(self, mock_embedder, mock_vector_store):
-        """Test that top_k parameter is respected."""
+        """Test that k parameter is respected."""
         mock_vector_store.query.return_value = {
             "ids": [["chunk1", "chunk2"]],
             "distances": [[0.1, 0.2]],
             "documents": [["Content 1", "Content 2"]],
             "metadatas": [[
-                {"source_file": "file1.txt", "chunk_index": 0},
-                {"source_file": "file2.txt", "chunk_index": 1}
+                {"document_id": "doc1", "document_path": "file1.txt", "chunk_position": 0},
+                {"document_id": "doc2", "document_path": "file2.txt", "chunk_position": 1}
             ]]
         }
 
@@ -179,11 +181,11 @@ class TestRetriever:
             vector_store=mock_vector_store
         )
 
-        results = retriever.retrieve("test query", top_k=1)
+        results = retriever.retrieve("test query", k=1)
 
-        # Should request top_k from vector store
+        # Should pass k to vector store query
         call_kwargs = mock_vector_store.query.call_args[1]
-        assert call_kwargs.get("top_k") == 1 or call_kwargs.get("n_results") == 1
+        assert call_kwargs.get("k") == 1
 
     def test_retrieve_with_empty_query(self, mock_embedder, mock_vector_store):
         """Test retrieval with empty query string."""
@@ -201,7 +203,7 @@ class TestRetriever:
             "metadatas": [[]]
         }
 
-        results = retriever.retrieve("", top_k=5)
+        results = retriever.retrieve("", k=5)
 
         # Should call embedder even with empty string
         mock_embedder.embed_text.assert_called_once()
@@ -213,38 +215,42 @@ class TestRetrievedChunk:
     def test_retrieved_chunk_creation(self):
         """Test creating a RetrievedChunk instance."""
         chunk = RetrievedChunk(
-            id="chunk1",
-            content="Test content",
+            text="Test content",
             score=0.95,
-            source_file="test.txt",
-            chunk_index=0,
+            chunk_id="chunk1",
+            document_id="doc1",
+            document_path="test.txt",
+            chunk_position=0,
             metadata={"key": "value"}
         )
 
-        assert chunk.id == "chunk1"
-        assert chunk.content == "Test content"
+        assert chunk.chunk_id == "chunk1"
+        assert chunk.text == "Test content"
         assert chunk.score == 0.95
-        assert chunk.source_file == "test.txt"
-        assert chunk.chunk_index == 0
+        assert chunk.document_id == "doc1"
+        assert chunk.document_path == "test.txt"
+        assert chunk.chunk_position == 0
         assert chunk.metadata == {"key": "value"}
 
     def test_retrieved_chunk_comparison(self):
         """Test comparing RetrievedChunk instances by score."""
         chunk1 = RetrievedChunk(
-            id="chunk1",
-            content="Content 1",
+            text="Content 1",
             score=0.95,
-            source_file="test.txt",
-            chunk_index=0,
+            chunk_id="chunk1",
+            document_id="doc1",
+            document_path="test.txt",
+            chunk_position=0,
             metadata={}
         )
 
         chunk2 = RetrievedChunk(
-            id="chunk2",
-            content="Content 2",
+            text="Content 2",
             score=0.85,
-            source_file="test.txt",
-            chunk_index=1,
+            chunk_id="chunk2",
+            document_id="doc2",
+            document_path="test.txt",
+            chunk_position=1,
             metadata={}
         )
 

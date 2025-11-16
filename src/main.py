@@ -234,19 +234,28 @@ def query(query: str, k: int, show_sources: bool) -> None:
     """
     Ask a question and get an answer from your documents.
     """
+    from src.config.settings import get_settings
     from src.generation.ollama_client import OllamaClient
     from src.generation.prompts import RAG_SYSTEM_PROMPT, build_rag_prompt
     from src.generation.response_parser import parse_response
     from src.generation.citation_formatter import format_response_with_references
     from src.retrieval.retriever import Retriever
+    from src.retrieval.bm25 import BM25Retriever
+    from src.retrieval.hybrid import HybridRetriever
 
     console.print(f"[bold blue]Question:[/bold blue] {query}")
     console.print()
 
     try:
-        # Retrieve relevant chunks
-        retriever = Retriever()
-        chunks = retriever.retrieve(query, k=k)
+        # Retrieve relevant chunks using hybrid retrieval
+        settings = get_settings()
+        vector_retriever = Retriever()
+        bm25_retriever = BM25Retriever()
+        hybrid_retriever = HybridRetriever(
+            vector_retriever=vector_retriever,
+            bm25_retriever=bm25_retriever
+        )
+        chunks = hybrid_retriever.retrieve(query, top_k=k, method=settings.retrieval_method)
 
         if not chunks:
             console.print("[yellow]No relevant documents found. Have you ingested any documents yet?[/yellow]")

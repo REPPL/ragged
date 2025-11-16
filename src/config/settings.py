@@ -47,6 +47,10 @@ class Settings(BaseSettings):
 
     # Retrieval Configuration
     retrieval_k: int = Field(default=5, gt=0, description="Number of chunks to retrieve")
+    retrieval_method: str = Field(
+        default="hybrid",
+        description="Retrieval method: 'vector', 'bm25', or 'hybrid'"
+    )
 
     # Generation Configuration
     llm_model: str = Field(default="llama3.2:latest", description="Ollama model for generation")

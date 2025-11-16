@@ -120,8 +120,8 @@ class TestVectorOnlyRetrieval:
         """Test retrieval using vector mode."""
         results = hybrid_retriever.retrieve("test query", top_k=5, method="vector")
 
-        # Should call only vector retriever
-        mock_vector_retriever.retrieve.assert_called_once_with("test query", top_k=5)
+        # Should call only vector retriever (note: Retriever.retrieve uses k= parameter)
+        mock_vector_retriever.retrieve.assert_called_once_with("test query", k=5)
         assert len(results) == 3  # From mock
 
     def test_vector_only_returns_chunks(self, hybrid_retriever):
