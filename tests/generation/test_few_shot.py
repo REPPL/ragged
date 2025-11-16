@@ -3,6 +3,8 @@
 import pytest
 import tempfile
 from pathlib import Path
+from unittest.mock import Mock
+import numpy as np
 from src.generation.few_shot import (
     FewShotExample,
     FewShotExampleStore,
@@ -183,6 +185,81 @@ class TestFewShotExampleStore:
         store.clear()
 
         assert len(store.get_all_examples()) == 0
+
+    def test_search_with_embedder(self, temp_storage):
+        """Test embedding-based semantic search."""
+        # Create mock embedder
+        mock_embedder = Mock()
+
+        # Mock embeddings for examples and query
+        # Example 1: "machine learning" -> [1.0, 0.0, 0.0]
+        # Example 2: "deep learning" -> [0.9, 0.2, 0.0]
+        # Example 3: "Python programming" -> [0.0, 0.0, 1.0]
+        # Query: "ML applications" -> [0.95, 0.1, 0.0] (closest to example 1)
+
+        example_embeddings = [
+            [1.0, 0.0, 0.0],  # machine learning
+            [0.9, 0.2, 0.0],  # deep learning
+            [0.0, 0.0, 1.0],  # Python
+        ]
+        query_embedding = [0.95, 0.1, 0.0]  # Similar to ML
+
+        # Set up mock to return embeddings sequentially
+        mock_embedder.embed_text.side_effect = example_embeddings + [query_embedding]
+
+        # Create store with embedder
+        store = FewShotExampleStore(storage_path=temp_storage, embedder=mock_embedder)
+
+        # Add examples (embeddings computed during add)
+        store.add_example("What is machine learning?", "ML context", "ML answer")
+        store.add_example("What is deep learning?", "DL context", "DL answer")
+        store.add_example("How to use Python?", "Python context", "Python answer")
+
+        # Search for ML query (should find ML example first)
+        results = store.search_similar("machine learning applications", top_k=2)
+
+        assert len(results) == 2
+        # First result should be ML (highest cosine similarity)
+        assert "machine learning" in results[0].query.lower()
+
+    def test_search_embedding_fallback(self, temp_storage):
+        """Test fallback to keyword search if embedding fails."""
+        # Create mock embedder that raises exception
+        mock_embedder = Mock()
+        mock_embedder.embed_text.side_effect = Exception("Embedding failed")
+
+        store = FewShotExampleStore(storage_path=temp_storage, embedder=mock_embedder)
+
+        # Add examples (will fail to embed but should still work)
+        store.add_example("What is machine learning?", "ML context", "ML answer")
+        store.add_example("What is Python?", "Python context", "Python answer")
+
+        # Should fall back to keyword search
+        results = store.search_similar("machine learning", top_k=1)
+
+        assert len(results) == 1
+        assert "machine learning" in results[0].query.lower()
+
+    def test_store_with_embedder_persistence(self, temp_storage):
+        """Test that embeddings are recomputed after loading."""
+        # Create mock embedder
+        mock_embedder = Mock()
+        mock_embedder.embed_text.return_value = [1.0, 0.0, 0.0]
+
+        # Create store, add example, save
+        store1 = FewShotExampleStore(storage_path=temp_storage, embedder=mock_embedder)
+        store1.add_example("Test query", "Test context", "Test answer")
+
+        # Create new store (should reload and recompute embeddings)
+        mock_embedder2 = Mock()
+        mock_embedder2.embed_text.return_value = [1.0, 0.0, 0.0]
+
+        store2 = FewShotExampleStore(storage_path=temp_storage, embedder=mock_embedder2)
+
+        assert len(store2.get_all_examples()) == 1
+        assert len(store2.example_embeddings) == 1
+        # Embedding should have been recomputed
+        mock_embedder2.embed_text.assert_called()
 
 
 class TestSeedDefaultExamples:

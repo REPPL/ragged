@@ -8,6 +8,7 @@ from dataclasses import dataclass, asdict
 from pathlib import Path
 import json
 import logging
+import numpy as np
 
 logger = logging.getLogger(__name__)
 
@@ -50,14 +51,17 @@ Answer: {self.answer}
 class FewShotExampleStore:
     """Store and retrieve few-shot examples."""
 
-    def __init__(self, storage_path: Optional[Path] = None):
+    def __init__(self, storage_path: Optional[Path] = None, embedder=None):
         """Initialize example store.
 
         Args:
             storage_path: Path to JSON file for persistence
+            embedder: Optional embedder for semantic similarity search
         """
         self.storage_path = storage_path or Path("data/few_shot_examples.json")
+        self.embedder = embedder
         self.examples: List[FewShotExample] = []
+        self.example_embeddings: List[np.ndarray] = []  # Query embeddings for examples
         self._load_examples()
 
     def _load_examples(self) -> None:
@@ -70,12 +74,35 @@ class FewShotExampleStore:
                         FewShotExample.from_dict(ex) for ex in data
                     ]
                 logger.info(f"Loaded {len(self.examples)} few-shot examples")
+
+                # Compute embeddings for loaded examples if embedder available
+                if self.embedder:
+                    self._compute_example_embeddings()
             except Exception as e:
                 logger.error(f"Failed to load examples: {e}")
                 self.examples = []
+                self.example_embeddings = []
         else:
             logger.info("No existing examples found")
             self.examples = []
+            self.example_embeddings = []
+
+    def _compute_example_embeddings(self) -> None:
+        """Compute embeddings for all examples."""
+        if not self.embedder:
+            return
+
+        self.example_embeddings = []
+        for example in self.examples:
+            try:
+                embedding = self.embedder.embed_text(example.query)
+                self.example_embeddings.append(np.array(embedding))
+            except Exception as e:
+                logger.warning(f"Failed to embed example query: {e}")
+                # Use zero vector as fallback
+                self.example_embeddings.append(np.zeros(384))  # Default embedding size
+
+        logger.debug(f"Computed embeddings for {len(self.example_embeddings)} examples")
 
     def save_examples(self) -> None:
         """Save examples to storage."""
@@ -117,6 +144,16 @@ class FewShotExampleStore:
         )
 
         self.examples.append(example)
+
+        # Compute embedding for new example if embedder available
+        if self.embedder:
+            try:
+                embedding = self.embedder.embed_text(query)
+                self.example_embeddings.append(np.array(embedding))
+            except Exception as e:
+                logger.warning(f"Failed to embed new example: {e}")
+                self.example_embeddings.append(np.zeros(384))
+
         self.save_examples()
 
         logger.info(f"Added new example (total: {len(self.examples)})")
@@ -161,9 +198,10 @@ class FewShotExampleStore:
         top_k: int = 3,
         category: Optional[str] = None
     ) -> List[FewShotExample]:
-        """Search for similar examples.
+        """Search for similar examples using semantic similarity.
 
-        Simple keyword-based search. Could be enhanced with embeddings.
+        Uses embedding-based cosine similarity if embedder available,
+        otherwise falls back to keyword matching.
 
         Args:
             query: Query to match
@@ -183,6 +221,81 @@ class FewShotExampleStore:
         if not candidates:
             return []
 
+        # Use embedding-based search if embedder available
+        if self.embedder and self.example_embeddings:
+            return self._search_by_embedding(query, candidates, top_k, category)
+        else:
+            # Fallback to keyword search
+            return self._search_by_keywords(query, candidates, top_k)
+
+    def _search_by_embedding(
+        self,
+        query: str,
+        candidates: List[FewShotExample],
+        top_k: int,
+        category: Optional[str] = None
+    ) -> List[FewShotExample]:
+        """Search using embedding-based cosine similarity.
+
+        Args:
+            query: Query text
+            candidates: Candidate examples to search
+            top_k: Number to return
+            category: Optional category filter
+
+        Returns:
+            Top-k most similar examples
+        """
+        try:
+            # Embed query
+            query_embedding = np.array(self.embedder.embed_text(query))
+
+            # Get indices of candidates in full examples list
+            if category:
+                candidate_indices = [
+                    i for i, ex in enumerate(self.examples)
+                    if ex.category == category
+                ]
+            else:
+                candidate_indices = list(range(len(self.examples)))
+
+            # Compute cosine similarities
+            scored = []
+            for idx in candidate_indices:
+                if idx < len(self.example_embeddings):
+                    example_emb = self.example_embeddings[idx]
+                    # Cosine similarity
+                    similarity = np.dot(query_embedding, example_emb) / (
+                        np.linalg.norm(query_embedding) * np.linalg.norm(example_emb) + 1e-10
+                    )
+                    scored.append((similarity, self.examples[idx]))
+
+            # Sort by similarity descending
+            scored.sort(key=lambda x: x[0], reverse=True)
+
+            # Return top-k
+            return [ex for _, ex in scored[:top_k]]
+
+        except Exception as e:
+            logger.warning(f"Embedding-based search failed: {e}, falling back to keywords")
+            return self._search_by_keywords(query, candidates, top_k)
+
+    def _search_by_keywords(
+        self,
+        query: str,
+        candidates: List[FewShotExample],
+        top_k: int
+    ) -> List[FewShotExample]:
+        """Search using keyword matching (fallback).
+
+        Args:
+            query: Query text
+            candidates: Candidate examples
+            top_k: Number to return
+
+        Returns:
+            Top-k examples by keyword overlap
+        """
         # Simple keyword matching
         query_lower = query.lower()
         query_words = set(query_lower.split())
@@ -203,6 +316,7 @@ class FewShotExampleStore:
     def clear(self) -> None:
         """Clear all examples."""
         self.examples = []
+        self.example_embeddings = []
         self.save_examples()
         logger.info("Cleared all examples")
 
