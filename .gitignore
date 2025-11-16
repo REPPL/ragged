@@ -226,3 +226,4 @@ models/
 # Docker volumes
 docker-data/
 .venv-*
+.mailmap

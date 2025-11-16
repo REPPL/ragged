@@ -75,7 +75,7 @@ Each guide includes:
 
 - **Specific Questions**: [GitHub Discussions](https://github.com/REPPL/ragged/discussions)
 - **Request a Guide**: [GitHub Issues](https://github.com/REPPL/ragged/issues)
-- **Contribute a Guide**: See [contributing guide](../contributing/README.md)
+- **Contribute a Guide**: See [contributing guide](../../CONTRIBUTING.md)
 
 ---
 

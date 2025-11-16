@@ -331,7 +331,7 @@ All decision documentation is now grouped under `decisions/` for easier navigati
 - Write devlog in [process/devlogs/](./process/devlogs/)
 
 **For documentation:**
-- See [../contributing/README.md](../contributing/README.md)
+- See [CONTRIBUTING.md](../../CONTRIBUTING.md)
 - Use templates in [process/templates/](./process/templates/)
 - Maintain British English
 - Cross-reference appropriately
@@ -361,7 +361,7 @@ All decision documentation is now grouped under `decisions/` for easier navigati
 
 - **General questions:** [GitHub Discussions](https://github.com/REPPL/ragged/discussions)
 - **Documentation issues:** [GitHub Issues](https://github.com/REPPL/ragged/issues)
-- **Contributing:** See [../contributing/README.md](../contributing/README.md)
+- **Contributing:** See [CONTRIBUTING.md](../../CONTRIBUTING.md)
 
 ---
 

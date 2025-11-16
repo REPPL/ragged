@@ -339,6 +339,6 @@ Have suggestions for improving AI usage transparency?
 
 - [Time Tracking Methodology](./time-tracking-methodology.md) - How we track AI vs. manual time
 - [Development Logs](./devlog/) - Daily AI effectiveness ratings
-- [Contributing Guide](../contributing/README.md) - General contribution guidelines
+- [Contributing Guide](../../../../CONTRIBUTING.md) - General contribution guidelines
 
 

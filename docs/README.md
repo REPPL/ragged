@@ -94,8 +94,7 @@ docs/
 │           └── templates/      → Document templates
 │
 ├── 🔬 Research & Community
-│   ├── research/        → Academic materials
-│   └── contributing/    → Contribution guidelines
+│   └── research/        → Academic materials
 │
 └── 📋 This file          → Navigation and overview
 ```
@@ -229,18 +228,18 @@ All developer-facing documentation is now organised under [development/](./devel
 
 ---
 
-### [Contributing](./contributing/) - Contribution Guidelines
+### [Contributing](../CONTRIBUTING.md) - Contribution Guidelines
 
 **Purpose:** Help contributors participate in ragged development
 
 **Content:**
-- [Contributing Guide](./contributing/README.md)
+- [Contributing Guide](../CONTRIBUTING.md)
 - Development setup
 - Code standards
 - Review process
 - AI assistance disclosure
 
-**Status:** Contributions welcomed after v0.1 release
+**Status:** Contributions welcomed (v0.2.2)
 
 **Audience:** Contributors, developers
 
@@ -275,7 +274,7 @@ All developer-facing documentation is now organised under [development/](./devel
 → Or [Version Design Plans](./development/planning/versions/) for detailed feature specifications
 
 **Contribute code or documentation**
-→ See [Contributing Guide](./contributing/README.md)
+→ See [Contributing Guide](../CONTRIBUTING.md)
 
 **Study the development process**
 → Explore [Process Documentation](./development/process/)
@@ -429,7 +428,7 @@ Documentation contributions are welcome!
 - Examples and use cases
 
 **Process:**
-1. Review [Contributing Guide](./contributing/README.md)
+1. Review [Contributing Guide](../CONTRIBUTING.md)
 2. Create an issue to discuss your contribution
 3. Submit a pull request
 
@@ -456,7 +455,7 @@ Documentation contributions are welcome!
 
 - **General Questions:** [GitHub Discussions](https://github.com/REPPL/ragged/discussions)
 - **Documentation Issues:** [GitHub Issues](https://github.com/REPPL/ragged/issues)
-- **Contributing:** See [Contributing Guide](./contributing/README.md)
+- **Contributing:** See [Contributing Guide](../CONTRIBUTING.md)
 
 ---
 
@@ -471,6 +470,6 @@ See [`../LICENSE`](../LICENSE) for full text.
 **Next Steps:**
 
 1. **New users:** Wait for v0.1 release, then start with [Tutorials](./tutorials/)
-2. **Contributors:** Review [Architecture](./development/planning/architecture/) and [Contributing Guide](./contributing/)
+2. **Contributors:** Review [Architecture](./development/planning/architecture/) and [Contributing Guide](../CONTRIBUTING.md)
 3. **Developers:** Explore [Process](./development/process/) and [Version Plans](./development/planning/versions/)
 4. **Researchers:** Check [Research](./research/) and [Time Tracking](./development/process/methodology/time-tracking.md)

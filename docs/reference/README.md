@@ -71,7 +71,7 @@ Reference documentation should be:
 - Manually maintained for configuration and specifications
 - Reviewed for accuracy with each release
 
-See [contributing guide](../contributing/README.md) for how to help.
+See [contributing guide](../../CONTRIBUTING.md) for how to help.
 
 ---
 

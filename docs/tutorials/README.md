@@ -42,7 +42,7 @@ Each tutorial includes:
 
 - **Questions**: [GitHub Discussions](https://github.com/REPPL/ragged/discussions)
 - **Issues**: [GitHub Issues](https://github.com/REPPL/ragged/issues)
-- **Contributing a Tutorial**: See [contributing guide](../contributing/README.md)
+- **Contributing a Tutorial**: See [contributing guide](../../CONTRIBUTING.md)
 
 ---
 

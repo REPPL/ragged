@@ -55,7 +55,7 @@ All explanations follow these principles:
 - **Context-rich** explanations of design decisions
 - **Accessible** to both technical and non-technical readers
 
-See [Contributing Guide](../contributing/README.md) for more information.
+See [Contributing Guide](../../CONTRIBUTING.md) for more information.
 
 ---
 
