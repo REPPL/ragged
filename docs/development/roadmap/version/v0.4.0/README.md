@@ -1176,7 +1176,7 @@ class TemporalQueryEngine:
 
 **Quality**:
 - Personalisation improvement: +15% relevance (user feedback)
-- Topic extraction accuracy: 80% (vs manual labeling)
+- Topic extraction accuracy: 80% (vs manual labelling)
 - Interest profile accuracy: 85% (user confirms top interests)
 
 ### 3.2 Qualitative Metrics

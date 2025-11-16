@@ -2338,5 +2338,27 @@ Each architectural component maps to specific user story acceptance criteria:
 
 ---
 
+## Related Documentation
+
+### Architecture Decisions
+- [ADR-0001: Local-Only Processing](../../decisions/adrs/0001-local-only-processing.md) - Privacy-first architecture
+- [ADR-0003: ChromaDB for Vector Storage](../../decisions/adrs/0003-chromadb-for-vector-storage.md) - Storage layer choice
+- [All ADRs](../../decisions/adrs/README.md) - Complete decision records
+
+### Version Plans
+- [v0.1 Design](../version/v0.1/README.md) - Foundation and basic RAG
+- [v0.2 Design](../version/v0.2/README.md) - Document normalisation
+- [v0.3 Design](../version/v0.3/README.md) - Personal memory
+- [All Version Plans](../version/README.md) - Complete version roadmap
+
+### Implementation Records
+- [v0.1 Implementation](../../implementation/version/v0.1/README.md) - Foundation implementation
+- [v0.2 Implementation](../../implementation/version/v0.2/README.md) - Current version
+
+### User Documentation
+- [Architecture Overview (User-facing)](../../../explanation/architecture-overview.md) - High-level architecture explanation
+
+---
+
 **Document Last Updated:** 2025-11-09
 **Architecture Version:** 2025 State-of-the-Art with Personal Memory, Hardware Optimisation, and User Stories

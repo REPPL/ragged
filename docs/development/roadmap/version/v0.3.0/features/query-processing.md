@@ -811,7 +811,7 @@ class ContextualCompressor:
 
         Uses simple sentence scoring based on:
         1. Keyword overlap with query
-        2. Position (earlier sentences slightly favored)
+        2. Position (earlier sentences slightly favoured)
         3. Sentence length (penalize very short/long)
         """
         # Split into sentences
