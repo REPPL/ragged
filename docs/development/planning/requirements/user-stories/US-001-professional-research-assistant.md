@@ -2,7 +2,7 @@
 
 **ID**: US-001
 **Title**: Professional Research Assistant
-**Status**: ✅ Active
+**Status:** ✅ Active
 **Priority**: Critical
 **Personas**: Researcher (primary)
 **Versions**: v0.1 - v1.0
@@ -472,6 +472,6 @@ class UsageLearner:
 
 ---
 
-**Status**: ✅ Active
+**Status:** ✅ Active
 **Next Review**: v0.3 milestone
 **Owner**: Product/Requirements

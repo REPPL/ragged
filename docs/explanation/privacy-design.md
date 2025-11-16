@@ -1,6 +1,6 @@
 # Privacy-First Design
 
-**Status**: 🚧 Coming Soon
+**Status:** 🚧 Coming Soon
 **Last Updated**: 2025-11-09
 
 ## Overview
@@ -46,8 +46,8 @@ This document will cover:
 
 ## Related Documentation
 
-- **[Architecture](../implementation/plan/architecture/README.md)** - Technical implementation
-- **[Offline Capability](../implementation/plan/technology-stack/offline-capability.md)** - Technical details
+- **[Architecture](../development/planning/architecture/README.md)** - Technical implementation
+- **[Offline Capability](../development/planning/technologies/offline-capability.md)** - Technical details
 - **[Privacy Research](../research/background/best-practices.md)** - Best practices
 
 ---

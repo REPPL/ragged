@@ -4,7 +4,7 @@
 
 **Version**: vX.X
 
-**Status**: [Planning | In Progress | Completed | Abandoned]
+**Status:** [Planning | In Progress | Completed | Abandoned]
 
 **Started**: YYYY-MM-DD
 
@@ -392,6 +392,6 @@
 
 ---
 
-**Status**: [Completed | In Progress]
+**Status:** [Completed | In Progress]
 
 **Last Updated**: YYYY-MM-DD

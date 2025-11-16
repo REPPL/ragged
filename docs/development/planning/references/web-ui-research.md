@@ -23,7 +23,7 @@ This document captures the research conducted to inform ragged's web interface d
 
 **Strengths**:
 - Rapid prototyping with Gradio
-- Good citation visualization
+- Good citation visualisation
 - Document preview with highlighting
 - Minimal learning curve
 
@@ -76,7 +76,7 @@ This document captures the research conducted to inform ragged's web interface d
 **Strengths**:
 - Professional UI/UX
 - Clear source attribution
-- Chunk visualization helpful for debugging
+- Chunk visualisation helpful for debugging
 - Good responsive design
 
 **Limitations**:
@@ -85,7 +85,7 @@ This document captures the research conducted to inform ragged's web interface d
 - Complex build pipeline
 
 **Lessons for ragged**:
-- Chunk visualization valuable for technical users
+- Chunk visualisation valuable for technical users
 - Progressive disclosure needed (hide complexity by default)
 - Mobile responsiveness important
 
@@ -132,7 +132,7 @@ This document captures the research conducted to inform ragged's web interface d
 - Great for simple server-rendered apps
 - Challenging for complex state management
 - Streaming tokens more complex
-- Limited for graph visualizations
+- Limited for graph visualisations
 
 ### Backend Framework Decision
 
@@ -334,7 +334,7 @@ This document captures the research conducted to inform ragged's web interface d
   - Assets (fonts, icons ~100KB)
 
 **Strategy**:
-- Lazy load graph visualization (only load when needed)
+- Lazy load graph visualisation (only load when needed)
 - Tree-shaking to remove unused code
 - Code splitting by route
 
@@ -415,7 +415,7 @@ This document captures the research conducted to inform ragged's web interface d
 **v0.5-v1.0 (Svelte)**:
 - Full responsive design
 - Touch-optimised interface
-- Mobile-friendly graph visualization
+- Mobile-friendly graph visualisation
 
 ## Dark Mode
 
@@ -481,7 +481,7 @@ const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
 1. **"Design Patterns for Conversational User Interfaces"** (2024)
    - Progressive disclosure in chat UIs
-   - Citation visualization techniques
+   - Citation visualisation techniques
 
 2. **"Privacy-Preserving Web Applications"** (2024)
    - Offline-first architectures

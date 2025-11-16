@@ -75,7 +75,7 @@ See [contributing guide](../../CONTRIBUTING.md) for how to help.
 
 ---
 
-**Status**: Reference docs will be built starting with v0.1 release (auto-generated from code).
+**Status:** Reference docs will be built starting with v0.1 release (auto-generated from code).
 
 **See Also**:
 - [API Source Code](../../src/ragged/) - Implementation

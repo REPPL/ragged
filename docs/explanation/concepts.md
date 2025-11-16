@@ -1,6 +1,6 @@
 # Core Concepts
 
-**Status**: 🚧 Coming Soon
+**Status:** 🚧 Coming Soon
 **Last Updated**: 2025-11-09
 
 ## Overview
@@ -39,7 +39,7 @@ This document will cover:
 
 - **[RAG Fundamentals](rag-fundamentals.md)** - Technical background on RAG systems
 - **[Architecture Overview](architecture-overview.md)** - System architecture
-- **[Implementation Plan](../implementation/plan/README.md)** - Technical roadmap
+- **[Implementation Plan](../development/planning/README.md)** - Technical roadmap
 
 ---
 

@@ -1,6 +1,6 @@
 # Progressive Disclosure
 
-**Status**: 🚧 Coming Soon
+**Status:** 🚧 Coming Soon
 **Last Updated**: 2025-11-09
 
 ## Overview
@@ -80,8 +80,8 @@ This document will cover:
 ## Related Documentation
 
 - **[Personas](personas-explained.md)** - User personas and needs
-- **[Web UI Plans](../implementation/plan/versions/)** - Interface evolution
-- **[UI Research](../implementation/plan/references/web-ui-research.md)** - Design research
+- **[Web UI Plans](../development/planning/versions/)** - Interface evolution
+- **[UI Research](../development/planning/references/web-ui-research.md)** - Design research
 
 ---
 

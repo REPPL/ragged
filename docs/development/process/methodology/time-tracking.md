@@ -2,7 +2,7 @@
 
 **Last Updated**: 2025-11-09
 **Purpose**: Transparent time tracking for AI-assisted development
-**Status**: Active from v0.1 onwards
+**Status:** Active from v0.1 onwards
 
 ---
 
@@ -41,7 +41,7 @@ To enhance transparency and reproducibility of ragged's development process, we 
 # Feature: [Feature Name]
 
 **Version**: v0.X
-**Status**: Completed | In Progress | Blocked
+**Status:** Completed | In Progress | Blocked
 **Developer**: [Name/Handle]
 **Start Date**: YYYY-MM-DD
 **Completion Date**: YYYY-MM-DD
@@ -185,7 +185,7 @@ To enhance transparency and reproducibility of ragged's development process, we 
 # Version 0.2 Development Time Summary
 
 **Version**: v0.2 (Document Normalisation + Enhanced Retrieval + Web UI)
-**Status**: Completed
+**Status:** Completed
 **Start Date**: 2025-11-10
 **Completion Date**: 2025-12-22
 **Total Development Time**: 127.5 hours
@@ -324,7 +324,7 @@ To enhance transparency and reproducibility of ragged's development process, we 
 
 **Focus**: Document normalisation pipeline design
 **Time Spent**: 4.5 hours
-**Status**: On track
+**Status:** On track
 
 ---
 
@@ -342,7 +342,7 @@ To enhance transparency and reproducibility of ragged's development process, we 
 - Created architecture diagram
 - Identified format-specific processors
 - **AI Used**: Claude Code generated initial diagram, I refined
-- **Output**: `docs/development/implementation/plan/core-concepts/document-normalisation.md`
+- **Output**: `docs/development/planning/core-concepts/document-normalisation.md`
 
 ### Afternoon Session (14:00-16:00) - 1.5 hours
 
@@ -733,5 +733,5 @@ This methodology transforms development documentation from **aspirational estima
 ---
 
 **Start Date**: 2025-11-09
-**Status**: Active - applied to all ragged development from v0.1 onwards
+**Status:** Active - applied to all ragged development from v0.1 onwards
 **Next Review**: After v0.3 completion (assess methodology effectiveness)

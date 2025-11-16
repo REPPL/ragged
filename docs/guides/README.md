@@ -79,7 +79,7 @@ Each guide includes:
 
 ---
 
-**Status**: Guides will be created during/after v0.1 implementation.
+**Status:** Guides will be created during/after v0.1 implementation.
 
 **See Also**:
 - [Tutorials](../tutorials/) - Learning-oriented lessons

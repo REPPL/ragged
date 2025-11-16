@@ -150,4 +150,4 @@ Consider semantic chunking for v0.3+ when:
 ## Related
 
 - [ADR-0008: tiktoken for Token Counting](./0008-tiktoken-for-token-counting.md)
-- [Core Concepts: Chunking Strategy](../core-concepts/chunking.md)
+- [Core Concepts: Chunking Strategy](../../planning/core-concepts/chunking.md)

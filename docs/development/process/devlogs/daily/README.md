@@ -8,7 +8,7 @@
 
 ## Overview
 
-This directory contains daily development logs organized by date.
+This directory contains daily development logs organised by date.
 
 **Format:** `YYYY-MM-DD.md`
 

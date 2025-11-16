@@ -191,7 +191,7 @@ CLI Enhancements (can run in parallel)
 | Feature Area | v0.1 | v0.2 | v0.3 |
 |--------------|------|------|------|
 | **Retrieval** | Basic dense | Dense + normalisation | Hybrid + reranking |
-| **Chunking** | Recursive splitter | + Overlap optimization | + Semantic/agentic |
+| **Chunking** | Recursive splitter | + Overlap optimisation | + Semantic/agentic |
 | **Documents** | PDF, TXT, MD | + Metadata extraction | + Multi-modal (images) |
 | **Evaluation** | Manual testing | Basic metrics | Comprehensive suite |
 | **CLI** | Basic commands | Enhanced output | Interactive + automation |

@@ -1,7 +1,7 @@
 # ragged v0.2 Development Log
 
 **Version**: 0.2.0
-**Status**: In Development
+**Status:** In Development
 **Started**: 2025-11-09
 **Estimated Completion**: 2-3 weeks
 

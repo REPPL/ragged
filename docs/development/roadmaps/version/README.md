@@ -126,7 +126,7 @@ Future      v0.7.0 ━━━━━━━━━━━━━ Production Ready (150
 ### v0.2.7 - UX & Performance (80-100 hours)
 
 **Status:** Planning
-**Focus:** User experience and performance optimizations
+**Focus:** User experience and performance optimisations
 
 **Key Features:**
 - Seamless model switching with model pool

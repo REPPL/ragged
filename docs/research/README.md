@@ -109,7 +109,7 @@ For citing specific research documents, use git commit hash:
 
 ```
 ragged Project. (2025). Document Normalisation Pipeline Design [commit abc123].
-Retrieved from https://github.com/REPPL/ragged/blob/abc123/docs/development/implementation/plan/core-concepts/document-normalisation.md
+Retrieved from https://github.com/REPPL/ragged/blob/abc123/docs/development/planning/core-concepts/document-normalisation.md
 ```
 
 ## Research Questions ragged Addresses
@@ -223,7 +223,7 @@ For each research claim in ragged documentation:
 
 ---
 
-**Status**: Research materials being collected during planning and development.
+**Status:** Research materials being collected during planning and development.
 
 **Next Steps**:
 1. Organise migrated background research
@@ -235,5 +235,5 @@ For each research claim in ragged documentation:
 
 **Related Documentation**:
 - [Development Process](../development/) - How ragged is built
-- [Implementation Plan](../implementation/plan/) - Technical architecture
+- [Implementation Plan](../development/planning/) - Technical architecture
 - [Explanation](../explanation/) - Conceptual understanding

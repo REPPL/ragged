@@ -154,7 +154,7 @@ Focus: Interactive workflows, automation, and developer productivity
 - ✅ Testing utilities for custom configurations
 - ✅ Local API server for integrations
 - ✅ AI-powered query suggestions
-- ✅ Customisable color themes
+- ✅ Customisable colour themes
 
 ### v0.4.0 Plugin Architecture (1 enhancement, 20-25 hours)
 
@@ -233,7 +233,7 @@ Based on the analysis, the recommended development sequence is:
 
 2. **v0.2.7 Second** (HIGH VALUE)
    - UX improvements have the highest immediate user value
-   - Performance optimizations provide measurable benefits
+   - Performance optimisations provide measurable benefits
    - These improvements set a strong foundation for v0.3
 
 3. **v0.3.0 Last** (DIFFERENTIATION)

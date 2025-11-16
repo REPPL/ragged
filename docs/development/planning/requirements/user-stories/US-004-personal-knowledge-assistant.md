@@ -2,7 +2,7 @@
 
 **ID**: US-004
 **Title**: Personal Knowledge Assistant
-**Status**: ✅ Active
+**Status:** ✅ Active
 **Priority**: Medium
 **Personas**: Casual (primary)
 **Versions**: v0.2 - v1.0
@@ -487,6 +487,6 @@ class CasualSearchEngine:
 
 ---
 
-**Status**: ✅ Active
+**Status:** ✅ Active
 **Next Review**: v0.2 milestone
 **Owner**: Product/Requirements

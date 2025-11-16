@@ -192,7 +192,7 @@ If AI was used, please describe:
 - **Level of human review**: Modified significantly
   - Added custom error handling
   - Rewrote validation logic
-  - Added domain-specific optimizations
+  - Added domain-specific optimisations
 - **Justification**: Accelerated boilerplate generation for new module
 ```
 

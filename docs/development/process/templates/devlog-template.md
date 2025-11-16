@@ -33,7 +33,7 @@
 - **Effectiveness**: ⭐⭐⭐⭐⭐ [Rating 1-5 stars]
 - **Notes**: [What worked well, what didn't]
 
-**Status**: [Completed | In Progress | Blocked]
+**Status:** [Completed | In Progress | Blocked]
 
 ### Feature/Task 2: [Name]
 
@@ -249,7 +249,7 @@
 
 ---
 
-**Status**: [In Progress | Completed]
+**Status:** [In Progress | Completed]
 
 **Weather**: [Optional - some developers track this]
 

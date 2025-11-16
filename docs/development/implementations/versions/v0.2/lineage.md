@@ -26,7 +26,7 @@ This document traces the lineage from planning through decisions to implementati
 - [Enhanced Retrieval](../../../planning/architecture/enhanced-retrieval.md) - Better search
 
 **Core Concepts:**
-- [Chunking Strategy](../../../planning/core-concepts/chunking.md) - Overlap optimization
+- [Chunking Strategy](../../../planning/core-concepts/chunking.md) - Overlap optimisation
 - [Metadata Extraction](../../../planning/core-concepts/metadata.md) - Document metadata
 
 ### 2. Architectural Decisions
@@ -60,7 +60,7 @@ This document traces the lineage from planning through decisions to implementati
 | Planning | Decision | Implementation | Status |
 |----------|----------|----------------|--------|
 | Document normalization | TBD (ADR-0015) | Text cleaning pipeline | 🔄 In Progress |
-| Chunk overlap optimization | TBD (ADR-0016) | Overlap calculator | ⏳ Planned |
+| Chunk overlap optimisation | TBD (ADR-0016) | Overlap calculator | ⏳ Planned |
 | Metadata extraction | TBD (ADR-0017) | Metadata pipeline | ⏳ Planned |
 | Enhanced retrieval | TBD (ADR-0018) | Query expansion | ⏳ Planned |
 
@@ -117,7 +117,7 @@ This document traces the lineage from planning through decisions to implementati
 2. **Performance Monitoring Added Early:**
    - **Planned:** v0.3
    - **Actual:** Basic monitoring added in v0.2
-   - **Reason:** Needed for retrieval optimization
+   - **Reason:** Needed for retrieval optimisation
 
 ---
 

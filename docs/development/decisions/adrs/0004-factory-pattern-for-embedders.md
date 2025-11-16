@@ -8,7 +8,7 @@
 
 **Related:**
 - [Embeddings Technology](../../planning/technologies/embeddings.md)
-- [Modularity Concept](../core-concepts/modularity.md)
+- [Modularity Concept](../../planning/core-concepts/modularity.md)
 
 ---
 

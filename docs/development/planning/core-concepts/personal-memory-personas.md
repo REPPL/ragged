@@ -2,7 +2,7 @@
 
 **Version**: 2.0
 **Last Updated**: 2025-11-09
-**Status**: Design Complete
+**Status:** Design Complete
 **Implementation Target**: v0.3+
 
 ---
@@ -973,14 +973,14 @@ class PIIHandler:
 **Features**:
 - Temporal knowledge graph (Kuzu)
 - "What was I working on..." queries
-- Project timeline visualization
+- Project timeline visualisation
 - Topic evolution tracking
 
 **Effort**: 25-30 hours
 
 **Dependencies**:
 - Kuzu embedded graph database
-- Graph visualization (optional)
+- Graph visualisation (optional)
 
 ### Phase 4: Advanced Features (v1.0)
 

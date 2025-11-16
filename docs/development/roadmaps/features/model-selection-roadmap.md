@@ -22,7 +22,7 @@ This roadmap details the phased implementation of dynamic model selection and in
 
 ### v0.1 - MVP (Single Model)
 **Duration**: 2-3 weeks
-**Status**: Foundation
+**Status:** Foundation
 
 - ✅ Single model support (manual selection)
 - ✅ Basic Ollama integration
@@ -37,7 +37,7 @@ This roadmap details the phased implementation of dynamic model selection and in
 
 ### v0.2 - Basic Routing
 **Duration**: 3-4 weeks
-**Status**: Planned
+**Status:** Planned
 
 **Features**:
 - Task classification (basic patterns)
@@ -62,7 +62,7 @@ answer = ragged.query("Write a Python function...")
 
 ### v0.3 - Complexity Analysis
 **Duration**: 2-3 weeks
-**Status**: Planned
+**Status:** Planned
 
 **Features**:
 - Complexity scoring algorithm
@@ -88,7 +88,7 @@ ragged.query("Analyse the architectural trade-offs...")  # → llama3.3:70b
 
 ### v0.4 - Persona Integration
 **Duration**: 3-4 weeks
-**Status**: Planned
+**Status:** Planned
 
 **Features**:
 - Persona-aware routing
@@ -116,7 +116,7 @@ ragged.query("Write a sorting function")  # → deepseek-coder:33b
 
 ### v0.5 - Advanced Routing
 **Duration**: 2-3 weeks
-**Status**: Planned
+**Status:** Planned
 
 **Features**:
 - Fallback chain generation
@@ -143,7 +143,7 @@ ragged.query("Complex query")
 
 ### v1.0 - Production Routing
 **Duration**: 3-4 weeks
-**Status**: Future
+**Status:** Future
 
 **Features**:
 - Cost optimisation (for cloud deployments)

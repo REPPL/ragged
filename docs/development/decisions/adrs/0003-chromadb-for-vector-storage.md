@@ -8,7 +8,7 @@
 
 **Related:**
 - [Vector Stores Evaluation](../../planning/technologies/vector-stores.md)
-- [Storage Model](../architecture/storage-model.md)
+- [Storage Model](../../planning/architecture/storage-model.md)
 
 ---
 

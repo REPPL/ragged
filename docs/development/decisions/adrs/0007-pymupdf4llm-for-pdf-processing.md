@@ -118,4 +118,4 @@ Markdown output is significantly superior to plain text for RAG use cases. The p
 ## Related
 
 - [ADR-0014: Markdown as Intermediate Format](./0014-markdown-as-intermediate-format.md)
-- [Architecture: Document Loaders](../architecture/document-loaders.md)
+- [Architecture: Document Loaders](../../planning/architecture/document-loaders.md)

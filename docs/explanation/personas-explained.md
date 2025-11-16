@@ -1,6 +1,6 @@
 # Personal Memory Personas
 
-**Status**: 🚧 Coming Soon
+**Status:** 🚧 Coming Soon
 **Last Updated**: 2025-11-09
 
 ## Overview
@@ -62,9 +62,9 @@ This document will cover:
 ## Related Documentation
 
 - **[Personal Memory Systems](../research/background/personal-memory-systems.md)** - Research background
-- **[User Stories](../requirements/user-stories/)** - Persona-based requirements
+- **[User Stories](../development/planning/requirements/user-stories/)** - Persona-based requirements
 - **[Progressive Disclosure](progressive-disclosure-explained.md)** - UI philosophy
-- **[Web UI Design](../implementation/plan/versions/v0.2/web-ui-basic.md)** - Interface implementation
+- **[Web UI Design](../development/planning/interfaces/web/v0.2-basic.md)** - Interface implementation
 
 ---
 

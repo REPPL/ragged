@@ -25,7 +25,7 @@ This file captures the important decisions, the context that led to them, altern
 
 ## Decision 1: 14-Phase Implementation Approach
 
-**Status**: Accepted
+**Status:** Accepted
 **Date**: 2025-11-09
 **Area**: Development Process
 
@@ -74,7 +74,7 @@ Implement v0.1 in 14 distinct phases:
 
 ## Decision 2: Pydantic v2 for Configuration and Models
 
-**Status**: Accepted
+**Status:** Accepted
 **Date**: 2025-11-09
 **Area**: Data Validation, Configuration
 
@@ -122,7 +122,7 @@ Use Pydantic v2 for:
 
 ## Decision 3: ChromaDB for Vector Storage
 
-**Status**: Accepted
+**Status:** Accepted
 **Date**: 2025-11-09
 **Area**: Vector Database
 
@@ -178,7 +178,7 @@ Use ChromaDB as the vector store with HTTP client mode.
 
 ## Decision 4: Dual Embedding Model Support
 
-**Status**: Accepted
+**Status:** Accepted
 **Date**: 2025-11-09
 **Area**: Embeddings
 
@@ -234,7 +234,7 @@ Factory pattern (`src/embeddings/factory.py`) with:
 
 ## Decision 5: PyMuPDF4LLM for PDF Processing
 
-**Status**: Accepted
+**Status:** Accepted
 **Date**: 2025-11-09
 **Area**: Document Ingestion
 
@@ -283,7 +283,7 @@ Use PyMuPDF4LLM for PDF processing, which converts PDFs to markdown.
 
 ## Decision 6: tiktoken for Token Counting
 
-**Status**: Accepted
+**Status:** Accepted
 **Date**: 2025-11-09
 **Area**: Chunking
 
@@ -329,7 +329,7 @@ Use tiktoken with cl100k_base encoding for all token counting operations.
 
 ## Decision 7: Recursive Character Text Splitter
 
-**Status**: Accepted
+**Status:** Accepted
 **Date**: 2025-11-09
 **Area**: Chunking
 
@@ -383,7 +383,7 @@ Implement RecursiveCharacterTextSplitter that tries increasingly smaller separat
 
 ## Decision 8: Click + Rich for CLI
 
-**Status**: Accepted
+**Status:** Accepted
 **Date**: 2025-11-09
 **Area**: CLI Interface
 
@@ -432,7 +432,7 @@ Use Click for CLI framework and Rich for terminal formatting.
 
 ## Decision 9: Privacy-Safe Logging
 
-**Status**: Accepted
+**Status:** Accepted
 **Date**: 2025-11-09
 **Area**: Logging, Security
 
@@ -491,7 +491,7 @@ class PrivacyFilter(logging.Filter):
 
 ## Decision 10: Factory Pattern for Embedders
 
-**Status**: Accepted
+**Status:** Accepted
 **Date**: 2025-11-09
 **Area**: Architecture, Embeddings
 
@@ -538,7 +538,7 @@ Implement factory pattern:
 
 ## Decision 11: Ollama for LLM Generation
 
-**Status**: Accepted
+**Status:** Accepted
 **Date**: 2025-11-09
 **Area**: LLM, Generation
 
@@ -587,7 +587,7 @@ Use Ollama as the LLM backend with llama3.2 as default model.
 
 ## Decision 12: Citation Format [Source: filename]
 
-**Status**: Accepted
+**Status:** Accepted
 **Date**: 2025-11-09
 **Area**: Generation, UX
 
@@ -651,7 +651,7 @@ citations = re.findall(pattern, response_text)
 
 ## Decision 13: Local-Only Processing (No External APIs)
 
-**Status**: Accepted
+**Status:** Accepted
 **Date**: 2025-11-09
 **Area**: Architecture, Privacy
 
@@ -702,7 +702,7 @@ Absolutely no external API calls:
 
 ## Decision 14: Markdown as Intermediate Format
 
-**Status**: Accepted
+**Status:** Accepted
 **Date**: 2025-11-09
 **Area**: Document Processing
 
@@ -784,4 +784,4 @@ Use Markdown as the intermediate format for all documents:
 
 **Last Updated**: 2025-11-09
 **Total Decisions**: 14
-**Status**: All accepted and implemented in v0.1
+**Status:** All accepted and implemented in v0.1

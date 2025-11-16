@@ -2,7 +2,7 @@
 
 **Document Version**: 1.0
 **Date**: 2025-11-09
-**Status**: Design Complete
+**Status:** Design Complete
 **Related**: [Hardware Optimisation](./hardware-optimisation.md), [Model Selection](./model-selection.md), [Personal Memory & Personas](./personal-memory-personas.md)
 
 ---

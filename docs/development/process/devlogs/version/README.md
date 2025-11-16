@@ -8,7 +8,7 @@
 
 ## Overview
 
-This directory contains development logs organized by version, providing a narrative account of how each version was built.
+This directory contains development logs organised by version, providing a narrative account of how each version was built.
 
 ---
 

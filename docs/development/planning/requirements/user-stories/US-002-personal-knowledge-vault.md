@@ -2,7 +2,7 @@
 
 **ID**: US-002
 **Title**: Personal Knowledge Vault
-**Status**: ✅ Active
+**Status:** ✅ Active
 **Priority**: Critical
 **Personas**: Researcher (primary), Casual (secondary)
 **Versions**: v0.1 - v1.0
@@ -582,6 +582,6 @@ class NoteEncryption:
 
 ---
 
-**Status**: ✅ Active
+**Status:** ✅ Active
 **Next Review**: v0.3 milestone
 **Owner**: Product/Requirements

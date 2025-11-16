@@ -173,7 +173,7 @@ Best practices and proven patterns for building RAG systems, extracted from rese
 
 **Implementation**:
 - YAML/JSON specifications for pipeline behaviour
-- Profile system for domain-specific optimizations
+- Profile system for domain-specific optimisations
 - Runtime overrides via CLI flags
 
 **Example**:
@@ -239,7 +239,7 @@ researcher:
 
 **TruLens** (For debugging):
 - Component-level tracing
-- Step visualization
+- Step visualisation
 - Latency tracking per stage
 
 **Phoenix** (For observability):
@@ -356,7 +356,7 @@ researcher:
 **Deploy Early**:
 - OpenTelemetry for distributed tracing
 - Prometheus for metrics collection
-- Grafana for visualization
+- Grafana for visualisation
 
 **Monitor Both**:
 - Technical metrics (latency, errors, throughput)

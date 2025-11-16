@@ -14,7 +14,7 @@ ragged v0.1 is implemented in 14 incremental phases, organised into three groups
 
 ## Phase 1: Foundation & Development Environment ✅
 
-**Status**: Complete
+**Status:** Complete
 **Duration**: ~12 hours
 **Completion Date**: 2025-11-09
 
@@ -71,7 +71,7 @@ tests/
 
 ## Phase 2: Document Ingestion Pipeline ✅
 
-**Status**: Complete
+**Status:** Complete
 **Duration**: ~10 hours
 **Completion Date**: 2025-11-09
 
@@ -122,7 +122,7 @@ pip install pymupdf4llm trafilatura chardet
 
 ## Phase 3: Chunking System ✅
 
-**Status**: Complete
+**Status:** Complete
 **Duration**: ~8 hours
 **Completion Date**: 2025-11-09
 
@@ -180,7 +180,7 @@ pip install tiktoken
 
 ## Phase 4: Embeddings System ✅
 
-**Status**: Complete
+**Status:** Complete
 **Duration**: ~12 hours
 **Completion Date**: 2025-11-09
 
@@ -241,7 +241,7 @@ pip install sentence-transformers torch ollama
 
 ## Phase 5: Vector Storage ✅
 
-**Status**: Complete
+**Status:** Complete
 **Duration**: ~6 hours
 **Completion Date**: 2025-11-09
 
@@ -296,7 +296,7 @@ pip install chromadb
 
 ## Phase 6: Retrieval System ✅
 
-**Status**: Complete
+**Status:** Complete
 **Duration**: ~6 hours
 **Completion Date**: 2025-11-09
 
@@ -345,7 +345,7 @@ src/retrieval/retriever.py (181 lines)
 
 ## Phase 7: Generation System ✅
 
-**Status**: Complete
+**Status:** Complete
 **Duration**: ~8 hours
 **Completion Date**: 2025-11-09
 
@@ -404,7 +404,7 @@ pip install ollama
 
 ## Phase 8: CLI Interface ✅
 
-**Status**: Complete
+**Status:** Complete
 **Duration**: ~8 hours
 **Completion Date**: 2025-11-09
 
@@ -488,7 +488,7 @@ pip install click rich
 
 ## Phase 9: End-to-End Integration ⏳
 
-**Status**: Pending
+**Status:** Pending
 **Estimated Duration**: 24-40 hours
 
 ### Goals
@@ -520,7 +520,7 @@ pip install click rich
 
 ## Phase 10: Docker Integration ⏳
 
-**Status**: Pending
+**Status:** Pending
 **Estimated Duration**: 16-24 hours
 
 ### Goals
@@ -548,7 +548,7 @@ pip install click rich
 
 ## Phase 11: Documentation 🚧
 
-**Status**: In Progress (~50% complete)
+**Status:** In Progress (~50% complete)
 **Estimated Remaining**: 20-36 hours
 
 ### Goals
@@ -578,7 +578,7 @@ pip install click rich
 
 ## Phase 12: Security Audit & Code Review ⏳
 
-**Status**: Pending
+**Status:** Pending
 **Estimated Duration**: 16-24 hours
 
 ### Goals
@@ -611,7 +611,7 @@ pip install click rich
 
 ## Phase 13: Testing & Coverage ⏳
 
-**Status**: Pending
+**Status:** Pending
 **Estimated Duration**: 24-40 hours
 
 ### Goals
@@ -645,7 +645,7 @@ pip install click rich
 
 ## Phase 14: Git Commit & Release ⏳
 
-**Status**: Pending (Core implementation committed)
+**Status:** Pending (Core implementation committed)
 **Estimated Duration**: 4-8 hours
 
 ### Goals
@@ -713,4 +713,4 @@ pip install click rich
 ---
 
 **Last Updated**: 2025-11-09
-**Status**: Core implementation complete, quality phases in progress
+**Status:** Core implementation complete, quality phases in progress

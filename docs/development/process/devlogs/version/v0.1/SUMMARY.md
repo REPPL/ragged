@@ -1,7 +1,7 @@
 # ragged v0.1 Development Summary
 
 **Version**: 0.1.0
-**Status**: Complete (11 of 14 phases, 79%)
+**Status:** Complete (11 of 14 phases, 79%)
 **Date**: November 2025
 **Development Time**: ~76 hours (~2 weeks calendar time)
 
@@ -261,7 +261,7 @@ See [lessons-learned.md](lessons-learned.md) for full analysis.
 3. Few-shot prompting
 4. Document-level metadata
 5. Improved Docker support
-6. Performance optimizations
+6. Performance optimisations
 
 ## Conclusion
 
@@ -269,7 +269,7 @@ ragged v0.1 successfully validates the core RAG architecture and proves that pri
 
 The modular architecture, type-safe implementation, and comprehensive documentation provide a solid foundation for future enhancements. Key learnings about phase granularity, testing strategy, and AI effectiveness will improve v0.2 development.
 
-**Status**: Core implementation complete, quality assurance in progress
+**Status:** Core implementation complete, quality assurance in progress
 **Confidence**: High - architecture validated, core features working
 **Recommendation**: Complete remaining phases, then proceed to v0.2 planning
 

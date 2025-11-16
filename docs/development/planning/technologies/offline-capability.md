@@ -1,7 +1,7 @@
 # Offline Capability & Privacy-First Web Design
 
 **Last Updated**: 2025-11-08
-**Status**: Planning
+**Status:** Planning
 
 ---
 

@@ -1,6 +1,6 @@
 # ragged v0.2 Complete Implementation Plan
 
-**Status**: Phase 1 Complete, Phases 2-8 Planned
+**Status:** Phase 1 Complete, Phases 2-8 Planned
 **Date**: 2025-11-09
 
 This document provides the complete blueprint for implementing ragged v0.2. Phase 1 (Environment & Dependencies) is complete with Python 3.12. The remaining phases follow.
@@ -303,19 +303,19 @@ docs/
 ## Key Architecture Decisions
 
 ### ADR 19: Python 3.12 for v0.2
-**Status**: Accepted
+**Status:** Accepted
 **Decision**: Use Python 3.12 instead of planned 3.11
 **Rationale**: Better library support, ChromaDB 1.3.4 works perfectly, more mature than 3.14
 **Result**: All v0.1 tests pass, excellent compatibility
 
 ### ADR 20: Gradio for Web UI
-**Status**: Accepted
+**Status:** Accepted
 **Decision**: Use Gradio instead of React for v0.2
 **Rationale**: Faster to implement (1 week vs 3 weeks), Python-native, sufficient for v0.2
 **Migration Path**: Can upgrade to React in v0.3 if needed
 
 ### ADR 21: Hybrid Search Implementation
-**Status**: Accepted
+**Status:** Accepted
 **Decision**: BM25 + Vector with Reciprocal Rank Fusion
 **Rationale**: Proven 10-15% improvement, moderate complexity, no new models needed
 

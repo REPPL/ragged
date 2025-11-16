@@ -1,7 +1,7 @@
 # Versioning Philosophy for ragged
 
 **Last Updated**: 2025-11-08
-**Status**: Planning
+**Status:** Planning
 
 ---
 
@@ -19,7 +19,7 @@ This document defines ragged's versioning strategy, clarifying when breaking cha
 
 ### Version Range: v0.1 through v0.9
 
-**Status**: 🚧 **Developer Beta** - Expect breaking changes
+**Status:** 🚧 **Developer Beta** - Expect breaking changes
 
 #### What This Means
 
@@ -234,7 +234,7 @@ from ragged.v0_2 import RAGPipeline  # If we provide versioned modules
 
 ### Version 1.0.0 Milestone
 
-**Status**: 🎯 **Stable Release** - Breaking changes require major version bump
+**Status:** 🎯 **Stable Release** - Breaking changes require major version bump
 
 #### What Changes at v1.0
 
@@ -501,7 +501,7 @@ The entire web interface has been rebuilt using Svelte.
 **No automatic migration** - this is a clean rebuild.
 
 **Why:** Gradio limitations prevented advanced features (GraphRAG
-visualization, developer mode, production polish).
+visualisation, developer mode, production polish).
 
 **API unchanged** - CLI and programmatic access still work.
 ```

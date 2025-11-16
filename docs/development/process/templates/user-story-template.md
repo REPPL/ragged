@@ -2,7 +2,7 @@
 
 **ID**: US-XXX
 **Title**: [Brief descriptive title]
-**Status**: ✅ Active | 🚧 In Progress | ⏸️ Deferred | ✔️ Complete | ❌ Rejected
+**Status:** ✅ Active | 🚧 In Progress | ⏸️ Deferred | ✔️ Complete | ❌ Rejected
 **Priority**: Critical | High | Medium | Low
 **Personas**: [Primary persona] (primary), [Secondary persona] (secondary)
 **Versions**: vX.X - vY.Y
@@ -238,7 +238,7 @@ class AnotherExample:
 
 ---
 
-**Status**: [Current status symbol and text]
+**Status:** [Current status symbol and text]
 **Next Review**: [Version milestone or date]
 **Owner**: [Team or person responsible]
 

@@ -1,6 +1,6 @@
 # Architecture Overview
 
-**Status**: 🚧 Coming Soon
+**Status:** 🚧 Coming Soon
 **Last Updated**: 2025-11-09
 
 ## Overview
@@ -41,8 +41,8 @@ This document will cover:
 
 ## Related Documentation
 
-- **[Architecture Details](../implementation/plan/architecture/README.md)** - Technical implementation
-- **[Data Flow](../implementation/plan/architecture/data-flow.md)** - Detailed data flow diagrams
+- **[Architecture Details](../development/planning/architecture/README.md)** - Technical implementation
+- **[Data Flow](../development/planning/architecture/data-flow.md)** - Detailed data flow diagrams
 - **[Privacy Design](privacy-design.md)** - Privacy architecture explanation
 
 ---

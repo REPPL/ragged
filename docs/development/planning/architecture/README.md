@@ -1506,7 +1506,7 @@ The architecture balances cutting-edge techniques with practical implementation 
 
 **Document Version**: 1.0
 **Last Updated**: November 2025
-**Status**: Ready for Implementation
+**Status:** Ready for Implementation
 ---
 
 ## Web UI Architecture
@@ -1555,7 +1555,7 @@ GET  /api/docs             # API documentation (v1.0)
 **Limitations:**
 - Limited customization
 - Not production-grade
-- Difficult for complex features (graph visualization)
+- Difficult for complex features (graph visualisation)
 
 **Features by Version:**
 - **v0.2:** Basic chat, document upload, streaming responses
@@ -1578,7 +1578,7 @@ GET  /api/docs             # API documentation (v1.0)
 5. **No Tracking:** Privacy-friendly by default
 
 **Features:**
-- **v0.5:** Clean rebuild, graph visualization, document preview
+- **v0.5:** Clean rebuild, graph visualisation, document preview
 - **v1.0:** PWA, admin panel, monitoring dashboard, API stability
 
 ### Streaming: Server-Sent Events (SSE)
@@ -1633,7 +1633,7 @@ async def stream_query(q: str):
 - Query inspector (original vs rewritten)
 - Retrieval details (scores, timing)
 - Performance metrics
-- Self-RAG visualization
+- Self-RAG visualisation
 
 **Level 4: Expert (Power Tools)**
 - RAGAS evaluation dashboard

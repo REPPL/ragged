@@ -1,6 +1,6 @@
 # Versioning Strategy
 
-**Status**: 🚧 Coming Soon
+**Status:** 🚧 Coming Soon
 **Last Updated**: 2025-11-09
 
 ## Overview
@@ -49,9 +49,9 @@ This document will cover:
 
 ## Related Documentation
 
-- **[Implementation Plan](../implementation/plan/README.md)** - Complete version roadmap
-- **[Versioning Philosophy](../implementation/plan/core-concepts/versioning-philosophy.md)** - Technical approach
-- **[Version Plans](../implementation/plan/versions/)** - Detailed version specifications
+- **[Implementation Plan](../development/planning/README.md)** - Complete version roadmap
+- **[Versioning Philosophy](../development/planning/core-concepts/versioning-philosophy.md)** - Technical approach
+- **[Version Plans](../development/planning/versions/)** - Detailed version specifications
 
 ---
 

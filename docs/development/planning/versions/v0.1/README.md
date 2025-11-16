@@ -1,6 +1,6 @@
 # Version 0.1: Foundation & Basic RAG
 
-**Status**: 📋 Planned (Not Started)
+**Status:** 📋 Planned (Not Started)
 **Target Timeline**: 2-3 weeks
 **Last Updated**: 2025-11-09
 

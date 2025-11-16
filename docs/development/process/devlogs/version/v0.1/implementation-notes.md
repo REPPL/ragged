@@ -9,7 +9,7 @@ This document captures the technical details of how v0.1 was implemented, includ
 2. [Module Implementations](#module-implementations)
 3. [Integration Points](#integration-points)
 4. [Technical Challenges & Solutions](#technical-challenges--solutions)
-5. [Performance Optimizations](#performance-optimizations)
+5. [Performance Optimizations](#performance-optimisations)
 6. [Security Implementations](#security-implementations)
 
 ---
@@ -338,7 +338,7 @@ with Progress() as progress:
 3. Accept warning about dependency conflicts
 4. Works for development, may need Python 3.11 for production
 
-**Status**: Deferred to Phase 10, may downgrade Python version
+**Status:** Deferred to Phase 10, may downgrade Python version
 
 ### Challenge: Test Environment Pollution
 **Problem**: Environment variables from one test affecting others

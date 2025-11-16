@@ -2,7 +2,7 @@
 
 **ID**: US-003
 **Title**: Code Documentation RAG
-**Status**: ✅ Active
+**Status:** ✅ Active
 **Priority**: High
 **Personas**: Developer (primary)
 **Versions**: v0.3 - v1.0
@@ -466,6 +466,6 @@ class DeveloperRouter:
 
 ---
 
-**Status**: ✅ Active
+**Status:** ✅ Active
 **Next Review**: v0.3 milestone
 **Owner**: Product/Requirements

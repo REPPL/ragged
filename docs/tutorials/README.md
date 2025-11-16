@@ -46,7 +46,7 @@ Each tutorial includes:
 
 ---
 
-**Status**: Tutorials will be created during/after v0.1 implementation.
+**Status:** Tutorials will be created during/after v0.1 implementation.
 
 **See Also**:
 - [Guides](../guides/) - Task-oriented how-tos

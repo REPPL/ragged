@@ -102,7 +102,7 @@ ragged template delete research-query
 
 **Estimated Time**: 5-6 hours
 
-**Impact**: Medium - Essential for optimization and troubleshooting
+**Impact**: Medium - Essential for optimisation and troubleshooting
 
 **Description:**
 Profile query and ingestion performance to identify bottlenecks. Generates detailed performance reports with flamegraphs.
@@ -444,7 +444,7 @@ ragged query "machne lerning" --auto-correct
 **Impact**: Low - Personalisation and accessibility
 
 **Description:**
-Customisable color themes for terminal output. Includes accessibility themes (high contrast, colorblind-friendly).
+Customisable colour themes for terminal output. Includes accessibility themes (high contrast, colorblind-friendly).
 
 **Command Syntax:**
 ```bash

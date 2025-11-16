@@ -1,6 +1,6 @@
 # RAG Fundamentals
 
-**Status**: 🚧 Coming Soon
+**Status:** 🚧 Coming Soon
 **Last Updated**: 2025-11-09
 
 ## Overview
@@ -65,14 +65,14 @@ This document will cover:
 ## Related Documentation
 
 - **[RAG Research](../research/background/rag.md)** - Technical research and papers
-- **[Implementation](../implementation/plan/core-concepts/)** - Technical implementation
+- **[Implementation](../development/planning/core-concepts/)** - Technical implementation
 - **[Architecture](architecture-overview.md)** - System design
 
 ---
 
 ## Further Reading
 
-- [Research Papers](../implementation/plan/references/research-papers.md)
+- [Research Papers](../development/planning/references/research-papers.md)
 - [Best Practices](../research/background/best-practices.md)
 - [Technology Comparisons](../research/background/technology-comparisons.md)
 

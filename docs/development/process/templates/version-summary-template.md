@@ -2,7 +2,7 @@
 
 **Version**: vX.X - [Version Name/Theme]
 
-**Status**: [Planning | In Progress | Completed]
+**Status:** [Planning | In Progress | Completed]
 
 **Started**: YYYY-MM-DD
 
@@ -188,7 +188,7 @@
 
 **Time**: XX.X hours
 
-**Status**: ✅ Complete
+**Status:** ✅ Complete
 
 **Description**: [One paragraph description]
 
@@ -588,7 +588,7 @@ XX files changed, XXX insertions(+), XXX deletions(-)
 
 **Version**: vX.X
 
-**Status**: [Completed | In Progress]
+**Status:** [Completed | In Progress]
 
 **Completion Date**: YYYY-MM-DD
 

@@ -14,7 +14,7 @@ Starting with a query using the "research" topic profile:
 
 1. **Global defaults**: System-wide settings
 2. **Role base**: `role/wrangler/default.yaml` (base Wrangler settings)
-3. **Topic profile**: `topic/research/default.yaml` (academic optimizations)
+3. **Topic profile**: `topic/research/default.yaml` (academic optimisations)
 4. **Collection config**: Collection-specific overrides (if any)
 5. **Runtime overrides**: CLI flags (e.g., `--chunk-size 1024`)
 

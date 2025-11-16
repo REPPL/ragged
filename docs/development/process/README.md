@@ -319,4 +319,4 @@ See [Contributing Guide](../../../CONTRIBUTING.md) for details.
 **This is a living process.** We'll refine our transparency practices as we learn what's most valuable for the community and research.
 
 **Last updated**: 2025-11-12
-**Status**: Active - all ragged development tracked from v0.1 onwards
+**Status:** Active - all ragged development tracked from v0.1 onwards

@@ -1,7 +1,7 @@
 # Web Framework Choices for ragged
 
 **Last Updated**: 2025-11-08
-**Status**: Planning
+**Status:** Planning
 
 ---
 
@@ -150,7 +150,7 @@ async def query_endpoint(request: QueryRequest):
    - Not optimised for production
 
 3. **Advanced Features Difficult**
-   - Graph visualization challenging
+   - Graph visualisation challenging
    - Complex state management awkward
    - Developer tools integration limited
 
@@ -444,7 +444,7 @@ demo.launch(
 
 **Rationale**:
 1. Gradio limitations become apparent by v0.4
-2. GraphRAG visualization needs custom UI
+2. GraphRAG visualisation needs custom UI
 3. Production polish important for v1.0
 4. Better user experience attracts users
 5. API available for those who prefer custom UIs
@@ -507,7 +507,7 @@ demo.launch(
 - [ ] Set up TypeScript
 - [ ] Implement chat interface
 - [ ] Add SSE streaming client
-- [ ] Build graph visualization
+- [ ] Build graph visualisation
 - [ ] Configure service worker
 - [ ] Optimise bundle size
 - [ ] Test PWA functionality

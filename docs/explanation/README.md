@@ -1,6 +1,6 @@
 # Explanation
 
-**Status**: 🚧 In Development
+**Status:** 🚧 In Development
 **Last Updated**: 2025-11-09
 
 ## Overview
@@ -59,4 +59,4 @@ See [Contributing Guide](../../CONTRIBUTING.md) for more information.
 
 ---
 
-*For technical implementation details, see [Implementation Plan](../implementation/plan/README.md)*
+*For technical implementation details, see [Implementation Plan](../development/planning/README.md)*

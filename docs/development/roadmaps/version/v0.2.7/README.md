@@ -12,7 +12,7 @@
 
 ## Overview
 
-Version 0.2.7 transforms ragged from a functional RAG system into a **delightful** one. This release focuses on user experience improvements and performance optimizations that provide immediate, measurable benefits.
+Version 0.2.7 transforms ragged from a functional RAG system into a **delightful** one. This release focuses on user experience improvements and performance optimisations that provide immediate, measurable benefits.
 
 **Key Goals**:
 - 2-4x faster batch processing (async operations)

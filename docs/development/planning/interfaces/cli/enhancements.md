@@ -1178,7 +1178,7 @@ ragged query "machne lerning" --auto-correct
 **Effort:** 3-4 hours
 
 **Description:**
-Customisable color themes for terminal output.
+Customisable colour themes for terminal output.
 
 **Command Syntax:**
 ```bash

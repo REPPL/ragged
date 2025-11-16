@@ -7,8 +7,8 @@
 **Area:** Data Validation, Configuration Management
 
 **Related:**
-- [Configuration System](../architecture/configuration-system.md)
-- [Implementation Notes](../implementation/v0.1/implementation-notes.md)
+- [Configuration System](../../planning/architecture/configuration-system.md)
+- [Implementation Notes](../../implementations/versions/v0.1/implementation-notes.md)
 
 ---
 

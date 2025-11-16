@@ -122,7 +122,7 @@ This document traces the lineage from initial planning through decisions to fina
 3. **Model Selection:** Refined model recommendations
    - **Planned:** Generic model suggestions
    - **Actual:** Hardware-specific recommendations (Mac Studio M4 Max focus)
-   - **Reason:** Primary development platform optimization
+   - **Reason:** Primary development platform optimisation
 
 ### No Major Deviations
 

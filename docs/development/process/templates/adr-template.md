@@ -1,6 +1,6 @@
 # ADR-XXXX: [Short Title]
 
-**Status**: [Proposed | Accepted | Deprecated | Superseded by ADR-YYYY]
+**Status:** [Proposed | Accepted | Deprecated | Superseded by ADR-YYYY]
 
 **Date**: YYYY-MM-DD
 
