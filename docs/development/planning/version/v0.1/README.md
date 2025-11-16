@@ -1,14 +1,17 @@
 # Version 0.1: Foundation & Basic RAG
 
-**Status:** 📋 Planned (Not Started)
-**Target Timeline**: 2-3 weeks
-**Last Updated**: 2025-11-09
+**Status:** ✅ Implemented (v0.1.0 released)
+**Implemented:** November 2025
+**Last Updated**: 2025-11-16
 
 ## Overview
 
 Version 0.1 establishes the foundation of ragged with basic RAG functionality via a command-line interface.
 
 **Goal**: Prove the concept and create a working RAG system that can ingest documents and answer questions locally.
+
+**For implementation details, see:**
+- [Implementation Records](../../../implementations/version/v0.1/) - What was actually built
 
 ---
 
@@ -79,7 +82,7 @@ Version 0.1 establishes the foundation of ragged with basic RAG functionality vi
 ❌ **Not in v0.1**:
 - Web interface (v0.2)
 - Advanced retrieval strategies (v0.3)
-- Knowledge graphs (v0.5)
+- Knowledge graphs (v0.4)
 - Self-improvement (v0.4)
 - Multi-document reasoning (v0.5)
 - Production optimisation (v1.0)
@@ -103,7 +106,7 @@ Detailed specifications will include:
 
 - **[Implementation Plan](../../README.md)** - Overall roadmap
 - **[Architecture](../../architecture/README.md)** - System architecture
-- **[v0.2 Plan](../v0.2/web-ui-basic.md)** - Next version
+- **[v0.2 Plan](../v0.2/)** - Next version
 
 ---
 
