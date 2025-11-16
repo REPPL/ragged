@@ -19,7 +19,7 @@ This document traces the lineage from planning through decisions to implementati
 ### 1. Planning Documents
 
 **Version Design:**
-- [v0.2 Version Overview](../../../planning/versions/v0.2/) - Enhanced retrieval goals
+- [v0.2 Version Overview](../../../planning/version/v0.2/) - Enhanced retrieval goals
 
 **Architecture Enhancements:**
 - [Document Normalisation](../../../planning/architecture/document-normalisation.md) - Text cleaning
@@ -140,7 +140,7 @@ This document traces the lineage from planning through decisions to implementati
 ## Related Documentation
 
 **Planning:**
-- [v0.2 Version Overview](../../../planning/versions/v0.2/)
+- [v0.2 Version Overview](../../../planning/version/v0.2/)
 - [Architecture Enhancements](../../../planning/architecture/)
 
 **Decisions:**

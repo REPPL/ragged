@@ -3,7 +3,7 @@
 [![Status: Alpha](https://img.shields.io/badge/status-alpha-red.svg)]()
 
 
-*This project is my attempt to learn fully AI-based 'vibe' coding and to document my use of AI coding assistants [transparently](./docs/development/methodology/ai-assistance.md). Expect breaking changes before v1.0.*
+*This project is my attempt to learn fully AI-based 'vibe' coding and to document my use of AI coding assistants [transparently](./docs/development/process/methodology/ai-assistance.md). Expect breaking changes before v1.0.*
 
 
 # `ragged`

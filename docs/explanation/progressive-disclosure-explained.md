@@ -80,7 +80,7 @@ This document will cover:
 ## Related Documentation
 
 - **[Personas](personas-explained.md)** - User personas and needs
-- **[Web UI Plans](../development/planning/versions/)** - Interface evolution
+- **[Web UI Plans](../development/planning/version/)** - Interface evolution
 - **[UI Research](../development/planning/references/web-ui-research.md)** - Design research
 
 ---

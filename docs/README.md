@@ -271,7 +271,7 @@ All developer-facing documentation is now organised under [development/](./devel
 **See what's planned next**
 → Check [Roadmaps](./development/roadmaps/) for version plans and timelines
 → Or [Current Roadmap](./development/roadmaps/version/current/) for active development (v0.3.0)
-→ Or [Version Design Plans](./development/planning/versions/) for detailed feature specifications
+→ Or [Version Design Plans](./development/planning/version/) for detailed feature specifications
 
 **Contribute code or documentation**
 → See [Contributing Guide](../CONTRIBUTING.md)
@@ -283,7 +283,7 @@ All developer-facing documentation is now organised under [development/](./devel
 
 **Research AI-assisted development**
 → Review [AI Assistance Guidelines](./development/process/methodology/ai-assistance.md)
-→ Compare [Design Plans](./development/planning/versions/) vs. [Actual Implementation](./development/implementations/)
+→ Compare [Design Plans](./development/planning/version/) vs. [Actual Implementation](./development/implementations/)
 → Study [Time Logs](./development/process/time-logs/) for AI effectiveness data
 
 **See research materials**
@@ -370,7 +370,7 @@ Each metadata field on its own line for readability.
 
 - All documentation version-controlled in git
 - Major milestones tagged (e.g., `v0.1-complete`)
-- Compare plans ([planning/versions/](./development/planning/versions/)) against actuals ([implementations/](./development/implementations/))
+- Compare plans ([planning/version/](./development/planning/version/)) against actuals ([implementations/](./development/implementations/))
 
 ### AI Transparency
 
@@ -471,5 +471,5 @@ See [`../LICENSE`](../LICENSE) for full text.
 
 1. **New users:** Wait for v0.1 release, then start with [Tutorials](./tutorials/)
 2. **Contributors:** Review [Architecture](./development/planning/architecture/) and [Contributing Guide](../CONTRIBUTING.md)
-3. **Developers:** Explore [Process](./development/process/) and [Version Plans](./development/planning/versions/)
+3. **Developers:** Explore [Process](./development/process/) and [Version Plans](./development/planning/version/)
 4. **Researchers:** Check [Research](./research/) and [Time Tracking](./development/process/methodology/time-tracking.md)

@@ -6,6 +6,20 @@
 **Version**: 0.1.0
 **Development Period**: November 2025
 
+---
+
+## 📍 Canonical Implementation Records
+
+For the official implementation record, see:
+- **[v0.1 Implementation Records](../../../../implementations/version/v0.1/)** - Canonical source of truth
+  - [Implementation Notes](../../../../implementations/version/v0.1/implementation-notes.md) - Technical details
+  - [Testing Documentation](../../../../implementations/version/v0.1/testing.md) - Test strategy
+  - [Implementation Summary](../../../../implementations/version/v0.1/summary.md) - Final summary
+
+This directory contains the **development log** (daily narrative). The **implementation records** directory contains the canonical technical documentation.
+
+---
+
 ## Quick Overview
 
 ragged v0.1 establishes the foundation for a privacy-first local RAG (Retrieval-Augmented Generation) system. This development log documents the complete journey from planning through implementation, organised by concerns for easy navigation and future reference.

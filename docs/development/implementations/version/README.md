@@ -56,7 +56,7 @@ Each version directory contains:
 
 ## Related Documentation
 
-- [Planning Versions](../../planning/versions/) - What was planned
+- [Planning Versions](../../planning/version/) - What was planned
 - [Roadmap Versions](../../roadmaps/version/) - Implementation timelines
 - [ADRs](../../decisions/adrs/) - Architectural decisions
 - [Development Logs](../../process/devlogs/version/) - Development narratives

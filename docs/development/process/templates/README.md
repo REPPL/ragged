@@ -97,7 +97,7 @@ Templates ensure consistent documentation practices and make it easy to capture 
 - Summarizing changes and improvements
 - Planning next version
 
-**Output location:** `/docs/development/planning/versions/vX.Y/README.md`
+**Output location:** `/docs/development/planning/version/vX.Y/README.md`
 
 **Key sections:**
 - Version goals and completion status
@@ -177,7 +177,7 @@ Templates can be adapted for project-specific needs:
 ## Cross-References
 
 - **Development Guide**: [../../README.md](../../README.md)
-- **Version Roadmap**: [../../planning/versions/](../../planning/versions/)
+- **Version Roadmap**: [../../planning/version/](../../planning/version/)
 - **User Stories**: [../../planning/requirements/user-stories/](../../planning/requirements/user-stories/)
 
 ---
@@ -195,5 +195,5 @@ Templates can be adapted for project-specific needs:
 1. **Creating an ADR**: Copy `adr-template.md` → `/docs/development/decisions/adrs/XXXX-title.md`
 2. **Daily Devlog**: Copy `devlog-template.md` → `/docs/development/process/devlogs/daily/YYYY-MM-DD.md`
 3. **New User Story**: Copy `user-story-template.md` → `/docs/development/planning/requirements/user-stories/US-XXX-title.md`
-4. **Version Summary**: Copy `version-summary-template.md` → `/docs/development/planning/versions/vX.Y/README.md`
+4. **Version Summary**: Copy `version-summary-template.md` → `/docs/development/planning/version/vX.Y/README.md`
 5. **Time Tracking**: Copy `feature-time-log-template.md` → `/docs/development/process/time-logs/feature-name.md`

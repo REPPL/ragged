@@ -533,7 +533,7 @@ Include:
 
 **Version:** v0.2.2 (Developer Beta)
 
-**Breaking changes expected** before v1.0 - see [Versioning Philosophy](docs/development/planning/versions/versioning-philosophy.md)
+**Breaking changes expected** before v1.0 - see [Versioning Philosophy](docs/development/planning/core-concepts/versioning-philosophy.md)
 
 **Active development focus:**
 - v0.2.3-v0.2.7: Incremental improvements

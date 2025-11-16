@@ -11,9 +11,9 @@
 This directory contains version-specific design overviews that outline the features, goals, and scope for each ragged version.
 
 **Distinction:**
-- **planning/versions/** = High-level design goals (what)
+- **planning/version/** = High-level design goals (what)
 - **roadmaps/version/** = Detailed implementation plans (how + when)
-- **implementations/versions/** = What was actually built
+- **implementations/version/** = What was actually built
 
 ---
 
@@ -43,7 +43,7 @@ Version directories contain:
 ## Related Documentation
 
 - [Roadmaps](../../../roadmaps/version/) - Detailed implementation plans with timelines
-- [Implementations](../../../implementations/versions/) - Actual implementation records
+- [Implementations](../../../implementations/version/) - Actual implementation records
 - [ADRs](../../../decisions/adrs/) - Decisions made during implementation
 
 ---

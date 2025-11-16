@@ -31,7 +31,7 @@ implementations/
 
 ## Version Implementation Records
 
-### [versions/v0.1/](./versions/v0.1/) - MVP Implementation
+### [versions/v0.1/](./version/v0.1/) - MVP Implementation
 
 **Status:** Complete (November 2025)
 
@@ -44,12 +44,12 @@ implementations/
 - Basic CLI interface
 
 **Key documents:**
-- [Summary](./versions/v0.1/summary.md) - Results and retrospective
-- [Implementation Notes](./versions/v0.1/implementation-notes.md) - Technical details
-- [Testing Results](./versions/v0.1/testing.md) - Test coverage and quality
-- [Lineage](./versions/v0.1/lineage.md) - Complete traceability from planning to implementation
+- [Summary](./version/v0.1/summary.md) - Results and retrospective
+- [Implementation Notes](./version/v0.1/implementation-notes.md) - Technical details
+- [Testing Results](./version/v0.1/testing.md) - Test coverage and quality
+- [Lineage](./version/v0.1/lineage.md) - Complete traceability from planning to implementation
 
-### [versions/v0.2/](./versions/v0.2/) - Enhanced Retrieval
+### [versions/v0.2/](./version/v0.2/) - Enhanced Retrieval
 
 **Status:** In progress
 
@@ -60,10 +60,10 @@ implementations/
 - Multi-query retrieval
 
 **Key documents:**
-- [Implementation Plan](./versions/v0.2/implementation-plan.md) - Development guide
-- [v0.2.1 Release Notes](./versions/v0.2/v0.2.1-release-notes.md) - Chunking enhancements
-- [v0.2.2 Release Notes](./versions/v0.2/v0.2.2-release-notes.md) - Retrieval enhancements
-- [Lineage](./versions/v0.2/lineage.md) - Traceability from planning to implementation (partial)
+- [Implementation Plan](./version/v0.2/implementation-plan.md) - Development guide
+- [v0.2.1 Release Notes](./version/v0.2/v0.2.1-release-notes.md) - Chunking enhancements
+- [v0.2.2 Release Notes](./version/v0.2/v0.2.2-release-notes.md) - Retrieval enhancements
+- [Lineage](./version/v0.2/lineage.md) - Traceability from planning to implementation (partial)
 
 ---
 
@@ -74,7 +74,7 @@ implementations/
 1. Navigate to the version directory (e.g., `versions/v0.1/`)
 2. Read the summary for high-level outcomes
 3. Review implementation notes for technical details
-4. Compare with original plans in `planning/versions/`
+4. Compare with original plans in `planning/version/`
 
 ### Planning Future Versions
 
@@ -97,7 +97,7 @@ When completing a version:
 ## Relationship to Other Documentation
 
 **Planning documentation:**
-- [planning/versions/](../planning/versions/) - Original design plans
+- [planning/version/](../planning/version/) - Original design plans
 - [planning/architecture/](../planning/architecture/) - System architecture
 
 **Decision documentation:**

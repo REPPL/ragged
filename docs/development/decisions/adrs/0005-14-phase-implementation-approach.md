@@ -137,6 +137,6 @@ Actual implementation matched plan closely, with minor adjustments:
 
 ## Related
 
-- [v0.1 Implementation Summary](../../implementations/versions/v0.1/summary.md)
+- [v0.1 Implementation Summary](../../implementations/version/v0.1/summary.md)
 - [Development Methodology](../../process/methodology/README.md)
 - [Time Tracking for v0.1](../../process/time-logs/version/v0.1/v0.1.0-time-log.md)

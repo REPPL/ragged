@@ -51,7 +51,7 @@ This document will cover:
 
 - **[Implementation Plan](../development/planning/README.md)** - Complete version roadmap
 - **[Versioning Philosophy](../development/planning/core-concepts/versioning-philosophy.md)** - Technical approach
-- **[Version Plans](../development/planning/versions/)** - Detailed version specifications
+- **[Version Plans](../development/planning/version/)** - Detailed version specifications
 
 ---
 

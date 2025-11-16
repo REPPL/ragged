@@ -99,7 +99,7 @@ All design and planning documents are now organised under `planning/` for clarit
 - [CLI Enhancements](./planning/interfaces/cli/enhancements.md) - Complete CLI feature specifications
 - [Interfaces README](./planning/interfaces/README.md) - Navigation and overview
 
-### [planning/versions/](./planning/versions/) - Version Plans
+### [planning/version/](./planning/version/) - Version Plans
 
 **Purpose:** Version-specific high-level design plans
 
@@ -177,8 +177,8 @@ All decision documentation is now grouped under `decisions/` for easier navigati
 **Status:** Active (v0.1 complete, v0.2 in progress)
 
 **Contains:**
-- **[versions/v0.1/](./implementations/versions/v0.1/)** - MVP implementation records
-- **[versions/v0.2/](./implementations/versions/v0.2/)** - Enhanced retrieval implementation
+- **[versions/v0.1/](./implementations/version/v0.1/)** - MVP implementation records
+- **[versions/v0.2/](./implementations/version/v0.2/)** - Enhanced retrieval implementation
 
 **When to use:**
 - Understanding what was actually built (vs. what was planned)
@@ -187,9 +187,9 @@ All decision documentation is now grouped under `decisions/` for easier navigati
 - Planning future versions based on learnings
 
 **Key documents:**
-- [v0.1 Summary](./implementations/versions/v0.1/summary.md) - Results and retrospective
-- [v0.1 Implementation Notes](./implementations/versions/v0.1/implementation-notes.md) - Technical details
-- [v0.1 Testing Results](./implementations/versions/v0.1/testing.md) - Test coverage and quality
+- [v0.1 Summary](./implementations/version/v0.1/summary.md) - Results and retrospective
+- [v0.1 Implementation Notes](./implementations/version/v0.1/implementation-notes.md) - Technical details
+- [v0.1 Testing Results](./implementations/version/v0.1/testing.md) - Test coverage and quality
 
 **Distinction:**
 - **planning/** = What we **planned** to build
@@ -253,7 +253,7 @@ All decision documentation is now grouped under `decisions/` for easier navigati
 **Plan a new feature**
 1. Start with [planning/vision/](./planning/vision/) to ensure alignment
 2. Create RFC in [decisions/rfcs/](./decisions/rfcs/) if significant
-3. Design in [planning/versions/](./planning/versions/) or [planning/architecture/](./planning/architecture/)
+3. Design in [planning/version/](./planning/version/) or [planning/architecture/](./planning/architecture/)
 4. Document decision in [decisions/adrs/](./decisions/adrs/)
 
 **Understand a past decision**
@@ -263,7 +263,7 @@ All decision documentation is now grouped under `decisions/` for easier navigati
 
 **See what's planned next**
 1. Check [roadmaps/](./roadmaps/) for near-term plans
-2. Or [planning/versions/](./planning/versions/) for long-term vision
+2. Or [planning/version/](./planning/version/) for long-term vision
 
 **Study how ragged is built**
 1. Read [process/README.md](./process/README.md) for overview
@@ -271,14 +271,14 @@ All decision documentation is now grouped under `decisions/` for easier navigati
 3. Study [process/time-logs/](./process/time-logs/) for empirical data
 
 **Implement a feature**
-1. Follow design in [planning/versions/](./planning/versions/) or [planning/architecture/](./planning/architecture/)
+1. Follow design in [planning/version/](./planning/version/) or [planning/architecture/](./planning/architecture/)
 2. Track work in [process/devlogs/](./process/devlogs/)
 3. Document actual in [implementations/](./implementations/)
 4. Create ADR in [decisions/adrs/](./decisions/adrs/) for key decisions
 
 **Research AI-assisted development**
 1. Read [process/methodology/](./process/methodology/)
-2. Compare [planning/versions/](./planning/versions/) vs. [implementations/](./implementations/)
+2. Compare [planning/version/](./planning/version/) vs. [implementations/](./implementations/)
 3. Study [process/time-logs/](./process/time-logs/) for AI effectiveness
 
 ---
@@ -319,13 +319,13 @@ All decision documentation is now grouped under `decisions/` for easier navigati
 1. **Read** [planning/vision/product-vision.md](./planning/vision/product-vision.md) - Understand goals
 2. **Review** [roadmaps/](./roadmaps/) - See what's planned
 3. **Study** [decisions/adrs/](./decisions/adrs/) - Understand key decisions
-4. **Follow** [planning/versions/](./planning/versions/) or [planning/interfaces/](./planning/interfaces/) - Implementation guides
+4. **Follow** [planning/version/](./planning/version/) or [planning/interfaces/](./planning/interfaces/) - Implementation guides
 5. **Document** [process/devlogs/](./process/devlogs/) - Share your journey
 
 ### Contributing
 
 **For code:**
-- Follow design in [planning/architecture/](./planning/architecture/) and [planning/versions/](./planning/versions/)
+- Follow design in [planning/architecture/](./planning/architecture/) and [planning/version/](./planning/version/)
 - Document decisions in [decisions/adrs/](./decisions/adrs/)
 - Track time in [process/time-logs/](./process/time-logs/)
 - Write devlog in [process/devlogs/](./process/devlogs/)
