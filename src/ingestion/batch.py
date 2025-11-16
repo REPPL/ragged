@@ -1,9 +1,11 @@
 """Batch document ingestion with progress reporting and error handling.
 
 Provides functionality to ingest multiple documents with progress tracking,
-duplicate detection, and graceful error handling.
+duplicate detection, graceful error handling, and memory management.
 """
 
+import gc
+import psutil
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
@@ -17,6 +19,7 @@ from src.embeddings.factory import get_embedder
 from src.ingestion.loaders import load_document
 from src.storage.vector_store import VectorStore
 from src.utils.logging import get_logger
+from src.exceptions import MemoryLimitExceededError
 
 logger = get_logger(__name__)
 
@@ -56,13 +59,14 @@ class BatchSummary:
 
 
 class BatchIngester:
-    """Batch document ingestion with error handling."""
+    """Batch document ingestion with error handling and memory management."""
 
     def __init__(
         self,
         console: Console,
         continue_on_error: bool = True,
         skip_duplicates: bool = True,
+        memory_limit_mb: Optional[int] = None,
     ):
         """Initialize batch ingester.
 
@@ -70,10 +74,50 @@ class BatchIngester:
             console: Rich console for output
             continue_on_error: If True, continue after errors; if False, stop
             skip_duplicates: If True, skip duplicate documents automatically
+            memory_limit_mb: Optional memory limit in MB (default: 80% of available)
         """
         self.console = console
         self.continue_on_error = continue_on_error
         self.skip_duplicates = skip_duplicates
+
+        # Set memory limit (default to 80% of available RAM)
+        if memory_limit_mb is None:
+            total_mb = psutil.virtual_memory().total / (1024 * 1024)
+            self.memory_limit_mb = int(total_mb * 0.8)
+        else:
+            self.memory_limit_mb = memory_limit_mb
+
+        logger.info(f"BatchIngester initialized with {self.memory_limit_mb}MB memory limit")
+
+    def _get_current_memory_mb(self) -> float:
+        """Get current process memory usage in MB.
+
+        Returns:
+            Current memory usage in megabytes
+        """
+        process = psutil.Process()
+        return process.memory_info().rss / (1024 * 1024)
+
+    def _check_memory_limit(self, operation: str = "batch_processing") -> None:
+        """Check if current memory usage exceeds limit.
+
+        Args:
+            operation: Name of operation for error message
+
+        Raises:
+            MemoryLimitExceededError: If memory limit exceeded
+        """
+        current_mb = self._get_current_memory_mb()
+        if current_mb > self.memory_limit_mb:
+            raise MemoryLimitExceededError(
+                operation=operation,
+                limit_mb=self.memory_limit_mb,
+                usage_mb=int(current_mb)
+            )
+
+    def _force_garbage_collection(self) -> None:
+        """Force garbage collection to free memory."""
+        gc.collect()
 
     def ingest_batch(
         self,
@@ -110,6 +154,15 @@ class BatchIngester:
                     completed=i - 1,
                 )
 
+            # Check memory before processing
+            try:
+                self._check_memory_limit(f"document_{i}")
+            except MemoryLimitExceededError as e:
+                logger.warning(f"Memory limit approaching, forcing GC: {e}")
+                self._force_garbage_collection()
+                # Check again after GC
+                self._check_memory_limit(f"document_{i}_post_gc")
+
             # Ingest single document
             result = self._ingest_single(
                 file_path, vector_store, embedder
@@ -118,6 +171,9 @@ class BatchIngester:
 
             if result.status == IngestionStatus.SUCCESS:
                 total_chunks += result.chunks
+
+            # Force garbage collection after each document to free memory
+            self._force_garbage_collection()
 
             # Fail fast if configured
             if (
@@ -131,6 +187,9 @@ class BatchIngester:
 
         if progress and task:
             progress.update(task, completed=len(file_paths))
+
+        # Final garbage collection
+        self._force_garbage_collection()
 
         # Build summary
         summary = BatchSummary(
@@ -209,6 +268,11 @@ class BatchIngester:
                 documents=chunk_texts,
                 metadatas=metadatas,
             )
+
+            # Explicitly clear large objects to free memory
+            del embeddings
+            del chunk_texts
+            del metadatas
 
             return IngestionResult(
                 file_path=file_path,

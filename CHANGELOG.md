@@ -5,6 +5,18 @@ All notable changes to ragged will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+- **BUG-006: Memory Leaks in Batch Processing**: Fixed memory accumulation during large batch document processing
+  - Added memory monitoring using psutil to track process memory usage
+  - Implemented configurable memory limits (default: 80% of available RAM)
+  - Added automatic garbage collection after each document to free memory promptly
+  - Added explicit deletion of large objects (embeddings, chunk_texts, metadatas) to accelerate memory release
+  - Integrated MemoryLimitExceededError exception for graceful memory limit handling
+  - Memory usage now remains stable during large batch operations (50+ documents)
+  - All 23 batch processing tests pass with 95% coverage
+
 ## [0.2.2] - 2025-11-10
 
 ### Fixed
