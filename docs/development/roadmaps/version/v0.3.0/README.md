@@ -98,6 +98,37 @@ Version 0.3.0 represents a major evolution of ragged, focusing on **advanced ret
 
 ---
 
+## Deferred Structural Improvements
+
+The following structural improvements were evaluated for v0.2.x but deferred to v0.3.0+ based on architectural analysis:
+
+### CLI Modular Structure
+- **Status:** ❌ Deferred to v0.3.0+
+- **Trigger:** CLI file exceeds 800 lines (currently 577 lines)
+- **Rationale:** Current single-file structure is maintainable; splitting during bug-fix phase adds unnecessary risk
+- **Implementation:** Split src/main.py into src/cli/ directory structure when threshold reached
+- **Estimated Effort:** 8-12 hours
+
+### Benchmarks Directory
+- **Status:** ❌ Deferred to v0.3.0+
+- **Dependencies:** Requires v0.3.0 Evaluation & Quality framework (FEAT-004)
+- **Rationale:** Benchmark infrastructure exists (src/utils/benchmarks.py) but should align with evaluation metrics
+- **Implementation:** Create tests/benchmarks/ with performance regression tests
+- **Estimated Effort:** 24 hours
+
+### Architecture Diagrams
+- **Status:** ❌ Deferred to v0.3.0+
+- **Rationale:** v0.3.0 will significantly change architecture; creating diagrams now = maintenance burden
+- **Implementation:** Add Mermaid component diagrams and sequence diagrams after v0.3.0 stabilises
+- **Estimated Effort:** 7 hours (Component + 2 Sequence diagrams)
+
+### When to Revisit
+- **CLI Modular Structure:** If src/main.py exceeds 800 lines OR plugin system needed
+- **Benchmarks Directory:** After v0.3.0 evaluation framework (FEAT-004) is complete
+- **Architecture Diagrams:** After v0.3.0 features stabilise (v0.3.1 or later)
+
+---
+
 ## Implementation Recommendations
 
 ### Recommended Order

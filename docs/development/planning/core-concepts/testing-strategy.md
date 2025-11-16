@@ -1194,7 +1194,7 @@ def test_detect_email_addresses():
 
     detector = PIIDetector()
 
-    text = "Contact me at john.doe@example.com for details."
+    text = "Contact me at test@example.invalid for details."
 
     result = detector.scan(text)
 
