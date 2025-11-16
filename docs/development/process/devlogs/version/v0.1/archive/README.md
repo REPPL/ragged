@@ -19,7 +19,7 @@ This directory contains archived development materials from the v0.1 implementat
 Most v0.1 development documentation has been organised into:
 - [v0.1 Development Log](../README.md) - Main narrative
 - [v0.1 Decisions Index](../decisions-index.md) - All decisions
-- [v0.1 Implementation Records](../../../../../implementations/version/v0.1/) - Final results
+- [v0.1 Implementation Records](../../../../../implementation/version/v0.1/) - Final results
 
 This archive contains supplementary materials that provide additional context but aren't part of the primary documentation.
 

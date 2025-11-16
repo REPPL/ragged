@@ -334,6 +334,16 @@ The goal is sustainable, high-quality development that builds ragged into a best
 
 ---
 
+## Related Documentation
+
+- [Planning Documentation](../planning/) - High-level design goals and architecture
+- [Planning: Version Designs](../planning/version/) - What each version aims to achieve
+- [Implementations](../implementation/) - What was actually built vs planned
+- [Process: Development Logs](../process/devlogs/version/) - Development narratives
+- [CLI Enhancements Catalogue](../planning/interfaces/cli/enhancements.md) - Complete CLI specifications
+
+---
+
 **Analysis Date**: 2025-11-11
 **Current Version**: v0.2.2
 **Analysed By**: Claude Code (Sonnet 4.5)

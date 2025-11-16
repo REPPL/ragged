@@ -45,7 +45,7 @@ Web UI documentation to be expanded as design progresses.
 
 ## Related Documentation
 
-- [Web UI Roadmap](../../../../roadmaps/version/v1.0/) - Implementation plan
+- [Web UI Roadmap](../../../../roadmap/version/v1.0/) - Implementation plan
 - [CLI Interface](../cli/) - Command-line alternative
 
 ---

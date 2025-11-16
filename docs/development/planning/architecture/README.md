@@ -41,7 +41,7 @@ This document describes the **complete vision** for ragged v1.0. Current impleme
 - 📋 Advanced caching (v0.3)
 - 📋 Production deployment (v1.0)
 
-See version roadmaps in `docs/development/roadmaps/version/` for detailed timelines.
+See version roadmaps in `docs/development/roadmap/version/` for detailed timelines.
 
 ### Core Design Principles
 

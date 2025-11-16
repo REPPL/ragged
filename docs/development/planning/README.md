@@ -13,7 +13,7 @@ This directory contains all planning and design documentation for ragged—every
 **Distinction:**
 - **planning/** = Future design (what we plan to build)
 - **decisions/** = Rationale (why we chose this approach)
-- **implementations/** = Past reality (what we actually built)
+- **implementation/** = Past reality (what we actually built)
 
 ---
 
@@ -37,7 +37,7 @@ Technology evaluations, comparisons, and selections
 ### [interfaces/](./interfaces/)
 User interface designs (CLI and Web UI)
 
-### [versions/](./versions/)
+### [version/](./version/)
 Version-specific high-level design plans
 
 ### [references/](./references/)
@@ -65,7 +65,7 @@ Research papers, academic materials, and external resources
 2. Create requirements/ user stories
 3. Design in architecture/ or core-concepts/
 4. Evaluate technologies/ if needed
-5. Add to appropriate versions/ roadmap
+5. Add to appropriate version/ roadmap
 6. Document decisions in decisions/adrs/
 
 ---
@@ -73,8 +73,8 @@ Research papers, academic materials, and external resources
 ## Related Documentation
 
 - [Decisions](../decisions/) - Why we chose certain approaches
-- [Roadmaps](../roadmaps/) - Implementation timelines
-- [Implementations](../implementations/) - What was actually built
+- [Roadmaps](../roadmap/) - Implementation timelines
+- [Implementations](../implementation/) - What was actually built
 
 ---
 

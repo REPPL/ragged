@@ -12,8 +12,8 @@ This directory contains version-specific design overviews that outline the featu
 
 **Distinction:**
 - **planning/version/** = High-level design goals (what)
-- **roadmaps/version/** = Detailed implementation plans (how + when)
-- **implementations/version/** = What was actually built
+- **roadmap/version/** = Detailed implementation plans (how + when)
+- **implementation/version/** = What was actually built
 
 ---
 
@@ -26,7 +26,7 @@ This directory contains version-specific design overviews that outline the featu
 - **[v0.4/](./v0.4/)** - Knowledge graphs
 - **[v0.3/](./v0.3/)** - Advanced retrieval and multi-modal
 - **[v0.2/](./v0.2/)** - Enhanced retrieval (current)
-- **v0.1/** - MVP (complete - see implementations/)
+- **v0.1/** - MVP (complete - see implementation/)
 
 ---
 
@@ -42,8 +42,8 @@ Version directories contain:
 
 ## Related Documentation
 
-- [Roadmaps](../../../roadmaps/version/) - Detailed implementation plans with timelines
-- [Implementations](../../../implementations/version/) - Actual implementation records
+- [Roadmaps](../../../roadmap/version/) - Detailed implementation plans with timelines
+- [Implementations](../../../implementation/version/) - Actual implementation records
 - [ADRs](../../../decisions/adrs/) - Decisions made during implementation
 
 ---

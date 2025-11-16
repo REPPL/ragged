@@ -80,7 +80,7 @@ ADR (Record of decision)
 - [ADRs Directory](./adrs/) - All architecture decisions
 - [RFCs Directory](./rfcs/) - All proposals
 - [Planning](../planning/) - Future designs
-- [Implementations](../implementations/) - Past implementations
+- [Implementations](../implementation/) - Past implementations
 
 ---
 

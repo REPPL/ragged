@@ -12,10 +12,10 @@ This directory contains the complete development documentation for ragged v0.2, 
 ## 📍 Canonical Implementation Records
 
 For the official implementation record, see:
-- **[v0.2 Implementation Records](../../../../implementations/version/v0.2/)** - Canonical source of truth
-  - [Implementation Plan](../../../../implementations/version/v0.2/implementation-plan.md) - Technical plan
-  - [v0.2.1 Release Notes](../../../../implementations/version/v0.2/v0.2.1-release-notes.md)
-  - [v0.2.2 Release Notes](../../../../implementations/version/v0.2/v0.2.2-release-notes.md)
+- **[v0.2 Implementation Records](../../../../implementation/version/v0.2/)** - Canonical source of truth
+  - [Implementation Plan](../../../../implementation/version/v0.2/implementation-plan.md) - Technical plan
+  - [v0.2.1 Release Notes](../../../../implementation/version/v0.2/v0.2.1-release-notes.md)
+  - [v0.2.2 Release Notes](../../../../implementation/version/v0.2/v0.2.2-release-notes.md)
 
 This directory contains the **development log** (daily narrative). The **implementation records** directory contains the canonical technical documentation.
 

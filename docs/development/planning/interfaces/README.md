@@ -66,9 +66,9 @@ UI/
 - Plugin system for unlimited extensibility
 
 **Implementation Tracking:**
-- See [v0.2.7 Roadmap](../../roadmaps/version/v0.2.7/README.md) for CLI foundation
-- See [v0.3.0 Roadmap](../../roadmaps/version/v0.3.0/README.md) for advanced CLI
-- See [v0.4.0 Roadmap](../../roadmaps/version/v0.4.0/README.md) for plugin system
+- See [v0.2.7 Roadmap](../../roadmap/version/v0.2.7/README.md) for CLI foundation
+- See [v0.3.0 Roadmap](../../roadmap/version/v0.3.0/README.md) for advanced CLI
+- See [v0.4.0 Roadmap](../../roadmap/version/v0.4.0/README.md) for plugin system
 
 ---
 
@@ -212,14 +212,14 @@ CLI and web UI share the **same ragged core**:
 ### Roadmap Integration
 
 **CLI Enhancements:**
-- **v0.2.7** (11 enhancements) - See [v0.2.7 Roadmap](../../roadmaps/version/v0.2.7/README.md)
-- **v0.3.0** (11 enhancements) - See [v0.3.0 Roadmap](../../roadmaps/version/v0.3.0/README.md)
-- **v0.4.0** (plugin system) - See [v0.4.0 Roadmap](../../roadmaps/version/v0.4.0/README.md)
+- **v0.2.7** (11 enhancements) - See [v0.2.7 Roadmap](../../roadmap/version/v0.2.7/README.md)
+- **v0.3.0** (11 enhancements) - See [v0.3.0 Roadmap](../../roadmap/version/v0.3.0/README.md)
+- **v0.4.0** (plugin system) - See [v0.4.0 Roadmap](../../roadmap/version/v0.4.0/README.md)
 
 **Web UI Enhancements:**
-- **v0.2.5** (bug fixes) - See [v0.2.5 Roadmap](../../roadmaps/version/v0.2.5/README.md)
-- **v0.3.0** (multi-modal) - See [v0.3.0 Roadmap](../../roadmaps/version/v0.3.0/README.md)
-- **v0.4.0** (advanced features) - See [v0.4.0 Roadmap](../../roadmaps/version/v0.4.0/README.md)
+- **v0.2.5** (bug fixes) - See [v0.2.5 Roadmap](../../roadmap/version/v0.2.5/README.md)
+- **v0.3.0** (multi-modal) - See [v0.3.0 Roadmap](../../roadmap/version/v0.3.0/README.md)
+- **v0.4.0** (advanced features) - See [v0.4.0 Roadmap](../../roadmap/version/v0.4.0/README.md)
 
 ---
 
@@ -234,7 +234,7 @@ CLI and web UI share the **same ragged core**:
 - [Vision](../vision/README.md) - Who ragged serves and why
 
 ### Process
-- [Roadmap Overview](../../roadmaps/README.md) - Development timeline
+- [Roadmap Overview](../../roadmap/README.md) - Development timeline
 - [Methodology](../../process/methodology/README.md) - Development approach
 
 ---

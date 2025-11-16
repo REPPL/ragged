@@ -15,7 +15,7 @@ Version 0.4 introduces a **Personal Memory System** and **Knowledge Graphs**, tr
 **Goal**: Make ragged remember what you care about and provide increasingly personalised responses over time.
 
 **For detailed implementation plans, see:**
-- [Roadmap: v0.4.0](../../../roadmaps/version/v0.4.0/) - Personal memory & knowledge graphs (180-225 hours)
+- [Roadmap: v0.4.0](../../../roadmap/version/v0.4.0/) - Personal memory & knowledge graphs (180-225 hours)
 
 ---
 
@@ -63,7 +63,7 @@ Version 0.4 introduces a **Personal Memory System** and **Knowledge Graphs**, tr
 - Custom chunking strategies
 - Hook system for workflow integration
 
-**Expected Impact**: Community can extend ragged for specialized use cases
+**Expected Impact**: Community can extend ragged for specialised use cases
 
 ---
 
@@ -110,7 +110,7 @@ Version 0.4 introduces a **Personal Memory System** and **Knowledge Graphs**, tr
 
 - [v0.3 Planning](../v0.3/) - Advanced retrieval & multi-modal
 - [v0.5 Planning](../v0.5/) - Vision integration
-- [Roadmap: v0.4.0](../../../roadmaps/version/v0.4.0/) - Detailed implementation plan
+- [Roadmap: v0.4.0](../../../roadmap/version/v0.4.0/) - Detailed implementation plan
 - [Architecture](../../architecture/) - System architecture
 
 ---

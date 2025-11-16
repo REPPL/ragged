@@ -79,7 +79,7 @@ Letta (formerly MemGPT) implements an "LLM Operating System" approach inspired b
 
 **Key Features:**
 
-1. **Memory Blocks**: Persistent, labeled containers for knowledge
+1. **Memory Blocks**: Persistent, labelled containers for knowledge
    - In-context blocks are part of every LLM call
    - Self-editable via dedicated tools
    - Shared across agents via block IDs
@@ -500,7 +500,7 @@ docker-compose up  # Starts Neo4j and related services
 ### 1.4 LangChain/LangGraph - Production Memory Persistence
 
 **Overview:**
-LangGraph has become the standard framework for production agent memory in 2025. The legacy LangChain memory modules (ConversationBufferMemory, etc.) have been deprecated in favor of LangGraph's checkpointing system, which provides superior persistence and multi-threading support.
+LangGraph has become the standard framework for production agent memory in 2025. The legacy LangChain memory modules (ConversationBufferMemory, etc.) have been deprecated in favour of LangGraph's checkpointing system, which provides superior persistence and multi-threading support.
 
 **Technical Architecture:**
 

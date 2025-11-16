@@ -846,7 +846,7 @@ class EmbeddingOptimiser:
 
 ## Related Documentation
 
-- [Hardware Optimisation Roadmap](../../roadmaps/features/hardware-optimisation-roadmap.md) - Implementation timeline
+- [Hardware Optimisation Roadmap](../../roadmap/features/hardware-optimisation-roadmap.md) - Implementation timeline
 - [Dynamic Model Selection](./model-selection.md) - Model selection strategies
 - [Personal Memory & Personas](./personal-memory-personas.md) - User context features
 - [Privacy Architecture](./privacy-architecture.md) - Privacy-first design principles

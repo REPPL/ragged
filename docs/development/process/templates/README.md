@@ -145,7 +145,7 @@ docs/development/
 ├── planning/
 │   ├── requirements/
 │   │   └── user-stories/   # User stories go here
-│   └── versions/           # Version summaries go here
+│   └── version/           # Version summaries go here
 │       ├── v0.1/
 │       │   └── README.md
 │       ├── v0.2/
@@ -153,7 +153,7 @@ docs/development/
 ├── decisions/
 │   ├── adrs/              # ADRs go here
 │   └── rfcs/              # RFCs go here
-├── roadmaps/              # Version roadmaps
+├── roadmap/              # Version roadmaps
 └── process/
     ├── devlogs/           # Daily logs go here
     ├── time-logs/         # Feature time logs go here

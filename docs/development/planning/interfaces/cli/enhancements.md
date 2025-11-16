@@ -1494,6 +1494,6 @@ def test_command_with_invalid_args():
 
 **Related Documents:**
 - [Product Vision](../../vision/product-vision.md)
-- [v0.2.7 Roadmap](../../../roadmaps/version/v0.2.7/README.md)
-- [v0.3.0 Roadmap](../../../roadmaps/version/v0.3.0/README.md)
-- [v0.4.0 Roadmap](../../../roadmaps/version/v0.4.0/README.md)
+- [v0.2.7 Roadmap](../../../roadmap/version/v0.2.7/README.md)
+- [v0.3.0 Roadmap](../../../roadmap/version/v0.3.0/README.md)
+- [v0.4.0 Roadmap](../../../roadmap/version/v0.4.0/README.md)

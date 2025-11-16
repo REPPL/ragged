@@ -12,7 +12,7 @@ This directory tracks the **actual implementation** of ragged features, organise
 
 **Distinction:**
 - **planning/** = What we **planned** to build (design phase)
-- **implementations/** = What we **actually built** (retrospective)
+- **implementation/** = What we **actually built** (retrospective)
 - **process/devlogs/** = **How** we built it (narrative)
 
 ---
@@ -20,9 +20,9 @@ This directory tracks the **actual implementation** of ragged features, organise
 ## Structure
 
 ```
-implementations/
+implementation/
 ├── README.md           ← This file
-└── versions/           ← Version-specific implementation records
+└── version/            ← Version-specific implementation records
     ├── v0.1/          ← MVP implementation (complete)
     └── v0.2/          ← Enhanced retrieval (in progress)
 ```
@@ -31,7 +31,7 @@ implementations/
 
 ## Version Implementation Records
 
-### [versions/v0.1/](./version/v0.1/) - MVP Implementation
+### [version/v0.1/](./version/v0.1/) - MVP Implementation
 
 **Status:** Complete (November 2025)
 
@@ -49,7 +49,7 @@ implementations/
 - [Testing Results](./version/v0.1/testing.md) - Test coverage and quality
 - [Lineage](./version/v0.1/lineage.md) - Complete traceability from planning to implementation
 
-### [versions/v0.2/](./version/v0.2/) - Enhanced Retrieval
+### [version/v0.2/](./version/v0.2/) - Enhanced Retrieval
 
 **Status:** In progress
 
@@ -71,7 +71,7 @@ implementations/
 
 ### Understanding What Was Built
 
-1. Navigate to the version directory (e.g., `versions/v0.1/`)
+1. Navigate to the version directory (e.g., `version/v0.1/`)
 2. Read the summary for high-level outcomes
 3. Review implementation notes for technical details
 4. Compare with original plans in `planning/version/`
@@ -86,7 +86,7 @@ implementations/
 ### Contributing
 
 When completing a version:
-1. Create version directory under `versions/`
+1. Create version directory under `version/`
 2. Document what was actually built
 3. Note deviations from the plan
 4. Record lessons learned
@@ -108,7 +108,7 @@ When completing a version:
 - [process/time-logs/version/](../process/time-logs/version/) - Time tracking
 
 **Roadmap documentation:**
-- [roadmaps/version/](../roadmaps/version/) - Feature roadmaps
+- [roadmap/version/](../roadmap/version/) - Feature roadmaps
 
 ---
 

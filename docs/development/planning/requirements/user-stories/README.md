@@ -221,8 +221,8 @@ Where:
 - [Testing Strategy](../../core-concepts/testing-strategy.md)
 
 ### Development
-- [Version Roadmap](../../versions/)
-- [Roadmaps](../../../roadmaps/README.md)
+- [Version Roadmap](../../version/)
+- [Roadmaps](../../../roadmap/README.md)
 
 ### Testing
 - [Testing Process](../../../process/testing/README.md)

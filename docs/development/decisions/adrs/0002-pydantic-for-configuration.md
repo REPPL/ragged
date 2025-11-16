@@ -8,7 +8,7 @@
 
 **Related:**
 - [Configuration System](../../planning/architecture/configuration-system.md)
-- [Implementation Notes](../../implementations/version/v0.1/implementation-notes.md)
+- [Implementation Notes](../../implementation/version/v0.1/implementation-notes.md)
 
 ---
 

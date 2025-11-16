@@ -183,8 +183,8 @@ All decisions were made during the v0.1 planning and implementation phase (Novem
 ## Related Documentation
 
 **Implementation:**
-- [v0.1 Implementation Summary](../../../../implementations/version/v0.1/summary.md)
-- [v0.1 Implementation Notes](../../../../implementations/version/v0.1/implementation-notes.md)
+- [v0.1 Implementation Summary](../../../../implementation/version/v0.1/summary.md)
+- [v0.1 Implementation Notes](../../../../implementation/version/v0.1/implementation-notes.md)
 
 **Architecture:**
 - [Architecture Overview](../../../../architecture/README.md)

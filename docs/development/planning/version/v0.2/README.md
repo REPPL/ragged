@@ -15,8 +15,8 @@ Version 0.2 enhances ragged with improved retrieval quality, batch operations, a
 **Goal**: Transform from proof-of-concept to usable tool with better retrieval and operational features.
 
 **For detailed implementation plans, see:**
-- [Implementation Records](../../../implementations/version/v0.2/) - What was actually built
-- [Roadmap: v0.2.3+](../../../roadmaps/version/) - Planned enhancements
+- [Implementation Records](../../../implementation/version/v0.2/) - What was actually built
+- [Roadmap: v0.2.3+](../../../roadmap/version/) - Planned enhancements
 
 ---
 
@@ -164,8 +164,8 @@ Version 0.2 enhances ragged with improved retrieval quality, batch operations, a
 
 - [v0.1 Planning](../v0.1/) - Foundation design
 - [v0.3 Planning](../v0.3/) - Next version design
-- [Implementation Records](../../../implementations/version/v0.2/) - Actual implementation
-- [Roadmaps](../../../roadmaps/version/) - Detailed roadmaps for v0.2.3+
+- [Implementation Records](../../../implementation/version/v0.2/) - Actual implementation
+- [Roadmaps](../../../roadmap/version/) - Detailed roadmaps for v0.2.3+
 - [Architecture](../../architecture/) - System architecture
 - [Core Concepts](../../core-concepts/) - Foundational concepts
 

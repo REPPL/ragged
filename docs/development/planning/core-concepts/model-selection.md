@@ -1857,7 +1857,7 @@ ragged models list --show-tiers
 
 ## Related Documentation
 
-- [Model Selection Roadmap](../../roadmaps/features/model-selection-roadmap.md) - Implementation timeline and future enhancements  
+- [Model Selection Roadmap](../../roadmap/features/model-selection-roadmap.md) - Implementation timeline and future enhancements  
 - [Model Selection Testing](../../process/testing/model-selection-testing.md) - Testing strategy
 - [Hardware Optimisation](./hardware-optimisation.md) - Hardware-aware model selection
 - [Personal Memory & Personas](./personal-memory-personas.md) - Persona-based routing

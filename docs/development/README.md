@@ -27,16 +27,99 @@ development/
 │   ├── architecture/ → System architecture design
 │   ├── core-concepts/→ Foundational technical concepts
 │   ├── interfaces/   → User interface design (CLI & web)
-│   ├── versions/     → Version-specific design plans
+│   ├── version/      → Version-specific design plans
 │   ├── technologies/ → Technology evaluations
 │   └── references/   → Research papers and resources
 ├── decisions/        → Decision records (grouped)
 │   ├── adrs/        → Architecture Decision Records
 │   └── rfcs/        → Request for Comments
-├── roadmaps/         → Development timelines and feature plans
-├── implementations/  → What was actually built
+├── roadmap/          → Development timelines and feature plans
+├── implementation/   → What was actually built
 └── process/          → How it was built (transparency)
 ```
+
+---
+
+## Single Source of Truth Principles
+
+**Core Rule:** Each piece of information exists in exactly one canonical location.
+
+### Directory Purposes
+
+| Directory | Purpose | Timeline | Audience | Examples |
+|-----------|---------|----------|----------|----------|
+| **planning/** | What to build & why | Future | Designers, architects | Design goals, architecture, requirements |
+| **roadmap/** | How & when to build | Future | Developers, managers | Feature specs, effort estimates, dependencies |
+| **implementation/** | What was built | Past | All stakeholders | Technical records, test results, release notes |
+| **process/** | How it was built | Past | Researchers, learners | Development narratives, time logs, methodology |
+
+### Decision Tree: Where Does This Documentation Belong?
+
+```
+Is this about a completed version?
+├─ YES: Is it technical implementation details?
+│  ├─ YES → implementation/version/vX.X/
+│  └─ NO: Is it development narrative/story?
+│     └─ YES → process/devlogs/version/vX.X/
+│
+└─ NO: Is this about a future version?
+   ├─ Is it high-level design goals (1-2 pages)?
+   │  └─ YES → planning/version/vX.X/
+   │
+   └─ Is it detailed implementation plans (multi-page)?
+      └─ YES → roadmap/version/vX.X.X/
+```
+
+### Specific Guidelines
+
+#### planning/version/ vs roadmap/version/
+
+**Use planning/version/** when documenting:
+- High-level design goals (1-2 pages)
+- Problem statements
+- Solution approaches
+- Expected impacts
+- Success criteria
+
+**Use roadmap/version/** when documenting:
+- Detailed feature specifications
+- Effort estimates (hours)
+- Dependencies and prerequisites
+- Implementation order
+- Technical implementation details
+
+**Example:**
+- `planning/version/v0.3/README.md` - "What is v0.3 trying to achieve?"
+- `roadmap/version/v0.3.0/README.md` - "How will we build v0.3.0, step by step?"
+
+#### implementation/ vs process/devlogs/
+
+**Use implementation/version/** for:
+- Technical implementation records (canonical)
+- Release notes
+- Test results
+- API documentation
+- Final summaries
+
+**Use process/devlogs/version/** for:
+- Development narratives
+- Daily logs
+- Decision timelines
+- Lessons learned
+- Process observations
+
+**Example:**
+- `implementation/version/v0.1/implementation-notes.md` - Technical specs of what was built
+- `process/devlogs/version/v0.1/daily-log.md` - Story of how it was built
+
+### Exceptions to Single Source of Truth
+
+**Different audiences may require adapted content:**
+- User documentation (docs/tutorials/) vs developer documentation (docs/development/)
+- High-level overview (README.md) vs detailed specs (architecture/)
+- Public changelog (CHANGELOG.md) vs implementation records (implementation/)
+
+**Rule:** Adaptation for audience is acceptable; duplication of technical details is not.
 
 ---
 
@@ -170,15 +253,15 @@ All decision documentation is now grouped under `decisions/` for easier navigati
 
 ---
 
-## [implementations/](./implementations/) - What Was Actually Built
+## [implementation/](./implementation/) - What Was Actually Built
 
 **Purpose:** Document **actual** implementation vs. design plans
 
 **Status:** Active (v0.1 complete, v0.2 in progress)
 
 **Contains:**
-- **[versions/v0.1/](./implementations/version/v0.1/)** - MVP implementation records
-- **[versions/v0.2/](./implementations/version/v0.2/)** - Enhanced retrieval implementation
+- **[version/v0.1/](./implementation/version/v0.1/)** - MVP implementation records
+- **[version/v0.2/](./implementation/version/v0.2/)** - Enhanced retrieval implementation
 
 **When to use:**
 - Understanding what was actually built (vs. what was planned)
@@ -187,30 +270,30 @@ All decision documentation is now grouped under `decisions/` for easier navigati
 - Planning future versions based on learnings
 
 **Key documents:**
-- [v0.1 Summary](./implementations/version/v0.1/summary.md) - Results and retrospective
-- [v0.1 Implementation Notes](./implementations/version/v0.1/implementation-notes.md) - Technical details
-- [v0.1 Testing Results](./implementations/version/v0.1/testing.md) - Test coverage and quality
+- [v0.1 Summary](./implementation/version/v0.1/summary.md) - Results and retrospective
+- [v0.1 Implementation Notes](./implementation/version/v0.1/implementation-notes.md) - Technical details
+- [v0.1 Testing Results](./implementation/version/v0.1/testing.md) - Test coverage and quality
 
 **Distinction:**
 - **planning/** = What we **planned** to build
-- **implementations/** = What we **actually built**
+- **implementation/** = What we **actually built**
 - **process/** = **How** we built it (narrative)
 
 ---
 
-## [roadmaps/](./roadmaps/) - Development Timelines
+## [roadmap/](./roadmap/) - Development Timelines
 
 **Purpose:** Version roadmaps and feature planning
 
 **Status:** Active (v0.2-v0.7 planned)
 
 **Contains:**
-- **[version/](./roadmaps/version/)** - Version-specific roadmaps (v0.2.3-v0.7.0)
-- **[features/](./roadmaps/features/)** - Cross-version feature roadmaps
+- **[version/](./roadmap/version/)** - Version-specific roadmaps (v0.2.3-v0.7.0)
+- **[features/](./roadmap/features/)** - Cross-version feature roadmaps
 
 **Key documents:**
-- [Roadmap Overview](./roadmaps/README.md)
-- [All Versions Overview](./roadmaps/version/README.md)
+- [Roadmap Overview](./roadmap/README.md)
+- [All Versions Overview](./roadmap/version/README.md)
 
 ---
 
@@ -262,7 +345,7 @@ All decision documentation is now grouped under `decisions/` for easier navigati
 3. Or [planning/architecture/](./planning/architecture/) for original planning
 
 **See what's planned next**
-1. Check [roadmaps/](./roadmaps/) for near-term plans
+1. Check [roadmap/](./roadmap/) for near-term plans
 2. Or [planning/version/](./planning/version/) for long-term vision
 
 **Study how ragged is built**
@@ -273,12 +356,12 @@ All decision documentation is now grouped under `decisions/` for easier navigati
 **Implement a feature**
 1. Follow design in [planning/version/](./planning/version/) or [planning/architecture/](./planning/architecture/)
 2. Track work in [process/devlogs/](./process/devlogs/)
-3. Document actual in [implementations/](./implementations/)
+3. Document actual in [implementation/](./implementation/)
 4. Create ADR in [decisions/adrs/](./decisions/adrs/) for key decisions
 
 **Research AI-assisted development**
 1. Read [process/methodology/](./process/methodology/)
-2. Compare [planning/version/](./planning/version/) vs. [implementations/](./implementations/)
+2. Compare [planning/version/](./planning/version/) vs. [implementation/](./implementation/)
 3. Study [process/time-logs/](./process/time-logs/) for AI effectiveness
 
 ---
@@ -306,7 +389,7 @@ All decision documentation is now grouped under `decisions/` for easier navigati
 **Output:** Daily logs, narratives, time tracking
 
 ### 5. Retrospective Phase
-**Location:** [implementations/](./implementations/)
+**Location:** [implementation/](./implementation/)
 **Purpose:** Document what was built
 **Output:** Summaries, comparisons to design
 
@@ -317,7 +400,7 @@ All decision documentation is now grouped under `decisions/` for easier navigati
 ### Getting Started
 
 1. **Read** [planning/vision/product-vision.md](./planning/vision/product-vision.md) - Understand goals
-2. **Review** [roadmaps/](./roadmaps/) - See what's planned
+2. **Review** [roadmap/](./roadmap/) - See what's planned
 3. **Study** [decisions/adrs/](./decisions/adrs/) - Understand key decisions
 4. **Follow** [planning/version/](./planning/version/) or [planning/interfaces/](./planning/interfaces/) - Implementation guides
 5. **Document** [process/devlogs/](./process/devlogs/) - Share your journey
@@ -334,7 +417,50 @@ All decision documentation is now grouped under `decisions/` for easier navigati
 - See [CONTRIBUTING.md](../../CONTRIBUTING.md)
 - Use templates in [process/templates/](./process/templates/)
 - Maintain British English
-- Cross-reference appropriately
+- Follow cross-reference standards (see below)
+
+### Cross-Reference Standards
+
+**All major documentation files should include a "Related Documentation" section at the end:**
+
+```markdown
+---
+
+## Related Documentation
+
+- [Link to related design doc](./path/to/design.md) - Brief description
+- [Link to implementation](./path/to/implementation.md) - Brief description
+- [Link to related version](./path/to/version.md) - Brief description
+
+---
+```
+
+**Guidelines:**
+- Place "Related Documentation" section at the end, before metadata footer
+- Use relative paths from current file
+- Include brief description for each link
+- Group by relationship type (design → implementation → process)
+- Ensure bidirectional links (if A links to B, B should link to A)
+
+**Standard patterns:**
+
+```markdown
+## Version Planning → Roadmap
+- planning/version/v0.X/README.md links to roadmap/version/v0.X.X/
+- roadmap/version/v0.X.X/ links back to planning/version/v0.X/
+
+## Planning → Implementation
+- planning/version/v0.X/ links to implementation/version/v0.X/
+- implementation/version/v0.X/ links back to planning/version/v0.X/
+
+## Design → Decision Records
+- planning/architecture/*.md links to relevant decisions/adrs/*.md
+- decisions/adrs/*.md links back to planning/architecture/*.md
+
+## Implementation → Process
+- implementation/version/v0.X/ links to process/devlogs/version/v0.X/
+- process/devlogs/version/v0.X/ links to implementation/version/v0.X/
+```
 
 ### Standards
 

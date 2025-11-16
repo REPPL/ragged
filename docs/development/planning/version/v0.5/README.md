@@ -15,7 +15,7 @@ Version 0.5 introduces **ColPali vision integration** for multi-modal document u
 **Goal**: Enable ragged to "see" documents like humans do, understanding visual layout and content.
 
 **For detailed implementation plans, see:**
-- [Roadmap: v0.5.0](../../../roadmaps/version/v0.5.0/) - ColPali vision integration (140-180 hours)
+- [Roadmap: v0.5.0](../../../roadmap/version/v0.5.0/) - ColPali vision integration (140-180 hours)
 
 ---
 
@@ -102,7 +102,7 @@ Version 0.5 introduces **ColPali vision integration** for multi-modal document u
 
 - [v0.4 Planning](../v0.4/) - Personal memory & knowledge graphs
 - [v1.0 Planning](../v1.0/) - Production release
-- [Roadmap: v0.5.0](../../../roadmaps/version/v0.5.0/) - Detailed implementation plan
+- [Roadmap: v0.5.0](../../../roadmap/version/v0.5.0/) - Detailed implementation plan
 - [Architecture](../../architecture/) - System architecture
 
 ---

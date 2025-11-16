@@ -15,7 +15,7 @@ Version 1.0 is the **production release** of ragged, marking the transition from
 **Goal**: Deliver a stable, production-ready RAG system with API stability guarantees and professional deployment options.
 
 **For detailed implementation plans, see:**
-- [Roadmap: v1.0.0](../../../roadmaps/version/) - Production features (TBD)
+- [Roadmap: v1.0.0](../../../roadmap/version/) - Production features (TBD)
 
 ---
 

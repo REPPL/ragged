@@ -39,7 +39,7 @@ When adding new features:
 
 ## Related Documentation
 
-- [Testing Results](../../implementations/version/) - Per-version test results
+- [Testing Results](../../implementation/version/) - Per-version test results
 - [Evaluation Framework](../../planning/core-concepts/evaluation.md) - Quality metrics
 
 ---

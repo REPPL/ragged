@@ -159,8 +159,8 @@ Documents **how to create** consistent development documentation.
 
 ## Document Lifecycle
 
-### Phase 1: Planning (../roadmaps/)
-1. Create roadmap: `../roadmaps/version/vX.X/README.md`
+### Phase 1: Planning (../roadmap/)
+1. Create roadmap: `../roadmap/version/vX.X/README.md`
 2. Document features, bugs, hour estimates
 3. Mark manual testing points (⚠️ MANUAL TEST REQUIRED)
 4. Review and approve
@@ -189,7 +189,7 @@ Documents **how to create** consistent development documentation.
 - **Curious about AI development?** Read [methodology/ai-assistance.md](./methodology/ai-assistance.md)
 - **Want to understand decisions?** Check ADRs in [../decisions/adrs/](../decisions/adrs/)
 - **See actual progress?** Read [devlog/daily/](./devlog/daily/)
-- **View planned features?** Check [../roadmaps/version/](../roadmaps/version/)
+- **View planned features?** Check [../roadmap/version/](../roadmap/version/)
 
 ### For Contributors
 
@@ -210,7 +210,7 @@ Documents **how to create** consistent development documentation.
 - **"Why did we do X?"** → Check [../decisions/adrs/](../decisions/adrs/) (ADRs)
 - **"How long did Y take?"** → Check [time-logs/version/](./time-logs/version/)
 - **"What happened on date Z?"** → Check [devlog/daily/](./devlog/daily/)
-- **"What's planned next?"** → Check [../roadmaps/version/](../roadmaps/version/)
+- **"What's planned next?"** → Check [../roadmap/version/](../roadmap/version/)
 
 ---
 
@@ -312,11 +312,23 @@ See [Contributing Guide](../../../CONTRIBUTING.md) for details.
 - **About development process**: [GitHub Discussions](https://github.com/REPPL/ragged/discussions)
 - **About specific decisions**: Check [../decisions/adrs/](../decisions/adrs/)
 - **About time tracking**: See [methodology/time-tracking.md](./methodology/time-tracking.md)
-- **About roadmap**: See [../roadmaps/version/README.md](../roadmaps/version/README.md)
+- **About roadmap**: See [../roadmap/version/README.md](../roadmap/version/README.md)
 
 ---
 
 **This is a living process.** We'll refine our transparency practices as we learn what's most valuable for the community and research.
+
+---
+
+## Related Documentation
+
+- [Planning Documentation](../planning/) - What we plan to build
+- [Roadmaps](../roadmap/) - How and when we plan to build it
+- [Implementations](../implementation/) - What we actually built
+- [Decision Records (ADRs)](../decisions/adrs/) - Why we made specific choices
+- [Development Documentation](../README.md) - Overall development documentation structure
+
+---
 
 **Last updated**: 2025-11-12
 **Status:** Active - all ragged development tracked from v0.1 onwards

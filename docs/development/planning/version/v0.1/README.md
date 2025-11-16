@@ -11,7 +11,7 @@ Version 0.1 establishes the foundation of ragged with basic RAG functionality vi
 **Goal**: Prove the concept and create a working RAG system that can ingest documents and answer questions locally.
 
 **For implementation details, see:**
-- [Implementation Records](../../../implementations/version/v0.1/) - What was actually built
+- [Implementation Records](../../../implementation/version/v0.1/) - What was actually built
 
 ---
 

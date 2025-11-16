@@ -11,10 +11,10 @@
 ## 📍 Canonical Implementation Records
 
 For the official implementation record, see:
-- **[v0.1 Implementation Records](../../../../implementations/version/v0.1/)** - Canonical source of truth
-  - [Implementation Notes](../../../../implementations/version/v0.1/implementation-notes.md) - Technical details
-  - [Testing Documentation](../../../../implementations/version/v0.1/testing.md) - Test strategy
-  - [Implementation Summary](../../../../implementations/version/v0.1/summary.md) - Final summary
+- **[v0.1 Implementation Records](../../../../implementation/version/v0.1/)** - Canonical source of truth
+  - [Implementation Notes](../../../../implementation/version/v0.1/implementation-notes.md) - Technical details
+  - [Testing Documentation](../../../../implementation/version/v0.1/testing.md) - Test strategy
+  - [Implementation Summary](../../../../implementation/version/v0.1/summary.md) - Final summary
 
 This directory contains the **development log** (daily narrative). The **implementation records** directory contains the canonical technical documentation.
 

@@ -76,16 +76,16 @@ docs/
 │       │   ├── core-concepts/  → Foundational concepts
 │       │   ├── technologies/   → Technology choices
 │       │   ├── interfaces/     → User interface design (CLI & web)
-│       │   ├── versions/       → Version-specific designs
+│       │   ├── version/       → Version-specific designs
 │       │   └── references/     → Research papers and resources
 │       ├── decisions/      → Rationale (why we chose)
 │       │   ├── adrs/           → Architecture Decision Records
 │       │   └── rfcs/           → Request for Comments proposals
-│       ├── roadmaps/       → Timelines (when to build)
+│       ├── roadmap/       → Timelines (when to build)
 │       │   ├── features/       → Feature roadmaps
 │       │   └── version/        → Version roadmaps
-│       ├── implementations/ → Past reality (what was built)
-│       │   └── versions/       → Implementation by version
+│       ├── implementation/ → Past reality (what was built)
+│       │   └── version/       → Implementation by version
 │       └── process/        → Methodology (how we built)
 │           ├── methodology/    → Development methods
 │           ├── devlogs/        → Development narratives
@@ -188,21 +188,21 @@ All developer-facing documentation is now organised under [development/](./devel
 
 **Structure:**
 - **planning/** - Future design documentation (what to build)
-  - vision/, requirements/, architecture/, core-concepts/, technologies/, interfaces/, versions/, references/
+  - vision/, requirements/, architecture/, core-concepts/, technologies/, interfaces/, version/, references/
 - **decisions/** - Decision rationale (why we chose)
   - adrs/ (Architecture Decision Records), rfcs/ (Request for Comments)
-- **roadmaps/** - Development timelines (when to build)
+- **roadmap/** - Development timelines (when to build)
   - features/, version/ (with current symlink → v0.3.0)
-- **implementations/** - Implementation records (what was built)
-  - versions/ (v0.1/, v0.2/)
+- **implementation/** - Implementation records (what was built)
+  - version/ (v0.1/, v0.2/)
 - **process/** - Development methodology (how we built)
   - methodology/, devlogs/, time-logs/, testing/, templates/
 
 **Quick Links:**
 - [Product Vision](./development/planning/vision/product-vision.md) - Goals and principles
 - [Architecture Overview](./development/planning/architecture/README.md) - System architecture
-- [Roadmaps](./development/roadmaps/README.md) - Version roadmaps and timelines
-- [Current Roadmap](./development/roadmaps/version/current/) - Active development plan (v0.3.0)
+- [Roadmaps](./development/roadmap/README.md) - Version roadmaps and timelines
+- [Current Roadmap](./development/roadmap/version/current/) - Active development plan (v0.3.0)
 - [CLI Enhancements Catalogue](./development/planning/interfaces/cli/enhancements.md) - Complete CLI feature catalogue
 - [Web UI Design](./development/planning/interfaces/web/) - Web interface evolution
 - [ADRs](./development/decisions/adrs/) - Key architectural decisions
@@ -269,8 +269,8 @@ All developer-facing documentation is now organised under [development/](./devel
 → Or [Version Devlogs](./development/process/devlogs/version/) for narrative context
 
 **See what's planned next**
-→ Check [Roadmaps](./development/roadmaps/) for version plans and timelines
-→ Or [Current Roadmap](./development/roadmaps/version/current/) for active development (v0.3.0)
+→ Check [Roadmaps](./development/roadmap/) for version plans and timelines
+→ Or [Current Roadmap](./development/roadmap/version/current/) for active development (v0.3.0)
 → Or [Version Design Plans](./development/planning/version/) for detailed feature specifications
 
 **Contribute code or documentation**
@@ -283,7 +283,7 @@ All developer-facing documentation is now organised under [development/](./devel
 
 **Research AI-assisted development**
 → Review [AI Assistance Guidelines](./development/process/methodology/ai-assistance.md)
-→ Compare [Design Plans](./development/planning/version/) vs. [Actual Implementation](./development/implementations/)
+→ Compare [Design Plans](./development/planning/version/) vs. [Actual Implementation](./development/implementation/)
 → Study [Time Logs](./development/process/time-logs/) for AI effectiveness data
 
 **See research materials**
@@ -370,7 +370,7 @@ Each metadata field on its own line for readability.
 
 - All documentation version-controlled in git
 - Major milestones tagged (e.g., `v0.1-complete`)
-- Compare plans ([planning/version/](./development/planning/version/)) against actuals ([implementations/](./development/implementations/))
+- Compare plans ([planning/version/](./development/planning/version/)) against actuals ([implementation/](./development/implementation/))
 
 ### AI Transparency
 

@@ -98,7 +98,7 @@ Use **ChromaDB** as the primary vector database with HTTP client mode:
 
 **6. pgvector (PostgreSQL extension)**
 - **Pros:** Leverages existing database, simple
-- **Cons:** Requires PostgreSQL, slower than specialized vector DBs
+- **Cons:** Requires PostgreSQL, slower than specialised vector DBs
 - **Decision:** Defer—consider for v0.2 if SQL integration needed
 
 ## Consequences

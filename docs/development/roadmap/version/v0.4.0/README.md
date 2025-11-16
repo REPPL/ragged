@@ -1496,7 +1496,7 @@ batch_size: 32
 **Example Use Cases:**
 
 1. **Custom Embedding Model**
-   - User wants to use a specialized medical domain model
+   - User wants to use a specialised medical domain model
    - Creates embedder plugin with custom model
    - Installs and configures via CLI
    - ragged uses custom embeddings transparently
