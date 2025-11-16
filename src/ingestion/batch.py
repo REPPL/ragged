@@ -224,11 +224,11 @@ class BatchIngester:
             # Load document
             document = load_document(file_path)
 
-            # Check for duplicates
+            # Check for duplicates using content hash
             if self.skip_duplicates:
-                file_hash = document.metadata.file_hash
+                content_hash = document.metadata.content_hash
                 existing = vector_store.get_documents_by_metadata(
-                    where={"file_hash": file_hash}
+                    where={"content_hash": content_hash}
                 )
 
                 if existing and existing.get("ids"):

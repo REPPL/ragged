@@ -18,6 +18,7 @@ class TestDocumentMetadata:
             file_path=sample_txt_path,
             file_size=1000,
             file_hash="a" * 64,  # Valid SHA256 hex
+            content_hash="b" * 64,  # Valid SHA256 hex
             created_at=datetime.now(timezone.utc),
             modified_at=datetime.now(timezone.utc),
             format="txt",
@@ -26,6 +27,7 @@ class TestDocumentMetadata:
         assert metadata.file_path == sample_txt_path
         assert metadata.file_size == 1000
         assert metadata.format == "txt"
+        assert metadata.content_hash == "b" * 64
 
     def test_invalid_file_hash(self, sample_txt_path: Path) -> None:
         """Test that invalid hash raises error."""
@@ -34,6 +36,7 @@ class TestDocumentMetadata:
                 file_path=sample_txt_path,
                 file_size=1000,
                 file_hash="invalid",  # Too short
+                content_hash="b" * 64,
                 created_at=datetime.now(timezone.utc),
                 modified_at=datetime.now(timezone.utc),
                 format="txt",
@@ -46,6 +49,7 @@ class TestDocumentMetadata:
                 file_path=sample_txt_path,
                 file_size=1000,
                 file_hash="a" * 64,
+                content_hash="b" * 64,
                 created_at=datetime.now(timezone.utc),
                 modified_at=datetime.now(timezone.utc),
                 format="docx",  # Unsupported
@@ -58,6 +62,7 @@ class TestDocumentMetadata:
                 file_path=sample_txt_path,
                 file_size=-100,
                 file_hash="a" * 64,
+                content_hash="b" * 64,
                 created_at=datetime.now(timezone.utc),
                 modified_at=datetime.now(timezone.utc),
                 format="txt",
@@ -69,6 +74,7 @@ class TestDocumentMetadata:
             file_path=sample_txt_path,
             file_size=1000,
             file_hash="a" * 64,
+            content_hash="b" * 64,
             created_at=datetime.now(timezone.utc),
             modified_at=datetime.now(timezone.utc),
             format="PDF",  # Uppercase
@@ -85,6 +91,8 @@ class TestChunkMetadata:
         metadata = ChunkMetadata(
             document_id="doc123",
             document_path=sample_txt_path,
+            file_hash="a" * 64,
+            content_hash="b" * 64,
             chunk_position=0,
             total_chunks=5,
             overlap_with_previous=0,
@@ -128,6 +136,8 @@ class TestChunk:
         metadata = ChunkMetadata(
             document_id="doc123",
             document_path=sample_txt_path,
+            file_hash="a" * 64,
+            content_hash="b" * 64,
             chunk_position=0,
             total_chunks=1,
             overlap_with_previous=0,
@@ -151,6 +161,8 @@ class TestChunk:
         metadata = ChunkMetadata(
             document_id="doc123",
             document_path=sample_txt_path,
+            file_hash="a" * 64,
+            content_hash="b" * 64,
             chunk_position=0,
             total_chunks=1,
             overlap_with_previous=0,
@@ -171,6 +183,8 @@ class TestChunk:
         metadata = ChunkMetadata(
             document_id="doc123",
             document_path=sample_txt_path,
+            file_hash="a" * 64,
+            content_hash="b" * 64,
             chunk_position=0,
             total_chunks=1,
             overlap_with_previous=0,
@@ -199,6 +213,7 @@ class TestDocument:
             file_path=sample_txt_path,
             file_size=100,
             file_hash="a" * 64,
+            content_hash="b" * 64,
             created_at=datetime.now(timezone.utc),
             modified_at=datetime.now(timezone.utc),
             format="txt",
@@ -248,6 +263,8 @@ class TestDocument:
         chunk_metadata = ChunkMetadata(
             document_id=doc.document_id,
             document_path=sample_txt_path,
+            file_hash="a" * 64,
+            content_hash="b" * 64,
             chunk_position=0,
             total_chunks=1,
             overlap_with_previous=0,

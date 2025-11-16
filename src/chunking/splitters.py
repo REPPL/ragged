@@ -347,6 +347,7 @@ def chunk_document(document: Document, splitter: RecursiveCharacterTextSplitter 
             document_id=document.document_id,
             document_path=document.metadata.file_path,
             file_hash=document.metadata.file_hash,
+            content_hash=document.metadata.content_hash,
             chunk_position=i,
             total_chunks=total_chunks,
             overlap_with_previous=0 if i == 0 else splitter.chunk_overlap,

@@ -20,6 +20,7 @@ class DocumentMetadata(BaseModel):
     file_path: Path
     file_size: int = Field(gt=0, description="File size in bytes")
     file_hash: str = Field(description="SHA256 hash of file content")
+    content_hash: str = Field(description="SHA256 hash of first 1KB + last 1KB (for duplicate detection)")
     created_at: datetime
     modified_at: datetime
     format: str = Field(description="Document format (pdf, txt, md, html)")
@@ -27,16 +28,16 @@ class DocumentMetadata(BaseModel):
     author: Optional[str] = None
     page_count: Optional[int] = Field(default=None, gt=0)
 
-    @field_validator("file_hash")
+    @field_validator("file_hash", "content_hash")
     @classmethod
     def validate_hash(cls, v: str) -> str:
         """Validate that hash is a valid SHA256 hex string."""
         if len(v) != 64:
-            raise ValueError("file_hash must be a 64-character SHA256 hex string")
+            raise ValueError("Hash must be a 64-character SHA256 hex string")
         try:
             int(v, 16)  # Verify it's valid hex
         except ValueError:
-            raise ValueError("file_hash must be a valid hexadecimal string")
+            raise ValueError("Hash must be a valid hexadecimal string")
         return v
 
     @field_validator("format")
@@ -56,7 +57,8 @@ class ChunkMetadata(BaseModel):
 
     document_id: str
     document_path: Path
-    file_hash: str = Field(description="SHA256 hash of source document (for duplicate detection)")
+    file_hash: str = Field(description="SHA256 hash of source document (full content)")
+    content_hash: str = Field(description="SHA256 hash of partial content (for duplicate detection)")
     chunk_position: int = Field(ge=0, description="0-indexed position in document")
     total_chunks: int = Field(gt=0, description="Total number of chunks in document")
     overlap_with_previous: int = Field(
@@ -138,14 +140,26 @@ class Document(BaseModel):
         stats = file_path.stat()
         file_size = stats.st_size
 
-        # Generate hash
+        # Generate full content hash
         file_hash = hashlib.sha256(content.encode("utf-8")).hexdigest()
+
+        # Generate partial content hash (first 1KB + last 1KB) for duplicate detection
+        content_bytes = content.encode("utf-8")
+        if len(content_bytes) <= 2048:  # 2KB or less
+            # Use full content for small files
+            content_hash = file_hash
+        else:
+            # Use first 1KB + last 1KB for large files
+            first_kb = content_bytes[:1024]
+            last_kb = content_bytes[-1024:]
+            content_hash = hashlib.sha256(first_kb + last_kb).hexdigest()
 
         # Create metadata
         metadata = DocumentMetadata(
             file_path=file_path,
             file_size=file_size,
             file_hash=file_hash,
+            content_hash=content_hash,
             created_at=datetime.fromtimestamp(stats.st_ctime, tz=timezone.utc),
             modified_at=datetime.fromtimestamp(stats.st_mtime, tz=timezone.utc),
             format=format,
