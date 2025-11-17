@@ -25,7 +25,12 @@ logger = get_logger(__name__)
     default="text",
     help="Output format (text for human-readable, json for programmatic use)",
 )
-def query(query: str, k: int, show_sources: bool, output_format: str) -> None:
+@click.option(
+    "--no-history",
+    is_flag=True,
+    help="Don't save this query to history",
+)
+def query(query: str, k: int, show_sources: bool, output_format: str, no_history: bool) -> None:
     """Ask a question and get an answer from your documents.
 
     \b
@@ -132,6 +137,26 @@ def query(query: str, k: int, show_sources: bool, output_format: str) -> None:
 
             console.print("[bold]Answer:[/bold]")
             console.print(formatted_response)
+
+        # Save to history unless disabled
+        if not no_history:
+            try:
+                from src.cli.commands.history import QueryHistory
+
+                history_manager = QueryHistory()
+                source_list = [
+                    f"{chunk.document_path} (page {chunk.page_number}, score: {chunk.score:.3f})"
+                    for chunk in chunks
+                ]
+                history_manager.add_query(
+                    query=query,
+                    top_k=k,
+                    answer=formatted_response,
+                    sources=source_list,
+                )
+                logger.debug("Query saved to history")
+            except Exception as e:
+                logger.warning(f"Failed to save query to history: {e}")
 
     except Exception as e:
         if output_format == "json":

@@ -74,6 +74,7 @@ from src.cli.commands.validate import validate
 from src.cli.commands.envinfo import env_info
 from src.cli.commands.metadata import metadata
 from src.cli.commands.search import search
+from src.cli.commands.history import history
 
 # Register commands
 cli.add_command(add)
@@ -87,6 +88,7 @@ cli.add_command(validate)
 cli.add_command(env_info)
 cli.add_command(metadata)
 cli.add_command(search)
+cli.add_command(history)
 
 
 def main() -> None:
