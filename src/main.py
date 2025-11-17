@@ -18,14 +18,45 @@ logger = get_logger(__name__)
 
 @click.group()
 @click.version_option(version=__version__)
-@click.option("--verbose", "-v", is_flag=True, help="Enable verbose logging")
-@click.option("--debug", is_flag=True, help="Enable debug logging")
-def cli(verbose: bool, debug: bool) -> None:
-    """ragged - Privacy-first local RAG system."""
+@click.option("--verbose", "-v", is_flag=True, help="Enable verbose logging (INFO level)")
+@click.option("--debug", is_flag=True, help="Enable debug logging (DEBUG level)")
+@click.option("--quiet", "-q", is_flag=True, help="Suppress all non-essential output")
+@click.pass_context
+def cli(ctx: click.Context, verbose: bool, debug: bool, quiet: bool) -> None:
+    """ragged - Privacy-first local RAG system.
+
+    \b
+    Examples:
+        ragged add document.pdf          # Normal output
+        ragged add document.pdf -v       # Verbose output
+        ragged add document.pdf --debug  # Debug output
+        ragged add document.pdf --quiet  # Minimal output
+    """
     if click is None:
         print("Error: click and rich required. Install with: pip install click rich")
         sys.exit(1)
-    log_level = "DEBUG" if debug else ("INFO" if verbose else "WARNING")
+
+    # Determine log level and verbosity
+    if debug:
+        log_level = "DEBUG"
+        verbosity = "debug"
+    elif verbose:
+        log_level = "INFO"
+        verbosity = "verbose"
+    elif quiet:
+        log_level = "ERROR"
+        verbosity = "quiet"
+    else:
+        log_level = "WARNING"
+        verbosity = "normal"
+
+    # Store verbosity in context for commands to access
+    ctx.ensure_object(dict)
+    ctx.obj["verbosity"] = verbosity
+    ctx.obj["quiet"] = quiet
+    ctx.obj["verbose"] = verbose
+    ctx.obj["debug"] = debug
+
     setup_logging(log_level=log_level, json_format=False)
 
 
