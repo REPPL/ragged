@@ -82,6 +82,29 @@ class ContextualChunker:
         self.add_document_context = add_document_context
         self.add_section_context = add_section_context
 
+    def _calculate_overlap(self, previous_chunk: str, current_chunk: str) -> int:
+        """Calculate character overlap between consecutive chunks.
+
+        Finds the longest suffix of previous_chunk that matches a prefix of current_chunk.
+
+        Args:
+            previous_chunk: Text of the previous chunk
+            current_chunk: Text of the current chunk
+
+        Returns:
+            Number of overlapping characters
+        """
+        max_overlap = 0
+        max_possible = min(len(previous_chunk), len(current_chunk))
+
+        # Check all possible overlap lengths from longest to shortest
+        for length in range(max_possible, 0, -1):
+            if previous_chunk[-length:] == current_chunk[:length]:
+                max_overlap = length
+                break  # Found the longest match, no need to continue
+
+        return max_overlap
+
     def chunk_document(self, document: Document) -> List[Chunk]:
         """Chunk a document with contextual enrichment.
 
@@ -130,6 +153,16 @@ class ContextualChunker:
             import hashlib
             chunk_content_hash = hashlib.sha256(enriched_text.encode()).hexdigest()
 
+            # Calculate overlap with previous chunk
+            overlap_prev = 0
+            if i > 0:
+                overlap_prev = self._calculate_overlap(text_chunks[i - 1], text_chunk)
+
+            # Calculate overlap with next chunk
+            overlap_next = 0
+            if i < len(text_chunks) - 1:
+                overlap_next = self._calculate_overlap(text_chunk, text_chunks[i + 1])
+
             chunk = Chunk(
                 chunk_id=f"{document.document_id}_chunk_{i}",
                 text=enriched_text,  # Use enriched text for embedding
@@ -143,8 +176,8 @@ class ContextualChunker:
                     content_hash=chunk_content_hash,
                     chunk_position=i,
                     total_chunks=total_chunks,
-                    overlap_with_previous=0,  # TODO: Calculate actual overlap
-                    overlap_with_next=0
+                    overlap_with_previous=overlap_prev,
+                    overlap_with_next=overlap_next
                 )
             )
 

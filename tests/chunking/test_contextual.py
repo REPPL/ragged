@@ -269,6 +269,83 @@ class TestContextualChunker:
         context = chunker._get_document_context(doc)
         assert context == ""
 
+    def test_calculate_overlap_basic(self):
+        """Test basic overlap calculation between chunks."""
+        chunker = ContextualChunker()
+
+        # Chunks with 5-character overlap
+        prev_chunk = "This is the previous chunk"
+        curr_chunk = "chunk of text continues"
+
+        overlap = chunker._calculate_overlap(prev_chunk, curr_chunk)
+        assert overlap == 5  # "chunk" matches
+
+    def test_calculate_overlap_no_overlap(self):
+        """Test overlap calculation with no overlap."""
+        chunker = ContextualChunker()
+
+        prev_chunk = "First chunk"
+        curr_chunk = "Second chunk"
+
+        overlap = chunker._calculate_overlap(prev_chunk, curr_chunk)
+        assert overlap == 0
+
+    def test_calculate_overlap_full_match(self):
+        """Test overlap when current chunk is entirely within previous."""
+        chunker = ContextualChunker()
+
+        prev_chunk = "This is a longer text chunk"
+        curr_chunk = "chunk"
+
+        overlap = chunker._calculate_overlap(prev_chunk, curr_chunk)
+        assert overlap == 5  # "chunk" is 5 characters
+
+    def test_overlap_metadata_preserved(self):
+        """Test that overlap metadata is correctly set in chunks."""
+        # Create very large content to ensure multiple chunks (5000 characters)
+        content = "This is a test sentence that will be repeated many times. " * 100
+        file_hash = hashlib.sha256(content.encode()).hexdigest()
+        content_hash = hashlib.sha256(content[:1024].encode() + content[-1024:].encode()).hexdigest()
+
+        doc = Document(
+            document_id="overlap_test",
+            content=content,
+            metadata=DocumentMetadata(
+                file_path=Path("overlap.txt"),
+                file_size=len(content),
+                file_hash=file_hash,
+                content_hash=content_hash,
+                created_at=datetime.now(),
+                modified_at=datetime.now(),
+                format="txt"
+            )
+        )
+
+        # Create chunks with overlap, without context to keep chunks predictable
+        chunker = ContextualChunker(
+            chunk_size=500,
+            chunk_overlap=100,
+            add_document_context=False,
+            add_section_context=False
+        )
+        chunks = chunker.chunk_document(doc)
+
+        # Should have multiple chunks with large content
+        assert len(chunks) >= 2
+
+        # First chunk should have no previous overlap
+        assert chunks[0].metadata.overlap_with_previous == 0
+
+        # Verify overlap is calculated (should be > 0 for middle chunks)
+        if len(chunks) >= 2:
+            # Second chunk should have previous overlap
+            assert chunks[1].metadata.overlap_with_previous > 0
+            # First chunk should have next overlap
+            assert chunks[0].metadata.overlap_with_next > 0
+
+        # Last chunk should have no next overlap
+        assert chunks[-1].metadata.overlap_with_next == 0
+
 
 class TestContextCompressor:
     """Test ContextCompressor."""
