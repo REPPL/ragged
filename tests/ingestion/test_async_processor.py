@@ -25,6 +25,7 @@ def sample_documents():
     for i in range(3):
         content = f"This is document {i}. " * 20
         file_hash = hashlib.sha256(content.encode()).hexdigest()
+        content_hash = hashlib.sha256((content[:1024] + content[-1024:]).encode()).hexdigest()
 
         doc = Document(
             document_id=f"doc{i}",
@@ -33,6 +34,7 @@ def sample_documents():
                 file_path=Path(f"/path/to/doc{i}.txt"),
                 file_size=len(content),
                 file_hash=file_hash,
+                content_hash=content_hash,
                 created_at=datetime.now(),
                 modified_at=datetime.now(),
                 format="txt"

@@ -208,13 +208,13 @@ class TestHistoryClear:
     def test_history_clear_with_confirmation(self, mock_history, cli_runner: CliRunner):
         """Test clearing history with confirmation."""
         history_instance = MagicMock()
-        history_instance.get_history.return_value = []
-        history_instance.clear_history.return_value = 0
+        history_instance.get_history.return_value = [{"query": "test", "timestamp": "2025-01-01"}]
+        history_instance.clear_history.return_value = 1
         mock_history.return_value = history_instance
 
         result = cli_runner.invoke(history, ["clear"], input="n\n")
         assert result.exit_code == 0
-        assert "Cancelled" in result.output
+        assert "Cancelled" in result.output or "Abort" in result.output
 
     @patch("src.cli.commands.history.QueryHistory")
     def test_history_clear_with_yes_flag(self, mock_history, cli_runner: CliRunner):

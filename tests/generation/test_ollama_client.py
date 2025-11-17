@@ -11,7 +11,7 @@ class TestOllamaClient:
     @pytest.fixture
     def mock_ollama(self):
         """Create a mock Ollama client."""
-        with patch("src.generation.ollama_client.ollama") as mock:
+        with patch("src.generation.ollama_client.ollama_module") as mock:
             yield mock
 
     def test_init_success(self, mock_ollama):

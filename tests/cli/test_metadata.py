@@ -17,7 +17,7 @@ class TestMetadataList:
         assert result.exit_code == 0
         assert "List all documents" in result.output
 
-    @patch("src.cli.commands.metadata.VectorStore")
+    @patch("src.storage.vector_store.VectorStore")
     def test_metadata_list_empty(self, mock_vector_store, cli_runner: CliRunner):
         """Test listing metadata when no documents exist."""
         store_instance = MagicMock()
@@ -31,7 +31,7 @@ class TestMetadataList:
         assert result.exit_code == 0
         assert "No documents found" in result.output
 
-    @patch("src.cli.commands.metadata.VectorStore")
+    @patch("src.storage.vector_store.VectorStore")
     def test_metadata_list_with_documents(self, mock_vector_store, cli_runner: CliRunner):
         """Test listing metadata with documents."""
         store_instance = MagicMock()
@@ -51,7 +51,7 @@ class TestMetadataList:
         assert "doc1.pdf" in result.output
         assert "doc2.pdf" in result.output
 
-    @patch("src.cli.commands.metadata.VectorStore")
+    @patch("src.storage.vector_store.VectorStore")
     def test_metadata_list_json_format(self, mock_vector_store, cli_runner: CliRunner):
         """Test listing metadata in JSON format."""
         store_instance = MagicMock()
@@ -75,7 +75,7 @@ class TestMetadataShow:
         assert result.exit_code == 0
         assert "Show metadata for a specific document" in result.output
 
-    @patch("src.cli.commands.metadata.VectorStore")
+    @patch("src.storage.vector_store.VectorStore")
     def test_metadata_show_not_found(self, mock_vector_store, cli_runner: CliRunner):
         """Test showing metadata for non-existent document."""
         store_instance = MagicMock()
@@ -89,7 +89,7 @@ class TestMetadataShow:
         assert result.exit_code == 1
         assert "not found" in result.output.lower()
 
-    @patch("src.cli.commands.metadata.VectorStore")
+    @patch("src.storage.vector_store.VectorStore")
     def test_metadata_show_found(self, mock_vector_store, cli_runner: CliRunner):
         """Test showing metadata for existing document."""
         store_instance = MagicMock()
@@ -107,7 +107,7 @@ class TestMetadataShow:
         assert "doc1.pdf" in result.output
         assert "2" in result.output  # 2 chunks
 
-    @patch("src.cli.commands.metadata.VectorStore")
+    @patch("src.storage.vector_store.VectorStore")
     def test_metadata_show_json_format(self, mock_vector_store, cli_runner: CliRunner):
         """Test showing metadata in JSON format."""
         store_instance = MagicMock()
@@ -137,7 +137,7 @@ class TestMetadataUpdate:
         assert result.exit_code == 0
         assert "No updates specified" in result.output
 
-    @patch("src.cli.commands.metadata.VectorStore")
+    @patch("src.storage.vector_store.VectorStore")
     def test_metadata_update_not_found(self, mock_vector_store, cli_runner: CliRunner):
         """Test updating non-existent document."""
         store_instance = MagicMock()
@@ -151,7 +151,7 @@ class TestMetadataUpdate:
         assert result.exit_code == 1
         assert "not found" in result.output.lower()
 
-    @patch("src.cli.commands.metadata.VectorStore")
+    @patch("src.storage.vector_store.VectorStore")
     def test_metadata_update_set(self, mock_vector_store, cli_runner: CliRunner):
         """Test setting metadata values."""
         store_instance = MagicMock()
@@ -169,7 +169,7 @@ class TestMetadataUpdate:
         assert "Updated metadata" in result.output
         assert "2 chunks" in result.output
 
-    @patch("src.cli.commands.metadata.VectorStore")
+    @patch("src.storage.vector_store.VectorStore")
     def test_metadata_update_multiple_sets(self, mock_vector_store, cli_runner: CliRunner):
         """Test setting multiple metadata values."""
         store_instance = MagicMock()
@@ -186,7 +186,7 @@ class TestMetadataUpdate:
         assert result.exit_code == 0
         assert "Updated metadata" in result.output
 
-    @patch("src.cli.commands.metadata.VectorStore")
+    @patch("src.storage.vector_store.VectorStore")
     def test_metadata_update_delete(self, mock_vector_store, cli_runner: CliRunner):
         """Test deleting metadata keys."""
         store_instance = MagicMock()
@@ -200,7 +200,8 @@ class TestMetadataUpdate:
         assert result.exit_code == 0
         assert "Updated metadata" in result.output
 
-    def test_metadata_update_invalid_format(self, cli_runner: CliRunner):
+    @patch("src.storage.vector_store.VectorStore")
+    def test_metadata_update_invalid_format(self, mock_vector_store, cli_runner: CliRunner):
         """Test update with invalid key=value format."""
         result = cli_runner.invoke(metadata, ["update", "doc1.pdf", "--set", "invalidformat"])
         assert result.exit_code == 1
@@ -222,7 +223,7 @@ class TestMetadataSearch:
         assert result.exit_code == 0
         assert "No filters specified" in result.output
 
-    @patch("src.cli.commands.metadata.VectorStore")
+    @patch("src.storage.vector_store.VectorStore")
     def test_metadata_search_no_results(self, mock_vector_store, cli_runner: CliRunner):
         """Test search with no matching documents."""
         store_instance = MagicMock()
@@ -236,7 +237,7 @@ class TestMetadataSearch:
         assert result.exit_code == 0
         assert "No documents found" in result.output
 
-    @patch("src.cli.commands.metadata.VectorStore")
+    @patch("src.storage.vector_store.VectorStore")
     def test_metadata_search_with_results(self, mock_vector_store, cli_runner: CliRunner):
         """Test search with matching documents."""
         store_instance = MagicMock()
@@ -256,7 +257,7 @@ class TestMetadataSearch:
         assert "doc1.pdf" in result.output
         assert "doc2.pdf" in result.output
 
-    @patch("src.cli.commands.metadata.VectorStore")
+    @patch("src.storage.vector_store.VectorStore")
     def test_metadata_search_multiple_filters(self, mock_vector_store, cli_runner: CliRunner):
         """Test search with multiple filters."""
         store_instance = MagicMock()

@@ -48,8 +48,18 @@ class TestFullRAGPipeline:
     @pytest.fixture
     def vector_store(self, settings):
         """Create a clean vector store for testing."""
+        # Parse chroma_url to extract host and port
+        import re
+        match = re.match(r'https?://([^:]+):(\d+)', settings.chroma_url)
+        if match:
+            host, port = match.groups()
+            port = int(port)
+        else:
+            host, port = "localhost", 8001
+
         store = VectorStore(
-            chroma_url=settings.chroma_url,
+            host=host,
+            port=port,
             collection_name="test_integration"
         )
         # Clear any existing data

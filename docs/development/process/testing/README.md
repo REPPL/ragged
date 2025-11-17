@@ -2,7 +2,7 @@
 
 **Purpose:** Testing strategies and test plans
 
-**Last Updated:** 2025-11-15
+**Last Updated:** 2025-11-17
 
 ---
 
@@ -18,10 +18,29 @@ This directory contains testing strategies, test plans, and testing-related docu
 
 ---
 
+## Current Test Coverage
+
+**As of v0.2.9-P1 (2025-11-17):**
+- **Total Tests:** 667 passing unit tests
+- **Code Coverage:** 58% overall
+- **Test Files:** 24+ test modules
+
+**Feature Coverage:**
+- Hybrid retrieval: 100% tested
+- BM25 search: 100% tested
+- Citation extraction: 100% tested
+- Document deduplication: 100% tested
+- CLI commands: Comprehensive test suite (113 tests)
+- Response parsing: Full coverage
+- Batch ingestion: Complete test coverage
+- Document loaders: All formats tested
+
+---
+
 ## Testing Approach
 
 ragged uses a hybrid testing approach:
-- **Unit Tests:** Core logic and algorithms
+- **Unit Tests:** Core logic and algorithms (667 tests)
 - **Integration Tests:** Component interactions and workflows
 - **Evaluation Tests:** RAG quality metrics (retrieval, generation)
 

@@ -18,7 +18,7 @@ class TestExportBackup:
         assert result.exit_code == 0
         assert "Create a backup" in result.output
 
-    @patch("src.cli.commands.exportimport.VectorStore")
+    @patch("src.storage.vector_store.VectorStore")
     def test_export_backup_empty_database(self, mock_vector_store, cli_runner: CliRunner, tmp_path):
         """Test backing up empty database."""
         store_instance = MagicMock()
@@ -35,7 +35,7 @@ class TestExportBackup:
         assert result.exit_code == 0
         assert "No data to export" in result.output
 
-    @patch("src.cli.commands.exportimport.VectorStore")
+    @patch("src.storage.vector_store.VectorStore")
     def test_export_backup_with_data(self, mock_vector_store, cli_runner: CliRunner, tmp_path):
         """Test backing up with data."""
         store_instance = MagicMock()
@@ -54,7 +54,7 @@ class TestExportBackup:
         assert output_file.exists()
         assert "Backup created successfully" in result.output
 
-    @patch("src.cli.commands.exportimport.VectorStore")
+    @patch("src.storage.vector_store.VectorStore")
     def test_export_backup_compressed(self, mock_vector_store, cli_runner: CliRunner, tmp_path):
         """Test creating compressed backup."""
         store_instance = MagicMock()
@@ -72,7 +72,7 @@ class TestExportBackup:
         assert result.exit_code == 0
         assert output_file.exists()
 
-    @patch("src.cli.commands.exportimport.VectorStore")
+    @patch("src.storage.vector_store.VectorStore")
     @patch("src.cli.commands.exportimport.get_settings")
     def test_export_backup_with_config(self, mock_settings, mock_vector_store, cli_runner: CliRunner, tmp_path):
         """Test backup including configuration."""
@@ -113,7 +113,7 @@ class TestExportRestore:
         result = cli_runner.invoke(export, ["restore", "/nonexistent/backup.json", "--yes"])
         assert result.exit_code != 0  # Should fail
 
-    @patch("src.cli.commands.exportimport.VectorStore")
+    @patch("src.storage.vector_store.VectorStore")
     def test_export_restore_invalid_backup(self, mock_vector_store, cli_runner: CliRunner, tmp_path):
         """Test restoring from invalid backup file."""
         backup_file = tmp_path / "invalid.json"
