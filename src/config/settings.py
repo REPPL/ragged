@@ -13,6 +13,8 @@ from typing import Any, Literal
 from pydantic import Field, ValidationInfo, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+from src.utils.path_utils import ensure_directory
+
 
 class EmbeddingModel(str, Enum):
     """Supported embedding model types."""
@@ -149,8 +151,7 @@ class Settings(BaseSettings):
             >>> data_dir = settings.ensure_data_dir()
             >>> config_file = data_dir / "config.yml"
         """
-        self.data_dir.mkdir(parents=True, exist_ok=True)
-        return self.data_dir
+        return ensure_directory(self.data_dir)
 
     def model_post_init(self, __context: Any) -> None:
         """Load user config if available (without creating directories as side effect)."""

@@ -165,7 +165,7 @@ class TestHybridRetrieval:
 
         # Should call both retrievers with expanded k
         expected_k = 5 * hybrid_retriever.config.top_k_multiplier
-        mock_vector_retriever.retrieve.assert_called_once_with("test query", top_k=expected_k)
+        mock_vector_retriever.retrieve.assert_called_once_with("test query", k=expected_k)
         mock_bm25_retriever.search.assert_called_once_with("test query", top_k=expected_k)
 
         assert len(results) > 0

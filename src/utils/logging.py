@@ -14,6 +14,7 @@ from typing import Any, Dict, Optional, Union
 from pythonjsonlogger import json as jsonlogger
 
 from src.config.settings import get_settings
+from src.utils.path_utils import ensure_directory
 
 
 class PrivacyFilter(logging.Filter):
@@ -128,7 +129,7 @@ def setup_logging(
 
     # File handler (if specified)
     if log_file:
-        log_file.parent.mkdir(parents=True, exist_ok=True)
+        ensure_directory(log_file.parent)
 
         # Use rotating file handler (max 10MB, keep 5 backups)
         file_handler = logging.handlers.RotatingFileHandler(

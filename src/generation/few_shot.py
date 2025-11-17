@@ -11,6 +11,7 @@ import logging
 import numpy as np
 
 from src.config.constants import FALLBACK_EMBEDDING_DIMENSION
+from src.utils.path_utils import ensure_directory
 
 logger = logging.getLogger(__name__)
 
@@ -109,7 +110,7 @@ class FewShotExampleStore:
     def save_examples(self) -> None:
         """Save examples to storage."""
         try:
-            self.storage_path.parent.mkdir(parents=True, exist_ok=True)
+            ensure_directory(self.storage_path.parent)
             with open(self.storage_path, 'w') as f:
                 data = [ex.to_dict() for ex in self.examples]
                 json.dump(data, f, indent=2)

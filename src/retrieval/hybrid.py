@@ -80,6 +80,34 @@ class HybridRetriever:
         logger.debug(f"Vector-only retrieval for: {query}")
         return self.vector.retrieve(query, k=top_k)
 
+    def _convert_bm25_to_chunk(
+        self,
+        doc_id: str,
+        content: str,
+        score: float,
+        metadata: dict,
+    ) -> RetrievedChunk:
+        """Convert BM25 search result to RetrievedChunk format.
+
+        Args:
+            doc_id: Document ID from BM25 results
+            content: Text content
+            score: Relevance score
+            metadata: Metadata dictionary from BM25
+
+        Returns:
+            RetrievedChunk with standardised format
+        """
+        return RetrievedChunk(
+            text=content,
+            score=score,
+            chunk_id=doc_id,
+            document_id=metadata.get("document_id", ""),
+            document_path=metadata.get("source_file", "unknown"),
+            chunk_position=metadata.get("chunk_index", 0),
+            metadata=metadata,
+        )
+
     def _bm25_only(self, query: str, top_k: int) -> List[RetrievedChunk]:
         """BM25 search only."""
         logger.debug(f"BM25-only retrieval for: {query}")
@@ -87,18 +115,10 @@ class HybridRetriever:
         results = self.bm25.search(query, top_k=top_k)
 
         # Convert to RetrievedChunk format
-        chunks = []
-        for doc_id, content, score, metadata in results:
-            chunk = RetrievedChunk(
-                text=content,
-                score=score,
-                chunk_id=doc_id,
-                document_id=metadata.get("document_id", ""),
-                document_path=metadata.get("source_file", "unknown"),
-                chunk_position=metadata.get("chunk_index", 0),
-                metadata=metadata,
-            )
-            chunks.append(chunk)
+        chunks = [
+            self._convert_bm25_to_chunk(doc_id, content, score, metadata)
+            for doc_id, content, score, metadata in results
+        ]
 
         return chunks
 
@@ -152,15 +172,7 @@ class HybridRetriever:
                 )
             else:
                 # From BM25 search
-                chunk = RetrievedChunk(
-                    text=content,
-                    score=score,
-                    chunk_id=doc_id,
-                    document_id=metadata.get("document_id", ""),
-                    document_path=metadata.get("source_file", "unknown"),
-                    chunk_position=metadata.get("chunk_index", 0),
-                    metadata=metadata,
-                )
+                chunk = self._convert_bm25_to_chunk(doc_id, content, score, metadata)
             chunks.append(chunk)
 
         logger.info(
