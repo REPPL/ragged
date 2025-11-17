@@ -37,7 +37,7 @@ def validate_file_path(file_path: Path, allowed_base: Optional[Path] = None) -> 
     try:
         resolved = file_path.resolve()
     except (OSError, RuntimeError) as e:
-        raise SecurityError(f"Invalid file path: {e}")
+        raise SecurityError(f"Invalid file path: {e}") from e
 
     # Check file exists
     if not resolved.exists():

@@ -176,7 +176,7 @@ def ensure_directory(path: Union[str, Path], parents: bool = True, exist_ok: boo
         raise InvalidPathError(
             f"Failed to create directory: {normalized}",
             {"path": str(normalized), "error": str(e)}
-        )
+        ) from e
 
     return normalized
 
