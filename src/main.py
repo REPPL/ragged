@@ -6,31 +6,14 @@ Provides CLI commands for document ingestion, querying, and management.
 
 import sys
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Dict, Literal, Optional, cast
-
-if TYPE_CHECKING:
-    import click
-    from rich.console import Console as ConsoleType
-    from rich.progress import Progress as ProgressType
-    from rich.table import Table as TableType
-else:
-    try:
-        import click
-        from rich.console import Console as ConsoleType
-        from rich.progress import Progress as ProgressType
-        from rich.table import Table as TableType
-    except ImportError:
-        click = None  # type: ignore[assignment]
-        ConsoleType = None  # type: ignore[assignment, misc]
-        ProgressType = None  # type: ignore[assignment, misc]
-        TableType = None  # type: ignore[assignment, misc]
+from typing import Any, Dict, Literal, Optional, cast
 
 from src import __version__
+from src.cli.common import click, console, ConsoleType, ProgressType, TableType
 from src.config.settings import get_settings
 from src.utils.logging import get_logger, setup_logging
 
 logger = get_logger(__name__)
-console = ConsoleType() if ConsoleType is not None else None
 
 
 @click.group()
@@ -539,50 +522,11 @@ def config_list_models() -> None:
         sys.exit(1)
 
 
-@cli.command()
-def health() -> None:
-    """
-    Check health of all services.
-    """
-    from src.generation.ollama_client import OllamaClient
-    from src.storage.vector_store import VectorStore
+# Import commands from modules
+from src.cli.commands.health import health
 
-    console.print("[bold]Checking services...[/bold]")
-    console.print()
-
-    all_healthy = True
-
-    # Ollama
-    try:
-        client = OllamaClient()
-        if client.health_check():
-            console.print("[green]✓[/green] Ollama: Running")
-        else:
-            console.print("[red]✗[/red] Ollama: Not responding")
-            all_healthy = False
-    except Exception as e:
-        console.print(f"[red]✗[/red] Ollama: {e}")
-        all_healthy = False
-
-    # ChromaDB
-    try:
-        vector_store = VectorStore()
-        if vector_store.health_check():
-            count = vector_store.count()
-            console.print(f"[green]✓[/green] ChromaDB: Running ({count} chunks stored)")
-        else:
-            console.print("[red]✗[/red] ChromaDB: Not responding")
-            all_healthy = False
-    except Exception as e:
-        console.print(f"[red]✗[/red] ChromaDB: {e}")
-        all_healthy = False
-
-    console.print()
-    if all_healthy:
-        console.print("[bold green]All services healthy![/bold green]")
-    else:
-        console.print("[bold yellow]Some services are not available.[/bold yellow]")
-        sys.exit(1)
+# Register commands
+cli.add_command(health)
 
 
 def main() -> None:
