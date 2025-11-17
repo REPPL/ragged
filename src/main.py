@@ -75,6 +75,7 @@ from src.cli.commands.envinfo import env_info
 from src.cli.commands.metadata import metadata
 from src.cli.commands.search import search
 from src.cli.commands.history import history
+from src.cli.commands.exportimport import export
 
 # Register commands
 cli.add_command(add)
@@ -89,6 +90,7 @@ cli.add_command(env_info)
 cli.add_command(metadata)
 cli.add_command(search)
 cli.add_command(history)
+cli.add_command(export)
 
 
 def main() -> None:
