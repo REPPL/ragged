@@ -1,10 +1,10 @@
-# Ragged v0.2.6 Roadmap - Quality & Code Improvements
+# Ragged v0.2.6 Roadmap - Documentation & Structural Improvements
 
 **Status:** Planned
 
-**Total Hours:** 12-19 hours (AI implementation)
+**Total Hours:** 24-35 hours (AI implementation)
 
-**Focus:** Code quality, maintainability, and technical debt reduction
+**Focus:** Documentation completeness and structural refactoring
 
 **Breaking Changes:** None
 
@@ -12,37 +12,26 @@
 
 ## Overview
 
-Version 0.2.6 addresses code quality improvements that enhance maintainability and reduce technical debt. Must complete v0.2.4 first.
+Version 0.2.6 focuses on documentation completeness and structural improvements after code quality foundations established in v0.2.5. This release enhances maintainability through comprehensive documentation and better code organisation without adding new functionality.
 
-**Dependencies:** Requires v0.2.4 completion (high priority bugs fixed)
+**Dependencies:** Requires v0.2.5 completion (code quality improvements, type hints, magic numbers extraction)
 
----
-
-## QUALITY-001: Type Hint Coverage (4 hours)
-
-**Problem:** Approximately 15% of functions lack proper type hints, reducing code clarity and preventing static type checking.
-
-**Implementation:**
-1. Run mypy --strict to identify missing type hints [1 hour]
-2. Add type hints to all public functions [2 hours]
-3. Add type hints to internal functions [1 hour]
-
-**Files:** All modules in src/ lacking complete type hints
-
-**⚠️ MANUAL TEST:** Run mypy --strict, verify no errors
-
-**Success:** mypy passes with --strict mode, all public functions have complete type hints
+**Note:** Items previously planned for v0.2.6 that were moved to v0.2.5:
+- ~~QUALITY-001: Type hints~~ → v0.2.5 QUALITY-006
+- ~~QUALITY-003: TODO cleanup~~ → v0.2.5 QUALITY-009
+- ~~QUALITY-005: Magic numbers~~ → v0.2.5 QUALITY-005
 
 ---
 
-## QUALITY-002: Docstring Completeness (3 hours)
+## QUALITY-002: Complete Google-Style Docstrings (8-10 hours)
 
 **Problem:** Some functions lack docstrings or have minimal documentation.
 
 **Implementation:**
-1. Audit all functions for missing docstrings [30 minutes]
-2. Add Google-style docstrings to all public functions [1.5 hours]
-3. Add examples to complex functions [1 hour]
+1. Audit all functions for missing docstrings [1 hour]
+2. Add Google-style docstrings to all public functions [4-5 hours]
+3. Add docstrings to internal functions [2-3 hours]
+4. Add examples to complex functions [1-2 hours]
 
 **Format:**
 ```python
@@ -81,42 +70,21 @@ def example_function(param1: str, param2: int = 5) -> Dict[str, Any]:
 
 ---
 
-## QUALITY-003: TODO Comments Cleanup (2-8 hours)
+## QUALITY-004: Eliminate Code Duplication (4-6 hours)
 
-**Problem:** 11 TODO comments found in code should either be implemented or converted to issues.
-
-**Implementation:**
-1. Audit all TODO comments in codebase [30 minutes]
-2. Implement quick TODOs (<30 min each) [1-5 hours]
-3. Create GitHub issues for complex TODOs [30 minutes]
-4. Remove obsolete TODOs [30 minutes]
-
-**Decision criteria:**
-- If quick (<30 min) → implement now
-- If complex → create GitHub issue and reference it
-- If obsolete → remove
-
-**Files:** All files containing TODO comments (11 found)
-
-**⚠️ MANUAL TEST:** Search for remaining TODOs, verify all have issue references or are implemented
-
-**Success:** No TODO comments without issue references, quick TODOs implemented
-
----
-
-## QUALITY-004: Code Duplication (1-2 hours)
-
-**Problem:** Some code duplication exists beyond BUG-007's metadata sanitisation (already addressed in v0.2.4).
+**Problem:** Some code duplication exists beyond what was addressed in v0.2.4/v0.2.5.
 
 **Implementation:**
-1. Run ruff to find duplicate code blocks [30 minutes]
-2. Extract common patterns to utilities [30 minutes-1 hour]
-3. Update all call sites [30 minutes]
+1. Run ruff to find duplicate code blocks [1 hour]
+2. Identify patterns for extraction [1 hour]
+3. Extract common patterns to utilities [1-2 hours]
+4. Update all call sites [1-2 hours]
 
 **Common patterns to extract:**
 - Repeated validation logic
 - Common data transformations
 - Shared formatting code
+- Error handling patterns
 
 **Files:** All modules with duplicated code patterns
 
@@ -126,84 +94,280 @@ def example_function(param1: str, param2: int = 5) -> Dict[str, Any]:
 
 ---
 
-## QUALITY-005: Magic Numbers (2 hours)
+## QUALITY-006: File Length Refactoring (6-10 hours)
 
-**Problem:** Hardcoded values (magic numbers) scattered throughout code without explanation.
+**Problem:** 9 files exceed 300 lines, making them harder to navigate and maintain.
 
-**Implementation:**
-1. Create src/config/constants.py [1 hour]
-2. Extract all magic numbers to named constants [30 minutes]
-3. Update all usages [30 minutes]
+**Files Exceeding 300 Lines:**
+1. `src/main.py` (586 lines) - CLI commands
+2. `src/web/gradio_ui.py` (497 lines) - UI components
+3. `src/generation/few_shot.py` (424 lines) - Storage + matching
+4. `src/chunking/splitters.py` (404 lines) - Recursive splitting
+5. `src/utils/benchmarks.py` (400 lines) - Profiling + analysis
+6. `src/ingestion/async_processor.py` (376 lines) - Batch + async
+7. `src/web/api.py` (364 lines) - Endpoint handlers
+8. `src/utils/path_utils.py` (341 lines) - Path utilities
+9. `src/exceptions.py` (327 lines) - Already well-organised ✅
 
-**Constants to define:**
+**Priority Refactoring** (focus on top 4):
+
+### 1. `src/main.py` (2-3 hours)
+**Strategy:** Split CLI commands into separate modules
+- Create `src/cli/` directory
+- Move commands to: `add.py`, `query.py`, `config.py`, `web.py`
+- Keep `main.py` as entry point with command registration
+
+### 2. `src/web/gradio_ui.py` (2-3 hours)
+**Strategy:** Extract API client and separate UI components
+- Create `src/web/gradio_client.py` for API interactions
+- Create `src/web/gradio_components.py` for reusable UI elements
+- Keep `gradio_ui.py` for layout and configuration
+
+### 3. `src/generation/few_shot.py` (1-2 hours)
+**Strategy:** Split storage logic from example matching
+- Keep `few_shot.py` for matching logic
+- Move storage to `few_shot_store.py`
+- Potential for future database-backed storage
+
+### 4. `src/chunking/splitters.py` (1-2 hours)
+**Strategy:** Extract recursive splitting logic
+- Keep `splitters.py` for `RecursiveCharacterTextSplitter`
+- Extract page tracking helpers to `page_tracking.py`
+- Clearer separation of concerns
+
+**Success Criteria:**
+- ✅ No files >400 lines (except exceptions.py which is acceptable)
+- ✅ Clear module responsibilities
+- ✅ All imports updated
+- ✅ All tests still pass
+
+---
+
+## QUALITY-007: Complex Function Extraction (4-6 hours)
+
+**Problem:** Some functions have high cyclomatic complexity, making them hard to test and maintain.
+
+**Target Functions:**
+
+### 1. `src/chunking/splitters.py:_split_recursive` (2 hours)
+**Lines:** 43-89
+**Complexity:** High (recursive with multiple conditionals)
+**Strategy:** Extract separator handling and overlap logic to helper methods
+
+### 2. `src/main.py:add` command (2-3 hours)
+**Lines:** 43-230 (~190 lines)
+**Complexity:** Very high (handles files + directories + progress + errors)
+**Strategy:** Extract directory scanning, progress reporting, error handling to separate functions
+
+### 3. `src/web/api.py:query_endpoint` (1-2 hours)
+**Lines:** ~150-250
+**Complexity:** High (streaming + non-streaming modes)
+**Strategy:** Extract stream handling to dedicated function
+
+**Implementation Plan:**
+1. Identify extraction boundaries [1 hour]
+2. Extract first function (splitters) [1 hour]
+3. Extract second function (main.py) [1-2 hours]
+4. Extract third function (api.py) [1 hour]
+5. Update tests [1 hour]
+
+**Success Criteria:**
+- ✅ No function >50 lines (excluding data structures)
+- ✅ Each function has single responsibility
+- ✅ Complexity reduced, tests easier to write
+
+---
+
+## QUALITY-008: Add Usage Examples to Docstrings (2-3 hours)
+
+**Problem:** Complex functions lack practical usage examples.
+
+**Target Modules:**
+
+### 1. `src/chunking/contextual.py:ContextualChunker` (30min)
+Add example showing:
+- Initialisation
+- Processing a document
+- Accessing chunks with context
+
+### 2. `src/retrieval/fusion.py:ReciprocalRankFusion` (30min)
+Add example showing:
+- Combining vector and BM25 results
+- Fusion parameters
+- Output format
+
+### 3. `src/generation/few_shot.py:FewShotManager` (30min)
+Add example showing:
+- Adding examples
+- Searching for similar examples
+- Using in prompt generation
+
+### 4. Core Data Models (30min)
+Add examples to:
+- `Document.from_file()`
+- `chunk_document()`
+- `Chunk` creation
+
+### 5. Configuration (30min)
+Add examples for:
+- `Settings` usage
+- Custom configuration
+- Environment variables
+
+**Format:**
 ```python
-# src/config/constants.py (NEW FILE)
-"""Named constants for ragged."""
+"""
+...
 
-# Chunking
-DEFAULT_CHUNK_SIZE = 500  # Tokens
-DEFAULT_CHUNK_OVERLAP = 50  # Tokens
-MAX_CHUNK_SIZE = 2000  # Maximum tokens per chunk
+Example:
+    Basic usage::
 
-# Retrieval
-DEFAULT_TOP_K = 5  # Number of chunks to retrieve
-MAX_TOP_K = 50  # Maximum retrievable chunks
+        >>> from src.chunking.contextual import ContextualChunker
+        >>> chunker = ContextualChunker(chunk_size=500)
+        >>> chunks = chunker.process_document(document)
+        >>> for chunk in chunks:
+        ...     print(chunk.text[:50])
+        First chunk with context...
+        Second chunk with context...
 
-# Token estimation
-CHARS_PER_TOKEN_ESTIMATE = 4  # Average characters per token
+    Advanced usage with custom context::
 
-# Batch processing
-DEFAULT_BATCH_SIZE = 32  # Documents per batch
-MAX_MEMORY_MB = 2000  # Maximum memory usage in MB
+        >>> chunker = ContextualChunker(
+        ...     chunk_size=500,
+        ...     context_size=100
+        ... )
+        >>> chunks = chunker.process_document(document)
+"""
 ```
 
-**Files:** src/config/constants.py (new), all files with magic numbers
-
-**⚠️ MANUAL TEST:** Verify all constants used correctly, behaviour unchanged
-
-**Success:** All magic numbers replaced with named, documented constants
+**Success Criteria:**
+- ✅ All complex public APIs have examples
+- ✅ Examples are tested (doctest or manual verification)
+- ✅ Examples cover common use cases
 
 ---
 
 ## Success Criteria (Test Checkpoints)
 
 **Automated:**
-- [ ] mypy --strict passes (QUALITY-001)
+- [ ] All tests still pass after refactoring
 - [ ] ruff check passes (QUALITY-004)
-- [ ] No bare magic numbers (QUALITY-005)
-- [ ] All tests still pass
+- [ ] No new warnings or errors
+- [ ] Import structure validated
 
 **Manual Testing:**
 - [ ] ⚠️ MANUAL: Documentation complete and clear
-- [ ] ⚠️ MANUAL: No TODO comments without issues
+- [ ] ⚠️ MANUAL: Examples tested and work correctly
 - [ ] ⚠️ MANUAL: Code duplication eliminated
+- [ ] ⚠️ MANUAL: File structure logical and navigable
 
 **Quality Gates:**
-- [ ] All existing tests pass
-- [ ] No new warnings in logs
-- [ ] Code quality metrics improved
-- [ ] mypy strict mode compliance
+- [ ] No files >400 lines (except exceptions.py)
+- [ ] No functions >50 lines
+- [ ] All public functions documented with examples
+- [ ] Code quality metrics maintained or improved
+
+**Documentation Metrics:**
+- [ ] 100% public function docstring coverage
+- [ ] 80%+ internal function docstring coverage
+- [ ] All complex functions have usage examples
+- [ ] API reference generated successfully
+
+---
+
+## Files Modified
+
+### New Files (8-12 estimated)
+**CLI Modules** (if main.py refactored):
+- `src/cli/__init__.py`
+- `src/cli/add.py`
+- `src/cli/query.py`
+- `src/cli/config.py`
+- `src/cli/web.py`
+
+**Web Modules** (if gradio_ui.py refactored):
+- `src/web/gradio_client.py`
+- `src/web/gradio_components.py`
+
+**Generation Modules** (if few_shot.py refactored):
+- `src/generation/few_shot_store.py`
+
+**Chunking Modules** (if splitters.py refactored):
+- `src/chunking/page_tracking.py`
+
+### Modified Files (All source files)
+**Docstrings Added:** All 45 Python source files updated
+
+**Refactored:**
+- `src/main.py`
+- `src/web/gradio_ui.py`
+- `src/generation/few_shot.py`
+- `src/chunking/splitters.py`
+- All files with code duplication
+
+---
+
+## Implementation Sequence
+
+### Phase 1: Documentation (8-10 hours)
+→ QUALITY-002: Add Google-style docstrings
+→ QUALITY-008: Add usage examples
+
+### Phase 2: Code Organisation (10-16 hours)
+→ QUALITY-006: File length refactoring
+→ QUALITY-007: Complex function extraction
+
+### Phase 3: Quality Improvements (4-6 hours)
+→ QUALITY-004: Eliminate code duplication
+
+### Phase 4: Validation (2-3 hours)
+→ Run full test suite
+→ Manual testing
+→ Documentation review
 
 ---
 
 ## Known Risks
 
-- TODO cleanup might reveal additional work needed
-- Type hint additions might expose design issues
-- Constant extraction might require configuration changes
-- Docstring writing might take longer than estimated
+1. **File Refactoring**: Import updates may break existing code if not careful
+2. **Function Extraction**: May require updating many call sites
+3. **Docstring Writing**: Estimating complexity/time difficult
+4. **Code Duplication**: Some patterns may be intentionally duplicated for clarity
+
+---
+
+## Dependencies
+
+**Requires:**
+- ✅ v0.2.5 complete (code quality improvements, type hints, magic numbers)
+
+**Blocks:**
+- v0.2.7 (new features)
+
+**External:**
+- Python 3.12.x
+- All existing dependencies (no additions)
 
 ---
 
 ## Next Version
 
 After v0.2.6 completion:
-- **v0.2.5:** Remaining P2 bugs (if any)
-- **v0.2.7:** UX & performance improvements
-- See: `roadmap/version/v0.2.7/README.md`
+- **v0.2.7:** Feature enhancements (UX & performance improvements)
+- See: [v0.2.7 Roadmap](../v0.2.7/README.md)
 
 ---
 
-**Last Updated:** 2025-11-12
+## Related Documentation
 
-**Status:** Ready for implementation after v0.2.4
+- [v0.2.6 Design Goals](../../planning/version/v0.2/v0.2.6-design.md) - Vision and decisions
+- [v0.2.5 Roadmap](../v0.2.5/README.md) - Previous version
+- [v0.2.7 Roadmap](../v0.2.7/README.md) - Next version
+
+---
+
+**Last Updated:** 2025-11-17
+
+**Status:** 📋 Ready for implementation after v0.2.5
+
+**Estimated Completion:** 3-4 weeks (24-35 hours)
