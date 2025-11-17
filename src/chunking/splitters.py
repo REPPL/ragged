@@ -331,7 +331,8 @@ def chunk_document(document: Document, splitter: RecursiveCharacterTextSplitter 
     chunk_pages = _map_chunks_to_pages(text_chunks, clean_content, original_content, page_positions)
 
     # Get total pages for fallback estimation
-    total_pages = document.metadata.page_count or 1
+    # Keep None for documents without pages (TXT, MD, HTML)
+    total_pages = document.metadata.page_count
 
     # Create Chunk objects with metadata
     chunks = []
@@ -339,8 +340,9 @@ def chunk_document(document: Document, splitter: RecursiveCharacterTextSplitter 
         # Get page info for this chunk
         page_number, page_range = chunk_pages[i] if i < len(chunk_pages) else (None, None)
 
-        # Fallback: estimate page if not found
-        if page_number is None and page_positions:
+        # Fallback: estimate page if not found AND document has pages (PDF)
+        # TXT/MD/HTML files have page_count=None, so they'll keep page_number=None (correct)
+        if page_number is None and total_pages is not None and total_pages > 0:
             page_number = _estimate_page_from_position(i, total_chunks, total_pages)
 
         chunk_metadata = ChunkMetadata(
