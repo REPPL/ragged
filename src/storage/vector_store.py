@@ -202,6 +202,30 @@ class VectorStore:
             logger.error(f"Failed to get documents by metadata: {e}")
             return {"ids": [], "documents": [], "metadatas": []}
 
+    def update_metadata(
+        self,
+        ids: List[str],
+        metadatas: List[Dict[str, Any]],
+    ) -> None:
+        """
+        Update metadata for existing embeddings.
+
+        Args:
+            ids: List of IDs to update
+            metadatas: List of metadata dicts (one per ID)
+        """
+        if len(ids) != len(metadatas):
+            raise ValueError("ids and metadatas must have same length")
+
+        # Serialise metadata for ChromaDB
+        serialised_metadatas = serialise_batch_metadata(metadatas)
+
+        self.collection.update(
+            ids=ids,
+            metadatas=serialised_metadatas,  # type: ignore[arg-type]
+        )
+        logger.info(f"Updated metadata for {len(ids)} embeddings")
+
     def delete(
         self,
         ids: Optional[List[str]] = None,

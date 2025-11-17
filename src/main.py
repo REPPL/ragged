@@ -72,6 +72,7 @@ from src.cli.commands.config import config
 from src.cli.commands.completion import completion
 from src.cli.commands.validate import validate
 from src.cli.commands.envinfo import env_info
+from src.cli.commands.metadata import metadata
 
 # Register commands
 cli.add_command(add)
@@ -83,6 +84,7 @@ cli.add_command(config)
 cli.add_command(completion)
 cli.add_command(validate)
 cli.add_command(env_info)
+cli.add_command(metadata)
 
 
 def main() -> None:
