@@ -40,6 +40,7 @@ from src.cli.commands.docs import list_docs, clear
 from src.cli.commands.config import config
 from src.cli.commands.completion import completion
 from src.cli.commands.validate import validate
+from src.cli.commands.envinfo import env_info
 
 # Register commands
 cli.add_command(add)
@@ -50,6 +51,7 @@ cli.add_command(clear)
 cli.add_command(config)
 cli.add_command(completion)
 cli.add_command(validate)
+cli.add_command(env_info)
 
 
 def main() -> None:
