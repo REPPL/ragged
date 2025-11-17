@@ -10,6 +10,7 @@ import re
 
 from src.ingestion.models import Document, Chunk, ChunkMetadata
 from src.chunking.splitters import RecursiveCharacterTextSplitter
+from src.utils.hashing import hash_content
 from src.utils.logging import get_logger
 
 logger = get_logger(__name__)
@@ -150,8 +151,7 @@ class ContextualChunker:
             token_count = len(enriched_text.split())
 
             # Calculate content hash for this chunk
-            import hashlib
-            chunk_content_hash = hashlib.sha256(enriched_text.encode()).hexdigest()
+            chunk_content_hash = hash_content(enriched_text)
 
             # Calculate overlap with previous chunk
             overlap_prev = 0

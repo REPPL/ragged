@@ -26,7 +26,9 @@ UI_HEALTH_CHECK_RETRY_DELAY = 0.5  # Quick health check delay (seconds)
 
 # Embedding Dimensions (for common models)
 DEFAULT_EMBEDDING_DIMENSION = 768  # Default dimension for most embedding models
+FALLBACK_EMBEDDING_DIMENSION = 384  # Fallback dimension when embeddings unavailable
 EMBEDDING_DIMENSIONS = {
     "all-mpnet-base-v2": 768,
+    "all-MiniLM-L6-v2": 384,  # Lightweight model commonly used
     "nomic-embed-text": 768,
 }

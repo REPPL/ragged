@@ -10,6 +10,8 @@ import json
 import logging
 import numpy as np
 
+from src.config.constants import FALLBACK_EMBEDDING_DIMENSION
+
 logger = logging.getLogger(__name__)
 
 
@@ -100,7 +102,7 @@ class FewShotExampleStore:
             except Exception:  # noqa: BLE001 - Continue processing other examples
                 logger.warning("Failed to embed example query", exc_info=True)
                 # Use zero vector as fallback
-                self.example_embeddings.append(np.zeros(384))  # Default embedding size
+                self.example_embeddings.append(np.zeros(FALLBACK_EMBEDDING_DIMENSION))
 
         logger.debug(f"Computed embeddings for {len(self.example_embeddings)} examples")
 
@@ -152,7 +154,7 @@ class FewShotExampleStore:
                 self.example_embeddings.append(np.array(embedding))
             except Exception:  # noqa: BLE001 - Fallback to zero vector on failure
                 logger.warning("Failed to embed new example", exc_info=True)
-                self.example_embeddings.append(np.zeros(384))
+                self.example_embeddings.append(np.zeros(FALLBACK_EMBEDDING_DIMENSION))
 
         self.save_examples()
 

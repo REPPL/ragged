@@ -5,13 +5,14 @@ This module defines Pydantic models for documents, chunks, and metadata
 with validation and type safety.
 """
 
-import hashlib
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import List, Optional
 from uuid import uuid4
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+
+from src.utils.hashing import hash_content, hash_file_content
 
 
 class DocumentMetadata(BaseModel):
@@ -141,18 +142,10 @@ class Document(BaseModel):
         file_size = stats.st_size
 
         # Generate full content hash
-        file_hash = hashlib.sha256(content.encode("utf-8")).hexdigest()
+        file_hash = hash_content(content)
 
         # Generate partial content hash (first 1KB + last 1KB) for duplicate detection
-        content_bytes = content.encode("utf-8")
-        if len(content_bytes) <= 2048:  # 2KB or less
-            # Use full content for small files
-            content_hash = file_hash
-        else:
-            # Use first 1KB + last 1KB for large files
-            first_kb = content_bytes[:1024]
-            last_kb = content_bytes[-1024:]
-            content_hash = hashlib.sha256(first_kb + last_kb).hexdigest()
+        content_hash = hash_file_content(content, sample_size=1024)
 
         # Create metadata
         metadata = DocumentMetadata(

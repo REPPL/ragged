@@ -7,8 +7,9 @@ from typing import Optional, Any, Dict, Tuple
 from collections import OrderedDict
 from dataclasses import dataclass, field
 from datetime import datetime
-import hashlib
 import json
+
+from src.utils.hashing import hash_content, hash_query
 from src.utils.logging import get_logger
 
 logger = get_logger(__name__)
@@ -76,7 +77,7 @@ class LRUCache:
         key_string = "|".join(key_parts)
 
         # Hash for fixed-length key
-        return hashlib.sha256(key_string.encode()).hexdigest()
+        return hash_content(key_string)
 
     def get(self, query: str, **kwargs: Any) -> Optional[Any]:
         """Get cached result if available.
@@ -208,7 +209,7 @@ class LRUCache:
     def __contains__(self, query: str) -> bool:
         """Check if query is cached (approximate)."""
         # Note: This checks without kwargs, so it's approximate
-        key_prefix = hashlib.sha256(query.encode()).hexdigest()
+        key_prefix = hash_query(query)
         return any(key.startswith(key_prefix) for key in self._cache.keys())
 
 

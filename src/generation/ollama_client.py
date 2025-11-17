@@ -106,6 +106,22 @@ class OllamaClient:
         except Exception:  # noqa: BLE001 - Non-critical verification, service continues
             logger.warning("Could not verify model availability", exc_info=True)
 
+    def _build_messages(self, prompt: str, system: Optional[str] = None) -> list[dict[str, str]]:
+        """Build messages list for Ollama chat API.
+
+        Args:
+            prompt: User prompt
+            system: Optional system prompt
+
+        Returns:
+            List of message dictionaries with role and content
+        """
+        messages = []
+        if system:
+            messages.append({"role": "system", "content": system})
+        messages.append({"role": "user", "content": prompt})
+        return messages
+
     def generate(
         self,
         prompt: str,
@@ -126,10 +142,7 @@ class OllamaClient:
             Generated text
         """
         # Build messages list
-        messages = []
-        if system:
-            messages.append({"role": "system", "content": system})
-        messages.append({"role": "user", "content": prompt})
+        messages = self._build_messages(prompt, system)
 
         # Prepare options
         options = {"temperature": temperature}
@@ -165,10 +178,7 @@ class OllamaClient:
             Response chunks as they arrive
         """
         # Build messages list
-        messages = []
-        if system:
-            messages.append({"role": "system", "content": system})
-        messages.append({"role": "user", "content": prompt})
+        messages = self._build_messages(prompt, system)
 
         try:
             stream = self.client.chat(
