@@ -24,7 +24,7 @@ class TestSettings:
         assert settings.chunk_size == 500
         assert settings.chunk_overlap == 100
         assert settings.retrieval_k == 5
-        assert settings.llm_model == "llama3.2:3b"
+        assert settings.llm_model == "llama3.2:latest"
         assert settings.log_level == "INFO"
         assert settings.data_dir == Path.home() / ".ragged"
 
@@ -119,15 +119,20 @@ class TestSettings:
             Settings()
 
     def test_data_dir_creation(self, temp_dir: Path) -> None:
-        """Test that data directory is created if it doesn't exist."""
+        """Test that data directory is created via ensure_data_dir(), not during initialization."""
         data_dir = temp_dir / "ragged_data"
         os.environ["RAGGED_DATA_DIR"] = str(data_dir)
 
         settings = Settings()
 
         assert settings.data_dir == data_dir
-        # The model_post_init should create the directory
+        # Directory should NOT exist after initialization (lazy creation)
+        assert not data_dir.exists()
+
+        # Directory SHOULD exist after calling ensure_data_dir()
+        result_dir = settings.ensure_data_dir()
         assert data_dir.exists()
+        assert result_dir == data_dir
 
     def test_get_settings_singleton(self) -> None:
         """Test that get_settings returns the same instance."""

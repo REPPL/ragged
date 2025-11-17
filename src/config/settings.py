@@ -133,16 +133,34 @@ class Settings(BaseSettings):
             )
         return self
 
+    def ensure_data_dir(self) -> Path:
+        """
+        Ensure the data directory exists, creating it if necessary.
+
+        This method implements lazy directory creation to avoid side effects
+        during Settings initialization. Call this method before any operations
+        that require the data directory to exist.
+
+        Returns:
+            Path: The data directory path (guaranteed to exist after this call)
+
+        Example:
+            >>> settings = get_settings()
+            >>> data_dir = settings.ensure_data_dir()
+            >>> config_file = data_dir / "config.yml"
+        """
+        self.data_dir.mkdir(parents=True, exist_ok=True)
+        return self.data_dir
+
     def model_post_init(self, __context) -> None:
-        """Create data directory and load user config if available."""
+        """Load user config if available (without creating directories as side effect)."""
         # Import here to avoid circular dependency
         from src.utils.logging import get_logger
 
         logger = get_logger(__name__)
 
-        self.data_dir.mkdir(parents=True, exist_ok=True)
-
-        # Check for user config file
+        # Only access config file if it already exists
+        # This avoids creating directories as a side effect of initialization
         config_file = self.data_dir / "config.yml"
         if config_file.exists():
             try:

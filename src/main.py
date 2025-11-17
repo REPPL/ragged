@@ -466,8 +466,9 @@ def config_set_model(model_name: Optional[str], auto: bool) -> None:
                 break
             console.print("[red]Invalid selection[/red]")
 
-    # Save to config file
-    config_file = settings.data_dir / "config.yml"
+    # Save to config file (ensure directory exists first)
+    data_dir = settings.ensure_data_dir()
+    config_file = data_dir / "config.yml"
     config = {}
 
     if config_file.exists():
