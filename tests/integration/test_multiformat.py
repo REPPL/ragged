@@ -7,7 +7,7 @@ Tests loading and processing of PDF, TXT, MD, HTML formats through the pipeline.
 import pytest
 from pathlib import Path
 from src.ingestion.loaders import load_document
-from src.chunking.splitters import RecursiveCharacterTextSplitter
+from src.chunking.splitters import RecursiveCharacterTextSplitter, chunk_document
 from src.config.settings import get_settings
 
 
@@ -59,6 +59,42 @@ Deep learning uses neural networks.
         file_path.write_text(content)
         return file_path
 
+    @pytest.fixture
+    def sample_pdf(self, tmp_path):
+        """Create sample PDF file."""
+        try:
+            import fitz  # pymupdf
+        except ImportError:
+            pytest.skip("pymupdf not available")
+
+        # Create a simple PDF with pymupdf
+        file_path = tmp_path / "sample.pdf"
+        doc = fitz.open()  # Create new PDF
+        page = doc.new_page()  # Add a page
+
+        # Add text to the page
+        text = """Machine Learning Research Paper
+
+Introduction
+This document demonstrates PDF loading and processing capabilities.
+Machine learning is transforming how we process and analyse data.
+
+Methods
+We utilise various machine learning algorithms for data analysis.
+The research methodology includes both supervised and unsupervised learning.
+
+Results
+Our experiments show significant improvements in accuracy and performance.
+"""
+        # Insert text at position (50, 50) with font size 12
+        page.insert_text((50, 50), text, fontsize=12)
+
+        # Save the PDF
+        doc.save(str(file_path))
+        doc.close()
+
+        return file_path
+
     @pytest.mark.integration
     def test_txt_loading_and_chunking(self, sample_txt, settings):
         """Test TXT file through full pipeline."""
@@ -66,17 +102,17 @@ Deep learning uses neural networks.
         document = load_document(sample_txt)
         assert document is not None
         assert "machine learning" in document.content.lower()
-        assert document.metadata.file_name == "sample.txt"
-        assert document.metadata.file_type == "txt"
+        assert document.metadata.file_path.name == "sample.txt"
+        assert document.metadata.format == "txt"
 
         # Chunk
         splitter = RecursiveCharacterTextSplitter(
             chunk_size=settings.chunk_size,
             chunk_overlap=settings.chunk_overlap
         )
-        chunks = splitter.chunk_document(document)
-        assert len(chunks) >= 1
-        assert all(chunk.metadata.source_file == "sample.txt" for chunk in chunks)
+        document = chunk_document(document, splitter)
+        assert len(document.chunks) >= 1
+        assert all(chunk.metadata.document_path.name == "sample.txt" for chunk in document.chunks)
 
     @pytest.mark.integration
     def test_markdown_loading_and_chunking(self, sample_markdown, settings):
@@ -85,8 +121,8 @@ Deep learning uses neural networks.
         document = load_document(sample_markdown)
         assert document is not None
         assert "machine learning" in document.content.lower()
-        assert document.metadata.file_name == "sample.md"
-        assert document.metadata.file_type == "md"
+        assert document.metadata.file_path.name == "sample.md"
+        assert document.metadata.format == "md"
 
         # Should preserve structure
         assert "Introduction" in document.content or "introduction" in document.content.lower()
@@ -96,8 +132,8 @@ Deep learning uses neural networks.
             chunk_size=settings.chunk_size,
             chunk_overlap=settings.chunk_overlap
         )
-        chunks = splitter.chunk_document(document)
-        assert len(chunks) >= 1
+        document = chunk_document(document, splitter)
+        assert len(document.chunks) >= 1
 
     @pytest.mark.integration
     def test_html_loading_and_chunking(self, sample_html, settings):
@@ -105,8 +141,8 @@ Deep learning uses neural networks.
         # Load
         document = load_document(sample_html)
         assert document is not None
-        assert document.metadata.file_name == "sample.html"
-        assert document.metadata.file_type == "html"
+        assert document.metadata.file_path.name == "sample.html"
+        assert document.metadata.format == "html"
 
         # Should extract text content
         content_lower = document.content.lower()
@@ -117,8 +153,8 @@ Deep learning uses neural networks.
             chunk_size=settings.chunk_size,
             chunk_overlap=settings.chunk_overlap
         )
-        chunks = splitter.chunk_document(document)
-        assert len(chunks) >= 1
+        document = chunk_document(document, splitter)
+        assert len(document.chunks) >= 1
 
     @pytest.mark.integration
     def test_all_formats_produce_consistent_chunks(self, tmp_path, settings):
@@ -141,23 +177,35 @@ Deep learning uses neural networks.
 
             # Load and chunk
             document = load_document(file_path)
-            chunks = splitter.chunk_document(document)
+            document = chunk_document(document, splitter)
 
             # All formats should produce valid chunks
-            assert len(chunks) >= 1
-            for chunk in chunks:
-                assert chunk.id is not None
-                assert len(chunk.content) > 0
-                assert chunk.metadata.source_file == f"test.{ext}"
-                assert chunk.metadata.chunk_index >= 0
+            assert len(document.chunks) >= 1
+            for chunk in document.chunks:
+                assert chunk.chunk_id is not None
+                assert len(chunk.text) > 0
+                assert chunk.metadata.document_path.name == f"test.{ext}"
+                assert chunk.metadata.chunk_position >= 0
 
     @pytest.mark.integration
-    @pytest.mark.skipif(True, reason="Requires PDF file fixture")
-    def test_pdf_loading_and_chunking(self, settings):
-        """Test PDF file through full pipeline (requires test PDF)."""
-        # Note: This test is skipped by default as it requires a test PDF
-        # To enable, create a test PDF and update the path
-        pass
+    def test_pdf_loading_and_chunking(self, sample_pdf, settings):
+        """Test PDF file through full pipeline."""
+        # Load
+        document = load_document(sample_pdf)
+        assert document is not None
+        assert "machine learning" in document.content.lower()
+        assert document.metadata.file_path.name == "sample.pdf"
+        assert document.metadata.format == "pdf"
+
+        # Chunk
+        splitter = RecursiveCharacterTextSplitter(
+            chunk_size=settings.chunk_size,
+            chunk_overlap=settings.chunk_overlap
+        )
+        document = chunk_document(document, splitter)
+        assert len(document.chunks) >= 1
+        # Chunks should have document_path in metadata
+        assert all(chunk.metadata.document_path.name == "sample.pdf" for chunk in document.chunks)
 
     @pytest.mark.integration
     def test_format_autodetection(self, sample_txt, sample_markdown, sample_html):
@@ -165,15 +213,15 @@ Deep learning uses neural networks.
 
         # TXT
         doc_txt = load_document(sample_txt)
-        assert doc_txt.metadata.file_type == "txt"
+        assert doc_txt.metadata.format == "txt"
 
         # Markdown
         doc_md = load_document(sample_markdown)
-        assert doc_md.metadata.file_type == "md"
+        assert doc_md.metadata.format == "md"
 
         # HTML
         doc_html = load_document(sample_html)
-        assert doc_html.metadata.file_type == "html"
+        assert doc_html.metadata.format == "html"
 
     @pytest.mark.integration
     def test_metadata_preservation_across_formats(self, sample_txt, sample_markdown, sample_html):
@@ -185,11 +233,11 @@ Deep learning uses neural networks.
             document = load_document(file_path)
 
             # All should have required metadata
-            assert document.metadata.file_name is not None
-            assert document.metadata.file_type is not None
+            assert document.metadata.file_path is not None
+            assert document.metadata.format is not None
             assert document.metadata.file_size > 0
             assert document.metadata.file_hash is not None
-            assert document.metadata.ingested_at is not None
+            assert document.metadata.created_at is not None
 
     @pytest.mark.integration
     def test_large_document_chunking(self, tmp_path, settings):
@@ -212,17 +260,17 @@ Deep learning uses neural networks.
             chunk_size=settings.chunk_size,
             chunk_overlap=settings.chunk_overlap
         )
-        chunks = splitter.chunk_document(document)
+        document = chunk_document(document, splitter)
 
         # Should produce multiple chunks
-        assert len(chunks) > 1
+        assert len(document.chunks) > 1
 
         # Chunks should have proper indices
-        for i, chunk in enumerate(chunks):
-            assert chunk.metadata.chunk_index == i
+        for i, chunk in enumerate(document.chunks):
+            assert chunk.metadata.chunk_position == i
 
         # All chunks should reference same source
-        assert all(chunk.metadata.source_file == "large_doc.txt" for chunk in chunks)
+        assert all(chunk.metadata.document_path.name == "large_doc.txt" for chunk in document.chunks)
 
     @pytest.mark.integration
     def test_error_handling_invalid_file(self, tmp_path):
