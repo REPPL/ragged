@@ -39,6 +39,7 @@ from src.cli.commands.health import health
 from src.cli.commands.docs import list_docs, clear
 from src.cli.commands.config import config
 from src.cli.commands.completion import completion
+from src.cli.commands.validate import validate
 
 # Register commands
 cli.add_command(add)
@@ -48,6 +49,7 @@ cli.add_command(list_docs)
 cli.add_command(clear)
 cli.add_command(config)
 cli.add_command(completion)
+cli.add_command(validate)
 
 
 def main() -> None:
