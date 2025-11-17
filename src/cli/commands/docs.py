@@ -5,30 +5,46 @@ import sys
 import click
 
 from src.cli.common import console, TableType
+from src.cli.formatters import FORMAT_CHOICES, print_formatted
 from src.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
 
 @click.command("list")
-def list_docs() -> None:
-    """List all ingested documents."""
+@click.option(
+    "--format",
+    "-f",
+    "output_format",
+    type=click.Choice(FORMAT_CHOICES, case_sensitive=False),
+    default="table",
+    help="Output format (table, json, csv, markdown, yaml)",
+)
+def list_docs(output_format: str) -> None:
+    """List all ingested documents.
+
+    \b
+    Examples:
+        ragged list                    # Show as table
+        ragged list --format json      # Export as JSON
+        ragged list --format csv       # Export as CSV
+        ragged list --format markdown  # Export as Markdown
+    """
     from src.storage.vector_store import VectorStore
 
     try:
         vector_store = VectorStore()
         info = vector_store.get_collection_info()
 
-        table = TableType(title="Vector Store Information")
-        table.add_column("Property", style="cyan")
-        table.add_column("Value", style="magenta")
+        # Format data for output
+        data = {
+            "Collection Name": info["name"],
+            "Total Chunks": info["count"],
+            "Note": "Document-level listing will be added in v0.2",
+        }
 
-        table.add_row("Collection Name", info["name"])
-        table.add_row("Total Chunks", str(info["count"]))
-
-        console.print(table)
-        console.print()
-        console.print("[italic]Note: Document-level listing will be added in v0.2[/italic]")
+        # Print in requested format
+        print_formatted([data], format_type=output_format, title="Vector Store Information", console=console)  # type: ignore
 
     except Exception as e:
         console.print(f"[bold red]✗[/bold red] Failed to list documents: {e}")
