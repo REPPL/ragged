@@ -173,4 +173,4 @@ If switching embedding models:
 
 - [ADR-0004: Factory Pattern for Embedders](./0004-factory-pattern-for-embedders.md)
 - [ADR-0012: Ollama for LLM Generation](./0012-ollama-for-generation.md)
-- [Technology Evaluation: Embeddings](../planning/design/technologies/embeddings.md)
+- [Technology Evaluation: Embeddings](../../planning/technologies/embeddings.md)

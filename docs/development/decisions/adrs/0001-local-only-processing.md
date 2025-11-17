@@ -8,7 +8,7 @@
 
 **Related:**
 - [Privacy Architecture](../../planning/core-concepts/privacy-architecture.md)
-- [Product Vision](../vision/product-vision.md)
+- [Product Vision](../../planning/vision/product-vision.md)
 
 ---
 

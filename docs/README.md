@@ -171,8 +171,9 @@ ragged uses the Diátaxis documentation system to help you learn and use the sys
 - [Architecture Overview](./explanation/architecture-overview.md) - High-level system design
 - [RAG Fundamentals](./explanation/rag-fundamentals.md) - Core RAG concepts
 - [Privacy Design](./explanation/privacy-design.md) - Privacy-first architecture
-- [Design Principles](./explanation/design-principles.md) - Core philosophy
-- [User Personas](./explanation/user-personas.md) - Who ragged serves
+- [User Personas](./explanation/personas-explained.md) - Who ragged serves
+- [Versioning Strategy](./explanation/versioning-strategy.md) - Version philosophy
+- [Progressive Disclosure](./explanation/progressive-disclosure-explained.md) - UX approach
 
 ---
 

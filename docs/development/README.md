@@ -423,14 +423,15 @@ All decision documentation is now grouped under `decisions/` for easier navigati
 
 **All major documentation files should include a "Related Documentation" section at the end:**
 
+**Example format:**
 ```markdown
 ---
 
 ## Related Documentation
 
-- [Link to related design doc](./path/to/design.md) - Brief description
-- [Link to implementation](./path/to/implementation.md) - Brief description
-- [Link to related version](./path/to/version.md) - Brief description
+- [v0.2.7 Planning](./planning/version/v0.2/README.md) - Design goals for this version
+- [v0.2.7 Implementation](./implementation/version/v0.2/README.md) - What was actually built
+- [CLI Enhancements](./planning/interfaces/cli/enhancements.md) - Complete CLI specifications
 
 ---
 ```

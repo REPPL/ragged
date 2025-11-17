@@ -94,131 +94,18 @@ ragged's CLI receives comprehensive enhancements across versions v0.2.7-v0.4.0, 
 | v0.4.0 | 1 | 20-25 | Extensibility (plugin system) |
 | **Total** | **23** | **120-158** | **Comprehensive CLI** |
 
-### v0.2.7 CLI Foundation (11 enhancements, 48-62 hours)
+**Detailed Enhancement Specifications:**
 
-Focus: Essential usability and document management
+All 23 CLI enhancements are fully documented in the [CLI Enhancements Catalogue](../planning/interfaces/cli/enhancements.md), including:
+- Complete technical specifications for each enhancement
+- Implementation guidance and code examples
+- Testing requirements and acceptance criteria
+- Cross-version dependencies and migration paths
+- Category organisation and progressive enhancement strategy
 
-| # | Enhancement | Priority | Hours | Category |
-|---|-------------|----------|-------|----------|
-| CLI-001 | Advanced Search & Filtering | High | 3-4 | Document Management |
-| CLI-002 | Metadata Management | High | 4-5 | Document Management |
-| CLI-003 | Bulk Operations | Medium | 5-6 | Document Management |
-| CLI-004 | Export/Import Utilities | Medium | 6-8 | Advanced Features |
-| CLI-005 | Output Format Options | High | 3-4 | Query & Retrieval |
-| CLI-006 | Query History & Replay | Medium | 4-5 | Query & Retrieval |
-| CLI-007 | Verbose & Quiet Modes | High | 2-3 | User Experience |
-| CLI-008 | Configuration Validation | High | 3-4 | Configuration & Setup |
-| CLI-009 | Environment Information | Medium | 2-3 | Configuration & Setup |
-| CLI-010 | Cache Management | Medium | 3-4 | Performance & Debugging |
-| CLI-011 | Shell Completion | High | 4-5 | Configuration & Setup |
+**Why This Separation?**
 
-**Key Capabilities After v0.2.7:**
-- ✅ Advanced document search with multiple filters
-- ✅ Metadata management without re-ingestion
-- ✅ Batch operations for large-scale management
-- ✅ Export/import for backup and migration
-- ✅ Multiple output formats (JSON, CSV, Markdown)
-- ✅ Query history for iterative refinement
-- ✅ Configurable verbosity for debugging
-- ✅ Configuration validation and diagnostics
-- ✅ System information for support requests
-- ✅ Cache management for performance tuning
-- ✅ Shell completion for bash/zsh/fish
-
-### v0.3.0 Advanced CLI (11 enhancements, 52-71 hours)
-
-Focus: Interactive workflows, automation, and developer productivity
-
-| # | Enhancement | Priority | Hours | Category |
-|---|-------------|----------|-------|----------|
-| CLI-012 | Interactive Mode (REPL) | High | 8-10 | User Experience |
-| CLI-013 | Query Templates & Saved Queries | Medium | 5-6 | Query & Retrieval |
-| CLI-014 | Performance Profiling | Medium | 5-6 | Performance & Debugging |
-| CLI-015 | Quality Metrics | Medium | 6-8 | Performance & Debugging |
-| CLI-016 | Watch Mode | Low | 4-5 | Advanced Features |
-| CLI-017 | Scheduled Operations | Low | 5-6 | Advanced Features |
-| CLI-018 | Debug Mode | High | 4-5 | Performance & Debugging |
-| CLI-019 | Testing Utilities | Medium | 6-8 | Developer Tools |
-| CLI-020 | API Server Mode | Low | 8-10 | Advanced Features |
-| CLI-021 | Smart Suggestions | Low | 5-6 | Developer Tools |
-| CLI-022 | Color Themes & Customisation | Low | 3-4 | User Experience |
-
-**Key Capabilities After v0.3.0:**
-- ✅ REPL for exploratory workflows
-- ✅ Query templates with parameter substitution
-- ✅ Performance profiling for optimisation
-- ✅ Quality metrics (RAGAS integration)
-- ✅ Automatic document ingestion (watch mode)
-- ✅ Scheduled maintenance operations
-- ✅ Enhanced debugging with execution traces
-- ✅ Testing utilities for custom configurations
-- ✅ Local API server for integrations
-- ✅ AI-powered query suggestions
-- ✅ Customisable colour themes
-
-### v0.4.0 Plugin Architecture (1 enhancement, 20-25 hours)
-
-Focus: Unlimited extensibility
-
-| # | Enhancement | Priority | Hours | Category |
-|---|-------------|----------|-------|----------|
-| CLI-023 | Plugin System | High | 20-25 | Advanced Features |
-
-**Plugin Interfaces:**
-- **Embedder Interface** - Custom embedding models
-- **Retriever Interface** - Custom retrieval strategies
-- **Processor Interface** - Custom document processors
-- **Command Interface** - Custom CLI commands
-
-**Key Capabilities After v0.4.0:**
-- ✅ Install/manage plugins via CLI
-- ✅ Custom embedders (domain-specific models)
-- ✅ Custom retrievers (e.g., graph-based)
-- ✅ Custom processors (e.g., LaTeX support)
-- ✅ Custom commands (e.g., batch analysis)
-- ✅ Plugin discovery via entry points
-- ✅ Plugin configuration and validation
-- ✅ Security sandboxing for plugins
-
-### Category Summary
-
-| Category | Enhancements | Hours | Examples |
-|----------|--------------|-------|----------|
-| Document Management | 3 | 12-15 | Search, Metadata, Bulk Ops |
-| Query & Retrieval | 3 | 12-15 | Output Formats, History, Templates |
-| User Experience | 4 | 18-23 | Verbose/Quiet, Interactive, Themes, Completion |
-| Configuration & Setup | 3 | 9-12 | Validation, Env Info, Shell Completion |
-| Performance & Debugging | 4 | 18-23 | Cache Mgmt, Profiling, Quality Metrics, Debug |
-| Advanced Features | 5 | 37-48 | Export/Import, Watch, Schedule, API, Plugins |
-| Developer Tools | 2 | 11-14 | Testing Utilities, Smart Suggestions |
-
-### Implementation Strategy
-
-**Progressive Enhancement Approach:**
-
-1. **v0.2.7** establishes the **foundation**
-   - Essential CLI capabilities for document management
-   - Basic UX improvements (verbosity, output formats)
-   - Troubleshooting tools (config validation, env info)
-   - Shell completion for discoverability
-
-2. **v0.3.0** adds **advanced capabilities**
-   - Interactive mode for exploratory workflows
-   - Automation features (watch, schedule)
-   - Developer productivity (profiling, testing, debug)
-   - API server for programmatic access
-
-3. **v0.4.0** enables **unlimited extensibility**
-   - Plugin architecture allows community contributions
-   - Custom embedders, retrievers, processors, commands
-   - Security-first plugin sandboxing
-   - Foundation for ecosystem growth
-
-**Benefits:**
-- Each version delivers complete, usable functionality
-- Later versions build on earlier foundations
-- Users get value incrementally
-- Reduced risk through staged rollout
+The catalogue is the **Single Source of Truth** for CLI enhancement specifications. This roadmap provides the high-level distribution and timeline planning, while the catalogue maintains all technical details. This separation ensures consistency and prevents duplication.
 
 ---
 

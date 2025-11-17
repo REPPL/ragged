@@ -21,7 +21,7 @@ ADRs provide:
 
 ## ADR Format
 
-Each ADR follows the template at [adr-template.md](../templates/adr-template.md) and includes:
+Each ADR follows the template at [adr-template.md](../../process/templates/adr-template.md) and includes:
 
 1. **Title**: Short, descriptive name
 2. **Status**: Proposed, Accepted, Deprecated, Superseded
@@ -47,9 +47,9 @@ Example decisions that may be documented:
 
 ## Related Documentation
 
-- **[ADR Template](../process/templates/adr-template.md)** - Template for new ADRs
+- **[ADR Template](../../process/templates/adr-template.md)** - Template for new ADRs
 - **[Development Guide](../README.md)** - Development process
-- **[Architecture](../planning/architecture/README.md)** - Current architecture
+- **[Architecture](../../planning/architecture/README.md)** - Current architecture
 
 ---
 
