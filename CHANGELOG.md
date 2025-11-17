@@ -7,29 +7,78 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.4] - 2025-11-17
+
 ### Added
-- **BUG-007: ChromaDB Metadata Serialisation**: Added support for complex metadata types in ChromaDB storage
-  - New `metadata_serialiser.py` module with serialisation/deserialisation utilities
-  - Automatic conversion of complex types to ChromaDB-compatible simple types:
-    - Path objects → str
-    - datetime objects → ISO format str
-    - lists/dicts → JSON str with `__json__:` prefix for round-trip deserialisation
-    - None values → removed during serialisation
+- **BUG-004: Custom Exception System**: Hierarchical exception structure with context-aware error messages
+  - New `exceptions.py` module with base `RaggedError` and specialised exceptions
+  - Organised by component: Ingestion, Storage, Retrieval, Generation, Configuration, Validation, Resource, API
+  - Context-aware exceptions (e.g., `UnsupportedFormatError` lists supported formats)
+  - Helper function `wrap_exception()` for third-party exception handling
+  - 41 tests, 100% coverage
+- **BUG-005: Secure Path Utilities**: Comprehensive path handling with security protections
+  - New `path_utils.py` module with secure path operations
+  - `safe_join()` prevents directory traversal attacks
+  - Path normalisation, validation, and sanitisation functions
+  - Utilities: directory creation, size calculation, hidden path detection
+  - Handles symlinks, relative paths, special characters, spaces consistently
+  - 51 tests, 100% coverage
+- **BUG-007: ChromaDB Metadata Serialisation**: Complex metadata type support for ChromaDB
+  - New `metadata_serialiser.py` module with automatic type conversion
+  - Path objects → str, datetime → ISO format, lists/dicts → JSON
+  - None values removed during serialisation (ChromaDB compatibility)
   - Transparent deserialisation on retrieval restores original types
-  - Integrated into VectorStore `add()`, `query()`, and `get_documents_by_metadata()` methods
-  - Fixed `query()` method to handle list inputs correctly
-  - All 44 storage tests passing (30 serialiser + 14 vector store)
-  - 95% test coverage for serialisation module
+  - Integrated into VectorStore methods: `add()`, `query()`, `get_documents_by_metadata()`
+  - 30 tests, 95% coverage
 
 ### Fixed
-- **BUG-006: Memory Leaks in Batch Processing**: Fixed memory accumulation during large batch document processing
-  - Added memory monitoring using psutil to track process memory usage
-  - Implemented configurable memory limits (default: 80% of available RAM)
-  - Added automatic garbage collection after each document to free memory promptly
-  - Added explicit deletion of large objects (embeddings, chunk_texts, metadatas) to accelerate memory release
-  - Integrated MemoryLimitExceededError exception for graceful memory limit handling
-  - Memory usage now remains stable during large batch operations (50+ documents)
-  - All 23 batch processing tests pass with 95% coverage
+- **BUG-006: Memory Leaks in Batch Processing**: Stable memory usage during large batch operations
+  - Memory monitoring using psutil to track process usage
+  - Configurable memory limits (default: 80% of available RAM)
+  - Automatic garbage collection after each document
+  - Explicit deletion of large objects (embeddings, chunk_texts, metadatas)
+  - `MemoryLimitExceededError` exception for graceful memory limit handling
+  - Tested stable with 50+ document batches
+  - 23 batch tests, 95% coverage
+- **BUG-008: Hybrid Retrieval Integration**: Complete system-wide hybrid retrieval
+  - Added `retrieval_method` setting to config (default: "hybrid")
+  - CLI query command now uses `HybridRetriever` instead of vector-only
+  - Fixed parameter name consistency: `k=` instead of `top_k=` throughout codebase
+  - Fixed `RetrievedChunk` attribute names in all tests
+  - Configurable retrieval strategy: "hybrid", "vector", or "bm25"
+  - 86 retrieval tests passing, 100% hybrid coverage
+- **BUG-009: Dynamic Few-Shot Selection**: Embedding-based semantic example selection
+  - Added `embedder` parameter to `FewShotExampleStore`
+  - Cosine similarity search for dynamic example selection
+  - Automatic fallback to keyword matching if embedder unavailable/fails
+  - Examples recomputed on store load for consistency
+  - Most relevant examples selected per query (improves answer quality)
+  - 21 tests (3 new embedding tests), 92% coverage
+- **BUG-010: Content-Based Duplicate Detection**: Efficient partial content hashing
+  - Added `content_hash` field to `DocumentMetadata` and `ChunkMetadata`
+  - Partial hashing: small files (≤2KB) use full hash, large files use first 1KB + last 1KB
+  - Maintained `file_hash` for full content integrity checking
+  - Batch duplicate detection updated to use `content_hash`
+  - Detects renamed files, copied files, same content from different sources
+  - 39 ingestion tests updated and passing
+- **BUG-011: Page Tracking Edge Cases**: Proper page handling for all document types
+  - Fixed page estimation to only apply to PDF documents
+  - TXT/MD/HTML files correctly maintain `page_number=None` (no page structure)
+  - PDFs continue accurate page tracking with estimation fallback
+  - No crashes or incorrect page assignments for non-PDF documents
+
+### Changed
+- **Dependency Added**: `psutil>=5.9.0` for memory monitoring (BUG-006)
+- **Schema Changes** (backwards-compatible with migration):
+  - `DocumentMetadata` and `ChunkMetadata` now require `content_hash` field
+  - Existing documents need re-ingestion for content-based duplicate detection
+
+### Technical Details
+- **Test Coverage**: 201 v0.2.4-specific tests passing, 13 skipped (TODO)
+- **Component Coverage**: Exceptions (100%), Path Utils (100%), Hybrid Retrieval (100%)
+- **Quality Gates**: All automated tests pass, no regressions
+- **Performance**: Memory improvements outweigh minor overhead from new features
+- **Security**: Path traversal prevention, input validation, secure hashing
 
 ## [0.2.2] - 2025-11-10
 
