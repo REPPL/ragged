@@ -35,6 +35,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Consistent exception handling in web/API layer (5 files)
   - All handlers preserve stack traces with `logger.exception()`
   - Improved error debugging throughout application
+- **QUALITY-010: Exception Chaining**: Added exception chaining to preserve complete stack traces
+  - Added `from e` to 2 exception re-raise locations (`security.py`, `path_utils.py`)
+  - Follows PEP 3134 exception chaining best practices
+  - Complete stack traces now preserved during exception re-raising
+- **QUALITY-011: Contextual Overlap Calculation**: Accurate overlap metadata for chunk relationships
+  - Implemented `_calculate_overlap()` method in ContextualChunker
+  - Finds longest suffix/prefix match between consecutive chunks
+  - 4 comprehensive tests verifying overlap accuracy
+  - Enables better quality assessment of chunking strategies
 
 ### Added
 - **QUALITY-003: Chunking Tests**: Comprehensive test coverage for chunking module
@@ -51,20 +60,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Contextual overlap calculation (line 146)
   - Token-based context truncation (line 267)
   - Zero obsolete TODOs remaining in codebase
+- **QUALITY-012: Integration Test Coverage**: Fixed and enabled multi-format integration tests
+  - Created `sample_pdf` fixture using pymupdf/fitz for dynamic PDF generation
+  - Fixed all 9 integration tests to use correct API (module-level `chunk_document()`, proper attribute names)
+  - Full pipeline integration verified across TXT, MD, HTML, PDF formats
+  - All tests passing with proper fixture isolation
 
 ### Technical Details
-- **Test Coverage**: +66 new tests added
+- **Test Coverage**: +70 new tests added (66 unit + 4 contextual overlap)
 - **Type Safety**: 100% strict mypy compliance (0 errors in 46 files)
-- **Code Quality**: 26 exception handlers improved, 13 constants extracted
+- **Code Quality**: 26 exception handlers improved, 13 constants extracted, 2 exception chains added
 - **Breaking Changes**: None (full backward compatibility maintained)
-- **Optional Improvements Deferred**: QUALITY-010 (exception chaining), QUALITY-011 (contextual overlap), QUALITY-012 (additional integration tests) → v0.2.6/v0.2.7
+- **Completion**: All 12 planned quality improvements successfully implemented (QUALITY-001 through QUALITY-012)
 
 ### Quality Metrics
 - Type Coverage: 100% (zero mypy --strict errors)
-- Exception Handling: 26 handlers using `logger.exception()`
+- Exception Handling: 26 handlers using `logger.exception()`, 2 exception chains added
 - Magic Numbers: 13 values extracted to constants
 - TODO Cleanup: 0 obsolete TODOs
-- Development Time: ~12 hours (vs. 13-20h estimated)
+- Integration Tests: 9 tests covering TXT, MD, HTML, PDF formats
+- Development Time: ~15 hours (vs. 13-20h estimated)
 
 ## [0.2.4] - 2025-11-17
 
