@@ -277,8 +277,10 @@ def load_html(file_path: Path) -> Document:
         soup = BeautifulSoup(html, "html.parser")
         if soup.title and soup.title.string:
             title = soup.title.string.strip()
-    except:
-        pass
+    except (AttributeError, TypeError) as e:
+        # HTML parsing failed or title extraction failed
+        logger.debug(f"Could not extract title from HTML: {e}")
+        # Fall back to filename as title
 
     logger.info(f"Loaded HTML: {len(text or '')} characters")
 

@@ -114,8 +114,8 @@ class TestHTMLLoader:
 
         assert isinstance(document, Document)
         assert document.content
-        assert document.metadata.file_name == "test.html"
-        assert document.metadata.file_type == "html"
+        assert document.metadata.file_path.name == "test.html"
+        assert document.metadata.format == "html"
 
         # Should extract text content (not HTML tags)
         content_lower = document.content.lower()
@@ -191,7 +191,7 @@ class TestLoadDocument:
         document = load_document(html_file)
 
         assert isinstance(document, Document)
-        assert document.metadata.file_type == "html"
+        assert document.metadata.format == "html"
 
     def test_load_document_unsupported_format(self, temp_dir):
         """Test loading unsupported file format."""
