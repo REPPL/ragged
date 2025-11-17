@@ -155,12 +155,28 @@ class TestBatchIngestion:
 
         ingester = BatchIngester(console, continue_on_error=True)
 
-        with patch('src.ingestion.batch.load_document') as mock_load:
+        with patch('src.ingestion.batch.load_document') as mock_load, \
+             patch('src.ingestion.batch.chunk_document') as mock_chunk:
+            # Create proper mock document
+            mock_doc = MagicMock()
+            mock_doc.metadata.file_hash = "hash1"
+            mock_doc.content = "test content"
+
             # First call succeeds, second fails
             mock_load.side_effect = [
-                MagicMock(metadata=MagicMock(file_hash="hash1")),
-                Exception("Load failed")
+                mock_doc,
+                ValueError("Load failed")
             ]
+
+            # Mock chunk_document to return proper structure
+            mock_chunk_obj = MagicMock()
+            mock_chunk_obj.text = "chunk text"
+            mock_chunk_obj.chunk_id = "chunk_1"
+            mock_chunk_obj.metadata.model_dump.return_value = {"filename": "test.txt"}
+            mock_chunked_doc = MagicMock()
+            mock_chunked_doc.chunks = [mock_chunk_obj]
+            mock_chunked_doc.document_id = "doc_1"
+            mock_chunk.return_value = mock_chunked_doc
 
             summary = ingester.ingest_batch([good_doc, bad_doc])
 
@@ -184,16 +200,20 @@ class TestBatchIngestion:
         with patch('src.ingestion.batch.load_document') as mock_load, \
              patch('src.ingestion.batch.chunk_document') as mock_chunk:
 
-            # Create proper mock document for first call
+            # Create proper mock documents
             mock_doc1 = MagicMock()
             mock_doc1.metadata.file_hash = "hash1"
-            mock_doc1.content = "test content"  # Add content string
+            mock_doc1.content = "test content"
+
+            mock_doc3 = MagicMock()
+            mock_doc3.metadata.file_hash = "hash3"
+            mock_doc3.content = "test content 3"
 
             # Second call fails
             mock_load.side_effect = [
                 mock_doc1,
-                Exception("Load failed"),
-                MagicMock(metadata=MagicMock(file_hash="hash3")),
+                ValueError("Load failed"),
+                mock_doc3,
             ]
 
             # Mock chunk_document to return proper structure

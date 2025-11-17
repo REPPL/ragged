@@ -176,7 +176,7 @@ class TestVectorStore:
             collection_name="test_collection"
         )
 
-        mock_client.heartbeat.side_effect = Exception("Connection failed")
+        mock_client.heartbeat.side_effect = ConnectionError("Connection failed")
 
         is_healthy = store.health_check()
 

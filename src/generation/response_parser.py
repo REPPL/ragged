@@ -58,12 +58,31 @@ def parse_response(response_text: str) -> GeneratedResponse:
     )
 
 
-def format_response_for_cli(response: GeneratedResponse) -> str:
+def extract_citations(text: str) -> List[str]:
+    """
+    Extract citations from text.
+
+    Args:
+        text: Text containing [Source: ...] citations
+
+    Returns:
+        List of unique citation strings
+
+    Example:
+        >>> text = "Answer [Source: file1.txt]. More info [Source: file2.pdf]."
+        >>> extract_citations(text)
+        ['file1.txt', 'file2.pdf']
+    """
+    response = parse_response(text)
+    return response.citations
+
+
+def format_response_for_cli(response: GeneratedResponse | str) -> str:
     """
     Format response for CLI display.
 
     Args:
-        response: Parsed response
+        response: Parsed response or raw response text
 
     Returns:
         Formatted string for terminal output
@@ -76,6 +95,10 @@ def format_response_for_cli(response: GeneratedResponse) -> str:
         - guide.md
         - documentation.pdf
     """
+    # Handle both GeneratedResponse objects and raw strings
+    if isinstance(response, str):
+        response = parse_response(response)
+
     output = []
 
     # Add answer
