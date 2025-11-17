@@ -6,25 +6,31 @@ Provides CLI commands for document ingestion, querying, and management.
 
 import sys
 from pathlib import Path
-from typing import Optional
+from typing import TYPE_CHECKING, Any, Dict, Literal, Optional, cast
 
-try:
+if TYPE_CHECKING:
     import click
-    from rich.console import Console
-    from rich.progress import Progress
-    from rich.table import Table
-except ImportError:
-    click = None
-    Console = None
-    Progress = None
-    Table = None
+    from rich.console import Console as ConsoleType
+    from rich.progress import Progress as ProgressType
+    from rich.table import Table as TableType
+else:
+    try:
+        import click
+        from rich.console import Console as ConsoleType
+        from rich.progress import Progress as ProgressType
+        from rich.table import Table as TableType
+    except ImportError:
+        click = None  # type: ignore[assignment]
+        ConsoleType = None  # type: ignore[assignment, misc]
+        ProgressType = None  # type: ignore[assignment, misc]
+        TableType = None  # type: ignore[assignment, misc]
 
 from src import __version__
 from src.config.settings import get_settings
 from src.utils.logging import get_logger, setup_logging
 
 logger = get_logger(__name__)
-console = Console() if Console else None
+console = ConsoleType() if ConsoleType is not None else None
 
 
 @click.group()
@@ -95,7 +101,7 @@ def add(
             skip_duplicates=True,  # Auto-skip duplicates in batch mode
         )
 
-        with Progress() as progress:
+        with ProgressType() as progress:
             summary = batch_ingester.ingest_batch(file_paths, progress)
 
         # Display summary
@@ -125,7 +131,7 @@ def add(
     existing_count = 0
 
     try:
-        with Progress() as progress:
+        with ProgressType() as progress:
             task = progress.add_task("Processing...", total=100)
 
             # Load document
@@ -176,7 +182,7 @@ def add(
             document.document_id = existing_doc_id
 
         # Continue with chunking and storing (for both new documents and overwrites)
-        with Progress() as progress:
+        with ProgressType() as progress:
             task = progress.add_task("Processing...", total=80, completed=20)
 
             # Chunk document
@@ -255,7 +261,11 @@ def query(query: str, k: int, show_sources: bool) -> None:
             vector_retriever=vector_retriever,
             bm25_retriever=bm25_retriever
         )
-        chunks = hybrid_retriever.retrieve(query, top_k=k, method=settings.retrieval_method)
+        chunks = hybrid_retriever.retrieve(
+            query,
+            top_k=k,
+            method=cast(Optional[Literal['vector', 'bm25', 'hybrid']], settings.retrieval_method)
+        )
 
         if not chunks:
             console.print("[yellow]No relevant documents found. Have you ingested any documents yet?[/yellow]")
@@ -271,7 +281,7 @@ def query(query: str, k: int, show_sources: bool) -> None:
             console.print()
 
         # Generate answer
-        with Progress() as progress:
+        with ProgressType() as progress:
             task = progress.add_task("Generating answer...", total=100)
             ollama_client = OllamaClient()
             progress.update(task, advance=30)
@@ -311,7 +321,7 @@ def list_docs() -> None:
         vector_store = VectorStore()
         info = vector_store.get_collection_info()
 
-        table = Table(title="Vector Store Information")
+        table = TableType(title="Vector Store Information")
         table.add_column("Property", style="cyan")
         table.add_column("Value", style="magenta")
 
@@ -371,7 +381,7 @@ def config_show() -> None:
     """
     settings = get_settings()
 
-    table = Table(title="Configuration")
+    table = TableType(title="Configuration")
     table.add_column("Setting", style="cyan")
     table.add_column("Value", style="magenta")
 
@@ -412,7 +422,7 @@ def config_set_model(model_name: Optional[str], auto: bool) -> None:
     """
     from src.config.model_manager import ModelManager
     from src.config.settings import get_settings
-    import yaml
+    import yaml  # type: ignore[import-untyped]
 
     settings = get_settings()
     manager = ModelManager(settings.ollama_url)
@@ -444,7 +454,7 @@ def config_set_model(model_name: Optional[str], auto: bool) -> None:
             sys.exit(1)
 
         # Display selection table
-        table = Table(title="Available Models")
+        table = TableType(title="Available Models")
         table.add_column("#", style="cyan")
         table.add_column("Model", style="magenta")
         table.add_column("Context", style="yellow")
@@ -469,7 +479,7 @@ def config_set_model(model_name: Optional[str], auto: bool) -> None:
     # Save to config file (ensure directory exists first)
     data_dir = settings.ensure_data_dir()
     config_file = data_dir / "config.yml"
-    config = {}
+    config: Dict[str, Any] = {}
 
     if config_file.exists():
         with open(config_file, "r") as f:
@@ -503,7 +513,7 @@ def config_list_models() -> None:
             console.print("  ollama pull llama3.2:latest")
             return
 
-        table = Table(title="Available Ollama Models")
+        table = TableType(title="Available Ollama Models")
         table.add_column("Model", style="cyan")
         table.add_column("Family", style="magenta")
         table.add_column("Context", style="yellow")

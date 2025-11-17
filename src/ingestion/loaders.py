@@ -180,7 +180,7 @@ def load_txt(file_path: Path) -> Document:
         logger.debug(f"UTF-8 failed, detecting encoding for {file_path}")
         raw = file_path.read_bytes()
         detected = chardet.detect(raw)
-        encoding = detected.get("encoding", "utf-8")
+        encoding = detected.get("encoding") or "utf-8"
         confidence = detected.get("confidence", 0)
 
         logger.info(f"Detected encoding: {encoding} (confidence: {confidence:.2f})")

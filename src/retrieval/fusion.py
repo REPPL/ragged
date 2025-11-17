@@ -7,9 +7,9 @@ logger = logging.getLogger(__name__)
 
 
 def reciprocal_rank_fusion(
-    rankings: List[List[Tuple[str, Any, float, dict]]],
+    rankings: List[List[Tuple[str, Any, float, dict[str, Any]]]],
     k: int = 60,
-) -> List[Tuple[str, Any, float, dict]]:
+) -> List[Tuple[str, Any, float, dict[str, Any]]]:
     """Combine multiple ranked lists using Reciprocal Rank Fusion.
 
     RRF formula: score(d) = sum(1 / (k + rank(d))) across all rankings
@@ -35,7 +35,7 @@ def reciprocal_rank_fusion(
     # Calculate RRF scores
     rrf_scores: Dict[str, float] = {}
     doc_content: Dict[str, Any] = {}
-    doc_metadata: Dict[str, dict] = {}
+    doc_metadata: Dict[str, dict[str, Any]] = {}
 
     for ranking in rankings:
         for rank, (doc_id, content, score, metadata) in enumerate(ranking, start=1):
@@ -76,9 +76,9 @@ def reciprocal_rank_fusion(
 
 
 def weighted_fusion(
-    rankings: List[List[Tuple[str, Any, float, dict]]],
+    rankings: List[List[Tuple[str, Any, float, dict[str, Any]]]],
     weights: List[float],
-) -> List[Tuple[str, Any, float, dict]]:
+) -> List[Tuple[str, Any, float, dict[str, Any]]]:
     """Combine rankings using weighted score fusion.
 
     Simple weighted average of normalized scores.
@@ -100,7 +100,7 @@ def weighted_fusion(
         raise ValueError("Weights must sum to 1.0")
 
     # Normalize scores within each ranking
-    normalized_rankings = []
+    normalized_rankings: List[List[Tuple[str, Any, float, dict[str, Any]]]] = []
     for ranking in rankings:
         if not ranking:
             normalized_rankings.append([])
@@ -122,7 +122,7 @@ def weighted_fusion(
     # Calculate weighted scores
     weighted_scores: Dict[str, float] = {}
     doc_content: Dict[str, Any] = {}
-    doc_metadata: Dict[str, dict] = {}
+    doc_metadata: Dict[str, dict[str, Any]] = {}
 
     for ranking, weight in zip(normalized_rankings, weights):
         for doc_id, content, score, metadata in ranking:

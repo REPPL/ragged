@@ -1,6 +1,6 @@
 """Hybrid retrieval combining vector and keyword search."""
 
-from typing import List, Literal, Optional
+from typing import Any, List, Literal, Optional
 from dataclasses import dataclass
 import logging
 
@@ -110,7 +110,7 @@ class HybridRetriever:
         k_expanded = top_k * self.config.top_k_multiplier
 
         # Vector search
-        vector_results = self.vector.retrieve(query, top_k=k_expanded)
+        vector_results = self.vector.retrieve(query, k=k_expanded)
 
         # BM25 search
         bm25_results = self.bm25.search(query, top_k=k_expanded)
@@ -174,7 +174,7 @@ class HybridRetriever:
         self,
         documents: List[str],
         doc_ids: List[str],
-        metadatas: Optional[List[dict]] = None,
+        metadatas: Optional[List[dict[str, Any]]] = None,
     ) -> None:
         """Update BM25 index with new documents.
 

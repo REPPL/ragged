@@ -5,16 +5,20 @@ Uses the sentence-transformers library to generate embeddings locally
 on CPU or GPU.
 """
 
-from typing import List
+from typing import TYPE_CHECKING, List, Optional, cast
 
 import numpy as np
 
-try:
-    from sentence_transformers import SentenceTransformer
-    import torch
-except ImportError:
-    SentenceTransformer = None
-    torch = None
+if TYPE_CHECKING:
+    from sentence_transformers import SentenceTransformer as SentenceTransformerType
+    import torch as torch_module
+else:
+    try:
+        from sentence_transformers import SentenceTransformer as SentenceTransformerType
+        import torch as torch_module
+    except ImportError:
+        SentenceTransformerType = None  # type: ignore[assignment, misc]
+        torch_module = None  # type: ignore[assignment]
 
 from src.embeddings.base import BaseEmbedder
 from src.utils.logging import get_logger
@@ -33,11 +37,11 @@ class SentenceTransformerEmbedder(BaseEmbedder):
     def __init__(
         self,
         model_name: str = "all-MiniLM-L6-v2",
-        device: str = None,
+        device: Optional[str] = None,
         batch_size: int = 32,
     ):
         """Initialize SentenceTransformer embedder."""
-        if SentenceTransformer is None:
+        if SentenceTransformerType is None:
             raise ImportError("sentence-transformers required: pip install sentence-transformers torch")
 
         self._model_name = model_name
@@ -45,9 +49,9 @@ class SentenceTransformerEmbedder(BaseEmbedder):
 
         # Device detection
         if device is None:
-            if torch and torch.cuda.is_available():
+            if torch_module and torch_module.cuda.is_available():
                 device = "cuda"
-            elif torch and hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():
+            elif torch_module and hasattr(torch_module.backends, 'mps') and torch_module.backends.mps.is_available():
                 device = "mps"
             else:
                 device = "cpu"
@@ -56,11 +60,11 @@ class SentenceTransformerEmbedder(BaseEmbedder):
 
         # Load model
         logger.info(f"Loading SentenceTransformer model: {model_name} on {device}")
-        self.model = SentenceTransformer(model_name, device=device)
+        self.model = SentenceTransformerType(model_name, device=device)
 
     def embed_text(self, text: str) -> np.ndarray:
         """Embed a single text string."""
-        return self.model.encode([text], convert_to_numpy=True)[0]
+        return cast(np.ndarray, self.model.encode([text], convert_to_numpy=True)[0])
 
     def embed_batch(self, texts: List[str]) -> np.ndarray:
         """Embed multiple texts efficiently in batch."""
@@ -74,7 +78,8 @@ class SentenceTransformerEmbedder(BaseEmbedder):
     @property
     def dimensions(self) -> int:
         """Get embedding dimensions."""
-        return self.model.get_sentence_embedding_dimension()
+        dim = self.model.get_sentence_embedding_dimension()
+        return dim if dim is not None else 384  # Default fallback
 
     @property
     def model_name(self) -> str:

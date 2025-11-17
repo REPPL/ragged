@@ -47,6 +47,10 @@ class ModelManager:
             models = []
 
             for m in response.models:
+                # Skip models without a name
+                if not m.model:
+                    continue
+
                 # Parse model info
                 info = ModelInfo(
                     name=m.model,
@@ -62,8 +66,8 @@ class ModelManager:
             models.sort(key=lambda x: x.suitability_score, reverse=True)
             return models
 
-        except Exception as e:
-            logger.error(f"Failed to list models: {e}")
+        except Exception:  # noqa: BLE001 - Return empty list on any error
+            logger.exception("Failed to list models")
             return []
 
     def get_recommended_model(self) -> Optional[str]:

@@ -5,7 +5,7 @@ duplicate detection, graceful error handling, and memory management.
 """
 
 import gc
-import psutil
+import psutil  # type: ignore[import-untyped]
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
@@ -15,6 +15,8 @@ from rich.console import Console
 from rich.progress import Progress, TaskID
 
 from src.chunking.splitters import chunk_document
+from src.config.constants import DEFAULT_MEMORY_LIMIT_PERCENTAGE
+from src.embeddings.base import BaseEmbedder
 from src.embeddings.factory import get_embedder
 from src.ingestion.loaders import load_document
 from src.storage.vector_store import VectorStore
@@ -80,10 +82,10 @@ class BatchIngester:
         self.continue_on_error = continue_on_error
         self.skip_duplicates = skip_duplicates
 
-        # Set memory limit (default to 80% of available RAM)
+        # Set memory limit (default to configured percentage of available RAM)
         if memory_limit_mb is None:
             total_mb = psutil.virtual_memory().total / (1024 * 1024)
-            self.memory_limit_mb = int(total_mb * 0.8)
+            self.memory_limit_mb = int(total_mb * DEFAULT_MEMORY_LIMIT_PERCENTAGE)
         else:
             self.memory_limit_mb = memory_limit_mb
 
@@ -96,7 +98,7 @@ class BatchIngester:
             Current memory usage in megabytes
         """
         process = psutil.Process()
-        return process.memory_info().rss / (1024 * 1024)
+        return float(process.memory_info().rss / (1024 * 1024))
 
     def _check_memory_limit(self, operation: str = "batch_processing") -> None:
         """Check if current memory usage exceeds limit.
@@ -208,7 +210,7 @@ class BatchIngester:
         self,
         file_path: Path,
         vector_store: VectorStore,
-        embedder,
+        embedder: BaseEmbedder,
     ) -> IngestionResult:
         """Ingest a single document with error handling.
 
@@ -281,7 +283,7 @@ class BatchIngester:
                 chunks=len(document.chunks),
             )
 
-        except Exception as e:
+        except (FileNotFoundError, PermissionError, ValueError, TypeError, OSError) as e:
             logger.error(f"Failed to ingest {file_path}: {e}", exc_info=True)
             return IngestionResult(
                 file_path=file_path,

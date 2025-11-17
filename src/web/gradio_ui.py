@@ -4,12 +4,21 @@ Privacy-first local RAG system with streaming responses and document upload.
 """
 
 import gradio as gr
-import requests
+import requests  # type: ignore[import-untyped]
 import json
 import os
-from typing import Generator, List, Tuple
+from typing import Any, Dict, Generator, List, Tuple, Union, cast
 from pathlib import Path
 import logging
+
+from src.config.constants import (
+    LONG_API_TIMEOUT,
+    SHORT_API_TIMEOUT,
+    UI_HEALTH_CHECK_MAX_RETRIES,
+    UI_HEALTH_CHECK_RETRY_DELAY,
+    UI_STARTUP_MAX_RETRIES,
+    UI_STARTUP_RETRY_DELAY,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -21,12 +30,14 @@ API_UPLOAD = f"{API_BASE_URL}/api/upload"
 API_COLLECTIONS = f"{API_BASE_URL}/api/collections"
 
 
-def check_api_health(max_retries: int = 10, retry_delay: float = 2.0) -> dict:
+def check_api_health(
+    max_retries: int = UI_STARTUP_MAX_RETRIES, retry_delay: float = UI_STARTUP_RETRY_DELAY
+) -> Dict[str, Any]:
     """Check if API is healthy with retry logic.
 
     Args:
-        max_retries: Maximum number of retry attempts (default: 10)
-        retry_delay: Delay in seconds between retries (default: 2.0)
+        max_retries: Maximum number of retry attempts
+        retry_delay: Delay in seconds between retries
 
     Returns:
         API health status dict
@@ -35,17 +46,17 @@ def check_api_health(max_retries: int = 10, retry_delay: float = 2.0) -> dict:
 
     for attempt in range(max_retries):
         try:
-            response = requests.get(API_HEALTH, timeout=5)
+            response = requests.get(API_HEALTH, timeout=SHORT_API_TIMEOUT)
             response.raise_for_status()
-            health_data = response.json()
+            health_data = cast(Dict[str, Any], response.json())
             logger.info(f"API health check successful on attempt {attempt + 1}")
             return health_data
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001 - Retry on any error
             if attempt < max_retries - 1:
-                logger.warning(f"API health check failed (attempt {attempt + 1}/{max_retries}): {e}. Retrying in {retry_delay}s...")
+                logger.warning(f"API health check failed (attempt {attempt + 1}/{max_retries}), retrying in {retry_delay}s...", exc_info=True)
                 time.sleep(retry_delay)
             else:
-                logger.error(f"API health check failed after {max_retries} attempts: {e}")
+                logger.exception(f"API health check failed after {max_retries} attempts")
                 return {"status": "unhealthy", "error": str(e)}
 
     return {"status": "unhealthy", "error": "Max retries exceeded"}
@@ -57,7 +68,9 @@ def get_api_status_display() -> str:
     Returns:
         Formatted markdown string with API status
     """
-    health = check_api_health(max_retries=1, retry_delay=0.5)
+    health = check_api_health(
+        max_retries=UI_HEALTH_CHECK_MAX_RETRIES, retry_delay=UI_HEALTH_CHECK_RETRY_DELAY
+    )
     status = health.get("status", "unknown")
 
     if status == "healthy" or status == "degraded":
@@ -105,7 +118,7 @@ def query_with_streaming(
                 "stream": True
             },
             stream=True,
-            timeout=60
+            timeout=LONG_API_TIMEOUT
         )
         response.raise_for_status()
 
@@ -201,7 +214,7 @@ def query_non_streaming(
                 "retrieval_method": retrieval_method,
                 "stream": False
             },
-            timeout=60
+            timeout=LONG_API_TIMEOUT
         )
         response.raise_for_status()
         data = response.json()
@@ -218,13 +231,13 @@ def query_non_streaming(
 
         return history, sources_md
 
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001 - Show error to user
         error_msg = f"❌ Error: {str(e)}"
         history.append((message, error_msg))
         return history, ""
 
 
-def format_sources(sources: List[dict]) -> str:
+def format_sources(sources: List[Dict[str, Any]]) -> str:
     """Format sources as markdown.
 
     Args:
@@ -252,7 +265,7 @@ def format_sources(sources: List[dict]) -> str:
     return md
 
 
-def upload_document(file) -> str:
+def upload_document(file: Any) -> str:
     """Upload a document to the API.
 
     Args:
@@ -270,7 +283,7 @@ def upload_document(file) -> str:
 
         with open(file_path, 'rb') as f:
             files = {'file': (file_path.name, f, 'application/octet-stream')}
-            response = requests.post(API_UPLOAD, files=files, timeout=60)
+            response = requests.post(API_UPLOAD, files=files, timeout=LONG_API_TIMEOUT)
             response.raise_for_status()
 
         data = response.json()
@@ -282,7 +295,7 @@ def upload_document(file) -> str:
         else:
             return f"⚠️ {message}"
 
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001 - Show error to user
         return f"❌ Upload failed: {str(e)}"
 
 
@@ -293,11 +306,11 @@ def get_collections() -> List[str]:
         List of collection names
     """
     try:
-        response = requests.get(API_COLLECTIONS, timeout=5)
+        response = requests.get(API_COLLECTIONS, timeout=SHORT_API_TIMEOUT)
         response.raise_for_status()
         data = response.json()
-        return data.get("collections", ["default"])
-    except Exception:
+        return cast(List[str], data.get("collections", ["default"]))
+    except Exception:  # noqa: BLE001 - Return default on any error
         return ["default"]
 
 
@@ -402,7 +415,14 @@ def create_ui() -> gr.Blocks:
             sources_display = gr.Markdown(label="Sources", value="")
 
         # Event handlers
-        def respond(message, history, collection, method, k, stream):
+        def respond(
+            message: str,
+            history: List[Tuple[str, str]],
+            collection: str,
+            method: str,
+            k: int,
+            stream: bool
+        ) -> Union[Generator[Tuple[List[Tuple[str, str]], str], None, None], Tuple[List[Tuple[str, str]], str]]:
             """Handle query submission with error handling."""
             try:
                 if stream:
@@ -470,14 +490,14 @@ def create_ui() -> gr.Blocks:
             outputs=[upload_status]
         )
 
-    return app
+    return cast(gr.Blocks, app)
 
 
 def launch(
     server_name: str = "0.0.0.0",
     server_port: int = 7860,
     share: bool = False
-):
+) -> None:
     """Launch Gradio UI.
 
     Args:

@@ -4,13 +4,17 @@ Ollama LLM client for text generation.
 Provides interface to Ollama for generating answers using local LLMs.
 """
 
-from typing import Optional
+from typing import TYPE_CHECKING, Generator, Optional
 
-try:
-    import ollama
-except ImportError:
-    ollama = None
+if TYPE_CHECKING:
+    import ollama as ollama_module
+else:
+    try:
+        import ollama as ollama_module
+    except ImportError:
+        ollama_module = None  # type: ignore[assignment]
 
+from src.config.constants import DEFAULT_API_TIMEOUT, DEFAULT_LLM_TEMPERATURE
 from src.config.settings import get_settings
 from src.utils.logging import get_logger
 
@@ -26,9 +30,9 @@ class OllamaClient:
 
     def __init__(
         self,
-        model: str = None,
-        base_url: str = None,
-        timeout: int = 30,
+        model: Optional[str] = None,
+        base_url: Optional[str] = None,
+        timeout: int = DEFAULT_API_TIMEOUT,
     ):
         """
         Initialize Ollama client.
@@ -38,7 +42,7 @@ class OllamaClient:
             base_url: Ollama API URL (uses config if None)
             timeout: Request timeout in seconds
         """
-        if ollama is None:
+        if ollama_module is None:
             raise ImportError("ollama required: pip install ollama")
 
         settings = get_settings()
@@ -47,7 +51,7 @@ class OllamaClient:
         self.timeout = timeout
 
         # Create client
-        self.client = ollama.Client(host=self.base_url)
+        self.client = ollama_module.Client(host=self.base_url)
 
         # Verify model exists
         self._verify_model_available()
@@ -99,14 +103,14 @@ class OllamaClient:
         except RuntimeError:
             # Re-raise RuntimeError to propagate helpful error messages
             raise
-        except Exception as e:
-            logger.warning(f"Could not verify model availability: {e}")
+        except Exception:  # noqa: BLE001 - Non-critical verification, service continues
+            logger.warning("Could not verify model availability", exc_info=True)
 
     def generate(
         self,
         prompt: str,
         system: Optional[str] = None,
-        temperature: float = 0.7,
+        temperature: float = DEFAULT_LLM_TEMPERATURE,
         max_tokens: Optional[int] = None,
     ) -> str:
         """
@@ -138,17 +142,17 @@ class OllamaClient:
                 messages=messages,
                 options=options,
             )
-            return response["message"]["content"]
-        except Exception as e:
-            logger.error(f"Generation failed: {e}")
-            raise RuntimeError(f"Failed to generate response: {e}")
+            return str(response["message"]["content"])
+        except Exception as e:  # noqa: BLE001 - Re-raised with context
+            logger.exception("Generation failed")
+            raise RuntimeError(f"Failed to generate response: {e}") from e  # noqa: TRY003
 
     def generate_stream(
         self,
         prompt: str,
         system: Optional[str] = None,
-        temperature: float = 0.7,
-    ):
+        temperature: float = DEFAULT_LLM_TEMPERATURE,
+    ) -> Generator[str, None, None]:
         """
         Generate text with streaming response.
 
@@ -176,9 +180,9 @@ class OllamaClient:
             for chunk in stream:
                 if "message" in chunk and "content" in chunk["message"]:
                     yield chunk["message"]["content"]
-        except Exception as e:
-            logger.error(f"Streaming generation failed: {e}")
-            raise RuntimeError(f"Failed to generate streaming response: {e}")
+        except Exception as e:  # noqa: BLE001 - Re-raised with context
+            logger.exception("Streaming generation failed")
+            raise RuntimeError(f"Failed to generate streaming response: {e}") from e  # noqa: TRY003
 
     def health_check(self) -> bool:
         """
@@ -190,6 +194,6 @@ class OllamaClient:
         try:
             self.client.list()
             return True
-        except Exception as e:
-            logger.error(f"Ollama health check failed: {e}")
+        except Exception:  # noqa: BLE001 - Health check returns False on any error
+            logger.exception("Ollama health check failed")
             return False

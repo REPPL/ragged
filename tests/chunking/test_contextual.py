@@ -30,6 +30,7 @@ The experiments were conducted over several months.
 The results show significant findings.
 """
     file_hash = hashlib.sha256(content.encode()).hexdigest()
+    content_hash = hashlib.sha256(content[:1024].encode() + content[-1024:].encode()).hexdigest()
 
     return Document(
         document_id="doc1",
@@ -38,6 +39,7 @@ The results show significant findings.
             file_path=Path("/path/to/research_paper.pdf"),
             file_size=len(content),
             file_hash=file_hash,
+            content_hash=content_hash,
             created_at=datetime.now(),
             modified_at=datetime.now(),
             format="pdf"
@@ -143,6 +145,7 @@ class TestContextualChunker:
         """Test section context detection from markdown headers."""
         content = "# Introduction\n\nThis is intro text.\n\n# Methods\n\nMethod details here."
         file_hash = hashlib.sha256(content.encode()).hexdigest()
+        content_hash = hashlib.sha256(content[:1024].encode() + content[-1024:].encode()).hexdigest()
 
         doc = Document(
             document_id="doc2",
@@ -151,6 +154,7 @@ class TestContextualChunker:
                 file_path=Path("paper.md"),
                 file_size=len(content),
                 file_hash=file_hash,
+                content_hash=content_hash,
                 created_at=datetime.now(),
                 modified_at=datetime.now(),
                 format="md"
@@ -165,14 +169,14 @@ class TestContextualChunker:
 
         chunks = chunker.chunk_document(doc)
 
-        # At least one chunk should have section context
-        section_contexts = [
-            chunk.metadata.get("section_context")
+        # At least one chunk should have section context embedded in text
+        chunks_with_section = [
+            chunk
             for chunk in chunks
-            if chunk.metadata.get("section_context")
+            if "[Section:" in chunk.text
         ]
 
-        assert len(section_contexts) > 0
+        assert len(chunks_with_section) > 0
 
     def test_extract_section_markdown_header(self):
         """Test section extraction from markdown headers."""
@@ -215,6 +219,8 @@ class TestContextualChunker:
         content = "Content"
         file_hash = hashlib.sha256(content.encode()).hexdigest()
 
+        content_hash = hashlib.sha256(content[:1024].encode() + content[-1024:].encode()).hexdigest()
+
         doc = Document(
             document_id="doc3",
             content=content,
@@ -222,6 +228,7 @@ class TestContextualChunker:
                 file_path=Path("/path/to/test_file.pdf"),
                 file_size=len(content),
                 file_hash=file_hash,
+                content_hash=content_hash,
                 created_at=datetime.now(),
                 modified_at=datetime.now(),
                 format="pdf"
@@ -238,6 +245,7 @@ class TestContextualChunker:
         """Test chunking with document context disabled."""
         content = "Test content here."
         file_hash = hashlib.sha256(content.encode()).hexdigest()
+        content_hash = hashlib.sha256(content[:1024].encode() + content[-1024:].encode()).hexdigest()
 
         doc = Document(
             document_id="doc4",
@@ -246,6 +254,7 @@ class TestContextualChunker:
                 file_path=Path("file.txt"),
                 file_size=len(content),
                 file_hash=file_hash,
+                content_hash=content_hash,
                 created_at=datetime.now(),
                 modified_at=datetime.now(),
                 format="txt"
@@ -279,6 +288,8 @@ class TestContextCompressor:
                 metadata=ChunkMetadata(
                     document_id="doc1",
                     document_path=Path("doc1.pdf"),
+                    file_hash="a" * 64,  # Valid SHA256 hash
+                    content_hash="b" * 64,  # Valid SHA256 hash
                     chunk_position=0,
                     total_chunks=1,
                     overlap_with_previous=0,
@@ -294,6 +305,8 @@ class TestContextCompressor:
                 metadata=ChunkMetadata(
                     document_id="doc2",
                     document_path=Path("doc2.txt"),
+                    file_hash="c" * 64,  # Valid SHA256 hash
+                    content_hash="d" * 64,  # Valid SHA256 hash
                     chunk_position=0,
                     total_chunks=1,
                     overlap_with_previous=0,

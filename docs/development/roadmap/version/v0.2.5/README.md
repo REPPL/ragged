@@ -547,6 +547,8 @@ After v0.2.5 completion:
 ## Related Documentation
 
 - [v0.2.5 Design Goals](../../planning/version/v0.2/v0.2.5-design.md) - Vision and decisions
+- [v0.2.5 Implementation](../../implementation/version/v0.2/v0.2.5-release-notes.md) - What was built
+- [v0.2.5 Time Log](../../process/time-logs/version/v0.2/v0.2.5-time-log.md) - Development timeline
 - [v0.2.4 Roadmap](../v0.2.4/README.md) - Previous version
 - [v0.2.6 Roadmap](../v0.2.6/README.md) - Next version
 

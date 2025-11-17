@@ -143,7 +143,7 @@ def build_contextual_prompt(
 
     if use_compression:
         compressor = ContextCompressor(max_tokens=2000)
-        context = compressor.compress(chunks, query)
+        context = compressor.compress(chunks, query)  # type: ignore[arg-type]
     else:
         # Use enriched text from contextual chunks
         context = build_rag_prompt(query, chunks).split("Question:")[0].strip()

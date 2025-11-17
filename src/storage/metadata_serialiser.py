@@ -49,7 +49,7 @@ def serialise_metadata(metadata: Dict[str, Any]) -> Dict[str, Any]:
             "active": True
         }
     """
-    serialised = {}
+    serialised: Dict[str, Any] = {}
 
     for key, value in metadata.items():
         # Skip None values

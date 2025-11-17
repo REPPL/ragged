@@ -62,8 +62,8 @@ class ContextualChunker:
 
     def __init__(
         self,
-        chunk_size: int = None,
-        chunk_overlap: int = None,
+        chunk_size: Optional[int] = None,
+        chunk_overlap: Optional[int] = None,
         add_document_context: bool = True,
         add_section_context: bool = True,
     ):
@@ -126,6 +126,10 @@ class ContextualChunker:
             # Count tokens (simple whitespace split for now)
             token_count = len(enriched_text.split())
 
+            # Calculate content hash for this chunk
+            import hashlib
+            chunk_content_hash = hashlib.sha256(enriched_text.encode()).hexdigest()
+
             chunk = Chunk(
                 chunk_id=f"{document.document_id}_chunk_{i}",
                 text=enriched_text,  # Use enriched text for embedding
@@ -135,6 +139,8 @@ class ContextualChunker:
                 metadata=ChunkMetadata(
                     document_id=document.document_id,
                     document_path=document.metadata.file_path,
+                    file_hash=document.metadata.file_hash,
+                    content_hash=chunk_content_hash,
                     chunk_position=i,
                     total_chunks=total_chunks,
                     overlap_with_previous=0,  # TODO: Calculate actual overlap

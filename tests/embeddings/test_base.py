@@ -57,8 +57,12 @@ class TestBaseEmbedder:
             """Complete embedder implementation."""
 
             @property
-            def dimension(self) -> int:
+            def dimensions(self) -> int:
                 return 3
+
+            @property
+            def model_name(self) -> str:
+                return "test-model"
 
             def embed_text(self, text: str) -> list[float]:
                 return [0.1, 0.2, 0.3]
@@ -69,15 +73,19 @@ class TestBaseEmbedder:
         # Should not raise
         embedder = CompleteEmbedder()
         assert embedder is not None
-        assert embedder.dimension == 3
+        assert embedder.dimensions == 3
 
     def test_concrete_implementation_embed_text(self):
         """Test embed_text method on concrete implementation."""
 
         class TestEmbedder(BaseEmbedder):
             @property
-            def dimension(self) -> int:
+            def dimensions(self) -> int:
                 return 4
+
+            @property
+            def model_name(self) -> str:
+                return "test-embedder"
 
             def embed_text(self, text: str) -> list[float]:
                 # Simple mock: return length-based embedding
@@ -99,8 +107,12 @@ class TestBaseEmbedder:
 
         class TestEmbedder(BaseEmbedder):
             @property
-            def dimension(self) -> int:
+            def dimensions(self) -> int:
                 return 3
+
+            @property
+            def model_name(self) -> str:
+                return "test-batch-embedder"
 
             def embed_text(self, text: str) -> list[float]:
                 return [0.1, 0.2, 0.3]

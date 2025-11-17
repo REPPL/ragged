@@ -6,7 +6,7 @@ enabling swappable backends (SentenceTransformers, Ollama, etc.).
 """
 
 from abc import ABC, abstractmethod
-from typing import List
+from typing import List, cast
 
 import numpy as np
 
@@ -94,7 +94,7 @@ class BaseEmbedder(ABC):
         norm = np.linalg.norm(embedding)
         if norm == 0:
             return embedding
-        return embedding / norm
+        return cast(np.ndarray, embedding / norm)
 
     def similarity(self, embedding1: np.ndarray, embedding2: np.ndarray) -> float:
         """

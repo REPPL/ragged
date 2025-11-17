@@ -9,7 +9,7 @@ import logging
 import logging.handlers
 import sys
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Union
 
 from pythonjsonlogger import json as jsonlogger
 
@@ -112,6 +112,7 @@ def setup_logging(
     console_handler.setLevel(level)
     console_handler.addFilter(privacy_filter)
 
+    console_formatter: Union[CustomJsonFormatter, logging.Formatter]
     if json_format:
         console_formatter = CustomJsonFormatter(
             "%(timestamp)s %(level)s %(logger)s %(message)s"
@@ -139,6 +140,7 @@ def setup_logging(
         file_handler.setLevel(level)
         file_handler.addFilter(privacy_filter)
 
+        file_formatter: Union[CustomJsonFormatter, logging.Formatter]
         if json_format:
             file_formatter = CustomJsonFormatter(
                 "%(timestamp)s %(level)s %(logger)s %(module)s %(function)s %(message)s"

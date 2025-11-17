@@ -81,7 +81,7 @@ class DocumentScanner:
             raise ValueError(f"Path is not a file or directory: {path}")
 
         # Directory - scan recursively
-        documents = []
+        documents: List[Path] = []
         self._scan_recursive(path, depth=0, results=documents)
 
         # Return sorted for deterministic order
@@ -132,8 +132,8 @@ class DocumentScanner:
 
         except PermissionError:
             logger.warning(f"Permission denied: {dir_path}")
-        except Exception as e:
-            logger.error(f"Error scanning {dir_path}: {e}")
+        except (FileNotFoundError, NotADirectoryError, OSError):
+            logger.exception(f"Error scanning {dir_path}")
 
     def _should_ignore(self, path: Path) -> bool:
         """Check if path matches any ignore patterns.

@@ -51,7 +51,7 @@ Answer: {self.answer}
 class FewShotExampleStore:
     """Store and retrieve few-shot examples."""
 
-    def __init__(self, storage_path: Optional[Path] = None, embedder=None):
+    def __init__(self, storage_path: Optional[Path] = None, embedder: Any = None):
         """Initialize example store.
 
         Args:
@@ -78,8 +78,8 @@ class FewShotExampleStore:
                 # Compute embeddings for loaded examples if embedder available
                 if self.embedder:
                     self._compute_example_embeddings()
-            except Exception as e:
-                logger.error(f"Failed to load examples: {e}")
+            except Exception:  # noqa: BLE001 - Graceful degradation on startup
+                logger.exception("Failed to load examples")
                 self.examples = []
                 self.example_embeddings = []
         else:
@@ -97,8 +97,8 @@ class FewShotExampleStore:
             try:
                 embedding = self.embedder.embed_text(example.query)
                 self.example_embeddings.append(np.array(embedding))
-            except Exception as e:
-                logger.warning(f"Failed to embed example query: {e}")
+            except Exception:  # noqa: BLE001 - Continue processing other examples
+                logger.warning("Failed to embed example query", exc_info=True)
                 # Use zero vector as fallback
                 self.example_embeddings.append(np.zeros(384))  # Default embedding size
 
@@ -112,8 +112,8 @@ class FewShotExampleStore:
                 data = [ex.to_dict() for ex in self.examples]
                 json.dump(data, f, indent=2)
             logger.info(f"Saved {len(self.examples)} examples to {self.storage_path}")
-        except Exception as e:
-            logger.error(f"Failed to save examples: {e}")
+        except Exception:  # noqa: BLE001 - Non-critical operation, graceful degradation
+            logger.exception("Failed to save examples")
 
     def add_example(
         self,
@@ -150,8 +150,8 @@ class FewShotExampleStore:
             try:
                 embedding = self.embedder.embed_text(query)
                 self.example_embeddings.append(np.array(embedding))
-            except Exception as e:
-                logger.warning(f"Failed to embed new example: {e}")
+            except Exception:  # noqa: BLE001 - Fallback to zero vector on failure
+                logger.warning("Failed to embed new example", exc_info=True)
                 self.example_embeddings.append(np.zeros(384))
 
         self.save_examples()
@@ -276,8 +276,8 @@ class FewShotExampleStore:
             # Return top-k
             return [ex for _, ex in scored[:top_k]]
 
-        except Exception as e:
-            logger.warning(f"Embedding-based search failed: {e}, falling back to keywords")
+        except Exception:  # noqa: BLE001 - Fallback to keyword search on any error
+            logger.warning("Embedding-based search failed, falling back to keywords", exc_info=True)
             return self._search_by_keywords(query, candidates, top_k)
 
     def _search_by_keywords(

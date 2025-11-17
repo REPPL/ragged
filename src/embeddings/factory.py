@@ -5,6 +5,8 @@ Provides a simple interface to instantiate the correct embedder
 based on application settings.
 """
 
+from typing import Optional
+
 from src.config.settings import EmbeddingModel, get_settings
 from src.embeddings.base import BaseEmbedder
 from src.embeddings.ollama_embedder import OllamaEmbedder
@@ -15,8 +17,8 @@ logger = get_logger(__name__)
 
 
 def create_embedder(
-    model_type: EmbeddingModel = None,
-    model_name: str = None,
+    model_type: Optional[EmbeddingModel] = None,
+    model_name: Optional[str] = None,
 ) -> BaseEmbedder:
     """
     Create an embedder instance based on configuration.

@@ -4,7 +4,7 @@ Enables concurrent document loading, chunking, and embedding.
 """
 
 import asyncio
-from typing import List, Optional, Callable, Any
+from typing import List, Optional, Callable, Any, Union
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 from dataclasses import dataclass
@@ -49,6 +49,7 @@ class AsyncDocumentProcessor:
         self.max_workers = max_workers
         self.use_process_pool = use_process_pool
 
+        self.executor: Union[ProcessPoolExecutor, ThreadPoolExecutor]
         if use_process_pool:
             self.executor = ProcessPoolExecutor(max_workers=max_workers)
         else:
@@ -79,8 +80,8 @@ class AsyncDocumentProcessor:
             logger.debug(f"Loaded document: {file_path}")
             return document
 
-        except Exception as e:
-            logger.error(f"Error loading document {file_path}: {e}")
+        except (FileNotFoundError, PermissionError, ValueError, TypeError, OSError):
+            logger.exception(f"Error loading document {file_path}")
             return None
 
     async def load_documents_async(
@@ -130,7 +131,7 @@ class AsyncDocumentProcessor:
         self,
         document: Document,
         chunker: Any,  # RecursiveCharacterTextSplitter or ContextualChunker
-        embed_fn: Optional[Callable] = None
+        embed_fn: Optional[Callable[..., Any]] = None
     ) -> ProcessingResult:
         """Process single document (chunk + embed) asynchronously.
 
@@ -190,10 +191,10 @@ class AsyncDocumentProcessor:
 
             return result
 
-        except Exception as e:
+        except (ValueError, TypeError, AttributeError, KeyError, OSError) as e:
             duration = time.time() - start_time
-            logger.error(
-                f"Error processing document {document.document_id}: {e}"
+            logger.exception(
+                f"Error processing document {document.document_id}"
             )
 
             return ProcessingResult(
@@ -207,7 +208,7 @@ class AsyncDocumentProcessor:
         self,
         documents: List[Document],
         chunker: Any,
-        embed_fn: Optional[Callable] = None,
+        embed_fn: Optional[Callable[..., Any]] = None,
         progress_callback: Optional[Callable[[int, int], None]] = None
     ) -> List[ProcessingResult]:
         """Process multiple documents concurrently.
@@ -259,7 +260,7 @@ class AsyncDocumentProcessor:
         self,
         file_paths: List[Path],
         chunker: Any,
-        embed_fn: Optional[Callable] = None,
+        embed_fn: Optional[Callable[..., Any]] = None,
         progress_callback: Optional[Callable[[int, int, str], None]] = None
     ) -> List[ProcessingResult]:
         """Load and process documents in one batch operation.
@@ -323,11 +324,11 @@ class AsyncDocumentProcessor:
         self.executor.shutdown(wait=wait)
         logger.debug("Async processor shutdown")
 
-    def __enter__(self):
+    def __enter__(self) -> "AsyncDocumentProcessor":
         """Context manager entry."""
         return self
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
+    def __exit__(self, exc_type: Any, exc_val: Any, exc_tb: Any) -> None:
         """Context manager exit."""
         self.shutdown(wait=True)
 

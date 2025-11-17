@@ -3,20 +3,23 @@ Token counting using tiktoken for accurate measurement.
 """
 
 from functools import lru_cache
-from typing import Optional
+from typing import TYPE_CHECKING, Any, Optional
 
-try:
-    import tiktoken
-except ImportError:
-    tiktoken = None
+if TYPE_CHECKING:
+    import tiktoken as tiktoken_module
+else:
+    try:
+        import tiktoken as tiktoken_module
+    except ImportError:
+        tiktoken_module = None  # type: ignore[assignment]
 
 
 @lru_cache(maxsize=1)
-def get_tokenizer(model: str = "cl100k_base"):
+def get_tokenizer(model: str = "cl100k_base") -> Any:
     """Get a cached tokenizer instance."""
-    if tiktoken is None:
+    if tiktoken_module is None:
         raise ImportError("tiktoken required: pip install tiktoken")
-    return tiktoken.get_encoding(model)
+    return tiktoken_module.get_encoding(model)
 
 
 def count_tokens(text: str, model: str = "cl100k_base") -> int:

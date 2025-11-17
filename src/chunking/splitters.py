@@ -3,7 +3,8 @@ Text splitting strategies for creating semantic chunks.
 """
 
 import re
-from typing import List, Tuple
+from pathlib import Path
+from typing import List, Optional, Tuple
 from uuid import uuid4
 
 from src.chunking.token_counter import count_tokens
@@ -19,14 +20,14 @@ class RecursiveCharacterTextSplitter:
 
     def __init__(
         self,
-        chunk_size: int = None,
-        chunk_overlap: int = None,
-        separators: List[str] = None,
+        chunk_size: Optional[int] = None,
+        chunk_overlap: Optional[int] = None,
+        separators: Optional[List[str]] = None,
     ):
         """Initialize the text splitter."""
         settings = get_settings()
-        self.chunk_size = chunk_size or settings.chunk_size
-        self.chunk_overlap = chunk_overlap or settings.chunk_overlap
+        self.chunk_size = chunk_size if chunk_size is not None else settings.chunk_size
+        self.chunk_overlap = chunk_overlap if chunk_overlap is not None else settings.chunk_overlap
 
         if self.chunk_overlap >= self.chunk_size:
             raise ValueError(f"chunk_overlap ({self.chunk_overlap}) must be less than chunk_size ({self.chunk_size})")
@@ -228,7 +229,7 @@ def _map_chunks_to_pages(
     clean_content: str,
     original_content: str,
     page_positions: List[Tuple[int, int]]
-) -> List[Tuple[int, str]]:
+) -> List[Tuple[Optional[int], Optional[str]]]:
     """
     Map text chunks to their page numbers.
 
@@ -249,7 +250,7 @@ def _map_chunks_to_pages(
     # Build position mapping
     clean_to_orig = _build_clean_to_orig_map(original_content)
 
-    chunk_pages = []
+    chunk_pages: List[Tuple[Optional[int], Optional[str]]] = []
     current_pos = 0
 
     for chunk_text in text_chunks:
@@ -307,7 +308,7 @@ def _estimate_page_from_position(chunk_position: int, total_chunks: int, total_p
     return min(max(estimated_page, 1), total_pages)
 
 
-def chunk_document(document: Document, splitter: RecursiveCharacterTextSplitter = None) -> Document:
+def chunk_document(document: Document, splitter: Optional[RecursiveCharacterTextSplitter] = None) -> Document:
     """Chunk a document and add chunk metadata with page tracking."""
     if splitter is None:
         splitter = RecursiveCharacterTextSplitter()
@@ -375,8 +376,9 @@ def chunk_document(document: Document, splitter: RecursiveCharacterTextSplitter 
 
 def create_chunk_metadata(
     document_id: str,
-    document_path,
+    document_path: Path,
     file_hash: str,
+    content_hash: str,
     position: int,
     total_chunks: int,
     previous_text: str = "",
@@ -397,6 +399,7 @@ def create_chunk_metadata(
         document_id=document_id,
         document_path=document_path,
         file_hash=file_hash,
+        content_hash=content_hash,
         chunk_position=position,
         total_chunks=total_chunks,
         overlap_with_previous=overlap_prev,

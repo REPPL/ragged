@@ -6,7 +6,7 @@ with automatic connection management and error handling.
 """
 
 import os
-from typing import Any, Dict, List, Optional
+from typing import TYPE_CHECKING, Any, Dict, List, Optional, cast
 from urllib.parse import urlparse
 
 import numpy as np
@@ -14,10 +14,13 @@ import numpy as np
 # Disable ChromaDB telemetry for privacy
 os.environ['ANONYMIZED_TELEMETRY'] = 'FALSE'
 
-try:
+if TYPE_CHECKING:
     import chromadb
-except ImportError:
-    chromadb = None
+else:
+    try:
+        import chromadb
+    except ImportError:
+        chromadb = None  # type: ignore[assignment]
 
 from src.config.settings import get_settings
 from src.storage.metadata_serialiser import (
@@ -40,8 +43,8 @@ class VectorStore:
     def __init__(
         self,
         collection_name: str = "ragged_documents",
-        host: str = None,
-        port: int = None,
+        host: Optional[str] = None,
+        port: Optional[int] = None,
     ):
         """Initialize vector store connection."""
         if chromadb is None:
@@ -81,7 +84,7 @@ class VectorStore:
         try:
             self.client.heartbeat()
             return True
-        except Exception as e:
+        except (ConnectionError, TimeoutError, AttributeError) as e:
             logger.error(f"ChromaDB health check failed: {e}")
             return False
 
@@ -119,7 +122,7 @@ class VectorStore:
             ids=ids,
             embeddings=embeddings_list,
             documents=documents,
-            metadatas=serialised_metadatas,
+            metadatas=serialised_metadatas,  # type: ignore[arg-type]
         )
         logger.info(f"Added {len(ids)} embeddings to collection {self._collection_name}")
 
@@ -157,17 +160,20 @@ class VectorStore:
 
         # Deserialise metadata in results
         if results and results.get("metadatas"):
+            metadatas = results["metadatas"]
             # ChromaDB returns nested lists for batch queries
-            if isinstance(results["metadatas"][0], list):
+            if metadatas and isinstance(metadatas[0], list):
                 # Batch query: list of lists
-                results["metadatas"] = [
-                    deserialise_batch_metadata(batch) for batch in results["metadatas"]
+                deserialised_batches = [
+                    deserialise_batch_metadata(batch)  # type: ignore[arg-type]
+                    for batch in metadatas
                 ]
+                results["metadatas"] = deserialised_batches  # type: ignore[typeddict-item]
             else:
                 # Single query: list of dicts
-                results["metadatas"] = deserialise_batch_metadata(results["metadatas"])
+                results["metadatas"] = deserialise_batch_metadata(metadatas)  # type: ignore[arg-type, typeddict-item]
 
-        return results
+        return cast(Dict[str, Any], results)
 
     def get_documents_by_metadata(self, where: Dict[str, Any]) -> Dict[str, Any]:
         """
@@ -189,10 +195,10 @@ class VectorStore:
 
             # Deserialise metadata in results
             if results and results.get("metadatas"):
-                results["metadatas"] = deserialise_batch_metadata(results["metadatas"])
+                results["metadatas"] = deserialise_batch_metadata(results["metadatas"])  # type: ignore[arg-type, typeddict-item]
 
-            return results
-        except Exception as e:
+            return cast(Dict[str, Any], results)
+        except (ConnectionError, TimeoutError, KeyError, ValueError, TypeError) as e:
             logger.error(f"Failed to get documents by metadata: {e}")
             return {"ids": [], "documents": [], "metadatas": []}
 
@@ -235,7 +241,7 @@ class VectorStore:
                 metadata={"description": "ragged document chunks"}
             )
             logger.info(f"Cleared collection {self._collection_name}")
-        except Exception as e:
+        except (ConnectionError, TimeoutError, ValueError, AttributeError) as e:
             logger.error(f"Failed to clear collection: {e}")
             raise
 

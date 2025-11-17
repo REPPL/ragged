@@ -58,7 +58,7 @@ class LRUCache:
         self._hits = 0
         self._misses = 0
 
-    def _make_key(self, query: str, **kwargs) -> str:
+    def _make_key(self, query: str, **kwargs: Any) -> str:
         """Create cache key from query and parameters.
 
         Args:
@@ -78,7 +78,7 @@ class LRUCache:
         # Hash for fixed-length key
         return hashlib.sha256(key_string.encode()).hexdigest()
 
-    def get(self, query: str, **kwargs) -> Optional[Any]:
+    def get(self, query: str, **kwargs: Any) -> Optional[Any]:
         """Get cached result if available.
 
         Args:
@@ -118,7 +118,7 @@ class LRUCache:
 
         return entry.value
 
-    def set(self, query: str, value: Any, **kwargs) -> None:
+    def set(self, query: str, value: Any, **kwargs: Any) -> None:
         """Store result in cache.
 
         Args:
@@ -160,7 +160,7 @@ class LRUCache:
         self._misses = 0
         logger.info(f"Cleared {count} cache entries")
 
-    def invalidate(self, query: str, **kwargs) -> bool:
+    def invalidate(self, query: str, **kwargs: Any) -> bool:
         """Invalidate specific cache entry.
 
         Args:

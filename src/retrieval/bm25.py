@@ -1,6 +1,6 @@
 """BM25 keyword-based retrieval for ragged v0.2."""
 
-from typing import List, Tuple, Optional
+from typing import Any, List, Tuple, Optional
 from rank_bm25 import BM25Okapi
 import logging
 
@@ -14,18 +14,18 @@ class BM25Retriever:
     Complements vector-based semantic search in hybrid retrieval.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize BM25 retriever."""
         self.index: Optional[BM25Okapi] = None
         self.documents: List[str] = []
         self.doc_ids: List[str] = []
-        self.metadatas: List[dict] = []
+        self.metadatas: List[dict[str, Any]] = []
 
     def index_documents(
         self,
         documents: List[str],
         doc_ids: List[str],
-        metadatas: Optional[List[dict]] = None,
+        metadatas: Optional[List[dict[str, Any]]] = None,
     ) -> None:
         """Index documents for BM25 search.
 
@@ -56,7 +56,7 @@ class BM25Retriever:
         self,
         query: str,
         top_k: int = 5,
-    ) -> List[Tuple[str, str, float, dict]]:
+    ) -> List[Tuple[str, str, float, dict[str, Any]]]:
         """Search for documents using BM25.
 
         Args:

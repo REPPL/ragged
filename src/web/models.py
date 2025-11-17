@@ -50,7 +50,7 @@ class HealthResponse(BaseModel):
 
     status: Literal["healthy", "degraded", "unhealthy"]
     version: str
-    services: dict = Field(default_factory=dict)
+    services: dict[str, str] = Field(default_factory=dict)
 
 
 class ErrorResponse(BaseModel):

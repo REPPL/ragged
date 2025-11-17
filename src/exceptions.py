@@ -4,6 +4,8 @@ Provides a hierarchical exception system with specific error types
 for different components of the RAG system.
 """
 
+from typing import Any, Optional
+
 
 class RaggedError(Exception):
     """Base exception for all ragged errors.
@@ -12,7 +14,7 @@ class RaggedError(Exception):
     making it easy to catch any ragged-specific error.
     """
 
-    def __init__(self, message: str, details: dict = None):
+    def __init__(self, message: str, details: Optional[dict[str, Any]] = None):
         """Initialise error with message and optional details.
 
         Args:
@@ -57,7 +59,7 @@ class ChunkingError(IngestionError):
 class UnsupportedFormatError(IngestionError):
     """Document format not supported."""
 
-    def __init__(self, format: str, supported_formats: list = None):
+    def __init__(self, format: str, supported_formats: Optional[list[str]] = None):
         """Initialise with format information.
 
         Args:
@@ -169,7 +171,7 @@ class PromptError(GenerationError):
 class ModelNotFoundError(GenerationError):
     """Requested model not available."""
 
-    def __init__(self, model: str, available_models: list = None):
+    def __init__(self, model: str, available_models: Optional[list[str]] = None):
         """Initialise with model information.
 
         Args:
@@ -303,7 +305,7 @@ class RequestValidationError(APIError):
 
 # Helper Functions
 
-def wrap_exception(error: Exception, context: str = None) -> RaggedError:
+def wrap_exception(error: Exception, context: Optional[str] = None) -> RaggedError:
     """Wrap a generic exception in a RaggedError.
 
     Useful for converting third-party exceptions to our hierarchy.

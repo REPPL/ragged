@@ -42,7 +42,7 @@ class Retriever:
     def __init__(
         self,
         vector_store: Optional[VectorStore] = None,
-        embedder = None,
+        embedder: Any = None,
     ):
         """
         Initialize retriever.

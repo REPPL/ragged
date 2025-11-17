@@ -5,7 +5,7 @@ Tools for measuring and comparing system performance.
 
 import time
 import statistics
-from typing import List, Dict, Any, Callable, Optional
+from typing import Any, Callable, Dict, Generator, List, Optional
 from dataclasses import dataclass, field
 from datetime import datetime
 from contextlib import contextmanager
@@ -87,7 +87,7 @@ class ComparisonResult:
 class Timer:
     """Simple timer for measuring elapsed time."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize timer."""
         self.start_time: Optional[float] = None
         self.end_time: Optional[float] = None
@@ -112,18 +112,18 @@ class Timer:
         self.elapsed = self.end_time - self.start_time
         return self.elapsed
 
-    def __enter__(self):
+    def __enter__(self) -> "Timer":
         """Context manager entry."""
         self.start()
         return self
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
+    def __exit__(self, exc_type: Any, exc_val: Any, exc_tb: Any) -> None:
         """Context manager exit."""
         self.stop()
 
 
 @contextmanager
-def time_it(name: str = "operation"):
+def time_it(name: str = "operation") -> Generator[Timer, None, None]:
     """Context manager for timing operations.
 
     Args:
@@ -171,10 +171,10 @@ class Benchmark:
 
     def run(
         self,
-        func: Callable,
-        *args,
+        func: Callable[..., Any],
+        *args: Any,
         metadata: Optional[Dict[str, Any]] = None,
-        **kwargs
+        **kwargs: Any
     ) -> BenchmarkResult:
         """Run benchmark on function.
 
@@ -270,12 +270,12 @@ class BenchmarkSuite:
     def add_benchmark(
         self,
         name: str,
-        func: Callable,
-        *args,
+        func: Callable[..., Any],
+        *args: Any,
         warmup: int = 3,
         iterations: int = 10,
         metadata: Optional[Dict[str, Any]] = None,
-        **kwargs
+        **kwargs: Any
     ) -> BenchmarkResult:
         """Add and run benchmark.
 
@@ -377,11 +377,11 @@ class BenchmarkSuite:
 # Convenience functions
 
 def benchmark_function(
-    func: Callable,
-    *args,
+    func: Callable[..., Any],
+    *args: Any,
     name: Optional[str] = None,
     iterations: int = 10,
-    **kwargs
+    **kwargs: Any
 ) -> BenchmarkResult:
     """Quick benchmark of a function.
 

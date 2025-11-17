@@ -5,15 +5,24 @@ Uses Ollama API to generate embeddings using models like nomic-embed-text.
 """
 
 import time
-from typing import List
+from typing import TYPE_CHECKING, List, Optional
 
 import numpy as np
 
-try:
-    import ollama
-except ImportError:
-    ollama = None
+if TYPE_CHECKING:
+    import ollama as ollama_module
+else:
+    try:
+        import ollama as ollama_module
+    except ImportError:
+        ollama_module = None  # type: ignore[assignment]
 
+from src.config.constants import (
+    DEFAULT_API_TIMEOUT,
+    DEFAULT_EMBEDDING_DIMENSION,
+    DEFAULT_MAX_RETRIES,
+    EXPONENTIAL_BACKOFF_BASE,
+)
 from src.config.settings import get_settings
 from src.embeddings.base import BaseEmbedder
 from src.utils.logging import get_logger
@@ -32,9 +41,9 @@ class OllamaEmbedder(BaseEmbedder):
     def __init__(
         self,
         model_name: str = "nomic-embed-text",
-        base_url: str = None,
-        timeout: int = 30,
-        max_retries: int = 3,
+        base_url: Optional[str] = None,
+        timeout: int = DEFAULT_API_TIMEOUT,
+        max_retries: int = DEFAULT_MAX_RETRIES,
     ):
         """
         Initialize Ollama embedder.
@@ -50,7 +59,7 @@ class OllamaEmbedder(BaseEmbedder):
               2. Create Ollama client
               3. Verify model is available
         """
-        if ollama is None:
+        if ollama_module is None:
             raise ImportError("ollama required: pip install ollama")
 
         self._model_name = model_name
@@ -61,7 +70,7 @@ class OllamaEmbedder(BaseEmbedder):
         self._base_url = base_url or settings.ollama_url
 
         # Create Ollama client
-        self.client = ollama.Client(host=self._base_url)
+        self.client = ollama_module.Client(host=self._base_url)
 
         # Verify model and get dimensions
         self._verify_model_available()
@@ -71,14 +80,14 @@ class OllamaEmbedder(BaseEmbedder):
         """Verify that the embedding model is available in Ollama."""
         try:
             models = self.client.list()
-            model_names = [m.model for m in models.models]
+            model_names = [m.model for m in models.models if m.model is not None]
 
             if not any(self._model_name in name for name in model_names):
                 logger.warning(
                     f"Model {self._model_name} not found. "
                     f"Install with: ollama pull {self._model_name}"
                 )
-        except Exception as e:
+        except (ConnectionError, TimeoutError, AttributeError) as e:
             logger.warning(f"Could not verify model availability: {e}")
 
     def _get_dimensions(self) -> int:
@@ -86,10 +95,10 @@ class OllamaEmbedder(BaseEmbedder):
         try:
             test_embedding = self.embed_text("test")
             return len(test_embedding)
-        except Exception:
+        except (ConnectionError, TimeoutError, KeyError, ValueError, TypeError):
             # Default for nomic-embed-text
-            logger.warning("Could not determine dimensions, using default 768")
-            return 768
+            logger.warning(f"Could not determine dimensions, using default {DEFAULT_EMBEDDING_DIMENSION}")
+            return DEFAULT_EMBEDDING_DIMENSION
 
     def embed_text(self, text: str) -> np.ndarray:
         """Embed a single text string with retry logic."""
@@ -100,14 +109,17 @@ class OllamaEmbedder(BaseEmbedder):
                     prompt=text
                 )
                 return np.array(response['embedding'], dtype=np.float32)
-            except Exception as e:
+            except (ConnectionError, TimeoutError, KeyError, ValueError, TypeError) as e:
                 if attempt == self._max_retries - 1:
                     logger.error(f"Failed to embed after {self._max_retries} attempts: {e}")
                     raise
                 # Exponential backoff
-                wait_time = 2 ** attempt
+                wait_time = EXPONENTIAL_BACKOFF_BASE ** attempt
                 logger.warning(f"Embedding attempt {attempt + 1} failed, retrying in {wait_time}s")
                 time.sleep(wait_time)
+
+        # This should never be reached, but satisfies type checker
+        raise RuntimeError("Embedding failed: retry loop exited unexpectedly")
 
     def embed_batch(self, texts: List[str]) -> np.ndarray:
         """Embed multiple texts (calls embed_text for each)."""

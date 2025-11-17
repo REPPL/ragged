@@ -7,6 +7,65 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.5] - 2025-11-17
+
+### Improved
+- **QUALITY-001: Settings Side Effects**: Refactored `get_settings()` to eliminate global state mutation
+  - Removed side effects preventing test fixture isolation
+  - Fixed `get_logger()` to not depend on settings globally
+  - Added `reset_settings()` utility for test isolation
+  - Test suite isolation improved, no more test pollution
+- **QUALITY-002: Bare Exception Handler**: Fixed bare `except:` clause catching BaseException
+  - Changed to `except Exception:` in `logging.py:43`
+  - Ensures keyboard interrupts and system exits work correctly
+- **QUALITY-004: Exception Handler Improvements**: Improved 26 exception handlers across 7 files
+  - Changed from `logger.error()` to `logger.exception()` for automatic traceback logging
+  - Files: chunking (4), embeddings (3), ingestion (3), retrieval (1)
+  - Debugging significantly easier with complete traceback information
+- **QUALITY-005: Magic Numbers Extraction**: Extracted 13 hardcoded values to constants
+  - New `constants.py` module with chunking, embedding, retrieval, generation, BM25, caching, security constants
+  - Single source of truth for configuration values
+  - Easier system tuning and parameter adjustment
+- **QUALITY-006: Comprehensive Type Hints**: Complete type safety with mypy strict mode
+  - Added strict mypy configuration with `--strict` flag
+  - Fixed 21 generic type parameter errors (`dict`, `list`, `Callable`)
+  - **Zero mypy errors across all 46 source files**
+  - Better IDE autocomplete and type-related bug prevention
+- **QUALITY-007: Exception Handler Standardisation**: Standardised 13 more exception handlers
+  - Consistent exception handling in web/API layer (5 files)
+  - All handlers preserve stack traces with `logger.exception()`
+  - Improved error debugging throughout application
+
+### Added
+- **QUALITY-003: Chunking Tests**: Comprehensive test coverage for chunking module
+  - New `test_splitters.py` with 19 tests
+  - Coverage: 0% → 85% for `chunking/splitters.py` (166 statements)
+  - Tests for recursive, token-based, and sentence splitters
+  - Fixed `chunk_document()` metadata bug (missing `chunk_index`)
+- **QUALITY-008: Citation Parser Tests**: Complete test coverage for IEEE citation formatting
+  - New `test_citation_formatter.py` with 28 tests
+  - Coverage: 0% → 100% for `citation_formatter.py` (39 statements)
+  - Tests for `extract_citation_numbers()`, `format_ieee_reference()`, `format_reference_list()`, `format_inline_citation()`
+- **QUALITY-009: TODO Cleanup**: Documented future enhancements as GitHub issues
+  - Created `todo-github-issues.md` documenting 2 future enhancements
+  - Contextual overlap calculation (line 146)
+  - Token-based context truncation (line 267)
+  - Zero obsolete TODOs remaining in codebase
+
+### Technical Details
+- **Test Coverage**: +66 new tests added
+- **Type Safety**: 100% strict mypy compliance (0 errors in 46 files)
+- **Code Quality**: 26 exception handlers improved, 13 constants extracted
+- **Breaking Changes**: None (full backward compatibility maintained)
+- **Optional Improvements Deferred**: QUALITY-010 (exception chaining), QUALITY-011 (contextual overlap), QUALITY-012 (additional integration tests) → v0.2.6/v0.2.7
+
+### Quality Metrics
+- Type Coverage: 100% (zero mypy --strict errors)
+- Exception Handling: 26 handlers using `logger.exception()`
+- Magic Numbers: 13 values extracted to constants
+- TODO Cleanup: 0 obsolete TODOs
+- Development Time: ~12 hours (vs. 13-20h estimated)
+
 ## [0.2.4] - 2025-11-17
 
 ### Added

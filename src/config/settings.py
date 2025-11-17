@@ -8,9 +8,9 @@ and validation.
 import functools
 from enum import Enum
 from pathlib import Path
-from typing import Literal
+from typing import Any, Literal
 
-from pydantic import Field, field_validator, model_validator
+from pydantic import Field, ValidationInfo, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -79,7 +79,7 @@ class Settings(BaseSettings):
 
     @field_validator("embedding_model_name", mode="before")
     @classmethod
-    def set_embedding_model_name(cls, v: str, info) -> str:
+    def set_embedding_model_name(cls, v: str, info: ValidationInfo) -> str:
         """Set default embedding model name based on embedding model type."""
         if v:  # If explicitly set, use it
             return v
@@ -96,7 +96,7 @@ class Settings(BaseSettings):
 
     @field_validator("embedding_dimensions", mode="before")
     @classmethod
-    def set_embedding_dimensions(cls, v: int, info) -> int:
+    def set_embedding_dimensions(cls, v: int, info: ValidationInfo) -> int:
         """Set embedding dimensions based on model."""
         if v and v > 0:  # If explicitly set and positive, use it
             return v
@@ -152,7 +152,7 @@ class Settings(BaseSettings):
         self.data_dir.mkdir(parents=True, exist_ok=True)
         return self.data_dir
 
-    def model_post_init(self, __context) -> None:
+    def model_post_init(self, __context: Any) -> None:
         """Load user config if available (without creating directories as side effect)."""
         # Import here to avoid circular dependency
         from src.utils.logging import get_logger
@@ -164,7 +164,7 @@ class Settings(BaseSettings):
         config_file = self.data_dir / "config.yml"
         if config_file.exists():
             try:
-                import yaml
+                import yaml  # type: ignore[import-untyped]
                 import os
 
                 with open(config_file, "r") as f:
@@ -175,8 +175,12 @@ class Settings(BaseSettings):
                     self.llm_model = user_config["llm_model"]
                     logger.info(f"Loaded LLM model from user config: {self.llm_model}")
 
-            except Exception as e:
-                logger.warning(f"Failed to load user config: {e}")
+            except (FileNotFoundError, PermissionError) as e:
+                logger.warning(f"Could not access config file: {e}")
+            except yaml.YAMLError as e:
+                logger.warning(f"Invalid YAML in config file: {e}")
+            except (KeyError, TypeError, ValueError) as e:
+                logger.warning(f"Invalid config structure: {e}")
 
 
 @functools.lru_cache()

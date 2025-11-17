@@ -8,10 +8,11 @@ import json
 import tempfile
 import time
 from pathlib import Path
-from typing import Optional
+from typing import Any, Dict, Literal, Optional, Union, cast
 
 from src.chunking.splitters import chunk_document
-from src.config.settings import get_settings
+from src.config.settings import Settings, get_settings
+from src.embeddings.base import BaseEmbedder
 from src.embeddings.factory import get_embedder
 from src.generation.ollama_client import OllamaClient
 from src.generation.prompts import build_rag_prompt, RAG_SYSTEM_PROMPT
@@ -48,15 +49,15 @@ app.add_middleware(
 )
 
 # Global state (initialized on startup)
-_settings: Optional[object] = None
-_embedder: Optional[object] = None
+_settings: Optional[Settings] = None
+_embedder: Optional[BaseEmbedder] = None
 _vector_store: Optional[VectorStore] = None
 _hybrid_retriever: Optional[HybridRetriever] = None
 _llm_client: Optional[OllamaClient] = None
 
 
 @app.on_event("startup")
-async def startup_event():
+async def startup_event() -> None:
     """Initialise retrievers and LLM client on startup."""
     global _settings, _embedder, _vector_store, _hybrid_retriever, _llm_client
 
@@ -90,13 +91,13 @@ async def startup_event():
 
         logger.info("All services initialised successfully")
 
-    except Exception as e:
-        logger.error(f"Failed to initialise services: {e}")
+    except Exception:  # noqa: BLE001 - Allow API to start even if services fail
+        logger.exception("Failed to initialise services")
         # Services will be None, API will return appropriate errors
 
 
 @app.get("/api/health", response_model=HealthResponse)
-async def health():
+async def health() -> HealthResponse:
     """Health check endpoint."""
     services = {
         "api": "healthy",
@@ -105,7 +106,7 @@ async def health():
     }
 
     all_healthy = all(s == "healthy" for s in services.values())
-    status = "healthy" if all_healthy else "degraded"
+    status: Literal["healthy", "degraded", "unhealthy"] = "healthy" if all_healthy else "degraded"
 
     return HealthResponse(
         status=status,
@@ -114,8 +115,8 @@ async def health():
     )
 
 
-@app.post("/api/query")
-async def query(request: QueryRequest):
+@app.post("/api/query", response_model=None)
+async def query(request: QueryRequest) -> Union[StreamingResponse, QueryResponse]:
     """Query endpoint with optional SSE streaming.
 
     Retrieves relevant documents using hybrid search and generates
@@ -132,7 +133,7 @@ async def query(request: QueryRequest):
 
     try:
         if request.stream:
-            async def stream_response():
+            async def stream_response() -> Any:
                 try:
                     # Status: Retrieving
                     yield f"event: status\n"
@@ -192,8 +193,8 @@ async def query(request: QueryRequest):
                     yield f"event: complete\n"
                     yield f"data: {json.dumps({'total_time': total_time})}\n\n"
 
-                except Exception as e:
-                    logger.error(f"Error during streaming query: {e}")
+                except Exception as e:  # noqa: BLE001 - Send error event to client
+                    logger.exception("Error during streaming query")
                     yield f"event: error\n"
                     yield f"data: {json.dumps({'error': str(e)})}\n\n"
 
@@ -244,16 +245,16 @@ async def query(request: QueryRequest):
                 total_time=total_time
             )
 
-    except Exception as e:
-        logger.error(f"Error processing query: {e}")
+    except Exception as e:  # noqa: BLE001 - Convert to HTTP exception
+        logger.exception("Error processing query")
         raise HTTPException(
             status_code=500,
             detail=f"Error processing query: {str(e)}"
-        )
+        ) from e
 
 
 @app.post("/api/upload", response_model=UploadResponse)
-async def upload(file: UploadFile = File(...)):
+async def upload(file: UploadFile = File(...)) -> UploadResponse:
     """Document upload endpoint.
 
     Accepts PDF, TXT, MD, HTML files and ingests them into the collection.
@@ -267,7 +268,8 @@ async def upload(file: UploadFile = File(...)):
 
     # Validate file type
     allowed_extensions = {".pdf", ".txt", ".md", ".html"}
-    file_ext = Path(file.filename).suffix.lower()
+    filename = file.filename or "unknown"
+    file_ext = Path(filename).suffix.lower()
 
     if file_ext not in allowed_extensions:
         raise HTTPException(
@@ -290,7 +292,8 @@ async def upload(file: UploadFile = File(...)):
 
         # Chunk document
         logger.info(f"Chunking document: {file.filename}")
-        chunks = chunk_document(document)
+        document = chunk_document(document)
+        chunks = document.chunks
 
         if not chunks:
             raise HTTPException(
@@ -301,15 +304,16 @@ async def upload(file: UploadFile = File(...)):
         # Generate embeddings
         logger.info(f"Generating embeddings for {len(chunks)} chunks")
         texts = [chunk.text for chunk in chunks]
-        embeddings = _embedder.embed(texts)
+        embeddings = _embedder.embed_batch(texts)
 
         # Store in vector database
         logger.info(f"Storing {len(chunks)} chunks in vector store")
         metadatas = [chunk.metadata.model_dump() for chunk in chunks]
         doc_ids = [chunk.chunk_id for chunk in chunks]
-        _vector_store.add_documents(
-            texts=texts,
+        _vector_store.add(
+            ids=doc_ids,
             embeddings=embeddings,
+            documents=texts,
             metadatas=metadatas
         )
 
@@ -321,24 +325,24 @@ async def upload(file: UploadFile = File(...)):
                 metadatas=metadatas
             )
 
-        logger.info(f"Successfully ingested {file.filename}")
+        logger.info(f"Successfully ingested {filename}")
 
         return UploadResponse(
-            filename=file.filename,
+            filename=filename,
             size=len(content),
             status="success",
-            message=f"Successfully ingested {len(chunks)} chunks from {file.filename}"
+            message=f"Successfully ingested {len(chunks)} chunks from {filename}"
         )
 
     except HTTPException:
         # Re-raise HTTP exceptions
         raise
-    except Exception as e:
-        logger.error(f"Error ingesting {file.filename}: {e}")
+    except Exception as e:  # noqa: BLE001 - Convert to HTTP exception
+        logger.exception(f"Error ingesting {filename}")
         raise HTTPException(
             status_code=500,
             detail=f"Error ingesting document: {str(e)}"
-        )
+        ) from e
     finally:
         # Clean up temporary file
         if temp_path.exists():
@@ -346,14 +350,14 @@ async def upload(file: UploadFile = File(...)):
 
 
 @app.get("/api/collections")
-async def list_collections():
+async def list_collections() -> Dict[str, Any]:
     """List available collections."""
     # Placeholder
     return {"collections": ["default"]}
 
 
 @app.delete("/api/collections/{collection_name}")
-async def clear_collection(collection_name: str):
+async def clear_collection(collection_name: str) -> Dict[str, Any]:
     """Clear all documents from a collection."""
     # Placeholder
     return {"status": "success", "collection": collection_name, "message": "Collection cleared (placeholder)"}
