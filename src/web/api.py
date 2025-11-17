@@ -134,6 +134,17 @@ async def query(request: QueryRequest) -> Union[StreamingResponse, QueryResponse
     try:
         if request.stream:
             async def stream_response() -> Any:
+                """Stream RAG response with Server-Sent Events.
+
+                Yields Server-Sent Events for real-time status updates and streaming response.
+                Events include: status, retrieved, chunk (response chunks), and complete.
+
+                Yields:
+                    SSE-formatted strings with event type and JSON data
+
+                Raises:
+                    HTTPException: If retrieval or generation fails
+                """
                 try:
                     # Status: Retrieving
                     yield f"event: status\n"
