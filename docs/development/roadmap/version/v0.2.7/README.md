@@ -1,26 +1,30 @@
-# Ragged v0.2.7 Roadmap - UX & Performance
+# Ragged v0.2.7 Roadmap - CLI Structure Refactoring
 
-**Status:** Planned
+**Status:** 🔄 IN PROGRESS (Current Version)
 
-**Total Hours:** 137-151 hours (AI implementation)
+**Total Hours:** TBD actual (originally estimated 137-151h for broader scope)
 
-**Focus:** User experience, performance optimisation, CLI enhancements, quality of life
+**Focus:** CLI architecture refactoring, folder ingestion, HTML processing
 
-**Breaking Changes:** Multi-collection system (migration provided)
+**Breaking Changes:** None (multi-collection deferred to later version)
 
-**Implementation Note:** Due to size (137-151 hours), implement in 5-6 focused sessions of 20-30 hours each
+**Implementation Note:** Scope significantly refined to focus on CLI foundation
 
 ## Overview
 
-Version 0.2.7 transforms ragged from a functional RAG system into a **delightful** one. This release focuses on user experience improvements and performance optimisations that provide immediate, measurable benefits.
+Version 0.2.7 refactored the CLI from a monolithic structure to a modular command-based architecture, establishing a foundation for future enhancements. Additionally implemented user-requested features: folder ingestion and HTML processing.
 
-**Key Goals**:
-- 2-4x faster batch processing (async operations)
-- 50-90% faster queries (caching)
-- Seamless model switching without restarts
-- Multi-collection document organisation
-- Better user guidance and feedback
-- Comprehensive CLI capabilities (document management, advanced queries, debugging)
+**Actual Focus (Refined from Original Plan):**
+- ✅ CLI command modularisation (14 modules created)
+- ✅ Folder ingestion with recursive scanning
+- ✅ HTML processing support (Trafilatura + BeautifulSoup)
+- ✅ Batch processing with progress bars
+- 🔄 Additional CLI enhancements (transitioned to v0.2.8)
+- 📅 Performance optimisations (deferred to v0.2.9)
+
+**Key Achievement:** CLI entry point reduced from 586+ lines to 107 lines (82% reduction)
+
+**See:** [v0.2.7 Implementation Record (In Progress)](../../implementation/version/v0.2/v0.2.7-in-progress.md)
 
 ---
 

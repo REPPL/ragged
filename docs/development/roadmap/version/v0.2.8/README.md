@@ -1,9 +1,9 @@
 # v0.2.8 Roadmap: CLI Enhancements + Documentation Consistency
 
-**Status**: Planning
-**Estimated Effort**: 50-62 hours
-**Timeline**: 4-5 weeks
-**Dependencies**: v0.2.7 (complete)
+**Status**: 🔄 IN PROGRESS - Core CLI features implemented, testing and documentation pending
+**Estimated Effort**: 40-60 hours (original), TBD actual
+**Timeline**: November 2025
+**Dependencies**: v0.2.7 (in progress, concurrent work)
 
 ---
 
@@ -16,6 +16,13 @@ Transform ragged's CLI from functional to exceptional by implementing state-of-t
 2. Documentation follows Single Source of Truth - no duplication
 3. Professional CLI experience matching or exceeding industry leaders
 4. Backwards compatibility maintained
+
+**Current Status:**
+- ✅ 10 major CLI enhancements implemented
+- 🔄 Testing and documentation in progress
+- 📅 Documentation consistency work ongoing
+
+**See:** [v0.2.8 Implementation Record (In Progress)](../../implementation/version/v0.2/v0.2.8-in-progress.md)
 
 ---
 
@@ -146,7 +153,3 @@ See individual feature documents:
 - [CLI Planning](../../../planning/interfaces/cli/README.md) - CLI vision
 - [LEANN Integration Analysis](../../../decisions/2025-11-16-leann-integration-analysis.md) - Lessons learned
 
----
-
-**Last Updated**: 2025-11-17
-**Status**: Planning → Ready for Implementation

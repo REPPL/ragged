@@ -236,7 +236,3 @@ ragged profile-memory add /large-dataset
 - [v0.2.7 Implementation](../../implementation/version/v0.2/README.md) - Current baseline
 - [Performance Planning](../../../planning/technologies/README.md) - Technical context
 
----
-
-**Last Updated**: 2025-11-17
-**Status**: Planning → Awaiting v0.2.8 Completion
