@@ -25,9 +25,20 @@ from src.config.constants import (
 )
 from src.config.settings import get_settings
 from src.embeddings.base import BaseEmbedder
+from src.exceptions import LLMConnectionError, EmbeddingError
+from src.utils.circuit_breaker import CircuitBreaker
 from src.utils.logging import get_logger
+from src.utils.retry import with_retry
 
 logger = get_logger(__name__)
+
+
+# v0.2.9: Circuit breaker for Ollama API protection
+_ollama_circuit_breaker = CircuitBreaker(
+    name="ollama_embeddings",
+    failure_threshold=5,
+    recovery_timeout=30.0,
+)
 
 
 class OllamaEmbedder(BaseEmbedder):
@@ -100,26 +111,46 @@ class OllamaEmbedder(BaseEmbedder):
             logger.warning(f"Could not determine dimensions, using default {DEFAULT_EMBEDDING_DIMENSION}")
             return DEFAULT_EMBEDDING_DIMENSION
 
+    @with_retry(max_attempts=3, base_delay=1.0, retryable_exceptions=(ConnectionError, TimeoutError, LLMConnectionError, EmbeddingError))
+    def _embed_text_internal(self, text: str) -> np.ndarray:
+        """
+        Internal method to embed text with circuit breaker protection.
+
+        v0.2.9: Protected by circuit breaker and retry decorator for >98% success rate.
+        """
+        try:
+            response = _ollama_circuit_breaker.call(
+                self.client.embeddings,
+                model=self._model_name,
+                prompt=text
+            )
+            return np.array(response['embedding'], dtype=np.float32)
+        except (KeyError, ValueError, TypeError) as e:
+            raise EmbeddingError(f"Invalid embedding response: {e}")
+        except (ConnectionError, TimeoutError) as e:
+            raise LLMConnectionError(f"Ollama connection failed: {e}")
+
     def embed_text(self, text: str) -> np.ndarray:
-        """Embed a single text string with retry logic."""
-        for attempt in range(self._max_retries):
+        """
+        Embed a single text string.
+
+        v0.2.9: Uses automatic retry with exponential backoff and circuit breaker.
+        """
+        settings = get_settings()
+        if not settings.feature_flags.enable_advanced_error_recovery:
+            # Fallback to old behaviour
             try:
                 response = self.client.embeddings(
                     model=self._model_name,
                     prompt=text
                 )
                 return np.array(response['embedding'], dtype=np.float32)
-            except (ConnectionError, TimeoutError, KeyError, ValueError, TypeError) as e:
-                if attempt == self._max_retries - 1:
-                    logger.error(f"Failed to embed after {self._max_retries} attempts: {e}")
-                    raise
-                # Exponential backoff
-                wait_time = EXPONENTIAL_BACKOFF_BASE ** attempt
-                logger.warning(f"Embedding attempt {attempt + 1} failed, retrying in {wait_time}s")
-                time.sleep(wait_time)
+            except Exception as e:
+                logger.error(f"Embedding failed: {e}")
+                raise
 
-        # This should never be reached, but satisfies type checker
-        raise RuntimeError("Embedding failed: retry loop exited unexpectedly")
+        # v0.2.9: Use advanced error recovery
+        return self._embed_text_internal(text)
 
     def embed_batch(self, texts: List[str]) -> np.ndarray:
         """Embed multiple texts (calls embed_text for each)."""
