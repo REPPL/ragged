@@ -1,9 +1,6 @@
-# ragged v3.0+ Planning - Ecosystem & Advanced Capabilities
+# Ecosystem & Advanced Capabilities
 
-**Status**: Strategic Planning
-**Total Estimated Hours**: 850-1250 hours (across multiple releases)
-**Target Timeline**: After v2.0, community-driven priorities
-**Focus**: Plugin ecosystem, federation, AI agents, mobile apps
+**Estimated Hours**: 850-1250 hours (across multiple releases)
 
 ---
 
@@ -48,7 +45,7 @@ ragged v3.0+ transforms from a product into a **platform**, enabling community i
 - ActivityPub or custom protocol
 
 **Use Cases**:
-- Research collaborations (share without centralization)
+- Research collaborations (share without centralisation)
 - Academic networks (federated knowledge graphs)
 - Professional networks (controlled sharing)
 
@@ -71,7 +68,7 @@ ragged v3.0+ transforms from a product into a **platform**, enabling community i
 
 **Use Cases**:
 - Research assistant (literature review automation)
-- Knowledge curator (organize and tag automatically)
+- Knowledge curator (organise and tag automatically)
 - Learning assistant (spaced repetition scheduling)
 - Writing assistant (draft generation, editing)
 
@@ -91,7 +88,7 @@ ragged v3.0+ transforms from a product into a **platform**, enabling community i
 - Offline-first with sync
 - Camera-based capture (documents, whiteboards, receipts)
 - Location-aware notes
-- Mobile-optimized UI
+- Mobile-optimised UI
 
 **Use Cases**:
 - Field research (scientists, journalists)
@@ -172,8 +169,3 @@ ragged v3.0+ transforms from a product into a **platform**, enabling community i
 - [v1.0 Planning](../v1.0/README.md) - Personal knowledge platform
 - [v2.0 Planning](../v2.0/README.md) - Enterprise collaboration
 - [Strategic Roadmap](../../vision/strategic-roadmap.md) - v1-v3 overview
-
----
-
-**Status**: Strategic Planning
-**Last Updated**: 2025-11-18

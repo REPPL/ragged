@@ -1,9 +1,6 @@
-# ragged v2.0 Planning - Multi-User & Regulatory Compliance
+# Multi-User & Regulatory Compliance
 
-**Status**: Strategic Planning
-**Total Estimated Hours**: 270-340 hours
-**Target Timeline**: After v1.0 stable and user-validated
-**Focus**: Enterprise collaboration with privacy-preserving compliance
+**Estimated Hours**: 270-340 hours
 
 ---
 
@@ -23,7 +20,7 @@ ragged v2.0 extends the personal knowledge platform to **small-medium teams** (1
 - ✅ State-of-the-art personal knowledge management
 - ✅ Modern web UI (block editor, graph viz, command palette)
 - ✅ Privacy-first architecture
-- ✅ AI-powered organization and retrieval
+- ✅ AI-powered organisation and retrieval
 
 **What v2.0 adds**:
 - Multi-user authentication and authorization
@@ -115,7 +112,7 @@ ragged v2.0 extends the personal knowledge platform to **small-medium teams** (1
 
 **2. Managed Self-Hosted** (Optional)
 - ragged deploys on customer's cloud (AWS/Azure/GCP)
-- ragged manages updates/monitoring
+- ragged manages updates and monitoring
 - Customer owns data
 
 **3. Cloud SaaS** (Future - v2.5+)
@@ -151,8 +148,3 @@ ragged v2.0 extends the personal knowledge platform to **small-medium teams** (1
 - [v1.0 Planning](../v1.0/README.md) - Personal knowledge platform
 - [v3.0 Planning](../v3.0/README.md) - Future ecosystem
 - [Strategic Roadmap](../../vision/strategic-roadmap.md) - v1-v3 overview
-
----
-
-**Status**: Strategic Planning
-**Last Updated**: 2025-11-18

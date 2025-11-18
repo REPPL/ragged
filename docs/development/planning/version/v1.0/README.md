@@ -1,9 +1,6 @@
-# ragged v1.0 Planning - State-of-the-Art Personal Knowledge Platform
+# State-of-the-Art Personal Knowledge Platform
 
-**Status**: Strategic Planning
-**Total Estimated Hours**: 400-500 hours
-**Target Timeline**: After v0.7 completion
-**Focus**: Transform into world-class personal knowledge management system
+**Estimated Hours**: 400-500 hours
 
 ---
 
@@ -12,7 +9,7 @@
 ragged v1.0 will become the **premier privacy-first personal knowledge platform**, combining:
 - **Obsidian's local-first philosophy** - Complete data ownership, no vendor lock-in
 - **Notion's UX sophistication** - Modern, intuitive, delightful interface
-- **AI-powered intelligence** - Automatic organization, semantic search, personal memory
+- **AI-powered intelligence** - Automatic organisation, semantic search, personal memory
 
 **Positioning**: State-of-the-art knowledge management for individuals who value privacy and want AI assistance without cloud dependencies.
 
@@ -32,28 +29,13 @@ ragged v1.0 will become the **premier privacy-first personal knowledge platform*
 **What's missing for v1.0** (user experience gap):
 - ❌ State-of-the-art web UI (current Svelte rebuild is only ~20% of needed UX)
 - ❌ Modern editing experience (block-based, not just markdown)
-- ❌ Visual knowledge organization (graph, canvas, timeline views)
+- ❌ Visual knowledge organisation (graph, canvas, timeline views)
 - ❌ Command-driven interface (Cmd+K for power users)
 - ❌ Mobile-responsive PWA (works offline, installable)
 - ❌ Daily notes workflow (journaling, quick capture)
 - ❌ Template system (reusable note structures)
 
 **The v1.0 challenge**: 100% of remaining work is frontend/UX. Backend is complete.
-
----
-
-## Competitive Analysis
-
-### Leading Personal Knowledge Management Systems (2025)
-
-| System | Strengths | ragged Advantages |
-|--------|-----------|-------------------|
-| **Obsidian** | Local-first, graph view, 1000+ plugins | AI-powered retrieval, multi-modal, knowledge graphs |
-| **Notion** | Block-based editor, databases, AI agents | Local-first, privacy, no cost |
-| **Logseq** | Outliner, daily notes, open source | Advanced RAG, personal memory |
-| **Mem.ai** | AI-first organization, smart search | Local processing, open source |
-
-**ragged's unique value**: Only system combining local-first privacy + state-of-the-art AI + modern UX + zero cost.
 
 ---
 
@@ -76,7 +58,7 @@ ragged v1.0 will become the **premier privacy-first personal knowledge platform*
 
 ### SHOULD HAVE for v1.1-v1.2 (100-130 hours)
 
-11. **Spatial Canvas** (30-40h) - Infinite canvas for visual organization
+11. **Spatial Canvas** (30-40h) - Infinite canvas for visual organisation
 12. **Multiple Collection Views** (25-35h) - List, board, gallery, timeline, table
 13. **PDF Annotation** (25-30h) - Highlight, comment, link to notes
 14. **Spaced Repetition** (20-25h) - Flashcards and learning system
@@ -120,8 +102,3 @@ ragged v1.0 will become the **premier privacy-first personal knowledge platform*
 - [v3.0 Planning](../v3.0/README.md) - Future directions
 - [Strategic Roadmap](../../vision/strategic-roadmap.md) - v1-v3 overview
 - [v0.7 Roadmap](../../../roadmap/version/v0.7/README.md) - Foundation
-
----
-
-**Status**: Strategic Planning
-**Last Updated**: 2025-11-18

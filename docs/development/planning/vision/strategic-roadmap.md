@@ -1,8 +1,6 @@
-# ragged Strategic Roadmap - Long-Term Vision (v1.0 - v3.x)
+# Strategic Roadmap - Long-Term Vision (v1.0 - v3.x)
 
-**Document Purpose**: Executive summary of ragged's 3-generation strategic plan
-**Timeline**: v1.0-v3.x (~1520-2090 total hours beyond v0.7)
-**Last Updated**: 2025-11-18
+**Estimated Hours**: ~1520-2090 total hours beyond v0.7
 
 ---
 
@@ -45,7 +43,7 @@ ragged's long-term vision evolves through three distinct phases:
 **Key Features (MUST HAVE - 225-280h)**:
 1. Block-based editor (TipTap/BlockNote)
 2. Command palette (Cmd+K)
-3. Interactive graph visualization
+3. Interactive graph visualisation
 4. Bidirectional links
 5. Advanced search interface
 6. Collection workspaces
@@ -71,7 +69,7 @@ ragged's long-term vision evolves through three distinct phases:
 
 ### v2.0 - Enterprise & Compliance (270-340 hours)
 
-**Vision**: Self-hosted enterprise knowledge management for privacy-conscious organizations
+**Vision**: Self-hosted enterprise knowledge management for privacy-conscious organisations
 
 **Target User**: Small-medium teams (10-500 users) needing collaboration + compliance
 
@@ -294,7 +292,7 @@ ragged's long-term vision evolves through three distinct phases:
 ### Short-term (v1.0 Implementation)
 
 4. **Phase 1: Core editor & navigation** (100-125h)
-5. **Phase 2: Knowledge organization** (75-95h)
+5. **Phase 2: Knowledge organisation** (75-95h)
 6. **Phase 3: Search & discovery** (50-60h)
 7. **Phase 4: Polish & testing** (100-125h)
 
@@ -312,8 +310,3 @@ ragged's long-term vision evolves through three distinct phases:
 - [v2.0 Planning](../version/v2.0/README.md) - Enterprise & compliance details
 - [v3.0 Planning](../version/v3.0/README.md) - Ecosystem platform details
 - [v0.7 Roadmap](../../roadmap/version/v0.7/README.md) - Foundation completion
-
----
-
-**Status**: Strategic Planning
-**Last Updated**: 2025-11-18
