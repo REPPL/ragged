@@ -17,7 +17,7 @@ This directory contains research materials, methodology documentation, and exper
 
 ## Directory Structure
 
-```
+```text
 research/
 ├── README.md (this file)
 ├── note/                    # Research notes and literature reviews
@@ -34,6 +34,7 @@ research/
 ├── benchmarks/              # Performance benchmarks
 │   └── (Will be added starting v0.2)
 └── citations.md             # Bibliography of referenced papers
+```
 
 ## Available Research Materials
 
@@ -77,54 +78,6 @@ These materials informed ragged's initial design.
 - Response quality measurements
 - Performance benchmarks (speed, memory)
 - Comparison to other RAG systems
-
-## Research Principles
-
-### Open Science
-
-- All research methods documented
-- Data and code publicly available (where possible)
-- Negative results published (what didn't work)
-- Reproducibility prioritized
-
-### Evidence-Based
-
-- Design decisions backed by research
-- Claims supported by data
-- Benchmarks reported honestly
-- Limitations acknowledged
-
-### Community Contribution
-
-- Share findings with RAG research community
-- Publish benchmarks for comparison
-- Contribute to open datasets
-- Cite and acknowledge sources
-
-## Citing ragged Research
-
-If you use ragged or its research materials in academic work:
-
-### In-Text Citation
-
-> The ragged project documented a transparent AI-assisted development process
-> including time tracking and architectural decisions (ragged Project, 2025).
-
-### Bibliography Entry
-
-```
-ragged Project. (2025). ragged: Privacy-First Local RAG System - Development
-Documentation and Research. GitHub. https://github.com/REPPL/ragged/tree/main/docs
-```
-
-### Specific Documents
-
-For citing specific research documents, use git commit hash:
-
-```
-ragged Project. (2025). Document Normalisation Pipeline Design [commit abc123].
-Retrieved from https://github.com/REPPL/ragged/blob/abc123/docs/development/planning/core-concepts/document-normalisation.md
-```
 
 ## Research Questions ragged Addresses
 
