@@ -20,6 +20,15 @@ Guides are **task-oriented** how-tos that help you solve specific problems. They
 
 ## Available Guides
 
+### Command-Line Interface
+
+**[CLI Features Guide](./cli/cli-features.md)**
+Comprehensive tutorial for using ragged's command-line interface. Covers document management, querying, configuration, and advanced workflows.
+
+- Topics: Adding documents, querying, collections, metadata, history
+- Level: Beginner to advanced
+- Version: v0.2.8+
+
 ### Development Environment
 
 **[Docker Setup Guide](./docker-setup.md)**

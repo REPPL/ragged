@@ -7,6 +7,80 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.8] - 2025-11-18
+
+### Added
+- **CLI Enhancements**: 10 new commands and features for comprehensive document management
+  - `metadata` command group: List, show, update, and search document metadata
+  - `search` command: Advanced semantic search with metadata filtering
+  - `history` command group: View, show, replay, clear, and export query history
+  - `cache` command group: View cache information and clear caches
+  - `export` command group: Backup and restore functionality
+  - `validate` command: Configuration and environment validation
+  - `env-info` command: System information for bug reports
+  - `completion` command: Shell completion installation (bash/zsh/fish)
+  - Query history automatically saved (disable with `--no-history`)
+  - Interactive model selection with RAG suitability scores
+- **Documentation**: Comprehensive CLI documentation
+  - CLI Command Reference Guide: Complete technical specifications for all 14 commands
+  - CLI Features User Guide: Comprehensive 1593-line tutorial with examples and workflows
+  - CLI-specific README files with navigation and cross-references
+- **Testing**: 8 new test files covering all CLI commands
+  - test_add.py: 24 tests for document ingestion
+  - test_query.py: 23 tests for query command
+  - test_health.py: 7 tests for service checks
+  - test_docs.py: 7 tests for document management
+  - test_config.py: 8 tests for configuration
+  - test_envinfo.py: 5 tests for environment information
+  - test_formatters.py: 18 tests for output formatting
+  - test_verbosity.py: 10 tests for verbosity control
+  - Total: 91+ new CLI tests
+
+### Changed
+- README.md updated with v0.2.8 features and CLI documentation links
+- Enhanced Quick Start section with comprehensive CLI examples
+- Added CLI Features section listing all 14 commands by category
+
+### Technical Details
+- **Commands**: 14 total CLI commands (4 base + 10 command groups)
+- **Documentation**: 2 major guides (command reference + features guide)
+- **Test Coverage**: 91+ new tests for CLI functionality
+- **Output Formats**: Multiple format support (text, json, table, csv, markdown, yaml)
+- **Completion**: Breaking Changes: None (all additions are backwards-compatible)
+
+## [0.2.7] - 2025-11-17
+
+### Added
+- **CLI Architecture Refactoring**: Modular command structure for maintainability
+  - Extracted all commands from monolithic `main.py` to separate modules in `cli/commands/`
+  - 14 command files: add, query, health, docs, config, completion, validate, envinfo, metadata, search, history, exportimport, cache
+  - Common utilities in `cli/common.py`, `cli/formatters.py`, `cli/verbosity.py`
+  - Improved testability with isolated command modules
+- **Folder Ingestion**: Already implemented in v0.2.2, validated and documented
+  - Recursive directory scanning with configurable depth
+  - Batch processing with progress indicators
+  - Automatic duplicate detection and skipping
+- **HTML Processing**: Enhanced web content extraction
+  - Trafilatura integration for clean HTML conversion
+  - BeautifulSoup fallback for complex pages
+  - Metadata extraction from HTML documents
+
+### Changed
+- CLI codebase restructured from single file to modular architecture
+- Improved code organisation and command isolation
+- Better separation of concerns (formatting, verbosity, common utilities)
+
+### Technical Details
+- **Architecture**: Modular command system with shared utilities
+- **Maintainability**: Each command in separate file for easier testing and updates
+- **Breaking Changes**: None (internal refactoring only)
+
+## [0.2.6] - 2025-11-17
+
+**Note**: Version v0.2.6 was skipped/deferred. Features originally planned for v0.2.6 were either already implemented in earlier versions or deferred to v0.2.8 and beyond.
+
+See implementation notes: `docs/development/implementation/version/v0.2/v0.2.6-skipped.md`
+
 ## [0.2.5] - 2025-11-17
 
 ### Improved

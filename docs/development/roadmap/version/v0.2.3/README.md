@@ -24,7 +24,7 @@ Version 0.2.3 was originally planned to address three critical P0 bugs. However,
 - BUG-002: Resolved by settings refactoring in v0.2.5 (QUALITY-001)
 - BUG-003: Addressed by comprehensive test additions in v0.2.4 and v0.2.5
 
-**See:** [v0.2.3 Implementation Record (Skipped)](../../implementation/version/v0.2/v0.2.3-skipped.md)
+**See:** [v0.2.3 Implementation Record (Skipped)](../../implementation/version/v0.2/v0.2.3.md)
 
 ---
 

@@ -1,18 +1,33 @@
-# Feature Roadmaps
+# Feature Specifications
 
-**Purpose:** Cross-version feature implementation plans
+**Purpose:** Centralised repository for all feature specifications and roadmaps
 
-**Last Updated:** 2025-11-15
+**Last Updated:** 2025-11-18
 
 ---
 
 ## Overview
 
-This directory contains detailed roadmaps for features that span multiple versions or have complex implementation timelines.
+This directory consolidates ALL feature specifications and roadmaps in one location, organised by scope:
+
+- **Cross-version features** - Features that span multiple versions (root level)
+- **Version-specific features** - Features specific to a version (version subdirectories)
+
+**Taxonomy:**
+```
+features/
+├── README.md (this file)
+├── {cross-version-feature}.md (e.g., hardware-optimisation-roadmap.md)
+└── v{X}.{Y}/ (version-specific features)
+    ├── README.md
+    └── {feature-name}.md
+```
 
 ---
 
-## Current Feature Roadmaps
+## Cross-Version Features
+
+Features that span multiple versions or have complex multi-phase implementation timelines.
 
 ### [hardware-optimisation-roadmap.md](./hardware-optimisation-roadmap.md)
 **Versions:** v0.1 - v1.0
@@ -24,6 +39,8 @@ This directory contains detailed roadmaps for features that span multiple versio
 - Phase 4: Dynamic optimisation (v1.0)
 
 **Effort:** 38-55 hours total
+
+---
 
 ### [model-selection-roadmap.md](./model-selection-roadmap.md)
 **Versions:** v0.1 - v2.1+
@@ -40,23 +57,44 @@ This directory contains detailed roadmaps for features that span multiple versio
 
 ---
 
-## Feature Roadmap Format
+## Version-Specific Features
 
-Each roadmap includes:
+Detailed feature specifications for individual versions.
+
+### [v0.3](./v0.3/)
+Advanced RAG techniques and features planned for v0.3 series.
+
+**Features:**
+- Chunking Strategies
+- CLI Features
+- Data Generation
+- Evaluation & Quality
+- Multi-Modal Support
+- Query Processing
+
+**See:** [v0.3 Features README](./v0.3/README.md)
+
+---
+
+## Feature Specification Format
+
+Each feature specification includes:
 - Overview and goals
-- Phase-by-phase implementation plan
+- Implementation details
 - Effort estimates (in hours)
 - Dependencies and prerequisites
 - Success criteria
 - Testing requirements
+- Integration points
 
 ---
 
 ## Related Documentation
 
-- [Version Roadmaps](../version/) - Version-specific plans
+- [Version Roadmaps](../version/) - Complete version roadmaps
 - [Planning](../../planning/) - Design documents
 - [Decisions](../../decisions/) - Architectural decisions
+- [Implementation Records](../../implementation/) - Completed features
 
 ---
 
