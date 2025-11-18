@@ -1,10 +1,10 @@
 # ragged Development Roadmap - All Versions
 
-**Current Version:** v0.2.2
+**Current Version:** v0.2.7
 
-**Last Updated:** 2025-11-12
+**Last Updated:** 2025-11-18
 
-**Planning Horizon:** v0.7.0 (~850-1050 total hours)
+**Planning Horizon:** v0.7.0 (~750-950 total hours remaining)
 
 ---
 
@@ -24,17 +24,19 @@ This document provides a unified view of all planned ragged versions. Each versi
 ## Timeline Summary
 
 ```
-Current     v0.2.2 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-                                                         │ Bug Fixes
-Next        v0.2.3 ━━━ P0 Critical (12-15h)             │ (44-59h)
-            v0.2.4 ━━━ P1 High Priority (20-25h)        │
-            v0.2.6 ━━━ P2 Quality (12-19h)              ┛
+Completed   v0.2.2 ━━━ Base System ✅
+            v0.2.3 ━━━ SKIPPED (resolved in v0.2.4-v0.2.5)
+            v0.2.4 ━━━ High Priority Bugs ✅ (2025-11-17)
+            v0.2.5 ━━━ Code Quality ✅ (2025-11-17)
+            v0.2.6 ━━━ SKIPPED/DEFERRED
+Current     v0.2.7 ━━━ CLI Refactoring (in progress)
+            v0.2.8 ━━━ CLI Enhancements (in progress)
             ═════════════════════════════════════════ STABILITY
-            v0.2.7 ━━━━━━━━━━━━━ UX & Performance (80-100h)
+Next        v0.2.9 ━━━ Performance & Stability (42-53h)
             ═════════════════════════════════════════ FOUNDATION
-            v0.3.0 ━━━━━━━━━━━━━ Advanced RAG (180-220h)
+            v0.3.x ━━━━━━━━━━━━━ Advanced RAG (437-501h, 13 releases)
             ═════════════════════════════════════════ ADVANCED
-            v0.4.0 ━━━━━━━━━━━━━ Personal Memory (160-200h)
+            v0.4.x ━━━━━━━━━━━━━ Personal Memory (195-242h, 10 releases)
             v0.5.0 ━━━━━━━━━━━━━ ColPali Vision (140-180h)
             v0.6.0 ━━━━━━━━━━━━━ Optimisation (120-150h)
             ═════════════════════════════════════════ PRODUCTION
@@ -47,19 +49,15 @@ Future      v0.7.0 ━━━━━━━━━━━━━ Production Ready (150
 
 ### v0.2.3 - Critical Bugs (P0) (12-15 hours)
 
-**Status:** Planned
-**Priority:** P0 - Must complete first
+**Status:** SKIPPED - Critical bugs resolved in subsequent versions (v0.2.4, v0.2.5)
+**Priority:** P0 - Was planned first
 **Focus:** Blocking issues that prevent core functionality
 
-**Key Issues:**
-- BUG-001: API endpoints non-functional (blocks Web UI)
-- BUG-002: Logger undefined in settings.py
-- BUG-003: Zero test coverage for new modules (606 lines)
-
-**Success Criteria:**
-- Web UI functional for uploads and queries
-- No NameError in config loading
-- Test coverage ≥80% for scanner, batch, model_manager
+**Resolution:**
+- Critical bugs were addressed incrementally in v0.2.4 and v0.2.5
+- API endpoints fixed
+- Logger issues resolved
+- Test coverage improved across multiple releases
 
 **See:** [v0.2.3/README.md](./v0.2.3/README.md)
 
@@ -67,106 +65,164 @@ Future      v0.7.0 ━━━━━━━━━━━━━ Production Ready (150
 
 ### v0.2.4 - High Priority Bugs (P1) (20-25 hours)
 
-**Status:** Planned
-**Priority:** P1 - Complete after v0.2.3
+**Status:** ✅ COMPLETE (Released 2025-11-17)
+**Priority:** P1
 **Focus:** Significant quality and functionality improvements
 
-**Key Issues:**
-- BUG-004: Inconsistent error handling
-- BUG-005: Path handling edge cases
-- BUG-006: Memory leaks in batch processing
-- BUG-007: ChromaDB metadata type restrictions
-- BUG-008: Incomplete hybrid retrieval integration
-- BUG-009: Few-shot examples unused
-- BUG-010: Duplicate detection incomplete
-- BUG-011: Page tracking edge cases
+**Completed:**
+- BUG-004: Custom exception system with hierarchical structure
+- BUG-005: Secure path utilities with directory traversal protection
+- BUG-007: ChromaDB metadata serialisation for complex types
+- BUG-008: Hybrid retrieval implementation (sparse + dense)
+- BUG-010: Comprehensive duplicate detection (file hash, content hash, similarity)
+- BUG-011: Page tracking with citation support
 
-**Success Criteria:**
-- Error handling consistent across codebase
-- Memory stable during large batches
-- Hybrid retrieval works correctly
+**Achievement:**
+- 100% test coverage for exceptions and path utilities
 - All P1 bugs resolved
+- 92 new tests added
 
-**See:** [v0.2.4/README.md](./v0.2.4/README.md)
-
----
-
-### v0.2.5 - Bug Fixes Overview (Split)
-
-**Status:** Split into v0.2.3, v0.2.4, v0.2.6
-**Note:** This version was split into three priority-based versions for token-efficient implementation.
-
-**See:** [v0.2.5/README.md](./v0.2.5/README.md) for split overview
+**See:** [v0.2.4/README.md](./v0.2.4/README.md) | [CHANGELOG](../../../CHANGELOG.md#024---2025-11-17)
 
 ---
 
-### v0.2.6 - Quality Improvements (P2) (12-19 hours)
+### v0.2.5 - Code Quality Improvements (13-20 hours)
 
-**Status:** Planned
-**Priority:** P2 - Complete after v0.2.4
-**Focus:** Code quality and maintainability
+**Status:** ✅ COMPLETE (Released 2025-11-17)
+**Focus:** Code quality, type safety, and test coverage
 
-**Key Improvements:**
-- QUALITY-001: Type hint coverage
-- QUALITY-002: Docstring completeness
-- QUALITY-003: TODO comments cleanup
-- QUALITY-004: Code duplication removal
-- QUALITY-005: Magic numbers replacement
+**Completed:**
+- QUALITY-001: Settings side effects eliminated
+- QUALITY-002: Exception handling improvements (26 handlers)
+- QUALITY-003: Chunking test coverage (0% → 85%)
+- QUALITY-004: Magic numbers extracted to constants (13 values)
+- QUALITY-005: Comprehensive type hints (100% strict mypy compliance)
+- QUALITY-006-012: Citation tests, TODO cleanup, integration tests
 
-**Success Criteria:**
-- mypy --strict passes
-- All public functions documented
-- No TODO comments without issue references
-- Code quality metrics improved
+**Achievement:**
+- Zero mypy --strict errors across 46 files
+- +70 new tests added
+- 100% test coverage for citation formatter
+- ~15 hours (vs 13-20h estimated)
+
+**See:** [v0.2.5/README.md](./v0.2.5/README.md) | [CHANGELOG](../../../CHANGELOG.md#025---2025-11-17)
+
+---
+
+### v0.2.6 - File Refactoring & Structure (12-19 hours)
+
+**Status:** SKIPPED/DEFERRED - Structural improvements moved to later versions
+**Priority:** P2
+**Focus:** File organisation and code structure
+
+**Note:**
+- Large-scale file refactoring deferred to avoid churn
+- Some improvements incorporated into v0.2.7-v0.2.8 CLI work
+- Remaining structural changes scheduled for v0.3+ as needed
 
 **See:** [v0.2.6/README.md](./v0.2.6/README.md)
 
 ---
 
-### v0.2.7 - UX & Performance (80-100 hours)
+### v0.2.7 - CLI Structure Refactoring (estimated 80-100h, actual TBD)
 
-**Status:** Planning
-**Focus:** User experience and performance optimisations
+**Status:** 🔄 IN PROGRESS (Current Version)
+**Focus:** CLI architecture and command organisation
 
-**Key Features:**
-- Seamless model switching with model pool
-- Multi-collection document organisation
-- Query result caching (50-90% speedup)
-- Async batch processing (2-4x faster)
-- Enhanced CLI feedback
+**Completed:**
+- CLI command modularisation (14 command modules created)
+- Main entry point refactored (586→107 lines, 82% reduction)
+- Command structure: add, cache, completion, config, docs, envinfo, exportimport, health, history, metadata, query, search, validate
+- Batch processing with progress bars
+- Folder ingestion with recursive scanning
+- HTML processing support (Trafilatura + BeautifulSoup)
 
-**Success Criteria:**
-- Batch processing 2-4x faster
-- Query latency reduced 50-90% (cached)
-- Model switching <2 sec
-- Positive user feedback
+**In Progress:**
+- Performance optimisations
+- Additional CLI enhancements
 
 **See:** [v0.2.7/README.md](./v0.2.7/README.md)
 
 ---
 
-### v0.3.0 - Advanced RAG Techniques (180-220 hours)
+### v0.2.8 - CLI Enhancements (planned 40-60h, actual TBD)
 
-**Status:** Planning
-**Focus:** State-of-the-art RAG capabilities
+**Status:** 🔄 IN PROGRESS
+**Focus:** Advanced CLI features and utilities
 
-**Key Features:**
-- Query decomposition (multi-query RAG)
-- HyDE (Hypothetical Document Embeddings)
-- Cross-encoder reranking (+10-20% quality)
-- Contextual compression
-- Self-querying retrieval
-- RAGAS evaluation framework
+**Completed:**
+- Shell completion (completion command)
+- Output formats (JSON, table formatters)
+- Config validation command
+- Environment info command
+- Metadata management
+- Search & filtering
+- Query history & replay
+- Export/import utilities
+- Cache management
+- Verbose/quiet modes
 
-**Quality Improvements:**
-- HyDE: +5-15% on complex queries
-- Reranking: +10-20% overall
-- Contextual compression: +5-10% on long documents
+**In Progress:**
+- Testing and documentation
+- Integration with v0.2.7 features
+
+**See:** [v0.2.8/README.md](./v0.2.8/README.md)
+
+---
+
+### v0.2.9 - Stability & Performance (42-53 hours)
+
+**Status:** 📅 PLANNED - Next target after v0.2.7-v0.2.8 complete
+**Focus:** Performance optimisation and system stability
+
+**Planned Features:**
+- Embedder caching (singleton pattern, 4-6x faster cold start)
+- Batch embedding optimisation (dynamic sizing, 3-5x throughput)
+- Query result caching (LRU/TTL, 10-20x faster repeat queries)
+- Error recovery & resilience (retry, circuit breaker, graceful degradation)
+- Memory management (dynamic monitoring, OOM prevention)
+- Comprehensive logging (structured JSON, metrics, audit trails)
 
 **Success Criteria:**
+- Embedder init: <0.5s cold, <0.1s warm
+- Repeat queries: <200ms
+- No OOM crashes
+- >95% error recovery rate
+- >80% test coverage maintained
+
+**See:** [v0.2.9/README.md](./v0.2.9/README.md)
+
+---
+
+### v0.3.x - Advanced RAG Techniques (437-501 hours, 13 releases)
+
+**Status:** Planning
+**Focus:** State-of-the-art RAG capabilities across 13 incremental releases
+
+**Release Structure:**
+- **v0.3.1** - Foundation & metrics (30h)
+- **v0.3.2** - Configuration transparency (28-34h)
+- **v0.3.3** - Advanced query processing (53-55h)
+- **v0.3.4** - Chunking strategies (58-65h)
+- **v0.3.5** - Modern OCR (Docling) (50-55h)
+- **v0.3.6** - Messy document handling (23-25h)
+- **v0.3.7** - VectorStore abstraction (35-40h)
+- **v0.3.8** - Production data & generation (68-74h)
+- **v0.3.9-v0.3.13** - Developer experience tools (92-120h)
+
+**Key Features:**
+- RAGAS evaluation framework
+- Query decomposition, reranking, HyDE
+- Semantic chunking, hierarchical strategies
+- Modern OCR (30× performance improvement)
+- Automated messy PDF handling
+- Versioned documents, rich queries
+- Interactive REPL, profiling, dashboards
+
+**Success Criteria:**
+- RAGAS scores >0.80
 - Measurable quality improvements for each technique
-- Comprehensive evaluation framework
-- Research-backed validation
+- Production-ready tooling
 
 **See:** [v0.3/README.md](./v0.3/README.md)
 
@@ -364,15 +420,6 @@ Hour estimates reflect autonomous AI coding assistant capabilities. Clear marker
 - **For feature requests:** Create RFC in `rfcs/`
 - **For roadmap feedback:** GitHub Discussions
 - **For usage questions:** Check main README
-
----
-
-## Document Metadata
-
-- **Created:** 2025-11-12
-- **Maintained By:** ragged development team
-- **Location:** `docs/development/roadmap/version/README.md`
-- **Purpose:** Unified overview of all planned versions
 
 ---
 

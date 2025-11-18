@@ -1,8 +1,8 @@
 # Ragged v0.2.6 Roadmap - Documentation & Structural Improvements
 
-**Status:** Planned
+**Status:** ⊗ SKIPPED/DEFERRED - Structural improvements moved to later versions
 
-**Total Hours:** 24-35 hours (AI implementation)
+**Total Hours:** N/A (not implemented as planned)
 
 **Focus:** Documentation completeness and structural refactoring
 
@@ -12,14 +12,23 @@
 
 ## Overview
 
-Version 0.2.6 focuses on documentation completeness and structural improvements after code quality foundations established in v0.2.5. This release enhances maintainability through comprehensive documentation and better code organisation without adding new functionality.
+Version 0.2.6 was originally planned for large-scale documentation and file refactoring. However, this version was **skipped/deferred** for the following reasons:
 
-**Dependencies:** Requires v0.2.5 completion (code quality improvements, type hints, magic numbers extraction)
+**Decision Rationale:**
+1. **Avoid Churn**: Large-scale file refactoring would create merge conflicts and disrupt ongoing work
+2. **Premature Optimisation**: File structure was adequate for current needs
+3. **Higher Priorities**: User-facing features (CLI, folder upload, HTML) took precedence
+4. **Incremental Approach**: Structural improvements better addressed incrementally in v0.2.7-v0.2.8
 
-**Note:** Items previously planned for v0.2.6 that were moved to v0.2.5:
-- ~~QUALITY-001: Type hints~~ → v0.2.5 QUALITY-006
-- ~~QUALITY-003: TODO cleanup~~ → v0.2.5 QUALITY-009
-- ~~QUALITY-005: Magic numbers~~ → v0.2.5 QUALITY-005
+**Items Already Completed in v0.2.5:**
+- ~~QUALITY-001: Type hints~~ → v0.2.5 QUALITY-006 ✅
+- ~~QUALITY-003: TODO cleanup~~ → v0.2.5 QUALITY-009 ✅
+- ~~QUALITY-005: Magic numbers~~ → v0.2.5 QUALITY-005 ✅
+
+**Items Incorporated into v0.2.7-v0.2.8:**
+- CLI modularisation (14 command modules created)
+- File organisation improvements where beneficial
+- Documentation updates alongside feature development
 
 ---
 
@@ -364,10 +373,3 @@ After v0.2.6 completion:
 - [v0.2.5 Roadmap](../v0.2.5/README.md) - Previous version
 - [v0.2.7 Roadmap](../v0.2.7/README.md) - Next version
 
----
-
-**Last Updated:** 2025-11-17
-
-**Status:** 📋 Ready for implementation after v0.2.5
-
-**Estimated Completion:** 3-4 weeks (24-35 hours)
