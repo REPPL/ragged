@@ -182,22 +182,6 @@ For each research claim in ragged documentation:
 - User study results
 - Comparison to commercial RAG systems
 
-## Questions?
-
-- **Research Collaboration**: [GitHub Discussions](https://github.com/REPPL/ragged/discussions)
-- **Academic Inquiries**: See README for contact information
-- **Citing ragged**: Use formats above or ask in discussions
-
----
-
-**Status:** Research materials being collected during planning and development.
-
-**Next Steps**:
-1. Organise migrated background research
-2. Design evaluation framework (v0.2)
-3. Conduct first benchmarks (v0.2)
-4. Document experimental methodology
-
 ---
 
 **Related Documentation**:
