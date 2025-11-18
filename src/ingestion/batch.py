@@ -16,11 +16,13 @@ from rich.progress import Progress, TaskID
 
 from src.chunking.splitters import chunk_document
 from src.config.constants import DEFAULT_MEMORY_LIMIT_PERCENTAGE
+from src.config.settings import get_settings
 from src.embeddings.base import BaseEmbedder
 from src.embeddings.factory import get_embedder
 from src.ingestion.loaders import load_document
 from src.storage.vector_store import VectorStore
 from src.utils.logging import get_logger
+from src.utils.resource_governor import get_governor, ResourcePriority
 from src.exceptions import MemoryLimitExceededError
 
 logger = get_logger(__name__)
@@ -69,6 +71,7 @@ class BatchIngester:
         continue_on_error: bool = True,
         skip_duplicates: bool = True,
         memory_limit_mb: Optional[int] = None,
+        use_resource_governor: bool = True,
     ):
         """Initialize batch ingester.
 
@@ -77,10 +80,12 @@ class BatchIngester:
             continue_on_error: If True, continue after errors; if False, stop
             skip_duplicates: If True, skip duplicate documents automatically
             memory_limit_mb: Optional memory limit in MB (default: 80% of available)
+            use_resource_governor: Use unified resource governance (v0.2.9+)
         """
         self.console = console
         self.continue_on_error = continue_on_error
         self.skip_duplicates = skip_duplicates
+        self.use_resource_governor = use_resource_governor
 
         # Set memory limit (default to configured percentage of available RAM)
         if memory_limit_mb is None:
@@ -89,7 +94,15 @@ class BatchIngester:
         else:
             self.memory_limit_mb = memory_limit_mb
 
-        logger.info(f"BatchIngester initialized with {self.memory_limit_mb}MB memory limit")
+        # Get resource governor if enabled
+        if self.use_resource_governor:
+            self.governor = get_governor()
+            logger.info(
+                f"BatchIngester initialized with resource governance: "
+                f"{self.memory_limit_mb}MB memory limit"
+            )
+        else:
+            logger.info(f"BatchIngester initialized with {self.memory_limit_mb}MB memory limit")
 
     def _get_current_memory_mb(self) -> float:
         """Get current process memory usage in MB.
@@ -165,10 +178,35 @@ class BatchIngester:
                 # Check again after GC
                 self._check_memory_limit(f"document_{i}_post_gc")
 
-            # Ingest single document
-            result = self._ingest_single(
-                file_path, vector_store, embedder
-            )
+            # Ingest single document (with resource governance if enabled)
+            if self.use_resource_governor:
+                # Estimate resources needed for this document
+                # (conservative estimate: 100MB + 10% CPU per document)
+                operation_id = f"ingest_{i}_{file_path.stem}"
+
+                try:
+                    with self.governor.reserve(
+                        operation_id=operation_id,
+                        memory_mb=100,
+                        cpu_percent=10.0,
+                        priority=ResourcePriority.NORMAL,
+                        timeout=30.0,  # Wait up to 30s for resources
+                    ):
+                        result = self._ingest_single(
+                            file_path, vector_store, embedder
+                        )
+                except Exception as e:
+                    logger.error(f"Resource reservation failed for {file_path}: {e}")
+                    result = IngestionResult(
+                        file_path=file_path,
+                        status=IngestionStatus.FAILED,
+                        error=f"Resource unavailable: {str(e)}",
+                    )
+            else:
+                result = self._ingest_single(
+                    file_path, vector_store, embedder
+                )
+
             results.append(result)
 
             if result.status == IngestionStatus.SUCCESS:
