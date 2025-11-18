@@ -170,7 +170,7 @@ This document traces the lineage from planning through decisions to implementati
 - Prioritised type safety, test coverage, and error handling
 
 **Implementation:**
-- [v0.2.5 Release Notes](./v0.2.5-release-notes.md) - Completed features
+- [v0.2.5 Release Notes](./v0.2.5.md) - Completed features
 - [v0.2.5 Time Log](../../process/time-logs/version/v0.2/v0.2.5-time-log.md) - ~12 hours actual
 - All 9 quality improvements successfully implemented
 
