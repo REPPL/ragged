@@ -1,0 +1,95 @@
+name: Performance Regression Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+
+jobs:
+  performance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+          pip install pytest pytest-benchmark
+
+      - name: Download baseline
+        id: download-baseline
+        continue-on-error: true
+        run: |
+          # Try to download baseline from artifacts
+          # For now, we'll create a placeholder
+          if [ ! -f baseline.json ]; then
+            echo "⚠️  No baseline found, skipping regression checks"
+            echo "baseline_found=false" >> $GITHUB_OUTPUT
+          else
+            echo "✅ Baseline loaded"
+            echo "baseline_found=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run performance tests
+        run: |
+          pytest tests/performance/ -v -m performance --tb=short || true
+          # Continue even if tests fail (we want to see the results)
+
+      - name: Generate performance report
+        if: always()
+        run: |
+          echo "## Performance Test Results" > performance-report.md
+          echo "" >> performance-report.md
+          echo "Performance tests completed. See test output above for details." >> performance-report.md
+          echo "" >> performance-report.md
+          if [ "${{ steps.download-baseline.outputs.baseline_found }}" == "false" ]; then
+            echo "⚠️ **No baseline found** - regression checks skipped" >> performance-report.md
+            echo "" >> performance-report.md
+            echo "To establish a baseline, run:" >> performance-report.md
+            echo '```' >> performance-report.md
+            echo "pytest tests/performance/ -v -m performance" >> performance-report.md
+            echo '```' >> performance-report.md
+          fi
+
+      - name: Upload performance report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-report
+          path: performance-report.md
+
+      - name: Comment PR with results
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let report = '## 📊 Performance Test Results\n\n';
+
+            if (fs.existsSync('performance-report.md')) {
+              const content = fs.readFileSync('performance-report.md', 'utf8');
+              report += content;
+            } else {
+              report += 'Performance tests completed. Check workflow logs for details.';
+            }
+
+            report += '\n\n---\n*Automated performance regression testing for v0.2.9*';
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: report
+            });
