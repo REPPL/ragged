@@ -472,8 +472,7 @@
 ## Related Documentation
 
 - [v0.2.9 Roadmap](./README.md) - Overall roadmap
-- [Production Readiness Checklist](./PRODUCTION-READINESS.md) - Pre-release validation
-- [Rollback Procedures](./ROLLBACK-PROCEDURES.md) - Emergency rollback
+- [Production Readiness Checklist](./production-readiness.md) - Pre-release validation
 - [Feature Specifications](./features/README.md) - Detailed feature designs
 
 ---

@@ -1,6 +1,6 @@
 # v0.2.9 Feature Specifications
 
-This directory contains detailed specifications for all 23 features planned for v0.2.9.
+This directory contains detailed specifications for all 22 features planned for v0.2.9.
 
 ---
 
@@ -21,7 +21,7 @@ All features follow the standard template: [TEMPLATE.md](./TEMPLATE.md)
 
 ---
 
-## Phase 0: Foundation & Documentation (6 specs)
+## Phase 0: Foundation & Documentation (3 specs)
 
 **Critical infrastructure before implementation begins**
 
@@ -29,12 +29,9 @@ All features follow the standard template: [TEMPLATE.md](./TEMPLATE.md)
 |---|---------|--------|--------|
 | 1 | [Feature Flag Framework](./feature-flags.md) | 2-3h | Not started |
 | 2 | [Performance Regression Test Suite](./performance-regression-tests.md) | 4-5h | Not started |
-| 3 | [Performance Baseline Measurements](./performance-baseline.md) | 1-2h | Not started |
-| 4 | [Risk Mitigation Playbook](./risk-mitigation.md) | 1-2h | Not started |
-| 5 | [Rollback Procedures](./rollback-procedures.md) | 1-2h | Not started |
-| 6 | [Production Readiness Checklist](./production-readiness.md) | 1-2h | Not started |
+| 3 | [Performance Baseline Measurements](./performance-baseline.md) | 4-5h | Not started |
 
-**Total**: 12-15 hours
+**Total**: 10-13 hours
 
 ---
 
@@ -44,12 +41,12 @@ All features follow the standard template: [TEMPLATE.md](./TEMPLATE.md)
 
 | # | Feature | Effort | Status |
 |---|---------|--------|--------|
-| 7 | [Embedder Caching with Progressive Warm-Up](./embedder-caching.md) | 9-12h | Not started |
-| 8 | [Intelligent Batch Auto-Tuning](./batch-embedding.md) | 9-11h | Not started |
-| 9 | [Query Result Caching Validation](./query-caching.md) | 1-2h | Not started |
-| 10 | [Advanced Error Recovery & Resilience](./error-recovery.md) | 9-12h | Not started |
-| 11 | [Resource Governance System](./resource-governance.md) | 8-10h | Not started |
-| 12 | [Performance-Aware Logging](./logging.md) | 6-8h | Not started |
+| 4 | [Embedder Caching with Progressive Warm-Up](./embedder-caching.md) | 9-12h | Not started |
+| 5 | [Intelligent Batch Auto-Tuning](./batch-embedding.md) | 9-11h | Not started |
+| 6 | [Query Result Caching Validation](./query-caching.md) | 1-2h | Not started |
+| 7 | [Advanced Error Recovery & Resilience](./error-recovery.md) | 9-12h | Not started |
+| 8 | [Resource Governance System](./resource-governance.md) | 8-10h | Not started |
+| 9 | [Performance-Aware Logging](./logging.md) | 6-8h | Not started |
 
 **Total**: 35-43 hours
 
@@ -61,11 +58,11 @@ All features follow the standard template: [TEMPLATE.md](./TEMPLATE.md)
 
 | # | Feature | Effort | Status |
 |---|---------|--------|--------|
-| 13 | [Enhanced Health Checks with Deep Diagnostics](./health-checks.md) | 3-4h | Not started |
-| 14 | [Async Operations with Backpressure](./async-operations.md) | 8-10h | Not started |
-| 15 | [Incremental Index Operations](./index-optimisation.md) | 5-6h | Not started |
-| 16 | [Operational Observability Dashboard](./observability-dashboard.md) | 3-4h | Not started |
-| 17 | [Cold Start Holistic Optimisation](./cold-start-optimisation.md) | 3-4h | Not started |
+| 10 | [Enhanced Health Checks with Deep Diagnostics](./health-checks.md) | 3-4h | Not started |
+| 11 | [Async Operations with Backpressure](./async-operations.md) | 8-10h | Not started |
+| 12 | [Incremental Index Operations](./index-optimisation.md) | 5-6h | Not started |
+| 13 | [Operational Observability Dashboard](./observability-dashboard.md) | 3-4h | Not started |
+| 14 | [Cold Start Holistic Optimisation](./cold-start-optimisation.md) | 3-4h | Not started |
 
 **Total**: 23-31 hours
 
@@ -77,11 +74,11 @@ All features follow the standard template: [TEMPLATE.md](./TEMPLATE.md)
 
 | # | Feature | Effort | Status |
 |---|---------|--------|--------|
-| 18 | [Test Coverage Improvements](./test-coverage.md) | 6-8h | Not started |
-| 19 | [Performance Profiling Tools Integration](./profiling-tools.md) | 4-5h | Not started |
-| 20 | [Graceful Degradation Specifications](./graceful-degradation.md) | 2-3h | Not started |
-| 21 | [Multi-Tier Caching Strategy](./multi-tier-caching.md) | 3-4h | Not started |
-| 22 | [Adaptive Performance Tuning](./adaptive-tuning.md) | 4-5h | Not started |
+| 15 | [Test Coverage Improvements](./test-coverage.md) | 6-8h | Not started |
+| 16 | [Performance Profiling Tools Integration](./profiling-tools.md) | 4-5h | Not started |
+| 17 | [Graceful Degradation Specifications](./graceful-degradation.md) | 2-3h | Not started |
+| 18 | [Multi-Tier Caching Strategy](./multi-tier-caching.md) | 3-4h | Not started |
+| 19 | [Adaptive Performance Tuning](./adaptive-tuning.md) | 4-5h | Not started |
 
 **Total**: 18-26 hours
 
@@ -197,13 +194,13 @@ Before marking a spec as "Ready for implementation":
 
 | Phase | Specs Complete | Specs In Progress | Specs Not Started | Total |
 |-------|----------------|-------------------|-------------------|-------|
-| Phase 0 | 0 | 0 | 6 | 6 |
+| Phase 0 | 0 | 0 | 3 | 3 |
 | Phase 1 | 0 | 0 | 6 | 6 |
 | Phase 2 | 0 | 0 | 5 | 5 |
 | Phase 3 | 0 | 0 | 5 | 5 |
-| **Total** | **0** | **0** | **22** | **22** |
+| **Total** | **0** | **0** | **19** | **19** |
 
-*Note: Template (1) not counted in progress tracking*
+*Note: Template (1) + supporting docs (2) not counted in progress tracking*
 
 **Last Updated**: 2025-11-18
 

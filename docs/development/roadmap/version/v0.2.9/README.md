@@ -1,8 +1,7 @@
 # v0.2.9 Roadmap: Production-Ready Release
 
 **Status**: Planning
-**Estimated Effort**: 85-109 hours
-**Timeline**: 2-3 months
+**Estimated Effort**: 83-107 hours
 **Dependencies**: v0.2.8 (recommended)
 
 ---
@@ -51,7 +50,7 @@
 
 All phases are now **MUST-HAVE** for the production-ready v0.2.9 release.
 
-### Phase 0: Foundation & Documentation (MUST-HAVE) - 12-15 hours
+### Phase 0: Foundation & Documentation (MUST-HAVE) - 10-13 hours
 
 **Critical infrastructure before implementation begins**:
 
@@ -68,15 +67,9 @@ All phases are now **MUST-HAVE** for the production-ready v0.2.9 release.
    - Microbenchmarks for critical paths
 
 3. **Feature Specifications** (4-5h)
-   - Create 23 detailed specification documents
+   - Create 22 detailed specification documents
    - API interfaces and edge cases
    - Testing requirements and success criteria
-
-4. **Critical Missing Pieces** (2-2h)
-   - Performance baseline measurements
-   - Risk mitigation playbook
-   - Rollback procedures documentation
-   - Production readiness checklist
 
 **Deliverable**: Solid foundation for safe, systematic implementation
 
@@ -237,40 +230,37 @@ Testing, tooling, and resilience:
 
 ## Detailed Feature Specifications
 
-**Total**: 23 feature specification documents to be created in Phase 0.
+**Total**: 22 feature specification documents to be created in Phase 0.
 
 ### Phase 0 Features
 1. [Feature Flag Framework](./features/feature-flags.md)
 2. [Performance Regression Test Suite](./features/performance-regression-tests.md)
 3. [Performance Baseline Measurements](./features/performance-baseline.md)
-4. [Risk Mitigation Playbook](./features/risk-mitigation.md)
-5. [Rollback Procedures](./features/rollback-procedures.md)
-6. [Production Readiness Checklist](./features/production-readiness.md)
 
 ### Phase 1 Features
-7. [Embedder Caching with Progressive Warm-Up](./features/embedder-caching.md)
-8. [Intelligent Batch Auto-Tuning](./features/batch-embedding.md)
-9. [Query Result Caching Validation](./features/query-caching.md)
-10. [Advanced Error Recovery & Resilience](./features/error-recovery.md)
-11. [Resource Governance System](./features/resource-governance.md)
-12. [Performance-Aware Logging](./features/logging.md)
+4. [Embedder Caching with Progressive Warm-Up](./features/embedder-caching.md)
+5. [Intelligent Batch Auto-Tuning](./features/batch-embedding.md)
+6. [Query Result Caching Validation](./features/query-caching.md)
+7. [Advanced Error Recovery & Resilience](./features/error-recovery.md)
+8. [Resource Governance System](./features/resource-governance.md)
+9. [Performance-Aware Logging](./features/logging.md)
 
 ### Phase 2 Features
-13. [Enhanced Health Checks with Deep Diagnostics](./features/health-checks.md)
-14. [Async Operations with Backpressure](./features/async-operations.md)
-15. [Incremental Index Operations](./features/index-optimisation.md)
-16. [Operational Observability Dashboard](./features/observability-dashboard.md)
-17. [Cold Start Holistic Optimisation](./features/cold-start-optimisation.md)
+10. [Enhanced Health Checks with Deep Diagnostics](./features/health-checks.md)
+11. [Async Operations with Backpressure](./features/async-operations.md)
+12. [Incremental Index Operations](./features/index-optimisation.md)
+13. [Operational Observability Dashboard](./features/observability-dashboard.md)
+14. [Cold Start Holistic Optimisation](./features/cold-start-optimisation.md)
 
 ### Phase 3 Features
-18. [Test Coverage Improvements](./features/test-coverage.md)
-19. [Performance Profiling Tools Integration](./features/profiling-tools.md)
-20. [Graceful Degradation Specifications](./features/graceful-degradation.md)
-21. [Multi-Tier Caching Strategy](./features/multi-tier-caching.md)
-22. [Adaptive Performance Tuning](./features/adaptive-tuning.md)
+15. [Test Coverage Improvements](./features/test-coverage.md)
+16. [Performance Profiling Tools Integration](./features/profiling-tools.md)
+17. [Graceful Degradation Specifications](./features/graceful-degradation.md)
+18. [Multi-Tier Caching Strategy](./features/multi-tier-caching.md)
+19. [Adaptive Performance Tuning](./features/adaptive-tuning.md)
 
 ### Supporting Documentation
-23. [Feature Specification Template](./features/TEMPLATE.md)
+20. [Feature Specification Template](./features/TEMPLATE.md)
 
 ---
 
@@ -362,57 +352,20 @@ ragged profile-memory add /large-dataset
 
 ---
 
-## Timeline
-
-### Development Approach
-
-**Spec-First**: All feature specifications created before implementation begins.
-**Testing**: Comprehensive test suite (90%+ coverage) built alongside implementation.
-**Deployment**: Phased rollout with feature flags for safe validation.
-
-### Week-by-Week Breakdown
-
-**Weeks 1-2: Phase 0 - Foundation** (12-15h)
-- Feature flags and regression test infrastructure
-- Create all 23 feature specifications
-- Document baseline measurements, playbooks, checklists
-
-**Weeks 3-6: Phase 1 - Core Performance** (35-43h)
-- Week 3: Embedder caching + progressive warm-up (9-12h)
-- Week 4: Intelligent batch auto-tuning + query cache validation (10-13h)
-- Week 5: Advanced error recovery (9-12h)
-- Week 6: Resource governance + performance-aware logging (14-18h)
-
-**Weeks 7-9: Phase 2 - Operational Excellence** (23-31h)
-- Week 7: Health checks + async with backpressure (11-14h)
-- Week 8: Incremental indexing + observability (8-10h)
-- Week 9: Cold start optimisation (3-4h) + buffer
-
-**Weeks 10-12: Phase 3 - Production Hardening** (18-26h)
-- Week 10: Test coverage improvements (6-8h)
-- Week 11: Profiling tools + graceful degradation (6-8h)
-- Week 12: Multi-tier caching + adaptive tuning (7-9h)
-
-**Week 13: Final Integration & Validation** (buffer)
-- End-to-end testing
-- Performance benchmarking validation
-- Documentation review
-- Release preparation
-
-### Phased Rollout Strategy
+## Phased Rollout Strategy
 
 **v0.2.9-alpha** (after Phase 1):
-- Core performance features
+- Core performance features (35-43h)
 - Opt-in via feature flags
 - Limited beta testing
 
 **v0.2.9-beta** (after Phase 2):
-- + Operational excellence features
+- + Operational excellence features (23-31h)
 - Default enabled (flags for rollback)
 - Wider beta testing
 
 **v0.2.9-rc** (after Phase 3):
-- Full feature set
+- Full feature set (18-26h)
 - Production validation
 - Load testing
 
@@ -420,6 +373,27 @@ ragged profile-memory add /large-dataset
 - Production release
 - All features enabled by default
 - Comprehensive documentation
+
+---
+
+## Emergency Rollback
+
+**If critical issues discovered in v0.2.9**:
+
+```bash
+# 1. Checkout previous stable version
+git checkout v0.2.8
+
+# 2. Reinstall
+pip uninstall ragged
+pip install -e .
+
+# 3. Verify rollback
+ragged --version  # Should show v0.2.8
+ragged health-check
+```
+
+**Feature-level rollback**: Use feature flags to disable specific features without full rollback (documented in [Feature Flag Framework](./features/feature-flags.md)).
 
 ---
 
@@ -431,24 +405,20 @@ v0.2.9 has been **significantly expanded** from the original plan to ensure v0.2
 
 | Aspect | Original | Enhanced | Improvement |
 |--------|----------|----------|-------------|
-| **Estimated Effort** | 42-53h | 85-109h | +43-56h (102-106% increase) |
-| **Timeline** | 3-4 weeks | 2-3 months | Professional development cycle |
-| **Features** | 12 features | 22 features | +10 new features |
+| **Estimated Effort** | 42-53h | 83-107h | +41-54h (98-102% increase) |
+| **Features** | 12 features | 19 features | +7 new features |
 | **Phases** | 3 (with priorities) | 4 (all MUST-HAVE) | Added Phase 0 foundation |
 | **Test Coverage** | >80% | >90% overall, >95% critical | Higher quality bar |
 | **Error Recovery** | >95% | >98% | More reliable |
 | **Service Availability** | Not specified | >99% | Enterprise-grade SLA |
-| **Documentation** | 9 specs | 23 specs + 3 playbooks | Comprehensive |
+| **Documentation** | 9 specs | 22 specs + playbooks | Comprehensive |
 
 ### New Features Added
 
-**Phase 0 (Foundation)**: 6 new features
+**Phase 0 (Foundation)**: 3 new features
 1. Feature Flag Framework
 2. Performance Regression Test Suite
 3. Performance Baseline Measurements
-4. Risk Mitigation Playbook
-5. Rollback Procedures
-6. Production Readiness Checklist
 
 **Phase 1 Enhancements**: 5 enhanced features
 - Progressive warm-up (added to embedder caching)
@@ -482,12 +452,12 @@ v0.2.9 has been **significantly expanded** from the original plan to ensure v0.2
 
 **v0.2.9 is now the definitive production-ready release**, addressing all the "nice-to-have" features and adding critical infrastructure for safe deployment. This positions ragged as an enterprise-grade system suitable for demanding production workloads.
 
-**The investment** of 85-109 hours (vs. 42-53h originally) ensures:
+**The investment** of 83-107 hours (vs. 42-53h originally) ensures:
 - Zero compromises on quality
 - Complete operational readiness
 - Comprehensive documentation
 - Battle-tested reliability
-- Easy rollback if needed
+- Feature flags for safe rollout
 - Professional deployment procedures
 
 ---
@@ -497,14 +467,13 @@ v0.2.9 has been **significantly expanded** from the original plan to ensure v0.2
 ### Must Read Before Implementation
 
 1. **[Feature Specification Template](./features/TEMPLATE.md)** - How to write specs
-2. **[Features README](./features/README.md)** - All 23 feature specifications
-3. **[Production Readiness Checklist](./PRODUCTION-READINESS.md)** - Release validation
-4. **[Risk Mitigation Playbook](./RISK-MITIGATION.md)** - Risk handling procedures
-5. **[Rollback Procedures](./ROLLBACK-PROCEDURES.md)** - Emergency rollback guide
+2. **[Features README](./features/README.md)** - All 22 feature specifications
+3. **[Production Readiness Checklist](./production-readiness.md)** - Release validation
+4. **[Risk Mitigation Playbook](./risk-mitigation.md)** - Risk handling procedures
 
 ### Supporting Documentation
 
-- Feature specifications (23 files in `./features/`)
+- Feature specifications (22 files in `./features/`)
 - Performance baseline measurements (to be created)
 - Architecture decision records (as needed)
 - Implementation documentation (as features complete)
@@ -516,11 +485,11 @@ v0.2.9 has been **significantly expanded** from the original plan to ensure v0.2
 ### Phase 0: Before Any Coding
 
 1. Read this roadmap completely
-2. Review [Production Readiness Checklist](./PRODUCTION-READINESS.md)
-3. Review [Risk Mitigation Playbook](./RISK-MITIGATION.md)
+2. Review [Production Readiness Checklist](./production-readiness.md)
+3. Review [Risk Mitigation Playbook](./risk-mitigation.md)
 4. Set up feature flag framework
 5. Create performance regression test suite
-6. Write all 23 feature specifications
+6. Write all 22 feature specifications
 
 ### Phase 1-3: Implementation
 
@@ -534,12 +503,11 @@ For each feature:
 
 ### Before Release
 
-1. Complete [Production Readiness Checklist](./PRODUCTION-READINESS.md)
+1. Complete [Production Readiness Checklist](./production-readiness.md)
 2. Validate all performance targets met
 3. Run full test suite (all passing, 90%+ coverage)
-4. Review [Rollback Procedures](./ROLLBACK-PROCEDURES.md)
-5. Prepare release notes
-6. Deploy via phased rollout (alpha → beta → rc → final)
+4. Prepare release notes
+5. Deploy via phased rollout (alpha → beta → rc → final)
 
 ---
 
