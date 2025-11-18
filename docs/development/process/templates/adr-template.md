@@ -23,6 +23,19 @@
 - Constraint 1
 - Constraint 2
 
+## Prior Art
+
+**Influences from Other Projects**:
+- [ ] Reviewed similar solutions in other projects
+- [ ] Documented inspirations in [acknowledgements/](../../acknowledgements/)
+- [ ] Noted key differences from prior art
+
+**External Inspirations**:
+- [Project Name](../../acknowledgements/project-name.md) - Concept X adapted
+- [Research Paper] - Technique Y influenced design
+
+**Key Differences**: [How ragged's approach differs from prior art]
+
 ## Decision Drivers
 
 [What factors influence this decision?]

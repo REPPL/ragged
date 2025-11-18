@@ -2,7 +2,7 @@
 
 **Status:** Planned
 
-**Total Hours:** 120-150 hours (AI implementation)
+**Total Hours:** 135-170 hours (AI implementation)
 
 **Focus:** Automatic query routing, domain adaptation, and advanced analytics
 
@@ -18,7 +18,53 @@ Version 0.6.0 introduces intelligent optimisation that automatically routes quer
 
 ---
 
-## OPTIMISE-001: Query Classification (25-30 hours)
+## OPTIMISE-001: Context Scope Management (15-20 hours)
+
+**Problem:** All queries use full context regardless of complexity. Simple queries waste tokens on broad context; complex queries may need comprehensive knowledge graph traversal.
+
+**Theoretical Foundation:** Implements [Context Engineering 2.0](../../acknowledgements/context-engineering-2.0.md) **dynamic context adaptation**—adjusting context scope based on query complexity and resource constraints.
+
+**Implementation:**
+1. Research context compression techniques [2-3 hours]
+2. Create ContextScopeManager with query complexity analysis [5-6 hours]
+3. Implement context selection strategies (narrow/medium/broad) [4-5 hours]
+4. Add context compression for complex queries [3-4 hours]
+5. Create scope recommendation system [1-2 hours]
+
+**Context Scopes:**
+- **Narrow** (simple factual): Recent documents only, no knowledge graph
+- **Medium** (standard queries): Recent + related topics from knowledge graph
+- **Broad** (complex analytical): Full knowledge graph + temporal memory + all relevant documents
+
+**Scope Selection Rules:**
+```python
+def determine_scope(query):
+    complexity = classify_complexity(query)
+    if complexity == "simple":
+        return ContextScope.NARROW  # Last 7 days, top 5 docs
+    elif complexity == "medium":
+        return ContextScope.MEDIUM  # Last 30 days, topic graph, top 15 docs
+    else:
+        return ContextScope.BROAD   # Full timeline, full graph, top 30 docs
+```
+
+**Compression Strategies:**
+- Chain-of-context: Summarise intermediate documents
+- Entity-focused: Extract only relevant entities from knowledge graph
+- Time-windowed: Limit temporal memory to relevant periods
+
+**Files:**
+- `src/context/scope_manager.py` (new, ~250 lines)
+- `src/context/compression.py` (new, ~200 lines)
+- `tests/context/test_scope_manager.py` (~150 lines)
+
+**⚠️ MANUAL TEST:** Test with simple vs complex queries, verify appropriate context scope selected, measure token usage reduction
+
+**Success:** Context usage optimised per query type, 30-50% token reduction on simple queries, no accuracy loss
+
+---
+
+## OPTIMISE-002: Query Classification (25-30 hours)
 
 **Problem:** All queries treated identically, but different query types need different processing strategies.
 
@@ -43,7 +89,7 @@ Version 0.6.0 introduces intelligent optimisation that automatically routes quer
 
 ---
 
-## OPTIMISE-002: Automatic Model Routing (30-40 hours)
+## OPTIMISE-003: Automatic Model Routing (30-40 hours)
 
 **Problem:** Single model for all queries is suboptimal - complex queries need larger models, simple queries can use faster models.
 
@@ -68,7 +114,7 @@ Version 0.6.0 introduces intelligent optimisation that automatically routes quer
 
 ---
 
-## OPTIMISE-003: Domain Adaptation (25-35 hours)
+## OPTIMISE-004: Domain Adaptation (25-35 hours)
 
 **Problem:** General-purpose embeddings may not capture domain-specific terminology and concepts.
 
@@ -94,7 +140,7 @@ Version 0.6.0 introduces intelligent optimisation that automatically routes quer
 
 ---
 
-## OPTIMISE-004: Performance Analytics (20-25 hours)
+## OPTIMISE-005: Performance Analytics (20-25 hours)
 
 **Problem:** No visibility into system performance, bottlenecks, or quality metrics over time.
 
@@ -121,7 +167,7 @@ Version 0.6.0 introduces intelligent optimisation that automatically routes quer
 
 ---
 
-## OPTIMISE-005: Smart Caching Strategy (20-25 hours)
+## OPTIMISE-006: Smart Caching Strategy (20-25 hours)
 
 **Problem:** Basic caching in v0.2.7 needs intelligence - predict what to cache, when to invalidate.
 
@@ -146,7 +192,7 @@ Version 0.6.0 introduces intelligent optimisation that automatically routes quer
 
 ---
 
-## OPTIMISE-006: CLI Analytics Commands (15-20 hours)
+## OPTIMISE-007: CLI Analytics Commands (15-20 hours)
 
 **Problem:** Need CLI interface to view analytics and optimisation status.
 
@@ -162,6 +208,7 @@ Version 0.6.0 introduces intelligent optimisation that automatically routes quer
 - `ragged analytics routing` - Model routing stats
 - `ragged analytics cache` - Cache performance
 - `ragged analytics domain` - Domain adaptation stats
+- `ragged analytics context` - Context scope usage statistics
 
 **Files:** src/main.py, src/analytics/reporter.py (new)
 
@@ -174,6 +221,7 @@ Version 0.6.0 introduces intelligent optimisation that automatically routes quer
 ## Success Criteria (Test Checkpoints)
 
 **Automated:**
+- [ ] Context scope selection correct for query complexity
 - [ ] Query classification accuracy >85%
 - [ ] Model routing selects appropriate models
 - [ ] Domain adaptation improves domain-specific retrieval
@@ -182,6 +230,7 @@ Version 0.6.0 introduces intelligent optimisation that automatically routes quer
 - [ ] All existing tests pass
 
 **Manual Testing:**
+- [ ] ⚠️ MANUAL: Context scope reduces token usage without accuracy loss
 - [ ] ⚠️ MANUAL: Model routing reduces latency for simple queries
 - [ ] ⚠️ MANUAL: Domain adaptation improves domain-specific results
 - [ ] ⚠️ MANUAL: Analytics provide actionable insights
@@ -189,6 +238,7 @@ Version 0.6.0 introduces intelligent optimisation that automatically routes quer
 - [ ] ⚠️ MANUAL: Routing decisions sensible for query types
 
 **Quality Gates:**
+- [ ] 30-50% token reduction for simple queries (context scope)
 - [ ] 30-50% latency reduction for simple queries (model routing)
 - [ ] 20-30% cache hit rate improvement (smart caching)
 - [ ] Domain-specific retrieval quality improvement measurable
@@ -199,6 +249,7 @@ Version 0.6.0 introduces intelligent optimisation that automatically routes quer
 
 ## Known Risks
 
+- Context scope determination may need query-specific tuning
 - Query classification may require tuning for accuracy
 - Model routing logic may need domain-specific adjustments
 - Domain adaptation effectiveness varies by domain
