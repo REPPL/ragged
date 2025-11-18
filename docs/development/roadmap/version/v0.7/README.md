@@ -303,3 +303,14 @@ After v0.7.0 completion:
 **Status:** Requires v0.6.0 completion first
 
 **Note:** v0.7.0 is the final preparation for v1.0 stable release
+
+---
+
+## Related Documentation
+
+- [Previous Version](../v0.6/README.md) - Intelligent optimisation
+- [Next Version](../../planning/version/v1.0/) - Production release planning
+- [Planning](../../planning/version/v0.7/) - Design goals for v0.7
+- [Version Overview](../README.md) - Complete version comparison
+
+---

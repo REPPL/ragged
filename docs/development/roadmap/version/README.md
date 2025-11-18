@@ -168,7 +168,7 @@ Future      v0.7.0 ━━━━━━━━━━━━━ Production Ready (150
 - Comprehensive evaluation framework
 - Research-backed validation
 
-**See:** [v0.3.0/README.md](./v0.3.0/README.md)
+**See:** [v0.3/README.md](./v0.3/README.md)
 
 ---
 
@@ -190,7 +190,7 @@ Future      v0.7.0 ━━━━━━━━━━━━━ Production Ready (150
 - Privacy guarantees maintained
 - Performance overhead <10%
 
-**See:** [v0.4.0/README.md](./v0.4.0/README.md)
+**See:** [v0.4/README.md](./v0.4/README.md)
 
 ---
 
@@ -212,7 +212,7 @@ Future      v0.7.0 ━━━━━━━━━━━━━ Production Ready (150
 - GPU memory managed efficiently
 - CPU fallback functional
 
-**See:** [v0.5.0/README.md](./v0.5.0/README.md)
+**See:** [v0.5/README.md](./v0.5/README.md)
 
 ---
 
@@ -234,7 +234,7 @@ Future      v0.7.0 ━━━━━━━━━━━━━ Production Ready (150
 - Analytics provide actionable insights
 - Cache hit rate improved 20-30%
 
-**See:** [v0.6.0/README.md](./v0.6.0/README.md)
+**See:** [v0.6/README.md](./v0.6/README.md)
 
 ---
 
@@ -260,7 +260,7 @@ Future      v0.7.0 ━━━━━━━━━━━━━ Production Ready (150
 - Production monitoring comprehensive
 - Security audit passed
 
-**See:** [v0.7.0/README.md](./v0.7.0/README.md)
+**See:** [v0.7/README.md](./v0.7/README.md)
 
 ---
 

@@ -211,10 +211,21 @@ Version 0.6.0 introduces intelligent optimisation that automatically routes quer
 
 After v0.6.0 completion:
 - **v0.7.0:** Production readiness (scalability, enterprise features, stable API)
-- See: `roadmap/version/v0.7.0/README.md`
+- See: `roadmap/version/v0.7/README.md`
 
 ---
 
 **Last Updated:** 2025-11-12
 
 **Status:** Requires v0.5.0 completion first
+
+---
+
+## Related Documentation
+
+- [Previous Version](../v0.5/README.md) - Multi-model intelligence
+- [Next Version](../v0.7/README.md) - Enterprise & production
+- [Planning](../../planning/version/v0.6/) - Design goals for v0.6
+- [Version Overview](../README.md) - Complete version comparison
+
+---

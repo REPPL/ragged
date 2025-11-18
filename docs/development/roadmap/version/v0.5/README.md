@@ -174,10 +174,21 @@ Version 0.5.0 introduces ColPali vision integration for multi-modal document und
 
 After v0.5.0 completion:
 - **v0.6.0:** Intelligent optimisation (auto-routing, domain adaptation)
-- See: `roadmap/version/v0.6.0/README.md`
+- See: `roadmap/version/v0.6/README.md`
 
 ---
 
 **Last Updated:** 2025-11-12
 
 **Status:** Requires v0.4.0 completion first
+
+---
+
+## Related Documentation
+
+- [Previous Version](../v0.4/README.md) - Personal memory & knowledge graphs
+- [Next Version](../v0.6/README.md) - Intelligent optimisation
+- [Planning](../../planning/version/v0.5/) - Design goals for v0.5
+- [Version Overview](../README.md) - Complete version comparison
+
+---

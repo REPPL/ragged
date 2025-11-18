@@ -1861,4 +1861,14 @@ v0.2.7 is successful if:
 
 ---
 
-**Next Steps**: After completing v0.2.7, proceed to [v0.3.0 Roadmap](v0.3.0-roadmap.md) for advanced RAG features.
+## Related Documentation
+
+- [Previous Version](../v0.2.6/README.md) - Documentation & structural improvements
+- [Next Version](../v0.3/README.md) - Advanced RAG features
+- [Planning](../../planning/version/v0.2/) - Design goals for v0.2 series
+- [CLI Enhancements Catalogue](../../planning/interfaces/cli/enhancements.md) - Comprehensive CLI specifications
+- [Version Overview](../README.md) - Complete version comparison
+
+---
+
+**Next Steps**: After completing v0.2.7, proceed to v0.3 for advanced RAG features.
