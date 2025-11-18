@@ -25,6 +25,5 @@ This archive contains supplementary materials that provide additional context bu
 
 ---
 
-**Maintained By:** ragged development team
 
 **License:** GPL-3.0

@@ -103,5 +103,4 @@ The `_format_context_for_prompt()` method currently returns the full context fro
 
 ---
 
-**Maintained By**: ragged development team
 **License**: GPL-3.0

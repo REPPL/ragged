@@ -50,6 +50,5 @@ Web UI documentation to be expanded as design progresses.
 
 ---
 
-**Maintained By:** ragged development team
 
 **License:** GPL-3.0

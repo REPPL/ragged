@@ -215,6 +215,5 @@ All decisions were made during the v0.1 planning and implementation phase (Novem
 
 ---
 
-**Maintained By:** ragged development team
 
 **License:** GPL-3.0

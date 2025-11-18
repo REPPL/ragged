@@ -120,6 +120,5 @@ When completing a version:
 
 ---
 
-**Maintained By:** ragged development team
 
 **License:** GPL-3.0

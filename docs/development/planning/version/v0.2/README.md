@@ -171,6 +171,5 @@ Version 0.2 enhances ragged with improved retrieval quality, batch operations, a
 
 ---
 
-**Maintained By:** ragged development team
 
 **License:** GPL-3.0

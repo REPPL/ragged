@@ -207,6 +207,5 @@ This document traces the lineage from planning through decisions to implementati
 
 ---
 
-**Maintained By:** ragged development team
 
 **License:** GPL-3.0

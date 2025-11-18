@@ -46,9 +46,3 @@ This directory contains detailed roadmaps for all ragged versions from v0.2.3 th
 - [Process: Development Logs](../process/devlogs/version/) - Development narratives
 - [CLI Enhancements Catalogue](../planning/interfaces/cli/enhancements.md) - Complete CLI specifications
 
----
-
-**Analysis Date**: 2025-11-11
-**Current Version**: v0.2.2
-**Analysed By**: Claude Code (Sonnet 4.5)
-**Total Lines Analysed**: ~15,000 lines across src/, tests/, docs/

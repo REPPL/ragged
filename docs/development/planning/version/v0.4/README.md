@@ -115,6 +115,5 @@ Version 0.4 introduces a **Personal Memory System** and **Knowledge Graphs**, tr
 
 ---
 
-**Maintained By:** ragged development team
 
 **License:** GPL-3.0

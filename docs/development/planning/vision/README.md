@@ -30,6 +30,5 @@ Read the product vision before proposing new features to ensure alignment with r
 
 ---
 
-**Maintained By:** ragged development team
 
 **License:** GPL-3.0

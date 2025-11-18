@@ -75,6 +75,5 @@ Time logs feed back into planning:
 
 ---
 
-**Maintained By:** ragged development team
 
 **License:** GPL-3.0

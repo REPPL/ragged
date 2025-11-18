@@ -84,6 +84,5 @@ ADR (Record of decision)
 
 ---
 
-**Maintained By:** ragged development team
 
 **License:** GPL-3.0

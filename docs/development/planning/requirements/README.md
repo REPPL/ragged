@@ -44,6 +44,5 @@ With acceptance criteria, priority, and effort estimates.
 
 ---
 
-**Maintained By:** ragged development team
 
 **License:** GPL-3.0

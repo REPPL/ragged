@@ -72,6 +72,5 @@ This directory contains detailed feature specifications for ragged v0.3.0, extra
 
 ---
 
-**Maintained By:** ragged development team
 
 **License:** GPL-3.0

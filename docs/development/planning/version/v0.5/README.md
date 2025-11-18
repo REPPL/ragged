@@ -107,6 +107,5 @@ Version 0.5 introduces **ColPali vision integration** for multi-modal document u
 
 ---
 
-**Maintained By:** ragged development team
 
 **License:** GPL-3.0

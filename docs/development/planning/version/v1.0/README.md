@@ -166,6 +166,5 @@ Version 1.0 is the **production release** of ragged, marking the transition from
 
 ---
 
-**Maintained By:** ragged development team
 
 **License:** GPL-3.0

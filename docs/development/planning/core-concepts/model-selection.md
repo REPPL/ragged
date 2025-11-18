@@ -1864,6 +1864,5 @@ ragged models list --show-tiers
 
 ---
 
-**Maintained By:** ragged development team
 
 **License:** GPL-3.0

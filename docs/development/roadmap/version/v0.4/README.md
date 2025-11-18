@@ -601,7 +601,6 @@ Version 0.4.x builds directly upon the foundation established by v0.3.x (13 rele
 
 ---
 
-**Maintained By:** ragged development team
 
 **License:** GPL-3.0
 

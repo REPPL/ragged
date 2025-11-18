@@ -493,5 +493,4 @@ All decision documentation is now grouped under `decisions/` for easier navigati
 ---
 
 **Last Updated:** 2025-11-14
-**Maintained By:** ragged development team
 **License:** GPL-3.0 (same as project)

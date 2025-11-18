@@ -349,6 +349,5 @@ While not part of v0.3's deliverables, this version includes preparatory work fo
 
 ---
 
-**Maintained By:** ragged development team
 
 **License:** GPL-3.0

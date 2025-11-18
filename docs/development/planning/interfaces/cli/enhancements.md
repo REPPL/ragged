@@ -1488,7 +1488,6 @@ def test_command_with_invalid_args():
 
 **Last Updated:** 2025-11-14
 
-**Maintained By:** ragged development team
 
 **Next Review:** Before v0.2.7 implementation begins
 

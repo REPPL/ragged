@@ -147,6 +147,5 @@ convert image.png -resize 1920x image-resized.png
 
 ---
 
-**Maintained By:** ragged development team
 
 **License:** GPL-3.0

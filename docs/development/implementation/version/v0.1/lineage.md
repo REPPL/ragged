@@ -169,6 +169,5 @@ All core architectural decisions were implemented as planned. The 14-phase appro
 
 ---
 
-**Maintained By:** ragged development team
 
 **License:** GPL-3.0

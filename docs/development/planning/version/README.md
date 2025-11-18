@@ -48,6 +48,5 @@ Version directories contain:
 
 ---
 
-**Maintained By:** ragged development team
 
 **License:** GPL-3.0
