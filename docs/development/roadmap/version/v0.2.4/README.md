@@ -14,7 +14,7 @@
 
 Version 0.2.4 addressed 8 high-priority bugs that significantly impact quality. Successfully completed and released.
 
-**See:** [v0.2.4 Implementation Record](../../implementation/version/v0.2/v0.2.4-release-notes.md) | [CHANGELOG](../../../../CHANGELOG.md#024---2025-11-17)
+**See:** [v0.2.4 Implementation Record](../../implementation/version/v0.2/v0.2.4.md) | [CHANGELOG](../../../../CHANGELOG.md#024---2025-11-17)
 
 ---
 

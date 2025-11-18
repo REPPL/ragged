@@ -22,11 +22,10 @@ Reference documentation is **information-oriented** material that provides preci
 ## Available Reference
 
 ### Core API
-*Will be added in v0.1 release.*
 
-- [ ] **Python API Reference** - Complete API documentation
-- [ ] **CLI Reference** - Command-line interface options
-- [ ] **REST API Reference** - FastAPI endpoints (v0.2+)
+- [x] **[CLI Reference](./cli/)** - Command-line interface specifications (v0.2.8)
+- [ ] **Python API Reference** - Complete API documentation (v0.3+)
+- [ ] **REST API Reference** - FastAPI endpoints (v0.3+)
 
 ### Configuration
 *Will be added in v0.1 release.*

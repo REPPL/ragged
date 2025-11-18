@@ -28,7 +28,10 @@
 - 💬 **Accurate Answers**: Generates natural language responses with source citations
 - 🔒 **100% Private**: Everything runs locally - no data leaves your machine
 - ⚡ **Hardware Optimised**: Supports CPU, Apple Silicon (MLX), and CUDA (planned)
-- 🎨 **Intuitive CLI**: Command-line interface with progress bars and colors
+- 🎨 **Intuitive CLI**: Command-line interface with progress bars and colours
+- 🗂️ **Metadata Management**: Tag, search, and organise documents (v0.2.8)
+- 📝 **Query History**: Save and replay queries (v0.2.8)
+- 🔄 **Backup & Restore**: Export and import your data (v0.2.8)
 
 ### How It Works
 
@@ -75,21 +78,73 @@ ollama serve          # Start Ollama (in separate terminal)
 
 ```bash
 # Add documents to your knowledge base
-ragged add /path/to/document.pdf
-ragged add /path/to/notes.txt
+ragged add document.pdf                    # Single file
+ragged add /path/to/folder/ --recursive    # Entire folder (v0.2.7+)
 
 # Ask questions
 ragged query "What are the key findings?"
-ragged query "Explain the methodology"
+ragged query "Explain the methodology" --show-sources
+
+# Advanced search and filtering (v0.2.8+)
+ragged search "machine learning" --path "research/*.pdf"
+ragged metadata update document.pdf --set category=research
+
+# Query history and replay (v0.2.8+)
+ragged history list
+ragged history replay 5
 
 # Manage your knowledge base
-ragged list    # Show collection statistics
-ragged clear   # Clear all documents
+ragged list                                # List documents
+ragged metadata list                       # Show document metadata (v0.2.8+)
+ragged clear                               # Clear all documents
 
-# Check configuration and health
-ragged config show
-ragged health
+# Configuration and health
+ragged config show                         # View configuration
+ragged config set-model                    # Interactive model selection (v0.2.8+)
+ragged health                              # Check service status
+ragged validate                            # Validate configuration (v0.2.8+)
+
+# Backup and maintenance (v0.2.8+)
+ragged export backup --compress            # Create compressed backup
+ragged cache clear --all                   # Clear caches
+
+# Environment information (v0.2.8+)
+ragged env-info                            # System information for bug reports
+ragged completion --install                # Install shell completion
 ```
+
+---
+
+## CLI Features (v0.2.8)
+
+ragged includes a comprehensive CLI with 14 commands:
+
+**Document Management:**
+- `add` - Ingest documents (single files or entire folders)
+- `list` / `clear` - View or remove documents
+- `metadata` - Tag, update, and search document metadata
+- `search` - Advanced search with filters
+
+**Querying:**
+- `query` - Ask questions and get answers with citations
+- `history` - View, replay, and export query history
+
+**Configuration:**
+- `config` - View and manage settings
+- `validate` - Validate configuration and environment
+- `env-info` - System information for bug reports
+
+**Maintenance:**
+- `health` - Check service connectivity
+- `cache` - Manage caches and temporary files
+- `export` - Backup and restore data
+
+**Utilities:**
+- `completion` - Install shell completion (bash/zsh/fish)
+
+**Documentation:**
+- [CLI Command Reference](docs/reference/cli/command-reference.md) - Complete technical specifications
+- [CLI Features Guide](docs/guides/cli/cli-features.md) - Comprehensive tutorial with examples
 
 ---
 

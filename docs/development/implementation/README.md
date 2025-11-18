@@ -61,8 +61,8 @@ implementation/
 
 **Key documents:**
 - [Implementation Plan](./version/v0.2/implementation-plan.md) - Development guide
-- [v0.2.1 Release Notes](./version/v0.2/v0.2.1-release-notes.md) - Chunking enhancements
-- [v0.2.2 Release Notes](./version/v0.2/v0.2.2-release-notes.md) - Retrieval enhancements
+- [v0.2.1 Release Notes](./version/v0.2/v0.2.1.md) - Chunking enhancements
+- [v0.2.2 Release Notes](./version/v0.2/v0.2.2.md) - Retrieval enhancements
 - [Lineage](./version/v0.2/lineage.md) - Traceability from planning to implementation (partial)
 
 ---

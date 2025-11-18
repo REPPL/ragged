@@ -22,7 +22,7 @@ Transform ragged's CLI from functional to exceptional by implementing state-of-t
 - 🔄 Testing and documentation in progress
 - 📅 Documentation consistency work ongoing
 
-**See:** [v0.2.8 Implementation Record (In Progress)](../../implementation/version/v0.2/v0.2.8-in-progress.md)
+**See:** [v0.2.8 Implementation Record (In Progress)](../../implementation/version/v0.2/v0.2.8.md)
 
 ---
 
