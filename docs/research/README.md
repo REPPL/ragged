@@ -20,6 +20,9 @@ This directory contains research materials, methodology documentation, and exper
 ```
 research/
 ├── README.md (this file)
+├── note/                    # Research notes and literature reviews
+│   ├── README.md
+│   └── rag-latency-optimisation.md
 ├── background/              # Research background (migrated from project-setup)
 │   ├── rag-landscape.md
 │   ├── vector-databases.md
@@ -34,9 +37,20 @@ research/
 
 ## Available Research Materials
 
+### Research Notes
+
+**`note/` directory**:
+- Literature reviews and research summaries
+- Analysis of external research relevant to ragged
+- Future consideration notes (techniques not yet implemented)
+- Attribution analysis (what warrants acknowledgement vs research note)
+
+**Available notes**:
+- [RAG Latency Optimisation](note/rag-latency-optimisation.md) - Latency reduction techniques research
+
 ### Background Research
 
-**Migrated from `project-setup/background/`**:
+**`background/` directory** (migrated from `project-setup/background/`):
 - Research on RAG landscape
 - Vector database comparisons
 - Embedding model evaluations
