@@ -23,14 +23,25 @@ else:
         chromadb = None  # type: ignore[assignment]
 
 from src.config.settings import get_settings
+from src.exceptions import VectorStoreConnectionError, VectorStoreError
 from src.storage.metadata_serialiser import (
     deserialise_batch_metadata,
     deserialise_metadata,
     serialise_batch_metadata,
 )
+from src.utils.circuit_breaker import CircuitBreaker
 from src.utils.logging import get_logger
+from src.utils.retry import with_retry
 
 logger = get_logger(__name__)
+
+
+# v0.2.9: Circuit breaker for ChromaDB protection
+_chroma_circuit_breaker = CircuitBreaker(
+    name="chromadb",
+    failure_threshold=5,
+    recovery_timeout=30.0,
+)
 
 
 class VectorStore:
@@ -126,6 +137,31 @@ class VectorStore:
         )
         logger.info(f"Added {len(ids)} embeddings to collection {self._collection_name}")
 
+    @with_retry(max_attempts=3, base_delay=1.0, retryable_exceptions=(ConnectionError, TimeoutError, VectorStoreConnectionError))
+    def _query_internal(
+        self,
+        query_list: List[List[float]],
+        k: int,
+        where: Optional[Dict[str, Any]],
+    ) -> Dict[str, Any]:
+        """
+        Internal query method with circuit breaker protection.
+
+        v0.2.9: Protected by circuit breaker and retry decorator.
+        """
+        try:
+            results = _chroma_circuit_breaker.call(
+                self.collection.query,
+                query_embeddings=query_list,
+                n_results=k,
+                where=where,
+            )
+            return cast(Dict[str, Any], results)
+        except (ConnectionError, TimeoutError) as e:
+            raise VectorStoreConnectionError(f"ChromaDB connection failed: {e}")
+        except Exception as e:
+            raise VectorStoreError(f"Query failed: {e}")
+
     def query(
         self,
         query_embedding: np.ndarray,
@@ -134,6 +170,8 @@ class VectorStore:
     ) -> Dict[str, Any]:
         """
         Query for similar vectors.
+
+        v0.2.9: Uses automatic retry with exponential backoff and circuit breaker.
 
         Args:
             query_embedding: Query embedding vector
@@ -152,11 +190,18 @@ class VectorStore:
             # Single value - convert to nested list
             query_list = [[float(query_embedding)]]
 
-        results = self.collection.query(
-            query_embeddings=query_list,
-            n_results=k,
-            where=where,
-        )
+        # v0.2.9: Check if advanced error recovery is enabled
+        settings = get_settings()
+        if settings.feature_flags.enable_advanced_error_recovery:
+            results = self._query_internal(query_list, k, where)
+        else:
+            # Fallback to old behaviour
+            results = self.collection.query(
+                query_embeddings=query_list,
+                n_results=k,
+                where=where,
+            )
+            results = cast(Dict[str, Any], results)
 
         # Deserialise metadata in results
         if results and results.get("metadatas"):
@@ -173,7 +218,7 @@ class VectorStore:
                 # Single query: list of dicts
                 results["metadatas"] = deserialise_batch_metadata(metadatas)  # type: ignore[arg-type, typeddict-item]
 
-        return cast(Dict[str, Any], results)
+        return results
 
     def get_documents_by_metadata(self, where: Dict[str, Any]) -> Dict[str, Any]:
         """
