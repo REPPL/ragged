@@ -14,6 +14,7 @@ from pydantic import Field, ValidationInfo, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from src.utils.path_utils import ensure_directory
+from src.config.feature_flags import FeatureFlags
 
 
 class EmbeddingModel(str, Enum):
@@ -70,6 +71,12 @@ class Settings(BaseSettings):
 
     # Logging
     log_level: Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"] = "INFO"
+
+    # Feature Flags (v0.2.9)
+    feature_flags: FeatureFlags = Field(
+        default_factory=FeatureFlags,
+        description="Runtime feature toggles for v0.2.9 features"
+    )
 
     model_config = SettingsConfigDict(
         env_file=".env",
@@ -175,6 +182,15 @@ class Settings(BaseSettings):
                 if "llm_model" in user_config and not os.getenv("RAGGED_LLM_MODEL"):
                     self.llm_model = user_config["llm_model"]
                     logger.info(f"Loaded LLM model from user config: {self.llm_model}")
+
+                # Load feature flags from config
+                if "feature_flags" in user_config:
+                    flags_config = user_config["feature_flags"]
+                    if isinstance(flags_config, dict):
+                        for flag_name, flag_value in flags_config.items():
+                            if hasattr(self.feature_flags, flag_name):
+                                setattr(self.feature_flags, flag_name, flag_value)
+                        logger.info(f"Loaded {len(flags_config)} feature flags from user config")
 
             except (FileNotFoundError, PermissionError) as e:
                 logger.warning(f"Could not access config file: {e}")

@@ -21,6 +21,8 @@ else:
         torch_module = None  # type: ignore[assignment]
 
 from src.embeddings.base import BaseEmbedder
+from src.embeddings.batch_tuner import BatchTuner
+from src.config.settings import get_settings
 from src.utils.logging import get_logger
 
 logger = get_logger(__name__)
@@ -62,15 +64,32 @@ class SentenceTransformerEmbedder(BaseEmbedder):
         logger.info(f"Loading SentenceTransformer model: {model_name} on {device}")
         self.model = SentenceTransformerType(model_name, device=device)
 
+        # v0.2.9: Initialize batch tuner if enabled
+        settings = get_settings()
+        if settings.feature_flags.enable_batch_auto_tuning:
+            self.batch_tuner: Optional[BatchTuner] = BatchTuner(initial_size=batch_size)
+            logger.info("Batch auto-tuning enabled")
+        else:
+            self.batch_tuner = None
+
     def embed_text(self, text: str) -> np.ndarray:
         """Embed a single text string."""
         return cast(np.ndarray, self.model.encode([text], convert_to_numpy=True)[0])
 
     def embed_batch(self, texts: List[str]) -> np.ndarray:
-        """Embed multiple texts efficiently in batch."""
+        """Embed multiple texts efficiently in batch.
+
+        v0.2.9: Uses intelligent batch size tuning when enabled.
+        """
+        # v0.2.9: Use batch tuner if enabled
+        if self.batch_tuner:
+            batch_size = self.batch_tuner.suggest_batch_size(texts)
+        else:
+            batch_size = self._batch_size
+
         return self.model.encode(
             texts,
-            batch_size=self._batch_size,
+            batch_size=batch_size,
             convert_to_numpy=True,
             show_progress_bar=len(texts) > 100,
         )

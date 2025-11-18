@@ -432,3 +432,102 @@ def cache_stats(output_format: str) -> None:
         console.print(f"[bold red]✗[/bold red] Failed to get cache stats: {e}")
         logger.error(f"Cache stats failed: {e}", exc_info=True)
         sys.exit(1)
+
+
+@cache.command("embedders")
+@click.option(
+    "--format",
+    "-f",
+    "output_format",
+    type=click.Choice(FORMAT_CHOICES + ["text"], case_sensitive=False),
+    default="text",
+    help="Output format",
+)
+def embedder_cache_stats(output_format: str) -> None:
+    """Show embedder cache statistics (v0.2.9).
+
+    \\b
+    Examples:
+        ragged cache embedders
+        ragged cache embedders --format json
+    """
+    try:
+        from src.embeddings.factory import get_cache_stats
+
+        stats = get_cache_stats()
+
+        if output_format == "text":
+            console.print(f"\n[bold]Embedder Cache Statistics[/bold]\n")
+            console.print(f"Caching Enabled: {'[green]Yes[/green]' if stats['enabled'] else '[red]No[/red]'}")
+            console.print(f"Cached Models: {stats['size']}")
+
+            if stats['models']:
+                console.print(f"\n[bold]Cached Embedders:[/bold]")
+                for model in stats['models']:
+                    console.print(f"  • {model}")
+            else:
+                console.print(f"\n[dim]No models currently cached[/dim]")
+
+            console.print()
+        else:
+            print_formatted(
+                stats,
+                format_type=output_format,  # type: ignore
+                title="Embedder Cache Statistics",
+                console=console,
+            )
+
+    except Exception as e:
+        console.print(f"[bold red]✗[/bold red] Failed to get embedder cache stats: {e}")
+        logger.error(f"Embedder cache stats failed: {e}", exc_info=True)
+        sys.exit(1)
+
+
+@cache.command("clear-embedders")
+@click.option(
+    "--yes",
+    "-y",
+    is_flag=True,
+    help="Skip confirmation prompt",
+)
+def clear_embedder_cache_cmd(yes: bool) -> None:
+    """Clear the embedder cache (v0.2.9).
+
+    Forces embedders to be reloaded on next use. Useful for freeing memory
+    or troubleshooting embedding issues.
+
+    \\b
+    Examples:
+        ragged cache clear-embedders
+        ragged cache clear-embedders --yes
+    """
+    try:
+        from src.embeddings.factory import clear_embedder_cache, get_cache_stats
+
+        # Get stats before clearing
+        stats = get_cache_stats()
+
+        if stats['size'] == 0:
+            console.print("[yellow]Embedder cache is already empty.[/yellow]")
+            return
+
+        console.print(f"[yellow]About to clear {stats['size']} cached embedder(s):[/yellow]")
+        for model in stats['models']:
+            console.print(f"  • {model}")
+
+        # Confirm
+        if not yes:
+            console.print()
+            if not click.confirm("Continue?"):
+                console.print("Cancelled.")
+                return
+
+        # Clear cache
+        count = clear_embedder_cache()
+        console.print(f"\n[green]✓[/green] Cleared {count} cached embedder(s)")
+        console.print("[dim]Embedders will be reloaded on next use[/dim]")
+
+    except Exception as e:
+        console.print(f"[bold red]✗[/bold red] Failed to clear embedder cache: {e}")
+        logger.error(f"Clear embedder cache failed: {e}", exc_info=True)
+        sys.exit(1)

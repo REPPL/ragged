@@ -107,7 +107,6 @@
 - [ ] Performance regression test suite: in CI
 - [ ] Performance baseline measurements: documented
 - [ ] Risk mitigation playbook: created and reviewed
-- [ ] Rollback procedures: documented and tested
 - [ ] Production readiness checklist: completed (this document)
 
 ### Phase 1: Core Performance
@@ -164,7 +163,6 @@
 - [ ] Deployment guide: production deployment procedures
 - [ ] Monitoring guide: setting up observability
 - [ ] Troubleshooting guide: common issues and solutions
-- [ ] Rollback procedures: tested and documented
 - [ ] Performance tuning guide: optimisation recommendations
 
 ---
@@ -210,7 +208,7 @@
 ### Beta Release (v0.2.9-beta)
 
 - [ ] Phase 2 features: implemented and tested
-- [ ] Default enabled: feature flags allow rollback
+- [ ] Default enabled: feature flags working correctly
 - [ ] Wider beta testing: feedback collected
 - [ ] Performance targets: validated in beta
 - [ ] Stability issues: resolved
@@ -309,8 +307,7 @@
 ## Related Documentation
 
 - [v0.2.9 Roadmap](./README.md) - Overall roadmap and timeline
-- [Risk Mitigation Playbook](./RISK-MITIGATION.md) - Risk handling procedures
-- [Rollback Procedures](./ROLLBACK-PROCEDURES.md) - How to revert if needed
+- [Risk Mitigation Playbook](./risk-mitigation.md) - Risk handling procedures
 - [Feature Specifications](./features/README.md) - Detailed feature specs
 
 ---

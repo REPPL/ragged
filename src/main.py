@@ -59,6 +59,10 @@ def cli(ctx: click.Context, verbose: bool, debug: bool, quiet: bool) -> None:
 
     setup_logging(log_level=log_level, json_format=False)
 
+    # v0.2.9: Warm up embedder cache in background (if enabled)
+    from src.embeddings.factory import warmup_embedder_cache
+    warmup_embedder_cache()
+
 
 # All CLI commands extracted to cli/commands/
 
@@ -77,6 +81,7 @@ from src.cli.commands.search import search
 from src.cli.commands.history import history
 from src.cli.commands.exportimport import export
 from src.cli.commands.cache import cache
+from src.cli.commands.feature_flags import feature_flags_group
 
 # Register commands
 cli.add_command(add)
@@ -93,6 +98,7 @@ cli.add_command(search)
 cli.add_command(history)
 cli.add_command(export)
 cli.add_command(cache)
+cli.add_command(feature_flags_group)
 
 
 def main() -> None:
