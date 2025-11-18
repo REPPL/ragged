@@ -20,54 +20,20 @@ This directory contains detailed roadmaps for all ragged versions from v0.2.3 th
 
 ---
 
-## CLI Enhancements Matrix
+## Key Principles
 
-ragged's CLI receives comprehensive enhancements across versions v0.2.7-v0.4.0, adding 23 new capabilities distributed strategically by version.
+- **Stability First** - Fix critical bugs before adding features
+- **Privacy Always** - All processing remains local
+- **Quality Focused** - Empirical validation and comprehensive testing
 
-**Related Documentation:** [CLI Enhancements Catalogue](../planning/interfaces/cli/enhancements.md)
-
-### Enhancement Distribution by Version
-
-| Version | Enhancements | Hours | Focus Area |
-|---------|--------------|-------|------------|
-| v0.2.7 | 11 | 48-62 | Foundation (document management, UX basics) |
-| v0.3.0 | 11 | 52-71 | Advanced (interactive, automation, developer tools) |
-| v0.4.0 | 1 | 20-25 | Extensibility (plugin system) |
-| **Total** | **23** | **120-158** | **Comprehensive CLI** |
-
-**Detailed Enhancement Specifications:**
-
-All 23 CLI enhancements are fully documented in the [CLI Enhancements Catalogue](../planning/interfaces/cli/enhancements.md), including:
-- Complete technical specifications for each enhancement
-- Implementation guidance and code examples
-- Testing requirements and acceptance criteria
-- Cross-version dependencies and migration paths
-- Category organisation and progressive enhancement strategy
-
-**Why This Separation?**
-
-The catalogue is the **Single Source of Truth** for CLI enhancement specifications. This roadmap provides the high-level distribution and timeline planning, while the catalogue maintains all technical details. This separation ensures consistency and prevents duplication.
+**For detailed development workflow, priority rankings, and testing requirements**, see **[Version Overview](version/README.md)**.
 
 ---
 
-## Development Principles
+## Cross-Version Initiatives
 
-**Priority Order:**
-1. **Stability First** - Fix critical bugs before adding features (v0.2.3-v0.2.6)
-2. **User Value** - UX and performance improvements (v0.2.7)
-3. **Advanced Features** - State-of-the-art RAG capabilities (v0.3+)
-
-**Quality Standards:**
-- Test-first approach for bug fixes
-- Measurable benchmarks for performance claims
-- Research-backed implementations for advanced features
-- Comprehensive documentation for all changes
-
-**See [Version Overview](version/README.md)** for:
-- Detailed development workflow
-- Priority rankings (P0, P1, P2, P3)
-- Testing requirements
-- Manual testing guidance
+**CLI Enhancements (v0.2.7-v0.4.0)**: 23 comprehensive enhancements distributed across three versions (120-158 hours total).
+**See:** [CLI Enhancements Catalogue](../planning/interfaces/cli/enhancements.md) for complete specifications.
 
 ---
 
