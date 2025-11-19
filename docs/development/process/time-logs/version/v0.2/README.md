@@ -2,8 +2,6 @@
 
 **Purpose:** Time tracking for all v0.2.x releases
 
-**Last Updated:** 2025-11-17
-
 ---
 
 ## Overview
@@ -74,6 +72,3 @@ Time logs feed back into planning:
 - [v0.2 Roadmap](../../../roadmap/version/v0.2/) - Original time estimates
 
 ---
-
-
-**License:** GPL-3.0

@@ -294,5 +294,4 @@ The hybrid architecture makes local development fast while maintaining deploymen
 
 ---
 
-**Last Updated**: 2025-11-09
 **Architecture Version**: Hybrid (Native Ollama + Containerised Application)

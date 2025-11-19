@@ -590,5 +590,3 @@ ragged completion install --shell bash
 - [Performance Optimisations](./performance-optimisations.md)
 
 ---
-
-**License:** GPL-3.0

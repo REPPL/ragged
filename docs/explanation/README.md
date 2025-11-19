@@ -1,7 +1,5 @@
 # Explanation
 
-**Status:** 🚧 In Development
-**Last Updated**: 2025-11-09
 
 ## Overview
 

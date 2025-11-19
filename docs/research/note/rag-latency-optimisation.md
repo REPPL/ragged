@@ -238,6 +238,3 @@ Collection of research and articles exploring latency optimisation in RAG system
 
 ---
 
-**Maintained By**: ragged development team
-**License**: GPL-3.0
-**Last Updated**: 2025-11-18

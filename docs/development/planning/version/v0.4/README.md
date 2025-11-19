@@ -4,8 +4,6 @@
 
 **Status:** 📋 Planned
 
-**Last Updated:** 2025-11-16
-
 ---
 
 ## Overview
@@ -276,6 +274,3 @@ ragged memory stats
 - [Architecture](../../architecture/) - System architecture
 
 ---
-
-
-**License:** GPL-3.0

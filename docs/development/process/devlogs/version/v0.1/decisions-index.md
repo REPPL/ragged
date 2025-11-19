@@ -2,8 +2,6 @@
 
 **Purpose:** Index of all architectural decisions made during v0.1 development
 
-**Last Updated:** 2025-11-15
-
 ---
 
 ## Overview
@@ -214,6 +212,3 @@ All decisions were made during the v0.1 planning and implementation phase (Novem
 3. Follow ADR template in `process/templates/adr-template.md`
 
 ---
-
-
-**License:** GPL-3.0

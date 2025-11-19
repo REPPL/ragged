@@ -600,8 +600,3 @@ Version 0.4.x builds directly upon the foundation established by v0.3.x (13 rele
 - [LEANN Integration Analysis](../../../decisions/2025-11-16-leann-integration-analysis.md)
 
 ---
-
-
-**License:** GPL-3.0
-
-**Last Updated:** 2025-11-18

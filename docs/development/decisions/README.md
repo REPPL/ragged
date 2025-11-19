@@ -2,8 +2,6 @@
 
 **Purpose:** All architectural and technical decisions for ragged
 
-**Last Updated:** 2025-11-15
-
 ---
 
 ## Overview
@@ -83,6 +81,3 @@ ADR (Record of decision)
 - [Implementations](../implementation/) - Past implementations
 
 ---
-
-
-**License:** GPL-3.0

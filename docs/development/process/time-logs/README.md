@@ -74,5 +74,4 @@ For each version/feature:
 
 ---
 
-**Last Updated:** 2025-11-12
 **Status:** Active - all development time tracked from v0.1 onwards

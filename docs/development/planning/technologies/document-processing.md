@@ -1,6 +1,5 @@
 # Document Processing Technologies
 
-**Last Updated**: 2025-11-09
 **Purpose**: Comprehensive evaluation of document processing tools for ragged
 **Implementation**: v0.2+
 

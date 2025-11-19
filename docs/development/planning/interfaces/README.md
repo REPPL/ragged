@@ -2,7 +2,6 @@
 
 **Status:** Active
 
-**Last Updated:** 2025-11-14
 
 **Purpose:** Central hub for all user interface design documentation (both CLI and web UI)
 

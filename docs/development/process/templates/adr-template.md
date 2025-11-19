@@ -141,7 +141,6 @@
 
 ---
 
-**Last Updated**: YYYY-MM-DD
 
 **Supersedes**: [ADR-YYYY if applicable]
 

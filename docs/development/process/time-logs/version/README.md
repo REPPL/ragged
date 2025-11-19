@@ -2,8 +2,6 @@
 
 **Purpose:** Actual time spent on each version
 
-**Last Updated:** 2025-11-15
-
 ---
 
 ## Overview
@@ -47,6 +45,3 @@ Time logs support:
 - [Development Logs](../../devlogs/version/) - Development narratives
 
 ---
-
-
-**License:** GPL-3.0

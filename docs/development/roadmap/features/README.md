@@ -2,8 +2,6 @@
 
 **Purpose:** Centralised repository for all feature specifications and roadmaps
 
-**Last Updated:** 2025-11-18
-
 ---
 
 ## Overview
@@ -97,6 +95,3 @@ Each feature specification includes:
 - [Implementation Records](../../implementation/) - Completed features
 
 ---
-
-
-**License:** GPL-3.0

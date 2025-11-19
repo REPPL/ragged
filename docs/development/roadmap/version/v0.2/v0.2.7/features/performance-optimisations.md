@@ -165,5 +165,3 @@ class BaseEmbedder:
 - [Configuration Management](./configuration-management.md)
 
 ---
-
-**License:** GPL-3.0

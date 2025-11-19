@@ -1,6 +1,5 @@
 # User Stories Index
 
-**Last Updated**: 2025-11-09
 **Status:** Active
 **Version**: 1.0
 

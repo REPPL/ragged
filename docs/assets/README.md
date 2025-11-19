@@ -2,8 +2,6 @@
 
 **Purpose:** Static assets for documentation (images, diagrams, videos)
 
-**Last Updated:** 2025-11-17
-
 ---
 
 ## Overview
@@ -96,6 +94,3 @@ assets/
 - [Tutorials](../tutorials/README.md) - Learning materials using these assets
 
 ---
-
-
-**License:** GPL-3.0

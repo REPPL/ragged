@@ -2,8 +2,6 @@
 
 **Purpose:** Web user interface design and specifications
 
-**Last Updated:** 2025-11-15
-
 ---
 
 ## Overview
@@ -49,6 +47,3 @@ Web UI documentation to be expanded as design progresses.
 - [CLI Interface](../cli/) - Command-line alternative
 
 ---
-
-
-**License:** GPL-3.0

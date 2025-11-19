@@ -1,6 +1,5 @@
 # Getting Started with ragged
 
-**Status:** Coming in v0.3
 
 This comprehensive getting started tutorial is planned for a future release.
 
@@ -22,4 +21,3 @@ The getting started tutorial will include:
 
 ---
 
-**Status:** Planned for v0.3

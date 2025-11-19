@@ -4,7 +4,6 @@
 
 **Status:** Planning complete
 
-**Last Updated:** 2025-11-14
 
 **Total Enhancements:** 25
 
@@ -1486,7 +1485,6 @@ def test_command_with_invalid_args():
 
 ---
 
-**Last Updated:** 2025-11-14
 
 
 **Next Review:** Before v0.2.7 implementation begins

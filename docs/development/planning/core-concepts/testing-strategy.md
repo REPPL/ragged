@@ -1912,7 +1912,6 @@ The strategy balances **development velocity** with **production quality**, ensu
 ---
 
 **Document Status**: Design Complete
-**Last Updated**: 2025-11-09
 **Related Documents**:
 - [Hardware Optimisation Strategy](./hardware-optimisation.md)
 - [Dynamic Model Selection](./model-selection.md)

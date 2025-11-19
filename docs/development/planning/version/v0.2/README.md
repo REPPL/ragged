@@ -4,8 +4,6 @@
 
 **Status:** ✅ Partially Implemented (v0.2.0-v0.2.2 released)
 
-**Last Updated:** 2025-11-16
-
 ---
 
 ## Overview
@@ -170,6 +168,3 @@ Version 0.2 enhances ragged with improved retrieval quality, batch operations, a
 - [Core Concepts](../../core-concepts/) - Foundational concepts
 
 ---
-
-
-**License:** GPL-3.0

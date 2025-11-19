@@ -1,6 +1,5 @@
 # Personal Notes Guide
 
-**Status**: Coming in v0.3.0
 
 This guide will cover using ragged for personal knowledge management, including:
 - Organising personal notes and insights

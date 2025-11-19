@@ -88,5 +88,4 @@ For broader context, also see:
 
 ---
 
-**Last Updated**: 2025-11-09
 **Maintainer**: Implementation team

@@ -2,8 +2,6 @@
 
 **Purpose:** All documentation for developers working on ragged
 
-**Last Updated:** 2025-11-14
-
 ---
 
 ## Table of Contents
@@ -491,6 +489,3 @@ All decision documentation is now grouped under `decisions/` for easier navigati
 - **Contributing:** See [CONTRIBUTING.md](../../CONTRIBUTING.md)
 
 ---
-
-**Last Updated:** 2025-11-14
-**License:** GPL-3.0 (same as project)

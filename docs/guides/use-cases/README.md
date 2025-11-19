@@ -2,7 +2,6 @@
 
 Practical workflows for specific use cases.
 
-**Status**: In development
 
 ---
 

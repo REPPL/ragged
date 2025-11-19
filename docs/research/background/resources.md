@@ -224,6 +224,5 @@ Curated collection of papers, articles, tools, and resources for building RAG sy
 
 ---
 
-**Last Updated**: 2025-11-02
 
 **Note**: Add new resources as you discover them during development.

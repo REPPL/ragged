@@ -394,4 +394,3 @@
 
 **Status:** [Completed | In Progress]
 
-**Last Updated**: YYYY-MM-DD

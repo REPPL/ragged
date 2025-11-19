@@ -30,4 +30,3 @@ Files are archived with their original names and dates preserved.
 ---
 
 **Status:** Empty - awaiting v0.2 archive content
-**Last Updated:** 2025-11-12

@@ -660,8 +660,3 @@ This security policy is a living document and will be updated regularly:
 
 ---
 
-**Last Updated:** 2025-11-19
-
-**Version:** 1.0 (established with v0.2.10/v0.2.11 security foundation)
-
-**License:** GPL-3.0

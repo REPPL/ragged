@@ -49,5 +49,3 @@ ragged query "..." --profile fast
 - [Performance Optimisations](./performance-optimisations.md)
 
 ---
-
-**License:** GPL-3.0

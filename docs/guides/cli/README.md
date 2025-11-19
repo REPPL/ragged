@@ -82,4 +82,3 @@ Each guide follows this pattern:
 
 ---
 
-**Status:** Complete for v0.2.8

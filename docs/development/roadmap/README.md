@@ -4,8 +4,6 @@ This directory contains detailed roadmaps for all ragged versions from v0.2.3 th
 
 ## Quick Overview
 
-**Current Version:** v0.2.7
-
 **Recently Completed:**
 - **[v0.2.3](version/v0.2.3/README.md)** - Critical bugs ✅ Complete
 - **[v0.2.4](version/v0.2.4/README.md)** - High priority bugs ✅ Complete

@@ -430,7 +430,6 @@ After v0.6.0 completion:
 
 ---
 
-**Last Updated:** 2025-11-12
 
 **Status:** Requires v0.5.0 completion first
 

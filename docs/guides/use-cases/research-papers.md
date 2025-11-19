@@ -1,6 +1,5 @@
 # Research Papers Guide
 
-**Status**: Coming in v0.3.0
 
 This guide will cover using ragged for academic literature management, including:
 - Organising research papers and academic literature

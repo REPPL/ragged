@@ -1,6 +1,5 @@
 # Policy for using AI Assistance
 
-**Last Updated**: 2025-11-10
 
 **Next planned Review**: After v0.3 completion (assess effectiveness and refine)
 

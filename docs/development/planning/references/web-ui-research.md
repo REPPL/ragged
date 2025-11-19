@@ -1,6 +1,5 @@
 # Web UI Research for RAG Systems (2025)
 
-**Last Updated**: 2025-11-09
 **Purpose**: Document research into state-of-the-art web interfaces for RAG systems
 
 ---

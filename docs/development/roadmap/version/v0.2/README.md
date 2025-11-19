@@ -4,8 +4,6 @@
 
 **Status:** Completed (v0.2.1 through v0.2.9), Foundation Extended (v0.2.10-v0.2.11)
 
-**Last Updated:** 2025-11-19
-
 ---
 
 ## Overview

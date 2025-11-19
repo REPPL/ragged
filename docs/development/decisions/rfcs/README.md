@@ -39,4 +39,3 @@ Example: `0001-multi-modal-rag.md`
 ---
 
 **Status:** Awaiting first RFC
-**Last Updated:** 2025-11-12

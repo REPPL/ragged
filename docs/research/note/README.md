@@ -112,7 +112,3 @@ When encountering relevant external research:
 - [Research Background](../background/) - Initial research that informed ragged's design
 
 ---
-
-**Maintained By**: ragged development team
-**License**: GPL-3.0
-**Last Updated**: 2025-11-18

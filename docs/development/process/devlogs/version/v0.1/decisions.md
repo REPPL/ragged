@@ -782,6 +782,5 @@ Use Markdown as the intermediate format for all documents:
 
 ---
 
-**Last Updated**: 2025-11-09
 **Total Decisions**: 14
 **Status:** All accepted and implemented in v0.1

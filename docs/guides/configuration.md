@@ -1,6 +1,5 @@
 # Configuration Guide
 
-**Status:** Coming in v0.3
 
 A comprehensive configuration guide is planned for a future release.
 
@@ -48,4 +47,3 @@ The configuration guide will include:
 
 ---
 
-**Status:** Planned for v0.3

@@ -1126,8 +1126,3 @@ async def query_documents(request: QueryRequest, req: Request):
 
 ---
 
-**Last Updated:** 2025-11-19
-
-**Architecture Version:** 1.0
-
-**License:** GPL-3.0

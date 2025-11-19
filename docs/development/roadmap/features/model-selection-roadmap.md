@@ -6,8 +6,6 @@
 
 **Versions:** v0.1 - v2.1+
 
-**Last Updated:** 2025-11-15
-
 ---
 
 ## Overview
@@ -263,7 +261,6 @@ The system balances **performance, quality, and resource efficiency**, ensuring 
 ---
 
 **Document Status**: Design Complete
-**Last Updated**: 2025-11-09
 **Related Documents**:
 - [Hardware Optimisation Strategy](./hardware-optimisation.md)
 - [Personal Memory & Personas](./personal-memory-personas.md)

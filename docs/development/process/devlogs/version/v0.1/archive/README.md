@@ -2,8 +2,6 @@
 
 **Purpose:** Historical development notes and drafts
 
-**Last Updated:** 2025-11-15
-
 ---
 
 ## Overview
@@ -24,6 +22,3 @@ Most v0.1 development documentation has been organised into:
 This archive contains supplementary materials that provide additional context but aren't part of the primary documentation.
 
 ---
-
-
-**License:** GPL-3.0

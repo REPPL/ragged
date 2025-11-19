@@ -598,4 +598,3 @@ XX files changed, XXX insertions(+), XXX deletions(-)
 
 ---
 
-**Last Updated**: YYYY-MM-DD
