@@ -29,3 +29,7 @@ class BM25RetrieverIncremental(BM25Retriever):
 **Success**: 10-100x faster for large collections
 
 **Timeline**: 5-6h
+
+---
+
+**Status**: ✅ IMPLEMENTED (commit 0faebab)
