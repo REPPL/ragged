@@ -2,8 +2,6 @@
 
 **Purpose:** User needs and functional requirements
 
-**Last Updated:** 2025-11-15
-
 ---
 
 ## Overview
@@ -43,6 +41,3 @@ With acceptance criteria, priority, and effort estimates.
 - See `../../process/templates/user-story-template.md`
 
 ---
-
-
-**License:** GPL-3.0

@@ -2,8 +2,6 @@
 
 **Purpose:** Reusable templates for manual testing documentation.
 
-**Last Updated:** 2025-11-19
-
 ---
 
 ## Overview
@@ -101,5 +99,3 @@ All templates follow this structure:
 - [Quality Assurance](../../../roadmap/) - Version quality gates
 
 ---
-
-**License:** GPL-3.0

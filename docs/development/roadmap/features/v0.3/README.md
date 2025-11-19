@@ -4,8 +4,6 @@
 
 **Status:** Planned
 
-**Last Updated:** 2025-11-15
-
 ---
 
 ## Overview
@@ -71,6 +69,3 @@ This directory contains detailed feature specifications for ragged v0.3.0, extra
 - [CLI Enhancements Catalogue](../../../../planning/interfaces/cli/enhancements.md) - Detailed CLI specs
 
 ---
-
-
-**License:** GPL-3.0

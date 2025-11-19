@@ -4,8 +4,6 @@
 
 **Status:** 📋 Planned (Q2-Q3 2026)
 
-**Last Updated:** 2025-11-16
-
 ---
 
 ## Overview
@@ -348,6 +346,3 @@ While not part of v0.3's deliverables, this version includes preparatory work fo
 - [CLI Enhancements Catalogue](../../interfaces/cli/enhancements.md) - Complete CLI specs
 
 ---
-
-
-**License:** GPL-3.0

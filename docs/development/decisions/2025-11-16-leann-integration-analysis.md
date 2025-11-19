@@ -264,5 +264,4 @@ LEANN (Lightweight Embedding-Aware Neural Network) is a vector database that ach
 
 ---
 
-**Last Updated:** 2025-11-16
 **Next Review:** v0.3 completion (Q3 2026)

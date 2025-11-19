@@ -2,8 +2,6 @@
 
 **Purpose:** Document what was actually built (vs. what was planned)
 
-**Last Updated:** 2025-11-15
-
 ---
 
 ## Overview
@@ -119,6 +117,3 @@ When completing a version:
 - **[Process Documentation →](../process/)** - Development narratives
 
 ---
-
-
-**License:** GPL-3.0

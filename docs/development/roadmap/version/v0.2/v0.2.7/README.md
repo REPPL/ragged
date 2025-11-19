@@ -212,5 +212,3 @@ v0.2.7 is successful if:
 ---
 
 **Next Steps**: After completing v0.2.7, proceed to v0.2.8 for additional CLI enhancements.
-
-**License:** GPL-3.0

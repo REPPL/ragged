@@ -2,10 +2,6 @@
 
 **Status:** Early Development (v0.2.2)
 
-**Last Updated:** 2025-11-13
-
-**Documentation Version:** 3.0 (restructured for industry standards)
-
 ---
 
 ## Table of Contents

@@ -1,6 +1,5 @@
 # Configuration Reference
 
-**Status:** Coming in v0.3
 
 Complete configuration reference documentation is planned for a future release.
 
@@ -38,4 +37,3 @@ The configuration reference will include:
 
 ---
 
-**Status:** Planned for v0.3

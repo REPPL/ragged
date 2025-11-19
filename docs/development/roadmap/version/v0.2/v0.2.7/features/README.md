@@ -59,5 +59,3 @@ This directory structure separates the large v0.2.7 roadmap (originally 1878 lin
 4. Maintain and update feature specifications independently
 
 ---
-
-**License:** GPL-3.0

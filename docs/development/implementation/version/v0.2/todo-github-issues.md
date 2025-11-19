@@ -102,5 +102,3 @@ The `_format_context_for_prompt()` method currently returns the full context fro
 - [Chunking ADR](../../decisions/adrs/) - Contextual chunking decisions
 
 ---
-
-**License**: GPL-3.0

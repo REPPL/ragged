@@ -186,8 +186,6 @@ Templates can be adapted for project-specific needs:
 
 **Review Cycle**: Quarterly or when process changes
 **Owner**: Development team
-**Last Updated**: 2025-11-09
-
 ---
 
 ## Quick Start

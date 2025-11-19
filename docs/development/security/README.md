@@ -2,8 +2,6 @@
 
 **Purpose:** Comprehensive security and privacy documentation for ragged.
 
-**Last Updated:** 2025-11-19
-
 ---
 
 ## Overview
@@ -517,8 +515,3 @@ We welcome contributions to improve ragged's security and privacy:
 
 ---
 
-**License:** GPL-3.0
-
-**Last Updated:** 2025-11-19
-
-**Maintained By:** ragged security team

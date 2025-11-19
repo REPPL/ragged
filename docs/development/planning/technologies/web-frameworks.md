@@ -1,6 +1,5 @@
 # Web Framework Choices for ragged
 
-**Last Updated**: 2025-11-08
 **Status:** Planning
 
 ---
