@@ -211,9 +211,9 @@ v0.2.10 (Security) → v0.2.11 (Privacy) → v0.3.1 (First v0.3 Feature)
 ### Security & Privacy Documentation
 
 **Core Documents:**
-- [Security Policy](../../security/policy.md) - Comprehensive security policy
-- [Privacy Architecture](../../security/privacy-architecture.md) - Technical privacy documentation
-- [Security README](../../security/README.md) - Security documentation hub
+- [Security Policy](../../../security/policy.md) - Comprehensive security policy
+- [Privacy Architecture](../../../security/privacy-architecture.md) - Technical privacy documentation
+- [Security README](../../../security/README.md) - Security documentation hub
 
 **Roadmap Documents:**
 - [v0.2.10 Roadmap](./v0.2.10/) - Security Hardening implementation plan
@@ -230,21 +230,17 @@ After completing each version, document in:
 ## Related Documentation
 
 ### Security & Privacy
-- [Security Policy](../../security/policy.md)
-- [Privacy Architecture](../../security/privacy-architecture.md)
-- [Security README](../../security/README.md)
+- [Security Policy](../../../security/policy.md)
+- [Privacy Architecture](../../../security/privacy-architecture.md)
+- [Security README](../../../security/README.md)
 
 ### Planning Documentation
-- [v0.2 Planning](../../planning/version/v0.2/) - Design goals and requirements
+- [v0.2 Planning](../../../planning/version/v0.2/) - Design goals and requirements
 
 ### Next Version
 - [v0.3 Roadmap](../v0.3/README.md) - Production-Ready RAG (depends on v0.2.10/v0.2.11)
 
 ### Implementation Records
-- [v0.2 Implementation](../../implementation/version/v0.2/) - Completed work
+- [v0.2 Implementation](../../../implementation/version/v0.2/) - Completed work
 
 ---
-
-**License:** GPL-3.0
-
-**Last Reviewed:** 2025-11-19

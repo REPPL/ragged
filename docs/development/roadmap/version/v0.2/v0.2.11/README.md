@@ -1989,7 +1989,7 @@ def test_customize_ttl():
 Task(
     subagent_type="codebase-security-auditor",
     prompt="Review privacy configuration implementation.
-            Check: default settings favor privacy, user controls comprehensive.
+            Check: default settings favour privacy, user controls comprehensive.
             Evaluate: privacy-by-default principle, ease of opt-out.
             Report: privacy configuration assessment, recommendations for defaults."
 )
@@ -1998,7 +1998,7 @@ Task(
 #### Acceptance Criteria
 
 - ✅ Privacy settings configurable via CLI
-- ✅ Default settings favor privacy (short TTLs, auto-cleanup enabled)
+- ✅ Default settings favour privacy (short TTLs, auto-cleanup enabled)
 - ✅ User can disable history/caching entirely
 - ✅ Privacy settings display command works
 - ✅ Configuration tests pass
@@ -2279,13 +2279,11 @@ Task(
 ## Related Documentation
 
 - [v0.2.10 - Security Hardening](../v0.2.10/) - Previous version (security foundation)
-- [v0.3.9 - REPL](../v0.3/v0.3.9.md) - Builds on encrypted session storage
-- [v0.3.10 - Metrics](../v0.3/v0.3.10.md) - Builds on PII redaction and TTL
+- [v0.3.9 - REPL](../../v0.3/v0.3.9.md) - Builds on encrypted session storage
+- [v0.3.10 - Metrics](../../v0.3/v0.3.10.md) - Builds on PII redaction and TTL
 - [Security Policy](../../../../security/policy.md) - Overall security policy
 - [Privacy Architecture](../../../../security/privacy-architecture.md) - Privacy design
 
 ---
 
 **Status:** Planned
-
-**License:** GPL-3.0

@@ -87,7 +87,7 @@ Best practices and proven patterns for building RAG systems, extracted from rese
 **Implementation**:
 1. **Parallel Retrieval**: Run BM25 (lexical) and vector search simultaneously
 2. **Result Fusion**: Use Reciprocal Rank Fusion or weighted combination
-3. **Weighting**: Start with alpha=0.7 (favoring vectors), tune for your domain
+3. **Weighting**: Start with alpha=0.7 (favouring vectors), tune for your domain
 
 **When to Use**:
 - Technical queries with specific terms
