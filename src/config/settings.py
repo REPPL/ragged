@@ -48,6 +48,20 @@ class Settings(BaseSettings):
     chunk_size: int = Field(default=500, gt=0, description="Chunk size in tokens")
     chunk_overlap: int = Field(default=100, ge=0, description="Overlap between chunks in tokens")
 
+    # Document Processing Configuration (v0.3.4a)
+    document_processor: str = Field(
+        default="docling",
+        description="Document processor to use: 'docling' (advanced) or 'legacy' (pymupdf)"
+    )
+    enable_table_extraction: bool = Field(
+        default=True,
+        description="Enable table structure extraction (Docling only)"
+    )
+    enable_layout_analysis: bool = Field(
+        default=True,
+        description="Enable layout analysis for better reading order (Docling only)"
+    )
+
     # Retrieval Configuration
     retrieval_k: int = Field(default=5, gt=0, description="Number of chunks to retrieve")
     retrieval_method: str = Field(
