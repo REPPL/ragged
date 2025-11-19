@@ -81,13 +81,11 @@ class TestReranker:
         assert result.original_count == 0
         assert result.reranked_count == 0
 
-    @patch('src.retrieval.reranker.CrossEncoder')
-    def test_rerank_with_model(self, mock_cross_encoder, sample_chunks):
+    def test_rerank_with_model(self, sample_chunks):
         """Test reranking with mock cross-encoder model."""
         # Mock model
         mock_model = MagicMock()
         mock_model.predict.return_value = np.array([0.9, 0.8, 0.7])
-        mock_cross_encoder.return_value = mock_model
 
         reranker = Reranker()
         reranker._model = mock_model
@@ -100,13 +98,11 @@ class TestReranker:
         # First chunk should have highest score
         assert reranked[0].score > reranked[1].score
 
-    @patch('src.retrieval.reranker.CrossEncoder')
-    def test_rerank_updates_scores(self, mock_cross_encoder, sample_chunks):
+    def test_rerank_updates_scores(self, sample_chunks):
         """Test that reranking updates chunk scores."""
         mock_model = MagicMock()
         new_scores = np.array([0.95, 0.85, 0.75])
         mock_model.predict.return_value = new_scores
-        mock_cross_encoder.return_value = mock_model
 
         reranker = Reranker()
         reranker._model = mock_model
@@ -118,12 +114,10 @@ class TestReranker:
         assert reranked[1].score == pytest.approx(0.85)
         assert reranked[2].score == pytest.approx(0.75)
 
-    @patch('src.retrieval.reranker.CrossEncoder')
-    def test_rerank_with_scores_simple(self, mock_cross_encoder):
+    def test_rerank_with_scores_simple(self):
         """Test rerank_with_scores method."""
         mock_model = MagicMock()
         mock_model.predict.return_value = np.array([0.9, 0.7, 0.8])
-        mock_cross_encoder.return_value = mock_model
 
         reranker = Reranker()
         reranker._model = mock_model
@@ -142,12 +136,10 @@ class TestReranker:
 
         assert len(results) == 0
 
-    @patch('src.retrieval.reranker.CrossEncoder')
-    def test_fallback_on_error(self, mock_cross_encoder, sample_chunks):
+    def test_fallback_on_error(self, sample_chunks):
         """Test fallback when reranking fails."""
         mock_model = MagicMock()
         mock_model.predict.side_effect = Exception("Reranking error")
-        mock_cross_encoder.return_value = mock_model
 
         reranker = Reranker()
         reranker._model = mock_model
@@ -159,12 +151,10 @@ class TestReranker:
         assert result.original_count == 3
         assert result.score_improvement == 0.0
 
-    @patch('src.retrieval.reranker.CrossEncoder')
-    def test_batch_processing(self, mock_cross_encoder, sample_chunks):
+    def test_batch_processing(self, sample_chunks):
         """Test that batch processing works."""
         mock_model = MagicMock()
         mock_model.predict.return_value = np.array([0.9, 0.8, 0.7])
-        mock_cross_encoder.return_value = mock_model
 
         reranker = Reranker(batch_size=2)
         reranker._model = mock_model
