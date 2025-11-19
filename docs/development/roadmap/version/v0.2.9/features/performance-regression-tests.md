@@ -308,4 +308,62 @@ jobs:
 
 ---
 
-**Status**: ✅ IMPLEMENTED (commit 7c18f32)
+**Status**: ✅ IMPLEMENTED (commit pending)
+
+**Implementation Details**:
+
+**Components Created**:
+1. **BaselineManager** - Baseline management system
+   - Load baselines from JSON
+   - Compare current vs baseline (5% threshold)
+   - Save new baselines
+   - Validation and error handling
+   - Automatic detection of improvements vs regressions
+
+2. **Regression Test Suite** - Critical path benchmarks
+   - embedder-init-cold: <0.5s target (was ~2-3s)
+   - embedder-init-warm: <0.1s target (with caching)
+   - batch-embed-10/100: Batch embedding performance
+   - single-embed: Single document embedding
+   - query-embed: Query embedding (shorter text)
+   - hash-content: Content hashing performance
+   - All tests compare against baseline with 5% threshold
+
+3. **Baseline Database** - JSON-based performance tracking
+   - Stores mean, median, std_dev, min, max, iterations
+   - Version tracking
+   - Timestamp metadata
+   - 7 critical benchmarks defined
+
+**Files Created**:
+- `tests/performance/baseline.py` (160 lines)
+- `tests/performance/test_baseline.py` (240 lines, 20+ tests)
+- `tests/performance/test_regression.py` (180 lines, 7 benchmarks)
+- `tests/performance/baseline.json` (baseline data)
+- `tests/performance/README.md` (documentation)
+
+**Features**:
+- Automated regression detection (>5% slower = fail)
+- Improvement detection (logs when faster)
+- Graceful handling of missing baselines
+- Pytest markers: @pytest.mark.performance, @pytest.mark.slow
+- Integration with existing Benchmark framework
+- Easy baseline updates after validation
+
+**Usage**:
+```bash
+# Run all performance tests
+pytest tests/performance/ -v -m performance
+
+# Run only fast tests
+pytest tests/performance/ -v -m "performance and not slow"
+
+# Update baseline after improvements
+python -c "from tests.performance.baseline import BaselineManager; ..."
+```
+
+**Next Steps** (CI integration pending):
+- Create `.github/workflows/performance.yml`
+- Configure artifact storage for baselines
+- PR comment generation with results
+- Automatic baseline validation
