@@ -1,9 +1,13 @@
 """Query history management for ragged CLI.
 
 Stores and manages query history for easy replay and analysis.
+
+v0.2.11 FEAT-PRIV-001: Query history now encrypted at rest.
 """
 
 import json
+import os
+import shutil
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -14,6 +18,7 @@ import click
 from src.cli.common import console
 from src.cli.formatters import FORMAT_CHOICES, print_formatted
 from src.config.settings import get_settings
+from src.security.encryption import get_encryption_manager
 from src.utils.logging import get_logger
 
 logger = get_logger(__name__)
@@ -43,26 +48,96 @@ class QueryHistory:
             self._save_history([])
 
     def _load_history(self) -> List[Dict[str, Any]]:
-        """Load history from file.
+        """Load history from encrypted file.
 
         Returns:
             List of history entries
+
+        Security: v0.2.11 FEAT-PRIV-001 - History loaded from encrypted file.
         """
-        try:
-            with open(self.history_file, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except (json.JSONDecodeError, FileNotFoundError) as e:
-            logger.warning(f"Failed to load history: {e}")
+        if not self.history_file.exists():
             return []
 
+        encryption = get_encryption_manager()
+
+        try:
+            # Read encrypted file
+            with open(self.history_file, "rb") as f:
+                encrypted = f.read()
+
+            # Decrypt
+            decrypted = encryption.decrypt(encrypted)
+
+            # Parse JSON
+            history = json.loads(decrypted.decode("utf-8"))
+
+            logger.debug(f"Loaded encrypted history: {len(history)} entries")
+            return history
+
+        except Exception as e:
+            logger.warning(f"Failed to load encrypted history: {e}")
+            # Try legacy plaintext migration
+            return self._migrate_plaintext_history()
+
     def _save_history(self, history: List[Dict[str, Any]]) -> None:
-        """Save history to file.
+        """Save history to encrypted file.
 
         Args:
             history: List of history entries
+
+        Security: v0.2.11 FEAT-PRIV-001 - History encrypted before writing to disk.
         """
-        with open(self.history_file, "w", encoding="utf-8") as f:
-            json.dump(history, f, indent=2, ensure_ascii=False)
+        encryption = get_encryption_manager()
+
+        # Serialise to JSON
+        json_data = json.dumps(history, indent=2, ensure_ascii=False)
+
+        # Encrypt
+        encrypted = encryption.encrypt(json_data.encode("utf-8"))
+
+        # Write encrypted file
+        with open(self.history_file, "wb") as f:
+            f.write(encrypted)
+
+        # Set restrictive permissions
+        os.chmod(self.history_file, 0o600)
+
+        logger.debug(f"Saved encrypted history: {len(history)} entries")
+
+    def _migrate_plaintext_history(self) -> List[Dict[str, Any]]:
+        """One-time migration from plaintext to encrypted history.
+
+        Returns:
+            List of history entries from legacy plaintext file
+
+        Security: Automatically migrates existing plaintext history to encrypted format.
+        """
+        legacy_file = self.history_file.with_suffix(".json.legacy")
+
+        # Check if file exists and might be plaintext
+        if self.history_file.exists():
+            try:
+                # Try reading as plaintext
+                with open(self.history_file, "r", encoding="utf-8") as f:
+                    history = json.load(f)
+
+                logger.warning("Migrating plaintext history to encrypted format")
+
+                # Backup plaintext
+                shutil.copy(self.history_file, legacy_file)
+
+                # Save encrypted
+                self._save_history(history)
+
+                logger.info(f"Migration complete. Legacy backup: {legacy_file}")
+                return history
+
+            except (json.JSONDecodeError, UnicodeDecodeError):
+                # File already encrypted or corrupted
+                logger.error("History file corrupted or already encrypted")
+                return []
+
+        return []
 
     def add_query(
         self,
