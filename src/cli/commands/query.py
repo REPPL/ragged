@@ -30,7 +30,12 @@ logger = get_logger(__name__)
     is_flag=True,
     help="Don't save this query to history",
 )
-def query(query: str, k: int, show_sources: bool, output_format: str, no_history: bool) -> None:
+@click.option(
+    "--show-confidence",
+    is_flag=True,
+    help="Show answer confidence score breakdown",
+)
+def query(query: str, k: int, show_sources: bool, output_format: str, no_history: bool, show_confidence: bool) -> None:
     """Ask a question and get an answer from your documents.
 
     \b
@@ -40,6 +45,7 @@ def query(query: str, k: int, show_sources: bool, output_format: str, no_history
         ragged query "Summary?" --format json > result.json
     """
     from src.config.settings import get_settings
+    from src.generation.confidence import ConfidenceCalculator
     from src.generation.ollama_client import OllamaClient
     from src.generation.prompts import RAG_SYSTEM_PROMPT, build_rag_prompt
     from src.generation.response_parser import parse_response
@@ -108,6 +114,18 @@ def query(query: str, k: int, show_sources: bool, output_format: str, no_history
                 include_unused_refs=False
             )
 
+        # Calculate confidence if requested
+        confidence = None
+        if show_confidence:
+            calculator = ConfidenceCalculator()
+            # Extract citations from formatted response
+            citations = [line for line in formatted_response.split('\n') if '[Source:' in line]
+            confidence = calculator.calculate(
+                retrieved_chunks=chunks,
+                answer=response_text,
+                citations=citations,
+            )
+
         # Output results
         if output_format == "json":
             result = {
@@ -125,6 +143,8 @@ def query(query: str, k: int, show_sources: bool, output_format: str, no_history
                 "retrieval_method": settings.retrieval_method,
                 "top_k": k,
             }
+            if confidence:
+                result["confidence"] = confidence.to_dict()
             print(json.dumps(result, indent=2))
         else:
             if show_sources:
@@ -137,6 +157,12 @@ def query(query: str, k: int, show_sources: bool, output_format: str, no_history
 
             console.print("[bold]Answer:[/bold]")
             console.print(formatted_response)
+
+            if confidence:
+                console.print(f"\n[bold]Confidence:[/bold] {confidence.to_str()} ({confidence.overall_confidence:.2f})")
+                console.print(f"  Retrieval:  {confidence.retrieval_score:.2f}")
+                console.print(f"  Generation: {confidence.generation_score:.2f}")
+                console.print(f"  Citations:  {confidence.citation_coverage:.2f}")
 
         # Save to history unless disabled
         if not no_history:

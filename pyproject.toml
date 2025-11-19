@@ -57,6 +57,9 @@ dependencies = [
     "psutil>=5.9.0",
     # v0.2.10/v0.2.11 security dependencies
     "cryptography>=41.0.0",  # Fernet encryption for query history, session data
+    # v0.3.0 evaluation dependencies
+    "ragas>=0.1.0",  # Apache 2.0 - RAGAS evaluation framework
+    "datasets>=2.14.0",  # Apache 2.0 - Required by ragas
 ]
 
 [project.optional-dependencies]
@@ -169,6 +172,9 @@ markers = [
     "slow: Slow-running tests",
     "requires_ollama: Tests requiring Ollama service",
     "requires_chromadb: Tests requiring ChromaDB service",
+    # Security and Privacy markers (v0.2.10, v0.2.11)
+    "security: Security hardening tests (v0.2.10)",
+    "privacy: Privacy infrastructure tests (v0.2.11)",
     # Manual test markers
     "smoke: Quick sanity checks (5-10 min)",
     "feature: Tests for specific feature (use with argument, e.g., @pytest.mark.feature('cli'))",
