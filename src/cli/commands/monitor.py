@@ -4,6 +4,8 @@ v0.2.9: Real-time metrics monitoring.
 """
 
 import time
+from typing import Optional
+
 import click
 from rich.live import Live
 from rich.table import Table
