@@ -97,8 +97,7 @@ class TestContextualCompressor:
 
         assert len(sentences) == 0
 
-    @patch('src.retrieval.compression.SentenceTransformer')
-    def test_compress_with_model(self, mock_transformer, sample_chunks):
+    def test_compress_with_model(self, sample_chunks):
         """Test compression with mock model."""
         # Mock model
         mock_model = MagicMock()
@@ -108,7 +107,6 @@ class TestContextualCompressor:
             np.array([[1.0, 0.0, 0.0], [0.8, 0.2, 0.0], [0.5, 0.5, 0.0]]),  # Sentence embeddings
             np.array([[0.9, 0.1, 0.0], [0.7, 0.3, 0.0], [0.6, 0.4, 0.0]]),  # More sentence embeddings
         ]
-        mock_transformer.return_value = mock_model
 
         compressor = ContextualCompressor(target_compression_ratio=0.5)
         compressor._model = mock_model
@@ -183,12 +181,10 @@ class TestContextualCompressor:
 
         assert reconstructed == ""
 
-    @patch('src.retrieval.compression.SentenceTransformer')
-    def test_fallback_on_error(self, mock_transformer, sample_chunks):
+    def test_fallback_on_error(self, sample_chunks):
         """Test fallback when compression fails."""
         mock_model = MagicMock()
         mock_model.encode.side_effect = Exception("Model error")
-        mock_transformer.return_value = mock_model
 
         compressor = ContextualCompressor()
         compressor._model = mock_model
