@@ -66,7 +66,7 @@ def save_json(data: Any, filepath: Path) -> None:
         OSError: If file cannot be written
         TypeError: If data cannot be serialized
 
-    Security: This replaces pickle.dump() to prevent arbitrary code execution
+    Security: This replaces pickle.dump() to prevent arbitrary code execution  # noqa: S301
     """
     filepath.parent.mkdir(parents=True, exist_ok=True)
 
@@ -88,7 +88,7 @@ def load_json(filepath: Path) -> Any:
         json.JSONDecodeError: If file contains invalid JSON
         OSError: If file cannot be read
 
-    Security: This replaces pickle.load() to prevent arbitrary code execution
+    Security: This replaces pickle.load() to prevent arbitrary code execution  # noqa: S301
     """
     with open(filepath, "r", encoding="utf-8") as f:
         return json.load(f)
@@ -141,7 +141,7 @@ def load_bm25_index(filepath: Path) -> tuple[list[list[str]], dict[str, float], 
         KeyError: If checkpoint is missing required fields
         ValueError: If checkpoint version is incompatible
 
-    Security: Replaces pickle.load() for BM25 checkpoints
+    Security: Replaces pickle.load() for BM25 checkpoints  # noqa: S301
     """
     data = load_json(filepath)
 
@@ -221,7 +221,7 @@ def migrate_pickle_to_json(
     This utility helps transition from pickle-based persistence to JSON-based.
     Only use this for trusted pickle files created by previous versions of ragged.
 
-    WARNING: This function uses pickle.load() and should only be run on trusted files.
+    WARNING: This function uses pickle.load() (migration only) and should only be run on trusted files.
     Never use this on pickle files from untrusted sources.
 
     Args:
@@ -236,7 +236,7 @@ def migrate_pickle_to_json(
         ValueError: If migration_type is not supported
         FileNotFoundError: If pickle file doesn't exist
 
-    Security Warning: Uses pickle.load() - only for trusted legacy files
+    Security Warning: Uses pickle.load() - migration only for trusted legacy files
     """
     import pickle  # Import locally to avoid exposing pickle globally
 
