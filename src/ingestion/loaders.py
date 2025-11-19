@@ -3,13 +3,17 @@ Document loaders for various file formats.
 
 This module provides loaders for PDF, TXT, Markdown, and HTML files
 with security validation and error handling.
+
+v0.3.4a: PDF loading now uses the new processor architecture (Docling or legacy).
 """
 
 import mimetypes
 from pathlib import Path
 from typing import Optional, Tuple
 
+from src.config.settings import get_settings
 from src.ingestion.models import Document
+from src.processing import ProcessorConfig, ProcessorFactory
 from src.utils.logging import get_logger
 from src.utils.security import (
     SecurityError,
@@ -19,6 +23,7 @@ from src.utils.security import (
 )
 
 logger = get_logger(__name__)
+settings = get_settings()
 
 
 def load_document(
@@ -107,54 +112,90 @@ def _detect_format(file_path: Path) -> str:
     return "txt"
 
 
-def load_pdf(file_path: Path) -> Document:
+def load_pdf(file_path: Path, processor_type: Optional[str] = None) -> Document:
     """
-    Load PDF using PyMuPDF4LLM.
+    Load PDF using the configured document processor.
+
+    v0.3.4a: Now uses the new processor architecture with Docling or legacy pymupdf.
 
     Args:
         file_path: Path to PDF file
+        processor_type: Override processor type ('docling' or 'legacy').
+                       If None, uses settings.document_processor.
 
     Returns:
         Document instance
+
+    Raises:
+        ImportError: If required dependencies are missing
+        ProcessorError: If document processing fails
     """
-    try:
-        import pymupdf4llm
-        import pymupdf as fitz
-    except ImportError:
-        raise ImportError("pymupdf and pymupdf4llm required for PDF support: pip install pymupdf pymupdf4llm")
+    logger.debug(f"Loading PDF: {file_path}")
 
-    logger.debug(f"Extracting text from PDF: {file_path}")
+    # Determine which processor to use
+    if processor_type is None:
+        processor_type = settings.document_processor
 
-    # Get metadata first to know page count
-    doc = fitz.open(file_path)
-    metadata = doc.metadata or {}
-    page_count = len(doc)
-    doc.close()
-
-    # Extract text page by page with page markers for citation tracking
-    pages_text = []
-    for page_num in range(page_count):
-        # Extract markdown for this page only
-        page_md = pymupdf4llm.to_markdown(str(file_path), pages=[page_num])
-        # Add page marker before the page content
-        pages_text.append(f"<!-- PAGE {page_num + 1} -->\n{page_md}")
-
-    # Join all pages with double newlines
-    md_text = "\n\n".join(pages_text)
-
-    title = metadata.get("title") or file_path.stem
-    author = metadata.get("author")
-
-    logger.info(f"Loaded PDF: {page_count} pages, {len(md_text)} characters")
-
-    return Document.from_file(
-        file_path=file_path,
-        content=md_text,
-        format="pdf",
-        title=title,
-        author=author,
-        page_count=page_count,
+    # Create processor configuration
+    config = ProcessorConfig(
+        processor_type=processor_type,
+        enable_table_extraction=settings.enable_table_extraction,
+        enable_layout_analysis=settings.enable_layout_analysis,
+        model_cache_dir=settings.data_dir / "models",
     )
+
+    # Check if processor is available, fall back to legacy if needed
+    if not ProcessorFactory.is_processor_available(processor_type):
+        logger.warning(
+            f"Processor '{processor_type}' not available. "
+            f"Falling back to 'legacy' processor."
+        )
+        config.processor_type = "legacy"
+
+    # Create processor and process document
+    try:
+        processor = ProcessorFactory.create(config)
+        result = processor.process(file_path)
+
+        logger.info(
+            f"Processed PDF with {result.processor_type}: "
+            f"{result.metadata.get('page_count', 0)} pages, "
+            f"{len(result.content)} characters, "
+            f"{len(result.tables)} tables extracted"
+        )
+
+        # Convert ProcessedDocument to Document
+        return Document.from_file(
+            file_path=file_path,
+            content=result.content,
+            format="pdf",
+            title=result.metadata.get("title", file_path.stem),
+            author=result.metadata.get("author"),
+            page_count=result.metadata.get("page_count"),
+        )
+
+    except ImportError as e:
+        # If Docling not installed, automatically fall back to legacy
+        if "docling" in str(e).lower() and config.processor_type == "docling":
+            logger.warning(
+                "Docling not installed. Falling back to legacy processor. "
+                "Install Docling with: pip install docling docling-core docling-parse"
+            )
+            config.processor_type = "legacy"
+            processor = ProcessorFactory.create(config)
+            result = processor.process(file_path)
+
+            return Document.from_file(
+                file_path=file_path,
+                content=result.content,
+                format="pdf",
+                title=result.metadata.get("title", file_path.stem),
+                author=result.metadata.get("author"),
+                page_count=result.metadata.get("page_count"),
+            )
+        else:
+            # Re-raise if it's a different import error
+            raise
 
 
 def load_txt(file_path: Path) -> Document:

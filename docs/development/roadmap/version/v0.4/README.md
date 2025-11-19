@@ -1,6 +1,6 @@
 # Ragged v0.4.x Roadmap Overview - Personal Memory & Knowledge Graphs
 
-**Version Series:** v0.4.0 - v0.4.10
+**Version Series:** v0.4.0 - v0.4.9
 
 **Status:** Planned
 
@@ -20,7 +20,7 @@ Version 0.4.x transforms ragged from a document retrieval tool into an intellige
 
 **Core Principle**: Foundation first, features second - establish rock-solid architecture, testing infrastructure (80%+ coverage), and code quality before introducing complex memory and personalisation features.
 
-**Key Capabilities** (by end of v0.4.10):
+**Key Capabilities** (by end of v0.4.0):
 - **Plugin Architecture**: Extensible system for custom embedders, retrievers, processors, and commands
 - **VectorStore Abstraction**: Support for multiple backends (ChromaDB, LEANN)
 - **Personal Memory System**: Persona management, behaviour learning, temporal memory
@@ -31,24 +31,146 @@ Version 0.4.x transforms ragged from a document retrieval tool into an intellige
 
 ---
 
+## Prerequisites & Security
+
+### Hard Prerequisites (Must Complete Before Starting v0.4)
+
+**CRITICAL**: v0.4.x **CANNOT** begin until all prerequisites are met.
+
+#### 1. Complete v0.2.10 & v0.2.11 (Security & Privacy Foundation)
+- **Status**: ✅ Completed (Nov 2025)
+- **Why Critical**: v0.4 stores highly sensitive user data (behaviour patterns, interests, temporal history)
+- **Components Required**:
+  - Session isolation (CRITICAL-003 resolved)
+  - JSON serialisation (CRITICAL-001 resolved)
+  - Encryption at rest (FEAT-PRIV-001)
+  - PII detection and redaction (FEAT-PRIV-002)
+  - Data lifecycle management (FEAT-PRIV-003)
+  - GDPR compliance toolkit (FEAT-PRIV-004)
+
+#### 2. Complete v0.3.x Series (All 13 Releases)
+- **Status**: ⏳ In Progress (Target: Q2-Q3 2026)
+- **Why Critical**: v0.4 builds directly on v0.3 architecture
+- **Key Dependencies**:
+  - v0.3.1: Evaluation framework (enables v0.4 validation)
+  - v0.3.3: Advanced query processing (enables v0.4.0 personalisation)
+  - v0.3.7: VectorStore abstraction (enables v0.4.0 & v0.4.0)
+  - v0.3.13: REST API (coexists with v0.4.0 plugin system)
+
+#### 3. Security Audit for Memory System (BEFORE v0.4.0)
+- **Status**: ⏳ Planned (Complete during/after v0.4.0)
+- **Why Critical**: Memory system stores personal behaviour data
+- **Scope**: Memory system design, knowledge graph storage, behaviour tracking
+- **Timeline**: 2-3 weeks, must pass before v0.4.0 implementation begins
+- **Deliverable**: Security audit report with pass/fail status
+- **See**: [v0.4.3/security-audit.md](v0.4.3/security-audit.md) for full requirements
+
+### Target Timeline
+
+**Earliest Start**: Q3 2026 (assuming v0.3.x complete by Q2-Q3 2026)
+**Estimated Duration**: 8 months (33 weeks, 195-242 hours)
+**Target Completion**: Q4 2026 (November-December)
+
+**Critical Path**:
+```
+v0.2.10/v0.2.11 (Complete) →
+v0.3.x (13 releases, Q2-Q3 2026) →
+Security Audit (2-3 weeks, during v0.4.0) →
+v0.4.0+ Memory System Implementation →
+LEANN Decision (evaluate at v0.4.0) →
+v0.4.0 Production Release (Q4 2026)
+```
+
+### Privacy & Security Commitment
+
+**Local-First Guarantee**: All user data remains on device
+**Zero Telemetry**: No usage tracking, no cloud dependencies
+**Privacy Controls**: Export, delete, disable tracking at any time
+**Security Gates**: Formal audit before memory system implementation
+**GDPR Compliance**: Built on v0.2.11 FEAT-PRIV-004 foundation
+
+---
+
+## LEANN Backend Decision Framework
+
+### Conditional Implementation (v0.4.0)
+
+**Status**: ⚠️ **CONDITIONAL** - Decision made after v0.4.0 evaluation
+
+**v0.4.0 (LEANN Backend Integration)** is **NOT guaranteed** - implementation depends on evaluation results at v0.4.0 completion.
+
+### Evaluation Checkpoint: After v0.4.0 Completes
+
+**When**: Immediately following v0.4.0 behaviour learning release
+**What**: Measure actual storage usage with memory system running
+**Who**: Development team + community feedback
+
+### Decision Criteria
+
+#### Proceed with v0.4.0 LEANN if:
+1. **Storage usage >10GB** - Storage efficiency becomes critical
+2. **Platform requirements met** - macOS OR Linux (not Windows initially)
+3. **Recall requirements acceptable** - Scientific use cases don't require 100% recall
+4. **Build complexity acceptable** - Team can handle C++ platform-specific builds
+
+#### Defer LEANN to v0.5.x if:
+1. **Storage manageable** - Memory system usage <10GB for typical users
+2. **Windows users critical** - Significant Windows user base (LEANN macOS/Linux only initially)
+3. **Recall requirements high** - Scientific/research use cases need 100% recall (ChromaDB better)
+4. **Resource constraints** - Team prefers focus on memory system stability
+
+### Implementation Options
+
+**Option A: Proceed with v0.4.0** (35-42 hours)
+- Implement LEANN backend per roadmap
+- 97% storage savings achieved
+- Optional `pip install ragged[leann]` dependency
+- Migration tools for ChromaDB ↔ LEANN
+
+**Option B: Defer to v0.5.x** (0 hours in v0.4)
+- Document evaluation results
+- Create v0.5.x LEANN planning document
+- Focus v0.4.0 time on memory system polish or additional features
+- Keep v0.4.0 stabilisation release as-is
+
+### Benefits & Trade-offs
+
+| Aspect | LEANN (Proceed) | Defer (Stability Focus) |
+|--------|----------------|------------------------|
+| **Storage** | 97% reduction | Standard (ChromaDB) |
+| **Complexity** | C++ builds, platform-specific | Pure Python, all platforms |
+| **Recall** | 90% top-3 | ~100% (lossless) |
+| **v0.4 Focus** | Alternative backends | Memory system polish |
+| **Windows Support** | Deferred | Full support maintained |
+| **Time Investment** | 35-42 hours | 0 hours (reallocate) |
+
+### Recommendation Framework
+
+**Proceed if**: Storage + Platform + Recall criteria all met
+**Defer if**: Any criterion NOT met OR team prefers stability focus
+
+**Note**: Either decision is valid - v0.4 succeeds with or without LEANN. The memory system is the core value.
+
+---
+
 ## Release Strategy
 
-### Foundation Phase (v0.4.1 - v0.4.3)
+### Foundation Phase (v0.4.0 - v0.4.0)
 **Focus**: Architecture, testing infrastructure, code quality
 **Hours**: 55-67
 **Goal**: Establish foundation that enables safe, rapid feature development
 
-### Core Features Phase (v0.4.4 - v0.4.6)
+### Core Features Phase (v0.4.0 - v0.4.0)
 **Focus**: Memory system implementation with stability
 **Hours**: 85-98
 **Goal**: Deliver persona management, behaviour learning, and personalisation
 
-### Advanced Features Phase (v0.4.7 - v0.4.9)
+### Advanced Features Phase (v0.4.0 - v0.4.0)
 **Focus**: Refactoring, temporal memory, LEANN backend
 **Hours**: 90-107
 **Goal**: Complete memory system and alternative storage backend
 
-### Stabilisation Phase (v0.4.10)
+### Stabilisation Phase (v0.4.0)
 **Focus**: Production readiness, comprehensive testing, performance
 **Hours**: 15-20
 **Goal**: Release-ready v0.4 with all features polished and tested
@@ -57,7 +179,7 @@ Version 0.4.x transforms ragged from a document retrieval tool into an intellige
 
 ## Incremental Releases
 
-### [v0.4.1 - Plugin Architecture & Testing Foundation](v0.4.1.md) (25-30h)
+### [v0.4.0 - Plugin Architecture & Testing Foundation](v0.4.0.md) (25-30h)
 
 **Status**: Planned | **Priority**: P0 - Foundation
 
@@ -79,7 +201,7 @@ Version 0.4.x transforms ragged from a document retrieval tool into an intellige
 
 ---
 
-### [v0.4.2 - VectorStore Abstraction & Refactoring](v0.4.2.md) (18-22h)
+### [v0.4.0 - VectorStore Abstraction & Refactoring](v0.4.0.md) (18-22h)
 
 **Status**: Planned | **Priority**: P0 - Foundation
 
@@ -101,7 +223,7 @@ Version 0.4.x transforms ragged from a document retrieval tool into an intellige
 
 ---
 
-### [v0.4.3 - Code Quality & Stability Release](v0.4.3.md) (12-15h)
+### [v0.4.0 - Code Quality & Stability Release](v0.4.0.md) (12-15h)
 
 **Status**: Planned | **Priority**: P1 - Quality
 
@@ -123,7 +245,7 @@ Version 0.4.x transforms ragged from a document retrieval tool into an intellige
 
 ---
 
-### [v0.4.4 - Memory Foundation: Personas & Tracking](v0.4.4.md) (35-40h)
+### [v0.4.0 - Memory Foundation: Personas & Tracking](v0.4.0.md) (35-40h)
 
 **Status**: Planned | **Priority**: P0 - Core Feature
 
@@ -146,7 +268,7 @@ Version 0.4.x transforms ragged from a document retrieval tool into an intellige
 
 ---
 
-### [v0.4.5 - Stability & Performance Enhancement](v0.4.5.md) (15-18h)
+### [v0.4.0 - Stability & Performance Enhancement](v0.4.0.md) (15-18h)
 
 **Status**: Planned | **Priority**: P1 - Quality
 
@@ -168,7 +290,7 @@ Version 0.4.x transforms ragged from a document retrieval tool into an intellige
 
 ---
 
-### [v0.4.6 - Behaviour Learning & Personalisation](v0.4.6.md) (35-40h)
+### [v0.4.0 - Behaviour Learning & Personalisation](v0.4.0.md) (35-40h)
 
 **Status**: Planned | **Priority**: P0 - Core Feature
 
@@ -190,7 +312,7 @@ Version 0.4.x transforms ragged from a document retrieval tool into an intellige
 
 ---
 
-### [v0.4.7 - Refactoring & Architecture Improvements](v0.4.7.md) (10-12h)
+### [v0.4.0 - Refactoring & Architecture Improvements](v0.4.0.md) (10-12h)
 
 **Status**: Planned | **Priority**: P2 - Quality
 
@@ -212,7 +334,7 @@ Version 0.4.x transforms ragged from a document retrieval tool into an intellige
 
 ---
 
-### [v0.4.8 - Temporal Memory System](v0.4.8.md) (40-45h)
+### [v0.4.0 - Temporal Memory System](v0.4.0.md) (40-45h)
 
 **Status**: Planned | **Priority**: P0 - Advanced Feature
 
@@ -234,7 +356,7 @@ Version 0.4.x transforms ragged from a document retrieval tool into an intellige
 
 ---
 
-### [v0.4.9 - LEANN Backend Integration](v0.4.9.md) (35-42h)
+### [v0.4.0 - LEANN Backend Integration](v0.4.0.md) (35-42h)
 
 **Status**: Planned | **Priority**: P1 - Alternative Backend
 
@@ -256,7 +378,7 @@ Version 0.4.x transforms ragged from a document retrieval tool into an intellige
 
 ---
 
-### [v0.4.10 - Production Readiness & Final Stabilisation](v0.4.10.md) (15-20h)
+### [v0.4.0 - Production Readiness & Final Stabilisation](v0.4.0.md) (15-20h)
 
 **Status**: Planned | **Priority**: P0 - Release
 
@@ -283,17 +405,17 @@ Version 0.4.x transforms ragged from a document retrieval tool into an intellige
 
 | Phase | Releases | Hours | Focus |
 |-------|----------|-------|-------|
-| Foundation | v0.4.1 - v0.4.3 | 55-67 | Architecture, testing, quality |
-| Core Features | v0.4.4 - v0.4.6 | 85-98 | Memory system, personalisation |
-| Advanced | v0.4.7 - v0.4.9 | 90-107 | Refactoring, temporal, LEANN |
-| Stabilisation | v0.4.10 | 15-20 | Production readiness |
+| Foundation | v0.4.0 - v0.4.0 | 55-67 | Architecture, testing, quality |
+| Core Features | v0.4.0 - v0.4.0 | 85-98 | Memory system, personalisation |
+| Advanced | v0.4.0 - v0.4.0 | 90-107 | Refactoring, temporal, LEANN |
+| Stabilisation | v0.4.0 | 15-20 | Production readiness |
 | **Total** | **10 releases** | **195-242** | **Complete v0.4** |
 
 **Original v0.4.0 estimate**: 180-225 hours
 **New v0.4.x total**: 195-242 hours
 **Difference**: +15-17 hours (+8%) for dedicated quality/stability releases
 
-**Justification**: Additional time investment in foundation, testing, and stability releases (v0.4.3, v0.4.5, v0.4.7, v0.4.10) pays dividends in reduced debugging, easier maintenance, and higher quality.
+**Justification**: Additional time investment in foundation, testing, and stability releases (v0.4.0, v0.4.0, v0.4.0, v0.4.0) pays dividends in reduced debugging, easier maintenance, and higher quality.
 
 ---
 
@@ -326,7 +448,7 @@ Version 0.4.x transforms ragged from a document retrieval tool into an intellige
 
 ### 3. Dedicated Stability Releases
 
-**Decision**: Include 4 stability-focused releases (v0.4.3, v0.4.5, v0.4.7, v0.4.10)
+**Decision**: Include 4 stability-focused releases (v0.4.0, v0.4.0, v0.4.0, v0.4.0)
 
 **Rationale**:
 - Foundation-first principle requires quality gates
@@ -338,7 +460,7 @@ Version 0.4.x transforms ragged from a document retrieval tool into an intellige
 
 ### 4. Plugin Architecture First
 
-**Decision**: Implement plugin system before memory features (v0.4.1)
+**Decision**: Implement plugin system before memory features (v0.4.0)
 
 **Rationale**:
 - Enables extensibility from start
@@ -350,10 +472,10 @@ Version 0.4.x transforms ragged from a document retrieval tool into an intellige
 
 ### 5. VectorStore Abstraction Early
 
-**Decision**: Implement abstraction layer before memory features (v0.4.2)
+**Decision**: Implement abstraction layer before memory features (v0.4.0)
 
 **Rationale**:
-- LEANN integration easier later (v0.4.9)
+- LEANN integration easier later (v0.4.0)
 - Clean architecture from start
 - Prepared for v0.3's VectorStore work
 - Multiple backends possible
@@ -410,10 +532,10 @@ Version 0.4.x transforms ragged from a document retrieval tool into an intellige
 
 ### Configuration Evolution
 
-**v0.4.1+**: Plugin configuration added
-**v0.4.2+**: VectorStore backend selection
-**v0.4.4+**: Memory system configuration
-**v0.4.9+**: LEANN backend options
+**v0.4.0+**: Plugin configuration added
+**v0.4.0+**: VectorStore backend selection
+**v0.4.0+**: Memory system configuration
+**v0.4.0+**: LEANN backend options
 
 **Principle**: Old configurations continue working, new features opt-in
 
@@ -439,7 +561,7 @@ Version 0.4.x transforms ragged from a document retrieval tool into an intellige
 
 ### Comprehensive Docs
 
-**By v0.4.10**:
+**By v0.4.0**:
 - Complete plugin development guide
 - VectorStore backend development guide
 - Memory system architecture documentation
@@ -453,11 +575,11 @@ Version 0.4.x transforms ragged from a document retrieval tool into an intellige
 
 ### High-Risk Items
 
-**Memory System Complexity** (v0.4.4-v0.4.8):
+**Memory System Complexity** (v0.4.0-v0.4.0):
 - **Mitigation**: Incremental delivery with dedicated stability releases
 - **Fallback**: Each release stands alone, can pause if issues
 
-**LEANN Platform Support** (v0.4.9):
+**LEANN Platform Support** (v0.4.0):
 - **Mitigation**: Optional dependency, extensive testing
 - **Fallback**: ChromaDB remains default and fully supported
 
@@ -467,7 +589,7 @@ Version 0.4.x transforms ragged from a document retrieval tool into an intellige
 - **Mitigation**: Benchmarking in each release, <5% regression limit
 - **Fallback**: Performance optimisation in stability releases
 
-**Plugin Security** (v0.4.1):
+**Plugin Security** (v0.4.0):
 - **Mitigation**: Validation, sandboxing design (full impl later)
 - **Fallback**: Plugin system can be disabled
 
@@ -478,7 +600,7 @@ Version 0.4.x transforms ragged from a document retrieval tool into an intellige
 - Enforced via CI/CD
 - Incremental improvement
 
-**Refactoring** (v0.4.2, v0.4.7):
+**Refactoring** (v0.4.0, v0.4.0):
 - Comprehensive existing tests
 - Incremental changes
 - Easy rollback
@@ -511,7 +633,7 @@ Version 0.4.x builds directly upon the foundation established by v0.3.x (13 rele
 **v0.3.7 - VectorStore Abstraction** (16-22 hours):
 - Delivers the VectorStore abstract interface
 - Refactors ChromaDB into clean implementation
-- **Enables**: v0.4.2 refactoring and v0.4.9 LEANN integration
+- **Enables**: v0.4.0 refactoring and v0.4.0 LEANN integration
 - **Status**: Foundation layer for multi-backend support
 
 **v0.3.1 - Foundation & Metrics** (30 hours):
@@ -521,12 +643,12 @@ Version 0.4.x builds directly upon the foundation established by v0.3.x (13 rele
 
 **v0.3.3 - Advanced Query Processing** (53-55 hours):
 - Implements reranking, query expansion, multi-query retrieval
-- **Enables**: v0.4.6 personalized ranking builds on this
+- **Enables**: v0.4.0 personalized ranking builds on this
 - **Status**: Advanced retrieval techniques foundation
 
 **v0.3.13 - Polish & Integration** (26-32 hours):
 - Delivers REST API with FastAPI
-- **Coexists with**: v0.4.1 plugin architecture (independent extension mechanisms)
+- **Coexists with**: v0.4.0 plugin architecture (independent extension mechanisms)
 - **Status**: Production API ready for v0.4 memory features
 
 ### v0.3.x → v0.4.x Progression
@@ -547,9 +669,9 @@ Version 0.4.x builds directly upon the foundation established by v0.3.x (13 rele
 **v0.4.x**: Starts after v0.3.13 complete (10 releases)
 
 **Clean Handoff**:
-- v0.3.7 delivers VectorStore → v0.4.2 refines and uses it
+- v0.3.7 delivers VectorStore → v0.4.0 refines and uses it
 - v0.3.1 establishes metrics → v0.4.x validates against them
-- v0.3.13 delivers API → v0.4.1 adds plugin system (complementary)
+- v0.3.13 delivers API → v0.4.0 adds plugin system (complementary)
 
 ### Scope Boundaries
 
@@ -587,8 +709,8 @@ Version 0.4.x builds directly upon the foundation established by v0.3.x (13 rele
 **Implementation Roadmaps**:
 - [v0.3.0 Roadmap](../../v0.3.0/README.md) - Advanced retrieval & document intelligence (13 releases, Q2-Q3 2026)
   - See especially [v0.3.7](../../v0.3.0/v0.3.7.md) - VectorStore abstraction foundation
-- [v0.4.0 Detailed Spec](v0.4.0-DETAILED-SPEC.md) - Original comprehensive roadmap (kept for reference)
-- Individual release roadmaps: [v0.4.1](v0.4.1.md) through [v0.4.10](v0.4.10.md)
+- [v0.4 Detailed Spec](v0.4-DETAILED-SPEC.md) - Original comprehensive roadmap (kept for reference)
+- Individual release roadmaps: [v0.4.0](v0.4.0.md) through [v0.4.9](v0.4.9.md)
 
 **Architecture**:
 - [Architecture Overview](../../../planning/architecture/README.md) - System architecture

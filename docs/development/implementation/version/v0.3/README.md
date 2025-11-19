@@ -20,6 +20,54 @@ The v0.3 series transforms ragged from a functional RAG system into an intellige
 
 ## Completed Versions
 
+### v0.3.0 - Foundation & Metrics (Completed 2025-11-19)
+
+**Status:** ✅ Completed
+**Implementation:** [v0.3.0/](./v0.3.0/)
+
+**Summary:**
+- RAGAS evaluation framework (4 quality metrics)
+- Answer confidence scoring
+- 1,277 lines added (616 production, 610 tests)
+- Baseline metrics established for v0.3.x tracking
+
+**Key Metrics:**
+- Test coverage: 37 tests passing
+- Dependencies: ragas, datasets (Apache 2.0)
+- Code quality: Comprehensive test coverage
+
+### v0.3.1 - Configuration Transparency (Completed 2025-11-19)
+
+**Status:** ✅ Completed
+**Implementation:** [v0.3.1/](./v0.3.1/)
+
+**Summary:**
+- Layered configuration system (defaults, file, env, CLI)
+- 5 built-in personas (accuracy, speed, balanced, research, quick-answer)
+- Transparency features (explain query, explain config)
+- 1,995 lines added (788 production, 1,207 tests)
+
+**Key Metrics:**
+- Test coverage: 367 tests passing, 94%+ coverage
+- Code quality: Excellent (comprehensive validation, error handling)
+
+### v0.3.2 - Advanced Query Processing (Completed 2025-11-19)
+
+**Status:** ✅ Completed
+**Implementation:** [v0.3.2/](./v0.3.2/)
+
+**Summary:**
+- Query Decomposition (complex queries → sub-queries)
+- HyDE (Hypothetical Document Embeddings)
+- Enhanced Reranking with Cross-Encoders
+- Contextual Compression (sentence-level extraction)
+- 1,912 lines added (880 production, 610 tests)
+
+**Key Metrics:**
+- Test coverage: 36 tests passing
+- Performance: All techniques within latency targets
+- Target quality: MRR@10 > 0.75 (25%+ improvement)
+
 ### v0.3.3 - Intelligent Chunking (Completed 2025-11-19)
 
 **Status:** ✅ Completed
@@ -32,7 +80,6 @@ The v0.3 series transforms ragged from a functional RAG system into an intellige
 - Complete type hints and British English docstrings
 
 **Key Metrics:**
-- Implementation time: [To be recorded]
 - Test coverage: Comprehensive (2 test files)
 - Code quality: Excellent (type hints, docstrings, error handling)
 
@@ -84,6 +131,9 @@ The v0.3 series transforms ragged from a functional RAG system into an intellige
 
 | Version | Status | Completion Date | Implementation Record |
 |---------|--------|----------------|----------------------|
+| v0.3.0 | ✅ Completed | 2025-11-19 | [v0.3.0/](./v0.3.0/) |
+| v0.3.1 | ✅ Completed | 2025-11-19 | [v0.3.1/](./v0.3.1/) |
+| v0.3.2 | ✅ Completed | 2025-11-19 | [v0.3.2/](./v0.3.2/) |
 | v0.3.3 | ✅ Completed | 2025-11-19 | [v0.3.3/](./v0.3.3/) |
 | v0.3.4 | 📋 Planned | - | - |
 | v0.3.5 | 📋 Planned | - | - |
