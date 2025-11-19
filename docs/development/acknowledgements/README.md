@@ -6,7 +6,7 @@ ragged builds upon innovative work from the open-source community, research pape
 
 ## Projects
 
-**[Autonomous Agentic RAG](./autonomous-agentic-rag.md)** by Fareed Khan
+**[Autonomous Agentic RAG](./autonomous-agentic-rag.md)**
 - Self-improving RAG systems with evolutionary optimisation
 - Influenced: v0.5.x (model routing), v1.x (multi-agent), v2.x (compliance)
 
