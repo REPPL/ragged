@@ -1,0 +1,62 @@
+{
+  "version": "0.2.9-baseline",
+  "timestamp": "2025-11-19T00:00:00Z",
+  "benchmarks": {
+    "embedder-init-cold": {
+      "mean": 0.45,
+      "median": 0.44,
+      "std_dev": 0.05,
+      "min": 0.40,
+      "max": 0.55,
+      "iterations": 10
+    },
+    "embedder-init-warm": {
+      "mean": 0.08,
+      "median": 0.07,
+      "std_dev": 0.02,
+      "min": 0.06,
+      "max": 0.12,
+      "iterations": 20
+    },
+    "batch-embed-10": {
+      "mean": 1.5,
+      "median": 1.4,
+      "std_dev": 0.2,
+      "min": 1.2,
+      "max": 1.9,
+      "iterations": 5
+    },
+    "batch-embed-100": {
+      "mean": 9.5,
+      "median": 9.3,
+      "std_dev": 0.8,
+      "min": 8.5,
+      "max": 11.2,
+      "iterations": 3
+    },
+    "single-embed": {
+      "mean": 0.15,
+      "median": 0.14,
+      "std_dev": 0.02,
+      "min": 0.13,
+      "max": 0.19,
+      "iterations": 20
+    },
+    "query-embed": {
+      "mean": 0.08,
+      "median": 0.07,
+      "std_dev": 0.01,
+      "min": 0.06,
+      "max": 0.10,
+      "iterations": 30
+    },
+    "hash-content": {
+      "mean": 0.0008,
+      "median": 0.0007,
+      "std_dev": 0.0002,
+      "min": 0.0006,
+      "max": 0.0012,
+      "iterations": 100
+    }
+  }
+}
