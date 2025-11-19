@@ -1,7 +1,7 @@
 # v0.2.9 Roadmap: Production-Ready Release
 
-**Status**: In Progress (Phase 0 COMPLETED, Phase 2 COMPLETED, Phase 3 80% COMPLETE)
-**Estimated Effort**: 83-107 hours (~71-89h spent on Phase 0-3)
+**Status**: Near Completion (Phase 0 ✅, Phase 1 ✅, Phase 2 ✅, Phase 3 80%)
+**Estimated Effort**: 83-107 hours (~85-95h completed, 98-89% done)
 **Dependencies**: v0.2.8 (recommended)
 
 ---
@@ -79,7 +79,7 @@ All phases are now **MUST-HAVE** for the production-ready v0.2.9 release.
 
 ---
 
-### Phase 1: Core Performance (MUST-HAVE) - 35-43 hours ✅ IMPLEMENTED
+### Phase 1: Core Performance (MUST-HAVE) - 35-43 hours ✅ COMPLETED
 
 Core performance optimisations that deliver measurable improvements:
 
@@ -111,25 +111,31 @@ Core performance optimisations that deliver measurable improvements:
    - Circuit states: CLOSED → OPEN → HALF_OPEN ✅
    - **Achievement**: >98% error recovery success rate (designed)
 
-5. **Resource Governance System** (8-10h) ⚠️ NOT STARTED
-   - Dynamic memory monitoring (pending)
-   - Unified resource budget (pending)
-   - OOM prevention (partial: via batch tuner memory checks)
-   - Automatic batch adjustment (partial: batch tuner only)
-   - Per-operation resource reservations (pending)
-   - Fair scheduling for concurrent operations (pending)
+5. **Resource Governance System** (8-10h) ✅ IMPLEMENTED
+   - ResourceGovernor class with unified budgeting ✅
+   - Memory/CPU/concurrency limits ✅
+   - Resource reservation and queueing ✅
+   - Priority-based scheduling (4 priority levels) ✅
+   - Context manager for automatic release ✅
+   - OOM prevention through limits ✅
+   - Fair scheduling with queuing ✅
+   - Singleton pattern with thread safety ✅
+   - **Status**: Commit 5ad5c9f (previously implemented)
 
-6. **Performance-Aware Logging & Monitoring** (6-8h) ⚠️ NOT STARTED
-   - Structured logging (JSON option) (pending)
-   - Async non-blocking log writes (pending)
-   - Performance metrics (pending)
-   - Dynamic log level adjustment under load (pending)
-   - High-frequency log sampling (pending)
-   - Operation audit trail (pending)
+6. **Performance-Aware Logging & Monitoring** (6-8h) ✅ IMPLEMENTED
+   - AsyncLogHandler with QueueListener ✅
+   - Non-blocking async log writes ✅
+   - SamplingFilter for high-frequency events ✅
+   - Per-logger sampling rates ✅
+   - Always logs WARNING+ (never samples errors) ✅
+   - Thread-safe counters ✅
+   - Queue depth monitoring ✅
+   - Graceful shutdown handling ✅
+   - **Status**: Commit 9213d8a (previously implemented)
 
 **Deliverable**: Blazing-fast, rock-solid ragged core
 
-**Status**: ✅ 4/6 FEATURES IMPLEMENTED (Feature flags, Embedder caching, Batch tuning, Error recovery with retry + circuit breaker)
+**Status**: ✅ ALL 6 FEATURES IMPLEMENTED (Feature flags, Embedder caching, Batch tuning, Error recovery, Resource governance, Performance logging)
 
 ---
 
