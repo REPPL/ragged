@@ -104,24 +104,29 @@ class DataLifecycleManager:
 
         cutoff = datetime.now() - timedelta(days=ttl_days)
         filtered = []
+        expired_count = 0
 
         for entry in entries:
             try:
                 timestamp_str = entry.get(timestamp_key)
                 if not timestamp_str:
+                    # Skip entries without timestamps (don't count as removed)
                     continue
 
                 timestamp = datetime.fromisoformat(timestamp_str)
 
                 if timestamp > cutoff:
                     filtered.append(entry)
+                else:
+                    # Entry is expired (count as removed)
+                    expired_count += 1
 
             except (ValueError, TypeError) as e:
                 logger.warning(f"Invalid timestamp in entry: {e}")
                 # Keep entry if timestamp invalid (safer than deleting)
                 filtered.append(entry)
 
-        removed = len(entries) - len(filtered)
+        removed = expired_count
 
         if removed > 0:
             logger.info(f"Filtered {removed} expired entries (TTL: {ttl_days} days)")

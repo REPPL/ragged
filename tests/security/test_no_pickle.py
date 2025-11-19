@@ -201,6 +201,10 @@ class TestPickleBan:
                     if "#" in line and line.index("#") < match.start() - line_start:
                         continue
 
+                    # Skip re.compile() - it's safe for regex compilation
+                    if description == "compile()" and "re.compile(" in line:
+                        continue
+
                     line_num = content[:match.start()].count("\n") + 1
                     violations.append(f"{relative_path}:{line_num}: Uses {description}")
 
