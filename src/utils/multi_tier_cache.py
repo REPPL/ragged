@@ -1,6 +1,7 @@
 """Multi-tier caching for embeddings and results.
 
 v0.2.9: Three-tier caching strategy for 30-50x performance improvement.
+v0.2.10: Replaced pickle with safe JSON serialization (FEAT-SEC-001).
 
 Tiers:
 - L1: Query embedding cache (fast, small, in-memory)
@@ -9,7 +10,6 @@ Tiers:
 """
 
 from typing import Optional, Any, Dict, List, Tuple
-import pickle
 from pathlib import Path
 from collections import OrderedDict
 from dataclasses import dataclass, field
@@ -20,6 +20,7 @@ import numpy as np
 from src.utils.hashing import hash_content
 from src.utils.logging import get_logger
 from src.retrieval.cache import QueryCache
+from src.utils.serialization import save_json, load_json, numpy_array_to_list, list_to_numpy_array
 
 logger = get_logger(__name__)
 
@@ -186,8 +187,8 @@ class L2DocumentEmbeddingCache:
         # In-memory hot cache (subset of disk cache)
         self._hot_cache: OrderedDict[str, np.ndarray] = OrderedDict()
 
-        # Disk index tracking all entries
-        self._index_path = self.cache_dir / "l2_index.pkl"
+        # Disk index tracking all entries (v0.2.10: migrated from .pkl to .json)
+        self._index_path = self.cache_dir / "l2_index.json"
         self._index: OrderedDict[str, Dict[str, Any]] = self._load_index()
 
         self._lock = threading.RLock()
@@ -202,29 +203,89 @@ class L2DocumentEmbeddingCache:
         )
 
     def _load_index(self) -> OrderedDict:
-        """Load disk index if exists."""
+        """Load disk index if exists.
+
+        Security: Replaced pickle with JSON (v0.2.10 FEAT-SEC-001).
+        Automatically migrates legacy .pkl index files to .json.
+        """
+        # Try loading JSON index first
         if self._index_path.exists():
             try:
-                with open(self._index_path, "rb") as f:
-                    index = pickle.load(f)
+                data = load_json(self._index_path)
+                # Convert to OrderedDict (JSON loads as regular dict)
+                index = OrderedDict(data.get("entries", {}))
                 logger.info(f"Loaded L2 index: {len(index)} entries")
                 return index
             except Exception as e:
-                logger.warning(f"Failed to load L2 index: {e}")
+                logger.warning(f"Failed to load L2 JSON index: {e}")
+
+        # Try loading legacy pickle index for migration
+        pkl_index_path = self.cache_dir / "l2_index.pkl"
+        if pkl_index_path.exists():
+            try:
+                import pickle
+                with open(pkl_index_path, "rb") as f:
+                    index = pickle.load(f)  # noqa: S301 (migration only)
+                logger.info(f"Loaded legacy L2 pickle index: {len(index)} entries")
+                logger.info("Auto-migrating L2 index from pickle to JSON...")
+                # Save as JSON and remove legacy pkl
+                self._index = index
+                self._save_index()
+                pkl_index_path.unlink()
+                logger.info("L2 index migration complete")
+                return index
+            except Exception as e:
+                logger.warning(f"Failed to load legacy L2 pickle index: {e}")
 
         return OrderedDict()
 
     def _save_index(self) -> None:
-        """Save disk index."""
+        """Save disk index using safe JSON serialization.
+
+        Security: Replaced pickle with JSON (v0.2.10 FEAT-SEC-001).
+        """
         try:
-            with open(self._index_path, "wb") as f:
-                pickle.dump(self._index, f)
+            # Convert datetime objects to ISO strings for JSON compatibility
+            serializable_index = {}
+            for key, value in self._index.items():
+                serializable_entry = value.copy()
+                if "created_at" in serializable_entry:
+                    serializable_entry["created_at"] = serializable_entry["created_at"].isoformat()
+                if "accessed_at" in serializable_entry:
+                    serializable_entry["accessed_at"] = serializable_entry["accessed_at"].isoformat()
+                if "shape" in serializable_entry:
+                    serializable_entry["shape"] = list(serializable_entry["shape"])
+                serializable_index[key] = serializable_entry
+
+            data = {"version": "1.0", "entries": serializable_index}
+            save_json(data, self._index_path)
         except Exception as e:
             logger.error(f"Failed to save L2 index: {e}")
 
     def _get_cache_path(self, key: str) -> Path:
-        """Get cache file path for key."""
-        return self.cache_dir / f"{key}.pkl"
+        """Get cache file path for key.
+
+        Note: v0.2.10 migrated from .pkl to .json for security.
+        """
+        return self.cache_dir / f"{key}.json"
+
+    def _save_embedding_to_disk(self, key: str, embedding: np.ndarray) -> None:
+        """Save embedding to disk as JSON.
+
+        Args:
+            key: Cache key
+            embedding: Numpy array to save
+
+        Security: Replaced pickle with JSON (v0.2.10 FEAT-SEC-001).
+        """
+        cache_path = self._get_cache_path(key)
+        data = {
+            "version": "1.0",
+            "embedding": numpy_array_to_list(embedding),
+            "dtype": str(embedding.dtype),
+            "shape": list(embedding.shape),
+        }
+        save_json(data, cache_path)
 
     def get(self, doc_id: str) -> Optional[np.ndarray]:
         """Get cached document embedding.
@@ -251,17 +312,34 @@ class L2DocumentEmbeddingCache:
                 logger.debug(f"L2 cache miss: {doc_id[:50]}...")
                 return None
 
-            # Load from disk
+            # Load from disk (try JSON first, fallback to legacy .pkl for migration)
             cache_path = self._get_cache_path(key)
-            if not cache_path.exists():
+            pkl_cache_path = self.cache_dir / f"{key}.pkl"
+
+            if not cache_path.exists() and not pkl_cache_path.exists():
                 logger.warning(f"L2 index inconsistency: {key} not on disk")
                 del self._index[key]
                 self._misses += 1
                 return None
 
             try:
-                with open(cache_path, "rb") as f:
-                    embedding = pickle.load(f)
+                # Try loading JSON cache file
+                if cache_path.exists():
+                    data = load_json(cache_path)
+                    embedding = list_to_numpy_array(data["embedding"])
+                # Fallback to legacy pickle for migration
+                elif pkl_cache_path.exists():
+                    import pickle
+                    with open(pkl_cache_path, "rb") as f:
+                        embedding = pickle.load(f)  # noqa: S301 (migration only)
+                    logger.debug(f"Auto-migrating embedding {key[:16]}... from pickle to JSON")
+                    # Save as JSON and remove legacy pkl
+                    self._save_embedding_to_disk(key, embedding)
+                    pkl_cache_path.unlink()
+                else:
+                    # Should not reach here due to earlier check
+                    self._misses += 1
+                    return None
 
                 self._disk_reads += 1
                 self._hits += 1
@@ -318,11 +396,9 @@ class L2DocumentEmbeddingCache:
 
                 logger.debug(f"L2 evicting oldest: {oldest_key[:16]}...")
 
-            # Save to disk
-            cache_path = self._get_cache_path(key)
+            # Save to disk using safe JSON serialization
             try:
-                with open(cache_path, "wb") as f:
-                    pickle.dump(embedding, f)
+                self._save_embedding_to_disk(key, embedding)
 
                 self._disk_writes += 1
 

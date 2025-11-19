@@ -1,9 +1,9 @@
 """Incremental index operations with checkpointing and atomic updates.
 
 v0.2.9: Differential updates, atomic swap, and background compaction for BM25.
+v0.2.10: Replaced pickle with safe JSON serialization (FEAT-SEC-001).
 """
 
-import pickle
 import threading
 import time
 from pathlib import Path
@@ -13,6 +13,7 @@ from rank_bm25 import BM25Okapi
 
 from src.retrieval.bm25 import BM25Retriever
 from src.utils.logging import get_logger
+from src.utils.serialization import save_json, load_json
 
 logger = get_logger(__name__)
 
@@ -260,24 +261,26 @@ class IncrementalBM25Retriever(BM25Retriever):
         return filtered[:top_k]
 
     def _save_checkpoint(self) -> None:
-        """Save checkpoint to disk."""
+        """Save checkpoint to disk using safe JSON serialization.
+
+        Security: Replaced pickle with JSON (v0.2.10 FEAT-SEC-001) to prevent arbitrary code execution.
+        """
         if not self.enable_checkpoints:
             return
 
-        checkpoint = IndexCheckpoint(
-            documents=self.documents,
-            doc_ids=self.doc_ids,
-            metadatas=self.metadatas,
-            deleted_ids=self.deleted_ids,
-            timestamp=time.time(),
-            version=self.version,
-        )
+        checkpoint_data = {
+            "documents": self.documents,
+            "doc_ids": self.doc_ids,
+            "metadatas": self.metadatas,
+            "deleted_ids": list(self.deleted_ids),  # Convert set to list for JSON
+            "timestamp": time.time(),
+            "version": self.version,
+        }
 
-        checkpoint_path = self.checkpoint_dir / f"bm25_checkpoint_v{self.version}.pkl"
+        checkpoint_path = self.checkpoint_dir / f"bm25_checkpoint_v{self.version}.json"
 
         try:
-            with open(checkpoint_path, 'wb') as f:
-                pickle.dump(checkpoint, f)
+            save_json(checkpoint_data, checkpoint_path)
 
             logger.debug(f"Saved checkpoint: {checkpoint_path}")
 
@@ -292,60 +295,107 @@ class IncrementalBM25Retriever(BM25Retriever):
 
         Args:
             keep: Number of recent checkpoints to keep
+
+        Note: v0.2.10 migrated from .pkl to .json files for security.
         """
         try:
-            checkpoints = sorted(
-                self.checkpoint_dir.glob("bm25_checkpoint_v*.pkl"),
+            # Clean both JSON (current) and legacy .pkl files
+            json_checkpoints = sorted(
+                self.checkpoint_dir.glob("bm25_checkpoint_v*.json"),
                 key=lambda p: p.stat().st_mtime,
                 reverse=True
             )
+            pkl_checkpoints = list(self.checkpoint_dir.glob("bm25_checkpoint_v*.pkl"))
 
-            for old_checkpoint in checkpoints[keep:]:
+            # Keep specified number of JSON checkpoints
+            for old_checkpoint in json_checkpoints[keep:]:
                 old_checkpoint.unlink()
                 logger.debug(f"Removed old checkpoint: {old_checkpoint}")
+
+            # Remove all legacy .pkl files (migrated to .json)
+            for old_checkpoint in pkl_checkpoints:
+                old_checkpoint.unlink()
+                logger.debug(f"Removed legacy pickle checkpoint: {old_checkpoint}")
 
         except Exception as e:
             logger.error(f"Failed to cleanup checkpoints: {e}")
 
     def load_checkpoint(self, version: Optional[int] = None) -> bool:
-        """Load checkpoint from disk.
+        """Load checkpoint from disk using safe JSON deserialization.
 
         Args:
             version: Specific version to load (None = latest)
 
         Returns:
             True if checkpoint loaded successfully
+
+        Security: Replaced pickle with JSON (v0.2.10 FEAT-SEC-001) to prevent arbitrary code execution.
         """
         if not self.enable_checkpoints:
             logger.warning("Checkpoints disabled, cannot load")
             return False
 
         try:
-            # Find checkpoint file
+            # Find checkpoint file (prioritize JSON, fallback to legacy .pkl for migration)
             if version is not None:
-                checkpoint_path = self.checkpoint_dir / f"bm25_checkpoint_v{version}.pkl"
+                checkpoint_path = self.checkpoint_dir / f"bm25_checkpoint_v{version}.json"
+                # Fallback to .pkl if .json doesn't exist (legacy migration)
+                if not checkpoint_path.exists():
+                    pkl_path = self.checkpoint_dir / f"bm25_checkpoint_v{version}.pkl"
+                    if pkl_path.exists():
+                        logger.warning(
+                            f"Loading legacy pickle checkpoint v{version}. "
+                            "Consider migrating to JSON format."
+                        )
+                        checkpoint_path = pkl_path
             else:
-                # Load latest
-                checkpoints = sorted(
+                # Load latest (prefer JSON)
+                json_checkpoints = sorted(
+                    self.checkpoint_dir.glob("bm25_checkpoint_v*.json"),
+                    key=lambda p: p.stat().st_mtime,
+                    reverse=True
+                )
+                pkl_checkpoints = sorted(
                     self.checkpoint_dir.glob("bm25_checkpoint_v*.pkl"),
                     key=lambda p: p.stat().st_mtime,
                     reverse=True
                 )
-                if not checkpoints:
+
+                if json_checkpoints:
+                    checkpoint_path = json_checkpoints[0]
+                elif pkl_checkpoints:
+                    checkpoint_path = pkl_checkpoints[0]
+                    logger.warning(
+                        "Loading legacy pickle checkpoint. Consider migrating to JSON format."
+                    )
+                else:
                     logger.warning("No checkpoints found")
                     return False
-                checkpoint_path = checkpoints[0]
 
-            # Load checkpoint
-            with open(checkpoint_path, 'rb') as f:
-                checkpoint: IndexCheckpoint = pickle.load(f)
+            # Load checkpoint based on file type
+            if checkpoint_path.suffix == ".json":
+                checkpoint_data = load_json(checkpoint_path)
+            else:
+                # Legacy pickle migration (temporary for backward compatibility)
+                import pickle
+                with open(checkpoint_path, 'rb') as f:
+                    checkpoint_obj: IndexCheckpoint = pickle.load(f)  # noqa: S301
+                # Convert to dict format
+                checkpoint_data = {
+                    "documents": checkpoint_obj.documents,
+                    "doc_ids": checkpoint_obj.doc_ids,
+                    "metadatas": checkpoint_obj.metadatas,
+                    "deleted_ids": list(checkpoint_obj.deleted_ids),
+                    "timestamp": checkpoint_obj.timestamp,
+                    "version": checkpoint_obj.version,
+                }
 
             with self._lock:
-                self.documents = checkpoint.documents
-                self.doc_ids = checkpoint.doc_ids
-                self.metadatas = checkpoint.metadatas
-                self.deleted_ids = checkpoint.deleted_ids
-                self.version = checkpoint.version
+                self.documents = checkpoint_data["documents"]
+                self.doc_ids = checkpoint_data["doc_ids"]
+                self.metadatas = checkpoint_data["metadatas"]
+                self.deleted_ids = set(checkpoint_data["deleted_ids"])  # Convert list back to set
+                self.version = checkpoint_data["version"]
 
                 # Rebuild index
                 if self.documents:
@@ -355,9 +405,14 @@ class IncrementalBM25Retriever(BM25Retriever):
                     self.index = None
 
             logger.info(
-                f"Loaded checkpoint v{checkpoint.version} from {checkpoint_path} "
+                f"Loaded checkpoint v{self.version} from {checkpoint_path} "
                 f"({len(self.documents)} documents, {len(self.deleted_ids)} deleted)"
             )
+
+            # Auto-migrate: Save as JSON if we loaded from .pkl
+            if checkpoint_path.suffix == ".pkl":
+                logger.info("Auto-migrating legacy pickle checkpoint to JSON...")
+                self._save_checkpoint()
 
             return True
 

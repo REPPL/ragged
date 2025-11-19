@@ -1,6 +1,8 @@
 """Query result caching with LRU eviction policy.
 
 Improves query performance by caching retrieval results.
+
+v0.2.10 FEAT-SEC-002: Added session isolation to prevent cross-user data leakage.
 """
 
 from typing import Optional, Any, Dict, Tuple
@@ -59,18 +61,28 @@ class LRUCache:
         self._hits = 0
         self._misses = 0
 
-    def _make_key(self, query: str, **kwargs: Any) -> str:
-        """Create cache key from query and parameters.
+    def _make_key(self, query: str, session_id: Optional[str] = None, **kwargs: Any) -> str:
+        """Create cache key from query and parameters with session isolation.
 
         Args:
             query: Query string
+            session_id: Session identifier for isolation (None = global cache)
             **kwargs: Additional parameters (collection, method, top_k, etc.)
 
         Returns:
             Cache key string
+
+        Security: v0.2.10 FEAT-SEC-002 - Session ID prevents cross-user cache pollution.
         """
-        # Create deterministic key from query and sorted kwargs
-        key_parts = [query]
+        # Create deterministic key from session, query, and sorted kwargs
+        key_parts = []
+
+        # Add session ID first for isolation (critical for security)
+        if session_id:
+            key_parts.append(f"session={session_id}")
+
+        key_parts.append(query)
+
         for k in sorted(kwargs.keys()):
             key_parts.append(f"{k}={kwargs[k]}")
 
@@ -79,17 +91,20 @@ class LRUCache:
         # Hash for fixed-length key
         return hash_content(key_string)
 
-    def get(self, query: str, **kwargs: Any) -> Optional[Any]:
+    def get(self, query: str, session_id: Optional[str] = None, **kwargs: Any) -> Optional[Any]:
         """Get cached result if available.
 
         Args:
             query: Query string
+            session_id: Session identifier for isolation (None = global cache)
             **kwargs: Query parameters
 
         Returns:
             Cached result or None if not found/expired
+
+        Security: v0.2.10 FEAT-SEC-002 - Session isolation prevents cross-user data leakage.
         """
-        key = self._make_key(query, **kwargs)
+        key = self._make_key(query, session_id=session_id, **kwargs)
 
         if key not in self._cache:
             self._misses += 1
@@ -119,15 +134,18 @@ class LRUCache:
 
         return entry.value
 
-    def set(self, query: str, value: Any, **kwargs: Any) -> None:
+    def set(self, query: str, value: Any, session_id: Optional[str] = None, **kwargs: Any) -> None:
         """Store result in cache.
 
         Args:
             query: Query string
             value: Result to cache
+            session_id: Session identifier for isolation (None = global cache)
             **kwargs: Query parameters
+
+        Security: v0.2.10 FEAT-SEC-002 - Session isolation prevents cross-user data leakage.
         """
-        key = self._make_key(query, **kwargs)
+        key = self._make_key(query, session_id=session_id, **kwargs)
 
         # Estimate size (simple approximation)
         size_bytes = len(str(value))
@@ -161,17 +179,18 @@ class LRUCache:
         self._misses = 0
         logger.info(f"Cleared {count} cache entries")
 
-    def invalidate(self, query: str, **kwargs: Any) -> bool:
+    def invalidate(self, query: str, session_id: Optional[str] = None, **kwargs: Any) -> bool:
         """Invalidate specific cache entry.
 
         Args:
             query: Query string
+            session_id: Session identifier for isolation (None = global cache)
             **kwargs: Query parameters
 
         Returns:
             True if entry was removed, False if not found
         """
-        key = self._make_key(query, **kwargs)
+        key = self._make_key(query, session_id=session_id, **kwargs)
 
         if key in self._cache:
             del self._cache[key]
@@ -224,7 +243,8 @@ class QueryCache(LRUCache):
         query: str,
         collection: str = "default",
         method: str = "hybrid",
-        top_k: int = 5
+        top_k: int = 5,
+        session_id: Optional[str] = None
     ) -> Optional[Any]:
         """Get cached query result.
 
@@ -233,12 +253,16 @@ class QueryCache(LRUCache):
             collection: Collection name
             method: Retrieval method
             top_k: Number of results
+            session_id: Session identifier for isolation (None = global cache)
 
         Returns:
             Cached result or None
+
+        Security: v0.2.10 FEAT-SEC-002 - Session isolation prevents cross-user data leakage.
         """
         return self.get(
             query,
+            session_id=session_id,
             collection=collection,
             method=method,
             top_k=top_k
@@ -250,7 +274,8 @@ class QueryCache(LRUCache):
         result: Any,
         collection: str = "default",
         method: str = "hybrid",
-        top_k: int = 5
+        top_k: int = 5,
+        session_id: Optional[str] = None
     ) -> None:
         """Store query result in cache.
 
@@ -260,10 +285,14 @@ class QueryCache(LRUCache):
             collection: Collection name
             method: Retrieval method
             top_k: Number of results
+            session_id: Session identifier for isolation (None = global cache)
+
+        Security: v0.2.10 FEAT-SEC-002 - Session isolation prevents cross-user data leakage.
         """
         self.set(
             query,
             result,
+            session_id=session_id,
             collection=collection,
             method=method,
             top_k=top_k
