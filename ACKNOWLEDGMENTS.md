@@ -4,9 +4,9 @@ ragged builds upon the innovative work of many open-source projects, research pa
 
 ---
 
-## Major Inspirations
+## Inspirations
 
-### **Autonomous Agentic RAG** by Fareed Khan
+### **Autonomous Agentic RAG**
 Self-improving RAG system with evolutionary optimisation and multi-agent orchestration.
 
 **Influenced**:
@@ -16,6 +16,7 @@ Self-improving RAG system with evolutionary optimisation and multi-agent orchest
 - v2.x: Compliance frameworks
 
 **Source**: https://github.com/FareedKhan-dev/autonomous-agentic-rag
+
 **Details**: [docs/development/acknowledgements/autonomous-agentic-rag.md](docs/development/acknowledgements/autonomous-agentic-rag.md)
 
 ---
@@ -27,15 +28,16 @@ Self-improving RAG system with evolutionary optimisation and multi-agent orchest
 - v0.4.9: LEANN backend integration
 
 **Source**: https://github.com/davidsandberg/leann
+
 **Details**: [docs/development/acknowledgements/leann.md](docs/development/acknowledgements/leann.md)
 
 ---
 
 ## Memory & Knowledge Graph Patterns
 
-**Mem0** - Personalised memory layer
-**Graphiti** (Zep AI) - Temporal knowledge graphs
-**Letta** - Stateful LLM agents
+- **Mem0** - Personalised memory layer
+- **Graphiti** (Zep AI) - Temporal knowledge graphs
+- **Letta** - Stateful LLM agents
 
 These projects influenced ragged's v0.4.x memory system design.
 
@@ -43,10 +45,10 @@ These projects influenced ragged's v0.4.x memory system design.
 
 ## Frameworks & Libraries
 
-**LangChain** - RAG patterns and component architecture
-**ChromaDB** - Primary vector storage backend
-**Ollama** - Local LLM deployment
-**Kuzu** - Embedded graph database (v0.4.4+)
+- **LangChain** - RAG patterns and component architecture
+- **ChromaDB** - Primary vector storage backend
+- **Ollama** - Local LLM deployment
+- **Kuzu** - Embedded graph database (v0.4.4+)
 
 ---
 
@@ -61,6 +63,7 @@ Theoretical framework positioning context engineering as entropy reduction.
 - v0.6.0: Dynamic context adaptation and compression
 
 **Source**: https://arxiv.org/abs/2510.26493
+
 **Details**: [docs/development/acknowledgements/context-engineering-2.0.md](docs/development/acknowledgements/context-engineering-2.0.md)
 
 ---
