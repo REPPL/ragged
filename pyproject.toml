@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ragged"
-version = "0.3.3"
+version = "0.3.4a"
 description = "Privacy-first local RAG system for document question-answering"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
@@ -57,6 +57,10 @@ dependencies = [
     "psutil>=5.9.0",
     # v0.2.10/v0.2.11 security dependencies
     "cryptography>=41.0.0",  # Fernet encryption for query history, session data
+    # v0.3.4a document processing dependencies
+    "docling>=2.5.0",  # MIT licence - state-of-the-art document processing
+    "docling-core>=2.0.0",  # MIT licence - core Docling functionality
+    "docling-parse>=2.0.0",  # MIT licence - document parsing utilities
 ]
 
 [project.optional-dependencies]
@@ -151,6 +155,9 @@ module = [
     "gradio.*",
     "sse_starlette.*",
     "rank_bm25.*",
+    "docling.*",
+    "docling_core.*",
+    "docling_parse.*",
 ]
 ignore_missing_imports = true
 
