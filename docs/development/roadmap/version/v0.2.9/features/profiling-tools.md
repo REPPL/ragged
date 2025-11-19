@@ -31,3 +31,28 @@ def profile_memory(operation):
 **Success**: `ragged benchmark` and `ragged profile-memory` working
 
 **Timeline**: 4-5h
+
+---
+
+**Status**: ✅ IMPLEMENTED (commit 4d0bf20)
+
+**Commands Added**:
+- `ragged benchmark embedding-init` - Benchmark embedder initialization
+- `ragged benchmark batch-embed` - Benchmark batch embedding throughput
+- `ragged benchmark query` - Benchmark query performance
+- `ragged benchmark memory` - Profile memory usage (add/query/embed)
+- `ragged benchmark all` - Run comprehensive benchmark suite
+
+**Implementation**:
+- src/cli/commands/benchmark.py (430 lines)
+- 5 benchmark subcommands with rich formatting
+- Integration with existing src/utils/benchmarks.py framework
+- Memory profiling via tracemalloc
+- Statistical analysis and performance rating
+
+**Features**:
+- Configurable runs and warmup iterations
+- Throughput calculations
+- Memory allocation tracking
+- Color-coded performance ratings
+- Detailed profiling modes
