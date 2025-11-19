@@ -84,6 +84,7 @@ from src.cli.commands.cache import cache
 from src.cli.commands.feature_flags import feature_flags_group
 from src.cli.commands.monitor import monitor
 from src.cli.commands.benchmark import benchmark
+from src.cli.commands.explain import explain
 
 # Register commands
 cli.add_command(add)
@@ -103,6 +104,7 @@ cli.add_command(cache)
 cli.add_command(feature_flags_group)
 cli.add_command(monitor)
 cli.add_command(benchmark)
+cli.add_command(explain)
 
 
 def main() -> None:
