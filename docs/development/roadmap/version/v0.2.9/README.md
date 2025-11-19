@@ -1,7 +1,7 @@
 # v0.2.9 Roadmap: Production-Ready Release
 
-**Status**: In Progress (Phase 1 IMPLEMENTED)
-**Estimated Effort**: 83-107 hours (31-39h spent on Phase 1)
+**Status**: In Progress (Phase 2 COMPLETED)
+**Estimated Effort**: 83-107 hours (~54-70h spent on Phase 0-2)
 **Dependencies**: v0.2.8 (recommended)
 
 ---
@@ -131,17 +131,18 @@ Core performance optimisations that deliver measurable improvements:
 
 ---
 
-### Phase 2: Operational Excellence (MUST-HAVE) - 23-31 hours
+### Phase 2: Operational Excellence (MUST-HAVE) - 23-31 hours ✅ COMPLETED
 
 Production-quality operational features:
 
-7. **Enhanced Health Checks with Deep Diagnostics** (3-4h)
+7. **Enhanced Health Checks with Deep Diagnostics** (3-4h) ✅ IMPLEMENTED
    - Deep diagnostics (original)
    - Performance health checks
    - Proactive issue detection
    - Service connectivity validation
+   - **Status**: Commit f934b66
 
-8. **Async Operations with Backpressure** (8-10h)
+8. **Async Operations with Backpressure** (8-10h) ✅ IMPLEMENTED
    - Concurrent document loading (original: 5-6h)
    - Async embedding generation
    - Queue depth limits (new: 3-4h)
@@ -149,33 +150,37 @@ Production-quality operational features:
    - Priority queues
    - Backpressure signals to document scanner
    - **Target**: 2-3x faster, no resource overwhelm
+   - **Status**: Commit c0d0021
 
-9. **Incremental Index Operations** (5-6h)
+9. **Incremental Index Operations** (5-6h) ✅ IMPLEMENTED
    - Pre-build and cache BM25 index (original: 4-5h)
    - Differential index updates (new: 5-6h total redesign)
    - Background index compaction
    - Index versioning with atomic swap
    - Concurrent read during rebuild
    - **Target**: 10-100x faster for large collections
+   - **Status**: Commit 0faebab
 
-10. **Operational Observability Dashboard** (3-4h)
+10. **Operational Observability Dashboard** (3-4h) ✅ IMPLEMENTED
     - CLI command: `ragged monitor`
     - Live performance metrics
     - Cache hit rates, batch sizes, memory trends
     - Performance degradation alerts
     - Export metrics (Prometheus/statsd format)
+    - **Status**: Commit 9d31e3f
 
-11. **Cold Start Holistic Optimisation** (3-4h)
+11. **Cold Start Holistic Optimisation** (3-4h) ✅ IMPLEMENTED
     - ChromaDB connection pooling (beyond embedder)
     - Config/schema validation caching
     - Lazy initialisation audit
     - Startup profiling instrumentation
     - Parallel initialisation of independent components
     - **Target**: Complete cold start <1s
+    - **Status**: Commit 06e9d8b
 
 **Deliverable**: Enterprise-grade operational capabilities
 
-**Priority**: MUST-HAVE
+**Status**: ✅ ALL 5 FEATURES IMPLEMENTED
 
 ---
 
