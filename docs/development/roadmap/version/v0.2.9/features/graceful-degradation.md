@@ -27,3 +27,27 @@ def retrieve_with_fallback(query, method="hybrid"):
 **Success**: >99% availability despite failures
 
 **Timeline**: 2-3h
+
+---
+
+**Status**: ✅ IMPLEMENTED (commit 6fade61)
+
+**Components**:
+1. **FallbackStrategy** - Primary + ordered fallbacks with automatic retry
+2. **@with_fallback** - Decorator for fallback behavior
+3. **DegradedMode** - Context manager for reduced functionality states
+4. **safe_execute** - Simple execution with default fallback
+5. **FallbackChain** - Builder pattern for sequential fallbacks
+6. **adaptive_batch_size** - Dynamic sizing under resource pressure
+7. **CircuitBreaker** - Prevent repeated calls to failing services
+
+**Implementation**: src/utils/graceful_degradation.py (450 lines)
+**Tests**: 530 lines, 80+ test cases
+
+**Fallback Paths Implemented**:
+- BM25 unavailable → Dense-only search
+- Embedder unavailable → Cached embeddings
+- Memory pressure → Reduced batch sizes
+- Vector store down → Cache-only mode
+- Model unavailable → Simpler model fallback
+- Circuit breaker: 3 states (CLOSED/OPEN/HALF_OPEN)
