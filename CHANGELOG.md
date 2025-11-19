@@ -7,6 +7,63 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.10] - 2025-11-19
+
+### Added
+- **Security Hardening**: Comprehensive security infrastructure (CRITICAL priority)
+  - Safe JSON serialisation utilities (`src/utils/serialization.py`)
+  - Session management system (`src/core/session.py`)
+  - Security testing framework (`tests/security/`)
+  - Pre-commit security hooks
+- **Session Isolation**: UUID-based session IDs prevent cross-user data leakage
+  - Session-scoped caching
+  - Automatic session cleanup
+  - Thread-safe session operations
+- **Security Audits**: Professional security assessment
+  - Baseline security audit (pre-v0.2.10)
+  - Post-implementation verification audit
+  - Comprehensive vulnerability analysis (18 issues → 9 issues)
+
+### Changed
+- **Pickle Elimination**: Replaced pickle with JSON for all serialisation
+  - BM25 checkpoints now use secure JSON format
+  - L2 cache embeddings use JSON (not pickle)
+  - Automatic migration from legacy .pkl files
+- **Cache Architecture**: Session-isolated caching prevents PII leakage
+  - Cache keys include session ID
+  - Session-scoped cache invalidation
+
+### Security
+- **CRITICAL Vulnerabilities Resolved**:
+  - CRITICAL-001: Arbitrary code execution via pickle (CVSS 9.8) - RESOLVED
+  - CRITICAL-003: Cross-session cache pollution (CVSS 8.1) - RESOLVED
+- **Security Tests**: 30+ automated security tests
+  - Pickle usage detection (prevents regression)
+  - Session isolation validation
+  - Path traversal protection
+  - Dependency vulnerability scanning
+
+### Technical Details
+- **New Files Created**: 8 files (2 production, 6 testing)
+  - src/utils/serialization.py (298 lines)
+  - src/core/session.py (405 lines)
+  - tests/security/* (5 test files, 1,166+ lines)
+- **Files Modified**: 3 production files
+  - src/retrieval/incremental_index.py (pickle → JSON migration)
+  - src/utils/multi_tier_cache.py (pickle → JSON migration)
+  - src/retrieval/cache.py (session isolation)
+- **Total Lines Changed**: ~2,200 lines (additions + modifications)
+- **Test Coverage**: 30+ security tests, 150+ assertions
+- **Risk Reduction**: HIGH → MEDIUM (50% issue reduction)
+- **Production Readiness**: ✅ Ready for controlled deployments
+
+### Breaking Changes
+- None (automatic migration from legacy pickle files)
+
+### Migration
+- Legacy .pkl checkpoint files automatically migrated to .json on first load
+- No user action required (transparent migration)
+
 ## [0.2.8] - 2025-11-18
 
 ### Added
