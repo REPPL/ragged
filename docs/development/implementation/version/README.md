@@ -2,8 +2,6 @@
 
 **Purpose:** Version-specific implementation records
 
-**Last Updated:** 2025-11-15
-
 ---
 
 ## Overview
@@ -62,6 +60,3 @@ Each version directory contains:
 - [Development Logs](../../process/devlogs/version/) - Development narratives
 
 ---
-
-
-**License:** GPL-3.0

@@ -1,6 +1,5 @@
 # Python API Reference
 
-**Status:** Coming in v0.3
 
 Python API reference documentation will be generated from docstrings.
 
@@ -42,4 +41,3 @@ Until formal API documentation is available, the best way to understand the API 
 
 ---
 
-**Status:** Planned for v0.3 (auto-generated from docstrings with Sphinx)

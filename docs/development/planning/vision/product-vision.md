@@ -5,7 +5,6 @@
 **ragged** is a privacy-first Retrieval-Augmented Generation (RAG) system designed for personal knowledge management, learning RAG internals, and experimentation with RAG architectures.
 
 **Status:** Early experimental/learning phase
-**License**: GPLv3
 **Primary Language**: Python 3.9+
 **Future**: Production version planned as "ragd" (RAG daemon)
 
@@ -300,6 +299,5 @@ What ragged is **not** trying to be:
 ---
 
 **Document Version**: 1.0
-**Last Updated**: 2025-11-02
 **Owner**: REPPL
 **Status:** Living document (update as project evolves)

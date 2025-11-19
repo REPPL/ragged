@@ -2,8 +2,6 @@
 
 **Purpose:** All forward-looking design and planning documents
 
-**Last Updated:** 2025-11-15
-
 ---
 
 ## Overview
@@ -77,6 +75,3 @@ Research papers, academic materials, and external resources
 - [Implementations](../implementation/) - What was actually built
 
 ---
-
-
-**License:** GPL-3.0

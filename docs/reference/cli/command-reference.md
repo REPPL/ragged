@@ -884,4 +884,3 @@ ragged cache clear --all --yes
 
 ---
 
-**Status:** Complete for v0.2.8

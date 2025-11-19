@@ -2,8 +2,6 @@
 
 **Purpose:** Command-line interface design and specifications
 
-**Last Updated:** 2025-11-15
-
 ---
 
 ## Overview
@@ -49,6 +47,3 @@ When planning CLI features:
 - [ADR-0010: Click + Rich for CLI](../../../../decisions/adrs/0010-click-rich-for-cli.md)
 
 ---
-
-
-**License:** GPL-3.0

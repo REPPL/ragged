@@ -2,8 +2,6 @@
 
 **Version:** 2.0
 
-**Last Updated:** 2025-11-15
-
 **Status:** Design Complete
 
 **Implementation Target:** v0.2+
@@ -1863,6 +1861,3 @@ ragged models list --show-tiers
 - [Personal Memory & Personas](./personal-memory-personas.md) - Persona-based routing
 
 ---
-
-
-**License:** GPL-3.0

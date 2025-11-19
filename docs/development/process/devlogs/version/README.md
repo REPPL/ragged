@@ -2,8 +2,6 @@
 
 **Purpose:** Version-specific development narratives
 
-**Last Updated:** 2025-11-16
-
 ---
 
 ## Overview
@@ -49,6 +47,3 @@ Each version directory contains:
 - [Decisions](../../../../decisions/adrs/) - Architectural decisions
 
 ---
-
-
-**License:** GPL-3.0

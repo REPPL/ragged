@@ -465,6 +465,3 @@ Pillow = "^10.0.0"              # HPND (already planned)
 
 **Implementation Target:** v0.3.5 (Q2 2026)
 
-**License:** GPL-3.0
-
-**Last Updated:** 2025-11-17

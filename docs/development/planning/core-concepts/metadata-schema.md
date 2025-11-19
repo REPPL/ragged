@@ -1,6 +1,5 @@
 # Metadata Schema Specification
 
-**Last Updated**: 2025-11-09
 **Purpose**: Define comprehensive metadata structure for all document types
 **Implementation**: v0.2+
 

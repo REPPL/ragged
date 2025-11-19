@@ -167,6 +167,13 @@ markers = [
     "slow: Slow-running tests",
     "requires_ollama: Tests requiring Ollama service",
     "requires_chromadb: Tests requiring ChromaDB service",
+    # Manual test markers
+    "smoke: Quick sanity checks (5-10 min)",
+    "feature: Tests for specific feature (use with argument, e.g., @pytest.mark.feature('cli'))",
+    "version: Tests for specific version (use with argument, e.g., @pytest.mark.version('v0.2.9'))",
+    "regression: Cross-version critical paths",
+    "workflow: End-to-end user workflows",
+    "interactive: Manual checklists (not automated)",
 ]
 
 [tool.coverage.run]

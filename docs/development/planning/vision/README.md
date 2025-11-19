@@ -2,8 +2,6 @@
 
 **Purpose:** Long-term product strategy and guiding principles
 
-**Last Updated:** 2025-11-15
-
 ---
 
 ## Contents
@@ -29,6 +27,3 @@ This directory contains the strategic vision for ragged, defining what we're bui
 Read the product vision before proposing new features to ensure alignment with ragged's core mission and principles.
 
 ---
-
-
-**License:** GPL-3.0

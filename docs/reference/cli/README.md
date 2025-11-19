@@ -71,4 +71,3 @@ CLI reference documentation is:
 
 ---
 
-**Status:** Complete for v0.2.8

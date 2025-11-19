@@ -2,8 +2,6 @@
 
 **Purpose:** Define the standard workflow for version documentation through its lifecycle
 
-**Last Updated:** 2025-11-18
-
 ---
 
 ## Overview
@@ -381,5 +379,3 @@ implementation/version/v0.2/
 4. Update master roadmap
 
 ---
-
-**License:** GPL-3.0

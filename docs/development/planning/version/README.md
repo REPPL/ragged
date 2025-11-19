@@ -2,8 +2,6 @@
 
 **Purpose:** High-level design plans for each version
 
-**Last Updated:** 2025-11-15
-
 ---
 
 ## Overview
@@ -65,6 +63,3 @@ Version directories contain:
 - [ADRs](../../../decisions/adrs/) - Decisions made during implementation
 
 ---
-
-
-**License:** GPL-3.0

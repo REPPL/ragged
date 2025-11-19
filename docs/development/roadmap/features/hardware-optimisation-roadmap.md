@@ -6,8 +6,6 @@
 
 **Versions:** v0.1 - v1.0
 
-**Last Updated:** 2025-11-15
-
 ---
 
 ## Overview
@@ -400,6 +398,3 @@ performance:
 - [v0.2 Roadmap](../version/v0.2/) - Overall v0.2 features
 
 ---
-
-
-**License:** GPL-3.0

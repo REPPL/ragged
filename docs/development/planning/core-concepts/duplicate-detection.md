@@ -1,6 +1,5 @@
 # Duplicate Detection Strategy
 
-**Last Updated**: 2025-11-09
 **Purpose**: Content-based duplicate detection (filename-independent)
 **Implementation**: v0.2+
 

@@ -283,8 +283,3 @@ The modular architecture, type-safe implementation, and comprehensive documentat
 **Recommendation**: Complete remaining phases, then proceed to v0.2 planning
 
 ---
-
-**Last Updated**: 2025-11-09
-**Contributors**: REPPL + Claude Code
-**License**: TBD
-**Repository**: github.com/REPPL/ragged (private)

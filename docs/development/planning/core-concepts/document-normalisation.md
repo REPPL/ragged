@@ -1,6 +1,5 @@
 # Document Normalisation Pipeline
 
-**Last Updated**: 2025-11-09
 **Purpose**: Design specification for converting all input formats to standardized Markdown
 **Status:** Core feature for v0.2
 

@@ -965,5 +965,3 @@ Due to length, I'll summarize the remaining UX improvements:
 - [Configuration Management](./configuration-management.md)
 
 ---
-
-**License:** GPL-3.0

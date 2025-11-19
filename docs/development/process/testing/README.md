@@ -2,8 +2,6 @@
 
 **Purpose:** Testing strategies and test plans
 
-**Last Updated:** 2025-11-17
-
 ---
 
 ## Overview
@@ -62,6 +60,3 @@ When adding new features:
 - [Evaluation Framework](../../planning/core-concepts/evaluation.md) - Quality metrics
 
 ---
-
-
-**License:** GPL-3.0

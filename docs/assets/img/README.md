@@ -2,8 +2,6 @@
 
 **Purpose:** Images, screenshots, and visual assets for documentation
 
-**Last Updated:** 2025-11-17
-
 ---
 
 ## Overview
@@ -146,6 +144,3 @@ convert image.png -resize 1920x image-resized.png
 - [Guides](../../guides/README.md) - Guides using these images
 
 ---
-
-
-**License:** GPL-3.0

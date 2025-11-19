@@ -1389,5 +1389,3 @@ Task(
 ---
 
 **Status:** Planned
-
-**License:** GPL-3.0
