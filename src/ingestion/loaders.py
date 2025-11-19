@@ -5,15 +5,18 @@ This module provides loaders for PDF, TXT, Markdown, and HTML files
 with security validation and error handling.
 
 v0.3.4a: PDF loading now uses the new processor architecture (Docling or legacy).
+v0.3.4b: Added intelligent routing with quality assessment.
 """
 
 import mimetypes
+import time
 from pathlib import Path
 from typing import Optional, Tuple
 
 from src.config.settings import get_settings
 from src.ingestion.models import Document
 from src.processing import ProcessorConfig, ProcessorFactory
+from src.processing import ProcessorRouter, RouterConfig, ProcessingMetrics
 from src.utils.logging import get_logger
 from src.utils.security import (
     SecurityError,
@@ -24,6 +27,57 @@ from src.utils.security import (
 
 logger = get_logger(__name__)
 settings = get_settings()
+
+# Global router and metrics (lazily initialized)
+_router: Optional[ProcessorRouter] = None
+_metrics: Optional[ProcessingMetrics] = None
+
+
+def _get_router() -> ProcessorRouter:
+    """
+    Get or create global processor router.
+
+    Returns:
+        ProcessorRouter instance
+    """
+    global _router
+
+    if _router is None:
+        # Create router configuration from settings
+        router_config = RouterConfig(
+            high_quality_threshold=getattr(settings, "routing_high_quality_threshold", 0.85),
+            low_quality_threshold=getattr(settings, "routing_low_quality_threshold", 0.70),
+            prefer_docling=True,
+            fast_quality_assessment=getattr(settings, "fast_quality_assessment", True),
+            cache_quality_assessments=getattr(settings, "cache_quality_assessments", True),
+            collect_metrics=True,
+        )
+
+        _router = ProcessorRouter(router_config)
+        logger.debug("Initialised global processor router")
+
+    return _router
+
+
+def _get_metrics() -> ProcessingMetrics:
+    """
+    Get or create global metrics collection.
+
+    Returns:
+        ProcessingMetrics instance
+    """
+    global _metrics
+
+    if _metrics is None:
+        storage_dir = settings.data_dir / "metrics" if hasattr(settings, "data_dir") else None
+        _metrics = ProcessingMetrics(
+            retention_days=30,
+            storage_dir=storage_dir,
+            auto_save=True,
+        )
+        logger.debug("Initialised global metrics collection")
+
+    return _metrics
 
 
 def load_document(
@@ -112,16 +166,23 @@ def _detect_format(file_path: Path) -> str:
     return "txt"
 
 
-def load_pdf(file_path: Path, processor_type: Optional[str] = None) -> Document:
+def load_pdf(
+    file_path: Path,
+    processor_type: Optional[str] = None,
+    use_routing: Optional[bool] = None,
+) -> Document:
     """
     Load PDF using the configured document processor.
 
     v0.3.4a: Now uses the new processor architecture with Docling or legacy pymupdf.
+    v0.3.4b: Added intelligent routing with quality assessment.
 
     Args:
         file_path: Path to PDF file
         processor_type: Override processor type ('docling' or 'legacy').
-                       If None, uses settings.document_processor.
+                       If None, uses routing or settings.document_processor.
+        use_routing: Enable intelligent routing (default: enabled if available).
+                    If False, uses settings.document_processor directly.
 
     Returns:
         Document instance
@@ -131,6 +192,121 @@ def load_pdf(file_path: Path, processor_type: Optional[str] = None) -> Document:
         ProcessorError: If document processing fails
     """
     logger.debug(f"Loading PDF: {file_path}")
+
+    # Determine if we should use routing
+    enable_routing = getattr(settings, "enable_quality_assessment", True)
+    if use_routing is not None:
+        enable_routing = use_routing
+
+    # Use routing if enabled and no explicit processor specified
+    if enable_routing and processor_type is None:
+        return _load_pdf_with_routing(file_path)
+    else:
+        return _load_pdf_direct(file_path, processor_type)
+
+
+def _load_pdf_with_routing(file_path: Path) -> Document:
+    """
+    Load PDF using intelligent routing.
+
+    Args:
+        file_path: Path to PDF file
+
+    Returns:
+        Document instance
+    """
+    start_time = time.time()
+    router = _get_router()
+    metrics = _get_metrics()
+
+    try:
+        # Step 1: Quality assessment and routing
+        route = router.route(file_path)
+
+        logger.info(
+            f"Routing decision: {route.processor} "
+            f"(quality={route.quality.overall_score:.2f}, "
+            f"born_digital={route.quality.is_born_digital})"
+        )
+        logger.debug(f"Routing reasoning: {route.reasoning}")
+
+        # Record routing decision
+        metrics.record_routing(route)
+
+        # Step 2: Create processor with routing configuration
+        processor = ProcessorFactory.create(route.config)
+
+        # Step 3: Process document
+        result = processor.process(file_path)
+
+        # Step 4: Add routing metadata
+        result.metadata["routing"] = {
+            "processor": route.processor,
+            "quality_score": route.quality.overall_score,
+            "is_born_digital": route.quality.is_born_digital,
+            "is_scanned": route.quality.is_scanned,
+            "quality_tier": route.config.options.get("quality_tier", "unknown"),
+            "reasoning": route.reasoning,
+        }
+
+        processing_time = time.time() - start_time
+
+        logger.info(
+            f"Processed PDF with routing: {route.processor} "
+            f"{result.metadata.get('page_count', 0)} pages, "
+            f"{len(result.content)} characters, "
+            f"{len(result.tables)} tables extracted, "
+            f"{processing_time:.2f}s"
+        )
+
+        # Record processing result
+        metrics.record_processing_result(
+            route=route,
+            success=True,
+            processing_time=processing_time,
+        )
+
+        # Convert ProcessedDocument to Document
+        return Document.from_file(
+            file_path=file_path,
+            content=result.content,
+            format="pdf",
+            title=result.metadata.get("title", file_path.stem),
+            author=result.metadata.get("author"),
+            page_count=result.metadata.get("page_count"),
+        )
+
+    except Exception as e:
+        processing_time = time.time() - start_time
+
+        # Record failure
+        if "route" in locals():
+            metrics.record_processing_result(
+                route=route,
+                success=False,
+                processing_time=processing_time,
+                error_message=str(e),
+            )
+
+        logger.error(f"PDF processing with routing failed: {e}")
+        raise
+
+
+def _load_pdf_direct(
+    file_path: Path,
+    processor_type: Optional[str] = None,
+) -> Document:
+    """
+    Load PDF directly without routing (legacy behaviour).
+
+    Args:
+        file_path: Path to PDF file
+        processor_type: Processor type to use
+
+    Returns:
+        Document instance
+    """
+    logger.debug(f"Loading PDF directly (no routing): {file_path}")
 
     # Determine which processor to use
     if processor_type is None:

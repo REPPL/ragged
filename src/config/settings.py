@@ -62,6 +62,32 @@ class Settings(BaseSettings):
         description="Enable layout analysis for better reading order (Docling only)"
     )
 
+    # Routing Configuration (v0.3.4b)
+    enable_quality_assessment: bool = Field(
+        default=True,
+        description="Enable intelligent routing with quality assessment"
+    )
+    routing_high_quality_threshold: float = Field(
+        default=0.85,
+        ge=0.0,
+        le=1.0,
+        description="Quality score threshold for high-quality documents"
+    )
+    routing_low_quality_threshold: float = Field(
+        default=0.70,
+        ge=0.0,
+        le=1.0,
+        description="Quality score threshold for low-quality documents"
+    )
+    fast_quality_assessment: bool = Field(
+        default=True,
+        description="Use fast quality assessment (analyse first 3 pages only)"
+    )
+    cache_quality_assessments: bool = Field(
+        default=True,
+        description="Cache quality assessment results"
+    )
+
     # Retrieval Configuration
     retrieval_k: int = Field(default=5, gt=0, description="Number of chunks to retrieve")
     retrieval_method: str = Field(
