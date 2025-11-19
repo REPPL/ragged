@@ -34,7 +34,7 @@ def retrieve_with_fallback(query, method="hybrid"):
 
 **Components**:
 1. **FallbackStrategy** - Primary + ordered fallbacks with automatic retry
-2. **@with_fallback** - Decorator for fallback behavior
+2. **@with_fallback** - Decorator for fallback behaviour
 3. **DegradedMode** - Context manager for reduced functionality states
 4. **safe_execute** - Simple execution with default fallback
 5. **FallbackChain** - Builder pattern for sequential fallbacks
