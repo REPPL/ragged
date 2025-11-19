@@ -27,9 +27,9 @@ This roadmap breaks v0.3.0 (437-501 hours total) into **13 minor releases** deli
 ### Why Required
 
 v0.3.x introduces features that store and process user data:
-- **v0.3.9 (REPL):** Command history and session files
-- **v0.3.10 (Metrics DB):** Query logs and performance data
-- **v0.3.13 (REST API):** Multi-user sessions and API requests
+- **v0.3.0 (REPL):** Command history and session files
+- **v0.3.0 (Metrics DB):** Query logs and performance data
+- **v0.3.0 (REST API):** Multi-user sessions and API requests
 
 Without v0.2.10 and v0.2.11, these features would:
 - ❌ Use insecure Pickle serialisation (arbitrary code execution vulnerability)
@@ -74,14 +74,14 @@ All v0.3.x features integrate with v0.2.10/v0.2.11:
 
 | v0.3 Feature | Security Integration | Privacy Integration |
 |--------------|---------------------|---------------------|
-| **v0.3.9 REPL** | Session isolation | Encrypted session files, PII warnings, TTL cleanup |
-| **v0.3.10 Metrics** | Session-scoped DB | Query hashing (NOT plaintext), TTL cleanup, GDPR export |
-| **v0.3.13 REST API** | Per-client sessions | Session-scoped caching, query hashing, audit logs |
+| **v0.3.0 REPL** | Session isolation | Encrypted session files, PII warnings, TTL cleanup |
+| **v0.3.0 Metrics** | Session-scoped DB | Query hashing (NOT plaintext), TTL cleanup, GDPR export |
+| **v0.3.0 REST API** | Per-client sessions | Session-scoped caching, query hashing, audit logs |
 
 **Privacy Risk Scores:**
-- v0.3.9 (REPL): 90/100
-- v0.3.10 (Metrics): 95/100
-- v0.3.13 (REST API): 92/100
+- v0.3.0 (REPL): 90/100
+- v0.3.0 (Metrics): 95/100
+- v0.3.0 (REST API): 92/100
 
 See detailed privacy implementation sections in each version's roadmap file.
 
@@ -97,31 +97,72 @@ This foundation is a **one-time investment** that protects ragged users and ensu
 
 ---
 
+## Feature Specifications
+
+For detailed technical specifications organised by feature area, see the **[features/](./features/)** directory. These documents provide comprehensive implementation details, code examples, and integration guidance for each major feature area.
+
+| Feature | Description | Versions | Effort | Privacy Risk |
+|---------|-------------|----------|--------|--------------|
+| [Query Processing](./features/query-processing.md) | Query decomposition, HyDE, reranking, contextual compression | v0.3.0, v0.3.0, v0.3.0 | 50-63h | 88/100 |
+| [Chunking Strategies](./features/chunking-strategies.md) | Semantic and hierarchical chunking with parent-child relationships | v0.3.0 | 38-46h | 90/100 |
+| [Multi-Modal Support](./features/multi-modal-support.md) | Docling + PaddleOCR integration for OCR, tables, images, charts | v0.3.0 | 57-71h | 75/100 |
+| [RAGAS Evaluation](./features/evaluation-quality.md) | RAGAS framework integration, MRR, NDCG metrics (target >0.80) | v0.3.0, v0.3.0, v0.3.0, v0.3.0 | 32-38h | 85/100 |
+| [Data Generation](./features/data-generation.md) | Chain-of-thought reasoning, enhanced citations, metadata filtering, auto-tagging | v0.3.0 | 68-74h | 85/100 |
+| [CLI Features](./features/cli-features.md) | Interactive REPL, debug mode, session management | v0.3.0 | 20-26h | 90/100 |
+
+### High-Risk Features (Privacy/Security Attention Required)
+
+These features require careful attention to privacy and security implementation:
+
+- **CLI REPL** (v0.3.0) - Privacy Risk: 90/100
+  - **Risks:** Session history contains sensitive user queries, persistent session state
+  - **Mitigations:** Session isolation (v0.2.10), encrypted session files (v0.2.11), PII warnings, TTL cleanup
+  - **Integration:** SessionManager, EncryptionManager, contains_pii(), hash_query()
+
+- **Multi-Modal Processing** (v0.3.0) - Privacy Risk: 75/100
+  - **Risks:** File uploads from external sources, temporary file handling, OCR of sensitive documents
+  - **Mitigations:** Temporary file cleanup, session-scoped processing, no external API calls (local-only)
+  - **Integration:** Session isolation for temporary files
+
+- **Evaluation & Metrics** (v0.3.0, v0.3.0) - Privacy Risk: 85/100
+  - **Risks:** Query logging for metrics, performance data storage
+  - **Mitigations:** Query hashing (NOT plaintext), TTL-based cleanup, GDPR export/deletion
+  - **Integration:** hash_query(), CleanupScheduler, GDPR compliance APIs
+
+- **Data Generation** (v0.3.0) - Privacy Risk: 85/100
+  - **Risks:** Auto-tagging processes document content, metadata storage
+  - **Mitigations:** Local LLM processing only, session-scoped metadata, no external APIs
+  - **Integration:** Session isolation for metadata
+
+See detailed privacy implementation sections in each feature specification and version roadmap.
+
+---
+
 ## Quick Navigation
 
 ### By Implementation Sequence
-1. [v0.3.1 - Foundation & Metrics](#v031---foundation--metrics-30-hours) (30h)
-2. [v0.3.2 - Configuration Transparency](#v032---configuration-transparency-28-34-hours) (28-34h)
-3. [v0.3.3 - Advanced Query Processing](#v033---advanced-query-processing-53-55-hours) (53-55h)
-4. [v0.3.4 - Intelligent Chunking](#v034---intelligent-chunking-38-40-hours) (38-40h)
-5. [v0.3.5 - Modern Document Processing](#v035---modern-document-processing-55-62-hours) (55-62h)
-6. [v0.3.6 - Messy Document Intelligence](#v036---messy-document-intelligence-49-57-hours) (49-57h)
-7. [v0.3.7 - VectorStore Abstraction](#v037---vectorstore-abstraction-16-22-hours) (16-22h)
-8. [v0.3.8 - Production Data & Generation](#v038---production-data--generation-68-74-hours) (68-74h)
-9. [v0.3.9 - Developer Experience I](#v039---developer-experience-i-20-24-hours) (20-24h)
-10. [v0.3.10 - Performance & Quality Tools](#v0310---performance--quality-tools-19-24-hours) (19-24h)
-11. [v0.3.11 - Automation & Templates](#v0311---automation--templates-18-24-hours) (18-24h)
-12. [v0.3.12 - Production Operations](#v0312---production-operations-17-23-hours) (17-23h)
-13. [v0.3.13 - Polish & Integration](#v0313---polish--integration-26-32-hours) (26-32h)
+1. [v0.3.0 - Foundation & Metrics](#v030---foundation--metrics-30-hours) (30h)
+2. [v0.3.0 - Configuration Transparency](#v031---configuration-transparency-28-34-hours) (28-34h)
+3. [v0.3.0 - Advanced Query Processing](#v032---advanced-query-processing-53-55-hours) (53-55h)
+4. [v0.3.0 - Intelligent Chunking](#v033---intelligent-chunking-38-40-hours) (38-40h)
+5. [v0.3.0 - Modern Document Processing](#v034---modern-document-processing-55-62-hours) (55-62h)
+6. [v0.3.0 - Messy Document Intelligence](#v035---messy-document-intelligence-49-57-hours) (49-57h)
+7. [v0.3.0 - VectorStore Abstraction](#v036---vectorstore-abstraction-16-22-hours) (16-22h)
+8. [v0.3.0 - Production Data & Generation](#v037---production-data--generation-68-74-hours) (68-74h)
+9. [v0.3.0 - Developer Experience I](#v038---developer-experience-i-20-24-hours) (20-24h)
+10. [v0.3.0 - Performance & Quality Tools](#v039---performance--quality-tools-19-24-hours) (19-24h)
+11. [v0.3.0 - Automation & Templates](#v0310---automation--templates-18-24-hours) (18-24h)
+12. [v0.3.0 - Production Operations](#v0311---production-operations-17-23-hours) (17-23h)
+13. [v0.3.0 - Polish & Integration](#v0312---polish--integration-26-32-hours) (26-32h)
 
 ### By Category
-- **[Core Functionality](#category-core-functionality):** v0.3.3, v0.3.4 (91-95h)
-- **[Document Intelligence](#category-document-intelligence):** v0.3.5, v0.3.6 (104-119h)
-- **[Quality & Metrics](#category-quality--metrics):** v0.3.1, v0.3.10 (49-54h)
-- **[Configuration & UX](#category-configuration--ux):** v0.3.2 (28-34h)
-- **[Production Features](#category-production-features):** v0.3.8 (68-74h)
-- **[Developer Experience](#category-developer-experience):** v0.3.9, v0.3.11, v0.3.12 (55-71h)
-- **[API & Integration](#category-api--integration):** v0.3.7, v0.3.13 (42-54h)
+- **[Core Functionality](#category-core-functionality):** v0.3.0, v0.3.0 (91-95h)
+- **[Document Intelligence](#category-document-intelligence):** v0.3.0, v0.3.0 (104-119h)
+- **[Quality & Metrics](#category-quality--metrics):** v0.3.0, v0.3.0 (49-54h)
+- **[Configuration & UX](#category-configuration--ux):** v0.3.0 (28-34h)
+- **[Production Features](#category-production-features):** v0.3.0 (68-74h)
+- **[Developer Experience](#category-developer-experience):** v0.3.0, v0.3.0, v0.3.0 (55-71h)
+- **[API & Integration](#category-api--integration):** v0.3.0, v0.3.0 (42-54h)
 
 ---
 
@@ -131,7 +172,7 @@ This foundation is a **one-time investment** that protects ragged users and ensu
 
 The 13 versions are designed to be implemented **sequentially** with some flexibility for parallel work on independent features.
 
-**⚠️ PREREQUISITE:** Complete v0.2.10 (Security Hardening) and v0.2.11 (Privacy Infrastructure) before starting v0.3.1. See [Security & Privacy Foundation](#security--privacy-foundation-required) above.
+**⚠️ PREREQUISITE:** Complete v0.2.10 (Security Hardening) and v0.2.11 (Privacy Infrastructure) before starting v0.3.0. See [Security & Privacy Foundation](#security--privacy-foundation-required) above.
 
 #### Phase 0: Security & Privacy Foundation (35-47h)
 **Goal:** Establish security and privacy infrastructure
@@ -151,7 +192,7 @@ Security hardening   Privacy infrastructure
 **Prerequisite:** v0.2.10 and v0.2.11 must be complete
 
 ```
-v0.3.1 (30h) → v0.3.2 (28-34h) → v0.3.3 (53-55h)
+v0.3.0 (30h) → v0.3.0 (28-34h) → v0.3.0 (53-55h)
    ↓              ↓                  ↓
 RAGAS baseline  Personas         Advanced retrieval
 ```
@@ -165,14 +206,14 @@ RAGAS baseline  Personas         Advanced retrieval
 **Goal:** Intelligent chunking and modern document processing
 
 ```
-v0.3.4 (38-40h) ──→ v0.3.5 (55-62h) ──→ v0.3.6 (49-57h)
+v0.3.0 (38-40h) ──→ v0.3.0 (55-62h) ──→ v0.3.0 (49-57h)
    ↓                   ↓                    ↓
 Semantic chunking   Docling OCR         Auto-correction
 ```
 
 **Dependencies:**
-- v0.3.5 depends on v0.3.4 (chunking for processed documents)
-- v0.3.6 depends on v0.3.5 (Docling integration for messy PDFs)
+- v0.3.0 depends on v0.3.0 (chunking for processed documents)
+- v0.3.0 depends on v0.3.0 (Docling integration for messy PDFs)
 
 **Deliverable:** 30× faster OCR + automated messy PDF handling
 
@@ -182,13 +223,13 @@ Semantic chunking   Docling OCR         Auto-correction
 **Goal:** Production features and API foundation
 
 ```
-v0.3.7 (16-22h) ──→ v0.3.8 (68-74h)
+v0.3.0 (16-22h) ──→ v0.3.0 (68-74h)
    ↓                   ↓
 VectorStore API     Production features
 ```
 
 **Dependencies:**
-- v0.3.8 depends on v0.3.1 (RAGAS metrics for chain-of-thought validation)
+- v0.3.0 depends on v0.3.0 (RAGAS metrics for chain-of-thought validation)
 
 **Deliverable:** RAGAS > 0.80 + multi-backend support
 
@@ -198,17 +239,17 @@ VectorStore API     Production features
 **Goal:** Developer tools, profiling, automation
 
 ```
-       v0.3.9 (20-24h)
+       v0.3.0 (20-24h)
            ↓
-   v0.3.10 (19-24h) ──→ v0.3.11 (18-24h) ──→ v0.3.12 (17-23h)
+   v0.3.0 (19-24h) ──→ v0.3.0 (18-24h) ──→ v0.3.0 (17-23h)
        ↓                    ↓                     ↓
    Profiling           Templates            Watch mode
 ```
 
 **Dependencies:**
-- v0.3.10 depends on v0.3.1 (metrics infrastructure)
-- v0.3.11 depends on v0.3.2 (configuration validation)
-- v0.3.12 depends on v0.3.11 (templates for scheduled operations)
+- v0.3.0 depends on v0.3.0 (metrics infrastructure)
+- v0.3.0 depends on v0.3.0 (configuration validation)
+- v0.3.0 depends on v0.3.0 (templates for scheduled operations)
 
 **Deliverable:** Complete developer toolkit
 
@@ -218,7 +259,7 @@ VectorStore API     Production features
 **Goal:** REST API, accessibility, final documentation
 
 ```
-v0.3.13 (26-32h)
+v0.3.0 (26-32h)
     ↓
 REST API + Accessibility + Complete docs
 ```
@@ -246,38 +287,38 @@ REST API + Accessibility + Complete docs
                     │      v0.3.x RELEASES            │
                     └─────────────────────────────────┘
 
-v0.3.1 (Foundation & Metrics)
-    ├─→ v0.3.8 (needs RAGAS)
-    ├─→ v0.3.9 (session management)
-    └─→ v0.3.10 (needs metrics infrastructure)
+v0.3.0 (Foundation & Metrics)
+    ├─→ v0.3.0 (needs RAGAS)
+    ├─→ v0.3.0 (session management)
+    └─→ v0.3.0 (needs metrics infrastructure)
 
-v0.3.2 (Configuration)
-    ├─→ v0.3.9 (config for interactive mode)
-    └─→ v0.3.11 (config validation)
+v0.3.0 (Configuration)
+    ├─→ v0.3.0 (config for interactive mode)
+    └─→ v0.3.0 (config validation)
 
-v0.3.3 (Advanced Retrieval)
-    └─→ v0.3.13 (query suggestions use decomposition)
+v0.3.0 (Advanced Retrieval)
+    └─→ v0.3.0 (query suggestions use decomposition)
 
-v0.3.4 (Intelligent Chunking)
-    └─→ v0.3.5 (chunking for processed docs)
+v0.3.0 (Intelligent Chunking)
+    └─→ v0.3.0 (chunking for processed docs)
 
-v0.3.5 (Modern OCR)
-    └─→ v0.3.6 (Docling for messy PDFs)
+v0.3.0 (Modern OCR)
+    └─→ v0.3.0 (Docling for messy PDFs)
 
-v0.3.9 (Interactive/Debug)
-    └─→ v0.3.10 (debug mode for profiling)
+v0.3.0 (Interactive/Debug)
+    └─→ v0.3.0 (debug mode for profiling)
     [Uses v0.2.10 Session, v0.2.11 encryption]
 
-v0.3.10 (Performance Tools)
+v0.3.0 (Performance Tools)
     [Uses v0.2.11 query hashing, TTL cleanup]
     [No v0.3.x dependents]
 
-v0.3.11 (Templates)
-    └─→ v0.3.12 (templates for scheduled operations)
+v0.3.0 (Templates)
+    └─→ v0.3.0 (templates for scheduled operations)
 
-v0.3.7, v0.3.12 → Independent
+v0.3.0, v0.3.0 → Independent
 
-v0.3.13 (Final Integration)
+v0.3.0 (Final Integration)
     ↑
     All versions (integration testing)
     [Uses v0.2.10 session isolation, v0.2.11 privacy]
@@ -290,7 +331,7 @@ v0.3.13 (Final Integration)
 Each version follows this standard workflow:
 
 #### 1. Pre-Implementation (30min - 2h)
-- [ ] Read version roadmap file (e.g., `v0.3.1.md`)
+- [ ] Read version roadmap file (e.g., `v0.3.0.md`)
 - [ ] Review dependencies (ensure prerequisites complete)
 - [ ] Create feature branch: `git checkout -b feature/v0.3.X-name`
 - [ ] Optional: Use architecture-advisor agent for complex design decisions
@@ -338,20 +379,20 @@ Each version follows this standard workflow:
 
 Track your progress through v0.3.x implementation:
 
-- [ ] **v0.3.1** - Foundation & Metrics (30h)
+- [ ] **v0.3.0** - Foundation & Metrics (30h)
   - [ ] RAGAS framework integrated
   - [ ] Baseline metrics established
   - [ ] Tests passing
   - [ ] Documentation complete
 
-- [ ] **v0.3.2** - Configuration Transparency (28-34h)
+- [ ] **v0.3.0** - Configuration Transparency (28-34h)
   - [ ] Personas implemented
   - [ ] `ragged explain` command working
   - [ ] Presets functional
   - [ ] Tests passing
   - [ ] Documentation complete
 
-- [ ] **v0.3.3** - Advanced Query Processing (53-55h)
+- [ ] **v0.3.0** - Advanced Query Processing (53-55h)
   - [ ] Query decomposition working
   - [ ] HyDE implemented
   - [ ] Reranking functional
@@ -360,14 +401,14 @@ Track your progress through v0.3.x implementation:
   - [ ] Tests passing
   - [ ] Documentation complete
 
-- [ ] **v0.3.4** - Intelligent Chunking (38-40h)
+- [ ] **v0.3.0** - Intelligent Chunking (38-40h)
   - [ ] Semantic chunking working
   - [ ] Hierarchical chunking functional
   - [ ] Parent-child retrieval working
   - [ ] Tests passing
   - [ ] Documentation complete
 
-- [ ] **v0.3.5** - Modern Document Processing (55-62h)
+- [ ] **v0.3.0** - Modern Document Processing (55-62h)
   - [ ] Docling integrated
   - [ ] PaddleOCR fallback working
   - [ ] 30× performance improvement validated
@@ -375,7 +416,7 @@ Track your progress through v0.3.x implementation:
   - [ ] Tests passing
   - [ ] Documentation complete
 
-- [ ] **v0.3.6** - Messy Document Intelligence (49-57h)
+- [ ] **v0.3.0** - Messy Document Intelligence (49-57h)
   - [ ] PDF analysis working
   - [ ] Auto-correction functional
   - [ ] 98%+ OCR confidence achieved
@@ -383,14 +424,14 @@ Track your progress through v0.3.x implementation:
   - [ ] Tests passing
   - [ ] Documentation complete
 
-- [ ] **v0.3.7** - VectorStore Abstraction (16-22h)
+- [ ] **v0.3.0** - VectorStore Abstraction (16-22h)
   - [ ] VectorStore interface complete
   - [ ] ChromaDB refactored
   - [ ] Zero breaking changes
   - [ ] Tests passing
   - [ ] Documentation complete
 
-- [ ] **v0.3.8** - Production Data & Generation (68-74h)
+- [ ] **v0.3.0** - Production Data & Generation (68-74h)
   - [ ] Version tracking working
   - [ ] Metadata filtering functional
   - [ ] Auto-tagging working
@@ -400,35 +441,35 @@ Track your progress through v0.3.x implementation:
   - [ ] Tests passing
   - [ ] Documentation complete
 
-- [ ] **v0.3.9** - Developer Experience I (20-24h)
+- [ ] **v0.3.0** - Developer Experience I (20-24h)
   - [ ] Interactive REPL working
   - [ ] Debug mode functional
   - [ ] Session management working
   - [ ] Tests passing
   - [ ] Documentation complete
 
-- [ ] **v0.3.10** - Performance & Quality Tools (19-24h)
+- [ ] **v0.3.0** - Performance & Quality Tools (19-24h)
   - [ ] Performance profiling working
   - [ ] Quality metrics dashboard functional
   - [ ] Historical tracking working
   - [ ] Tests passing
   - [ ] Documentation complete
 
-- [ ] **v0.3.11** - Automation & Templates (18-24h)
+- [ ] **v0.3.0** - Automation & Templates (18-24h)
   - [ ] Query templates working
   - [ ] Configuration validation functional
   - [ ] Benchmark testing working
   - [ ] Tests passing
   - [ ] Documentation complete
 
-- [ ] **v0.3.12** - Production Operations (17-23h)
+- [ ] **v0.3.0** - Production Operations (17-23h)
   - [ ] Watch mode working
   - [ ] Scheduled operations functional
   - [ ] Daemon mode stable
   - [ ] Tests passing
   - [ ] Documentation complete
 
-- [ ] **v0.3.13** - Polish & Integration (26-32h)
+- [ ] **v0.3.0** - Polish & Integration (26-32h)
   - [ ] REST API functional
   - [ ] Smart suggestions working
   - [ ] All 5 themes implemented
@@ -439,27 +480,27 @@ Track your progress through v0.3.x implementation:
 
 ### Milestone Tracking
 
-- [ ] **Milestone 1:** Foundation Complete (v0.3.1-v0.3.2)
+- [ ] **Milestone 1:** Foundation Complete (v0.3.0-v0.3.0)
   - Target: Weeks 1-7
   - Metrics baseline + User-friendly configuration
 
-- [ ] **Milestone 2:** Core Retrieval Complete (v0.3.3-v0.3.4)
+- [ ] **Milestone 2:** Core Retrieval Complete (v0.3.0-v0.3.0)
   - Target: Weeks 8-15
   - Advanced retrieval + Intelligent chunking
 
-- [ ] **Milestone 3:** Modern OCR Complete (v0.3.5-v0.3.6)
+- [ ] **Milestone 3:** Modern OCR Complete (v0.3.0-v0.3.0)
   - Target: Weeks 16-25
   - 30× faster processing + Messy PDF handling
 
-- [ ] **Milestone 4:** Production Ready (v0.3.7-v0.3.8)
+- [ ] **Milestone 4:** Production Ready (v0.3.0-v0.3.0)
   - Target: Weeks 26-32
   - Multi-backend + RAGAS > 0.80
 
-- [ ] **Milestone 5:** Developer Tools Complete (v0.3.9-v0.3.12)
+- [ ] **Milestone 5:** Developer Tools Complete (v0.3.0-v0.3.0)
   - Target: Weeks 33-40
   - REPL + Profiling + Templates + Automation
 
-- [ ] **Milestone 6:** v0.3.0 Released (v0.3.13)
+- [ ] **Milestone 6:** v0.3.0 Released (v0.3.0)
   - Target: Weeks 41-44
   - REST API + Accessibility + Complete docs
 
@@ -493,7 +534,7 @@ Track your progress through v0.3.x implementation:
 
 ## Minor Version Releases
 
-### v0.3.1 - Foundation & Metrics (30 hours)
+### v0.3.0 - Foundation & Metrics (30 hours)
 
 **Category:** Quality & Evaluation Infrastructure
 
@@ -511,11 +552,11 @@ Establish metrics BEFORE any improvements to enable data-driven development.
 
 **Deliverable:** Objective quality metrics, baseline scores for comparison
 
-**[→ Detailed Roadmap](./v0.3.1.md)**
+**[→ Detailed Roadmap](./v0.3.0.md)**
 
 ---
 
-### v0.3.2 - Configuration Transparency (28-34 hours)
+### v0.3.0 - Configuration Transparency (28-34 hours)
 
 **Category:** User Experience & Configuration
 
@@ -533,17 +574,17 @@ Transparent, customisable configuration with personas.
 
 **Deliverable:** "accuracy", "speed", "balanced" profiles, transparent decision-making
 
-**[→ Detailed Roadmap](./v0.3.2.md)**
+**[→ Detailed Roadmap](./v0.3.0.md)**
 
 ---
 
-### v0.3.3 - Advanced Query Processing (53-55 hours)
+### v0.3.0 - Advanced Query Processing (53-55 hours)
 
 **Category:** Core Retrieval Functionality
 
 **Priority:** Critical
 
-**Dependencies:** v0.3.1 (RAGAS for evaluation)
+**Dependencies:** v0.3.0 (RAGAS for evaluation)
 
 State-of-the-art retrieval techniques.
 
@@ -555,17 +596,17 @@ State-of-the-art retrieval techniques.
 
 **Deliverable:** 10-20% quality improvement per technique, MRR@10 > 0.75
 
-**[→ Detailed Roadmap](./v0.3.3.md)**
+**[→ Detailed Roadmap](./v0.3.0.md)**
 
 ---
 
-### v0.3.4 - Intelligent Chunking (38-40 hours)
+### v0.3.0 - Intelligent Chunking (38-40 hours)
 
 **Category:** Core Chunking Intelligence
 
 **Priority:** High
 
-**Dependencies:** v0.3.3 (for testing with advanced retrieval)
+**Dependencies:** v0.3.0 (for testing with advanced retrieval)
 
 Topic-coherent chunks with parent-child relationships.
 
@@ -577,17 +618,17 @@ Topic-coherent chunks with parent-child relationships.
 
 **Deliverable:** Semantic and hierarchical chunking strategies, 5-15% quality improvement
 
-**[→ Detailed Roadmap](./v0.3.4.md)**
+**[→ Detailed Roadmap](./v0.3.0.md)**
 
 ---
 
-### v0.3.5 - Modern Document Processing (55-62 hours)
+### v0.3.0 - Modern Document Processing (55-62 hours)
 
 **Category:** State-of-the-Art OCR & Document Intelligence
 
 **Priority:** Critical (architectural change)
 
-**Dependencies:** v0.3.4 (chunking for processed documents)
+**Dependencies:** v0.3.0 (chunking for processed documents)
 
 Replace Tesseract + Camelot with Docling + PaddleOCR.
 
@@ -600,17 +641,17 @@ Replace Tesseract + Camelot with Docling + PaddleOCR.
 
 **Deliverable:** Modern OCR stack, 30× faster processing, exceptional quality
 
-**[→ Detailed Roadmap](./v0.3.5.md)**
+**[→ Detailed Roadmap](./v0.3.0.md)**
 
 ---
 
-### v0.3.6 - Messy Document Intelligence (49-57 hours)
+### v0.3.0 - Messy Document Intelligence (49-57 hours)
 
 **Category:** Automated Document Correction & Exceptional Markdown (KILLER FEATURE)
 
 **Priority:** High
 
-**Dependencies:** v0.3.5 (Docling integration)
+**Dependencies:** v0.3.0 (Docling integration)
 
 Fully automated PDF correction with exceptional markdown conversion - completely hidden from users.
 
@@ -622,11 +663,11 @@ Fully automated PDF correction with exceptional markdown conversion - completely
 
 **Deliverable:** Zero user intervention for messy PDFs, 98% OCR confidence
 
-**[→ Detailed Roadmap](./v0.3.6.md)**
+**[→ Detailed Roadmap](./v0.3.0.md)**
 
 ---
 
-### v0.3.7 - VectorStore Abstraction (16-22 hours)
+### v0.3.0 - VectorStore Abstraction (16-22 hours)
 
 **Category:** API Foundation for v0.4 LEANN
 
@@ -644,17 +685,17 @@ Clean abstraction for multi-backend support.
 
 **Deliverable:** Multi-database support foundation for v0.4 LEANN
 
-**[→ Detailed Roadmap](./v0.3.7.md)**
+**[→ Detailed Roadmap](./v0.3.0.md)**
 
 ---
 
-### v0.3.8 - Production Data & Generation (68-74 hours)
+### v0.3.0 - Production Data & Generation (68-74 hours)
 
 **Category:** Production-Ready Features
 
 **Priority:** Critical
 
-**Dependencies:** v0.3.1 (RAGAS for chain-of-thought validation)
+**Dependencies:** v0.3.0 (RAGAS for chain-of-thought validation)
 
 Versioned documents, rich queries, transparent reasoning.
 
@@ -667,17 +708,17 @@ Versioned documents, rich queries, transparent reasoning.
 
 **Deliverable:** RAGAS > 0.80, transparent AI reasoning, production-quality generation
 
-**[→ Detailed Roadmap](./v0.3.8.md)**
+**[→ Detailed Roadmap](./v0.3.0.md)**
 
 ---
 
-### v0.3.9 - Developer Experience I (20-24 hours)
+### v0.3.0 - Developer Experience I (20-24 hours)
 
 **Category:** CLI - Interactive & Debug
 
 **Priority:** Medium
 
-**Dependencies:** v0.3.2 (configuration system)
+**Dependencies:** v0.3.0 (configuration system)
 
 Exploratory workflows and debugging tools.
 
@@ -689,17 +730,17 @@ Exploratory workflows and debugging tools.
 
 **Deliverable:** Interactive exploration, transparent debugging
 
-**[→ Detailed Roadmap](./v0.3.9.md)**
+**[→ Detailed Roadmap](./v0.3.0.md)**
 
 ---
 
-### v0.3.10 - Performance & Quality Tools (19-24 hours)
+### v0.3.0 - Performance & Quality Tools (19-24 hours)
 
 **Category:** CLI - Measurement & Optimisation
 
 **Priority:** Medium
 
-**Dependencies:** v0.3.1 (RAGAS metrics), v0.3.9 (debug mode integration)
+**Dependencies:** v0.3.0 (RAGAS metrics), v0.3.0 (debug mode integration)
 
 Bottleneck identification and quality dashboards.
 
@@ -711,17 +752,17 @@ Bottleneck identification and quality dashboards.
 
 **Deliverable:** Data-driven optimisation tools
 
-**[→ Detailed Roadmap](./v0.3.10.md)**
+**[→ Detailed Roadmap](./v0.3.0.md)**
 
 ---
 
-### v0.3.11 - Automation & Templates (18-24 hours)
+### v0.3.0 - Automation & Templates (18-24 hours)
 
 **Category:** CLI - Workflow Automation
 
 **Priority:** Medium
 
-**Dependencies:** v0.3.2 (configuration), v0.3.10 (metrics for testing)
+**Dependencies:** v0.3.0 (configuration), v0.3.0 (metrics for testing)
 
 Template-based queries and testing tools.
 
@@ -733,17 +774,17 @@ Template-based queries and testing tools.
 
 **Deliverable:** Repeatable workflows, automated testing
 
-**[→ Detailed Roadmap](./v0.3.11.md)**
+**[→ Detailed Roadmap](./v0.3.0.md)**
 
 ---
 
-### v0.3.12 - Production Operations (17-23 hours)
+### v0.3.0 - Production Operations (17-23 hours)
 
 **Category:** CLI - Production Monitoring
 
 **Priority:** Medium
 
-**Dependencies:** v0.3.11 (templates for scheduled operations)
+**Dependencies:** v0.3.0 (templates for scheduled operations)
 
 Production monitoring and automation.
 
@@ -755,11 +796,11 @@ Production monitoring and automation.
 
 **Deliverable:** Production-ready automation and monitoring
 
-**[→ Detailed Roadmap](./v0.3.12.md)**
+**[→ Detailed Roadmap](./v0.3.0.md)**
 
 ---
 
-### v0.3.13 - Polish & Integration (26-32 hours)
+### v0.3.0 - Polish & Integration (26-32 hours)
 
 **Category:** API, Web, Final UX
 
@@ -777,7 +818,7 @@ REST API, refined UX, accessibility, complete documentation - v0.3 production-re
 
 **Deliverable:** Production-ready v0.3.0 release with REST API and accessibility
 
-**[→ Detailed Roadmap](./v0.3.13.md)**
+**[→ Detailed Roadmap](./v0.3.0.md)**
 
 ---
 
@@ -785,19 +826,19 @@ REST API, refined UX, accessibility, complete documentation - v0.3 production-re
 
 | Category | Versions | Total Hours | Percentage |
 |----------|----------|-------------|------------|
-| **Core Functionality** | v0.3.3, v0.3.4 | 91-95h | 21% |
-| **Document Intelligence** | v0.3.5, v0.3.6 | 104-119h | 24% |
-| **Quality & Metrics** | v0.3.1, v0.3.10 | 49-54h | 11% |
-| **Configuration & UX** | v0.3.2 | 28-34h | 6% |
-| **Production Features** | v0.3.8 | 68-74h | 15% |
-| **Developer Experience** | v0.3.9, v0.3.11, v0.3.12 | 55-71h | 14% |
-| **API & Integration** | v0.3.7, v0.3.13 | 42-54h | 10% |
+| **Core Functionality** | v0.3.0, v0.3.0 | 91-95h | 21% |
+| **Document Intelligence** | v0.3.0, v0.3.0 | 104-119h | 24% |
+| **Quality & Metrics** | v0.3.0, v0.3.0 | 49-54h | 11% |
+| **Configuration & UX** | v0.3.0 | 28-34h | 6% |
+| **Production Features** | v0.3.0 | 68-74h | 15% |
+| **Developer Experience** | v0.3.0, v0.3.0, v0.3.0 | 55-71h | 14% |
+| **API & Integration** | v0.3.0, v0.3.0 | 42-54h | 10% |
 
 ### Category: Core Functionality
 
 **Focus:** Advanced retrieval and intelligent chunking
 
-**Versions:** v0.3.3, v0.3.4
+**Versions:** v0.3.0, v0.3.4
 
 **Total:** 91-95h (21% of effort)
 
@@ -809,7 +850,7 @@ REST API, refined UX, accessibility, complete documentation - v0.3 production-re
 
 **Focus:** Modern OCR and automated PDF correction
 
-**Versions:** v0.3.5, v0.3.6
+**Versions:** v0.3.0, v0.3.6
 
 **Total:** 104-119h (24% of effort - largest category)
 
@@ -821,7 +862,7 @@ REST API, refined UX, accessibility, complete documentation - v0.3 production-re
 
 **Focus:** RAGAS framework and performance profiling
 
-**Versions:** v0.3.1, v0.3.10
+**Versions:** v0.3.0, v0.3.10
 
 **Total:** 49-54h (11% of effort)
 
@@ -857,7 +898,7 @@ REST API, refined UX, accessibility, complete documentation - v0.3 production-re
 
 **Focus:** Interactive tools, profiling, templates, automation
 
-**Versions:** v0.3.9, v0.3.11, v0.3.12
+**Versions:** v0.3.0, v0.3.0, v0.3.12
 
 **Total:** 55-71h (14% of effort)
 
@@ -869,7 +910,7 @@ REST API, refined UX, accessibility, complete documentation - v0.3 production-re
 
 **Focus:** VectorStore abstraction and REST API
 
-**Versions:** v0.3.7, v0.3.13
+**Versions:** v0.3.0, v0.3.12
 
 **Total:** 42-54h (10% of effort)
 
@@ -883,11 +924,11 @@ REST API, refined UX, accessibility, complete documentation - v0.3 production-re
 
 | Metric | v0.2 | v0.3 Target | Achievement |
 |--------|------|-------------|-------------|
-| **Retrieval Quality** | MRR@10 ~0.60 | > 0.75 | [Track in v0.3.3] |
-| **Answer Quality** | RAGAS ~0.70 | > 0.80 | [Track in v0.3.8] |
-| **Multi-Modal Success** | - | 95%+ PDFs | [Track in v0.3.5] |
-| **OCR Confidence** | - | 98%+ (good quality) | [Track in v0.3.6] |
-| **Processing Speed** | 100 pages/min | 1000 pages/min | [Track in v0.3.5] |
+| **Retrieval Quality** | MRR@10 ~0.60 | > 0.75 | [Track in v0.3.0] |
+| **Answer Quality** | RAGAS ~0.70 | > 0.80 | [Track in v0.3.0] |
+| **Multi-Modal Success** | - | 95%+ PDFs | [Track in v0.3.0] |
+| **OCR Confidence** | - | 98%+ (good quality) | [Track in v0.3.0] |
+| **Processing Speed** | 100 pages/min | 1000 pages/min | [Track in v0.3.0] |
 
 ### User Experience Goals
 
@@ -928,7 +969,7 @@ These quality gates apply across all v0.3.x versions:
 - [ ] No performance regressions
 - [ ] Performance targets met (see version-specific goals)
 - [ ] Memory usage acceptable
-- [ ] Profiling data captured (v0.3.10+)
+- [ ] Profiling data captured (v0.3.0+)
 
 ### Quality Requirements (Retrieval/Generation Features)
 - [ ] RAGAS scores measured and documented
@@ -946,22 +987,22 @@ These quality gates apply across all v0.3.x versions:
 |---------|-------|-------|------------------|
 | **v0.2.10** | **15-21** | **2** | **2** |
 | **v0.2.11** | **20-26** | **2-3** | **4-5** |
-| v0.3.1 | 30 | 3 | 7-8 |
-| v0.3.2 | 28-34 | 3-4 | 10-12 |
-| v0.3.3 | 53-55 | 5-6 | 15-18 |
-| v0.3.4 | 38-40 | 4 | 19-22 |
-| v0.3.5 | 55-62 | 6 | 25-28 |
-| v0.3.6 | 49-57 | 5-6 | 30-34 |
-| v0.3.7 | 16-22 | 2 | 32-36 |
-| v0.3.8 | 68-74 | 7 | 39-43 |
-| v0.3.9 | 20-24 | 2-3 | 41-46 |
-| v0.3.10 | 19-24 | 2-3 | 43-49 |
-| v0.3.11 | 18-24 | 2-3 | 45-52 |
-| v0.3.12 | 17-23 | 2-3 | 47-55 |
-| v0.3.13 | 26-32 | 3 | 50-58 |
+| v0.3.0 | 30 | 3 | 7-8 |
+| v0.3.0 | 28-34 | 3-4 | 10-12 |
+| v0.3.0 | 53-55 | 5-6 | 15-18 |
+| v0.3.0 | 38-40 | 4 | 19-22 |
+| v0.3.0 | 55-62 | 6 | 25-28 |
+| v0.3.0 | 49-57 | 5-6 | 30-34 |
+| v0.3.0 | 16-22 | 2 | 32-36 |
+| v0.3.0 | 68-74 | 7 | 39-43 |
+| v0.3.0 | 20-24 | 2-3 | 41-46 |
+| v0.3.0 | 19-24 | 2-3 | 43-49 |
+| v0.3.0 | 18-24 | 2-3 | 45-52 |
+| v0.3.0 | 17-23 | 2-3 | 47-55 |
+| v0.3.0 | 26-32 | 3 | 50-58 |
 | **Total** | **472-548** | **47-55** | **47-55 weeks** |
 
-**Note:** v0.2.10 and v0.2.11 are prerequisites that must be completed before v0.3.1.
+**Note:** v0.2.10 and v0.2.11 are prerequisites that must be completed before v0.3.0.
 
 ### At 15 Hours/Week
 
@@ -1008,7 +1049,7 @@ Specific agent recommendations are documented in each version's roadmap file. Se
 
 ## Dependency Changes
 
-### Removed Dependencies (v0.3.5)
+### Removed Dependencies (v0.3.0)
 ```toml
 # REMOVED in v0.3.5
 # pytesseract = "^0.3.10"      # Replaced by Docling/PaddleOCR
@@ -1017,13 +1058,13 @@ Specific agent recommendations are documented in each version's roadmap file. Se
 
 ### New Dependencies by Version
 
-#### v0.3.4 - Intelligent Chunking
+#### v0.3.0 - Intelligent Chunking
 ```toml
 nltk = "^3.8.0"                 # Apache 2.0 - Sentence splitting
 scipy = "^1.11.0"               # BSD - Similarity calculations
 ```
 
-#### v0.3.5 - Modern Document Processing
+#### v0.3.0 - Modern Document Processing
 ```toml
 docling = "^2.0.0"              # MIT - Modern document processing
 paddleocr = "^2.8.0"            # Apache 2.0 - Fallback OCR
@@ -1031,7 +1072,7 @@ paddlepaddle = "^2.6.0"         # Apache 2.0 - PaddleOCR backend
 opencv-python = "^4.8.0"        # BSD - Image preprocessing
 ```
 
-#### v0.3.6 - Messy Document Intelligence
+#### v0.3.0 - Messy Document Intelligence
 ```toml
 pypdf = "^3.17.0"               # BSD - PDF manipulation
 img2pdf = "^0.5.1"              # LGPL - Image to PDF
@@ -1039,30 +1080,30 @@ scikit-image = "^0.22.0"        # BSD - Image quality assessment
 Pillow = "^10.0.0"              # HPND - Image handling
 ```
 
-#### v0.3.9 - Developer Experience I
+#### v0.3.0 - Developer Experience I
 ```toml
 prompt-toolkit = "^3.0.0"       # BSD - REPL interface
 ```
 
-#### v0.3.10 - Performance & Quality Tools
+#### v0.3.0 - Performance & Quality Tools
 ```toml
 memory-profiler = "^0.61.0"     # BSD - Memory tracking
 rich = "^13.7.0"                # MIT - Beautiful tables
 ```
 
-#### v0.3.11 - Automation & Templates
+#### v0.3.0 - Automation & Templates
 ```toml
 jinja2 = "^3.1.0"               # BSD - Template engine
 ```
 
-#### v0.3.12 - Production Operations
+#### v0.3.0 - Production Operations
 ```toml
 watchdog = "^3.0.0"             # Apache 2.0 - File system monitoring
 APScheduler = "^3.10.0"         # MIT - Job scheduling
 croniter = "^2.0.0"             # MIT - Cron parsing
 ```
 
-#### v0.3.13 - Polish & Integration
+#### v0.3.0 - Polish & Integration
 ```toml
 fastapi = "^0.104.0"            # MIT - REST API framework
 uvicorn = "^0.24.0"             # BSD - ASGI server
@@ -1160,13 +1201,13 @@ personas:
 **1. Docling Performance on Very Messy Scans**
 - **Risk:** Docling may struggle with worst-case documents
 - **Mitigation:** PaddleOCR fallback, confidence tracking
-- **Validation:** Test on representative sample before full implementation (v0.3.5)
-- **Owner:** v0.3.5, v0.3.6
+- **Validation:** Test on representative sample before full implementation (v0.3.0)
+- **Owner:** v0.3.0, v0.3.6
 
 **2. Automated Correction Accuracy**
 - **Risk:** Auto-correction may make wrong decisions
 - **Mitigation:** Confidence tracking, metadata logging, user can review corrections
-- **Validation:** Manual review of 50+ corrected documents (v0.3.6)
+- **Validation:** Manual review of 50+ corrected documents (v0.3.0)
 - **Owner:** v0.3.6
 
 ### Medium Risk Items
@@ -1174,7 +1215,7 @@ personas:
 **3. Configuration Persona Design**
 - **Risk:** Personas may not match user mental models
 - **Mitigation:** User testing, iteration based on feedback
-- **Validation:** Get feedback from 3-5 users before finalising (v0.3.2)
+- **Validation:** Get feedback from 3-5 users before finalising (v0.3.0)
 - **Owner:** v0.3.2
 
 **4. Test Coverage Goals**
@@ -1186,7 +1227,7 @@ personas:
 **5. RAGAS > 0.80 Target**
 - **Risk:** May not achieve target with current techniques
 - **Mitigation:** Combine multiple techniques, iterate on prompts
-- **Validation:** Measure after each retrieval improvement (v0.3.3, v0.3.4, v0.3.8)
+- **Validation:** Measure after each retrieval improvement (v0.3.0, v0.3.0, v0.3.0)
 - **Owner:** v0.3.8
 
 ### Low Risk Items
@@ -1222,7 +1263,7 @@ Each v0.3.x version must pass security validation:
 - [ ] Input validation on user data
 - [ ] British English compliance in error messages
 
-**For data-handling features (v0.3.9, v0.3.10, v0.3.13):**
+**For data-handling features (v0.3.0, v0.3.0, v0.3.0):**
 - [ ] Session isolation verified (no cross-user leakage)
 - [ ] PII detection tested (email, phone, SSN patterns)
 - [ ] Query hashing used (NOT plaintext storage)
@@ -1243,21 +1284,21 @@ See detailed security testing checklists in v0.2.10 and v0.2.11 roadmaps.
 
 | v0.3 Feature | Privacy Risk | Mitigation | Risk Score |
 |--------------|-------------|-----------|-----------|
-| **v0.3.1 RAGAS** | Low | No user data stored | N/A |
-| **v0.3.2 Config** | None | Configuration only | N/A |
-| **v0.3.3 Retrieval** | Low | Session-scoped caching | N/A |
-| **v0.3.4 Chunking** | None | Document processing only | N/A |
-| **v0.3.5 OCR** | None | Document processing only | N/A |
-| **v0.3.6 Auto-correct** | None | Document processing only | N/A |
-| **v0.3.7 VectorStore** | Low | Session isolation | N/A |
-| **v0.3.8 Metadata** | Medium | Query hashing, TTL | N/A |
-| **v0.3.9 REPL** | **HIGH** | Encrypted sessions, PII warnings, TTL | **90/100** |
-| **v0.3.10 Metrics** | **HIGH** | Query hashing, DB encryption, TTL | **95/100** |
-| **v0.3.11 Templates** | Low | Template processing only | N/A |
-| **v0.3.12 Watch** | Low | File monitoring only | N/A |
-| **v0.3.13 REST API** | **HIGH** | Session isolation, auth, rate limiting | **92/100** |
+| **v0.3.0 RAGAS** | Low | No user data stored | N/A |
+| **v0.3.0 Config** | None | Configuration only | N/A |
+| **v0.3.0 Retrieval** | Low | Session-scoped caching | N/A |
+| **v0.3.0 Chunking** | None | Document processing only | N/A |
+| **v0.3.0 OCR** | None | Document processing only | N/A |
+| **v0.3.0 Auto-correct** | None | Document processing only | N/A |
+| **v0.3.0 VectorStore** | Low | Session isolation | N/A |
+| **v0.3.0 Metadata** | Medium | Query hashing, TTL | N/A |
+| **v0.3.0 REPL** | **HIGH** | Encrypted sessions, PII warnings, TTL | **90/100** |
+| **v0.3.0 Metrics** | **HIGH** | Query hashing, DB encryption, TTL | **95/100** |
+| **v0.3.0 Templates** | Low | Template processing only | N/A |
+| **v0.3.0 Watch** | Low | File monitoring only | N/A |
+| **v0.3.0 REST API** | **HIGH** | Session isolation, auth, rate limiting | **92/100** |
 
-**High-risk features (v0.3.9, v0.3.10, v0.3.13) have detailed privacy implementation sections in their roadmap files.**
+**High-risk features (v0.3.0, v0.3.0, v0.3.0) have detailed privacy implementation sections in their roadmap files.**
 
 ### GDPR Compliance Summary
 
@@ -1265,14 +1306,14 @@ v0.3.x features support GDPR requirements through v0.2.11 infrastructure:
 
 | GDPR Right | Implementation | v0.3 Features |
 |-----------|---------------|---------------|
-| **Right to Access (Art. 15)** | User can export all data | v0.3.9, v0.3.10, v0.3.13 |
-| **Right to Erasure (Art. 17)** | User can delete all data | v0.3.9, v0.3.10, v0.3.13 |
-| **Right to Portability (Art. 20)** | JSON export format | v0.3.9, v0.3.10, v0.3.13 |
-| **Storage Limitation (Art. 5)** | TTL-based cleanup | v0.3.9, v0.3.10, v0.3.13 |
-| **Data Minimisation (Art. 5)** | Query hashing (NOT plaintext) | v0.3.10, v0.3.13 |
-| **Confidentiality (Art. 32)** | Encryption at rest | v0.3.9, v0.3.10, v0.3.13 |
+| **Right to Access (Art. 15)** | User can export all data | v0.3.0, v0.3.0, v0.3.0 |
+| **Right to Erasure (Art. 17)** | User can delete all data | v0.3.0, v0.3.0, v0.3.0 |
+| **Right to Portability (Art. 20)** | JSON export format | v0.3.0, v0.3.0, v0.3.0 |
+| **Storage Limitation (Art. 5)** | TTL-based cleanup | v0.3.0, v0.3.0, v0.3.0 |
+| **Data Minimisation (Art. 5)** | Query hashing (NOT plaintext) | v0.3.0, v0.3.0 |
+| **Confidentiality (Art. 32)** | Encryption at rest | v0.3.0, v0.3.0, v0.3.0 |
 
-**CLI Commands (implemented in v0.3.9+):**
+**CLI Commands (implemented in v0.3.0+):**
 ```bash
 ragged privacy export --format json --output my-data.json
 ragged privacy delete --confirm
@@ -1330,7 +1371,7 @@ scheduler.schedule_cleanup(data_path, ttl_days=90)
 ### Feature Specifications
 - [Query Processing Features](./features/query-processing.md) - Detailed specs
 - [Chunking Strategies](./features/chunking-strategies.md) - Detailed specs
-- [Multi-Modal Support](./features/multi-modal-support.md) - Detailed specs (needs update for Docling)
+- [Multi-Modal Support](./features/multi-modal-support.md) - Detailed specs
 - [Evaluation & Quality](./features/evaluation-quality.md) - Detailed specs
 - [Data & Generation](./features/data-generation.md) - Detailed specs
 - [CLI Features](./features/cli-features.md) - Detailed specs
@@ -1349,10 +1390,10 @@ scheduler.schedule_cleanup(data_path, ttl_days=90)
 ### Getting Started
 
 1. **Read this roadmap completely** to understand the full scope
-2. **Review [v0.3.1](./v0.3.1.md)** - the first version to implement
+2. **Review [v0.3.0](./v0.3.0.md)** - the first version to implement
 3. **Set up your environment** with necessary dependencies
 4. **Create feature branch** for v0.3.1
-5. **Follow the execution checklist** in v0.3.1.md
+5. **Follow the execution checklist** in v0.3.0.md
 6. **Track your progress** using the [Progress Tracking](#progress-tracking) section
 
 ### After v0.3.0 Completion
