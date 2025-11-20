@@ -12,7 +12,7 @@ This directory contains the complete implementation documentation for ragged v0.
 
 ### v0.2.10 - Security Hardening
 **Status:** ✅ Completed
-**Implementation:** [v0.2.10.md](./v0.2.10.md)
+**Implementation:** [v0.2.10/](./v0.2.10/)
 
 **Summary:**
 - Eliminated Pickle vulnerabilities
@@ -22,7 +22,7 @@ This directory contains the complete implementation documentation for ragged v0.
 
 ### v0.2.11 - Privacy Infrastructure
 **Status:** ✅ Completed
-**Implementation:** [v0.2.11.md](./v0.2.11.md)
+**Implementation:** [v0.2.11/](./v0.2.11/)
 
 **Summary:**
 - Encryption at rest (Fernet/AES-128)
@@ -37,8 +37,8 @@ This directory contains the complete implementation documentation for ragged v0.
 ## Quick Navigation
 
 ### Implementation Records
-- 📄 **[v0.2.10.md](./v0.2.10.md)** - Security Hardening implementation
-- 📄 **[v0.2.11.md](./v0.2.11.md)** - Privacy Infrastructure implementation
+- 📁 **[v0.2.10/](./v0.2.10/)** - Security Hardening implementation
+- 📁 **[v0.2.11/](./v0.2.11/)** - Privacy Infrastructure implementation
 - 📄 **[lineage.md](./lineage.md)** - Complete traceability from planning to implementation
 
 ### Test Results
@@ -129,8 +129,8 @@ test: Add integration tests for web UI (Phase 7)
 - [v0.2 Roadmap](../../roadmap/version/v0.2/) - Detailed implementation plans (if exists)
 
 ### Implementation Records
-- [v0.2.10 Implementation](./v0.2.10.md) - Security Hardening
-- [v0.2.11 Implementation](./v0.2.11.md) - Privacy Infrastructure
+- [v0.2.10 Implementation](./v0.2.10/) - Security Hardening
+- [v0.2.11 Implementation](./v0.2.11/) - Privacy Infrastructure
 - [v0.3 Implementation Index](../v0.3/README.md) - Next version series
 
 ### Testing
