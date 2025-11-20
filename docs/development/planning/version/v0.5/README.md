@@ -1,6 +1,5 @@
 # ragged v0.5 Design Overview
 
-**Version:** v0.5
 
 **Status:** 📋 Planned
 

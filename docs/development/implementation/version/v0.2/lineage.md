@@ -1,6 +1,5 @@
 # v0.2 Implementation Lineage
 
-**Version:** v0.2.x (In Progress)
 
 **Status:** Partial Implementation
 

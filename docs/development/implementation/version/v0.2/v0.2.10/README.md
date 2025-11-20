@@ -1,7 +1,5 @@
 # v0.2.10 - Security Hardening
 
-**Version:** v0.2.10
-**Completed:** November 2025
 **Status:** ✅ Completed
 
 ---

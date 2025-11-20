@@ -1,6 +1,5 @@
 # Hardware Optimisation Strategy
 
-**Version:** 2.0
 
 
 **Status:** Design Complete

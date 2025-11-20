@@ -9,7 +9,6 @@ This guide provides implementation skeletons for Phases 3-14 of ragged v0.1. Eac
 - Integration points and dependencies
 - Implementation notes and best practices
 
-**Completed:** Phases 1-2 (Foundation, Models, Security)
 **Remaining:** Phases 3-14 (see below)
 
 ---

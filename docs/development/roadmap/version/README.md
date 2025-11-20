@@ -65,7 +65,6 @@ Future      v0.7.0 ━━━━━━━━━━━━━ Production Ready (150
 **Priority:** P1
 **Focus:** Significant quality and functionality improvements
 
-**Completed:**
 - BUG-004: Custom exception system with hierarchical structure
 - BUG-005: Secure path utilities with directory traversal protection
 - BUG-007: ChromaDB metadata serialisation for complex types
@@ -87,7 +86,6 @@ Future      v0.7.0 ━━━━━━━━━━━━━ Production Ready (150
 **Status:** ✅ COMPLETE (Released 2025-11-17)
 **Focus:** Code quality, type safety, and test coverage
 
-**Completed:**
 - QUALITY-001: Settings side effects eliminated
 - QUALITY-002: Exception handling improvements (26 handlers)
 - QUALITY-003: Chunking test coverage (0% → 85%)
@@ -125,7 +123,6 @@ Future      v0.7.0 ━━━━━━━━━━━━━ Production Ready (150
 **Status:** 🔄 IN PROGRESS (Current Version)
 **Focus:** CLI architecture and command organisation
 
-**Completed:**
 - CLI command modularisation (14 command modules created)
 - Main entry point refactored (586→107 lines, 82% reduction)
 - Command structure: add, cache, completion, config, docs, envinfo, exportimport, health, history, metadata, query, search, validate
@@ -146,7 +143,6 @@ Future      v0.7.0 ━━━━━━━━━━━━━ Production Ready (150
 **Status:** 🔄 IN PROGRESS
 **Focus:** Advanced CLI features and utilities
 
-**Completed:**
 - Shell completion (completion command)
 - Output formats (JSON, table formatters)
 - Config validation command

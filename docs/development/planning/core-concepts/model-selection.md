@@ -1,6 +1,5 @@
 # Dynamic Model Selection Strategy
 
-**Version:** 2.0
 
 **Status:** Design Complete
 

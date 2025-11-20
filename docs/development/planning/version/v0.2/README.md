@@ -1,6 +1,5 @@
 # ragged v0.2 Design Overview
 
-**Version:** v0.2
 
 **Status:** ✅ Partially Implemented (v0.2.0-v0.2.2 released)
 
