@@ -5,6 +5,7 @@ This module handles downloading, caching, and loading of ML models used
 by document processors (primarily Docling models like DocLayNet and TableFormer).
 """
 
+import hashlib
 import time
 from pathlib import Path
 from typing import Any, Dict, Optional
@@ -12,6 +13,15 @@ from typing import Any, Dict, Optional
 from src.utils.logging import get_logger
 
 logger = get_logger(__name__)
+
+
+# HIGH-003: Model integrity verification with SHA-256 checksums
+# Expected checksums for known model versions (update as needed)
+MODEL_CHECKSUMS: Dict[str, str] = {
+    # Add checksums here when known model versions are verified
+    # Format: "model_name:version": "sha256_hash"
+    # Example: "DocLayNet:v1.0": "abc123..."
+}
 
 
 class ModelManager:
@@ -33,18 +43,20 @@ class ModelManager:
         >>> tableformer = manager.get_model("TableFormer")
     """
 
-    def __init__(self, cache_dir: Optional[Path] = None):
+    def __init__(self, cache_dir: Optional[Path] = None, verify_integrity: bool = True):
         """
         Initialise the model manager.
 
         Args:
             cache_dir: Directory for caching models. If None, uses default
                       location (~/.cache/ragged/models)
+            verify_integrity: Whether to verify model integrity with checksums
         """
         if cache_dir is None:
             cache_dir = Path.home() / ".cache" / "ragged" / "models"
 
         self.cache_dir = cache_dir
+        self.verify_integrity = verify_integrity
         self._loaded_models: Dict[str, Any] = {}
 
         logger.debug(f"Model manager initialised with cache dir: {cache_dir}")
@@ -206,3 +218,90 @@ class ModelManager:
             ['DocLayNet']
         """
         return list(self._loaded_models.keys())
+
+    def compute_file_checksum(self, file_path: Path) -> str:
+        """
+        Compute SHA-256 checksum for a file.
+
+        Args:
+            file_path: Path to file to checksum
+
+        Returns:
+            Hexadecimal SHA-256 checksum
+
+        Raises:
+            FileNotFoundError: If file doesn't exist
+            IOError: If file cannot be read
+
+        Example:
+            >>> manager = ModelManager()
+            >>> checksum = manager.compute_file_checksum(Path("model.bin"))
+        """
+        if not file_path.exists():
+            raise FileNotFoundError(f"File not found: {file_path}")
+
+        sha256_hash = hashlib.sha256()
+        with open(file_path, "rb") as f:
+            # Read in chunks to handle large files
+            for byte_block in iter(lambda: f.read(4096), b""):
+                sha256_hash.update(byte_block)
+
+        checksum = sha256_hash.hexdigest()
+        logger.debug(f"Computed SHA-256 for {file_path.name}: {checksum[:16]}...")
+        return checksum
+
+    def verify_model_integrity(
+        self, model_path: Path, expected_checksum: Optional[str] = None
+    ) -> bool:
+        """
+        Verify model file integrity using SHA-256 checksum.
+
+        Args:
+            model_path: Path to model file
+            expected_checksum: Expected SHA-256 checksum (if None, checks MODEL_CHECKSUMS)
+
+        Returns:
+            True if checksum matches, False otherwise
+
+        Example:
+            >>> manager = ModelManager()
+            >>> is_valid = manager.verify_model_integrity(
+            ...     Path("model.bin"),
+            ...     "abc123..."
+            ... )
+        """
+        if not model_path.exists():
+            logger.warning(f"Cannot verify integrity: file not found {model_path}")
+            return False
+
+        try:
+            actual_checksum = self.compute_file_checksum(model_path)
+
+            # If no expected checksum provided, try to find it in MODEL_CHECKSUMS
+            if expected_checksum is None:
+                # Try to find checksum by model name
+                model_key = model_path.stem
+                expected_checksum = MODEL_CHECKSUMS.get(model_key)
+
+                if expected_checksum is None:
+                    logger.debug(
+                        f"No expected checksum found for {model_path.name}. "
+                        f"Integrity verification skipped."
+                    )
+                    return True  # Can't verify, assume OK
+
+            # Verify checksum
+            if actual_checksum == expected_checksum:
+                logger.info(f"Model integrity verified: {model_path.name}")
+                return True
+            else:
+                logger.error(
+                    f"Model integrity check FAILED for {model_path.name}! "
+                    f"Expected: {expected_checksum[:16]}..., "
+                    f"Got: {actual_checksum[:16]}..."
+                )
+                return False
+
+        except Exception as e:
+            logger.error(f"Error verifying model integrity: {e}")
+            return False

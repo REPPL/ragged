@@ -159,9 +159,31 @@ class DoclingProcessor(BaseProcessor):
 
         logger.debug(f"Processing PDF with Docling: {file_path}")
 
+        # HIGH-002: Add processing timeout
+        from src.config.settings import get_settings
+        settings = get_settings()
+
+        # Use processing timeout if configured
+        timeout_seconds = getattr(settings, 'processing_timeout_seconds', 300)  # Default 5 minutes
+
         try:
-            # Convert document using Docling
-            result = self.pipeline.convert(str(file_path))
+            # Wrap processing in timeout using concurrent.futures
+            from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeoutError
+
+            def _do_processing():
+                # Convert document using Docling
+                result = self.pipeline.convert(str(file_path))
+                return result
+
+            with ThreadPoolExecutor(max_workers=1) as executor:
+                future = executor.submit(_do_processing)
+                try:
+                    result = future.result(timeout=timeout_seconds)
+                except FuturesTimeoutError:
+                    raise ProcessorError(
+                        f"Processing timeout after {timeout_seconds}s. "
+                        f"Document may be too complex or corrupted."
+                    )
 
             # Extract markdown content
             md_text = result.document.export_to_markdown()
@@ -407,6 +429,45 @@ class DoclingProcessor(BaseProcessor):
         # In the future, this could aggregate confidence scores from
         # individual elements (tables, text blocks, etc.)
         return 0.95
+
+    def validate_file(self, file_path: Path) -> None:
+        """
+        Validate file with Docling-specific security checks.
+
+        Adds file size and MIME type validation to base validation.
+
+        Args:
+            file_path: Path to validate
+
+        Raises:
+            FileNotFoundError: If file doesn't exist
+            SecurityError: If file fails security checks
+            ValueError: If file type is not supported
+        """
+        # Call parent validation (existence, type, empty check)
+        super().validate_file(file_path)
+
+        # CRITICAL-001: Add file size validation
+        from src.utils.security import validate_file_size, SecurityError
+        from src.config.settings import get_settings
+
+        settings = get_settings()
+        try:
+            validate_file_size(file_path, max_size_mb=settings.max_file_size_mb)
+        except SecurityError as e:
+            raise ValueError(f"File size validation failed: {e}") from e
+
+        # HIGH-001: Add MIME type verification (magic bytes check)
+        from src.utils.security import validate_mime_type
+
+        try:
+            mime_type = validate_mime_type(file_path, expected_types=["application/pdf"])
+            logger.debug(f"Validated MIME type: {mime_type} for {file_path.name}")
+        except SecurityError as e:
+            raise ValueError(
+                f"File does not appear to be a valid PDF (detected type issue). "
+                f"Please ensure you're uploading an actual PDF file, not a renamed file."
+            ) from e
 
     def supports_file_type(self, file_path: Path) -> bool:
         """

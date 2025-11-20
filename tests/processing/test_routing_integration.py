@@ -21,6 +21,37 @@ from src.processing.base import ProcessedDocument, ProcessorConfig
 from src.processing.quality_assessor import QualityAssessment
 
 
+@pytest.fixture(autouse=True)
+def clear_singletons():
+    """Clear router and metrics singletons before each test."""
+    import src.ingestion.loaders as loaders
+    loaders._router = None
+    loaders._metrics = None
+    yield
+    # Cleanup after test
+    loaders._router = None
+    loaders._metrics = None
+
+
+@pytest.fixture(autouse=True)
+def mock_fitz():
+    """Mock PyMuPDF (fitz) to prevent actual PDF processing."""
+    with patch("src.processing.quality_assessor.QualityAssessor._assess_pdf") as mock_assess:
+        # Return a default quality assessment
+        mock_assess.return_value = QualityAssessment(
+            overall_score=0.75,
+            is_born_digital=False,
+            is_scanned=True,
+            text_quality=0.70,
+            layout_complexity=0.5,
+            image_quality=0.70,
+            has_tables=False,
+            has_rotated_content=False,
+            metadata={"fallback": True},
+        )
+        yield mock_assess
+
+
 @pytest.fixture
 def mock_pdf_file(tmp_path):
     """Create mock PDF file."""
@@ -95,20 +126,17 @@ class TestEndToEndRouting:
     """Test complete routing workflow."""
 
     @patch("src.ingestion.loaders.ProcessorFactory")
-    @patch("src.processing.router.QualityAssessor")
     def test_load_pdf_with_routing_success(
         self,
-        mock_assessor_class,
         mock_factory,
+        mock_fitz,
         mock_pdf_file,
         mock_quality_assessment,
         mock_processed_document,
     ):
         """Test successful PDF loading with routing."""
-        # Mock quality assessor
-        mock_assessor = Mock()
-        mock_assessor.assess.return_value = mock_quality_assessment
-        mock_assessor_class.return_value = mock_assessor
+        # Override default mock with test-specific assessment
+        mock_fitz.return_value = mock_quality_assessment
 
         # Mock processor
         mock_processor = Mock()
@@ -119,7 +147,7 @@ class TestEndToEndRouting:
         result = _load_pdf_with_routing(mock_pdf_file)
 
         # Verify quality assessment was called
-        mock_assessor.assess.assert_called_once()
+        mock_fitz.assert_called_once()
 
         # Verify processor was created and used
         mock_factory.create.assert_called_once()
