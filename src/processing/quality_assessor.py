@@ -128,7 +128,7 @@ class QualityAssessor:
         self,
         fast_mode: bool = True,
         cache_enabled: bool = True,
-        max_pages_to_analyse: int = 3,
+        max_pages_to_analyze: int = 3,
     ):
         """
         Initialise quality assessor.
@@ -136,11 +136,11 @@ class QualityAssessor:
         Args:
             fast_mode: Enable fast mode (analyse subset of pages)
             cache_enabled: Enable quality assessment caching
-            max_pages_to_analyse: Maximum pages to analyse in fast mode
+            max_pages_to_analyze: Maximum pages to analyse in fast mode
         """
         self.fast_mode = fast_mode
         self.cache_enabled = cache_enabled
-        self.max_pages_to_analyse = max_pages_to_analyse
+        self.max_pages_to_analyze = max_pages_to_analyze
         self._cache: Dict[str, QualityAssessment] = {}
 
         # Lazy imports for heavy dependencies
@@ -209,15 +209,19 @@ class QualityAssessor:
         """
         Generate cache key from file path, size, and modification time.
 
+        CRITICAL-1: Uses SHA-256 instead of MD5 for collision resistance.
+        MD5 is vulnerable to collision attacks which could poison the cache.
+
         Args:
             file_path: Path to file
 
         Returns:
-            Cache key string
+            Cache key string (SHA-256 hexdigest)
         """
         stat = file_path.stat()
         key_data = f"{file_path}:{stat.st_size}:{stat.st_mtime}"
-        return hashlib.md5(key_data.encode()).hexdigest()
+        # Use SHA-256 for collision resistance (not MD5)
+        return hashlib.sha256(key_data.encode()).hexdigest()
 
     def _assess_pdf(self, file_path: Path) -> QualityAssessment:
         """
@@ -240,14 +244,14 @@ class QualityAssessor:
 
         # Determine pages to analyse
         if self.fast_mode:
-            pages_to_analyse = min(self.max_pages_to_analyse, page_count)
-            page_indices = list(range(pages_to_analyse))
+            pages_to_analyze = min(self.max_pages_to_analyze, page_count)
+            page_indices = list(range(pages_to_analyze))
         else:
-            pages_to_analyse = page_count
+            pages_to_analyze = page_count
             page_indices = list(range(page_count))
 
         logger.debug(
-            f"Analysing {pages_to_analyse} of {page_count} pages "
+            f"Analysing {pages_to_analyze} of {page_count} pages "
             f"(fast_mode={self.fast_mode})"
         )
 
@@ -428,8 +432,38 @@ class QualityAssessor:
                 self._cv2 = cv2
                 self._np = np
 
-            # Get page as image
-            pix = page.get_pixmap(matrix=self._pymupdf.Matrix(2, 2))  # 2x scaling
+            # CRITICAL-2: Add resource limits for page rendering
+            # Check page dimensions before rendering to prevent memory exhaustion
+            rect = page.rect
+            page_width = rect.width
+            page_height = rect.height
+
+            # Maximum rendered dimensions (prevents DoS via massive page rendering)
+            MAX_RENDER_WIDTH = 10000
+            MAX_RENDER_HEIGHT = 10000
+            MAX_RENDER_PIXELS = 50_000_000  # 50 megapixels
+
+            # Calculate rendering scale (2x for quality assessment)
+            scale = 2.0
+            rendered_width = page_width * scale
+            rendered_height = page_height * scale
+            rendered_pixels = rendered_width * rendered_height
+
+            # Check if rendering would exceed limits
+            if (rendered_width > MAX_RENDER_WIDTH or
+                rendered_height > MAX_RENDER_HEIGHT or
+                rendered_pixels > MAX_RENDER_PIXELS):
+                logger.warning(
+                    f"Page dimensions too large for rendering: "
+                    f"{page_width:.0f}x{page_height:.0f} → "
+                    f"{rendered_width:.0f}x{rendered_height:.0f} "
+                    f"({rendered_pixels/1_000_000:.1f}MP). "
+                    f"Skipping image quality assessment."
+                )
+                return 0.5  # Return moderate score for oversized pages
+
+            # Get page as image (with safe dimensions)
+            pix = page.get_pixmap(matrix=self._pymupdf.Matrix(scale, scale))
             img_data = pix.samples
 
             # Convert to numpy array
@@ -646,7 +680,7 @@ class QualityAssessor:
             "file_name": file_path.name,
             "file_size": file_path.stat().st_size,
             "total_pages": total_pages,
-            "pages_analysed": len(page_scores),
+            "pages_analyzed": len(page_scores),
             "fast_mode": self.fast_mode,
         }
 

@@ -11,6 +11,7 @@ v0.3.4b: Intelligent Routing
 from __future__ import annotations
 
 import json
+import os
 import time
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timedelta
@@ -353,6 +354,10 @@ class ProcessingMetrics:
         with open(file_path, "w") as f:
             json.dump(data, f, indent=2)
 
+        # CRITICAL-3: Set secure file permissions (owner read/write only)
+        # Metrics may contain sensitive information about document processing
+        os.chmod(file_path, 0o600)
+
         logger.info(f"Exported {len(self._metrics)} metrics to {file_path}")
 
     def export_summary(self, file_path: Path) -> None:
@@ -382,6 +387,9 @@ class ProcessingMetrics:
 
         with open(file_path, "w") as f:
             json.dump(data, f, indent=2)
+
+        # CRITICAL-3: Set secure file permissions (owner read/write only)
+        os.chmod(file_path, 0o600)
 
         logger.info(f"Exported summary to {file_path}")
 
