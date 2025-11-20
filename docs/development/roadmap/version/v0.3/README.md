@@ -1,6 +1,5 @@
 # ragged v0.3.0 Implementation Roadmap
 
-**Version:** v0.3.0 - Production-Ready RAG System
 
 **Status:** Ready for Implementation
 

@@ -1,6 +1,5 @@
 # v0.1 Implementation Lineage
 
-**Version:** v0.1.0
 
 **Status:** Complete
 
