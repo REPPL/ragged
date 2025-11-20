@@ -1,6 +1,5 @@
 # v0.3.0 Feature Specifications
 
-**Version:** v0.3.0
 
 **Status:** Planned
 

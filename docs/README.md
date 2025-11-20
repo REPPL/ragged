@@ -290,7 +290,6 @@ All developer-facing documentation is now organised under [development/](./devel
 
 ## Current Project Status
 
-**Version:** v0.2.2 (Early Development)
 
 **Date:** 2025-11-13
 

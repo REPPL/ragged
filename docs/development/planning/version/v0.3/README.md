@@ -1,6 +1,5 @@
 # ragged v0.3 Design Overview
 
-**Version:** v0.3
 
 **Status:** 📋 Planned (Q2-Q3 2026)
 
