@@ -1,7 +1,5 @@
 # v0.3.1 - Configuration Transparency
 
-**Version:** v0.3.1
-**Completed:** 2025-11-19
 **Status:** ✅ Completed
 
 ---
