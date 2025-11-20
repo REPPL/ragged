@@ -1,7 +1,5 @@
 # v0.3.0 - Foundation & Metrics
 
-**Version:** v0.3.0
-**Completed:** 2025-11-19
 **Status:** ✅ Completed
 
 ---

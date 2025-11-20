@@ -1,7 +1,6 @@
 # Performance Baseline: ragged v0.2.2
 
 **Date:** 2025-11-16
-**Version:** 0.2.2
 **Purpose:** Establish performance baselines for comparison with future versions
 
 ---

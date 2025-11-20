@@ -1,8 +1,6 @@
 # v0.3.4b Implementation Summary
 
-**Version:** 0.3.4b
 **Name:** Intelligent Routing
-**Completed:** 2025-11-19
 **Implementation Time:** 12-15 hours (estimated, to be confirmed in time-log)
 
 ---
