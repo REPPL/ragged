@@ -24,10 +24,10 @@ else:
 
 from src.config.settings import get_settings
 from src.exceptions import VectorStoreConnectionError, VectorStoreError
-from src.storage.metadata_serialiser import (
-    deserialise_batch_metadata,
-    deserialise_metadata,
-    serialise_batch_metadata,
+from src.storage.metadata_serializer import (
+    deserialize_batch_metadata,
+    deserialize_metadata,
+    serialize_batch_metadata,
 )
 from src.utils.circuit_breaker import CircuitBreaker
 from src.utils.logging import get_logger
@@ -127,13 +127,13 @@ class VectorStore:
         embeddings_list = embeddings.tolist() if isinstance(embeddings, np.ndarray) else embeddings
 
         # Serialise metadata for ChromaDB compatibility
-        serialised_metadatas = serialise_batch_metadata(metadatas)
+        serialized_metadatas = serialize_batch_metadata(metadatas)
 
         self.collection.add(
             ids=ids,
             embeddings=embeddings_list,
             documents=documents,
-            metadatas=serialised_metadatas,  # type: ignore[arg-type]
+            metadatas=serialized_metadatas,  # type: ignore[arg-type]
         )
         logger.info(f"Added {len(ids)} embeddings to collection {self._collection_name}")
 
@@ -209,14 +209,14 @@ class VectorStore:
             # ChromaDB returns nested lists for batch queries
             if metadatas and isinstance(metadatas[0], list):
                 # Batch query: list of lists
-                deserialised_batches = [
-                    deserialise_batch_metadata(batch)  # type: ignore[arg-type]
+                deserialized_batches = [
+                    deserialize_batch_metadata(batch)  # type: ignore[arg-type]
                     for batch in metadatas
                 ]
-                results["metadatas"] = deserialised_batches  # type: ignore[typeddict-item]
+                results["metadatas"] = deserialized_batches  # type: ignore[typeddict-item]
             else:
                 # Single query: list of dicts
-                results["metadatas"] = deserialise_batch_metadata(metadatas)  # type: ignore[arg-type, typeddict-item]
+                results["metadatas"] = deserialize_batch_metadata(metadatas)  # type: ignore[arg-type, typeddict-item]
 
         return results
 
@@ -240,7 +240,7 @@ class VectorStore:
 
             # Deserialise metadata in results
             if results and results.get("metadatas"):
-                results["metadatas"] = deserialise_batch_metadata(results["metadatas"])  # type: ignore[arg-type, typeddict-item]
+                results["metadatas"] = deserialize_batch_metadata(results["metadatas"])  # type: ignore[arg-type, typeddict-item]
 
             return cast(Dict[str, Any], results)
         except (ConnectionError, TimeoutError, KeyError, ValueError, TypeError) as e:
@@ -263,11 +263,11 @@ class VectorStore:
             raise ValueError("ids and metadatas must have same length")
 
         # Serialise metadata for ChromaDB
-        serialised_metadatas = serialise_batch_metadata(metadatas)
+        serialized_metadatas = serialize_batch_metadata(metadatas)
 
         self.collection.update(
             ids=ids,
-            metadatas=serialised_metadatas,  # type: ignore[arg-type]
+            metadatas=serialized_metadatas,  # type: ignore[arg-type]
         )
         logger.info(f"Updated metadata for {len(ids)} embeddings")
 

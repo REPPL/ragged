@@ -15,7 +15,7 @@ from src.utils.logging import get_logger
 logger = get_logger(__name__)
 
 
-def serialise_metadata(metadata: Dict[str, Any]) -> Dict[str, Any]:
+def serialize_metadata(metadata: Dict[str, Any]) -> Dict[str, Any]:
     """Serialise metadata for ChromaDB storage.
 
     Converts complex types to ChromaDB-compatible simple types:
@@ -40,7 +40,7 @@ def serialise_metadata(metadata: Dict[str, Any]) -> Dict[str, Any]:
         ...     "active": True,
         ...     "missing": None
         ... }
-        >>> serialise_metadata(metadata)
+        >>> serialize_metadata(metadata)
         {
             "path": "/data/file.pdf",
             "tags": "__json__:[\"ML\", \"AI\"]",
@@ -49,7 +49,7 @@ def serialise_metadata(metadata: Dict[str, Any]) -> Dict[str, Any]:
             "active": True
         }
     """
-    serialised: Dict[str, Any] = {}
+    serialized: Dict[str, Any] = {}
 
     for key, value in metadata.items():
         # Skip None values
@@ -58,20 +58,20 @@ def serialise_metadata(metadata: Dict[str, Any]) -> Dict[str, Any]:
 
         # Path objects → string
         if isinstance(value, Path):
-            serialised[key] = str(value)
+            serialized[key] = str(value)
 
         # datetime → ISO format string
         elif isinstance(value, datetime):
-            serialised[key] = value.isoformat()
+            serialized[key] = value.isoformat()
 
         # Lists and dicts → JSON string with special prefix
         elif isinstance(value, (list, dict)):
             json_str = json.dumps(value, ensure_ascii=False)
-            serialised[key] = f"__json__:{json_str}"
+            serialized[key] = f"__json__:{json_str}"
 
         # Simple types → unchanged
         elif isinstance(value, (str, int, float, bool)):
-            serialised[key] = value
+            serialized[key] = value
 
         # Unknown types → string representation with warning
         else:
@@ -79,12 +79,12 @@ def serialise_metadata(metadata: Dict[str, Any]) -> Dict[str, Any]:
                 f"Unknown metadata type for key '{key}': {type(value).__name__}. "
                 f"Converting to string."
             )
-            serialised[key] = str(value)
+            serialized[key] = str(value)
 
-    return serialised
+    return serialized
 
 
-def deserialise_metadata(metadata: Dict[str, Any]) -> Dict[str, Any]:
+def deserialize_metadata(metadata: Dict[str, Any]) -> Dict[str, Any]:
     """Deserialise metadata from ChromaDB storage.
 
     Converts serialised values back to original types:
@@ -104,7 +104,7 @@ def deserialise_metadata(metadata: Dict[str, Any]) -> Dict[str, Any]:
         ...     "config": "__json__:{\"model\": \"llama2\"}",
         ...     "count": 5
         ... }
-        >>> deserialise_metadata(metadata)
+        >>> deserialize_metadata(metadata)
         {
             "path": "/data/file.pdf",
             "tags": ["ML", "AI"],
@@ -112,29 +112,29 @@ def deserialise_metadata(metadata: Dict[str, Any]) -> Dict[str, Any]:
             "count": 5
         }
     """
-    deserialised = {}
+    deserialized = {}
 
     for key, value in metadata.items():
         # JSON-serialised values → parse back to original type
         if isinstance(value, str) and value.startswith("__json__:"):
             json_str = value[len("__json__:"):]
             try:
-                deserialised[key] = json.loads(json_str)
+                deserialized[key] = json.loads(json_str)
             except json.JSONDecodeError as e:
                 logger.warning(
                     f"Failed to deserialise JSON for key '{key}': {e}. "
                     f"Keeping as string."
                 )
-                deserialised[key] = value
+                deserialized[key] = value
 
         # All other values → unchanged
         else:
-            deserialised[key] = value
+            deserialized[key] = value
 
-    return deserialised
+    return deserialized
 
 
-def serialise_batch_metadata(metadatas: list[Dict[str, Any]]) -> list[Dict[str, Any]]:
+def serialize_batch_metadata(metadatas: list[Dict[str, Any]]) -> list[Dict[str, Any]]:
     """Serialise a batch of metadata dictionaries.
 
     Args:
@@ -143,10 +143,10 @@ def serialise_batch_metadata(metadatas: list[Dict[str, Any]]) -> list[Dict[str, 
     Returns:
         List of serialised metadata dictionaries
     """
-    return [serialise_metadata(m) for m in metadatas]
+    return [serialize_metadata(m) for m in metadatas]
 
 
-def deserialise_batch_metadata(metadatas: list[Dict[str, Any]]) -> list[Dict[str, Any]]:
+def deserialize_batch_metadata(metadatas: list[Dict[str, Any]]) -> list[Dict[str, Any]]:
     """Deserialise a batch of metadata dictionaries.
 
     Args:
@@ -155,4 +155,4 @@ def deserialise_batch_metadata(metadatas: list[Dict[str, Any]]) -> list[Dict[str
     Returns:
         List of deserialised metadata dictionaries
     """
-    return [deserialise_metadata(m) for m in metadatas]
+    return [deserialize_metadata(m) for m in metadatas]

@@ -339,7 +339,7 @@ class TestAdaptiveTuner:
 
     @patch("src.utils.adaptive_tuning.os.cpu_count", return_value=4)
     @patch("src.utils.adaptive_tuning.psutil.virtual_memory")
-    def test_analyse_workload(self, mock_memory, mock_cpu):
+    def test_analyze_workload(self, mock_memory, mock_cpu):
         """Test workload analysis."""
         mock_memory.return_value.total = 8 * (1024 ** 3)
         mock_memory.return_value.available = 4 * (1024 ** 3)
@@ -350,7 +350,7 @@ class TestAdaptiveTuner:
         for _ in range(60):
             tuner.record_ingestion(doc_size_kb=10.0)
 
-        mode = tuner.analyse_workload()
+        mode = tuner.analyze_workload()
         assert mode == "bulk_ingestion"
 
     @patch("src.utils.adaptive_tuning.os.cpu_count", return_value=4)

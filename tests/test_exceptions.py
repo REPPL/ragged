@@ -45,7 +45,7 @@ from src.exceptions import (
     MemoryLimitExceededError,
     # API
     APIError,
-    ServiceNotInitialisedError,
+    ServiceNotInitializedError,
     RequestValidationError,
     # Helper
     wrap_exception,
@@ -269,8 +269,8 @@ class TestAPIErrors:
     """Tests for API-related exceptions."""
 
     def test_service_not_initialised_error(self):
-        """Test ServiceNotInitialisedError."""
-        error = ServiceNotInitialisedError("vector_store")
+        """Test ServiceNotInitializedError."""
+        error = ServiceNotInitializedError("vector_store")
         assert isinstance(error, APIError)
         assert "vector_store" in str(error)
         assert error.details["service"] == "vector_store"
