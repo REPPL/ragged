@@ -1,18 +1,18 @@
-# v0.4.0 - Memory Foundation: Personas & Tracking
+# v0.4.3 - Memory Foundation: Personas & Tracking
 
 **Hours**: 35-40 | **Priority**: P0 - Core Feature | **Status**: Planned
 
-**Dependencies**: v0.4.0 complete (Quality baseline established), **Security audit PASSED**
+**Dependencies**: v0.4.2 complete (Quality baseline established), **Security audit PASSED**
 
 ---
 
 ## 🔒 SECURITY GATE: Implementation Blocked Until Audit Passes
 
-**CRITICAL**: v0.4.0 implementation **CANNOT** begin until formal security audit is complete and passes.
+**CRITICAL**: v0.4.3 implementation **CANNOT** begin until formal security audit is complete and passes.
 
 ### Why This Gate Exists
 
-v0.4.0 introduces the **personal memory system**—the most privacy-sensitive component in ragged's architecture. This system will store:
+v0.4.3 introduces the **personal memory system**—the most privacy-sensitive component in ragged's architecture. This system will store:
 
 - **User behaviour patterns** (query history, topic interests, temporal activity)
 - **Personal preferences** (focus areas, active projects, usage statistics)
@@ -23,9 +23,9 @@ v0.4.0 introduces the **personal memory system**—the most privacy-sensitive co
 
 ### Security Audit Requirements
 
-**Status**: ⏳ **Must complete during/after v0.4.0**
+**Status**: ⏳ **Must complete during/after v0.4.2**
 
-**Timeline**: 2-3 weeks (concurrent with v0.4.0 development)
+**Timeline**: 2-3 weeks (concurrent with v0.4.2 development)
 
 **Scope**: See [security-audit.md](./security-audit.md) for complete requirements
 
@@ -41,16 +41,16 @@ v0.4.0 introduces the **personal memory system**—the most privacy-sensitive co
 
 ### Implementation Checklist
 
-Before starting v0.4.0 implementation, verify:
+Before starting v0.4.3 implementation, verify:
 
-- [ ] Security audit complete (see [v0.4.0.md](../v0.4.0.md#security-audit-preparation))
+- [ ] Security audit complete (see [v0.4.2.md](../v0.4.2.md#security-audit-preparation))
 - [ ] Audit report shows **NO critical findings**
 - [ ] All high-priority recommendations addressed in design
 - [ ] Privacy framework documented (see [privacy-framework.md](./privacy-framework.md))
 - [ ] Testing scenarios prepared (see [testing-scenarios.md](./testing-scenarios.md))
 - [ ] Team has reviewed and approved audit findings
 
-**If audit fails**: Design changes required, v0.4.0 implementation delayed until resolved.
+**If audit fails**: Design changes required, v0.4.3 implementation delayed until resolved.
 
 ---
 
@@ -366,7 +366,7 @@ Version 0.4.4 is successful if:
 │   ├── queries.db              # SQLite (encrypted)
 │   └── feedback.db             # SQLite (encrypted)
 ├── semantic/
-│   └── memory_vectors/         # ChromaDB (future - v0.4.0)
+│   └── memory_vectors/         # ChromaDB (future - v0.4.8)
 └── graph/
     └── kuzu_db/                # Kuzu database
 ```
@@ -422,16 +422,16 @@ Version 0.4.4 is successful if:
 
 **See**: [security-audit.md](./security-audit.md) for complete security audit requirements, scope, and pass criteria.
 
-**Critical**: v0.4.0 implementation blocked until audit passes.
+**Critical**: v0.4.3 implementation blocked until audit passes.
 
 ---
 
 ## Related Documentation
 
-- [v0.4.0 Overview](../README.md) - Release series overview
-- [v0.4 Detailed Spec](../v0.4-DETAILED-SPEC.md) - Part 2: Milestone 1
-- [v0.4.0](../v0.4.0.md) - Code quality (previous) - **Security audit preparation**
-- [v0.4.0](../v0.4.0.md) - Stability & performance (next)
+- [v0.4 Overview](../README.md) - Release series overview
+- [v0.4 Detailed Spec](../v0.4-detailed-spec.md) - Part 2: Milestone 1
+- [v0.4.2](../v0.4.2.md) - Code quality (previous) - **Security audit preparation**
+- [v0.4.4](../v0.4.4.md) - Stability & performance (next)
 - [Security Audit Requirements](./security-audit.md) - **MUST PASS BEFORE IMPLEMENTATION**
 - [Privacy Framework](./privacy-framework.md) - User privacy controls and validation
 - [Testing Scenarios](./testing-scenarios.md) - Comprehensive privacy testing

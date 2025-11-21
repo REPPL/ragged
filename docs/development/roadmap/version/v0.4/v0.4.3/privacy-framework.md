@@ -1,4 +1,4 @@
-# Privacy Framework for v0.4.0 Memory System
+# Privacy Framework for v0.4.3 Memory System
 
 **Purpose**: Define comprehensive privacy validation framework and user privacy controls for the personal memory system.
 
@@ -8,7 +8,7 @@
 
 ## Overview
 
-The v0.4.0 memory system introduces **behaviour data collection**—the most privacy-sensitive data type in ragged. This framework ensures users have complete control and visibility over their personal data.
+The v0.4.3 memory system introduces **behaviour data collection**—the most privacy-sensitive data type in ragged. This framework ensures users have complete control and visibility over their personal data.
 
 **Core Principle**: **Privacy by Design** - Privacy built into system architecture, not added as an afterthought.
 
@@ -520,7 +520,7 @@ ragged memory audit-log --operations delete,export
 
 ## Privacy Validation Checklist
 
-Before v0.4.0 release, verify:
+Before v0.4.3 release, verify:
 
 ### Data Collection
 - [ ] Only necessary data collected (data minimisation)
@@ -571,7 +571,7 @@ Before v0.4.0 release, verify:
 
 ## Related Documentation
 
-- [v0.4.0 README](./README.md) - Main implementation roadmap
+- [v0.4.3 README](./README.md) - Main implementation roadmap
 - [Security Audit Requirements](./security-audit.md) - Security validation
 - [Testing Scenarios](./testing-scenarios.md) - Privacy test scenarios
 - [v0.2.11 Privacy Infrastructure](../../v0.2/v0.2.11.md) - Foundation (encryption, PII detection, GDPR toolkit)
