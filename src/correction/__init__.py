@@ -5,6 +5,8 @@ v0.3.5: Automated detection and correction of PDF issues (rotation, ordering, du
 
 from src.correction.analyzer import PDFAnalyzer, AnalysisResult, AnalyzerConfig
 from src.correction.corrector import PDFCorrector, CorrectorConfig
+from src.correction.metadata import MetadataGenerator
+from src.correction.pipeline import CorrectionPipeline
 from src.correction.schemas import (
     IssueReport,
     IssueType,
@@ -28,6 +30,9 @@ __all__ = [
     "CorrectorConfig",
     "CorrectionAction",
     "CorrectionResult",
+    # Pipeline
+    "CorrectionPipeline",
+    "MetadataGenerator",
     # Transformers
     "RotationTransformer",
     "DuplicateRemover",
