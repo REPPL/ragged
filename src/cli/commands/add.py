@@ -18,12 +18,18 @@ logger = get_logger(__name__)
 @click.option("--recursive/--no-recursive", default=True, help="Scan subdirectories (default: True)")
 @click.option("--max-depth", type=int, help="Maximum directory depth (unlimited by default)")
 @click.option("--fail-fast", is_flag=True, help="Stop on first error instead of continuing")
+@click.option(
+    "--chunking-strategy",
+    type=click.Choice(["fixed", "semantic", "hierarchical"], case_sensitive=False),
+    help="Chunking strategy: 'fixed' (default, fast), 'semantic' (topic boundaries), or 'hierarchical' (parent-child)"
+)
 def add(
     path: Path,
     format: Optional[str],
     recursive: bool,
     max_depth: Optional[int],
     fail_fast: bool,
+    chunking_strategy: Optional[str],
 ) -> None:
     """Ingest document(s) into the system.
 
@@ -150,9 +156,9 @@ def add(
         with ProgressType() as progress:
             task = progress.add_task("Processing...", total=80, completed=20)
 
-            # Chunk document
+            # Chunk document (v0.3.3: support intelligent chunking strategies)
             progress.update(task, description="Chunking document...", advance=10)
-            document = chunk_document(document)
+            document = chunk_document(document, strategy=chunking_strategy)
             progress.update(task, advance=20)
 
             # Generate embeddings

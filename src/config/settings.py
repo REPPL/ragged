@@ -44,9 +44,51 @@ class Settings(BaseSettings):
     embedding_model_name: str = Field(default="")  # Set in validator
     embedding_dimensions: int = Field(default=0)  # Set in validator
 
-    # Chunking Configuration
+    # Chunking Configuration (v0.3.3: Intelligent Chunking)
     chunk_size: int = Field(default=500, gt=0, description="Chunk size in tokens")
     chunk_overlap: int = Field(default=100, ge=0, description="Overlap between chunks in tokens")
+    chunking_strategy: str = Field(
+        default="fixed",
+        description="Chunking strategy: 'fixed' (recursive character), 'semantic' (topic boundaries), or 'hierarchical' (parent-child)"
+    )
+    # Semantic chunking parameters
+    semantic_similarity_threshold: float = Field(
+        default=0.75,
+        ge=0.0,
+        le=1.0,
+        description="Similarity threshold for semantic chunking (lower = more chunks)"
+    )
+    semantic_min_chunk_size: int = Field(
+        default=200,
+        gt=0,
+        description="Minimum chunk size for semantic chunking (characters)"
+    )
+    semantic_max_chunk_size: int = Field(
+        default=1500,
+        gt=0,
+        description="Maximum chunk size for semantic chunking (characters)"
+    )
+    # Hierarchical chunking parameters
+    hierarchical_parent_size: int = Field(
+        default=2000,
+        gt=0,
+        description="Parent chunk size for hierarchical chunking (characters)"
+    )
+    hierarchical_child_size: int = Field(
+        default=500,
+        gt=0,
+        description="Child chunk size for hierarchical chunking (characters)"
+    )
+    hierarchical_parent_overlap: int = Field(
+        default=200,
+        ge=0,
+        description="Overlap between parent chunks (characters)"
+    )
+    hierarchical_child_overlap: int = Field(
+        default=50,
+        ge=0,
+        description="Overlap between child chunks (characters)"
+    )
 
     # Document Processing Configuration (v0.3.4a)
     document_processor: str = Field(
@@ -181,6 +223,17 @@ class Settings(BaseSettings):
                 f"chunk_size ({self.chunk_size})"
             )
         return self
+
+    @field_validator("chunking_strategy")
+    @classmethod
+    def validate_chunking_strategy(cls, v: str) -> str:
+        """Validate chunking strategy is one of the supported types."""
+        valid_strategies = {"fixed", "semantic", "hierarchical"}
+        if v not in valid_strategies:
+            raise ValueError(
+                f"chunking_strategy must be one of {valid_strategies}, got '{v}'"
+            )
+        return v
 
     def ensure_data_dir(self) -> Path:
         """
