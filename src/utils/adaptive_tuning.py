@@ -295,7 +295,7 @@ class AdaptiveTuner:
         self.workload.update_ingestion(doc_size_kb)
         logger.debug(f"Recorded ingestion: {doc_size_kb:.1f}KB")
 
-    def analyse_workload(self) -> WorkloadMode:
+    def analyze_workload(self) -> WorkloadMode:
         """Analyse current workload and detect mode.
 
         Returns:
@@ -316,7 +316,7 @@ class AdaptiveTuner:
             Tuning recommendations
         """
         # Detect current mode
-        mode = self.analyse_workload()
+        mode = self.analyze_workload()
 
         # Refresh hardware capabilities (memory may have changed)
         memory = psutil.virtual_memory()

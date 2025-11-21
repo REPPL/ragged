@@ -283,7 +283,7 @@ class APIError(RaggedError):
     pass
 
 
-class ServiceNotInitialisedError(APIError):
+class ServiceNotInitializedError(APIError):
     """Required service not initialised."""
 
     def __init__(self, service: str):

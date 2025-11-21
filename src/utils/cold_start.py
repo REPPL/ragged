@@ -242,11 +242,11 @@ async def parallel_init(*init_functions: Callable[[], Any]) -> List[Any]:
 
 
 class ColdStartOptimizer:
-    """Holistic cold start optimization.
+    """Holistic cold start optimisation.
 
-    Combines all optimization strategies:
+    Combines all optimisation strategies:
     - Connection pooling
-    - Lazy initialization
+    - Lazy initialisation
     - Parallel component loading
 
     Example:
@@ -255,7 +255,7 @@ class ColdStartOptimizer:
     """
 
     def __init__(self):
-        """Initialize cold start optimizer."""
+        """Initialise cold start optimiser."""
         self.warmup_complete = False
         self._warmup_lock = threading.Lock()
 
@@ -350,7 +350,7 @@ class ColdStartOptimizer:
         return self.lazy_retriever.get()
 
     def get_stats(self) -> dict:
-        """Get optimization statistics.
+        """Get optimisation statistics.
 
         Returns:
             Statistics dictionary
