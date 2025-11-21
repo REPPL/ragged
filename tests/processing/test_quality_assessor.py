@@ -98,12 +98,12 @@ class TestQualityAssessor:
         assessor = QualityAssessor(
             fast_mode=True,
             cache_enabled=True,
-            max_pages_to_analyse=5,
+            max_pages_to_analyze=5,
         )
 
         assert assessor.fast_mode is True
         assert assessor.cache_enabled is True
-        assert assessor.max_pages_to_analyse == 5
+        assert assessor.max_pages_to_analyze == 5
 
     def test_cache_key(self, assessor, tmp_path):
         """Test cache key generation."""
