@@ -700,6 +700,56 @@ Version 0.4.x builds directly upon the foundation established by v0.3.x (13 rele
 
 ---
 
+## Roadmap Restructuring Status
+
+**Completed Phases** (Nov 2025):
+
+### Phase 1: Critical Structural Fixes ✅
+- Fixed version numbering across 8 release files
+- Applied v0.2.10+ naming conventions (lowercase filenames)
+- Audited and fixed all cross-references
+- **Commit**: 07e5470 (14 files changed, 115 insertions, 115 deletions)
+
+### Phase 4: Execution Framework ✅
+- Created execution playbook (step-by-step implementation guide)
+- Created progress tracker (real-time status monitoring)
+- Created testing guide (comprehensive quality gates and testing standards)
+- **Commit**: 764dd84 (4 files changed, 1,804 insertions)
+
+### Phase 5: Enhancement Opportunities ✅
+- Documented security hardening enhancements (HSM, sandboxing, audit logging)
+- Documented performance optimization opportunities (caching, parallel processing)
+- Documented plugin ecosystem expansion strategy (marketplace, community)
+- **Commit**: 7983500 (3 files changed, 3,219 insertions)
+
+**Deferred Phases** (to be addressed after v0.3.x complete):
+
+### Phase 2: Content Consolidation (Deferred)
+- **Original Goal**: Consolidate overlapping content, remove redundancies
+- **Why Deferred**: Requires significant refactoring best done during v0.4.x implementation when all release specifications are finalised
+- **When to Revisit**: After v0.4.3 (memory foundation) when core architecture is stable
+
+### Phase 3: Decision Framework Documentation (Deferred)
+- **Original Goal**: Document decision-making frameworks and trade-offs
+- **Why Deferred**: LEANN decision framework already well-documented in v0.4.5 and related ADRs; additional decision documentation can be added as implementation progresses
+- **When to Revisit**: During v0.4.x implementation as design decisions arise
+
+### Phase 6: Final Review & Polish (Deferred)
+- **Original Goal**: Comprehensive review of all v0.4.x documentation for clarity, consistency, completeness
+- **Why Deferred**: Most valuable after v0.4.x implementation when all specifications have been tested and refined through actual development
+- **When to Revisit**: After v0.4.9 (before declaring v0.4.x complete)
+
+**Rationale for Deferral**:
+These phases involve refinement and polish best done after the v0.4.x implementation cycle, when:
+1. All specifications have been tested through actual development
+2. Design decisions have been validated or revised based on implementation experience
+3. Content consolidation opportunities are clearer (after seeing what content was actually used)
+4. Final polish can address lessons learned from the full implementation cycle
+
+The completed phases (1, 4, 5) establish the critical foundation needed for autonomous implementation to begin once v0.3.x is complete.
+
+---
+
 ## Related Documentation
 
 **Planning**:
@@ -716,6 +766,11 @@ Version 0.4.x builds directly upon the foundation established by v0.3.x (13 rele
 - [Execution Playbook](execution-playbook.md) - Step-by-step implementation guide for autonomous execution
 - [Progress Tracker](progress-tracker.md) - Real-time status tracking across all 10 releases
 - [Testing Guide](testing-guide.md) - Comprehensive testing standards, quality gates, and success criteria
+
+**Enhancement Opportunities** (beyond baseline):
+- [Security Enhancements](security-enhancements.md) - Optional security hardening (HSM, sandboxing, audit logging, supply chain)
+- [Performance Enhancements](performance-enhancements.md) - Optional performance optimizations (caching, parallel processing, monitoring)
+- [Plugin Ecosystem](plugin-ecosystem.md) - Plugin ecosystem expansion strategy (official plugins, marketplace, community)
 
 **Architecture**:
 - [Architecture Overview](../../../planning/architecture/README.md) - System architecture
