@@ -1,14 +1,17 @@
-"""Document chunking orchestration and metadata creation."""
+"""
+Document chunking orchestration and metadata creation.
+
+v0.3.3: Updated to support intelligent chunking strategies (semantic, hierarchical)
+"""
 
 import re
 from pathlib import Path
-from typing import Optional
+from typing import Any, Optional
 
-from src.chunking.splitters.recursive_splitter import RecursiveCharacterTextSplitter
 from src.chunking.splitters.page_tracking import (
     build_page_position_map,
-    map_chunks_to_pages,
     estimate_page_from_position,
+    map_chunks_to_pages,
 )
 from src.chunking.token_counter import count_tokens
 from src.ingestion.models import Chunk, ChunkMetadata, Document
@@ -17,10 +20,36 @@ from src.utils.logging import get_logger
 logger = get_logger(__name__)
 
 
-def chunk_document(document: Document, splitter: Optional[RecursiveCharacterTextSplitter] = None) -> Document:
-    """Chunk a document and add chunk metadata with page tracking."""
+def chunk_document(document: Document, splitter: Optional[Any] = None, strategy: str | None = None) -> Document:
+    """
+    Chunk a document and add chunk metadata with page tracking.
+
+    v0.3.3: Supports multiple chunking strategies via ChunkerFactory.
+
+    Args:
+        document: Document to chunk
+        splitter: Optional custom splitter (overrides strategy parameter)
+        strategy: Chunking strategy ("fixed", "semantic", "hierarchical")
+                 If None and splitter is None, uses settings.chunking_strategy
+
+    Returns:
+        Document with chunks added
+
+    Example:
+        >>> # Use configured strategy
+        >>> doc = chunk_document(document)
+        >>>
+        >>> # Override with specific strategy
+        >>> doc = chunk_document(document, strategy="semantic")
+        >>>
+        >>> # Provide custom splitter
+        >>> custom_splitter = SemanticChunker(similarity_threshold=0.8)
+        >>> doc = chunk_document(document, splitter=custom_splitter)
+    """
+    # Lazy import to avoid circular dependencies
     if splitter is None:
-        splitter = RecursiveCharacterTextSplitter()
+        from src.chunking.factory import ChunkerFactory
+        splitter = ChunkerFactory.create_chunker(strategy)
 
     logger.info(f"Chunking document: {document.document_id}")
 
@@ -55,6 +84,10 @@ def chunk_document(document: Document, splitter: Optional[RecursiveCharacterText
         if page_number is None and total_pages is not None and total_pages > 0:
             page_number = estimate_page_from_position(i, total_chunks, total_pages)
 
+        # Get overlap value (may not exist for all chunker types)
+        # Semantic chunkers don't use traditional overlap
+        chunk_overlap = getattr(splitter, 'chunk_overlap', 0)
+
         chunk_metadata = ChunkMetadata(
             document_id=document.document_id,
             document_path=document.metadata.file_path,
@@ -62,8 +95,8 @@ def chunk_document(document: Document, splitter: Optional[RecursiveCharacterText
             content_hash=document.metadata.content_hash,
             chunk_position=i,
             total_chunks=total_chunks,
-            overlap_with_previous=0 if i == 0 else splitter.chunk_overlap,
-            overlap_with_next=0 if i == total_chunks - 1 else splitter.chunk_overlap,
+            overlap_with_previous=0 if i == 0 else chunk_overlap,
+            overlap_with_next=0 if i == total_chunks - 1 else chunk_overlap,
             page_number=page_number,
             page_range=page_range,
         )

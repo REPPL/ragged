@@ -19,8 +19,8 @@ from unittest.mock import Mock, patch, MagicMock
 from dataclasses import dataclass
 
 from src.processing.quality_assessor import QualityAssessor, QualityAssessment
-from src.processing.router import Router, RouterConfig
-from src.processing.metrics import ProcessingMetrics, ProcessingMetric
+from src.processing.router import ProcessorRouter, RouterConfig
+from src.processing.metrics import ProcessingMetrics, RoutingMetric
 from src.utils.security import SecurityError
 
 
@@ -327,7 +327,7 @@ class TestRouterSecurity:
         Vulnerability: Malicious objects could be registered as processors.
         Expected: Should validate processor implements BaseProcessor.
         """
-        router = Router(RouterConfig())
+        router = ProcessorRouter(RouterConfig())
 
         # Try to register invalid processor
         fake_processor = "not a processor"
@@ -347,7 +347,7 @@ class TestRouterSecurity:
         Expected: Detailed scores should only appear in DEBUG logs.
         """
         assessor = QualityAssessor()
-        router = Router(RouterConfig())
+        router = ProcessorRouter(RouterConfig())
 
         test_file = tmp_path / "test.pdf"
         test_file.write_bytes(b"%PDF-1.4\n")
@@ -418,7 +418,7 @@ class TestIntegrationSecurity:
         test_file.write_bytes(b"%PDF-1.4\ntest content\n")
 
         # Create router with all components
-        router = Router(RouterConfig())
+        router = ProcessorRouter(RouterConfig())
         assessor = QualityAssessor()
         metrics = ProcessingMetrics(storage_dir=tmp_path, auto_save=False)
 
