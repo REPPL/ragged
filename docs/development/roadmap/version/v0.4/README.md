@@ -155,22 +155,22 @@ v0.4.0 Production Release (Q4 2026)
 
 ## Release Strategy
 
-### Foundation Phase (v0.4.0 - v0.4.0)
+### Foundation Phase (v0.4.0 - v0.4.2)
 **Focus**: Architecture, testing infrastructure, code quality
 **Hours**: 55-67
 **Goal**: Establish foundation that enables safe, rapid feature development
 
-### Core Features Phase (v0.4.0 - v0.4.0)
+### Core Features Phase (v0.4.3 - v0.4.5)
 **Focus**: Memory system implementation with stability
 **Hours**: 85-98
 **Goal**: Deliver persona management, behaviour learning, and personalisation
 
-### Advanced Features Phase (v0.4.0 - v0.4.0)
+### Advanced Features Phase (v0.4.6 - v0.4.8)
 **Focus**: Refactoring, temporal memory, LEANN backend
 **Hours**: 90-107
 **Goal**: Complete memory system and alternative storage backend
 
-### Stabilisation Phase (v0.4.0)
+### Stabilisation Phase (v0.4.9)
 **Focus**: Production readiness, comprehensive testing, performance
 **Hours**: 15-20
 **Goal**: Release-ready v0.4 with all features polished and tested
@@ -201,7 +201,7 @@ v0.4.0 Production Release (Q4 2026)
 
 ---
 
-### [v0.4.0 - VectorStore Abstraction & Refactoring](v0.4.0.md) (18-22h)
+### [v0.4.1 - VectorStore Abstraction & Refactoring](v0.4.1.md) (18-22h)
 
 **Status**: Planned | **Priority**: P0 - Foundation
 
@@ -223,7 +223,7 @@ v0.4.0 Production Release (Q4 2026)
 
 ---
 
-### [v0.4.0 - Code Quality & Stability Release](v0.4.0.md) (12-15h)
+### [v0.4.2 - Code Quality & Stability Release](v0.4.2.md) (12-15h)
 
 **Status**: Planned | **Priority**: P1 - Quality
 
@@ -245,7 +245,7 @@ v0.4.0 Production Release (Q4 2026)
 
 ---
 
-### [v0.4.0 - Memory Foundation: Personas & Tracking](v0.4.0.md) (35-40h)
+### [v0.4.3 - Memory Foundation: Personas & Tracking](v0.4.3/README.md) (35-40h)
 
 **Status**: Planned | **Priority**: P0 - Core Feature
 
@@ -268,7 +268,7 @@ v0.4.0 Production Release (Q4 2026)
 
 ---
 
-### [v0.4.0 - Stability & Performance Enhancement](v0.4.0.md) (15-18h)
+### [v0.4.4 - Stability & Performance Enhancement](v0.4.4.md) (15-18h)
 
 **Status**: Planned | **Priority**: P1 - Quality
 
@@ -290,7 +290,7 @@ v0.4.0 Production Release (Q4 2026)
 
 ---
 
-### [v0.4.0 - Behaviour Learning & Personalisation](v0.4.0.md) (35-40h)
+### [v0.4.5 - Behaviour Learning & Personalisation](v0.4.5.md) (35-40h)
 
 **Status**: Planned | **Priority**: P0 - Core Feature
 
@@ -312,7 +312,7 @@ v0.4.0 Production Release (Q4 2026)
 
 ---
 
-### [v0.4.0 - Refactoring & Architecture Improvements](v0.4.0.md) (10-12h)
+### [v0.4.6 - Refactoring & Architecture Improvements](v0.4.6.md) (10-12h)
 
 **Status**: Planned | **Priority**: P2 - Quality
 
@@ -334,7 +334,7 @@ v0.4.0 Production Release (Q4 2026)
 
 ---
 
-### [v0.4.0 - Temporal Memory System](v0.4.0.md) (40-45h)
+### [v0.4.7 - Temporal Memory System](v0.4.7.md) (40-45h)
 
 **Status**: Planned | **Priority**: P0 - Advanced Feature
 
@@ -356,7 +356,7 @@ v0.4.0 Production Release (Q4 2026)
 
 ---
 
-### [v0.4.0 - LEANN Backend Integration](v0.4.0.md) (35-42h)
+### [v0.4.8 - LEANN Backend Integration](v0.4.8.md) (35-42h)
 
 **Status**: Planned | **Priority**: P1 - Alternative Backend
 
@@ -378,7 +378,7 @@ v0.4.0 Production Release (Q4 2026)
 
 ---
 
-### [v0.4.0 - Production Readiness & Final Stabilisation](v0.4.0.md) (15-20h)
+### [v0.4.9 - Production Readiness & Final Stabilisation](v0.4.9.md) (15-20h)
 
 **Status**: Planned | **Priority**: P0 - Release
 
@@ -405,10 +405,10 @@ v0.4.0 Production Release (Q4 2026)
 
 | Phase | Releases | Hours | Focus |
 |-------|----------|-------|-------|
-| Foundation | v0.4.0 - v0.4.0 | 55-67 | Architecture, testing, quality |
-| Core Features | v0.4.0 - v0.4.0 | 85-98 | Memory system, personalisation |
-| Advanced | v0.4.0 - v0.4.0 | 90-107 | Refactoring, temporal, LEANN |
-| Stabilisation | v0.4.0 | 15-20 | Production readiness |
+| Foundation | v0.4.0 - v0.4.2 | 55-67 | Architecture, testing, quality |
+| Core Features | v0.4.3 - v0.4.5 | 85-98 | Memory system, personalisation |
+| Advanced | v0.4.6 - v0.4.8 | 90-107 | Refactoring, temporal, LEANN |
+| Stabilisation | v0.4.9 | 15-20 | Production readiness |
 | **Total** | **10 releases** | **195-242** | **Complete v0.4** |
 
 **Original v0.4.0 estimate**: 180-225 hours
@@ -707,9 +707,9 @@ Version 0.4.x builds directly upon the foundation established by v0.3.x (13 rele
 - [v0.4 Planning](../../../planning/version/v0.4/) - Memory system design overview
 
 **Implementation Roadmaps**:
-- [v0.3.0 Roadmap](../../v0.3.0/README.md) - Advanced retrieval & document intelligence (13 releases, Q2-Q3 2026)
-  - See especially [v0.3.7](../../v0.3.0/v0.3.7.md) - VectorStore abstraction foundation
-- [v0.4 Detailed Spec](v0.4-DETAILED-SPEC.md) - Original comprehensive roadmap (kept for reference)
+- [v0.3 Roadmap](../../v0.3/README.md) - Advanced retrieval & document intelligence (13 releases, Q2-Q3 2026)
+  - See especially [v0.3.7](../../v0.3/v0.3.7.md) - VectorStore abstraction foundation
+- [v0.4 Detailed Spec](v0.4-detailed-spec.md) - Original comprehensive roadmap (kept for reference)
 - Individual release roadmaps: [v0.4.0](v0.4.0.md) through [v0.4.9](v0.4.9.md)
 
 **Architecture**:
