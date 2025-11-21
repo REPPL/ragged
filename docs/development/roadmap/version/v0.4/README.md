@@ -712,6 +712,11 @@ Version 0.4.x builds directly upon the foundation established by v0.3.x (13 rele
 - [v0.4 Detailed Spec](v0.4-detailed-spec.md) - Original comprehensive roadmap (kept for reference)
 - Individual release roadmaps: [v0.4.0](v0.4.0.md) through [v0.4.9](v0.4.9.md)
 
+**Implementation Guides**:
+- [Execution Playbook](execution-playbook.md) - Step-by-step implementation guide for autonomous execution
+- [Progress Tracker](progress-tracker.md) - Real-time status tracking across all 10 releases
+- [Testing Guide](testing-guide.md) - Comprehensive testing standards, quality gates, and success criteria
+
 **Architecture**:
 - [Architecture Overview](../../../planning/architecture/README.md) - System architecture
 - [ADR-0015: VectorStore Abstraction](../../../decisions/adrs/0015-vectorstore-abstraction.md)
