@@ -1,20 +1,20 @@
-# Security Audit Requirements for v0.4.0 Memory System
+# Security Audit Requirements for v0.4.3 Memory System
 
-**Status**: ⏳ Required before v0.4.0 implementation
+**Status**: ⏳ Required before v0.4.3 implementation
 
-**Timeline**: 2-3 weeks (concurrent with v0.4.0 development)
+**Timeline**: 2-3 weeks (concurrent with v0.4.2 development)
 
-**Preparation**: See [v0.4.0.md Security Audit Preparation](../v0.4.0.md#security-audit-preparation)
+**Preparation**: See [v0.4.2.md Security Audit Preparation](../v0.4.2.md#security-audit-preparation)
 
 ---
 
 ## Overview
 
-Formal security audit of the personal memory system design **required before v0.4.0 implementation begins**.
+Formal security audit of the personal memory system design **required before v0.4.3 implementation begins**.
 
 **Why Required**: The memory system stores highly sensitive personal data (behaviour patterns, interests, temporal activity) that requires the highest level of privacy protection and security validation.
 
-**Gate Function**: v0.4.0 implementation is **BLOCKED** until this audit passes with no critical findings.
+**Gate Function**: v0.4.3 implementation is **BLOCKED** until this audit passes with no critical findings.
 
 ---
 
@@ -206,9 +206,9 @@ Formal security audit of the personal memory system design **required before v0.
 
 ## Audit Timeline
 
-### Phase 1: Preparation (During v0.4.0) - 3h
+### Phase 1: Preparation (During v0.4.2) - 3h
 
-**Deliverables** (see [v0.4.0.md](../v0.4.0.md#security-audit-preparation)):
+**Deliverables** (see [v0.4.2.md](../v0.4.2.md#security-audit-preparation)):
 1. Memory system architecture documentation
 2. Data flow diagrams
 3. Privacy threat model (LINDDUN)
@@ -339,7 +339,7 @@ Formal security audit of the personal memory system design **required before v0.
 
 ### Audit Fails If:
 
-**Critical Failures** (block v0.4.0 implementation):
+**Critical Failures** (block v0.4.3 implementation):
 
 1. ❌ **Critical security findings**
    - Data leakage possible
@@ -372,7 +372,7 @@ Formal security audit of the personal memory system design **required before v0.
 ### If Audit Passes:
 
 1. **Update Implementation Plan**:
-   - Incorporate audit recommendations into v0.4.0 roadmap
+   - Incorporate audit recommendations into v0.4.3 roadmap
    - Update [README.md](./README.md) with any design changes
    - Revise [privacy-framework.md](./privacy-framework.md) if needed
 
