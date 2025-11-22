@@ -83,11 +83,11 @@ dev = [
 ]
 
 [project.scripts]
-ragged = "src.main:cli"
+ragged = "ragged.main:cli"
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["src*"]
+[tool.setuptools]
+packages = ["ragged"]
+package-dir = {"ragged" = "src"}
 
 [tool.black]
 line-length = 100
