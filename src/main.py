@@ -89,6 +89,7 @@ from src.cli.commands.show import show  # v0.3.5: PDF correction metadata viewer
 from src.cli.commands.versions import versions  # v0.3.7a: Document version tracking
 from src.cli.commands.template import template  # v0.3.11: Template commands
 from src.cli.commands.test import test  # v0.3.11: Testing commands
+from src.cli.commands.serve import serve  # v0.3.12: API server
 
 # Register commands
 cli.add_command(add)
@@ -113,6 +114,7 @@ cli.add_command(show)  # v0.3.5: PDF correction metadata viewer
 cli.add_command(versions)  # v0.3.7a: Document version tracking
 cli.add_command(template)  # v0.3.11: Template commands
 cli.add_command(test)  # v0.3.11: Testing commands
+cli.add_command(serve)  # v0.3.12: API server
 
 
 def main() -> None:
