@@ -25,7 +25,11 @@ Each version has a time log file: `vX.Y.Z-time-log.md`
 ## Current Time Logs
 
 - **[v0.1.0-time-log.md](./v0.1/v0.1.0-time-log.md)** - MVP time tracking (complete)
-- **v0.2.x-time-log.md** - Enhanced retrieval (in progress)
+- **v0.2.x-time-log.md** - Enhanced retrieval (complete)
+- **[v0.3/](./v0.3/)** - v0.3.0-v0.3.2 time logs
+- **[v0.3.3/](./v0.3.3/)** - Intelligent Chunking time logs
+- **[v0.3.4a/](./v0.3.4a/)** - Vector Scaling & Optimisation (planned)
+- **[v0.3.4b/](./v0.3.4b/)** - Hybrid Search & Query Optimisation (planned)
 
 ---
 
