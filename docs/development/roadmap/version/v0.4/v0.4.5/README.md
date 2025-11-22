@@ -1,18 +1,18 @@
-# v0.4.3 - Memory Foundation: Personas & Tracking
+# v0.4.5 - Memory Foundation: Personas & Tracking
 
 **Hours**: 35-40 | **Priority**: P0 - Core Feature | **Status**: Planned
 
-**Dependencies**: v0.4.2 complete (Quality baseline established), **Security audit PASSED**
+**Dependencies**: v0.4.4 complete (Quality baseline established), **Security audit PASSED**, v0.4.3 complete (LEANN backend available)
 
 ---
 
 ## 🔒 SECURITY GATE: Implementation Blocked Until Audit Passes
 
-**CRITICAL**: v0.4.3 implementation **CANNOT** begin until formal security audit is complete and passes.
+**CRITICAL**: v0.4.5 implementation **CANNOT** begin until formal security audit is complete and passes.
 
 ### Why This Gate Exists
 
-v0.4.3 introduces the **personal memory system**—the most privacy-sensitive component in ragged's architecture. This system will store:
+v0.4.5 introduces the **personal memory system**—the most privacy-sensitive component in ragged's architecture. This system will store:
 
 - **User behaviour patterns** (query history, topic interests, temporal activity)
 - **Personal preferences** (focus areas, active projects, usage statistics)
@@ -23,9 +23,9 @@ v0.4.3 introduces the **personal memory system**—the most privacy-sensitive co
 
 ### Security Audit Requirements
 
-**Status**: ⏳ **Must complete during/after v0.4.2**
+**Status**: ⏳ **Must complete during/after v0.4.4**
 
-**Timeline**: 2-3 weeks (concurrent with v0.4.2 development)
+**Timeline**: 2-3 weeks (concurrent with v0.4.4 development)
 
 **Scope**: See [security-audit.md](./security-audit.md) for complete requirements
 
@@ -41,24 +41,27 @@ v0.4.3 introduces the **personal memory system**—the most privacy-sensitive co
 
 ### Implementation Checklist
 
-Before starting v0.4.3 implementation, verify:
+Before starting v0.4.5 implementation, verify:
 
-- [ ] Security audit complete (see [v0.4.2.md](../v0.4.2.md#security-audit-preparation))
+- [ ] Security audit complete (see [v0.4.4.md](../v0.4.4.md#security-audit-preparation))
 - [ ] Audit report shows **NO critical findings**
 - [ ] All high-priority recommendations addressed in design
 - [ ] Privacy framework documented (see [privacy-framework.md](./privacy-framework.md))
 - [ ] Testing scenarios prepared (see [testing-scenarios.md](./testing-scenarios.md))
 - [ ] Team has reviewed and approved audit findings
+- [ ] v0.4.3 LEANN backend complete (multi-backend support available)
 
-**If audit fails**: Design changes required, v0.4.3 implementation delayed until resolved.
+**If audit fails**: Design changes required, v0.4.5 implementation delayed until resolved.
 
 ---
 
 ## Overview
 
-Implement personal memory system foundation with persona management, interaction tracking, and knowledge graph initialisation.
+Implement personal memory system foundation with persona management, interaction tracking, and knowledge graph initialisation - designed with **multi-backend support from day one** (LEANN + ChromaDB).
 
-**Vision**: Enable ragged to remember user context, preferences, and interaction history - all locally with zero cloud dependencies.
+**Vision**: Enable ragged to remember user context, preferences, and interaction history - all locally with zero cloud dependencies, leveraging LEANN's storage efficiency (97% savings) where available.
+
+**Multi-Backend Architecture**: Memory system is **designed for LEANN from the start**, with graceful fallback to ChromaDB on unsupported platforms. This avoids migration complexity and provides storage efficiency from day one on macOS/Linux.
 
 **Theoretical Foundation**: Inspired by [Context Engineering 2.0](../../../../acknowledgements/context-engineering-2.0.md), this release implements **structured context layering**—organising personal knowledge as hierarchical entities (users → topics → documents → temporal relationships). Knowledge graphs reduce computational uncertainty (entropy reduction) by making relationships explicit and machine-understandable.
 
@@ -308,7 +311,7 @@ def test_persona_isolation():
 
 ## Success Criteria
 
-Version 0.4.4 is successful if:
+Version 0.4.5 is successful if:
 
 1. ✅ **Security audit passed** (no critical findings)
 2. ✅ Persona system works seamlessly
@@ -325,6 +328,8 @@ Version 0.4.4 is successful if:
 13. ✅ No network calls during memory operations (automated testing)
 14. ✅ Encryption at rest validated
 15. ✅ GDPR compliance verified (Articles 15, 17, 20)
+16. ✅ Multi-backend memory system works (LEANN on macOS/Linux, ChromaDB on Windows)
+17. ✅ Memory data portable between backends (backend-agnostic storage)
 
 ---
 
@@ -351,6 +356,7 @@ Version 0.4.4 is successful if:
 - `kuzu>=0.6.0` - Graph database
 - `pydantic>=2.0` - Already used
 - `python-dateutil>=2.8` - Temporal operations
+- VectorStore backend (from v0.4.3): LEANN or ChromaDB (auto-selected)
 
 ---
 
@@ -366,15 +372,26 @@ Version 0.4.4 is successful if:
 │   ├── queries.db              # SQLite (encrypted)
 │   └── feedback.db             # SQLite (encrypted)
 ├── semantic/
-│   └── memory_vectors/         # ChromaDB (future - v0.4.8)
+│   └── memory_vectors/         # Multi-backend: LEANN (macOS/Linux) or ChromaDB (Windows)
 └── graph/
     └── kuzu_db/                # Kuzu database
 ```
+
+**Multi-Backend Integration** (v0.4.3 foundation):
+- Memory system uses `VectorStore` interface (backend-agnostic)
+- macOS/Linux: LEANN backend by default (97% storage savings)
+- Windows: ChromaDB backend (fully functional)
+- User can override backend selection via config
+
+**Memory Storage Efficiency**:
+- LEANN (macOS/Linux): ~6MB for 10K interactions (97% savings)
+- ChromaDB (Windows): ~200MB for 10K interactions (standard)
 
 **Encryption** (inherited from v0.2.11):
 - All SQLite databases encrypted at rest
 - YAML files containing sensitive data encrypted
 - Kuzu database: Investigate encryption support
+- Vector storage: Backend-specific encryption (both LEANN and ChromaDB support encryption)
 
 ---
 
@@ -422,7 +439,7 @@ Version 0.4.4 is successful if:
 
 **See**: [security-audit.md](./security-audit.md) for complete security audit requirements, scope, and pass criteria.
 
-**Critical**: v0.4.3 implementation blocked until audit passes.
+**Critical**: v0.4.5 implementation blocked until audit passes.
 
 ---
 
@@ -430,8 +447,9 @@ Version 0.4.4 is successful if:
 
 - [v0.4 Overview](../README.md) - Release series overview
 - [v0.4 Detailed Spec](../v0.4-detailed-spec.md) - Part 2: Milestone 1
-- [v0.4.2](../v0.4.2.md) - Code quality (previous) - **Security audit preparation**
-- [v0.4.4](../v0.4.4.md) - Stability & performance (next)
+- [v0.4.4](../v0.4.4.md) - Code quality (previous) - **Security audit preparation**
+- [v0.4.3](../v0.4.3.md) - LEANN backend (previous) - **Multi-backend foundation**
+- [v0.4.6](../v0.4.6.md) - Stability & performance (next)
 - [Security Audit Requirements](./security-audit.md) - **MUST PASS BEFORE IMPLEMENTATION**
 - [Privacy Framework](./privacy-framework.md) - User privacy controls and validation
 - [Testing Scenarios](./testing-scenarios.md) - Comprehensive privacy testing
