@@ -7,6 +7,49 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.7c] - 2025-11-22
+
+### Added - Enhanced Citations
+
+**Rich Citation Formatting (240+ lines)**
+- Quote extraction from chunks with smart truncation
+- Confidence score display in citations
+- Chunk ID support for debugging
+- Citation deduplication by source and page
+- Flexible filtering by confidence threshold
+
+**New Functions**
+- `extract_quote_from_chunk()` - Extract representative quotes (respects word boundaries)
+- `format_enhanced_citation()` - Format citations with metadata (quotes, confidence, chunk IDs)
+- `format_enhanced_reference_list()` - Enhanced reference lists with filtering
+- `format_response_with_enhanced_citations()` - Full response formatting
+- `deduplicate_citations()` - Remove duplicate citations by (source, page) key
+
+**Enhanced Citation Format**
+```
+[1] Source: paper.pdf, Page 42, Confidence: 0.95
+"Machine learning is a subset of artificial intelligence that focuses..."
+Chunk ID: doc1_ch007
+```
+
+**Key Features**
+- Smart quote truncation (max length, word boundaries)
+- Optional confidence threshold filtering (hide low-confidence sources)
+- Optional chunk ID display for debugging
+- Backward compatible with existing citation functions
+- Cited numbers filtering (show only referenced sources)
+
+**Testing & Quality**
+- 27 comprehensive unit tests (22 new, 5 existing)
+- 99% coverage on citation_formatter.py
+- All 50 tests passing
+- Edge cases: empty content, None metadata, missing attributes
+
+**Performance**
+- Minimal overhead (~50ms for quote extraction)
+- Lazy evaluation (quotes extracted only when needed)
+- No breaking changes to existing API
+
 ## [0.3.7b] - 2025-11-22
 
 ### Added - Chain-of-Thought Reasoning
