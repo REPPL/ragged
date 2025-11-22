@@ -29,6 +29,7 @@
 - 🔒 **100% Private**: Everything runs locally - no data leaves your machine
 - ⚡ **Hardware Optimised**: Supports CPU, Apple Silicon (MLX), and CUDA (planned)
 - 🎨 **Intuitive CLI**: Command-line interface with progress bars and colours
+- 📄 **PDF Intelligence**: Automatic quality detection and correction for messy PDFs (v0.3.5)
 - 🗂️ **Metadata Management**: Tag, search, and organise documents (v0.2.8)
 - 📝 **Query History**: Save and replay queries (v0.2.8)
 - 🔄 **Backup & Restore**: Export and import your data (v0.2.8)
@@ -78,8 +79,14 @@ ollama serve          # Start Ollama (in separate terminal)
 
 ```bash
 # Add documents to your knowledge base
-ragged add document.pdf                    # Single file
+ragged add document.pdf                    # Single file (auto-corrects PDFs, v0.3.5+)
 ragged add /path/to/folder/ --recursive    # Entire folder (v0.2.7+)
+ragged add messy.pdf --no-auto-correct-pdf # Skip PDF correction (v0.3.5+)
+
+# View PDF quality and corrections (v0.3.5+)
+ragged show quality <document_id>          # Quality report with issues
+ragged show corrections <document_id>      # Applied corrections
+ragged show uncertainties <document_id>    # Low-confidence sections
 
 # Ask questions
 ragged query "What are the key findings?"
@@ -115,15 +122,16 @@ ragged completion --install                # Install shell completion
 
 ---
 
-## CLI Features (v0.2.8)
+## CLI Features
 
-ragged includes a comprehensive CLI with 14 commands:
+ragged includes a comprehensive CLI with 15 commands:
 
 **Document Management:**
-- `add` - Ingest documents (single files or entire folders)
+- `add` - Ingest documents with automatic PDF quality detection and correction (v0.3.5+)
 - `list` / `clear` - View or remove documents
 - `metadata` - Tag, update, and search document metadata
 - `search` - Advanced search with filters
+- `show` - View PDF quality reports, corrections, and uncertainties (v0.3.5+)
 
 **Querying:**
 - `query` - Ask questions and get answers with citations
