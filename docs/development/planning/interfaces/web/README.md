@@ -43,6 +43,7 @@ Web UI documentation to be expanded as design progresses.
 
 ## Related Documentation
 
+- [Web UI Design Assets](../../../../design/webUI/) - Visual design files, mockups, and icons
 - [Web UI Roadmap](../../../../roadmap/version/v1.0/) - Implementation plan
 - [CLI Interface](../cli/) - Command-line alternative
 

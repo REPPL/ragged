@@ -24,6 +24,8 @@
   - [Implementation - What Was Actually Built](#implementation---what-was-actually-built)
 - [For Development Process](#for-development-process)
   - [Process - Development Transparency](#process---development-transparency)
+- [For Designers](#for-designers)
+  - [Design - Visual Design Assets](#design---visual-design-assets)
 - [For Research & Community](#for-research--community)
   - [Research - Academic Materials](#research---academic-materials)
   - [Contributing - Contribution Guidelines](#contributing---contribution-guidelines)
@@ -88,6 +90,12 @@ docs/
 │           ├── time-logs/      → Time tracking
 │           ├── testing/        → Testing documentation
 │           └── templates/      → Document templates
+│
+├── 🎨 Design Assets
+│   └── design/          → Visual design files and mockups
+│       └── webUI/           → Web interface design assets
+│           ├── icons/       → Icon design files
+│           └── wireframe/   → Wireframes and layouts
 │
 ├── 🔬 Research & Community
 │   └── research/        → Academic materials
@@ -205,6 +213,32 @@ All developer-facing documentation is now organised under [development/](./devel
 - [ADRs](./development/decisions/adrs/) - Key architectural decisions
 
 **Audience:** Contributors, developers, technical stakeholders
+
+---
+
+## For Designers
+
+### [Design](./design/) - Visual Design Assets
+
+**Purpose:** Visual design files, mockups, and UI/UX assets
+
+**Structure:**
+- **webUI/** - Web user interface design
+  - README with design specifications
+  - Icon design files (.svg, .penpot)
+  - Wireframes and layouts
+  - Design system assets
+
+**Quick Links:**
+- [Web UI Design](./design/webUI/README.md) - Web interface design documentation
+- [Icons](./design/webUI/icons/) - Icon design files
+- [Wireframes](./design/webUI/wireframe/) - Layout wireframes
+
+**Relationship to Planning:**
+- **design/** contains visual assets (.svg, .penpot, etc.)
+- **[development/planning/interfaces/](./development/planning/interfaces/)** contains written specifications
+
+**Audience:** Designers, UI/UX contributors, visual developers
 
 ---
 

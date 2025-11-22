@@ -35,8 +35,14 @@ Each version directory contains:
 
 - **[v0.1/](./v0.1/)** - MVP development narrative (complete)
   - Canonical docs: [implementation/version/v0.1/](../../../../implementation/version/v0.1/)
-- **[v0.2/](./v0.2/)** - Enhanced retrieval development (in progress)
+- **[v0.2/](./v0.2/)** - Enhanced retrieval development (complete)
   - Canonical docs: [implementation/version/v0.2/](../../../../implementation/version/v0.2/)
+- **[v0.3.3/](./v0.3.3/)** - Intelligent Chunking development
+  - Canonical docs: [implementation/version/v0.3/v0.3.3/](../../../../implementation/version/v0.3/v0.3.3/)
+- **[v0.3.4a/](./v0.3.4a/)** - Vector Scaling & Optimisation (planned)
+  - Canonical docs: [implementation/version/v0.3/v0.3.4a/](../../../../implementation/version/v0.3/v0.3.4a/)
+- **[v0.3.4b/](./v0.3.4b/)** - Hybrid Search & Query Optimisation (planned)
+  - Canonical docs: [implementation/version/v0.3/v0.3.4b/](../../../../implementation/version/v0.3/v0.3.4b/)
 
 ---
 
