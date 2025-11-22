@@ -234,7 +234,6 @@ Sizes:
 ## Related Documentation
 
 - [Web UI Planning Specifications](../../development/planning/interfaces/web/) - Written UI specifications and requirements
-- [Icon Design Files](./icons/) - Icon assets and specifications
 - [Wireframes](./wireframe/) - Layout wireframes and mockups
 - [Design Directory Overview](../) - All design assets
 - [v0.6.7 Roadmap](../../development/roadmap/version/v0.6/v0.6.7.md) - Web UI implementation plan
