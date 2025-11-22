@@ -20,6 +20,12 @@ class TestVectorStoreFactory:
         assert store is not None
         assert store.health_check()
 
+    def test_create_auto_backend(self, tmp_path):
+        """Test auto-selecting backend."""
+        store = VectorStoreFactory.create(backend="auto")
+        assert store is not None
+        assert store.health_check()
+
     def test_create_unknown_backend_raises(self):
         """Test that unknown backend raises error."""
         with pytest.raises(VectorStoreConfigError):
@@ -30,6 +36,19 @@ class TestVectorStoreFactory:
         backends = VectorStoreFactory.get_available_backends()
         assert isinstance(backends, list)
         assert "chromadb" in backends  # Should be available
+
+    def test_get_backend_support_info(self):
+        """Test getting backend support information."""
+        info = VectorStoreFactory.get_backend_support_info()
+
+        assert "platform" in info
+        assert "backend_support" in info
+        assert "available_backends" in info
+        assert "default_backend" in info
+
+        # ChromaDB should always be supported
+        assert info["backend_support"]["chromadb"] is True
+        assert info["default_backend"] in ("chromadb", "leann")
 
 
 class TestVectorStoreDocument:
