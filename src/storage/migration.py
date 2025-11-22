@@ -13,6 +13,7 @@ v0.5.0: v0.4 → v0.5 migration support
 """
 
 import logging
+import re
 from typing import Any
 
 import chromadb
@@ -21,6 +22,54 @@ from chromadb.api import ClientAPI
 from ragged.storage.schema import EmbeddingType
 
 logger = logging.getLogger(__name__)
+
+# SECURITY FIX (CRITICAL-8): Pattern for safe collection names
+# Allow: alphanumeric, underscore, dash (must start with letter/number)
+SAFE_COLLECTION_NAME_PATTERN = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9_-]{0,62}$")
+
+
+def _validate_collection_name(name: str) -> str:
+    """
+    Validate and sanitize collection name to prevent NoSQL injection.
+
+    SECURITY FIX (CRITICAL-8): Prevents malicious collection names.
+
+    Args:
+        name: Collection name to validate
+
+    Returns:
+        Validated collection name
+
+    Raises:
+        ValueError: If collection name is invalid or potentially malicious
+
+    Example:
+        >>> _validate_collection_name("documents")
+        'documents'
+        >>> _validate_collection_name("doc_collection_123")
+        'doc_collection_123'
+        >>> _validate_collection_name("../../etc/passwd")
+        ValueError: Invalid collection name
+    """
+    if not name or not isinstance(name, str):
+        raise ValueError(f"Collection name must be a non-empty string, got: {type(name)}")
+
+    if len(name) > 63:
+        raise ValueError(f"Collection name too long (max 63 characters): {name}")
+
+    if not SAFE_COLLECTION_NAME_PATTERN.match(name):
+        raise ValueError(
+            f"Invalid collection name: '{name}'. "
+            f"Must start with alphanumeric and contain only alphanumeric, underscore, dash."
+        )
+
+    # Additional check for suspicious patterns
+    suspicious_patterns = ["../", "..\\", "$", "{", "}", "<", ">", "'", '"', ";", "|"]
+    for pattern in suspicious_patterns:
+        if pattern in name:
+            raise ValueError(f"Collection name contains suspicious pattern: {pattern}")
+
+    return name
 
 
 class StorageMigration:
@@ -46,13 +95,16 @@ class StorageMigration:
             Schema version: "v0.4" (text-only) or "v0.5" (dual-embedding)
 
         Raises:
-            ValueError: If collection doesn't exist
+            ValueError: If collection doesn't exist or name is invalid
 
         Example:
             >>> migration = StorageMigration(client)
             >>> migration.detect_schema_version("documents")
             'v0.4'
         """
+        # SECURITY FIX (CRITICAL-8): Validate collection name
+        collection_name = _validate_collection_name(collection_name)
+
         try:
             collection = self.client.get_collection(collection_name)
         except Exception as e:
@@ -104,7 +156,7 @@ class StorageMigration:
             }
 
         Raises:
-            ValueError: If collection is already v0.5 or migration fails
+            ValueError: If collection is already v0.5, name is invalid, or migration fails
 
         Example:
             >>> migration = StorageMigration(client)
@@ -112,6 +164,9 @@ class StorageMigration:
             >>> print(stats)
             {'embeddings_processed': 150, 'ids_renamed': 150, 'metadata_updated': 150, 'skipped': 0}
         """
+        # SECURITY FIX (CRITICAL-8): Validate collection name
+        collection_name = _validate_collection_name(collection_name)
+
         schema_version = self.detect_schema_version(collection_name)
 
         if schema_version == "v0.5":

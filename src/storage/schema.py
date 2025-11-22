@@ -13,6 +13,7 @@ The schema supports:
 v0.5.0: Initial dual embedding schema
 """
 
+import re
 from datetime import datetime
 from enum import Enum
 from typing import TypedDict
@@ -194,6 +195,8 @@ def parse_embedding_id(embedding_id: str) -> dict[str, str | int]:
     """
     Parse embedding ID to extract document ID, type, and index.
 
+    SECURITY FIX (CRITICAL-5): Uses regex validation to prevent injection attacks.
+
     Args:
         embedding_id: Embedding ID in standard format
 
@@ -201,7 +204,7 @@ def parse_embedding_id(embedding_id: str) -> dict[str, str | int]:
         Dictionary with 'document_id', 'type', and 'index'
 
     Raises:
-        ValueError: If ID format is invalid
+        ValueError: If ID format is invalid or contains suspicious patterns
 
     Example:
         >>> parse_embedding_id("abc123_chunk_5_text")
@@ -209,43 +212,28 @@ def parse_embedding_id(embedding_id: str) -> dict[str, str | int]:
         >>> parse_embedding_id("abc123_page_3_vision")
         {'document_id': 'abc123', 'type': 'vision', 'index': 3}
     """
-    # Split from right to extract type
-    parts = embedding_id.rsplit("_", 1)
-    if len(parts) != 2:
-        raise ValueError(f"Invalid embedding ID format: {embedding_id}")
+    # SECURITY FIX (CRITICAL-5): Use regex pattern for strict validation
+    # Pattern: {document_id}_(chunk|page)_{index}_(text|vision)
+    # document_id: alphanumeric, dash, underscore (but not starting/ending with underscore)
+    # index: non-negative integer
+    text_pattern = re.compile(r"^([a-zA-Z0-9][\w-]*[a-zA-Z0-9])_chunk_(\d+)_text$")
+    vision_pattern = re.compile(r"^([a-zA-Z0-9][\w-]*[a-zA-Z0-9])_page_(\d+)_vision$")
 
-    remaining, emb_type = parts
+    # Try text pattern
+    match = text_pattern.match(embedding_id)
+    if match:
+        document_id, index_str = match.groups()
+        return {"document_id": document_id, "type": "text", "index": int(index_str)}
 
-    # Validate type
-    if emb_type not in ("text", "vision"):
-        raise ValueError(f"Invalid embedding type in ID: {emb_type}")
+    # Try vision pattern
+    match = vision_pattern.match(embedding_id)
+    if match:
+        document_id, index_str = match.groups()
+        return {"document_id": document_id, "type": "vision", "index": int(index_str)}
 
-    # Split again to extract index
-    parts = remaining.rsplit("_", 1)
-    if len(parts) != 2:
-        raise ValueError(f"Invalid embedding ID format: {embedding_id}")
-
-    remaining, index_str = parts
-
-    # Extract index
-    try:
-        index = int(index_str)
-    except ValueError as e:
-        raise ValueError(f"Invalid index in embedding ID: {index_str}") from e
-
-    # Split once more to remove "chunk" or "page" prefix
-    parts = remaining.rsplit("_", 1)
-    if len(parts) != 2:
-        raise ValueError(f"Invalid embedding ID format: {embedding_id}")
-
-    document_id, prefix = parts
-
-    # Validate prefix matches type
-    expected_prefix = "chunk" if emb_type == "text" else "page"
-    if prefix != expected_prefix:
-        raise ValueError(
-            f"Invalid prefix '{prefix}' for embedding type '{emb_type}' "
-            f"(expected '{expected_prefix}')"
-        )
-
-    return {"document_id": document_id, "type": emb_type, "index": index}
+    # No match - invalid format
+    raise ValueError(
+        f"Invalid embedding ID format: '{embedding_id}'. "
+        f"Expected format: '{{document_id}}_chunk_{{index}}_text' or "
+        f"'{{document_id}}_page_{{index}}_vision'"
+    )
