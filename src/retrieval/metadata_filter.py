@@ -2,25 +2,203 @@
 Metadata filtering and faceted search for retrieval.
 
 v0.3.7d: Rich metadata queries with filter parsing and faceted search.
+
+SECURITY FIX (HIGH-4): Safe query construction to prevent NoSQL injection
 """
 
 import re
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, Union, Set
 from dataclasses import dataclass, field
 
 from src.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
+# SECURITY FIX (HIGH-4): Whitelisted metadata field names to prevent injection
+ALLOWED_METADATA_FIELDS: Set[str] = {
+    "tag", "tags",
+    "author", "authors",
+    "file_type", "filetype",
+    "date", "created_at", "updated_at",
+    "confidence", "score",
+    "source", "category",
+    "title", "description",
+    "language", "lang",
+    "version", "status",
+    "page", "page_number",
+    "chunk_id", "chunk_index",
+    "embedding_model", "model",
+}
+
+# SECURITY FIX (HIGH-4): Whitelisted operators
+ALLOWED_OPERATORS: Set[str] = {
+    "==", "!=", ">", "<", ">=", "<=",
+    "in", "not_in", "contains",
+}
+
+# SECURITY FIX (HIGH-4): MongoDB operators that should never appear in field names
+FORBIDDEN_FIELD_PREFIXES: Set[str] = {
+    "$where", "$regex", "$gt", "$lt", "$gte", "$lte",
+    "$eq", "$ne", "$in", "$nin", "$and", "$or", "$not",
+    "$exists", "$type", "$mod", "$text", "$search",
+}
+
+
+class MetadataFilterSecurityError(Exception):
+    """Raised when metadata filter contains malicious input."""
+
+    pass
+
+
+def validate_field_name(field: str) -> str:
+    """Validate metadata field name to prevent injection.
+
+    SECURITY FIX (HIGH-4): Validates field names against whitelist and forbidden patterns.
+
+    Args:
+        field: Field name to validate
+
+    Returns:
+        Validated field name
+
+    Raises:
+        MetadataFilterSecurityError: If field name is malicious
+    """
+    if not field or not isinstance(field, str):
+        raise MetadataFilterSecurityError("Field name must be a non-empty string")
+
+    # Check for forbidden MongoDB operators
+    field_lower = field.lower()
+    for forbidden in FORBIDDEN_FIELD_PREFIXES:
+        if field_lower.startswith(forbidden):
+            raise MetadataFilterSecurityError(
+                f"Field name '{field}' contains forbidden operator '{forbidden}'"
+            )
+
+    # Validate against whitelist (case-insensitive)
+    if field_lower not in ALLOWED_METADATA_FIELDS:
+        raise MetadataFilterSecurityError(
+            f"Field name '{field}' not in allowed fields. "
+            f"Allowed: {sorted(ALLOWED_METADATA_FIELDS)}"
+        )
+
+    # Additional checks: only alphanumeric and underscore
+    if not re.match(r'^[a-zA-Z_][a-zA-Z0-9_]*$', field):
+        raise MetadataFilterSecurityError(
+            f"Field name '{field}' contains invalid characters. "
+            "Only alphanumeric and underscore allowed."
+        )
+
+    return field_lower  # Normalize to lowercase
+
+
+def validate_operator(operator: str) -> str:
+    """Validate filter operator.
+
+    SECURITY FIX (HIGH-4): Validates operators against whitelist.
+
+    Args:
+        operator: Operator to validate
+
+    Returns:
+        Validated operator
+
+    Raises:
+        MetadataFilterSecurityError: If operator is not allowed
+    """
+    if operator not in ALLOWED_OPERATORS:
+        raise MetadataFilterSecurityError(
+            f"Operator '{operator}' not allowed. "
+            f"Allowed: {sorted(ALLOWED_OPERATORS)}"
+        )
+
+    return operator
+
+
+def sanitize_value(value: Any, field: str) -> Any:
+    """Sanitize filter value to prevent injection.
+
+    SECURITY FIX (HIGH-4): Validates and sanitizes values.
+
+    Args:
+        value: Value to sanitize
+        field: Field name (for type hints)
+
+    Returns:
+        Sanitized value
+
+    Raises:
+        MetadataFilterSecurityError: If value is malicious
+    """
+    # Check for dict-based injection attempts (MongoDB operators in values)
+    if isinstance(value, dict):
+        # Dicts are not allowed in values (prevent operator injection)
+        raise MetadataFilterSecurityError(
+            "Dictionary values not allowed (potential operator injection)"
+        )
+
+    # Check for list values (should only be used with 'in' operator)
+    if isinstance(value, list):
+        # Validate each item in list
+        if len(value) > 1000:
+            raise MetadataFilterSecurityError("List values limited to 1000 items")
+
+        sanitized = []
+        for item in value:
+            if isinstance(item, (str, int, float, bool)):
+                sanitized.append(item)
+            else:
+                raise MetadataFilterSecurityError(
+                    f"List items must be primitive types, got {type(item).__name__}"
+                )
+        return sanitized
+
+    # Primitives are safe
+    if isinstance(value, (str, int, float, bool, type(None))):
+        # Additional string validation
+        if isinstance(value, str):
+            # Prevent extremely long strings (DoS)
+            if len(value) > 10000:
+                raise MetadataFilterSecurityError("String values limited to 10000 characters")
+
+            # Check for null bytes
+            if '\x00' in value:
+                raise MetadataFilterSecurityError("Null bytes not allowed in values")
+
+        return value
+
+    # Unsupported types
+    raise MetadataFilterSecurityError(
+        f"Value type '{type(value).__name__}' not allowed. "
+        "Only str, int, float, bool, None, or list of primitives allowed."
+    )
+
 
 @dataclass
 class FilterCondition:
-    """A single filter condition."""
+    """A single filter condition.
+
+    SECURITY FIX (HIGH-4): Validates field, operator, and value to prevent NoSQL injection.
+    """
 
     field: str  # Metadata field name
     operator: str  # "==", "!=", ">", "<", ">=", "<=", "in", "not_in", "contains"
     value: Any  # Filter value
+
+    def __post_init__(self):
+        """Validate filter condition components.
+
+        SECURITY FIX (HIGH-4): Validates all components to prevent injection.
+        """
+        # Validate and normalize field name
+        self.field = validate_field_name(self.field)
+
+        # Validate operator
+        self.operator = validate_operator(self.operator)
+
+        # Sanitize value
+        self.value = sanitize_value(self.value, self.field)
 
     def __str__(self) -> str:
         """String representation."""
@@ -35,13 +213,27 @@ class FilterCondition:
 
 @dataclass
 class MetadataFilter:
-    """Complex metadata filter with AND/OR logic."""
+    """Complex metadata filter with AND/OR logic.
+
+    SECURITY FIX (HIGH-4): All conditions are validated via FilterCondition.__post_init__.
+    """
 
     conditions: List[FilterCondition] = field(default_factory=list)
     logic: str = "AND"  # "AND" or "OR"
 
     def add_condition(self, field: str, operator: str, value: Any) -> None:
-        """Add a filter condition."""
+        """Add a filter condition.
+
+        SECURITY FIX (HIGH-4): FilterCondition validates all inputs to prevent injection.
+
+        Args:
+            field: Metadata field name (validated against whitelist)
+            operator: Comparison operator (validated against allowed operators)
+            value: Filter value (sanitized to prevent operator injection)
+
+        Raises:
+            MetadataFilterSecurityError: If field, operator, or value is malicious
+        """
         self.conditions.append(FilterCondition(field, operator, value))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -128,11 +320,16 @@ class FilterParser:
         """
         Parse filter string into MetadataFilter.
 
+        SECURITY FIX (HIGH-4): Validates all filter components via FilterCondition.
+
         Args:
             filter_string: Filter expression (e.g., "tag=python confidence>0.9")
 
         Returns:
             MetadataFilter object
+
+        Raises:
+            MetadataFilterSecurityError: If any filter component is malicious
 
         Examples:
             >>> parser = FilterParser()
@@ -160,15 +357,21 @@ class FilterParser:
             if operator == "=":
                 operator = "=="
 
-            # Parse value
-            value = cls._parse_value(value_str, field)
+            try:
+                # Parse value
+                value = cls._parse_value(value_str, field)
 
-            # Check for multiple values (OR within field)
-            if isinstance(value, str) and "," in value:
-                values = [cls._parse_value(v.strip(), field) for v in value.split(",")]
-                metadata_filter.add_condition(field, "in", values)
-            else:
-                metadata_filter.add_condition(field, operator, value)
+                # Check for multiple values (OR within field)
+                if isinstance(value, str) and "," in value:
+                    values = [cls._parse_value(v.strip(), field) for v in value.split(",")]
+                    metadata_filter.add_condition(field, "in", values)
+                else:
+                    metadata_filter.add_condition(field, operator, value)
+
+            except MetadataFilterSecurityError as e:
+                # Log and skip malicious filter
+                logger.warning(f"Rejected malicious filter '{part}': {e}")
+                continue
 
         return metadata_filter
 
@@ -186,6 +389,8 @@ class FilterParser:
         """
         Parse CLI-style filter arguments.
 
+        SECURITY FIX (HIGH-4): All filter values validated via FilterCondition.
+
         Args:
             tag: Tag filter (comma-separated for OR)
             author: Author name filter
@@ -197,6 +402,9 @@ class FilterParser:
 
         Returns:
             MetadataFilter object
+
+        Raises:
+            MetadataFilterSecurityError: If any filter component is malicious
 
         Example:
             >>> parser = FilterParser()
