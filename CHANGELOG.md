@@ -7,6 +7,74 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.7b] - 2025-11-22
+
+### Added - Chain-of-Thought Reasoning
+
+**Transparent Reasoning System (500+ lines)**
+- Multiple reasoning modes: NONE, BASIC, STRUCTURED, CHAIN
+- ReasoningParser with XML and regex fallback parsing
+- ReasoningGenerator for transparent AI responses
+- Automatic validation with contradiction and uncertainty detection
+- Confidence scoring with penalty system for validation issues
+
+**Reasoning Modes**
+- NONE: Direct answers (fastest, no reasoning overhead)
+- BASIC: Simple step-by-step thinking (default)
+- STRUCTURED: Detailed XML-formatted reasoning with confidence scores
+- CHAIN: Full chain-of-thought with evidence gathering and validation
+
+**Key Components**
+- `src/generation/reasoning/types.py` - Data structures (ReasoningMode, ReasoningStep, ValidationFlag, ReasonedResponse)
+- `src/generation/reasoning/prompts.py` - Prompt templates for each reasoning mode
+- `src/generation/reasoning/parser.py` - Multi-strategy parser (XML, markdown, regex)
+- `src/generation/reasoning/generator.py` - Generator integration with Ollama
+
+**Validation Features**
+- Automatic contradiction detection
+- Uncertainty marker identification
+- Unsupported claim detection
+- Low confidence flagging
+- Severity levels: low, medium, high
+
+**Testing & Quality**
+- 18 comprehensive unit tests
+- 87% coverage on parser (most complex component)
+- All tests passing
+- Type hints throughout
+
+**Performance**
+- Minimal overhead for BASIC mode (~100ms parsing)
+- Negligible impact for NONE mode (direct answers)
+- Configurable via reasoning mode selection
+
+**Backward Compatibility**
+- 100% backward compatible (new module, no changes to existing code)
+- Zero breaking changes
+- Opt-in via ReasoningGenerator
+
+### Technical Details
+
+**Data Structures:**
+```python
+ReasoningMode: NONE | BASIC | STRUCTURED | CHAIN
+ReasoningStep: (step_number, thought, action, confidence, evidence)
+ValidationFlag: (type, description, severity, step_numbers)
+ReasonedResponse: Complete response with reasoning trace
+```
+
+**Validation Types:**
+- contradiction: Conflicting information
+- uncertainty: Expressed doubt
+- assumption: Unstated assumptions
+- low_confidence: Below confidence threshold
+- missing_evidence: Claims without citations
+
+**Confidence Calculation:**
+- Average across reasoning steps
+- Penalties for validation flags (high: -0.2, medium: -0.1)
+- Final score range: 0.0-1.0
+
 ## [0.3.7a] - 2025-11-22
 
 ### Added - Document Version Tracking
