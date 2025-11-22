@@ -151,3 +151,13 @@ Early testing shows users significantly appreciate:
 
 - [UI Design: CLI Interface](../../planning/interfaces/cli/)
 - [User Stories](../../planning/requirements/user-stories/README.md)
+
+---
+
+## Related Documentation
+
+- [CLI Enhancements](../../planning/interfaces/cli/enhancements.md) - Complete CLI specs
+- [CLI Features (v0.3)](../../roadmap/features/v0.3/cli-features.md) - Feature roadmap
+- [Themes System (v0.3.12)](../../roadmap/version/v0.3/v0.3.12.md) - Colour themes
+
+---

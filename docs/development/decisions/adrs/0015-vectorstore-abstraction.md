@@ -512,3 +512,14 @@ Phase 1 and Phase 2 were completed in v0.3.6 with the following key deliverables
 
 **Last Updated:** 2025-11-22
 **Next Review:** v0.4.0 (LEANN implementation)
+
+---
+
+## Related Documentation
+
+- [ChromaDB Storage (ADR-0003)](./0003-chromadb-for-vector-storage.md) - Initial implementation
+- [VectorStore Refactoring (v0.4.2)](../../roadmap/version/v0.4/v0.4.2.md) - Abstraction implementation
+- [Storage Architecture](../../planning/architecture/) - Vector storage design
+- [v0.4.2 Implementation](../../implementation/version/v0.4/v0.4.2/) - What was built
+
+---

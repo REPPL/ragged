@@ -460,3 +460,14 @@ pdf2image = "^1.16.0"           # MIT - PDF to image conversion
 
 ---
 
+
+---
+
+## Related Documentation
+
+- [Multi-Modal RAG (v0.5)](../../version/v0.5/) - Full implementation plan
+- [ColPali Integration (v0.5.1)](../../version/v0.5/features/VISION-001-colpali-integration.md) - Vision model
+- [v0.3.10 PDF Correction](../../version/v0.3/v0.3.10.md) - Text extraction improvements
+- [Vision & Multimodal Planning](../../../../planning/version/v0.5/) - v0.5 design goals
+
+---

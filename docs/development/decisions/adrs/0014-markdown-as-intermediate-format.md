@@ -197,3 +197,13 @@ Markdown is an excellent LLM-friendly intermediate representation. The structure
 - [ADR-0007: PyMuPDF4LLM for PDF Processing](./0007-pymupdf4llm-for-pdf-processing.md)
 - [ADR-0009: Recursive Character Text Splitter](./0009-recursive-character-text-splitter.md)
 - [Architecture: Document Loaders](../../planning/architecture/document-loaders.md)
+
+---
+
+## Related Documentation
+
+- [PDF Processing (ADR-0007)](./0007-pymupdf4llm-for-pdf-processing.md) - PDF extraction
+- [Document Processing Pipeline](../../planning/architecture/) - Ingestion flow
+- [PDF Correction (v0.3.10)](../../roadmap/version/v0.3/v0.3.10.md) - Format improvements
+
+---

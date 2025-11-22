@@ -733,3 +733,13 @@ This methodology transforms development documentation from **aspirational estima
 **Start Date**: 2025-11-09
 **Status:** Active - applied to all ragged development from v0.1 onwards
 **Next Review**: After v0.3 completion (assess methodology effectiveness)
+
+---
+
+## Related Documentation
+
+- [AI Assistance Methodology](./ai-assistance.md) - AI productivity tracking
+- [Time Logs](../time-logs/) - Actual time records
+- [Versioning Strategy](../../planning/core-concepts/versioning-philosophy.md) - Version planning
+
+---

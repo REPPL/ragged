@@ -504,3 +504,14 @@ def store_hierarchical_chunks(chunks_dict: dict):
 
 ---
 
+
+---
+
+## Related Documentation
+
+- [Intelligent Chunking (v0.3.3)](../../version/v0.3/v0.3.3.md) - Implementation roadmap
+- [v0.3.3 Implementation Summary](../../../implementation/version/v0.3/v0.3.3/) - What was built
+- [Chunking Architecture](../../../../planning/architecture/) - System architecture
+- [v0.3 Planning](../../../../planning/version/v0.3/) - Design goals
+
+---

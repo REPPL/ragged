@@ -225,3 +225,14 @@ results = collection.query(
 **Supersedes:** None
 
 **Superseded By:** None (subject to re-evaluation in v0.3)
+
+---
+
+## Related Documentation
+
+- [VectorStore Abstraction (ADR-0015)](./0015-vectorstore-abstraction.md) - Abstraction layer
+- [Vector Storage Architecture](../../planning/architecture/) - Storage design
+- [v0.4.2 VectorStore Refactoring](../../roadmap/version/v0.4/v0.4.2.md) - Implementation
+- [ChromaDB Integration](../../implementation/version/v0.1/) - Initial implementation
+
+---

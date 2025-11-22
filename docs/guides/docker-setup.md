@@ -295,3 +295,13 @@ The hybrid architecture makes local development fast while maintaining deploymen
 ---
 
 **Architecture Version**: Hybrid (Native Ollama + Containerised Application)
+
+---
+
+## Related Documentation
+
+- [Installation Guide](../tutorials/installation.md) - Main installation instructions
+- [Configuration Guide](./configuration.md) - Configuration options
+- [Environment Info Command](../reference/cli/env-info.md) - System diagnostics
+
+---

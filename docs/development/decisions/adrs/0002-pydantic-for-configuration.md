@@ -171,3 +171,13 @@ class Settings(BaseSettings):
 **Supersedes:** None
 
 **Superseded By:** None
+
+---
+
+## Related Documentation
+
+- [Configuration System](../../planning/core-concepts/) - Configuration approach
+- [Factory Pattern (ADR-0004)](./0004-factory-pattern-for-embedders.md) - Related pattern
+- [Architecture Overview](../../planning/architecture/README.md) - System architecture
+
+---

@@ -178,3 +178,13 @@ v0.3+:
 
 - [ADR-0012: Ollama for LLM Generation](./0012-ollama-for-llm-generation.md)
 - [User Stories](../../planning/requirements/user-stories/README.md)
+
+---
+
+## Related Documentation
+
+- [Source Attribution](../../planning/core-concepts/) - Citation approach
+- [Query Results Format](../../planning/interfaces/) - Output format
+- [RAG Fundamentals](../../../explanation/rag-fundamentals.md) - RAG concepts
+
+---

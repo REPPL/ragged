@@ -120,3 +120,13 @@ LRU cache on tokeniser instance reduces overhead significantly for repeated oper
 
 - [ADR-0009: Recursive Character Text Splitter](./0009-recursive-character-text-splitter.md)
 - [Core Concepts: Chunking Strategy](../../planning/core-concepts/chunking.md)
+
+---
+
+## Related Documentation
+
+- [Chunking Strategies](../../roadmap/features/v0.3/chunking-strategies.md) - Token-aware chunking
+- [Recursive Splitter (ADR-0009)](./0009-recursive-character-text-splitter.md) - Related decision
+- [Token Management](../../planning/core-concepts/) - Token handling
+
+---

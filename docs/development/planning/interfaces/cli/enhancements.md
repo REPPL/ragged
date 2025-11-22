@@ -65,7 +65,7 @@ Enhancements improving overall CLI usability and interaction patterns.
 **Enhancements:**
 - Verbose & Quiet Modes
 - Interactive Mode
-- Color Themes & Customisation
+- Colour Themes & Customisation
 - Smart Suggestions
 
 ### 4. Configuration & Setup
@@ -1168,7 +1168,7 @@ ragged query "machne lerning" --auto-correct
 
 ---
 
-### 22. Color Themes & Customisation
+### 22. Colour Themes & Customisation
 
 **Category:** User Experience
 
@@ -1198,7 +1198,7 @@ ragged config theme create my-theme --config theme.yaml
   - `ragged/config/themes/` - Theme files
 
 - **Dependencies:**
-  - Rich color support
+  - Rich colour support
   - Theme configuration
   - Terminal detection
 

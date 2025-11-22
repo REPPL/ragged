@@ -174,3 +174,13 @@ If switching embedding models:
 - [ADR-0004: Factory Pattern for Embedders](./0004-factory-pattern-for-embedders.md)
 - [ADR-0012: Ollama for LLM Generation](./0012-ollama-for-generation.md)
 - [Technology Evaluation: Embeddings](../../planning/technologies/embeddings.md)
+
+---
+
+## Related Documentation
+
+- [Factory Pattern (ADR-0004)](./0004-factory-pattern-for-embedders.md) - Embedder abstraction
+- [Embedding Models](../../planning/technologies/) - Model choices
+- [Embedding Architecture](../../planning/architecture/) - System design
+
+---

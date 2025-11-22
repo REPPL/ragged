@@ -29,7 +29,7 @@
 **Advisory**: https://github.com/advisories/GHSA-48p4-8xcf-vxj5
 
 **Description**:
-urllib3 supports being used in a Pyodide runtime utilizing the JavaScript Fetch API or XMLHttpRequest. The `retries` and `redirect` parameters are ignored with Pyodide; the runtime itself determines redirect behavior.
+urllib3 supports being used in a Pyodide runtime utilizing the JavaScript Fetch API or XMLHttpRequest. The `retries` and `redirect` parameters are ignored with Pyodide; the runtime itself determines redirect behaviour.
 
 **Affected Usages**:
 Any code which relies on urllib3 to control the number of redirects for an HTTP request in a Pyodide runtime.
@@ -221,3 +221,13 @@ pip-audit --desc
 **Next Scan Due**: 2025-11-27 (weekly)
 **Report Generated**: 2025-11-20
 **Status**: 2 vulnerabilities identified, upgrade recommended
+
+---
+
+## Related Documentation
+
+- [Privacy-Safe Logging (ADR-0011)](../decisions/adrs/0011-privacy-safe-logging.md) - Security approach
+- [Local-Only Processing (ADR-0001)](../decisions/adrs/0001-local-only-processing.md) - Privacy foundation
+- [Security Best Practices](./README.md) - Security overview
+
+---

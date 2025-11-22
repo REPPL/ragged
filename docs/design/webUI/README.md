@@ -56,7 +56,7 @@ docs/design/webUI/
 
 **Contents:**
 - Complete production-ready design based on wireframe
-- Professional color scheme and typography
+- Professional colour scheme and typography
 - All interactive states and metadata displays
 
 **Design Specifications:**
@@ -188,7 +188,7 @@ Sizes:
 **Inspiration:**
 - **Perplexity.ai**: Query interface, results with sources
 - **Notion**: Document management, collection organization
-- **Linear**: Keyboard shortcuts, clean aesthetics, professional color scheme
+- **Linear**: Keyboard shortcuts, clean aesthetics, professional colour scheme
 
 ---
 
@@ -204,7 +204,7 @@ Sizes:
 ### For Development:
 1. **Reference webUI.svg** for exact dimensions, colors, typography
 2. **Extract component specs** from this README
-3. **Use color palette** as CSS variables
+3. **Use colour palette** as CSS variables
 4. **Implement responsive breakpoints** (sidebar collapse at 768px)
 
 ### For Stakeholder Review:

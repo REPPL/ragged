@@ -919,3 +919,14 @@ Relevant excerpts:"""
 
 ---
 
+
+---
+
+## Related Documentation
+
+- [Query Expansion (v0.3.6)](../../version/v0.3/v0.3.6.md) - Implementation roadmap
+- [Context-Aware Retrieval (v0.3.2)](../../version/v0.3/v0.3.2.md) - Related features
+- [Smart Suggestions (v0.3.12)](../../version/v0.3/v0.3.12.md) - Query refinement
+- [v0.3 Planning](../../../../planning/version/v0.3/) - Design goals
+
+---

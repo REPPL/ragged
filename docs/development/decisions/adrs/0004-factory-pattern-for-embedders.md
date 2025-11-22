@@ -295,3 +295,13 @@ This implementation demonstrates several design principles:
 **Supersedes:** None
 
 **Superseded By:** None
+
+---
+
+## Related Documentation
+
+- [Pydantic Configuration (ADR-0002)](./0002-pydantic-for-configuration.md) - Configuration approach
+- [Dual Embedding Support (ADR-0006)](./0006-dual-embedding-model-support.md) - Multiple models
+- [Embedding Architecture](../../planning/architecture/) - System design
+
+---

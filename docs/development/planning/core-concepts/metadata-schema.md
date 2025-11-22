@@ -664,3 +664,13 @@ def test_academic_citation_format():
 ---
 
 **Next Steps**: See [duplicate-detection.md](./duplicate-detection.md) for content-based deduplication strategy.
+
+---
+
+## Related Documentation
+
+- [Document Normalisation](./document-normalisation.md) - Normalisation process
+- [Duplicate Detection](./duplicate-detection.md) - Uniqueness tracking
+- [Storage Architecture](../../architecture/) - Data storage
+
+---

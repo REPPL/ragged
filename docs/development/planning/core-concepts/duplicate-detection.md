@@ -804,3 +804,13 @@ def test_semantic_duplicate_detection():
 ---
 
 **Next Steps**: Implement in v0.2 alongside document normalisation pipeline.
+
+---
+
+## Related Documentation
+
+- [Document Normalisation](./document-normalisation.md) - Related concept
+- [Metadata Schema](./metadata-schema.md) - Document tracking
+- [Storage Architecture](../../architecture/) - System design
+
+---

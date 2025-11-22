@@ -638,3 +638,13 @@ Expert:    5%  (researchers)
 - v0.5-v1.0: Complete 4-level hierarchy
 
 **Next**: See [versioning-philosophy.md](./versioning-philosophy.md) for development approach.
+
+---
+
+## Related Documentation
+
+- [Progressive Disclosure Explained](../../../../explanation/progressive-disclosure-explained.md) - User-facing explanation
+- [CLI Enhancements](../../interfaces/cli/enhancements.md) - CLI design
+- [User Personas](./personal-memory-personas.md) - Target users
+
+---
