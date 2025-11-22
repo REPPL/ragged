@@ -2,6 +2,8 @@
 
 Comprehensive logging of all plugin actions for security monitoring
 and forensic analysis.
+
+SECURITY FIX (HIGH-3): Safe JSON parsing with depth and size limits
 """
 
 from dataclasses import dataclass, asdict
@@ -13,6 +15,115 @@ import json
 import logging
 
 logger = logging.getLogger(__name__)
+
+# SECURITY FIX (HIGH-3): JSON parsing limits to prevent DoS
+MAX_JSON_DEPTH = 10  # Maximum nesting depth for JSON structures
+MAX_JSON_STRING_LENGTH = 10000  # Maximum length for string values
+MAX_JSON_ARRAY_LENGTH = 1000  # Maximum array length
+MAX_JSON_OBJECT_KEYS = 100  # Maximum keys in object
+
+
+class AuditSecurityError(Exception):
+    """Raised when audit log parsing encounters malicious data."""
+
+    pass
+
+
+def _validate_json_structure(obj: Any, depth: int = 0) -> None:
+    """Validate JSON structure against security limits.
+
+    SECURITY FIX (HIGH-3): Prevents DoS via deeply nested or oversized JSON.
+
+    Args:
+        obj: Object to validate
+        depth: Current nesting depth
+
+    Raises:
+        AuditSecurityError: If structure violates security limits
+    """
+    if depth > MAX_JSON_DEPTH:
+        raise AuditSecurityError(f"JSON depth exceeds maximum of {MAX_JSON_DEPTH}")
+
+    if isinstance(obj, dict):
+        if len(obj) > MAX_JSON_OBJECT_KEYS:
+            raise AuditSecurityError(f"JSON object has too many keys (max {MAX_JSON_OBJECT_KEYS})")
+        for key, value in obj.items():
+            if not isinstance(key, str):
+                raise AuditSecurityError("JSON object keys must be strings")
+            if len(key) > MAX_JSON_STRING_LENGTH:
+                raise AuditSecurityError(f"JSON key exceeds maximum length of {MAX_JSON_STRING_LENGTH}")
+            _validate_json_structure(value, depth + 1)
+
+    elif isinstance(obj, list):
+        if len(obj) > MAX_JSON_ARRAY_LENGTH:
+            raise AuditSecurityError(f"JSON array exceeds maximum length of {MAX_JSON_ARRAY_LENGTH}")
+        for item in obj:
+            _validate_json_structure(item, depth + 1)
+
+    elif isinstance(obj, str):
+        if len(obj) > MAX_JSON_STRING_LENGTH:
+            raise AuditSecurityError(f"JSON string exceeds maximum length of {MAX_JSON_STRING_LENGTH}")
+
+    elif isinstance(obj, (int, float, bool, type(None))):
+        # Primitives are safe
+        pass
+
+    else:
+        raise AuditSecurityError(f"Unsupported JSON type: {type(obj).__name__}")
+
+
+def safe_json_loads(json_str: str) -> Dict[str, Any]:
+    """Safely parse JSON with structure validation.
+
+    SECURITY FIX (HIGH-3): Validates JSON structure before and after parsing.
+
+    Args:
+        json_str: JSON string to parse
+
+    Returns:
+        Parsed and validated JSON object
+
+    Raises:
+        AuditSecurityError: If JSON is malicious or violates limits
+        json.JSONDecodeError: If JSON is malformed
+    """
+    # Pre-validation: check raw string length
+    if len(json_str) > MAX_JSON_STRING_LENGTH * 2:
+        raise AuditSecurityError("JSON string too large")
+
+    # Parse JSON
+    try:
+        obj = json.loads(json_str)
+    except json.JSONDecodeError as e:
+        raise json.JSONDecodeError(f"Invalid JSON: {e.msg}", e.doc, e.pos)
+
+    # Post-validation: validate structure
+    _validate_json_structure(obj)
+
+    return obj
+
+
+def sanitize_details(details: Optional[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
+    """Sanitize details dictionary for safe logging.
+
+    SECURITY FIX (HIGH-3): Validates and sanitizes details before logging.
+
+    Args:
+        details: Details dictionary to sanitize
+
+    Returns:
+        Sanitized details or None if invalid
+    """
+    if details is None:
+        return None
+
+    try:
+        # Validate structure
+        _validate_json_structure(details)
+        return details
+    except AuditSecurityError as e:
+        logger.warning(f"Sanitizing malicious details: {e}")
+        return {"_sanitized": True, "_error": str(e)}
 
 
 class AuditEventType(Enum):
@@ -35,7 +146,10 @@ class AuditEventType(Enum):
 
 @dataclass
 class AuditEvent:
-    """Individual audit event."""
+    """Individual audit event.
+
+    SECURITY FIX (HIGH-3): Sanitizes details field to prevent malicious JSON.
+    """
 
     timestamp: str
     event_type: AuditEventType
@@ -47,7 +161,10 @@ class AuditEvent:
     duration_ms: int = 0
 
     def to_dict(self) -> Dict[str, Any]:
-        """Convert to dictionary for serialisation."""
+        """Convert to dictionary for serialisation (with sanitization).
+
+        SECURITY FIX (HIGH-3): Sanitizes details before serialisation.
+        """
         data = {
             "timestamp": self.timestamp,
             "event": self.event_type.value,
@@ -58,7 +175,8 @@ class AuditEvent:
         if self.user_id:
             data["user_id"] = self.user_id
         if self.details:
-            data["details"] = self.details
+            # SECURITY FIX (HIGH-3): Sanitize details before logging
+            data["details"] = sanitize_details(self.details)
         if self.duration_ms > 0:
             data["duration_ms"] = self.duration_ms
         return data
@@ -220,6 +338,8 @@ class AuditLogger:
     ) -> List[AuditEvent]:
         """Retrieve audit events with filtering.
 
+        SECURITY FIX (HIGH-3): Uses safe JSON parsing with structure validation.
+
         Args:
             plugin_name: Filter by plugin name
             event_type: Filter by event type
@@ -237,7 +357,8 @@ class AuditLogger:
             with open(self.log_path, "r") as f:
                 for line in f:
                     try:
-                        data = json.loads(line.strip())
+                        # SECURITY FIX (HIGH-3): Use safe JSON parsing
+                        data = safe_json_loads(line.strip())
                         event = AuditEvent.from_dict(data)
 
                         # Apply filters
@@ -254,8 +375,8 @@ class AuditLogger:
 
                         if len(events) >= limit:
                             break
-                    except json.JSONDecodeError:
-                        logger.warning(f"Invalid JSON in audit log: {line}")
+                    except (json.JSONDecodeError, AuditSecurityError) as e:
+                        logger.warning(f"Invalid/malicious JSON in audit log: {e}")
                         continue
 
         except Exception as e:
@@ -277,6 +398,8 @@ class AuditLogger:
     def clear_old_events(self, days: int = 90) -> int:
         """Clear events older than specified days.
 
+        SECURITY FIX (HIGH-3): Uses safe JSON parsing during cleanup.
+
         Args:
             days: Number of days to retain
 
@@ -294,14 +417,19 @@ class AuditLogger:
             with open(self.log_path, "r") as f:
                 for line in f:
                     try:
-                        data = json.loads(line.strip())
+                        # SECURITY FIX (HIGH-3): Use safe JSON parsing
+                        data = safe_json_loads(line.strip())
                         event_time = datetime.fromisoformat(data["timestamp"].replace("Z", "+00:00"))
                         if event_time.timestamp() >= cutoff:
                             kept_events.append(line)
                         else:
                             removed_count += 1
+                    except (json.JSONDecodeError, AuditSecurityError):
+                        # Skip malicious/malformed entries
+                        logger.warning("Removing malicious/malformed audit entry during cleanup")
+                        removed_count += 1
                     except Exception:
-                        # Keep malformed entries
+                        # Keep entries with other errors (e.g., timestamp issues)
                         kept_events.append(line)
 
             # Rewrite file with kept events
