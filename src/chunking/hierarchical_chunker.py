@@ -10,9 +10,7 @@ Child chunks link to their parent for improved context during generation.
 
 import re
 from dataclasses import dataclass
-from typing import List, Optional, Tuple
 
-from src.chunking.token_counter import count_tokens
 from src.config.settings import get_settings
 from src.utils.logging import get_logger
 
@@ -37,9 +35,9 @@ class HierarchicalChunk:
     text: str
     chunk_id: str
     level: str  # "parent" or "child"
-    parent_id: Optional[str] = None
-    parent_text: Optional[str] = None
-    child_ids: Optional[List[str]] = None
+    parent_id: str | None = None
+    parent_text: str | None = None
+    child_ids: list[str] | None = None
     position: int = 0
 
 
@@ -87,7 +85,7 @@ class HierarchicalChunker:
             f"HierarchicalChunker initialised (parent={parent_chunk_size}, child={child_chunk_size})"
         )
 
-    def split_text(self, text: str) -> List[str]:
+    def split_text(self, text: str) -> list[str]:
         """
         Split text into hierarchical chunks.
 
@@ -111,7 +109,7 @@ class HierarchicalChunker:
 
     def create_hierarchy(
         self, text: str, document_id: str = "doc"
-    ) -> List[HierarchicalChunk]:
+    ) -> list[HierarchicalChunk]:
         """
         Create full parent-child hierarchy.
 
@@ -183,7 +181,7 @@ class HierarchicalChunker:
             # Fallback: create simple chunks as children
             return self._fallback_chunks(text, document_id)
 
-    def _create_parent_chunks(self, text: str) -> List[str]:
+    def _create_parent_chunks(self, text: str) -> list[str]:
         """
         Create parent chunks (broader context).
 
@@ -197,7 +195,7 @@ class HierarchicalChunker:
             text, self.parent_chunk_size, self.parent_overlap
         )
 
-    def _create_child_chunks(self, parent_text: str) -> List[str]:
+    def _create_child_chunks(self, parent_text: str) -> list[str]:
         """
         Create child chunks within a parent chunk.
 
@@ -213,7 +211,7 @@ class HierarchicalChunker:
 
     def _split_with_overlap(
         self, text: str, chunk_size: int, overlap: int
-    ) -> List[str]:
+    ) -> list[str]:
         """
         Split text into chunks with overlap.
 
@@ -258,7 +256,7 @@ class HierarchicalChunker:
 
     def _fallback_chunks(
         self, text: str, document_id: str
-    ) -> List[HierarchicalChunk]:
+    ) -> list[HierarchicalChunk]:
         """
         Fallback to simple chunking if hierarchical fails.
 
@@ -289,7 +287,7 @@ class HierarchicalChunker:
         return chunks
 
     @staticmethod
-    def get_parent_text(chunk: HierarchicalChunk) -> Optional[str]:
+    def get_parent_text(chunk: HierarchicalChunk) -> str | None:
         """
         Get parent text for a child chunk.
 
@@ -305,7 +303,7 @@ class HierarchicalChunker:
 
     @staticmethod
     def format_with_parent(
-        child_text: str, parent_text: Optional[str]
+        child_text: str, parent_text: str | None
     ) -> str:
         """
         Format child text with parent context for LLM.

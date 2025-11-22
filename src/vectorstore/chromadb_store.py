@@ -1,8 +1,9 @@
 """ChromaDB implementation of VectorStore interface."""
 
-from typing import List, Dict, Any, Optional
-from pathlib import Path
 import logging
+from pathlib import Path
+from typing import Any
+
 import numpy as np
 
 try:
@@ -11,8 +12,8 @@ try:
 except ImportError:
     chromadb = None
 
-from ragged.vectorstore.interface import VectorStore, VectorStoreDocument, VectorStoreQueryResult
 from ragged.vectorstore.exceptions import VectorStoreConnectionError, VectorStoreNotFoundError
+from ragged.vectorstore.interface import VectorStore, VectorStoreDocument, VectorStoreQueryResult
 
 logger = logging.getLogger(__name__)
 
@@ -20,7 +21,7 @@ logger = logging.getLogger(__name__)
 class ChromaDBStore(VectorStore):
     """ChromaDB implementation of VectorStore."""
 
-    def __init__(self, config: Optional[Dict[str, Any]] = None):
+    def __init__(self, config: dict[str, Any] | None = None):
         """Initialise ChromaDB store.
 
         Args:
@@ -49,10 +50,10 @@ class ChromaDBStore(VectorStore):
 
     def add(
         self,
-        ids: List[str],
+        ids: list[str],
         embeddings: np.ndarray,
-        documents: List[str],
-        metadatas: List[Dict[str, Any]],
+        documents: list[str],
+        metadatas: list[dict[str, Any]],
         collection_name: str = "default",
     ) -> None:
         """Add documents to ChromaDB."""
@@ -77,7 +78,7 @@ class ChromaDBStore(VectorStore):
         query_embedding: np.ndarray,
         n_results: int = 10,
         collection_name: str = "default",
-        filter_dict: Optional[Dict[str, Any]] = None,
+        filter_dict: dict[str, Any] | None = None,
     ) -> VectorStoreQueryResult:
         """Search ChromaDB for similar documents."""
         try:
@@ -107,7 +108,7 @@ class ChromaDBStore(VectorStore):
             ids=results["ids"][0],
         )
 
-    def delete(self, document_ids: List[str], collection_name: str = "default") -> int:
+    def delete(self, document_ids: list[str], collection_name: str = "default") -> int:
         """Delete documents from ChromaDB."""
         try:
             collection = self.client.get_collection(name=collection_name)
@@ -119,10 +120,10 @@ class ChromaDBStore(VectorStore):
 
     def update(
         self,
-        ids: List[str],
-        embeddings: Optional[np.ndarray] = None,
-        documents: Optional[List[str]] = None,
-        metadatas: Optional[List[Dict[str, Any]]] = None,
+        ids: list[str],
+        embeddings: np.ndarray | None = None,
+        documents: list[str] | None = None,
+        metadatas: list[dict[str, Any]] | None = None,
         collection_name: str = "default",
     ) -> int:
         """Update documents in ChromaDB."""
@@ -142,7 +143,7 @@ class ChromaDBStore(VectorStore):
             logger.error(f"Failed to update documents: {e}")
             return 0
 
-    def get(self, document_ids: List[str], collection_name: str = "default") -> List[VectorStoreDocument]:
+    def get(self, document_ids: list[str], collection_name: str = "default") -> list[VectorStoreDocument]:
         """Get documents by ID from ChromaDB."""
         try:
             collection = self.client.get_collection(name=collection_name)
@@ -170,7 +171,7 @@ class ChromaDBStore(VectorStore):
         except Exception:
             return 0
 
-    def list_collections(self) -> List[str]:
+    def list_collections(self) -> list[str]:
         """List all collections."""
         try:
             collections = self.client.list_collections()
@@ -179,7 +180,7 @@ class ChromaDBStore(VectorStore):
             logger.error(f"Failed to list collections: {e}")
             return []
 
-    def create_collection(self, name: str, metadata: Optional[Dict] = None) -> None:
+    def create_collection(self, name: str, metadata: dict | None = None) -> None:
         """Create a new collection."""
         # ChromaDB requires non-empty metadata
         collection_metadata = metadata if metadata else {"created_by": "ragged"}

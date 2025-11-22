@@ -7,7 +7,7 @@ Uses Click's built-in shell completion support (Click 8.0+).
 import os
 import sys
 from pathlib import Path
-from typing import Literal, Optional
+from typing import Literal
 
 from src.cli.common import click, console
 
@@ -32,7 +32,7 @@ ShellType = Literal["bash", "zsh", "fish"]
     is_flag=True,
     help="Show completion script without installing",
 )
-def completion(shell: Optional[str], install: bool, show: bool) -> None:
+def completion(shell: str | None, install: bool, show: bool) -> None:
     """Install shell completion for ragged CLI.
 
     Supports bash, zsh, and fish shells. Auto-detects your shell if not specified.
@@ -88,7 +88,7 @@ def completion(shell: Optional[str], install: bool, show: bool) -> None:
     _show_instructions(shell)  # type: ignore
 
 
-def _detect_shell() -> Optional[ShellType]:
+def _detect_shell() -> ShellType | None:
     """Auto-detect the current shell."""
     # Try SHELL environment variable
     shell_path = os.environ.get("SHELL", "")
@@ -205,12 +205,12 @@ def _show_instructions(shell: ShellType) -> None:
     if shell in ("bash", "zsh"):
         console.print(f"  1. Add to your {config_file}:")
         console.print(f"     ragged completion --shell {shell} --show >> {config_file}")
-        console.print(f"\n  2. Reload your shell:")
+        console.print("\n  2. Reload your shell:")
         console.print(f"     source {config_file}")
     else:  # fish
-        console.print(f"  1. Save completion script:")
+        console.print("  1. Save completion script:")
         console.print(f"     ragged completion --shell {shell} --show > {config_file}")
-        console.print(f"\n  2. Restart your shell or reload config")
+        console.print("\n  2. Restart your shell or reload config")
 
     console.print(
         "\n[bold yellow]Current Detection:[/bold yellow]"

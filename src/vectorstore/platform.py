@@ -1,13 +1,12 @@
 """Platform detection for backend selection."""
 
-import platform
 import logging
-from typing import Dict
+import platform
 
 logger = logging.getLogger(__name__)
 
 
-def detect_platform_backend_support() -> Dict[str, bool]:
+def detect_platform_backend_support() -> dict[str, bool]:
     """Detect which backends are available on current platform.
 
     Returns:
@@ -63,7 +62,7 @@ def get_default_backend() -> str:
     return "chromadb"
 
 
-def get_platform_info() -> Dict[str, str]:
+def get_platform_info() -> dict[str, str]:
     """Get detailed platform information.
 
     Returns:

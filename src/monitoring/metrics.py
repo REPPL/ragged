@@ -8,7 +8,7 @@ import json
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from src.utils.logging import get_logger
 
@@ -24,15 +24,15 @@ class QualityMetrics:
     duration_ms: float
     chunks_retrieved: int
     avg_confidence: float
-    context_precision: Optional[float] = None
-    context_recall: Optional[float] = None
-    faithfulness: Optional[float] = None
-    answer_relevancy: Optional[float] = None
-    ragas_score: Optional[float] = None
+    context_precision: float | None = None
+    context_recall: float | None = None
+    faithfulness: float | None = None
+    answer_relevancy: float | None = None
+    ragas_score: float | None = None
     success: bool = True
-    metadata: Dict[str, Any] = field(default_factory=dict)
+    metadata: dict[str, Any] = field(default_factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary for storage."""
         return {
             "query_hash": self.query_hash,
@@ -50,7 +50,7 @@ class QualityMetrics:
         }
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> "QualityMetrics":
+    def from_dict(cls, data: dict[str, Any]) -> "QualityMetrics":
         """Create from dictionary."""
         return cls(
             query_hash=data["query_hash"],
@@ -75,7 +75,7 @@ class MetricsCollector:
     Uses JSON file storage for simplicity (MVP approach).
     """
 
-    def __init__(self, storage_path: Optional[Path] = None):
+    def __init__(self, storage_path: Path | None = None):
         """
         Initialise metrics collector.
 
@@ -94,7 +94,7 @@ class MetricsCollector:
 
             os.chmod(self.storage_path, 0o600)
 
-        self.metrics: List[QualityMetrics] = []
+        self.metrics: list[QualityMetrics] = []
         self._load()
 
     def _load(self) -> None:
@@ -103,7 +103,7 @@ class MetricsCollector:
             return
 
         try:
-            with open(self.storage_path, "r") as f:
+            with open(self.storage_path) as f:
                 data = json.load(f)
 
             self.metrics = [QualityMetrics.from_dict(m) for m in data.get("metrics", [])]
@@ -142,7 +142,7 @@ class MetricsCollector:
         self.metrics.append(metrics)
         self._save()
 
-    def get_recent(self, limit: int = 100) -> List[QualityMetrics]:
+    def get_recent(self, limit: int = 100) -> list[QualityMetrics]:
         """
         Get recent metrics.
 
@@ -154,7 +154,7 @@ class MetricsCollector:
         """
         return sorted(self.metrics, key=lambda m: m.timestamp, reverse=True)[:limit]
 
-    def get_statistics(self, last_n: int = 100) -> Dict[str, Any]:
+    def get_statistics(self, last_n: int = 100) -> dict[str, Any]:
         """
         Compute aggregate statistics.
 
@@ -280,7 +280,7 @@ class MetricsCollector:
         output.append("")
         return "\n".join(output)
 
-    def export(self, output_path: Path, last_n: Optional[int] = None) -> None:
+    def export(self, output_path: Path, last_n: int | None = None) -> None:
         """
         Export metrics to JSON file.
 
@@ -323,7 +323,7 @@ class MetricsCollector:
 
 
 # Convenience function
-def create_metrics_collector(storage_path: Optional[Path] = None) -> MetricsCollector:
+def create_metrics_collector(storage_path: Path | None = None) -> MetricsCollector:
     """
     Create a metrics collector.
 

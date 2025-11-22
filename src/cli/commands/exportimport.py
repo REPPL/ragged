@@ -4,11 +4,10 @@ Enables data backup, migration, and portability.
 """
 
 import json
-import shutil
 import sys
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 import click
 
@@ -57,7 +56,7 @@ def export() -> None:
     help="Compress output with gzip",
 )
 def backup_command(
-    output_file: Optional[str],
+    output_file: str | None,
     include_embeddings: bool,
     include_config: bool,
     compress: bool,
@@ -82,7 +81,7 @@ def backup_command(
 
         output_path = Path(output_file)
 
-        console.print(f"[bold]Creating backup...[/bold]")
+        console.print("[bold]Creating backup...[/bold]")
         console.print(f"Output: {output_path}")
 
         # Initialize vector store
@@ -99,7 +98,7 @@ def backup_command(
             return
 
         # Build export data structure
-        export_data: Dict[str, Any] = {
+        export_data: dict[str, Any] = {
             "version": __version__,
             "export_timestamp": datetime.now().isoformat(),
             "ragged_version": __version__,
@@ -151,7 +150,7 @@ def backup_command(
         file_size = output_path.stat().st_size
         size_mb = file_size / (1024 * 1024)
 
-        console.print(f"\n[green]✓[/green] Backup created successfully")
+        console.print("\n[green]✓[/green] Backup created successfully")
         console.print(f"  File: {output_path}")
         console.print(f"  Size: {size_mb:.2f} MB")
         console.print(f"  Chunks: {len(chunks)}")
@@ -197,12 +196,13 @@ def restore_command(
         ragged export restore backup.json.gz
     """
     try:
-        from src.storage.vector_store import VectorStore
         import numpy as np
+
+        from src.storage.vector_store import VectorStore
 
         backup_path = Path(backup_file)
 
-        console.print(f"[bold]Restoring from backup...[/bold]")
+        console.print("[bold]Restoring from backup...[/bold]")
         console.print(f"File: {backup_path}")
 
         # Read backup file
@@ -213,7 +213,7 @@ def restore_command(
             with gzip.open(backup_path, "rt", encoding="utf-8") as f:
                 backup_data = json.load(f)
         else:
-            with open(backup_path, "r", encoding="utf-8") as f:
+            with open(backup_path, encoding="utf-8") as f:
                 backup_data = json.load(f)
 
         # Validate backup data
@@ -225,7 +225,7 @@ def restore_command(
         total_chunks = len(backup_data["chunks"])
         has_embeddings = backup_data.get("include_embeddings", False)
 
-        console.print(f"\nBackup information:")
+        console.print("\nBackup information:")
         console.print(f"  Version: {backup_version}")
         console.print(f"  Timestamp: {backup_data.get('export_timestamp', 'unknown')}")
         console.print(f"  Chunks: {total_chunks}")
@@ -311,7 +311,7 @@ def restore_command(
                 progress = ((i + len(ids_to_add[i:end_idx])) / len(ids_to_add)) * 100
                 console.print(f"Progress: {progress:.1f}%")
 
-        console.print(f"\n[green]✓[/green] Restore completed successfully")
+        console.print("\n[green]✓[/green] Restore completed successfully")
         console.print(f"  Restored: {len(ids_to_add)} chunks")
         if skipped > 0:
             console.print(f"  Skipped: {skipped} existing chunks")
@@ -349,16 +349,16 @@ def info_command(backup_file: str) -> None:
             with gzip.open(backup_path, "rt", encoding="utf-8") as f:
                 backup_data = json.load(f)
         else:
-            with open(backup_path, "r", encoding="utf-8") as f:
+            with open(backup_path, encoding="utf-8") as f:
                 backup_data = json.load(f)
 
         # Display information
-        console.print(f"\n[bold]Backup Information[/bold]")
+        console.print("\n[bold]Backup Information[/bold]")
         console.print(f"File: {backup_path}")
         console.print(f"Size: {backup_path.stat().st_size / (1024 * 1024):.2f} MB")
         console.print()
 
-        console.print(f"[bold]Content:[/bold]")
+        console.print("[bold]Content:[/bold]")
         console.print(f"  Ragged Version: {backup_data.get('ragged_version', 'unknown')}")
         console.print(f"  Export Timestamp: {backup_data.get('export_timestamp', 'unknown')}")
         console.print(f"  Collection Name: {backup_data.get('collection_name', 'unknown')}")
@@ -366,14 +366,14 @@ def info_command(backup_file: str) -> None:
         console.print(f"  Embeddings Included: {backup_data.get('include_embeddings', False)}")
 
         if backup_data.get("config"):
-            console.print(f"\n[bold]Configuration:[/bold]")
+            console.print("\n[bold]Configuration:[/bold]")
             for key, value in backup_data["config"].items():
                 console.print(f"  {key}: {value}")
 
         # Analyze document distribution
         if backup_data.get("chunks"):
-            console.print(f"\n[bold]Document Distribution:[/bold]")
-            doc_counts: Dict[str, int] = {}
+            console.print("\n[bold]Document Distribution:[/bold]")
+            doc_counts: dict[str, int] = {}
             for chunk in backup_data["chunks"]:
                 metadata = chunk.get("metadata", {})
                 doc_path = metadata.get("document_path", "Unknown")

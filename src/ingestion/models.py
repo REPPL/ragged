@@ -5,9 +5,8 @@ This module defines Pydantic models for documents, chunks, and metadata
 with validation and type safety.
 """
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import List, Optional
 from uuid import uuid4
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
@@ -25,9 +24,9 @@ class DocumentMetadata(BaseModel):
     created_at: datetime
     modified_at: datetime
     format: str = Field(description="Document format (pdf, txt, md, html)")
-    title: Optional[str] = None
-    author: Optional[str] = None
-    page_count: Optional[int] = Field(default=None, gt=0)
+    title: str | None = None
+    author: str | None = None
+    page_count: int | None = Field(default=None, gt=0)
 
     @field_validator("file_hash", "content_hash")
     @classmethod
@@ -68,10 +67,10 @@ class ChunkMetadata(BaseModel):
     overlap_with_next: int = Field(
         ge=0, description="Number of characters overlapping with next chunk"
     )
-    page_number: Optional[int] = Field(
+    page_number: int | None = Field(
         default=None, ge=1, description="Page number where this chunk starts (for PDFs)"
     )
-    page_range: Optional[str] = Field(
+    page_range: str | None = Field(
         default=None, description="Page range if chunk spans multiple pages (e.g., '5-7')"
     )
 
@@ -108,7 +107,7 @@ class Document(BaseModel):
     document_id: str = Field(default_factory=lambda: str(uuid4()))
     content: str = Field(min_length=1, description="Full document content")
     metadata: DocumentMetadata
-    chunks: List[Chunk] = Field(default_factory=list)
+    chunks: list[Chunk] = Field(default_factory=list)
 
     @classmethod
     def from_file(
@@ -116,9 +115,9 @@ class Document(BaseModel):
         file_path: Path,
         content: str,
         format: str,
-        title: Optional[str] = None,
-        author: Optional[str] = None,
-        page_count: Optional[int] = None,
+        title: str | None = None,
+        author: str | None = None,
+        page_count: int | None = None,
     ) -> "Document":
         """
         Create a Document from a file.
@@ -153,8 +152,8 @@ class Document(BaseModel):
             file_size=file_size,
             file_hash=file_hash,
             content_hash=content_hash,
-            created_at=datetime.fromtimestamp(stats.st_ctime, tz=timezone.utc),
-            modified_at=datetime.fromtimestamp(stats.st_mtime, tz=timezone.utc),
+            created_at=datetime.fromtimestamp(stats.st_ctime, tz=UTC),
+            modified_at=datetime.fromtimestamp(stats.st_mtime, tz=UTC),
             format=format,
             title=title,
             author=author,
@@ -163,7 +162,7 @@ class Document(BaseModel):
 
         return cls(content=content, metadata=metadata)
 
-    def add_chunks(self, chunks: List[Chunk]) -> None:
+    def add_chunks(self, chunks: list[Chunk]) -> None:
         """
         Add chunks to the document.
 

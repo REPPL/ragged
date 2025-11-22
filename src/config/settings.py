@@ -13,8 +13,8 @@ from typing import Any, Literal
 from pydantic import Field, ValidationInfo, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-from src.utils.path_utils import ensure_directory
 from src.config.feature_flags import FeatureFlags
+from src.utils.path_utils import ensure_directory
 
 
 class EmbeddingModel(str, Enum):
@@ -160,6 +160,35 @@ class Settings(BaseSettings):
         description="Runtime feature toggles for v0.2.9 features"
     )
 
+    # Vision Configuration (v0.5.0: ColPali Vision Integration)
+    vision_enabled: bool = Field(
+        default=False,
+        description="Enable vision embeddings for documents (requires GPU or Apple Silicon)"
+    )
+    vision_model_name: str = Field(
+        default="vidore/colpali-v1.3-hf",
+        description="HuggingFace model for vision embeddings"
+    )
+    vision_device: str = Field(
+        default="auto",
+        description="Device for vision processing: 'auto', 'cuda', 'mps', or 'cpu'"
+    )
+    vision_batch_size: int = Field(
+        default=4,
+        gt=0,
+        description="Batch size for vision embedding (adjust based on VRAM: 4GB=1-2, 8GB=4-6, 16GB=8-12)"
+    )
+    vision_pdf_dpi: int = Field(
+        default=150,
+        gt=0,
+        le=600,
+        description="DPI for PDF to image conversion (150 recommended, higher=slower)"
+    )
+    vision_cache_dir: Path | None = Field(
+        default=None,
+        description="Custom directory for vision model cache (None = HuggingFace default)"
+    )
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
@@ -265,10 +294,11 @@ class Settings(BaseSettings):
         config_file = self.data_dir / "config.yml"
         if config_file.exists():
             try:
-                import yaml  # type: ignore[import-untyped]
                 import os
 
-                with open(config_file, "r") as f:
+                import yaml  # type: ignore[import-untyped]
+
+                with open(config_file) as f:
                     user_config = yaml.safe_load(f) or {}
 
                 # Override with user config (if not set by environment variable)
@@ -293,7 +323,7 @@ class Settings(BaseSettings):
                 logger.warning(f"Invalid config structure: {e}")
 
 
-@functools.lru_cache()
+@functools.lru_cache
 def get_settings() -> Settings:
     """
     Get cached settings instance.

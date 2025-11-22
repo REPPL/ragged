@@ -90,7 +90,7 @@ def load_json(filepath: Path) -> Any:
 
     Security: This replaces pickle.load() to prevent arbitrary code execution  # noqa: S301
     """
-    with open(filepath, "r", encoding="utf-8") as f:
+    with open(filepath, encoding="utf-8") as f:
         return json.load(f)
 
 

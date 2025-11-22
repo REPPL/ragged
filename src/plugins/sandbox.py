@@ -4,20 +4,18 @@ Provides secure execution environment for plugins with resource limits
 and permission enforcement.
 """
 
-from dataclasses import dataclass
-from typing import Optional, Dict, Any, Callable
-from pathlib import Path
-import subprocess
-import resource
-import os
-import signal
 import logging
-import time
+import os
+import resource
+import signal
+import subprocess
 import sys
-import platform
+import time
+from dataclasses import dataclass
 from enum import Enum
+from pathlib import Path
 
-from ragged.plugins.permissions import PermissionType, PermissionManager
+from ragged.plugins.permissions import PermissionManager, PermissionType
 
 logger = logging.getLogger(__name__)
 
@@ -69,9 +67,9 @@ class SandboxExecutionResult:
     """Result of executing code in sandbox."""
 
     result: SandboxResult
-    output: Optional[str] = None
-    error: Optional[str] = None
-    exit_code: Optional[int] = None
+    output: str | None = None
+    error: str | None = None
+    exit_code: int | None = None
     duration_ms: int = 0
     peak_memory_mb: int = 0
 
@@ -82,8 +80,8 @@ class PluginSandbox:
     def __init__(
         self,
         plugin_name: str,
-        config: Optional[SandboxConfig] = None,
-        permission_manager: Optional[PermissionManager] = None,
+        config: SandboxConfig | None = None,
+        permission_manager: PermissionManager | None = None,
     ):
         """Initialise plugin sandbox.
 
@@ -95,13 +93,13 @@ class PluginSandbox:
         self.plugin_name = plugin_name
         self.config = config or SandboxConfig()
         self.permission_manager = permission_manager
-        self._process: Optional[subprocess.Popen] = None
+        self._process: subprocess.Popen | None = None
 
     def execute(
         self,
         executable: str,
         args: list[str],
-        env: Optional[Dict[str, str]] = None,
+        env: dict[str, str] | None = None,
     ) -> SandboxExecutionResult:
         """Execute plugin in sandboxed environment with path validation.
 
@@ -341,7 +339,7 @@ class PluginSandbox:
 
         logger.debug(f"Validated {len(args)} arguments")
 
-    def _prepare_environment(self, env: Optional[Dict[str, str]]) -> Dict[str, str]:
+    def _prepare_environment(self, env: dict[str, str] | None) -> dict[str, str]:
         """Prepare restricted environment variables.
 
         SECURITY FIX (CRITICAL-3): Implements network isolation

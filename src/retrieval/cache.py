@@ -5,11 +5,10 @@ Improves query performance by caching retrieval results.
 v0.2.10 FEAT-SEC-002: Added session isolation to prevent cross-user data leakage.
 """
 
-from typing import Optional, Any, Dict, Tuple
 from collections import OrderedDict
 from dataclasses import dataclass, field
 from datetime import datetime
-import json
+from typing import Any
 
 from src.utils.hashing import hash_content, hash_query
 from src.utils.logging import get_logger
@@ -47,7 +46,7 @@ class LRUCache:
     def __init__(
         self,
         maxsize: int = 128,
-        ttl_seconds: Optional[int] = None
+        ttl_seconds: int | None = None
     ):
         """Initialize LRU cache.
 
@@ -61,7 +60,7 @@ class LRUCache:
         self._hits = 0
         self._misses = 0
 
-    def _make_key(self, query: str, session_id: Optional[str] = None, **kwargs: Any) -> str:
+    def _make_key(self, query: str, session_id: str | None = None, **kwargs: Any) -> str:
         """Create cache key from query and parameters with session isolation.
 
         Args:
@@ -91,7 +90,7 @@ class LRUCache:
         # Hash for fixed-length key
         return hash_content(key_string)
 
-    def get(self, query: str, session_id: Optional[str] = None, **kwargs: Any) -> Optional[Any]:
+    def get(self, query: str, session_id: str | None = None, **kwargs: Any) -> Any | None:
         """Get cached result if available.
 
         Args:
@@ -134,7 +133,7 @@ class LRUCache:
 
         return entry.value
 
-    def set(self, query: str, value: Any, session_id: Optional[str] = None, **kwargs: Any) -> None:
+    def set(self, query: str, value: Any, session_id: str | None = None, **kwargs: Any) -> None:
         """Store result in cache.
 
         Args:
@@ -179,7 +178,7 @@ class LRUCache:
         self._misses = 0
         logger.info(f"Cleared {count} cache entries")
 
-    def invalidate(self, query: str, session_id: Optional[str] = None, **kwargs: Any) -> bool:
+    def invalidate(self, query: str, session_id: str | None = None, **kwargs: Any) -> bool:
         """Invalidate specific cache entry.
 
         Args:
@@ -199,7 +198,7 @@ class LRUCache:
 
         return False
 
-    def stats(self) -> Dict[str, Any]:
+    def stats(self) -> dict[str, Any]:
         """Get cache statistics.
 
         Returns:
@@ -244,8 +243,8 @@ class QueryCache(LRUCache):
         collection: str = "default",
         method: str = "hybrid",
         top_k: int = 5,
-        session_id: Optional[str] = None
-    ) -> Optional[Any]:
+        session_id: str | None = None
+    ) -> Any | None:
         """Get cached query result.
 
         Args:
@@ -275,7 +274,7 @@ class QueryCache(LRUCache):
         collection: str = "default",
         method: str = "hybrid",
         top_k: int = 5,
-        session_id: Optional[str] = None
+        session_id: str | None = None
     ) -> None:
         """Store query result in cache.
 

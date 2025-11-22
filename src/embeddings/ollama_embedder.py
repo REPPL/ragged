@@ -4,8 +4,7 @@ Ollama-based embedding implementation.
 Uses Ollama API to generate embeddings using models like nomic-embed-text.
 """
 
-import time
-from typing import TYPE_CHECKING, List, Optional
+from typing import TYPE_CHECKING
 
 import numpy as np
 
@@ -21,11 +20,10 @@ from src.config.constants import (
     DEFAULT_API_TIMEOUT,
     DEFAULT_EMBEDDING_DIMENSION,
     DEFAULT_MAX_RETRIES,
-    EXPONENTIAL_BACKOFF_BASE,
 )
 from src.config.settings import get_settings
 from src.embeddings.base import BaseEmbedder
-from src.exceptions import LLMConnectionError, EmbeddingError
+from src.exceptions import EmbeddingError, LLMConnectionError
 from src.utils.circuit_breaker import CircuitBreaker
 from src.utils.logging import get_logger
 from src.utils.retry import with_retry
@@ -52,7 +50,7 @@ class OllamaEmbedder(BaseEmbedder):
     def __init__(
         self,
         model_name: str = "nomic-embed-text",
-        base_url: Optional[str] = None,
+        base_url: str | None = None,
         timeout: int = DEFAULT_API_TIMEOUT,
         max_retries: int = DEFAULT_MAX_RETRIES,
     ):
@@ -152,7 +150,7 @@ class OllamaEmbedder(BaseEmbedder):
         # v0.2.9: Use advanced error recovery
         return self._embed_text_internal(text)
 
-    def embed_batch(self, texts: List[str]) -> np.ndarray:
+    def embed_batch(self, texts: list[str]) -> np.ndarray:
         """Embed multiple texts (calls embed_text for each)."""
         embeddings = []
 

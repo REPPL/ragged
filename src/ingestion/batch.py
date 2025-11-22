@@ -5,25 +5,23 @@ duplicate detection, graceful error handling, and memory management.
 """
 
 import gc
-import psutil  # type: ignore[import-untyped]
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
-from typing import List, Optional
 
+import psutil  # type: ignore[import-untyped]
 from rich.console import Console
-from rich.progress import Progress, TaskID
+from rich.progress import Progress
 
 from src.chunking.splitters import chunk_document
 from src.config.constants import DEFAULT_MEMORY_LIMIT_PERCENTAGE
-from src.config.settings import get_settings
 from src.embeddings.base import BaseEmbedder
 from src.embeddings.factory import get_embedder
+from src.exceptions import MemoryLimitExceededError
 from src.ingestion.loaders import load_document
 from src.storage.vector_store import VectorStore
 from src.utils.logging import get_logger
-from src.utils.resource_governor import get_governor, ResourcePriority
-from src.exceptions import MemoryLimitExceededError
+from src.utils.resource_governor import ResourcePriority, get_governor
 
 logger = get_logger(__name__)
 
@@ -43,10 +41,10 @@ class IngestionResult:
 
     file_path: Path
     status: IngestionStatus
-    document_id: Optional[str] = None
+    document_id: str | None = None
     chunks: int = 0
-    error: Optional[str] = None
-    duplicate_of: Optional[str] = None
+    error: str | None = None
+    duplicate_of: str | None = None
 
 
 @dataclass
@@ -59,7 +57,7 @@ class BatchSummary:
     skipped: int
     failed: int
     total_chunks: int
-    results: List[IngestionResult]
+    results: list[IngestionResult]
 
 
 class BatchIngester:
@@ -70,7 +68,7 @@ class BatchIngester:
         console: Console,
         continue_on_error: bool = True,
         skip_duplicates: bool = True,
-        memory_limit_mb: Optional[int] = None,
+        memory_limit_mb: int | None = None,
         use_resource_governor: bool = True,
     ):
         """Initialize batch ingester.
@@ -136,8 +134,8 @@ class BatchIngester:
 
     def ingest_batch(
         self,
-        file_paths: List[Path],
-        progress: Optional[Progress] = None,
+        file_paths: list[Path],
+        progress: Progress | None = None,
     ) -> BatchSummary:
         """
         Ingest multiple documents with progress reporting.

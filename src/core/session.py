@@ -16,13 +16,13 @@ Security Context:
 
 import threading
 import uuid
-from datetime import datetime, timedelta
-from pathlib import Path
-from typing import Dict, Optional, Set
 from dataclasses import dataclass, field
+from datetime import datetime
+from pathlib import Path
+from typing import Optional
 
 from src.utils.logging import get_logger
-from src.utils.serialization import save_json, load_json
+from src.utils.serialization import load_json, save_json
 
 logger = get_logger(__name__)
 
@@ -44,7 +44,7 @@ class Session:
     session_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     created_at: datetime = field(default_factory=datetime.now)
     last_accessed: datetime = field(default_factory=datetime.now)
-    metadata: Dict[str, any] = field(default_factory=dict)
+    metadata: dict[str, any] = field(default_factory=dict)
 
     def touch(self) -> None:
         """Update last accessed timestamp."""
@@ -62,7 +62,7 @@ class Session:
         age = datetime.now() - self.last_accessed
         return age.total_seconds() > ttl_seconds
 
-    def to_dict(self) -> Dict[str, any]:
+    def to_dict(self) -> dict[str, any]:
         """Convert session to dictionary for serialization.
 
         Returns:
@@ -76,7 +76,7 @@ class Session:
         }
 
     @classmethod
-    def from_dict(cls, data: Dict[str, any]) -> "Session":
+    def from_dict(cls, data: dict[str, any]) -> "Session":
         """Create session from dictionary.
 
         Args:
@@ -121,7 +121,7 @@ class SessionManager:
         self,
         session_ttl: int = 3600,
         enable_persistence: bool = False,
-        session_dir: Optional[Path] = None,
+        session_dir: Path | None = None,
     ):
         """Initialize session manager.
 
@@ -135,11 +135,11 @@ class SessionManager:
         self.session_dir = session_dir or Path.home() / ".ragged" / "sessions"
 
         # Active sessions
-        self._sessions: Dict[str, Session] = {}
+        self._sessions: dict[str, Session] = {}
         self._session_lock = threading.RLock()
 
         # Cleanup tracking
-        self._cleanup_thread: Optional[threading.Thread] = None
+        self._cleanup_thread: threading.Thread | None = None
         self._cleanup_interval = 300  # 5 minutes
         self._cleanup_stop = threading.Event()
 
@@ -157,7 +157,7 @@ class SessionManager:
         cls,
         session_ttl: int = 3600,
         enable_persistence: bool = False,
-        session_dir: Optional[Path] = None,
+        session_dir: Path | None = None,
     ) -> "SessionManager":
         """Get singleton instance of SessionManager.
 
@@ -177,7 +177,7 @@ class SessionManager:
                     cls._instance = cls(session_ttl, enable_persistence, session_dir)
         return cls._instance
 
-    def create_session(self, metadata: Optional[Dict[str, any]] = None) -> Session:
+    def create_session(self, metadata: dict[str, any] | None = None) -> Session:
         """Create a new session with unique ID.
 
         Args:
@@ -199,7 +199,7 @@ class SessionManager:
         logger.info(f"Created session: {session.session_id}")
         return session
 
-    def get_session(self, session_id: str) -> Optional[Session]:
+    def get_session(self, session_id: str) -> Session | None:
         """Retrieve session by ID.
 
         Args:
@@ -251,7 +251,7 @@ class SessionManager:
         logger.info(f"Deleted session: {session_id}")
         return True
 
-    def get_active_sessions(self) -> Set[str]:
+    def get_active_sessions(self) -> set[str]:
         """Get set of active (non-expired) session IDs.
 
         Returns:
@@ -379,7 +379,7 @@ class SessionManager:
 
         logger.info(f"SessionManager shutdown complete ({len(self._sessions)} sessions)")
 
-    def get_stats(self) -> Dict[str, any]:
+    def get_stats(self) -> dict[str, any]:
         """Get session manager statistics.
 
         Returns:

@@ -1,12 +1,12 @@
 """Hybrid retrieval combining vector and keyword search."""
 
-from typing import Any, List, Literal, Optional
-from dataclasses import dataclass
 import logging
+from dataclasses import dataclass
+from typing import Any, Literal
 
-from src.retrieval.retriever import Retriever, RetrievedChunk
 from src.retrieval.bm25 import BM25Retriever
 from src.retrieval.fusion import reciprocal_rank_fusion, weighted_fusion
+from src.retrieval.retriever import RetrievedChunk, Retriever
 
 logger = logging.getLogger(__name__)
 
@@ -35,7 +35,7 @@ class HybridRetriever:
         self,
         vector_retriever: Retriever,
         bm25_retriever: BM25Retriever,
-        config: Optional[HybridConfig] = None,
+        config: HybridConfig | None = None,
     ):
         """Initialize hybrid retriever.
 
@@ -52,8 +52,8 @@ class HybridRetriever:
         self,
         query: str,
         top_k: int = 5,
-        method: Optional[Literal["vector", "bm25", "hybrid"]] = None,
-    ) -> List[RetrievedChunk]:
+        method: Literal["vector", "bm25", "hybrid"] | None = None,
+    ) -> list[RetrievedChunk]:
         """Retrieve relevant chunks using specified method.
 
         Args:
@@ -75,7 +75,7 @@ class HybridRetriever:
         else:
             raise ValueError(f"Unknown retrieval method: {method}")
 
-    def _vector_only(self, query: str, top_k: int) -> List[RetrievedChunk]:
+    def _vector_only(self, query: str, top_k: int) -> list[RetrievedChunk]:
         """Vector search only."""
         logger.debug(f"Vector-only retrieval for: {query}")
         return self.vector.retrieve(query, k=top_k)
@@ -108,7 +108,7 @@ class HybridRetriever:
             metadata=metadata,
         )
 
-    def _bm25_only(self, query: str, top_k: int) -> List[RetrievedChunk]:
+    def _bm25_only(self, query: str, top_k: int) -> list[RetrievedChunk]:
         """BM25 search only."""
         logger.debug(f"BM25-only retrieval for: {query}")
 
@@ -122,7 +122,7 @@ class HybridRetriever:
 
         return chunks
 
-    def _hybrid_search(self, query: str, top_k: int) -> List[RetrievedChunk]:
+    def _hybrid_search(self, query: str, top_k: int) -> list[RetrievedChunk]:
         """Hybrid search combining vector and BM25."""
         logger.debug(f"Hybrid retrieval for: {query}")
 
@@ -184,9 +184,9 @@ class HybridRetriever:
 
     def update_bm25_index(
         self,
-        documents: List[str],
-        doc_ids: List[str],
-        metadatas: Optional[List[dict[str, Any]]] = None,
+        documents: list[str],
+        doc_ids: list[str],
+        metadatas: list[dict[str, Any]] | None = None,
     ) -> None:
         """Update BM25 index with new documents.
 

@@ -5,13 +5,13 @@ v0.3.5: Integrates PDF analysis and correction into document ingestion.
 
 from pathlib import Path
 
-from src.correction.analyzer import PDFAnalyzer, AnalyzerConfig
-from src.correction.corrector import PDFCorrector, CorrectorConfig
+from src.correction.analyzer import AnalyzerConfig, PDFAnalyzer
+from src.correction.corrector import CorrectorConfig, PDFCorrector
 from src.correction.schemas import AnalysisResult, CorrectionResult
 from src.correction.transformers import (
-    RotationTransformer,
     DuplicateRemover,
     PageReorderTransformer,
+    RotationTransformer,
 )
 from src.utils.logging import get_logger
 
@@ -41,10 +41,10 @@ class CorrectionPipeline:
 
         # Register detectors
         from src.correction.detectors import (
-            RotationDetector,
-            PageOrderDetector,
             DuplicateDetector,
+            PageOrderDetector,
             QualityDetector,
+            RotationDetector,
         )
 
         self.analyzer.register_detector("rotation", RotationDetector())

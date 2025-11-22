@@ -2,12 +2,11 @@
 
 import json
 import sys
-from typing import Literal, Optional, cast
+from typing import Literal, cast
 
 import click
 
-from src.cli.common import console, ProgressType
-from src.cli.formatters import FORMAT_CHOICES, print_formatted
+from src.cli.common import ProgressType, console
 from src.utils.logging import get_logger
 
 logger = get_logger(__name__)
@@ -40,13 +39,12 @@ def query(query: str, k: int, show_sources: bool, output_format: str, no_history
         ragged query "Summary?" --format json > result.json
     """
     from src.config.settings import get_settings
+    from src.generation.citation_formatter import format_response_with_references
     from src.generation.ollama_client import OllamaClient
     from src.generation.prompts import RAG_SYSTEM_PROMPT, build_rag_prompt
-    from src.generation.response_parser import parse_response
-    from src.generation.citation_formatter import format_response_with_references
-    from src.retrieval.retriever import Retriever
     from src.retrieval.bm25 import BM25Retriever
     from src.retrieval.hybrid import HybridRetriever
+    from src.retrieval.retriever import Retriever
 
     if output_format == "text":
         console.print(f"[bold blue]Question:[/bold blue] {query}")
@@ -64,7 +62,7 @@ def query(query: str, k: int, show_sources: bool, output_format: str, no_history
         chunks = hybrid_retriever.retrieve(
             query,
             top_k=k,
-            method=cast(Optional[Literal['vector', 'bm25', 'hybrid']], settings.retrieval_method)
+            method=cast(Literal['vector', 'bm25', 'hybrid'] | None, settings.retrieval_method)
         )
 
         if not chunks:

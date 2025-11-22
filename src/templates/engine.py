@@ -4,8 +4,9 @@ Jinja2-based template engine for RAG workflows.
 v0.3.10: Repeatable query templates with custom functions.
 """
 
+from collections.abc import Callable
 from pathlib import Path
-from typing import Any, Callable, Dict, Optional
+from typing import Any
 
 try:
     import jinja2
@@ -42,10 +43,10 @@ class TemplateEngine:
 
     def __init__(
         self,
-        query_fn: Optional[Callable] = None,
-        retrieve_fn: Optional[Callable] = None,
-        summarise_fn: Optional[Callable] = None,
-        template_dir: Optional[Path] = None,
+        query_fn: Callable | None = None,
+        retrieve_fn: Callable | None = None,
+        summarise_fn: Callable | None = None,
+        template_dir: Path | None = None,
         autoescape: bool = False,
     ):
         """
@@ -201,7 +202,7 @@ class TemplateEngine:
             chunks.append(text[i : i + chunk_size])
         return chunks
 
-    def render_string(self, template_string: str, variables: Dict[str, Any]) -> str:
+    def render_string(self, template_string: str, variables: dict[str, Any]) -> str:
         """
         Render template from string.
 
@@ -227,7 +228,7 @@ class TemplateEngine:
             logger.exception(f"Template rendering error: {e}")
             raise TemplateError(f"Template rendering failed: {e}") from e
 
-    def render_file(self, template_path: Path, variables: Dict[str, Any]) -> str:
+    def render_file(self, template_path: Path, variables: dict[str, Any]) -> str:
         """
         Render template from file.
 
@@ -268,7 +269,7 @@ class TemplateEngine:
             logger.exception(f"Template rendering error: {e}")
             raise TemplateError(f"Template rendering failed: {e}") from e
 
-    def validate_template(self, template_string: str) -> Dict[str, Any]:
+    def validate_template(self, template_string: str) -> dict[str, Any]:
         """
         Validate template syntax.
 
@@ -311,9 +312,9 @@ class TemplateEngine:
 
 # Convenience function
 def create_template_engine(
-    query_fn: Optional[Callable] = None,
-    retrieve_fn: Optional[Callable] = None,
-    template_dir: Optional[Path] = None,
+    query_fn: Callable | None = None,
+    retrieve_fn: Callable | None = None,
+    template_dir: Path | None = None,
 ) -> TemplateEngine:
     """
     Create a template engine.

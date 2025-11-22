@@ -5,24 +5,24 @@ Uses the sentence-transformers library to generate embeddings locally
 on CPU or GPU.
 """
 
-from typing import TYPE_CHECKING, List, Optional, cast
+from typing import TYPE_CHECKING, cast
 
 import numpy as np
 
 if TYPE_CHECKING:
-    from sentence_transformers import SentenceTransformer as SentenceTransformerType
     import torch as torch_module
+    from sentence_transformers import SentenceTransformer as SentenceTransformerType
 else:
     try:
-        from sentence_transformers import SentenceTransformer as SentenceTransformerType
         import torch as torch_module
+        from sentence_transformers import SentenceTransformer as SentenceTransformerType
     except ImportError:
         SentenceTransformerType = None  # type: ignore[assignment, misc]
         torch_module = None  # type: ignore[assignment]
 
+from src.config.settings import get_settings
 from src.embeddings.base import BaseEmbedder
 from src.embeddings.batch_tuner import BatchTuner
-from src.config.settings import get_settings
 from src.utils.logging import get_logger
 
 logger = get_logger(__name__)
@@ -39,7 +39,7 @@ class SentenceTransformerEmbedder(BaseEmbedder):
     def __init__(
         self,
         model_name: str = "all-MiniLM-L6-v2",
-        device: Optional[str] = None,
+        device: str | None = None,
         batch_size: int = 32,
     ):
         """Initialize SentenceTransformer embedder."""
@@ -67,7 +67,7 @@ class SentenceTransformerEmbedder(BaseEmbedder):
         # v0.2.9: Initialize batch tuner if enabled
         settings = get_settings()
         if settings.feature_flags.enable_batch_auto_tuning:
-            self.batch_tuner: Optional[BatchTuner] = BatchTuner(initial_size=batch_size)
+            self.batch_tuner: BatchTuner | None = BatchTuner(initial_size=batch_size)
             logger.info("Batch auto-tuning enabled")
         else:
             self.batch_tuner = None
@@ -76,7 +76,7 @@ class SentenceTransformerEmbedder(BaseEmbedder):
         """Embed a single text string."""
         return cast(np.ndarray, self.model.encode([text], convert_to_numpy=True)[0])
 
-    def embed_batch(self, texts: List[str]) -> np.ndarray:
+    def embed_batch(self, texts: list[str]) -> np.ndarray:
         """Embed multiple texts efficiently in batch.
 
         v0.2.9: Uses intelligent batch size tuning when enabled.

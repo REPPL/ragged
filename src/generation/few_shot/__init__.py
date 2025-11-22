@@ -4,9 +4,9 @@ Stores high-quality Q&A examples and retrieves relevant ones for few-shot learni
 """
 
 from src.generation.few_shot.models import FewShotExample
-from src.generation.few_shot.store import FewShotExampleStore
-from src.generation.few_shot.seeding import seed_default_examples
 from src.generation.few_shot.prompt import format_few_shot_prompt
+from src.generation.few_shot.seeding import seed_default_examples
+from src.generation.few_shot.store import FewShotExampleStore
 
 __all__ = [
     "FewShotExample",

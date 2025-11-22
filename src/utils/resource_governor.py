@@ -6,12 +6,14 @@ v0.2.9: Prevents resource starvation through reservation system with queueing.
 import gc
 import threading
 import time
-import psutil  # type: ignore[import-untyped]
+from collections.abc import Iterator
 from contextlib import contextmanager
 from dataclasses import dataclass
 from enum import Enum
-from queue import Queue, Empty
-from typing import Optional, Dict, Iterator
+from queue import Empty, Queue
+from typing import Optional
+
+import psutil  # type: ignore[import-untyped]
 
 from src.config.settings import get_settings
 from src.utils.logging import get_logger
@@ -104,9 +106,9 @@ class ResourceGovernor:
 
     def __init__(
         self,
-        memory_limit_mb: Optional[int] = None,
-        cpu_limit_percent: Optional[float] = None,
-        max_concurrent_ops: Optional[int] = None,
+        memory_limit_mb: int | None = None,
+        cpu_limit_percent: float | None = None,
+        max_concurrent_ops: int | None = None,
         enable_gc: bool = True,
     ):
         """Initialize resource governor.
@@ -132,7 +134,7 @@ class ResourceGovernor:
         self.enable_gc = enable_gc
 
         # Active reservations
-        self.reservations: Dict[str, ResourceReservation] = {}
+        self.reservations: dict[str, ResourceReservation] = {}
 
         # Request queue (priority, timestamp, request)
         self.request_queue: Queue = Queue()
@@ -220,7 +222,7 @@ class ResourceGovernor:
         logger.debug("Triggering garbage collection due to memory pressure")
         return gc.collect()
 
-    def _can_fulfill_request(self, request: ResourceRequest) -> tuple[bool, Optional[str]]:
+    def _can_fulfill_request(self, request: ResourceRequest) -> tuple[bool, str | None]:
         """Check if request can be fulfilled with current resources.
 
         Args:
@@ -257,7 +259,7 @@ class ResourceGovernor:
         memory_mb: int,
         cpu_percent: float = 10.0,
         priority: ResourcePriority = ResourcePriority.NORMAL,
-        timeout: Optional[float] = None,
+        timeout: float | None = None,
     ) -> bool:
         """Request resource reservation.
 
@@ -420,7 +422,7 @@ class ResourceGovernor:
         memory_mb: int,
         cpu_percent: float = 10.0,
         priority: ResourcePriority = ResourcePriority.NORMAL,
-        timeout: Optional[float] = None,
+        timeout: float | None = None,
     ) -> Iterator[None]:
         """Context manager for resource reservation.
 

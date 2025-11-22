@@ -1,6 +1,5 @@
 """Few-shot prompt formatting."""
 
-from typing import List
 
 from src.generation.few_shot.models import FewShotExample
 
@@ -8,7 +7,7 @@ from src.generation.few_shot.models import FewShotExample
 def format_few_shot_prompt(
     query: str,
     context: str,
-    examples: List[FewShotExample],
+    examples: list[FewShotExample],
     max_examples: int = 3
 ) -> str:
     """Format a prompt with few-shot examples.

@@ -4,21 +4,16 @@ Discovers and loads plugins using Python entry points and validates them
 before making them available to the system.
 """
 
-from typing import Dict, List, Optional, Type
-from pathlib import Path
-import importlib
 import logging
-import sys
 
 try:
     from importlib.metadata import entry_points
 except ImportError:
     from importlib_metadata import entry_points  # Python <3.8
 
-from ragged.plugins.interfaces import Plugin, PLUGIN_TYPES
-from ragged.plugins.validation import PluginValidator
+from ragged.plugins.interfaces import PLUGIN_TYPES, Plugin
 from ragged.plugins.permissions import PermissionManager
-from ragged.plugins.sandbox import PluginSandbox
+from ragged.plugins.validation import PluginValidator
 
 logger = logging.getLogger(__name__)
 
@@ -34,8 +29,8 @@ class PluginLoader:
 
     def __init__(
         self,
-        validator: Optional[PluginValidator] = None,
-        permission_manager: Optional[PermissionManager] = None,
+        validator: PluginValidator | None = None,
+        permission_manager: PermissionManager | None = None,
     ):
         """Initialise plugin loader.
 
@@ -45,9 +40,9 @@ class PluginLoader:
         """
         self.validator = validator or PluginValidator()
         self.permission_manager = permission_manager or PermissionManager()
-        self._loaded_plugins: Dict[str, Plugin] = {}
+        self._loaded_plugins: dict[str, Plugin] = {}
 
-    def discover_plugins(self, plugin_type: Optional[str] = None) -> List[str]:
+    def discover_plugins(self, plugin_type: str | None = None) -> list[str]:
         """Discover available plugins via entry points.
 
         Args:
@@ -83,7 +78,7 @@ class PluginLoader:
     def load_plugin(
         self,
         plugin_name: str,
-        config: Optional[Dict] = None,
+        config: dict | None = None,
         validate: bool = True,
     ) -> Plugin:
         """Load a plugin by name.
@@ -170,7 +165,7 @@ class PluginLoader:
             except Exception as e:
                 logger.error(f"Error unloading plugin {plugin_name}: {e}")
 
-    def get_loaded_plugins(self, plugin_type: Optional[str] = None) -> Dict[str, Plugin]:
+    def get_loaded_plugins(self, plugin_type: str | None = None) -> dict[str, Plugin]:
         """Get currently loaded plugins.
 
         Args:
@@ -187,7 +182,7 @@ class PluginLoader:
             }
         return self._loaded_plugins.copy()
 
-    def reload_plugin(self, plugin_name: str, config: Optional[Dict] = None) -> Plugin:
+    def reload_plugin(self, plugin_name: str, config: dict | None = None) -> Plugin:
         """Reload a plugin.
 
         Args:

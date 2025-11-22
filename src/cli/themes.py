@@ -4,7 +4,7 @@ v0.3.12: Customisable themes for inclusive design.
 """
 
 from dataclasses import dataclass
-from typing import Dict, Literal, Optional
+from typing import Literal
 
 from src.utils.logging import get_logger
 
@@ -31,7 +31,7 @@ class ThemeManager:
     """Manage colour themes and accessibility."""
 
     # Theme definitions
-    THEMES: Dict[ThemeName, ThemeColors] = {
+    THEMES: dict[ThemeName, ThemeColors] = {
         "dark": ThemeColors(
             success="green",
             error="red",
@@ -86,7 +86,7 @@ class ThemeManager:
     }
 
     # Theme descriptions
-    DESCRIPTIONS: Dict[ThemeName, str] = {
+    DESCRIPTIONS: dict[ThemeName, str] = {
         "dark": "Dark terminal optimised (default)",
         "light": "Light background optimised",
         "high-contrast": "WCAG 2.1 AA compliant",
@@ -133,7 +133,7 @@ class ThemeManager:
         return color
 
     @classmethod
-    def list_themes(cls) -> Dict[ThemeName, str]:
+    def list_themes(cls) -> dict[ThemeName, str]:
         """List available themes.
 
         Returns:
@@ -142,7 +142,7 @@ class ThemeManager:
         return cls.DESCRIPTIONS.copy()
 
     @classmethod
-    def get_theme_colors(cls, theme_name: ThemeName) -> Optional[ThemeColors]:
+    def get_theme_colors(cls, theme_name: ThemeName) -> ThemeColors | None:
         """Get colours for a theme.
 
         Args:
@@ -153,7 +153,7 @@ class ThemeManager:
         """
         return cls.THEMES.get(theme_name)
 
-    def apply_to_console(self, console_theme: Optional[str] = None) -> Dict[str, str]:
+    def apply_to_console(self, console_theme: str | None = None) -> dict[str, str]:
         """Get theme mapping for rich Console.
 
         Args:

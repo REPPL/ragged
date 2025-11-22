@@ -1,13 +1,12 @@
 """CLI commands for managing v0.2.9 feature flags."""
 
+
 import click
+import yaml
 from rich.console import Console
 from rich.table import Table
-from pathlib import Path
-import yaml
 
 from src.config import get_settings
-
 
 console = Console()
 
@@ -215,7 +214,7 @@ def _save_flags_to_config(flags):
 
     # Load existing config or create new
     if config_file.exists():
-        with open(config_file, "r") as f:
+        with open(config_file) as f:
             config = yaml.safe_load(f) or {}
     else:
         config = {}

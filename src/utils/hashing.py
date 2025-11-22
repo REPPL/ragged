@@ -4,10 +4,9 @@ Provides consistent SHA-256 hashing functions used throughout the codebase.
 """
 
 import hashlib
-from typing import Union
 
 
-def hash_content(content: Union[str, bytes], encoding: str = "utf-8") -> str:
+def hash_content(content: str | bytes, encoding: str = "utf-8") -> str:
     """Generate SHA-256 hash of content.
 
     Args:

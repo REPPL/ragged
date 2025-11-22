@@ -16,7 +16,7 @@ import time
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from src.processing.router import ProcessingRoute
 from src.utils.logging import get_logger
@@ -60,10 +60,10 @@ class RoutingMetric:
     has_tables: bool
     layout_complexity: float
     estimated_time: float
-    actual_time: Optional[float] = None
+    actual_time: float | None = None
     success: bool = True
-    error_message: Optional[str] = None
-    metadata: Dict[str, Any] = field(default_factory=dict)
+    error_message: str | None = None
+    metadata: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass
@@ -83,8 +83,8 @@ class MetricsSummary:
     """
 
     total_documents: int
-    by_processor: Dict[str, int]
-    by_quality_tier: Dict[str, int]
+    by_processor: dict[str, int]
+    by_quality_tier: dict[str, int]
     avg_quality_score: float
     avg_processing_time: float
     success_rate: float
@@ -110,7 +110,7 @@ class ProcessingMetrics:
     def __init__(
         self,
         retention_days: int = 30,
-        storage_dir: Optional[Path] = None,
+        storage_dir: Path | None = None,
         auto_save: bool = True,
     ):
         """
@@ -125,7 +125,7 @@ class ProcessingMetrics:
         self.storage_dir = storage_dir
         self.auto_save = auto_save
 
-        self._metrics: List[RoutingMetric] = []
+        self._metrics: list[RoutingMetric] = []
         self._start_time = time.time()
 
         # Create storage directory if needed
@@ -175,8 +175,8 @@ class ProcessingMetrics:
         self,
         route: ProcessingRoute,
         success: bool,
-        processing_time: Optional[float] = None,
-        error_message: Optional[str] = None,
+        processing_time: float | None = None,
+        error_message: str | None = None,
     ) -> None:
         """
         Record processing result for a route.
@@ -212,8 +212,8 @@ class ProcessingMetrics:
 
     def get_summary(
         self,
-        since: Optional[datetime] = None,
-        processor: Optional[str] = None,
+        since: datetime | None = None,
+        processor: str | None = None,
     ) -> MetricsSummary:
         """
         Get aggregated metrics summary.
@@ -252,11 +252,11 @@ class ProcessingMetrics:
         # Calculate aggregates
         total_documents = len(metrics)
 
-        by_processor: Dict[str, int] = {}
+        by_processor: dict[str, int] = {}
         for m in metrics:
             by_processor[m.processor] = by_processor.get(m.processor, 0) + 1
 
-        by_quality_tier: Dict[str, int] = {}
+        by_quality_tier: dict[str, int] = {}
         for m in metrics:
             by_quality_tier[m.quality_tier] = by_quality_tier.get(m.quality_tier, 0) + 1
 
@@ -291,7 +291,7 @@ class ProcessingMetrics:
     def get_quality_distribution(
         self,
         bins: int = 10,
-    ) -> Dict[str, int]:
+    ) -> dict[str, int]:
         """
         Get quality score distribution.
 
@@ -301,7 +301,7 @@ class ProcessingMetrics:
         Returns:
             Dictionary mapping bin ranges to counts
         """
-        distribution: Dict[str, int] = {}
+        distribution: dict[str, int] = {}
 
         for metric in self._metrics:
             # Determine bin
@@ -314,14 +314,14 @@ class ProcessingMetrics:
 
         return distribution
 
-    def get_processing_times_by_tier(self) -> Dict[str, List[float]]:
+    def get_processing_times_by_tier(self) -> dict[str, list[float]]:
         """
         Get processing times grouped by quality tier.
 
         Returns:
             Dictionary mapping tier name to list of processing times
         """
-        times_by_tier: Dict[str, List[float]] = {
+        times_by_tier: dict[str, list[float]] = {
             "high": [],
             "medium": [],
             "low": [],
@@ -458,7 +458,7 @@ class ProcessingMetrics:
                 logger.debug("No existing metrics file found")
                 return
 
-            with open(metrics_file, "r") as f:
+            with open(metrics_file) as f:
                 data = json.load(f)
 
             # Load metrics

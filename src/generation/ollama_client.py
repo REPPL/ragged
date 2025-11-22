@@ -4,7 +4,8 @@ Ollama LLM client for text generation.
 Provides interface to Ollama for generating answers using local LLMs.
 """
 
-from typing import TYPE_CHECKING, Generator, Optional
+from collections.abc import Generator
+from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     import ollama as ollama_module
@@ -30,8 +31,8 @@ class OllamaClient:
 
     def __init__(
         self,
-        model: Optional[str] = None,
-        base_url: Optional[str] = None,
+        model: str | None = None,
+        base_url: str | None = None,
         timeout: int = DEFAULT_API_TIMEOUT,
     ):
         """
@@ -75,10 +76,10 @@ class OllamaClient:
 
                 if not available:
                     raise RuntimeError(
-                        f"No models available in Ollama.\n\n"
-                        f"Install a model with:\n"
-                        f"  ollama pull llama3.2:latest\n\n"
-                        f"See available models at: https://ollama.com/library"
+                        "No models available in Ollama.\n\n"
+                        "Install a model with:\n"
+                        "  ollama pull llama3.2:latest\n\n"
+                        "See available models at: https://ollama.com/library"
                     )
 
                 recommended = manager.get_recommended_model()
@@ -106,7 +107,7 @@ class OllamaClient:
         except Exception:  # noqa: BLE001 - Non-critical verification, service continues
             logger.warning("Could not verify model availability", exc_info=True)
 
-    def _build_messages(self, prompt: str, system: Optional[str] = None) -> list[dict[str, str]]:
+    def _build_messages(self, prompt: str, system: str | None = None) -> list[dict[str, str]]:
         """Build messages list for Ollama chat API.
 
         Args:
@@ -125,9 +126,9 @@ class OllamaClient:
     def generate(
         self,
         prompt: str,
-        system: Optional[str] = None,
+        system: str | None = None,
         temperature: float = DEFAULT_LLM_TEMPERATURE,
-        max_tokens: Optional[int] = None,
+        max_tokens: int | None = None,
     ) -> str:
         """
         Generate text completion.
@@ -163,7 +164,7 @@ class OllamaClient:
     def generate_stream(
         self,
         prompt: str,
-        system: Optional[str] = None,
+        system: str | None = None,
         temperature: float = DEFAULT_LLM_TEMPERATURE,
     ) -> Generator[str, None, None]:
         """

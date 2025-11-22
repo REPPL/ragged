@@ -1,15 +1,14 @@
 """Factory for creating VectorStore instances."""
 
-from enum import Enum
-from typing import Optional, Dict, Any
-from pathlib import Path
 import logging
+from enum import Enum
+from typing import Any
 
-from ragged.vectorstore.interface import VectorStore
 from ragged.vectorstore.exceptions import VectorStoreConfigError
+from ragged.vectorstore.interface import VectorStore
 from ragged.vectorstore.platform import (
-    get_default_backend,
     detect_platform_backend_support,
+    get_default_backend,
     get_platform_info,
 )
 
@@ -29,7 +28,7 @@ class VectorStoreFactory:
     @staticmethod
     def create(
         backend: str = "auto",
-        config: Optional[Dict[str, Any]] = None,
+        config: dict[str, Any] | None = None,
     ) -> VectorStore:
         """Create a VectorStore instance.
 
@@ -74,9 +73,9 @@ class VectorStoreFactory:
 
                 if platform_name == "Windows":
                     raise VectorStoreConfigError(
-                        f"LEANN backend not available on Windows. "
-                        f"LEANN requires macOS or Linux. "
-                        f"Use ChromaDB backend instead (fully functional)."
+                        "LEANN backend not available on Windows. "
+                        "LEANN requires macOS or Linux. "
+                        "Use ChromaDB backend instead (fully functional)."
                     )
                 else:
                     raise VectorStoreConfigError(
@@ -90,7 +89,7 @@ class VectorStoreFactory:
             )
 
     @staticmethod
-    def create_from_config(config: Dict[str, Any]) -> VectorStore:
+    def create_from_config(config: dict[str, Any]) -> VectorStore:
         """Create VectorStore from configuration dictionary.
 
         Args:
@@ -132,7 +131,7 @@ class VectorStoreFactory:
         return available
 
     @staticmethod
-    def get_backend_support_info() -> Dict[str, Any]:
+    def get_backend_support_info() -> dict[str, Any]:
         """Get detailed backend support information for current platform.
 
         Returns:

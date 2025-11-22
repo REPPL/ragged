@@ -8,7 +8,7 @@ import json
 import re
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from src.utils.logging import get_logger
 
@@ -44,14 +44,14 @@ class DocumentTags:
     """Auto-generated document tags and metadata."""
 
     document_type: DocumentType = DocumentType.OTHER
-    topics: List[str] = field(default_factory=list)
+    topics: list[str] = field(default_factory=list)
     language: str = "en"
     academic_level: AcademicLevel = AcademicLevel.NOT_APPLICABLE
-    entities: Dict[str, List[str]] = field(default_factory=dict)
-    keywords: List[str] = field(default_factory=list)
+    entities: dict[str, list[str]] = field(default_factory=dict)
+    keywords: list[str] = field(default_factory=list)
     confidence: float = 0.0
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """
         Convert tags to dictionary for storage.
 
@@ -69,7 +69,7 @@ class DocumentTags:
         }
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> "DocumentTags":
+    def from_dict(cls, data: dict[str, Any]) -> "DocumentTags":
         """
         Create DocumentTags from dictionary.
 
@@ -175,7 +175,7 @@ Rules:
 
 Respond with ONLY the JSON object, no explanation."""
 
-    def __init__(self, llm_client: Optional[Any] = None):
+    def __init__(self, llm_client: Any | None = None):
         """
         Initialise auto-tagger.
 
@@ -188,7 +188,7 @@ Respond with ONLY the JSON object, no explanation."""
     def tag_document(
         self,
         content: str,
-        filename: Optional[str] = None,
+        filename: str | None = None,
     ) -> DocumentTags:
         """
         Automatically tag and classify a document.
@@ -258,7 +258,7 @@ Respond with ONLY the JSON object, no explanation."""
             confidence=classification.get("confidence", 0.0),
         )
 
-    def extract_topics(self, content: str) -> List[str]:
+    def extract_topics(self, content: str) -> list[str]:
         """
         Extract main topics from document.
 
@@ -287,7 +287,7 @@ Respond with ONLY the JSON object, no explanation."""
         # Fallback: simple keyword frequency
         return self._extract_keywords(content)[:5]
 
-    def extract_entities(self, content: str) -> Dict[str, List[str]]:
+    def extract_entities(self, content: str) -> dict[str, list[str]]:
         """
         Extract named entities from document.
 
@@ -319,7 +319,7 @@ Respond with ONLY the JSON object, no explanation."""
     def _rule_based_tagging(
         self,
         content: str,
-        filename: Optional[str] = None,
+        filename: str | None = None,
     ) -> DocumentTags:
         """
         Simple rule-based tagging fallback.
@@ -375,7 +375,7 @@ Respond with ONLY the JSON object, no explanation."""
 
         return tags
 
-    def _extract_json(self, response: str) -> Dict[str, Any]:
+    def _extract_json(self, response: str) -> dict[str, Any]:
         """
         Extract JSON object from LLM response.
 
@@ -411,7 +411,7 @@ Respond with ONLY the JSON object, no explanation."""
         except json.JSONDecodeError as e:
             raise ValueError(f"Invalid JSON in response: {e}")
 
-    def _extract_keywords(self, content: str, top_n: int = 10) -> List[str]:
+    def _extract_keywords(self, content: str, top_n: int = 10) -> list[str]:
         """
         Extract keywords using simple frequency analysis.
 
@@ -469,7 +469,7 @@ Respond with ONLY the JSON object, no explanation."""
         words = re.findall(r"\b[a-z]{3,}\b", content.lower())
 
         # Count frequencies
-        word_freq: Dict[str, int] = {}
+        word_freq: dict[str, int] = {}
         for word in words:
             if word not in stopwords:
                 word_freq[word] = word_freq.get(word, 0) + 1
@@ -479,7 +479,7 @@ Respond with ONLY the JSON object, no explanation."""
 
         return [word for word, _ in sorted_words[:top_n]]
 
-    def _simple_entity_extraction(self, content: str) -> Dict[str, List[str]]:
+    def _simple_entity_extraction(self, content: str) -> dict[str, list[str]]:
         """
         Simple entity extraction using capitalization patterns.
 
@@ -506,8 +506,8 @@ Respond with ONLY the JSON object, no explanation."""
 # Convenience function for quick tagging
 def tag_document(
     content: str,
-    filename: Optional[str] = None,
-    llm_client: Optional[Any] = None,
+    filename: str | None = None,
+    llm_client: Any | None = None,
 ) -> DocumentTags:
     """
     Quickly tag a document.

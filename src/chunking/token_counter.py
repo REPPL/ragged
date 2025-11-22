@@ -3,7 +3,7 @@ Token counting using tiktoken for accurate measurement.
 """
 
 from functools import lru_cache
-from typing import TYPE_CHECKING, Any, Optional
+from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
     import tiktoken as tiktoken_module

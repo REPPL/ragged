@@ -5,8 +5,6 @@ This module implements the factory pattern for instantiating the appropriate
 document processor based on configuration.
 """
 
-from pathlib import Path
-from typing import Dict, Type
 
 from src.processing.base import BaseProcessor, ProcessorConfig
 from src.utils.logging import get_logger
@@ -28,10 +26,10 @@ class ProcessorFactory:
         >>> result = processor.process(Path("document.pdf"))
     """
 
-    _processors: Dict[str, Type[BaseProcessor]] = {}
+    _processors: dict[str, type[BaseProcessor]] = {}
 
     @classmethod
-    def register_processor(cls, name: str, processor_class: Type[BaseProcessor]) -> None:
+    def register_processor(cls, name: str, processor_class: type[BaseProcessor]) -> None:
         """
         Register a new processor type.
 
@@ -87,7 +85,7 @@ class ProcessorFactory:
         return processor_class(config)
 
     @classmethod
-    def get_available_processors(cls) -> Dict[str, Type[BaseProcessor]]:
+    def get_available_processors(cls) -> dict[str, type[BaseProcessor]]:
         """
         Get all registered processors.
 

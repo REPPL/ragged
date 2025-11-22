@@ -3,21 +3,21 @@
 v0.3.5: Automated detection and correction of PDF issues (rotation, ordering, duplicates).
 """
 
-from src.correction.analyzer import PDFAnalyzer, AnalysisResult, AnalyzerConfig
-from src.correction.corrector import PDFCorrector, CorrectorConfig
+from src.correction.analyzer import AnalysisResult, AnalyzerConfig, PDFAnalyzer
+from src.correction.corrector import CorrectorConfig, PDFCorrector
 from src.correction.metadata import MetadataGenerator
 from src.correction.pipeline import CorrectionPipeline
 from src.correction.schemas import (
+    CorrectionAction,
+    CorrectionResult,
     IssueReport,
     IssueType,
     QualityGrade,
-    CorrectionAction,
-    CorrectionResult,
 )
 from src.correction.transformers import (
-    RotationTransformer,
     DuplicateRemover,
     PageReorderTransformer,
+    RotationTransformer,
 )
 
 __all__ = [

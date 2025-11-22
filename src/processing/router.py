@@ -12,7 +12,6 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Dict, List, Optional
 
 from src.processing.base import BaseProcessor, ProcessorConfig
 from src.processing.quality_assessor import QualityAssessment, QualityAssessor
@@ -69,7 +68,7 @@ class ProcessingRoute:
     quality: QualityAssessment
     reasoning: str
     estimated_time: float = 0.0
-    fallback_options: List[str] = field(default_factory=list)
+    fallback_options: list[str] = field(default_factory=list)
 
 
 class ProcessorRouter:
@@ -91,7 +90,7 @@ class ProcessorRouter:
         >>> print(f"Using {route.processor}: {route.reasoning}")
     """
 
-    def __init__(self, config: Optional[RouterConfig] = None):
+    def __init__(self, config: RouterConfig | None = None):
         """
         Initialise processor router.
 
@@ -99,7 +98,7 @@ class ProcessorRouter:
             config: Router configuration (defaults to RouterConfig())
         """
         self.config = config or RouterConfig()
-        self._processors: Dict[str, BaseProcessor] = {}
+        self._processors: dict[str, BaseProcessor] = {}
 
         # Initialise quality assessor
         self.assessor = QualityAssessor(
@@ -342,7 +341,7 @@ class ProcessorRouter:
 
         return estimated_time
 
-    def _determine_fallbacks(self, primary_processor: str) -> List[str]:
+    def _determine_fallbacks(self, primary_processor: str) -> list[str]:
         """
         Determine fallback processors if primary fails.
 
@@ -360,7 +359,7 @@ class ProcessorRouter:
         else:
             return ["docling", "legacy"]
 
-    def get_available_processors(self) -> List[str]:
+    def get_available_processors(self) -> list[str]:
         """
         Get list of registered processors.
 

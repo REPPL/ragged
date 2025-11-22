@@ -7,7 +7,7 @@ import shutil
 import sys
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 import click
 
@@ -40,7 +40,7 @@ def _get_directory_size(path: Path) -> int:
     return total_size
 
 
-def _get_cache_info() -> Dict[str, Any]:
+def _get_cache_info() -> dict[str, Any]:
     """Get information about all caches and temporary files."""
     settings = get_settings()
     data_dir = Path(settings.data_dir)
@@ -128,7 +128,7 @@ def cache_info(output_format: str) -> None:
         cache_data = _get_cache_info()
 
         if output_format == "text":
-            console.print(f"\n[bold]Cache Information[/bold]")
+            console.print("\n[bold]Cache Information[/bold]")
             console.print(f"Data Directory: {cache_data['data_directory']}")
             console.print(f"Total Size: {cache_data['total_size_formatted']}\n")
 
@@ -289,7 +289,7 @@ def clean_cache(older_than: int, dry_run: bool, yes: bool) -> None:
         cutoff_date = datetime.now() - timedelta(days=older_than)
 
         # Find old files
-        old_files: List[Path] = []
+        old_files: list[Path] = []
         total_size = 0
 
         cache_dirs = [
@@ -325,7 +325,7 @@ def clean_cache(older_than: int, dry_run: bool, yes: bool) -> None:
             console.print("[yellow]DRY RUN - No files will be deleted[/yellow]\n")
 
         # Group by directory
-        by_dir: Dict[str, List[Path]] = {}
+        by_dir: dict[str, list[Path]] = {}
         for file_path in old_files:
             parent = str(file_path.parent)
             if parent not in by_dir:
@@ -337,7 +337,7 @@ def clean_cache(older_than: int, dry_run: bool, yes: bool) -> None:
             console.print(f"[cyan]{dir_path}[/cyan]: {len(files)} files ({_format_size(dir_size)})")
 
         if dry_run:
-            console.print(f"\n[dim]Use without --dry-run to actually delete these files[/dim]")
+            console.print("\n[dim]Use without --dry-run to actually delete these files[/dim]")
             return
 
         # Confirm
@@ -407,13 +407,13 @@ def cache_stats(output_format: str) -> None:
                 )
 
         if output_format == "text":
-            console.print(f"\n[bold]Cache Statistics[/bold]\n")
+            console.print("\n[bold]Cache Statistics[/bold]\n")
             console.print(f"Total Cache Size: {stats['total_size']}")
             console.print(f"Active Components: {stats['cache_components']}")
             console.print(f"Total Items: {stats['total_items']}")
 
             if components:
-                console.print(f"\n[bold]Breakdown by Component:[/bold]")
+                console.print("\n[bold]Breakdown by Component:[/bold]")
                 for comp in sorted(components, key=lambda x: x["percentage"], reverse=True):
                     console.print(f"\n{comp['name']}")
                     console.print(f"  Size: {comp['size']} ({comp['percentage']:.1f}%)")
@@ -457,16 +457,16 @@ def embedder_cache_stats(output_format: str) -> None:
         stats = get_cache_stats()
 
         if output_format == "text":
-            console.print(f"\n[bold]Embedder Cache Statistics[/bold]\n")
+            console.print("\n[bold]Embedder Cache Statistics[/bold]\n")
             console.print(f"Caching Enabled: {'[green]Yes[/green]' if stats['enabled'] else '[red]No[/red]'}")
             console.print(f"Cached Models: {stats['size']}")
 
             if stats['models']:
-                console.print(f"\n[bold]Cached Embedders:[/bold]")
+                console.print("\n[bold]Cached Embedders:[/bold]")
                 for model in stats['models']:
                     console.print(f"  • {model}")
             else:
-                console.print(f"\n[dim]No models currently cached[/dim]")
+                console.print("\n[dim]No models currently cached[/dim]")
 
             console.print()
         else:

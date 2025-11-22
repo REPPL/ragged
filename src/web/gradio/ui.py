@@ -2,13 +2,14 @@
 
 import json
 import logging
-from typing import Generator, List, Tuple, Union, cast
+from collections.abc import Generator
+from typing import cast
 
 import gradio as gr
 import requests  # type: ignore[import-untyped]
 
 from src.web.gradio.api import check_api_health, get_api_status_display, get_collections
-from src.web.gradio.query import query_with_streaming, query_non_streaming
+from src.web.gradio.query import query_non_streaming, query_with_streaming
 from src.web.gradio.upload import upload_document
 
 logger = logging.getLogger(__name__)
@@ -117,12 +118,12 @@ def create_ui() -> gr.Blocks:
         # Event handlers
         def respond(
             message: str,
-            history: List[Tuple[str, str]],
+            history: list[tuple[str, str]],
             collection: str,
             method: str,
             k: int,
             stream: bool
-        ) -> Union[Generator[Tuple[List[Tuple[str, str]], str], None, None], Tuple[List[Tuple[str, str]], str]]:
+        ) -> Generator[tuple[list[tuple[str, str]], str], None, None] | tuple[list[tuple[str, str]], str]:
             """Handle query submission with error handling."""
             try:
                 if stream:

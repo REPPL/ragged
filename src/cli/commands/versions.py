@@ -4,11 +4,10 @@ v0.3.7a: Document version tracking and querying.
 """
 
 from pathlib import Path
-from typing import Optional
 
 import click
-from rich.table import Table
 from rich.panel import Panel
+from rich.table import Table
 
 from src.cli.common import console
 from src.storage import VersionTracker
@@ -111,10 +110,10 @@ def list(file_path: str) -> None:
 )
 @click.argument("identifier", type=str, required=False)
 def show(
-    version_id: Optional[str],
-    version_number: Optional[int],
-    content_hash: Optional[str],
-    identifier: Optional[str],
+    version_id: str | None,
+    version_number: int | None,
+    content_hash: str | None,
+    identifier: str | None,
 ) -> None:
     """Show details of a specific version.
 
@@ -164,7 +163,7 @@ def show(
         f"Version: {version.version_number}\n"
         f"Document ID: {version.doc_id}\n"
         f"Created: {version.created_at.strftime('%Y-%m-%d %H:%M:%S')}",
-        title=f"Version Details",
+        title="Version Details",
         border_style="green",
     ))
 
@@ -174,12 +173,12 @@ def show(
     console.print(f"Content Hash:  {version.content_hash}")
 
     # File information
-    console.print(f"\n[bold]File[/bold]")
+    console.print("\n[bold]File[/bold]")
     console.print(f"Path: {version.file_path}")
 
     # Page information
     if version.page_hashes:
-        console.print(f"\n[bold]Pages[/bold]")
+        console.print("\n[bold]Pages[/bold]")
         console.print(f"Total Pages: {len(version.page_hashes)}")
 
         # Show first few page hashes
@@ -192,7 +191,7 @@ def show(
 
     # Metadata
     if version.metadata:
-        console.print(f"\n[bold]Metadata[/bold]")
+        console.print("\n[bold]Metadata[/bold]")
         for key, value in version.metadata.items():
             console.print(f"{key}: {value}")
 
@@ -223,17 +222,17 @@ def check(file_path: str) -> None:
         is_new = tracker.is_new_version(file_path_abs, content_hash)
 
         if is_new:
-            console.print(f"[yellow]⚠[/yellow] Document has changed (new version detected)")
+            console.print("[yellow]⚠[/yellow] Document has changed (new version detected)")
             console.print(f"[dim]Content hash: {content_hash[:16]}...[/dim]")
 
             # Check if document exists at all
             doc_id = tracker.find_document_by_path(file_path_abs)
             if doc_id:
-                console.print(f"\n[dim]Re-index to create new version.[/dim]")
+                console.print("\n[dim]Re-index to create new version.[/dim]")
             else:
-                console.print(f"\n[dim]Document not yet indexed.[/dim]")
+                console.print("\n[dim]Document not yet indexed.[/dim]")
         else:
-            console.print(f"[green]✓[/green] Document unchanged (matches latest version)")
+            console.print("[green]✓[/green] Document unchanged (matches latest version)")
             console.print(f"[dim]Content hash: {content_hash[:16]}...[/dim]")
 
     except Exception as e:
@@ -327,7 +326,7 @@ def compare(doc_id: str, version1: int, version2: int) -> None:
 
     # Page-level changes
     if v1.page_hashes and v2.page_hashes:
-        console.print(f"\n[bold]Page-Level Changes[/bold]")
+        console.print("\n[bold]Page-Level Changes[/bold]")
 
         changed_pages = []
         for i in range(min(len(v1.page_hashes), len(v2.page_hashes))):

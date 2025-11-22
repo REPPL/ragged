@@ -5,7 +5,6 @@ Validates configuration settings and environment to catch issues early.
 
 import sys
 from pathlib import Path
-from typing import Any, Dict, List, Tuple
 
 import httpx
 from pydantic import ValidationError
@@ -53,9 +52,9 @@ def validate(fix: bool, verbose: bool) -> None:
     """
     console.print("\n[bold]Ragged Configuration Validation[/bold]\n")
 
-    issues: List[Tuple[str, str, str]] = []  # (severity, category, message)
-    warnings: List[Tuple[str, str]] = []  # (category, message)
-    fixes_applied: List[str] = []
+    issues: list[tuple[str, str, str]] = []  # (severity, category, message)
+    warnings: list[tuple[str, str]] = []  # (category, message)
+    fixes_applied: list[str] = []
 
     # 1. Validate configuration loading
     console.print("[bold cyan]1. Configuration File[/bold cyan]")
@@ -139,9 +138,9 @@ def validate(fix: bool, verbose: bool) -> None:
 
 def _validate_directories(
     settings: Settings,
-    issues: List[Tuple[str, str, str]],
-    warnings: List[Tuple[str, str]],
-    fixes_applied: List[str],
+    issues: list[tuple[str, str, str]],
+    warnings: list[tuple[str, str]],
+    fixes_applied: list[str],
     fix: bool,
     verbose: bool,
 ) -> bool:
@@ -177,7 +176,7 @@ def _validate_directories(
     else:
         console.print(f"  [green]✓[/green] Data directory: {data_dir}")
         if verbose:
-            console.print(f"    Writable: Yes")
+            console.print("    Writable: Yes")
             console.print(f"    Absolute path: {data_dir.resolve()}")
 
     # Check ChromaDB persistence directory
@@ -208,15 +207,15 @@ def _validate_directories(
     else:
         console.print(f"  [green]✓[/green] ChromaDB directory: {chroma_dir}")
         if verbose:
-            console.print(f"    Writable: Yes")
+            console.print("    Writable: Yes")
 
     return all_ok
 
 
 def _validate_ollama(
     settings: Settings,
-    issues: List[Tuple[str, str, str]],
-    warnings: List[Tuple[str, str]],
+    issues: list[tuple[str, str, str]],
+    warnings: list[tuple[str, str]],
     verbose: bool,
 ) -> None:
     """Validate Ollama service connectivity."""
@@ -245,7 +244,7 @@ def _validate_ollama(
             ("ERROR", "ollama", f"Ollama not reachable at {settings.ollama_base_url}. Is it running?")
         )
     except httpx.TimeoutException:
-        console.print(f"  [yellow]⚠[/yellow] Ollama connection timed out")
+        console.print("  [yellow]⚠[/yellow] Ollama connection timed out")
         warnings.append(("ollama", "Connection timeout - Ollama may be slow or overloaded"))
     except Exception as e:
         console.print(f"  [yellow]⚠[/yellow] Error checking Ollama: {e}")
@@ -254,8 +253,8 @@ def _validate_ollama(
 
 def _validate_chromadb(
     settings: Settings,
-    issues: List[Tuple[str, str, str]],
-    warnings: List[Tuple[str, str]],
+    issues: list[tuple[str, str, str]],
+    warnings: list[tuple[str, str]],
     verbose: bool,
 ) -> None:
     """Validate ChromaDB configuration."""
@@ -278,8 +277,8 @@ def _validate_chromadb(
 
 def _validate_embedding_model(
     settings: Settings,
-    issues: List[Tuple[str, str, str]],
-    warnings: List[Tuple[str, str]],
+    issues: list[tuple[str, str, str]],
+    warnings: list[tuple[str, str]],
     verbose: bool,
 ) -> None:
     """Validate embedding model configuration."""
@@ -305,8 +304,8 @@ def _validate_embedding_model(
 
 def _validate_llm_model(
     settings: Settings,
-    issues: List[Tuple[str, str, str]],
-    warnings: List[Tuple[str, str]],
+    issues: list[tuple[str, str, str]],
+    warnings: list[tuple[str, str]],
     verbose: bool,
 ) -> None:
     """Validate LLM model configuration."""

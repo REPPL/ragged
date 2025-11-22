@@ -2,11 +2,10 @@
 
 import sys
 from pathlib import Path
-from typing import Optional
 
 import click
 
-from src.cli.common import console, ProgressType
+from src.cli.common import ProgressType, console
 from src.utils.logging import get_logger
 
 logger = get_logger(__name__)
@@ -28,14 +27,33 @@ logger = get_logger(__name__)
     default=True,
     help="Automatically detect and correct PDF issues (rotation, duplicates, ordering) (default: enabled)"
 )
+@click.option(
+    "--vision/--no-vision",
+    default=False,
+    help="Enable vision embeddings for PDFs (requires GPU, see installation guide)"
+)
+@click.option(
+    "--vision-device",
+    type=click.Choice(["auto", "cuda", "mps", "cpu"], case_sensitive=False),
+    default="auto",
+    help="Device for vision processing (default: auto-detect)"
+)
+@click.option(
+    "--vision-batch-size",
+    type=int,
+    help="Batch size for vision embedding (default: 4, adjust based on VRAM)"
+)
 def add(
     path: Path,
-    format: Optional[str],
+    format: str | None,
     recursive: bool,
-    max_depth: Optional[int],
+    max_depth: int | None,
     fail_fast: bool,
-    chunking_strategy: Optional[str],
+    chunking_strategy: str | None,
     auto_correct_pdf: bool,
+    vision: bool,
+    vision_device: str,
+    vision_batch_size: int | None,
 ) -> None:
     """Ingest document(s) into the system.
 
@@ -45,9 +63,9 @@ def add(
     """
     from src.chunking.splitters import chunk_document
     from src.embeddings.factory import get_embedder
+    from src.ingestion.batch import BatchIngester, IngestionStatus
     from src.ingestion.loaders import load_document
     from src.ingestion.scanner import DocumentScanner
-    from src.ingestion.batch import BatchIngester, IngestionStatus
     from src.storage.vector_store import VectorStore
 
     # Determine if we're processing a single file or directory
@@ -116,6 +134,7 @@ def add(
         # PDF Correction (v0.3.5): Analyze and correct PDFs before processing
         if auto_correct_pdf and path.suffix.lower() == ".pdf":
             import asyncio
+
             from src.correction import CorrectionPipeline, MetadataGenerator
 
             console.print("[dim]Analyzing PDF quality...[/dim]")
@@ -183,7 +202,7 @@ def add(
         if existing_doc_id is not None:
             # Show duplicate warning outside progress context
             console.print()
-            console.print(f"[yellow]⚠ Document already exists:[/yellow]")
+            console.print("[yellow]⚠ Document already exists:[/yellow]")
             console.print(f"  Document ID: {existing_doc_id}")
             console.print(f"  Existing path: {existing_path}")
             console.print(f"  Current path:  {path}")
@@ -200,7 +219,7 @@ def add(
             # Delete old chunks
             console.print(f"[yellow]Removing {existing_count} old chunks...[/yellow]")
             vector_store.delete(ids=existing["ids"])
-            console.print(f"[green]✓[/green] Removed old chunks")
+            console.print("[green]✓[/green] Removed old chunks")
             console.print()
 
             # Preserve document_id for continuity

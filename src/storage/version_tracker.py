@@ -12,7 +12,7 @@ import sqlite3
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Optional, Any
+from typing import Any
 from uuid import uuid4
 
 from src.utils.logging import get_logger
@@ -38,11 +38,11 @@ class DocumentVersion:
     version_id: str
     doc_id: str
     content_hash: str
-    page_hashes: List[str]
+    page_hashes: list[str]
     version_number: int
     created_at: datetime
     file_path: str
-    metadata: Dict[str, Any]
+    metadata: dict[str, Any]
 
 
 class VersionTracker:
@@ -73,7 +73,7 @@ class VersionTracker:
         >>> v2 = tracker.get_version(doc_id=version.doc_id, version_number=2)
     """
 
-    def __init__(self, db_path: Optional[Path] = None):
+    def __init__(self, db_path: Path | None = None):
         """
         Initialize version tracker with SQLite database.
 
@@ -151,8 +151,8 @@ class VersionTracker:
     def calculate_content_hash(
         self,
         content: bytes,
-        page_contents: Optional[List[bytes]] = None
-    ) -> tuple[str, List[str]]:
+        page_contents: list[bytes] | None = None
+    ) -> tuple[str, list[str]]:
         """
         Calculate hierarchical hash for document.
 
@@ -187,8 +187,8 @@ class VersionTracker:
         self,
         file_path: str,
         content_hash: str,
-        page_hashes: Optional[List[str]] = None,
-        metadata: Optional[Dict[str, Any]] = None
+        page_hashes: list[str] | None = None,
+        metadata: dict[str, Any] | None = None
     ) -> DocumentVersion:
         """
         Track a new document version.
@@ -331,8 +331,8 @@ class VersionTracker:
     def get_version(
         self,
         doc_id: str,
-        version_number: Optional[int] = None
-    ) -> Optional[DocumentVersion]:
+        version_number: int | None = None
+    ) -> DocumentVersion | None:
         """
         Get specific version of a document.
 
@@ -382,7 +382,7 @@ class VersionTracker:
                 metadata=json.loads(row["metadata"]) if row["metadata"] else {}
             )
 
-    def get_version_by_id(self, version_id: str) -> Optional[DocumentVersion]:
+    def get_version_by_id(self, version_id: str) -> DocumentVersion | None:
         """
         Get version by version ID.
 
@@ -416,7 +416,7 @@ class VersionTracker:
                 metadata=json.loads(row["metadata"]) if row["metadata"] else {}
             )
 
-    def get_version_by_hash(self, content_hash: str) -> Optional[DocumentVersion]:
+    def get_version_by_hash(self, content_hash: str) -> DocumentVersion | None:
         """
         Get version by content hash.
 
@@ -450,7 +450,7 @@ class VersionTracker:
                 metadata=json.loads(row["metadata"]) if row["metadata"] else {}
             )
 
-    def list_versions(self, doc_id: str) -> List[DocumentVersion]:
+    def list_versions(self, doc_id: str) -> list[DocumentVersion]:
         """
         List all versions of a document.
 
@@ -488,7 +488,7 @@ class VersionTracker:
                 for row in rows
             ]
 
-    def find_document_by_path(self, file_path: str) -> Optional[str]:
+    def find_document_by_path(self, file_path: str) -> str | None:
         """
         Find document ID by file path.
 
@@ -514,8 +514,8 @@ class VersionTracker:
         self,
         chunk_id: str,
         version_id: str,
-        page_number: Optional[int] = None,
-        chunk_sequence: Optional[int] = None
+        page_number: int | None = None,
+        chunk_sequence: int | None = None
     ) -> None:
         """
         Link a chunk ID to a specific version.
@@ -537,7 +537,7 @@ class VersionTracker:
             )
             conn.commit()
 
-    def get_chunk_version(self, chunk_id: str) -> Optional[DocumentVersion]:
+    def get_chunk_version(self, chunk_id: str) -> DocumentVersion | None:
         """
         Get version associated with a chunk.
 

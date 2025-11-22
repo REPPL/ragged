@@ -4,8 +4,8 @@ This module provides feature flag management for safe, gradual rollout
 of v0.2.9 features with easy rollback capability.
 """
 
+
 from pydantic import BaseModel, Field
-from typing import Dict, List
 
 
 class FeatureFlags(BaseModel):
@@ -143,7 +143,7 @@ class FeatureFlags(BaseModel):
             raise AttributeError(f"Unknown feature: {feature}")
         setattr(self, attr_name, False)
 
-    def get_all_flags(self) -> Dict[str, bool]:
+    def get_all_flags(self) -> dict[str, bool]:
         """Get all feature flags and their current status.
 
         Returns:
@@ -160,7 +160,7 @@ class FeatureFlags(BaseModel):
             for field_name in self.model_fields.keys()
         }
 
-    def get_enabled_features(self) -> List[str]:
+    def get_enabled_features(self) -> list[str]:
         """Get list of currently enabled features.
 
         Returns:

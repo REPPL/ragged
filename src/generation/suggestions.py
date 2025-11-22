@@ -5,7 +5,6 @@ v0.3.12: Intelligent query refinement to improve retrieval quality.
 
 import re
 from dataclasses import dataclass
-from typing import List, Optional
 
 from src.utils.logging import get_logger
 
@@ -17,9 +16,9 @@ class QuerySuggestions:
     """Query suggestions and refinements."""
 
     original: str
-    corrections: List[str]
-    refinements: List[str]
-    related: List[str]
+    corrections: list[str]
+    refinements: list[str]
+    related: list[str]
     quality_score: float
 
 
@@ -66,7 +65,7 @@ class QuerySuggester:
         "are",
     ]
 
-    def __init__(self, llm_client: Optional[object] = None):
+    def __init__(self, llm_client: object | None = None):
         """Initialise query suggester.
 
         Args:
@@ -110,7 +109,7 @@ class QuerySuggester:
 
         return suggestions
 
-    def _check_spelling(self, query: str) -> List[str]:
+    def _check_spelling(self, query: str) -> list[str]:
         """Check and correct spelling.
 
         Args:
@@ -153,7 +152,7 @@ class QuerySuggester:
         # Vague if too short or no question structure
         return word_count < 3 or not has_question_word
 
-    def _refine_query(self, query: str) -> List[str]:
+    def _refine_query(self, query: str) -> list[str]:
         """Refine vague query into specific questions.
 
         Args:
@@ -178,7 +177,7 @@ class QuerySuggester:
 
         return refinements
 
-    def _generate_related(self, query: str) -> List[str]:
+    def _generate_related(self, query: str) -> list[str]:
         """Generate related queries.
 
         Args:
@@ -243,7 +242,7 @@ class QuerySuggester:
         return min(score, 1.0)
 
 
-def create_query_suggester(llm_client: Optional[object] = None) -> QuerySuggester:
+def create_query_suggester(llm_client: object | None = None) -> QuerySuggester:
     """Create query suggester instance.
 
     Args:

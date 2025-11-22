@@ -9,9 +9,9 @@ Provides a configuration system with proper precedence ordering:
 """
 
 import os
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any
 
 import yaml
 
@@ -52,7 +52,7 @@ class RaggedConfig:
     persona: str = "balanced"
 
     @classmethod
-    def load(cls, config_path: Optional[Path] = None) -> "RaggedConfig":
+    def load(cls, config_path: Path | None = None) -> "RaggedConfig":
         """
         Load configuration with layered overrides.
 
@@ -79,7 +79,7 @@ class RaggedConfig:
 
         return config
 
-    def _merge(self, overrides: Dict[str, Any]) -> None:
+    def _merge(self, overrides: dict[str, Any]) -> None:
         """
         Merge override dict into config.
 
@@ -127,7 +127,7 @@ class RaggedConfig:
                 else:
                     setattr(self, attr, os.environ[env_var])
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """
         Convert to dictionary.
 
@@ -136,7 +136,7 @@ class RaggedConfig:
         """
         return asdict(self)
 
-    def save(self, config_path: Optional[Path] = None) -> None:
+    def save(self, config_path: Path | None = None) -> None:
         """
         Save current config to file.
 
@@ -155,7 +155,7 @@ class RaggedConfig:
 class ConfigValidator:
     """Validate configuration values."""
 
-    def validate(self, config: RaggedConfig) -> Tuple[bool, List[str]]:
+    def validate(self, config: RaggedConfig) -> tuple[bool, list[str]]:
         """
         Validate configuration.
 

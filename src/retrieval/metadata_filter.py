@@ -7,16 +7,16 @@ SECURITY FIX (HIGH-4): Safe query construction to prevent NoSQL injection
 """
 
 import re
-from datetime import datetime
-from typing import Any, Dict, List, Optional, Union, Set
 from dataclasses import dataclass, field
+from datetime import datetime
+from typing import Any
 
 from src.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
 # SECURITY FIX (HIGH-4): Whitelisted metadata field names to prevent injection
-ALLOWED_METADATA_FIELDS: Set[str] = {
+ALLOWED_METADATA_FIELDS: set[str] = {
     "tag", "tags",
     "author", "authors",
     "file_type", "filetype",
@@ -32,13 +32,13 @@ ALLOWED_METADATA_FIELDS: Set[str] = {
 }
 
 # SECURITY FIX (HIGH-4): Whitelisted operators
-ALLOWED_OPERATORS: Set[str] = {
+ALLOWED_OPERATORS: set[str] = {
     "==", "!=", ">", "<", ">=", "<=",
     "in", "not_in", "contains",
 }
 
 # SECURITY FIX (HIGH-4): MongoDB operators that should never appear in field names
-FORBIDDEN_FIELD_PREFIXES: Set[str] = {
+FORBIDDEN_FIELD_PREFIXES: set[str] = {
     "$where", "$regex", "$gt", "$lt", "$gte", "$lte",
     "$eq", "$ne", "$in", "$nin", "$and", "$or", "$not",
     "$exists", "$type", "$mod", "$text", "$search",
@@ -218,7 +218,7 @@ class MetadataFilter:
     SECURITY FIX (HIGH-4): All conditions are validated via FilterCondition.__post_init__.
     """
 
-    conditions: List[FilterCondition] = field(default_factory=list)
+    conditions: list[FilterCondition] = field(default_factory=list)
     logic: str = "AND"  # "AND" or "OR"
 
     def add_condition(self, field: str, operator: str, value: Any) -> None:
@@ -236,7 +236,7 @@ class MetadataFilter:
         """
         self.conditions.append(FilterCondition(field, operator, value))
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """
         Convert filter to vector store where clause.
 
@@ -378,12 +378,12 @@ class FilterParser:
     @classmethod
     def parse_cli_filters(
         cls,
-        tag: Optional[str] = None,
-        author: Optional[str] = None,
-        file_type: Optional[str] = None,
-        date_after: Optional[str] = None,
-        date_before: Optional[str] = None,
-        confidence: Optional[str] = None,
+        tag: str | None = None,
+        author: str | None = None,
+        file_type: str | None = None,
+        date_after: str | None = None,
+        date_before: str | None = None,
+        confidence: str | None = None,
         **kwargs: Any,
     ) -> MetadataFilter:
         """
@@ -526,8 +526,8 @@ class FacetedSearch:
     @staticmethod
     def get_facets(
         vector_store: Any,
-        fields: Optional[List[str]] = None,
-    ) -> Dict[str, List[Any]]:
+        fields: list[str] | None = None,
+    ) -> dict[str, list[Any]]:
         """
         Get available values for metadata fields (facets).
 
@@ -547,7 +547,7 @@ class FacetedSearch:
         """
         # Placeholder for v0.3.7d
         # Will need vector store API to extract unique metadata values
-        facets: Dict[str, List[Any]] = {}
+        facets: dict[str, list[Any]] = {}
 
         # Common facets (placeholders)
         if fields is None or "tag" in fields:
@@ -563,7 +563,7 @@ class FacetedSearch:
     def count_facet_values(
         vector_store: Any,
         field: str,
-    ) -> Dict[Any, int]:
+    ) -> dict[Any, int]:
         """
         Count occurrences of each value in a metadata field.
 

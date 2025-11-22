@@ -8,10 +8,8 @@ Ensures compliance with data minimisation principles (GDPR Article 5).
 
 import logging
 import threading
-import time
 from datetime import datetime, timedelta
-from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 logger = logging.getLogger(__name__)
 
@@ -56,12 +54,12 @@ class DataLifecycleManager:
         self.cleanup_interval_hours = cleanup_interval_hours
 
         # Cleanup scheduler
-        self._cleanup_thread: Optional[threading.Thread] = None
+        self._cleanup_thread: threading.Thread | None = None
         self._cleanup_stop = threading.Event()
         self._running = False
 
     def is_expired(
-        self, timestamp: datetime, ttl_days: int, reference_time: Optional[datetime] = None
+        self, timestamp: datetime, ttl_days: int, reference_time: datetime | None = None
     ) -> bool:
         """Check if timestamp has exceeded TTL.
 
@@ -85,8 +83,8 @@ class DataLifecycleManager:
         return age.total_seconds() > (ttl_days * 86400)
 
     def filter_expired_entries(
-        self, entries: List[Dict[str, Any]], timestamp_key: str = "timestamp", ttl_days: int = 30
-    ) -> tuple[List[Dict[str, Any]], int]:
+        self, entries: list[dict[str, Any]], timestamp_key: str = "timestamp", ttl_days: int = 30
+    ) -> tuple[list[dict[str, Any]], int]:
         """Filter out expired entries from list.
 
         Args:
@@ -198,7 +196,7 @@ class DataLifecycleManager:
 
 
 # Global lifecycle manager (singleton)
-_lifecycle_manager: Optional[DataLifecycleManager] = None
+_lifecycle_manager: DataLifecycleManager | None = None
 
 
 def get_lifecycle_manager(

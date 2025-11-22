@@ -7,7 +7,7 @@ v0.3.8: Read-Eval-Print Loop interface for ragged.
 import cmd
 import sys
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from src.config.settings import get_settings
 from src.utils.logging import get_logger
@@ -41,9 +41,9 @@ Quick Start:
         """Initialise interactive shell."""
         super().__init__()
         self.settings = get_settings()
-        self.history: List[str] = []
-        self.config_changes: Dict[str, Any] = {}
-        self.context: Dict[str, Any] = {}
+        self.history: list[str] = []
+        self.config_changes: dict[str, Any] = {}
+        self.context: dict[str, Any] = {}
 
         # Disable default cmd features we don't want
         self.use_rawinput = True
@@ -147,9 +147,9 @@ Quick Start:
         Usage: status
         """
         print("\n📊 System Status\n")
-        print(f"  ragged version: 0.3.8")
-        print(f"  Documents loaded: 0")  # TODO: Get from actual library
-        print(f"  Configuration: Default")  # TODO: Check if custom config
+        print("  ragged version: 0.3.8")
+        print("  Documents loaded: 0")  # TODO: Get from actual library
+        print("  Configuration: Default")  # TODO: Check if custom config
         print(f"  Commands executed: {len(self.history)}")
         print()
 

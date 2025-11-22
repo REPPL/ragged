@@ -6,14 +6,15 @@ v0.2.10: Replaced pickle with safe JSON serialization (FEAT-SEC-001).
 
 import threading
 import time
-from pathlib import Path
-from typing import List, Optional, Dict, Any, Tuple, Set
 from dataclasses import dataclass
+from pathlib import Path
+from typing import Any
+
 from rank_bm25 import BM25Okapi
 
 from src.retrieval.bm25 import BM25Retriever
 from src.utils.logging import get_logger
-from src.utils.serialization import save_json, load_json
+from src.utils.serialization import load_json, save_json
 
 logger = get_logger(__name__)
 
@@ -22,10 +23,10 @@ logger = get_logger(__name__)
 class IndexCheckpoint:
     """Checkpoint data for incremental indexing."""
 
-    documents: List[str]
-    doc_ids: List[str]
-    metadatas: List[Dict[str, Any]]
-    deleted_ids: Set[str]
+    documents: list[str]
+    doc_ids: list[str]
+    metadatas: list[dict[str, Any]]
+    deleted_ids: set[str]
     timestamp: float
     version: int
 
@@ -50,7 +51,7 @@ class IncrementalBM25Retriever(BM25Retriever):
 
     def __init__(
         self,
-        checkpoint_dir: Optional[Path] = None,
+        checkpoint_dir: Path | None = None,
         enable_checkpoints: bool = True,
         compaction_threshold: float = 0.5,
     ):
@@ -68,7 +69,7 @@ class IncrementalBM25Retriever(BM25Retriever):
         self.compaction_threshold = compaction_threshold
 
         # Incremental state
-        self.deleted_ids: Set[str] = set()
+        self.deleted_ids: set[str] = set()
         self.version = 0
         self._lock = threading.Lock()
 
@@ -82,9 +83,9 @@ class IncrementalBM25Retriever(BM25Retriever):
 
     def add_documents(
         self,
-        documents: List[str],
-        doc_ids: List[str],
-        metadatas: Optional[List[Dict[str, Any]]] = None,
+        documents: list[str],
+        doc_ids: list[str],
+        metadatas: list[dict[str, Any]] | None = None,
     ) -> None:
         """Add documents incrementally without full rebuild.
 
@@ -121,7 +122,7 @@ class IncrementalBM25Retriever(BM25Retriever):
             if self.enable_checkpoints:
                 self._save_checkpoint()
 
-    def remove_documents(self, doc_ids: List[str]) -> None:
+    def remove_documents(self, doc_ids: list[str]) -> None:
         """Remove documents by marking as deleted (lazy deletion).
 
         Actual removal happens during compaction.
@@ -238,7 +239,7 @@ class IncrementalBM25Retriever(BM25Retriever):
         self,
         query: str,
         top_k: int = 5,
-    ) -> List[Tuple[str, str, float, Dict[str, Any]]]:
+    ) -> list[tuple[str, str, float, dict[str, Any]]]:
         """Search, filtering out deleted documents.
 
         Args:
@@ -320,7 +321,7 @@ class IncrementalBM25Retriever(BM25Retriever):
         except Exception as e:
             logger.error(f"Failed to cleanup checkpoints: {e}")
 
-    def load_checkpoint(self, version: Optional[int] = None) -> bool:
+    def load_checkpoint(self, version: int | None = None) -> bool:
         """Load checkpoint from disk using safe JSON deserialization.
 
         Args:
@@ -443,7 +444,7 @@ class IncrementalBM25Retriever(BM25Retriever):
                 if self.enable_checkpoints:
                     self._save_checkpoint()
 
-    def get_stats(self) -> Dict[str, Any]:
+    def get_stats(self) -> dict[str, Any]:
         """Get index statistics.
 
         Returns:

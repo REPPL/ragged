@@ -8,8 +8,9 @@ no sensitive information (PII, file contents, API keys) is logged.
 import logging
 import logging.handlers
 import sys
+from datetime import UTC
 from pathlib import Path
-from typing import Any, Dict, Optional, Union
+from typing import Any
 
 from pythonjsonlogger import json as jsonlogger
 
@@ -61,9 +62,9 @@ class CustomJsonFormatter(jsonlogger.JsonFormatter):
 
     def add_fields(
         self,
-        log_record: Dict[str, Any],
+        log_record: dict[str, Any],
         record: logging.LogRecord,
-        message_dict: Dict[str, Any],
+        message_dict: dict[str, Any],
     ) -> None:
         """Add custom fields to log records."""
         super().add_fields(log_record, record, message_dict)
@@ -76,14 +77,14 @@ class CustomJsonFormatter(jsonlogger.JsonFormatter):
 
         # Add timestamp in ISO format
         if not log_record.get("timestamp"):
-            from datetime import datetime, timezone
+            from datetime import datetime
 
-            log_record["timestamp"] = datetime.now(timezone.utc).isoformat()
+            log_record["timestamp"] = datetime.now(UTC).isoformat()
 
 
 def setup_logging(
-    log_level: Optional[str] = None,
-    log_file: Optional[Path] = None,
+    log_level: str | None = None,
+    log_file: Path | None = None,
     json_format: bool = True,
 ) -> None:
     """
@@ -113,7 +114,7 @@ def setup_logging(
     console_handler.setLevel(level)
     console_handler.addFilter(privacy_filter)
 
-    console_formatter: Union[CustomJsonFormatter, logging.Formatter]
+    console_formatter: CustomJsonFormatter | logging.Formatter
     if json_format:
         console_formatter = CustomJsonFormatter(
             "%(timestamp)s %(level)s %(logger)s %(message)s"
@@ -141,7 +142,7 @@ def setup_logging(
         file_handler.setLevel(level)
         file_handler.addFilter(privacy_filter)
 
-        file_formatter: Union[CustomJsonFormatter, logging.Formatter]
+        file_formatter: CustomJsonFormatter | logging.Formatter
         if json_format:
             file_formatter = CustomJsonFormatter(
                 "%(timestamp)s %(level)s %(logger)s %(module)s %(function)s %(message)s"

@@ -4,9 +4,10 @@ LEANN provides 97% storage savings through graph-based selective recomputation.
 Platform support: macOS, Linux (not available on Windows).
 """
 
-from typing import List, Dict, Any, Optional
-from pathlib import Path
 import logging
+from pathlib import Path
+from typing import Any
+
 import numpy as np
 
 try:
@@ -16,12 +17,11 @@ except ImportError:
     leann = None
     LEANN_AVAILABLE = False
 
-from ragged.vectorstore.interface import VectorStore, VectorStoreDocument, VectorStoreQueryResult
 from ragged.vectorstore.exceptions import (
     VectorStoreConnectionError,
     VectorStoreNotFoundError,
-    VectorStoreConfigError,
 )
+from ragged.vectorstore.interface import VectorStore, VectorStoreDocument, VectorStoreQueryResult
 
 logger = logging.getLogger(__name__)
 
@@ -35,7 +35,7 @@ class LEANNStore(VectorStore):
     Platform support: macOS, Linux (not Windows)
     """
 
-    def __init__(self, config: Optional[Dict[str, Any]] = None):
+    def __init__(self, config: dict[str, Any] | None = None):
         """Initialise LEANN store.
 
         Args:
@@ -66,7 +66,7 @@ class LEANNStore(VectorStore):
         self.search_complexity = self.config.get("search_complexity", 100)
 
         # Collection storage
-        self.collections: Dict[str, Any] = {}
+        self.collections: dict[str, Any] = {}
 
         try:
             logger.info(f"Initialised LEANN at {self.persist_dir}")
@@ -88,10 +88,10 @@ class LEANNStore(VectorStore):
 
     def add(
         self,
-        ids: List[str],
+        ids: list[str],
         embeddings: np.ndarray,
-        documents: List[str],
-        metadatas: List[Dict[str, Any]],
+        documents: list[str],
+        metadatas: list[dict[str, Any]],
         collection_name: str = "default",
     ) -> None:
         """Add documents to LEANN graph-based index.
@@ -131,7 +131,7 @@ class LEANNStore(VectorStore):
         query_embedding: np.ndarray,
         n_results: int = 10,
         collection_name: str = "default",
-        filter_dict: Optional[Dict[str, Any]] = None,
+        filter_dict: dict[str, Any] | None = None,
     ) -> VectorStoreQueryResult:
         """Search LEANN for similar documents using graph-based retrieval.
 
@@ -199,7 +199,7 @@ class LEANNStore(VectorStore):
             documents=result_documents, distances=result_distances, ids=result_ids
         )
 
-    def _cosine_distance(self, vec1: List[float], vec2: List[float]) -> float:
+    def _cosine_distance(self, vec1: list[float], vec2: list[float]) -> float:
         """Calculate cosine distance between two vectors.
 
         Args:
@@ -220,7 +220,7 @@ class LEANNStore(VectorStore):
         # Convert to distance (1 - similarity)
         return 1.0 - similarity
 
-    def delete(self, document_ids: List[str], collection_name: str = "default") -> int:
+    def delete(self, document_ids: list[str], collection_name: str = "default") -> int:
         """Delete documents from LEANN.
 
         Args:
@@ -246,10 +246,10 @@ class LEANNStore(VectorStore):
 
     def update(
         self,
-        ids: List[str],
-        embeddings: Optional[np.ndarray] = None,
-        documents: Optional[List[str]] = None,
-        metadatas: Optional[List[Dict[str, Any]]] = None,
+        ids: list[str],
+        embeddings: np.ndarray | None = None,
+        documents: list[str] | None = None,
+        metadatas: list[dict[str, Any]] | None = None,
         collection_name: str = "default",
     ) -> int:
         """Update documents in LEANN.
@@ -284,7 +284,7 @@ class LEANNStore(VectorStore):
         logger.debug(f"Updated {updated_count} documents in LEANN collection '{collection_name}'")
         return updated_count
 
-    def get(self, document_ids: List[str], collection_name: str = "default") -> List[VectorStoreDocument]:
+    def get(self, document_ids: list[str], collection_name: str = "default") -> list[VectorStoreDocument]:
         """Get documents by ID from LEANN.
 
         Args:
@@ -326,7 +326,7 @@ class LEANNStore(VectorStore):
 
         return len(self.collections[collection_name]["documents"])
 
-    def list_collections(self) -> List[str]:
+    def list_collections(self) -> list[str]:
         """List all LEANN collections.
 
         Returns:
@@ -334,7 +334,7 @@ class LEANNStore(VectorStore):
         """
         return list(self.collections.keys())
 
-    def create_collection(self, name: str, metadata: Optional[Dict] = None) -> None:
+    def create_collection(self, name: str, metadata: dict | None = None) -> None:
         """Create a new LEANN collection.
 
         Args:
@@ -345,7 +345,7 @@ class LEANNStore(VectorStore):
         logger.info(f"Created LEANN collection '{name}'")
 
     def _create_collection_internal(
-        self, name: str, metadata: Optional[Dict] = None
+        self, name: str, metadata: dict | None = None
     ) -> None:
         """Internal method to create collection.
 

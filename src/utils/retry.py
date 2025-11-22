@@ -5,15 +5,15 @@ v0.2.9: Automatic retry logic for transient failures, achieving >98% recovery su
 
 import functools
 import time
-from typing import Callable, Optional, Tuple, Type
+from collections.abc import Callable
 
 from src.exceptions import (
+    EmbeddingError,
     LLMConnectionError,
+    ResourceExhaustedError,
+    SearchError,
     VectorStoreConnectionError,
     VectorStoreError,
-    EmbeddingError,
-    SearchError,
-    ResourceExhaustedError,
 )
 from src.utils.logging import get_logger
 
@@ -102,8 +102,8 @@ def with_retry(
     max_attempts: int = 3,
     base_delay: float = 1.0,
     max_delay: float = 60.0,
-    retryable_exceptions: Optional[Tuple[Type[Exception], ...]] = None,
-    on_retry: Optional[Callable[[Exception, int], None]] = None,
+    retryable_exceptions: tuple[type[Exception], ...] | None = None,
+    on_retry: Callable[[Exception, int], None] | None = None,
 ) -> Callable:
     """
     Decorator to add retry logic with exponential backoff.
@@ -225,7 +225,7 @@ class RetryContext:
         self.base_delay = base_delay
         self.max_delay = max_delay
         self.current_attempt = 0
-        self.last_exception: Optional[Exception] = None
+        self.last_exception: Exception | None = None
 
     def __iter__(self):
         """Iterator interface."""

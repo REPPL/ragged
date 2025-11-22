@@ -3,8 +3,6 @@
 v0.3.12: REST API server for web/mobile integration.
 """
 
-from pathlib import Path
-from typing import Optional
 
 import click
 from rich.console import Console

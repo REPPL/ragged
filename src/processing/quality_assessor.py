@@ -15,7 +15,7 @@ import hashlib
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from src.utils.logging import get_logger
 
@@ -47,7 +47,7 @@ class PageQuality:
     layout_complexity: float = 0.0
     has_tables: bool = False
     has_rotated_content: bool = False
-    metadata: Dict[str, Any] = field(default_factory=dict)
+    metadata: dict[str, Any] = field(default_factory=dict)
 
     @property
     def overall_score(self) -> float:
@@ -96,10 +96,10 @@ class QualityAssessment:
     image_quality: float
     has_tables: bool
     has_rotated_content: bool
-    page_scores: List[PageQuality] = field(default_factory=list)
+    page_scores: list[PageQuality] = field(default_factory=list)
     recommended_processor: str = "docling"
     confidence: float = 1.0
-    metadata: Dict[str, Any] = field(default_factory=dict)
+    metadata: dict[str, Any] = field(default_factory=dict)
 
 
 class QualityAssessor:
@@ -141,7 +141,7 @@ class QualityAssessor:
         self.fast_mode = fast_mode
         self.cache_enabled = cache_enabled
         self.max_pages_to_analyze = max_pages_to_analyze
-        self._cache: Dict[str, QualityAssessment] = {}
+        self._cache: dict[str, QualityAssessment] = {}
 
         # Lazy imports for heavy dependencies
         self._pymupdf = None
@@ -256,7 +256,7 @@ class QualityAssessor:
         )
 
         # Analyse each page
-        page_scores: List[PageQuality] = []
+        page_scores: list[PageQuality] = []
         for page_idx in page_indices:
             page = doc[page_idx]
             page_quality = self._assess_page(page, page_idx + 1)
@@ -633,7 +633,7 @@ class QualityAssessor:
 
     def _aggregate_assessment(
         self,
-        page_scores: List[PageQuality],
+        page_scores: list[PageQuality],
         total_pages: int,
         file_path: Path,
     ) -> QualityAssessment:

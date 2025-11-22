@@ -9,13 +9,12 @@ Implements token bucket algorithm for rate limiting with:
 - Automatic token replenishment
 """
 
-import time
-import threading
-from typing import Dict, Optional
-from dataclasses import dataclass, field
-from pathlib import Path
 import json
 import logging
+import threading
+import time
+from dataclasses import dataclass, field
+from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
@@ -132,7 +131,7 @@ class RateLimitConfig:
         if self.requests_per_minute < 1:
             self.requests_per_minute = 1
 
-    def to_dict(self) -> Dict:
+    def to_dict(self) -> dict:
         """Serialise to dictionary."""
         return {
             "plugin_name": self.plugin_name,
@@ -141,7 +140,7 @@ class RateLimitConfig:
         }
 
     @classmethod
-    def from_dict(cls, data: Dict) -> "RateLimitConfig":
+    def from_dict(cls, data: dict) -> "RateLimitConfig":
         """Deserialise from dictionary."""
         return cls(
             plugin_name=data["plugin_name"],
@@ -156,7 +155,7 @@ class RateLimiter:
     SECURITY FIX (MEDIUM-1): Thread-safe rate limiting to prevent DoS.
     """
 
-    def __init__(self, config_path: Optional[Path] = None):
+    def __init__(self, config_path: Path | None = None):
         """Initialise rate limiter.
 
         Args:
@@ -167,8 +166,8 @@ class RateLimiter:
         self.config_path = config_path
         self.config_path.parent.mkdir(parents=True, exist_ok=True)
 
-        self._configs: Dict[str, RateLimitConfig] = {}
-        self._buckets: Dict[str, TokenBucket] = {}
+        self._configs: dict[str, RateLimitConfig] = {}
+        self._buckets: dict[str, TokenBucket] = {}
         self._lock = threading.RLock()
 
         self._load_config()
@@ -177,7 +176,7 @@ class RateLimiter:
         """Load rate limit configuration from storage."""
         if self.config_path.exists():
             try:
-                with open(self.config_path, "r") as f:
+                with open(self.config_path) as f:
                     data = json.load(f)
                     for plugin_data in data.get("plugins", []):
                         config = RateLimitConfig.from_dict(plugin_data)
@@ -216,7 +215,7 @@ class RateLimiter:
         self,
         plugin_name: str,
         requests_per_minute: int,
-        burst_size: Optional[int] = None
+        burst_size: int | None = None
     ) -> None:
         """Set rate limit for a plugin.
 
@@ -281,7 +280,7 @@ class RateLimiter:
             f"Rate limit check passed for {plugin_name} (cost: {cost})"
         )
 
-    def get_rate_limit(self, plugin_name: str) -> Optional[RateLimitConfig]:
+    def get_rate_limit(self, plugin_name: str) -> RateLimitConfig | None:
         """Get rate limit configuration for a plugin.
 
         Args:
@@ -304,7 +303,7 @@ class RateLimiter:
                 self._buckets[plugin_name].reset()
                 logger.info(f"Reset rate limit for {plugin_name}")
 
-    def get_all_rate_limits(self) -> Dict[str, RateLimitConfig]:
+    def get_all_rate_limits(self) -> dict[str, RateLimitConfig]:
         """Get all rate limit configurations.
 
         Returns:

@@ -7,8 +7,8 @@ import json
 from pathlib import Path
 
 import click
-from rich.table import Table
 from rich.panel import Panel
+from rich.table import Table
 
 from src.cli.common import console
 from src.utils.logging import get_logger
@@ -133,8 +133,8 @@ def corrections(document_id: str) -> None:
 
     corrections_file = metadata_dir / "corrections.json"
     if not corrections_file.exists():
-        console.print(f"[yellow]ℹ[/yellow] No corrections were applied to this document")
-        console.print(f"[dim]Document may not have required corrections[/dim]")
+        console.print("[yellow]ℹ[/yellow] No corrections were applied to this document")
+        console.print("[dim]Document may not have required corrections[/dim]")
         return
 
     try:
@@ -166,7 +166,7 @@ def corrections(document_id: str) -> None:
             arrow = "→"
 
         console.print()
-        console.print(f"[bold]Quality Improvement:[/bold]")
+        console.print("[bold]Quality Improvement:[/bold]")
         console.print(
             f"  Before:  {qual['before']:.0%}\n"
             f"  After:   {qual['after']:.0%}\n"
@@ -224,8 +224,8 @@ def uncertainties(document_id: str) -> None:
 
     uncertainties_file = metadata_dir / "uncertainties.json"
     if not uncertainties_file.exists():
-        console.print(f"[green]✓[/green] No uncertainties detected in this document")
-        console.print(f"[dim]Document quality is good[/dim]")
+        console.print("[green]✓[/green] No uncertainties detected in this document")
+        console.print("[dim]Document quality is good[/dim]")
         return
 
     try:

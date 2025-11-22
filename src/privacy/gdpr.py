@@ -12,10 +12,9 @@ Security: All operations logged for audit trail.
 
 import json
 import logging
-import shutil
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 logger = logging.getLogger(__name__)
 
@@ -35,7 +34,7 @@ class GDPRToolkit:
         >>> toolkit.delete_user_data(session_id="abc123")
     """
 
-    def __init__(self, data_dir: Optional[Path] = None):
+    def __init__(self, data_dir: Path | None = None):
         """Initialise GDPR toolkit.
 
         Args:
@@ -49,8 +48,8 @@ class GDPRToolkit:
         self.data_dir = data_dir
 
     def export_user_data(
-        self, session_id: Optional[str] = None, output_path: Optional[Path] = None
-    ) -> Dict[str, Any]:
+        self, session_id: str | None = None, output_path: Path | None = None
+    ) -> dict[str, Any]:
         """Export all user data (GDPR Article 15 + 20).
 
         Args:
@@ -98,7 +97,7 @@ class GDPRToolkit:
         return export_data
 
     def delete_user_data(
-        self, session_id: Optional[str] = None, confirm: bool = False, backup: bool = True
+        self, session_id: str | None = None, confirm: bool = False, backup: bool = True
     ) -> int:
         """Delete all user data (GDPR Article 17).
 
@@ -144,7 +143,7 @@ class GDPRToolkit:
 
         return deleted_count
 
-    def get_data_inventory(self, session_id: Optional[str] = None) -> Dict[str, int]:
+    def get_data_inventory(self, session_id: str | None = None) -> dict[str, int]:
         """Get inventory of all user data.
 
         Args:
@@ -234,10 +233,10 @@ class GDPRToolkit:
 
 
 # Global GDPR toolkit (singleton)
-_gdpr_toolkit: Optional[GDPRToolkit] = None
+_gdpr_toolkit: GDPRToolkit | None = None
 
 
-def get_gdpr_toolkit(data_dir: Optional[Path] = None) -> GDPRToolkit:
+def get_gdpr_toolkit(data_dir: Path | None = None) -> GDPRToolkit:
     """Get global GDPR toolkit (singleton).
 
     Args:

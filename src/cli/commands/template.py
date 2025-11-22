@@ -5,7 +5,6 @@ v0.3.11: CLI integration for query templates.
 """
 
 from pathlib import Path
-from typing import Dict, Optional
 
 import click
 from rich.console import Console
@@ -49,8 +48,8 @@ def template():
 def render_template(
     template_path: Path,
     var: tuple,
-    template_dir: Optional[Path],
-    output: Optional[Path],
+    template_dir: Path | None,
+    output: Path | None,
 ):
     """
     Render a template file.
