@@ -85,6 +85,7 @@ from src.cli.commands.feature_flags import feature_flags_group
 from src.cli.commands.monitor import monitor
 from src.cli.commands.benchmark import benchmark
 from src.cli.commands.explain import explain
+from src.cli.commands.show import show  # v0.3.5: PDF correction metadata viewer
 
 # Register commands
 cli.add_command(add)
@@ -105,6 +106,7 @@ cli.add_command(feature_flags_group)
 cli.add_command(monitor)
 cli.add_command(benchmark)
 cli.add_command(explain)
+cli.add_command(show)  # v0.3.5: PDF correction metadata viewer
 
 
 def main() -> None:
