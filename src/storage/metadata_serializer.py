@@ -97,6 +97,9 @@ def deserialize_metadata(metadata: dict[str, Any]) -> dict[str, Any]:
     Returns:
         Deserialised metadata with original types restored
 
+    Raises:
+        ValueError: If JSON is too large or deeply nested (security protection)
+
     Example:
         >>> metadata = {
         ...     "path": "/data/file.pdf",
@@ -112,14 +115,42 @@ def deserialize_metadata(metadata: dict[str, Any]) -> dict[str, Any]:
             "count": 5
         }
     """
+    # SECURITY FIX (CRITICAL-1): Limits to prevent JSON DoS attacks
+    MAX_JSON_SIZE = 100_000  # 100KB per JSON field
+    MAX_NESTING_DEPTH = 10  # Maximum object/array nesting
+
     deserialized = {}
 
     for key, value in metadata.items():
         # JSON-serialised values → parse back to original type
         if isinstance(value, str) and value.startswith("__json__:"):
             json_str = value[len("__json__:"):]
+
+            # SECURITY FIX (CRITICAL-1): Validate JSON size before parsing
+            if len(json_str) > MAX_JSON_SIZE:
+                logger.error(
+                    f"JSON field '{key}' exceeds size limit ({len(json_str)} > {MAX_JSON_SIZE}). "
+                    f"Potential DoS attack detected."
+                )
+                raise ValueError(
+                    f"JSON field '{key}' exceeds maximum size ({MAX_JSON_SIZE} bytes)"
+                )
+
             try:
-                deserialized[key] = json.loads(json_str)
+                parsed_value = json.loads(json_str)
+
+                # SECURITY FIX (CRITICAL-1): Validate nesting depth
+                if not _is_safe_json_depth(parsed_value, MAX_NESTING_DEPTH):
+                    logger.error(
+                        f"JSON field '{key}' exceeds nesting depth limit ({MAX_NESTING_DEPTH}). "
+                        f"Potential DoS attack detected."
+                    )
+                    raise ValueError(
+                        f"JSON field '{key}' exceeds maximum nesting depth ({MAX_NESTING_DEPTH})"
+                    )
+
+                deserialized[key] = parsed_value
+
             except json.JSONDecodeError as e:
                 logger.warning(
                     f"Failed to deserialise JSON for key '{key}': {e}. "
@@ -132,6 +163,43 @@ def deserialize_metadata(metadata: dict[str, Any]) -> dict[str, Any]:
             deserialized[key] = value
 
     return deserialized
+
+
+def _is_safe_json_depth(obj: Any, max_depth: int, current_depth: int = 0) -> bool:
+    """
+    Check if JSON object/array nesting depth is within safe limits.
+
+    SECURITY FIX (CRITICAL-1): Prevents deeply nested JSON from causing parser DoS.
+
+    Args:
+        obj: Object to check (dict, list, or primitive)
+        max_depth: Maximum allowed nesting depth
+        current_depth: Current recursion depth
+
+    Returns:
+        True if depth is safe, False otherwise
+
+    Example:
+        >>> _is_safe_json_depth({"a": {"b": {"c": "value"}}}, max_depth=3)
+        True
+        >>> _is_safe_json_depth({"a": {"b": {"c": {"d": "value"}}}}, max_depth=3)
+        False
+    """
+    if current_depth > max_depth:
+        return False
+
+    if isinstance(obj, dict):
+        return all(
+            _is_safe_json_depth(value, max_depth, current_depth + 1)
+            for value in obj.values()
+        )
+    elif isinstance(obj, list):
+        return all(
+            _is_safe_json_depth(item, max_depth, current_depth + 1) for item in obj
+        )
+    else:
+        # Primitive types (str, int, float, bool, None) are safe
+        return True
 
 
 def serialize_batch_metadata(metadatas: list[dict[str, Any]]) -> list[dict[str, Any]]:

@@ -127,7 +127,7 @@ class DualEmbeddingStore:
             Generated embedding ID
 
         Raises:
-            ValueError: If embedding dimension incorrect
+            ValueError: If embedding dimension, shape, or values are invalid
 
         Example:
             >>> embedding = np.random.rand(384)
@@ -137,8 +137,27 @@ class DualEmbeddingStore:
             >>> id
             'doc123_chunk_0_text'
         """
+        # SECURITY FIX (CRITICAL-4): Enhanced embedding validation
+        # Validate embedding is numpy array
+        if not isinstance(embedding, np.ndarray):
+            raise ValueError(f"Text embedding must be numpy array, got {type(embedding).__name__}")
+
+        # Validate embedding shape (must be 1D)
+        if embedding.ndim != 1:
+            raise ValueError(f"Text embedding must be 1-dimensional, got {embedding.ndim}D array")
+
+        # Validate embedding dimension
         if embedding.shape[0] != 384:
             raise ValueError(f"Text embedding must be 384-dimensional, got {embedding.shape[0]}")
+
+        # SECURITY FIX (CRITICAL-4): Validate embedding values (no NaN, Inf)
+        if not np.isfinite(embedding).all():
+            nan_count = np.isnan(embedding).sum()
+            inf_count = np.isinf(embedding).sum()
+            raise ValueError(
+                f"Text embedding contains invalid values: {nan_count} NaN, {inf_count} Inf. "
+                f"This may indicate corruption or attack."
+            )
 
         embedding_id = generate_embedding_id(document_id, EmbeddingType.TEXT, chunk_index)
 
@@ -189,7 +208,7 @@ class DualEmbeddingStore:
             Generated embedding ID
 
         Raises:
-            ValueError: If embedding dimension incorrect
+            ValueError: If embedding dimension, shape, or values are invalid
 
         Example:
             >>> embedding = np.random.rand(128)
@@ -199,8 +218,31 @@ class DualEmbeddingStore:
             >>> id
             'doc123_page_0_vision'
         """
+        # SECURITY FIX (CRITICAL-4): Enhanced embedding validation
+        # Validate embedding is numpy array
+        if not isinstance(embedding, np.ndarray):
+            raise ValueError(
+                f"Vision embedding must be numpy array, got {type(embedding).__name__}"
+            )
+
+        # Validate embedding shape (must be 1D)
+        if embedding.ndim != 1:
+            raise ValueError(
+                f"Vision embedding must be 1-dimensional, got {embedding.ndim}D array"
+            )
+
+        # Validate embedding dimension
         if embedding.shape[0] != 128:
             raise ValueError(f"Vision embedding must be 128-dimensional, got {embedding.shape[0]}")
+
+        # SECURITY FIX (CRITICAL-4): Validate embedding values (no NaN, Inf)
+        if not np.isfinite(embedding).all():
+            nan_count = np.isnan(embedding).sum()
+            inf_count = np.isinf(embedding).sum()
+            raise ValueError(
+                f"Vision embedding contains invalid values: {nan_count} NaN, {inf_count} Inf. "
+                f"This may indicate corruption or attack."
+            )
 
         embedding_id = generate_embedding_id(document_id, EmbeddingType.VISION, page_number)
 
@@ -484,6 +526,9 @@ class DualEmbeddingStore:
         doc_distance: dict[str, float] = {}
         doc_document: dict[str, str] = {}
 
+        # SECURITY FIX (CRITICAL-6): Maximum rank to prevent integer overflow
+        MAX_RANK = 10_000  # Reasonable upper bound for retrieval results
+
         # Process text results
         if text_results and text_results["ids"] and len(text_results["ids"][0]) > 0:
             for rank, (doc_id, metadata, distance) in enumerate(
@@ -493,6 +538,13 @@ class DualEmbeddingStore:
                     text_results["distances"][0],
                 )
             ):
+                # SECURITY FIX (CRITICAL-6): Validate rank is within safe bounds
+                if rank < 0 or rank > MAX_RANK:
+                    logger.warning(
+                        f"Rank {rank} out of bounds [0, {MAX_RANK}], skipping result"
+                    )
+                    continue
+
                 rrf_score = text_weight / (RRF_K + rank + 1)
                 doc_scores[doc_id] = doc_scores.get(doc_id, 0.0) + rrf_score
 
@@ -514,6 +566,13 @@ class DualEmbeddingStore:
                     vision_results["distances"][0],
                 )
             ):
+                # SECURITY FIX (CRITICAL-6): Validate rank is within safe bounds
+                if rank < 0 or rank > MAX_RANK:
+                    logger.warning(
+                        f"Rank {rank} out of bounds [0, {MAX_RANK}], skipping result"
+                    )
+                    continue
+
                 rrf_score = vision_weight / (RRF_K + rank + 1)
                 doc_scores[doc_id] = doc_scores.get(doc_id, 0.0) + rrf_score
 
