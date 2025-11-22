@@ -7,6 +7,78 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.7d] - 2025-11-22
+
+### Added - Metadata Filtering & Faceted Search
+
+**Rich Query Filtering System (400+ lines)**
+- User-friendly filter syntax parser
+- Complex filter queries with AND/OR logic
+- CLI-style filter arguments
+- Faceted search interface (foundation)
+- Integration with existing retrieval system
+
+**Filter Syntax Support**
+```bash
+# Simple equality
+tag=python author=Smith file_type=pdf
+
+# Comparisons
+confidence>0.9 date>=2023-01-01
+
+# Multiple values (OR within field)
+tag=python,java,rust
+
+# Combined filters (AND across fields)
+tag=python confidence>0.9 author=Smith date>=2023-01-01
+```
+
+**New Classes & Functions**
+- `FilterCondition` - Single filter condition with operator support
+- `MetadataFilter` - Complex filter with AND/OR logic, ChromaDB integration
+- `FilterParser` - Parse filter strings and CLI arguments
+- `FacetedSearch` - Discover available filter values (foundation)
+- `create_filter()` - Convenience function for quick filter creation
+
+**Supported Operators**
+- Equality: `==`, `=`
+- Inequality: `!=`
+- Comparison: `>`, `<`, `>=`, `<=`
+- Membership: `in`, `not_in`
+- Contains: `contains` (string matching)
+
+**CLI Filter Arguments** (ready for integration)
+- `--tag` - Tag filter (comma-separated for OR)
+- `--author` - Author name filter
+- `--file-type` - File type filter (pdf, txt, md, etc.)
+- `--date-after` - Date range start (YYYY-MM-DD)
+- `--date-before` - Date range end (YYYY-MM-DD)
+- `--confidence` - Confidence threshold (e.g., ">0.9", ">=0.95")
+- Custom filters via kwargs
+
+**Type Inference**
+- Automatic type detection (boolean, integer, float, date, string)
+- Date parsing (YYYY-MM-DD format → ISO datetime)
+- Numeric inference based on field names (confidence, score)
+- Quote stripping from string values
+
+**Testing & Quality**
+- 37 comprehensive unit tests
+- 92% coverage on metadata_filter.py
+- All tests passing
+- Edge cases: invalid filters, type conversions, empty inputs
+
+**Integration**
+- Compatible with existing `Retriever.retrieve(filter_metadata=...)` API
+- ChromaDB where clause generation
+- Ready for CLI command integration
+- Backward compatible with existing code
+
+**Performance**
+- Lightweight filter parsing (~1ms)
+- No overhead when filters not used
+- Efficient ChromaDB query generation
+
 ## [0.3.7c] - 2025-11-22
 
 ### Added - Enhanced Citations
