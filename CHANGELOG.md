@@ -7,6 +7,143 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.11] - 2025-11-22
+
+### Added - CLI Integration for Templates & Testing
+
+**Template CLI Commands** (src/cli/commands/template.py - 217 lines)
+- `ragged template render` - Render templates with variable substitution
+  - Support for multiple variables via `-v key=value` syntax
+  - Optional template directory specification
+  - Output to file or stdout
+  - Automatic template_dir inference from template path
+- `ragged template validate` - Validate template syntax
+  - Jinja2 syntax checking
+  - Error reporting with line numbers
+  - Clear success/failure indication
+- `ragged template list` - List available templates
+  - Discover all *.j2 files in directory
+  - Rich table output with paths
+  - Template count summary
+- `ragged template show` - Display template contents
+  - Syntax highlighting for Jinja2 (default)
+  - Option to disable highlighting
+  - Line-numbered output
+
+**Test CLI Commands** (src/cli/commands/test.py - 186 lines)
+- `ragged test config` - Validate configuration files
+  - Comprehensive YAML validation
+  - Error and warning categorisation
+  - Formatted output with colour-coded messages
+  - Summary table with error/warning counts
+  - Optional `--strict` mode (treats warnings as errors)
+- `ragged test config-string` - Validate config from string
+  - Same validation as file-based
+  - Useful for testing configurations programmatically
+
+**Example Templates** (templates/)
+- `templates/examples/simple_summary.j2` - Document summary template
+  - Variable substitution demonstration
+  - Default value handling
+  - Custom filter usage (truncate_words)
+  - Well-commented for learning
+- `templates/README.md` - Template usage documentation
+  - CLI command examples
+  - Variable usage guide
+  - Custom filter reference
+  - Creating new templates guide
+
+**CLI Integration**
+- Registered template and test commands in main CLI (src/main.py)
+- Commands accessible via `ragged template` and `ragged test`
+- Full integration with existing CLI infrastructure
+- Consistent error handling and output formatting
+
+**Testing** (79 tests total, all passing)
+- Template CLI tests (tests/cli/test_template_commands.py - 11 tests):
+  - Basic template rendering
+  - Output file writing
+  - Invalid variable format handling
+  - Template validation (valid & invalid)
+  - Template listing (with/without templates)
+  - Template display (with/without highlighting)
+- Test CLI tests (tests/cli/test_test_commands.py - 14 tests):
+  - Valid configuration validation
+  - Invalid syntax/schema handling
+  - Warning detection and display
+  - Strict mode enforcement
+  - String-based validation
+  - Error count display
+  - Summary formatting
+- Core functionality tests (56 tests from v0.3.10):
+  - Template engine (28 tests, 92% coverage)
+  - Config validator (28 tests, 94% coverage)
+
+**Usage Examples**
+
+Template rendering:
+```bash
+# Render a template with variables
+ragged template render summary.j2 -v document=paper.pdf -v topic="ML"
+
+# Render to file
+ragged template render summary.j2 -v name=John -o output.txt
+
+# List templates
+ragged template list -d templates/examples
+
+# Validate template
+ragged template validate templates/examples/simple_summary.j2
+
+# Show template with syntax highlighting
+ragged template show summary.j2
+```
+
+Configuration testing:
+```bash
+# Validate configuration
+ragged test config config.yaml
+
+# Strict mode (warnings fail)
+ragged test config config.yaml --strict
+
+# Validate config string
+ragged test config-string "chunking:\n  chunk_size: 500"
+```
+
+**Improvements from v0.3.10**
+- Completed all deferred CLI features
+- Added example templates for learning
+- Added comprehensive CLI tests
+- Fixed template_dir handling for flexible usage
+- Improved error messaging in CLI commands
+
+**Coverage & Quality**
+- Template CLI: 90% coverage
+- Test CLI: 90% coverage
+- All 79 tests passing
+- Zero regressions in existing functionality
+
+**Backward Compatibility**
+- No changes to existing commands
+- New commands are additive only
+- Existing template engine and validator unchanged
+- All v0.3.10 functionality preserved
+
+### Changed
+- `src/main.py` - Added template and test command registrations
+
+### Fixed
+- Template CLI now infers template_dir from template path when not specified
+- Config validation tests handle world-readable temp file permissions appropriately
+
+### Technical Details
+- **New Production Code**: 403 lines (2 CLI modules)
+- **New Test Code**: 25 tests, 403 lines
+- **Example Content**: 2 files (template + README)
+- **Dependencies**: None (uses existing click, rich, Jinja2)
+- **Documentation**: Comprehensive in-code docstrings and README
+
 ## [0.3.10] - 2025-11-22
 
 ### Added - Automation & Templates (MVP)

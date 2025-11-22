@@ -87,6 +87,8 @@ from src.cli.commands.benchmark import benchmark
 from src.cli.commands.explain import explain
 from src.cli.commands.show import show  # v0.3.5: PDF correction metadata viewer
 from src.cli.commands.versions import versions  # v0.3.7a: Document version tracking
+from src.cli.commands.template import template  # v0.3.11: Template commands
+from src.cli.commands.test import test  # v0.3.11: Testing commands
 
 # Register commands
 cli.add_command(add)
@@ -109,6 +111,8 @@ cli.add_command(benchmark)
 cli.add_command(explain)
 cli.add_command(show)  # v0.3.5: PDF correction metadata viewer
 cli.add_command(versions)  # v0.3.7a: Document version tracking
+cli.add_command(template)  # v0.3.11: Template commands
+cli.add_command(test)  # v0.3.11: Testing commands
 
 
 def main() -> None:
