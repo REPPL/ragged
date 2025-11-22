@@ -79,6 +79,83 @@ tag=python confidence>0.9 author=Smith date>=2023-01-01
 - No overhead when filters not used
 - Efficient ChromaDB query generation
 
+## [0.3.7e] - 2025-11-22
+
+### Added - Auto-Tagging & Classification
+
+**LLM-Based Document Tagging System (480+ lines)**
+- Automatic document type classification
+- Topic extraction and categorisation
+- Named entity recognition (people, organisations, locations)
+- Academic level detection
+- Intelligent keyword extraction
+- Multi-strategy tagging (LLM + rule-based fallback)
+
+**Document Classification**
+- Document types: research_paper, book, article, technical_doc, blog_post, news, tutorial, reference, other
+- Academic levels: introductory, intermediate, advanced, expert, not_applicable
+- Language detection (ISO 639-1 codes)
+- Confidence scoring for classification reliability
+
+**New Classes & Enums**
+- `DocumentType` - Enum for document type classification
+- `AcademicLevel` - Enum for target audience expertise level
+- `DocumentTags` - Dataclass for auto-generated tags and metadata
+- `AutoTagger` - Main tagger class with LLM-based classification
+- `tag_document()` - Convenience function for quick tagging
+
+**LLM Integration**
+- Structured JSON prompts for reliable classification
+- Three specialised prompts: classification, topic extraction, entity extraction
+- JSON extraction with error handling (handles extra text around JSON)
+- Confidence scores from LLM responses
+
+**Rule-Based Fallback**
+- Offline operation without LLM
+- Filename-based type detection (.pdf, .md, .markdown)
+- Content analysis (abstract, chapter, references keywords)
+- Keyword frequency analysis
+- Simple capitalisation-based entity extraction
+- Lower confidence scores (0.6) for rule-based vs LLM (0.8-0.95)
+
+**Entity Recognition**
+- People: Individual names
+- Organisations: Companies, institutions, groups
+- Locations: Countries, cities, places
+- Automatic extraction from document content
+
+**Topic & Keyword Extraction**
+- LLM-based: 3-5 main topics from content analysis
+- Rule-based: Frequency analysis with stopword filtering
+- Automatic type inference for metadata values
+- Configurable top-N keyword extraction
+
+**Integration & Usage**
+```python
+# With LLM client
+tagger = AutoTagger(llm_client)
+tags = tagger.tag_document(content, filename="paper.pdf")
+print(f"Type: {tags.document_type.value}")
+print(f"Topics: {tags.topics}")
+print(f"Entities: {tags.entities}")
+
+# Without LLM (rule-based fallback)
+tags = tag_document(content, filename="tutorial.md")
+```
+
+**Testing & Quality**
+- 29 comprehensive unit tests
+- 96% coverage on auto_tagger.py
+- Mock LLM testing framework
+- Edge cases: empty content, invalid JSON, LLM failures
+- Fallback behaviour verification
+
+**Performance**
+- Fast rule-based classification (~5ms)
+- LLM-based classification (depends on LLM latency)
+- Graceful degradation on LLM failure
+- No overhead when not used
+
 ## [0.3.7c] - 2025-11-22
 
 ### Added - Enhanced Citations
