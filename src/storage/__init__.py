@@ -2,6 +2,7 @@
 Vector storage and retrieval.
 
 v0.3.6: Vectorstore abstraction for multi-backend support.
+v0.3.7a: Document version tracking.
 """
 
 # Abstract interface (for type hints and subclassing)
@@ -16,6 +17,9 @@ from src.storage.vectorstore_factory import get_vectorstore
 # Specific implementations
 from src.storage.chromadb_store import ChromaDBStore
 
+# Version tracking (v0.3.7a)
+from src.storage.version_tracker import VersionTracker, DocumentVersion
+
 __all__ = [
     # Abstract interface
     "VectorStoreInterface",
@@ -25,4 +29,7 @@ __all__ = [
     "get_vectorstore",
     # Specific implementations
     "ChromaDBStore",
+    # Version tracking (v0.3.7a)
+    "VersionTracker",
+    "DocumentVersion",
 ]
