@@ -1,9 +1,9 @@
 # ADR-0015: VectorStore Abstraction Layer
 
 **Date:** 2025-11-16
-**Status:** Proposed
+**Status:** Accepted (Phase 1-2 completed in v0.3.6)
 **Deciders:** ragged development team
-**Tags:** architecture, storage, plugins, v0.4
+**Tags:** architecture, storage, plugins, v0.3.6, v0.4
 
 ---
 
@@ -364,23 +364,84 @@ vectorstore:
 
 ---
 
+## Implementation Notes (v0.3.6)
+
+**Release Date:** 2025-11-22
+
+### What Was Implemented
+
+Phase 1 and Phase 2 were completed in v0.3.6 with the following key deliverables:
+
+**1. Abstract Interface** (`src/storage/vectorstore_interface.py`)
+- VectorStore ABC with 9 abstract methods
+- Uses `numpy.ndarray` for embeddings (performance optimisation)
+- Returns Dict[str, Any] instead of custom dataclasses (backward compatibility)
+- Methods: health_check, add, query, delete, update_metadata, get_documents_by_metadata, list, count, clear, get_collection_info
+
+**2. ChromaDB Implementation** (`src/storage/chromadb_store.py`)
+- ChromaDBStore(VectorStore) implements full interface
+- Preserved all existing functionality:
+  - Circuit breaker protection (_chroma_circuit_breaker)
+  - Automatic retry with exponential backoff (@with_retry decorator)
+  - Metadata serialization for complex types
+- Zero behavioral changes from original implementation
+- All 14 storage tests passing
+
+**3. Factory Function** (`src/storage/vectorstore_factory.py`)
+- get_vectorstore(backend, collection_name, host, port) factory
+- Supports backend selection: 'chromadb', 'leann', 'qdrant', 'weaviate'
+- Returns NotImplementedError for future backends with roadmap references
+- Defaults to 'chromadb' if not specified
+
+**4. Backward Compatibility** (`src/storage/vector_store.py`)
+- Original module now re-exports: `from chromadb_store import ChromaDBStore as VectorStore`
+- 100% backward compatible - all existing imports work unchanged
+- All modules using VectorStore continue working without modification
+
+**5. Package Exports** (`src/storage/__init__.py`)
+- Exports VectorStoreInterface (for type hints)
+- Exports VectorStore (backward compatible alias)
+- Exports get_vectorstore (recommended for new code)
+- Exports ChromaDBStore (specific implementation)
+
+### Key Differences from Original Proposal
+
+1. **No Custom Dataclasses:** Kept Dict return types instead of VectorStoreDocument/VectorStoreQueryResult for backward compatibility
+2. **Numpy Arrays:** Used np.ndarray for embeddings instead of List[float] for better performance
+3. **Additional Methods:** Added list(), get_documents_by_metadata(), update_metadata() based on actual usage patterns
+4. **Simpler Factory:** Function-based factory instead of class-based for ease of use
+5. **Re-export Pattern:** Used re-export for backward compatibility instead of direct refactoring
+
+### Testing
+
+- All 14 storage tests passing
+- Backward compatibility verified via programmatic import checks
+- Integration modules (ingestion, retrieval) continue working unchanged
+
+---
+
 ## Implementation Plan
 
-### Phase 1: Interface Design (v0.3)
-**Effort: 4-6 hours**
+### Phase 1: Interface Design (v0.3.6) ✅ **COMPLETED**
+**Effort: 4-6 hours (Actual: 4 hours)**
 
-- [ ] Finalise VectorStore interface
-- [ ] Define VectorStoreDocument and VectorStoreQueryResult
-- [ ] Create abstract base class
-- [ ] Document interface contracts
+- [x] Finalise VectorStore interface
+- [x] ~~Define VectorStoreDocument and VectorStoreQueryResult~~ (deferred - used simpler Dict returns for backward compatibility)
+- [x] Create abstract base class (`src/storage/vectorstore_interface.py`)
+- [x] Document interface contracts
 
-### Phase 2: ChromaDB Refactor (v0.3)
-**Effort: 4-6 hours**
+**Completed:** 2025-11-22
 
-- [ ] Implement ChromaDBStore class
-- [ ] Extract all ChromaDB logic to ChromaDBStore
-- [ ] Update ragged core to use VectorStore interface
-- [ ] Ensure all existing tests pass
+### Phase 2: ChromaDB Refactor (v0.3.6) ✅ **COMPLETED**
+**Effort: 4-6 hours (Actual: 5 hours)**
+
+- [x] Implement ChromaDBStore class (`src/storage/chromadb_store.py`)
+- [x] Extract all ChromaDB logic to ChromaDBStore
+- [x] Update ragged core to use VectorStore interface via re-export
+- [x] Ensure all existing tests pass (14/14 storage tests passing)
+- [x] Create factory function (`src/storage/vectorstore_factory.py`)
+
+**Completed:** 2025-11-22
 
 ### Phase 3: LEANN Implementation (v0.4)
 **Effort: 12-16 hours**
@@ -449,5 +510,5 @@ vectorstore:
 
 ---
 
-**Last Updated:** 2025-11-16
-**Next Review:** v0.3 completion (Q3 2026)
+**Last Updated:** 2025-11-22
+**Next Review:** v0.4.0 (LEANN implementation)
