@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1120" width="1920" height="1120">
+  <title>ragged WebUI Mockup - Ultra Simple for Penpot</title>
+
+  <!-- Background -->
+  <rect width="1920" height="1120" fill="#f8f9fa"/>
+
+  <!-- Header -->
+  <rect width="1920" height="60" fill="#1e1e1e"/>
+  <text x="20" y="40" font-size="24" font-weight="600" fill="#ffffff">ragged</text>
+  <text x="120" y="40" font-size="14" fill="#adb5bd">Multi-modal RAG System</text>
+
+  <!-- Settings Icon (Header Right) - Simple Circle Placeholder -->
+  <circle cx="1852" cy="30" r="10" fill="none" stroke="#adb5bd" stroke-width="2"/>
+  <circle cx="1852" cy="30" r="4" fill="none" stroke="#adb5bd" stroke-width="1.5"/>
+
+  <!-- Theme Icon (Header Right) - Simple Crescent -->
+  <circle cx="1892" cy="30" r="10" fill="none" stroke="#adb5bd" stroke-width="2"/>
+  <circle cx="1896" cy="26" r="8" fill="#1e1e1e"/>
+
+  <!-- Sidebar -->
+  <rect x="0" y="60" width="320" height="1060" fill="#ffffff" stroke="#dee2e6" stroke-width="1"/>
+
+  <!-- Sidebar Header -->
+  <text x="20" y="95" font-size="18" font-weight="600" fill="#1e1e1e">Library</text>
+
+  <!-- Collapse Icon - Simple Arrow -->
+  <line x1="295" y1="85" x2="285" y2="90" stroke="#868e96" stroke-width="2"/>
+  <line x1="295" y1="95" x2="285" y2="90" stroke="#868e96" stroke-width="2"/>
+
+  <!-- Upload Zone -->
+  <rect x="20" y="110" width="280" height="120" fill="#f8f9fa" stroke="#4c6ef5" stroke-width="2" rx="8"/>
+
+  <!-- Document Icon - Simple Rectangle -->
+  <rect x="148" y="135" width="24" height="30" fill="none" stroke="#4c6ef5" stroke-width="2" rx="2"/>
+  <line x1="154" y1="145" x2="166" y2="145" stroke="#4c6ef5" stroke-width="1"/>
+  <line x1="154" y1="150" x2="166" y2="150" stroke="#4c6ef5" stroke-width="1"/>
+  <line x1="154" y1="155" x2="166" y2="155" stroke="#4c6ef5" stroke-width="1"/>
+
+  <text x="90" y="185" font-size="14" fill="#495057">Drag and Drop Files</text>
+  <text x="95" y="205" font-size="12" fill="#868e96">and add to library</text>
+  <text x="103" y="222" font-size="11" fill="#adb5bd">(or click to upload)</text>
+
+  <!-- Metadata Section -->
+  <rect x="20" y="250" width="280" height="100" fill="#e7f5ff" rx="6"/>
+  <text x="30" y="275" font-size="13" font-weight="600" fill="#1e1e1e">42 documents</text>
+  <text x="30" y="295" font-size="13" fill="#495057">128 tags</text>
+  <text x="30" y="315" font-size="13" fill="#495057">1,847 embeddings</text>
+  <text x="30" y="335" font-size="11" fill="#868e96">Last accessed: January 2025</text>
+
+  <!-- Collection Selector -->
+  <text x="20" y="380" font-size="12" font-weight="600" fill="#495057">COLLECTION</text>
+  <rect x="20" y="390" width="280" height="36" fill="#ffffff" stroke="#ced4da" stroke-width="1" rx="4"/>
+
+  <!-- Collapse Icon -->
+  <line x1="39" y1="403" x2="29" y2="408" stroke="#868e96" stroke-width="1.5"/>
+  <line x1="39" y1="413" x2="29" y2="408" stroke="#868e96" stroke-width="1.5"/>
+
+  <text x="50" y="413" font-size="14" fill="#1e1e1e">My first collection</text>
+
+  <!-- Dropdown Icon -->
+  <line x1="283" y1="404" x2="288" y2="409" stroke="#868e96" stroke-width="1.5"/>
+  <line x1="293" y1="404" x2="288" y2="409" stroke="#868e96" stroke-width="1.5"/>
+
+  <!-- Search Field -->
+  <text x="20" y="448" font-size="11" fill="#868e96">Search field to select collection</text>
+  <text x="20" y="462" font-size="11" fill="#adb5bd">(entire library otherwise)</text>
+  <rect x="20" y="470" width="280" height="32" fill="#ffffff" stroke="#ced4da" stroke-width="1" rx="4"/>
+
+  <!-- Search Icon - Simple Circle and Line -->
+  <circle cx="35" cy="484" r="7" fill="none" stroke="#adb5bd" stroke-width="1.5"/>
+  <line x1="40" y1="489" x2="44" y2="493" stroke="#adb5bd" stroke-width="1.5"/>
+
+  <text x="50" y="491" font-size="13" fill="#adb5bd">Search collections...</text>
+
+  <!-- Tags Filter Section -->
+  <text x="20" y="528" font-size="12" font-weight="600" fill="#495057">FILTER BY TAGS</text>
+  <text x="20" y="545" font-size="10" fill="#868e96">Filter documents dynamically via tags</text>
+
+  <!-- Tag Pills -->
+  <rect x="20" y="555" width="55" height="24" fill="#4c6ef5" rx="12"/>
+  <text x="30" y="571" font-size="12" fill="#ffffff">Tag1</text>
+
+  <rect x="85" y="555" width="55" height="24" fill="#e7f5ff" stroke="#4c6ef5" stroke-width="1" rx="12"/>
+  <text x="95" y="571" font-size="12" fill="#4c6ef5">Tag2</text>
+
+  <rect x="150" y="555" width="55" height="24" fill="#e7f5ff" stroke="#4c6ef5" stroke-width="1" rx="12"/>
+  <text x="160" y="571" font-size="12" fill="#4c6ef5">Tag3</text>
+
+  <rect x="215" y="555" width="40" height="24" fill="#f8f9fa" stroke="#ced4da" stroke-width="1" rx="12"/>
+  <text x="225" y="571" font-size="12" fill="#868e96">...</text>
+
+  <!-- Main Content Area -->
+  <!-- Query Input Section -->
+  <text x="360" y="95" font-size="16" font-weight="600" fill="#1e1e1e">Query</text>
+
+  <!-- Large Query Input -->
+  <rect x="360" y="110" width="1520" height="120" fill="#ffffff" stroke="#ced4da" stroke-width="2" rx="8"/>
+
+  <!-- Search Icon in Query Input -->
+  <circle cx="390" cy="170" r="10" fill="none" stroke="#adb5bd" stroke-width="2"/>
+  <line x1="397" y1="177" x2="404" y2="184" stroke="#adb5bd" stroke-width="2"/>
+
+  <text x="415" y="180" font-size="16" fill="#adb5bd">Ask a question about your documents...</text>
+
+  <!-- Context Selector -->
+  <text x="360" y="260" font-size="13" font-weight="600" fill="#495057">Context Window</text>
+  <rect x="360" y="270" width="200" height="38" fill="#ffffff" stroke="#ced4da" stroke-width="1" rx="4"/>
+  <text x="375" y="294" font-size="14" fill="#1e1e1e">Medium context</text>
+
+  <!-- Dropdown Icon -->
+  <line x1="543" y1="284" x2="548" y2="289" stroke="#868e96" stroke-width="1.5"/>
+  <line x1="553" y1="284" x2="548" y2="289" stroke="#868e96" stroke-width="1.5"/>
+
+  <!-- Top-K Selector -->
+  <text x="580" y="260" font-size="13" font-weight="600" fill="#495057">Results</text>
+  <rect x="580" y="270" width="140" height="38" fill="#ffffff" stroke="#ced4da" stroke-width="1" rx="4"/>
+  <text x="595" y="294" font-size="14" fill="#1e1e1e">Top-K: 5</text>
+
+  <!-- Dropdown Icon -->
+  <line x1="703" y1="284" x2="708" y2="289" stroke="#868e96" stroke-width="1.5"/>
+  <line x1="713" y1="284" x2="708" y2="289" stroke="#868e96" stroke-width="1.5"/>
+
+  <!-- Results Section -->
+  <text x="360" y="345" font-size="16" font-weight="600" fill="#1e1e1e">Results</text>
+  <text x="360" y="365" font-size="12" fill="#868e96">Results with source metadata (document, page, score, model) and chunk preview</text>
+
+  <!-- Sample Result Card -->
+  <rect x="360" y="380" width="1520" height="140" fill="#ffffff" stroke="#e9ecef" stroke-width="1" rx="8"/>
+
+  <!-- Result Header -->
+  <rect x="360" y="380" width="1520" height="45" fill="#f8f9fa" rx="8"/>
+  <text x="380" y="407" font-size="13" font-weight="600" fill="#1e1e1e">research_paper_2024.pdf</text>
+  <text x="600" y="407" font-size="12" fill="#868e96">• Page 15 •</text>
+  <text x="690" y="407" font-size="12" font-weight="600" fill="#4c6ef5">Score: 0.92</text>
+  <text x="790" y="407" font-size="12" fill="#868e96">• Model:</text>
+  <text x="860" y="407" font-size="12" fill="#495057">llama3.2:3b</text>
+
+  <!-- Result Content Preview -->
+  <text x="380" y="450" font-size="14" fill="#1e1e1e">This section presents the methodology for multi-modal retrieval-augmented</text>
+  <text x="380" y="470" font-size="14" fill="#1e1e1e">generation systems. The approach combines text, image, and structured data</text>
+  <text x="380" y="490" font-size="14" fill="#1e1e1e">embeddings to enable comprehensive semantic search across document types...</text>
+
+  <text x="380" y="510" font-size="12" fill="#4c6ef5">View full context →</text>
+  <line x1="380" y1="512" x2="490" y2="512" stroke="#4c6ef5" stroke-width="1"/>
+
+  <!-- Additional Result Cards -->
+  <rect x="360" y="540" width="1520" height="140" fill="#ffffff" stroke="#e9ecef" stroke-width="1" rx="8"/>
+  <rect x="360" y="540" width="1520" height="45" fill="#f8f9fa" rx="8"/>
+  <text x="380" y="567" font-size="13" font-weight="600" fill="#1e1e1e">user_manual_v3.pdf</text>
+  <text x="550" y="567" font-size="12" fill="#868e96">• Page 42 •</text>
+  <text x="640" y="567" font-size="12" font-weight="600" fill="#4c6ef5">Score: 0.89</text>
+  <text x="740" y="567" font-size="12" fill="#868e96">• Model:</text>
+  <text x="810" y="567" font-size="12" fill="#495057">llama3.2:3b</text>
+  <text x="380" y="610" font-size="14" fill="#adb5bd">[Result content preview...]</text>
+
+  <rect x="360" y="700" width="1520" height="140" fill="#ffffff" stroke="#e9ecef" stroke-width="1" rx="8"/>
+  <rect x="360" y="700" width="1520" height="45" fill="#f8f9fa" rx="8"/>
+  <text x="380" y="727" font-size="13" font-weight="600" fill="#1e1e1e">technical_specs.md</text>
+  <text x="550" y="727" font-size="12" fill="#868e96">• Line 156 •</text>
+  <text x="650" y="727" font-size="12" font-weight="600" fill="#4c6ef5">Score: 0.85</text>
+  <text x="750" y="727" font-size="12" fill="#868e96">• Model:</text>
+  <text x="820" y="727" font-size="12" fill="#495057">llama3.2:3b</text>
+  <text x="380" y="770" font-size="14" fill="#adb5bd">[Result content preview...]</text>
+</svg>

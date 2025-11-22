@@ -1179,8 +1179,8 @@ For users with compliance requirements:
 ## Related Documentation
 
 - [v0.4.2 Security Baseline](v0.4.2.md) - Code quality and security audit preparation
-- [v0.4.3 Security Audit](v0.4.3/security-audit.md) - Memory system security requirements
-- [v0.4.3 Privacy Framework](v0.4.3/privacy-framework.md) - User privacy controls
+- [v0.4.3 Security Audit](v0.4.5/security-audit.md) - Memory system security requirements
+- [v0.4.3 Privacy Framework](v0.4.5/privacy-framework.md) - User privacy controls
 - [v0.4.0 Plugin Architecture](v0.4.0.md) - Plugin system foundation
 - [Testing Guide](testing-guide.md) - Security testing standards
 

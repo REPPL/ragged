@@ -63,7 +63,7 @@ Version 0.4.x transforms ragged from a document retrieval tool into an intellige
 - **Scope**: Memory system design, knowledge graph storage, behaviour tracking
 - **Timeline**: 2-3 weeks, must pass before v0.4.0 implementation begins
 - **Deliverable**: Security audit report with pass/fail status
-- **See**: [v0.4.3/security-audit.md](v0.4.3/security-audit.md) for full requirements
+- **See**: [v0.4.5/security-audit.md](v0.4.5/security-audit.md) for full requirements
 
 ### Target Timeline
 
@@ -189,7 +189,7 @@ v0.4.13 Production Release (Q2 2027)
 
 ---
 
-### [v0.4.3 - Memory Foundation: Personas & Tracking](v0.4.3/README.md) (35-40h)
+### [v0.4.3 - Memory Foundation: Personas & Tracking](v0.4.3.md) (35-40h)
 
 **Status**: Planned | **Priority**: P0 - Core Feature
 
@@ -234,7 +234,7 @@ v0.4.13 Production Release (Q2 2027)
 
 ---
 
-### [v0.4.5 - Behaviour Learning & Personalisation](v0.4.5.md) (35-40h)
+### [v0.4.5 - Behaviour Learning & Personalisation](v0.4.5/README.md) (35-40h)
 
 **Status**: Planned | **Priority**: P0 - Core Feature
 
@@ -349,17 +349,17 @@ v0.4.13 Production Release (Q2 2027)
 
 | Phase | Releases | Hours | Focus |
 |-------|----------|-------|-------|
-| Foundation | v0.4.0 - v0.4.2 | 55-67 | Architecture, testing, quality |
-| Core Features | v0.4.3 - v0.4.5 | 85-98 | Memory system, personalisation |
-| Advanced | v0.4.6 - v0.4.8 | 90-107 | Refactoring, temporal, LEANN |
-| Stabilisation | v0.4.9 | 15-20 | Production readiness |
-| **Total** | **10 releases** | **195-242** | **Complete v0.4** |
+| Foundation & Security | v0.4.0 - v0.4.4 | 98-119 | Architecture, testing, quality |
+| Memory System Core | v0.4.5 - v0.4.8 | 85-98 | Memory, personalisation, LEANN |
+| Advanced Features | v0.4.9 - v0.4.10 | 47-57 | Refactoring, temporal memory |
+| Stabilisation & Production | v0.4.11 - v0.4.13 | 40-55 | Migration, optimisation, production |
+| **Total** | **14 releases** | **270-329** | **Complete v0.4** |
 
 **Original v0.4.0 estimate**: 180-225 hours
-**New v0.4.x total**: 195-242 hours
-**Difference**: +15-17 hours (+8%) for dedicated quality/stability releases
+**New v0.4.x total**: 270-329 hours
+**Difference**: +45-104 hours (+25-46%) for dedicated quality/stability releases and advanced features
 
-**Justification**: Additional time investment in foundation, testing, and stability releases (v0.4.0, v0.4.0, v0.4.0, v0.4.0) pays dividends in reduced debugging, easier maintenance, and higher quality.
+**Justification**: Additional time investment in foundation, testing, and stability releases (v0.4.2, v0.4.4, v0.4.6, v0.4.9) pays dividends in reduced debugging, easier maintenance, and higher quality.
 
 ---
 
@@ -379,7 +379,7 @@ v0.4.13 Production Release (Q2 2027)
 
 ### 2. Incremental Release Strategy
 
-**Decision**: Break v0.4.0 into 10 incremental releases instead of 1 large release
+**Decision**: Break v0.4.0 into 14 incremental releases instead of 1 large release
 
 **Rationale**:
 - Manage complexity and risk
@@ -662,7 +662,7 @@ Version 0.4.x builds directly upon the foundation established by v0.3.x (13 rele
 
 ### Phase 5: Enhancement Opportunities ✅
 - Documented security hardening enhancements (HSM, sandboxing, audit logging)
-- Documented performance optimization opportunities (caching, parallel processing)
+- Documented performance optimisation opportunities (caching, parallel processing)
 - Documented plugin ecosystem expansion strategy (marketplace, community)
 - **Commit**: 7983500 (3 files changed, 3,219 insertions)
 
@@ -704,16 +704,20 @@ The completed phases (1, 4, 5) establish the critical foundation needed for auto
 - [v0.3 Roadmap](../../v0.3/README.md) - Advanced retrieval & document intelligence (13 releases, Q2-Q3 2026)
   - See especially [v0.3.7](../../v0.3/v0.3.7.md) - VectorStore abstraction foundation
 - [v0.4 Detailed Spec](v0.4-detailed-spec.md) - Original comprehensive roadmap (kept for reference)
-- Individual release roadmaps: [v0.4.0](v0.4.0.md) through [v0.4.9](v0.4.9.md)
+- Individual release roadmaps:
+  - Foundation & Security: [v0.4.0](v0.4.0.md) - [v0.4.4](v0.4.4.md)
+  - Memory System Core: [v0.4.5](v0.4.5/README.md) - [v0.4.8](v0.4.8.md)
+  - Advanced Features: [v0.4.9](v0.4.9.md) - [v0.4.10](v0.4.10/README.md)
+  - Stabilisation & Production: [v0.4.11](v0.4.11.md) - [v0.4.13](v0.4.13.md)
 
 **Implementation Guides**:
 - [Execution Playbook](execution-playbook.md) - Step-by-step implementation guide for autonomous execution
-- [Progress Tracker](progress-tracker.md) - Real-time status tracking across all 10 releases
+- [Progress Tracker](progress-tracker.md) - Real-time status tracking across all 14 releases
 - [Testing Guide](testing-guide.md) - Comprehensive testing standards, quality gates, and success criteria
 
 **Enhancement Opportunities** (beyond baseline):
 - [Security Enhancements](security-enhancements.md) - Optional security hardening (HSM, sandboxing, audit logging, supply chain)
-- [Performance Enhancements](performance-enhancements.md) - Optional performance optimizations (caching, parallel processing, monitoring)
+- [Performance Enhancements](performance-enhancements.md) - Optional performance optimisations (caching, parallel processing, monitoring)
 - [Plugin Ecosystem](plugin-ecosystem.md) - Plugin ecosystem expansion strategy (official plugins, marketplace, community)
 
 **Architecture**:

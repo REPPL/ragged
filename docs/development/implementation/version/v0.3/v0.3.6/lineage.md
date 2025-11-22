@@ -124,7 +124,7 @@
 **Challenges Identified During Planning**:
 - Backward compatibility paramount (solved with re-export pattern)
 - Test updates minimal (patch path changes only)
-- Performance optimization (numpy arrays)
+- Performance optimisation (numpy arrays)
 - Future-proofing for multiple backends
 
 ### From Plan to Delivery

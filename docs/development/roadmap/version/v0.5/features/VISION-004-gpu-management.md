@@ -836,7 +836,7 @@ class AdaptiveBatchSizer:
 
         # Estimate memory per batch item
         # Formula: embedding_dim * sequence_length * bytes_per_element * overhead_factor
-        overhead_factor = 3.0  # Account for activations, gradients, optimizer state
+        overhead_factor = 3.0  # Account for activations, gradients, optimiser state
 
         bytes_per_item = (
             embedding_dim * sequence_length * bytes_per_element * overhead_factor

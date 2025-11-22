@@ -1023,7 +1023,7 @@ def migrate(collection: str, dry_run: bool):
 @storage.command("vacuum")
 @click.option("--collection", default="documents", help="Collection to clean")
 def vacuum(collection: str):
-    """Remove orphaned embeddings and optimize storage."""
+    """Remove orphaned embeddings and optimise storage."""
     click.echo(f"Vacuuming collection: {collection}")
     click.echo("(Not yet implemented)")
 

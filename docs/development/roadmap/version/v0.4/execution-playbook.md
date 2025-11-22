@@ -162,7 +162,7 @@
 
 **Dependencies**:
 - v0.4.2 complete
-- Security audit PASSED (see [v0.4.3/security-audit.md](v0.4.3/security-audit.md))
+- Security audit PASSED (see [v0.4.5/security-audit.md](v0.4.5/security-audit.md))
 
 **Pre-Implementation Checklist**:
 - [ ] Security audit complete
@@ -173,7 +173,7 @@
 
 **Steps**:
 1. **Security Verification**: Confirm audit pass before ANY code changes
-2. **Read**: [v0.4.3/README.md](v0.4.3/README.md) - Complete specification
+2. **Read**: [v0.4.3.md](v0.4.3.md) - Complete specification
 3. **Implementation** (25-30 hours):
    - Persona management system (`src/memory/personas.py`)
    - Interaction tracking with SQLite (`src/memory/interactions.py`)
@@ -207,7 +207,7 @@
 **Steps**:
 1. **Read**: [v0.4.4.md](v0.4.4.md) - Stability focus
 2. **Optimization** (6-7 hours):
-   - Database query optimization (indexes, prepared statements)
+   - Database query optimisation (indexes, prepared statements)
    - Caching strategies
    - Memory leak detection and fixes
 3. **Integration Testing** (4-5 hours):
@@ -220,7 +220,7 @@
    - No memory leaks over 1000 operations
 5. **Commit & Tag**:
    ```bash
-   git commit -m "perf(memory): optimize memory system performance (v0.4.4)"
+   git commit -m "perf(memory): optimise memory system performance (v0.4.4)"
    git tag v0.4.4
    ```
 
@@ -262,7 +262,7 @@
 **Steps**: See [v0.4.6.md](v0.4.6.md)
 - Code consolidation, complexity reduction
 - Architecture pattern enforcement
-- Dependency optimization
+- Dependency optimisation
 
 ---
 
@@ -400,7 +400,7 @@ Version 0.4.x is successful if all criteria met:
 - [v0.4 Overview](README.md) - Series overview and decision framework
 - [Progress Tracker](progress-tracker.md) - Status tracking
 - [v0.4.0](v0.4.0.md) through [v0.4.9](v0.4.9.md) - Individual release specs
-- [v0.4.3 Security Audit](v0.4.3/security-audit.md) - **Critical gate requirements**
+- [v0.4.3 Security Audit](v0.4.5/security-audit.md) - **Critical gate requirements**
 
 ---
 

@@ -227,7 +227,7 @@
 
 **Implementation Checklist** (ONLY after security gate passes):
 - [ ] Verify audit pass before ANY code changes
-- [ ] Read v0.4.3/README.md specification
+- [ ] Read v0.4.3.md specification
 - [ ] Implementation: Persona management system
 - [ ] Implementation: Interaction tracking with SQLite
 - [ ] Implementation: Knowledge graph foundation with Kuzu
@@ -538,7 +538,7 @@ See [execution-playbook.md](./execution-playbook.md#rollback-procedures) for det
 - [v0.4 Overview](./README.md) - Series overview
 - [Execution Playbook](./execution-playbook.md) - Step-by-step implementation guide
 - [v0.4.0](./v0.4.0.md) through [v0.4.9](./v0.4.9.md) - Individual release specs
-- [v0.4.3 Security Audit](./v0.4.3/security-audit.md) - Critical gate requirements
+- [v0.4.3 Security Audit](./v0.4.5/security-audit.md) - Critical gate requirements
 
 ---
 
