@@ -12,8 +12,9 @@ class TestVectorStore:
     @pytest.fixture
     def mock_chroma_client(self):
         """Create a mock ChromaDB client."""
-        with patch("src.storage.vector_store.chromadb.HttpClient") as mock_client_class, \
-             patch("src.storage.vector_store.get_settings") as mock_settings:
+        # v0.3.6: Update patches to use chromadb_store module
+        with patch("src.storage.chromadb_store.chromadb.HttpClient") as mock_client_class, \
+             patch("src.storage.chromadb_store.get_settings") as mock_settings:
             mock_client = MagicMock()
             mock_client_class.return_value = mock_client
 
