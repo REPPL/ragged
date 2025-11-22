@@ -23,6 +23,11 @@ logger = get_logger(__name__)
     type=click.Choice(["fixed", "semantic", "hierarchical"], case_sensitive=False),
     help="Chunking strategy: 'fixed' (default, fast), 'semantic' (topic boundaries), or 'hierarchical' (parent-child)"
 )
+@click.option(
+    "--auto-correct-pdf/--no-auto-correct-pdf",
+    default=True,
+    help="Automatically detect and correct PDF issues (rotation, duplicates, ordering) (default: enabled)"
+)
 def add(
     path: Path,
     format: Optional[str],
@@ -30,6 +35,7 @@ def add(
     max_depth: Optional[int],
     fail_fast: bool,
     chunking_strategy: Optional[str],
+    auto_correct_pdf: bool,
 ) -> None:
     """Ingest document(s) into the system.
 
@@ -101,7 +107,55 @@ def add(
     existing_path = None
     existing_count = 0
 
+    # PDF correction variables
+    pdf_corrected = False
+    pdf_analysis = None
+    corrected_pdf_path = None
+
     try:
+        # PDF Correction (v0.3.5): Analyze and correct PDFs before processing
+        if auto_correct_pdf and path.suffix.lower() == ".pdf":
+            import asyncio
+            from src.correction import CorrectionPipeline, MetadataGenerator
+
+            console.print("[dim]Analyzing PDF quality...[/dim]")
+
+            with ProgressType() as progress:
+                task = progress.add_task("Analyzing PDF...", total=100)
+
+                # Create correction pipeline
+                pipeline = CorrectionPipeline()
+
+                # Analyze and correct PDF
+                progress.update(task, description="Detecting issues...", advance=30)
+                corrected_pdf_path = path.parent / f".corrected_{path.name}"
+
+                # Run async analysis and correction
+                pdf_analysis, pdf_correction = asyncio.run(
+                    pipeline.analyze_and_correct(path, corrected_pdf_path)
+                )
+
+                progress.update(task, advance=70)
+
+            # Display quality summary
+            summary = pipeline.format_analysis_summary(pdf_analysis)
+            quality_display = f"[{summary['quality_color']}]{summary['quality_icon']} Quality: {summary['quality_score']} ({summary['quality_grade']})[/{summary['quality_color']}]"
+            console.print(f"  {quality_display}")
+
+            if pdf_analysis.requires_correction and pdf_correction:
+                successful = len([a for a in pdf_correction.actions if a.success])
+                total = len(pdf_correction.actions)
+                console.print(f"  [yellow]⚡ Auto-corrected:[/yellow] {successful}/{total} issues")
+
+                if summary['issue_summary'] != "none":
+                    console.print(f"  [dim]Issues: {summary['issue_summary']}[/dim]")
+
+                # Use corrected PDF for processing
+                path = corrected_pdf_path
+                pdf_corrected = True
+            elif pdf_analysis.issues:
+                console.print(f"  [dim]Issues detected but not corrected: {summary['issue_summary']}[/dim]")
+
         with ProgressType() as progress:
             task = progress.add_task("Processing...", total=100)
 
@@ -197,7 +251,33 @@ def add(
         console.print(f"  Chunks: {len(document.chunks)}")
         console.print(f"  Path: {path}")
 
+        # Generate PDF correction metadata (v0.3.5)
+        if pdf_analysis is not None:
+            try:
+                from src.correction import MetadataGenerator
+
+                # Create metadata directory
+                metadata_dir = Path("data/documents/.ragged") / document.document_id
+                metadata_dir.mkdir(parents=True, exist_ok=True)
+
+                # Generate metadata files
+                generator = MetadataGenerator(metadata_dir)
+                metadata_files = generator.generate_all(pdf_analysis, pdf_correction if pdf_corrected else None)
+
+                console.print(f"  [dim]Metadata: {len(metadata_files)} files generated[/dim]")
+            except Exception as e:
+                logger.warning(f"Failed to generate PDF metadata: {e}")
+
     except Exception as e:
         console.print(f"[bold red]✗[/bold red] Failed to ingest document: {e}")
         logger.error(f"Ingestion failed: {e}", exc_info=True)
         sys.exit(1)
+
+    finally:
+        # Cleanup temporary corrected PDF
+        if pdf_corrected and corrected_pdf_path and corrected_pdf_path.exists():
+            try:
+                corrected_pdf_path.unlink()
+                logger.debug(f"Cleaned up temporary corrected PDF: {corrected_pdf_path}")
+            except Exception as e:
+                logger.warning(f"Failed to cleanup corrected PDF: {e}")
