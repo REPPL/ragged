@@ -171,7 +171,7 @@ pytest tests/privacy/ -v
 # - Encryption validated
 ```
 
-**Pass Criteria** (see [v0.4.3/testing-scenarios.md](v0.4.3/testing-scenarios.md)):
+**Pass Criteria** (see [v0.4.5/testing-scenarios.md](v0.4.5/testing-scenarios.md)):
 - ✅ No external network calls (monitored)
 - ✅ All data stored in expected location
 - ✅ Personas completely isolated
@@ -294,7 +294,7 @@ pytest tests/privacy/ -v
 - [ ] Memory CLI commands functional
 - [ ] Privacy controls work (view, delete, export)
 
-**Privacy Tests** (see [v0.4.3/testing-scenarios.md](v0.4.3/testing-scenarios.md)):
+**Privacy Tests** (see [v0.4.5/testing-scenarios.md](v0.4.5/testing-scenarios.md)):
 - [ ] **Network Isolation**: Zero external calls during memory ops
 - [ ] **Data Locality**: All data in `~/.ragged/memory/`
 - [ ] **Persona Isolation**: No cross-persona data leakage
@@ -838,8 +838,8 @@ echo "✅ Ready to tag release"
 
 - [Execution Playbook](./execution-playbook.md) - Implementation guide
 - [Progress Tracker](./progress-tracker.md) - Status tracking
-- [v0.4.3 Privacy Testing](./v0.4.3/testing-scenarios.md) - Detailed privacy test scenarios
-- [v0.4.3 Security Audit](./v0.4.3/security-audit.md) - Security requirements
+- [v0.4.3 Privacy Testing](./v0.4.5/testing-scenarios.md) - Detailed privacy test scenarios
+- [v0.4.3 Security Audit](./v0.4.5/security-audit.md) - Security requirements
 
 ---
 

@@ -836,7 +836,7 @@ class ProductionRAG:
         self.components = self.initialize_components()
         self.monitor = ObservabilityMonitor()
         self.evaluator = RAGEvaluator()
-        self.optimizer = AutoTuner()
+        self.optimiser = AutoTuner()
 
     def initialize_components(self):
         return {
@@ -869,7 +869,7 @@ class ProductionRAG:
             )
 
             # Store for optimisation
-            self.optimizer.record(query, response, metrics)
+            self.optimiser.record(query, response, metrics)
 
             return response
 
@@ -1072,7 +1072,7 @@ class ModelManager:
         self.models[model_name] = model
         return model
 
-    def optimize_for_hardware(self):
+    def optimise_for_hardware(self):
         """Detect and optimise for available hardware"""
         if self.has_cuda():
             return "cuda"
@@ -1188,7 +1188,7 @@ class MemoryOptimizer:
         self.total_memory = total_memory_gb * 1024 * 1024 * 1024
         self.allocations = {}
 
-    def optimize_allocation(self):
+    def optimise_allocation(self):
         """
         Optimal allocation for 128GB system:
         - OS/System: 8GB

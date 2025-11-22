@@ -10,7 +10,7 @@
 
 ## Overview
 
-This document identifies **optional performance optimizations** for v0.4.x beyond the performance baseline established in v0.4.4.
+This document identifies **optional performance optimisations** for v0.4.x beyond the performance baseline established in v0.4.4.
 
 **Baseline Performance** (v0.4.4 targets):
 - ✅ Memory operations: <100ms
@@ -367,7 +367,7 @@ vector_store:
 
 **Current State**: Basic graph queries in Kuzu
 
-**Enhancement**: Query optimization and materialized views
+**Enhancement**: Query optimisation and materialized views
 
 **Benefits**:
 - 5-10x speedup for complex graph queries

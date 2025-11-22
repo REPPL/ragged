@@ -8,7 +8,7 @@
 
 ## Development Summary
 
-v0.3.4b implemented intelligent routing based on document quality assessment, enabling optimized processing based on document characteristics. This completed the middle phase of the progressive enhancement strategy for v0.3.4.
+v0.3.4b implemented intelligent routing based on document quality assessment, enabling optimised processing based on document characteristics. This completed the middle phase of the progressive enhancement strategy for v0.3.4.
 
 ---
 
@@ -143,7 +143,7 @@ v0.3.4b implemented intelligent routing based on document quality assessment, en
 
 **Quality Highlights:**
 - Quality assessment <1s overhead (fast mode)
-- Cache-based performance optimization
+- Cache-based performance optimisation
 - Detailed logging for debugging
 - Fallback mechanisms for failures
 

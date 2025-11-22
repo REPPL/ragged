@@ -879,7 +879,7 @@ manager.add_persona(Persona(
 ))
 
 manager.add_persona(Persona(
-    id="performance_optimizer",
+    id="performance_optimiser",
     name="Performance Engineer",
     role="Optimise for speed and efficiency",
     expertise=["caching", "indexing", "profiling"],
@@ -891,7 +891,7 @@ query = "How do I ensure user data is never sent to cloud?"
 if "privacy" in query or "data" in query:
     manager.switch_persona("privacy_expert")
 elif "performance" in query or "slow" in query:
-    manager.switch_persona("performance_optimizer")
+    manager.switch_persona("performance_optimiser")
 ```
 
 **Real-World Application:**
