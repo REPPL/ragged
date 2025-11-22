@@ -341,3 +341,13 @@ Have suggestions for improving AI usage transparency?
 - [Contributing Guide](../../../../CONTRIBUTING.md) - General contribution guidelines
 
 
+
+---
+
+## Related Documentation
+
+- [Time Tracking Methodology](./time-tracking.md) - Tracking AI productivity
+- [Development Process](../README.md) - Overall methodology
+- [DevLogs](../devlogs/) - Development narratives showing AI collaboration
+
+---

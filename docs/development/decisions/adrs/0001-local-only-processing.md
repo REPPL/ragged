@@ -137,3 +137,14 @@ All core functionality must work completely offline with local models and databa
 **Supersedes:** None
 
 **Superseded By:** None
+
+---
+
+## Related Documentation
+
+- [Privacy Design](../../../explanation/privacy-design.md) - Privacy architecture
+- [Product Vision](../../planning/vision/product-vision.md) - Privacy-first principles
+- [Architecture Overview](../../planning/architecture/README.md) - System architecture
+- [Local-Only RAG Benefits](../../../research/background/personal-memory-systems.md) - Research background
+
+---

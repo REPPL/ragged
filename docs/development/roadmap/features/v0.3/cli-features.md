@@ -465,7 +465,7 @@ ragged config theme create my-theme --config theme.yaml
   - `ragged/config/themes/` - Theme files
   - `tests/cli/test_themes.py` - Test suite
 
-- **Dependencies**: Rich color support, theme configuration, terminal detection
+- **Dependencies**: Rich colour support, theme configuration, terminal detection
 
 **Acceptance Criteria:**
 - ✅ Built-in themes available
@@ -473,7 +473,7 @@ ragged config theme create my-theme --config theme.yaml
 - ✅ Themes persist across sessions
 - ✅ Accessibility themes included
 
-**See:** [CLI Enhancements Catalogue](../../../../../planning/interfaces/cli/enhancements.md#22-color-themes--customisation) for full specification
+**See:** [CLI Enhancements Catalogue](../../../../../planning/interfaces/cli/enhancements.md#22-colour-themes--customisation) for full specification
 
 ---
 
@@ -504,3 +504,14 @@ ragged config theme create my-theme --config theme.yaml
 
 ---
 
+
+---
+
+## Related Documentation
+
+- [CLI Enhancements Catalogue](../../../../planning/interfaces/cli/enhancements.md) - Complete CLI specifications
+- [v0.3 Roadmap](../../version/v0.3/) - Overall v0.3 planning
+- [v0.3.12 Implementation](../../../implementation/version/v0.3/v0.3.12/) - Themes and API server implementation
+- [Testing Framework (v0.3.1)](../../version/v0.3/v0.3.1.md) - Testing utilities roadmap
+
+---

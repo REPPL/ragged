@@ -151,3 +151,13 @@ Consider semantic chunking for v0.3+ when:
 
 - [ADR-0008: tiktoken for Token Counting](./0008-tiktoken-for-token-counting.md)
 - [Core Concepts: Chunking Strategy](../../planning/core-concepts/chunking.md)
+
+---
+
+## Related Documentation
+
+- [Intelligent Chunking (v0.3.3)](../../roadmap/version/v0.3/v0.3.3.md) - Advanced chunking
+- [Token Counting (ADR-0008)](./0008-tiktoken-for-token-counting.md) - Related decision
+- [Chunking Architecture](../../planning/architecture/) - System design
+
+---

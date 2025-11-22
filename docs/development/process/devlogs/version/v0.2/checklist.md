@@ -84,7 +84,7 @@
 - [x] Build source citations display
 - [x] Add collection selector dropdown
 - [x] Create settings panel (retrieval method, top_k, streaming toggle)
-- [x] Style with Soft theme (Indigo primary color)
+- [x] Style with Soft theme (Indigo primary colour)
 - [x] Write automated UI tests (18 tests, 73% coverage)
 - [x] Create launch scripts (start_api.sh, start_ui.sh, start_all.sh)
 

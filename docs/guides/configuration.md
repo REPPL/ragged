@@ -47,3 +47,13 @@ The configuration guide will include:
 
 ---
 
+
+---
+
+## Related Documentation
+
+- [Pydantic Configuration (ADR-0002)](../development/decisions/adrs/0002-pydantic-for-configuration.md) - Configuration design
+- [Settings Reference](../reference/configuration/) - All settings
+- [Installation Tutorial](../tutorials/installation.md) - Getting started
+
+---

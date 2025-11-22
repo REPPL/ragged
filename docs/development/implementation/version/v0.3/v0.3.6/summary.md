@@ -468,7 +468,7 @@ __all__ = [
 - ✅ **Zero breaking changes** - All existing code works unchanged
 - ✅ **Transparent refactoring** - Users don't need to do anything
 - ✅ **No configuration changes** - Defaults remain the same
-- ✅ **Same performance** - ChromaDB behavior identical
+- ✅ **Same performance** - ChromaDB behaviour identical
 - ✅ **Foundation for choice** - v0.4.0 will enable backend selection
 
 **User Experience:**

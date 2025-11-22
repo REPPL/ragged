@@ -1494,3 +1494,13 @@ The personal memory and persona system transforms ragged from a simple RAG tool 
 - [Metadata Schema](./metadata-schema.md)
 - [Privacy Architecture](./privacy-architecture.md)
 - [Model Selection System](./model-selection.md)
+
+---
+
+## Related Documentation
+
+- [User Personas Explained](../../../../explanation/personas-explained.md) - User-facing personas
+- [Progressive Disclosure](./progressive-disclosure.md) - UX approach
+- [Product Vision](../../vision/product-vision.md) - Target audience
+
+---
