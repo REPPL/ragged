@@ -7,6 +7,105 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.7a] - 2025-11-22
+
+### Added - Document Version Tracking
+
+**SQLite Version Store (540 lines)**
+- Persistent version tracking database using SQLite (~/.ragged/versions.db)
+- Three-table schema for documents, versions, and chunk associations
+- ACID transactions for data integrity
+- Indexed queries for fast lookups
+- Automatic sequential version numbering (1, 2, 3, ...)
+- DocumentVersion dataclass with full type hints
+- Chunk-to-version linking for result attribution
+
+**Hierarchical Content Hashing**
+- Two-level SHA-256 hashing for change detection:
+  - Page-level: Individual hash per page
+  - Document-level: Hash of concatenated page hashes
+- Consistent, deterministic hashing
+- Enables future partial re-indexing (detects which pages changed)
+- Automatic duplicate detection (skip re-indexing unchanged documents)
+
+**Version Query API**
+- track_document() - Create/update version records
+- is_new_version() - Check if content changed
+- get_version() - Retrieve by version number, ID, or content hash
+- list_versions() - Get all versions of a document
+- find_document_by_path() - Find document ID from file path
+- link_chunk_to_version() - Associate chunks with versions
+- calculate_content_hash() - Hierarchical hashing utility
+
+**CLI Commands (380+ lines)**
+- `ragged versions list <file_path>` - List all versions with summary table
+- `ragged versions show <identifier>` - Show detailed version information
+- `ragged versions check <file_path>` - Check if document changed
+- `ragged versions compare <doc_id> <v1> <v2>` - Compare two versions
+- Rich-formatted output with tables, panels, and color coding
+- Multiple query modes: by ID, version number, or content hash
+
+**Testing & Quality**
+- 24 comprehensive unit tests
+- 96% test coverage on version_tracker.py
+- All edge cases covered (concurrent tracking, path handling, metadata)
+- Python 3.12 compatible (ISO datetime format)
+- Zero deprecation warnings
+
+**Documentation**
+- ADR-0020: Document Version Tracking architecture decision
+- Implementation summary with metrics and decisions
+- README.md for v0.3.7a implementation
+- Comprehensive docstrings (British English)
+- CLI help text for all commands
+
+**Backward Compatibility**
+- 100% backward compatible (additive changes only)
+- Zero breaking changes
+- Existing code works unchanged
+- Version tracking is opt-in
+
+**Performance**
+- SHA-256 hashing: ~1ms per page
+- Database queries: <1ms (indexed)
+- Storage overhead: ~1KB per version
+- Negligible impact on indexing pipeline
+
+### Technical Details
+
+**Database Schema:**
+```sql
+documents (doc_id, file_path, created_at, updated_at)
+versions (version_id, doc_id, content_hash, page_hashes, version_number, ...)
+chunk_versions (chunk_id, version_id, page_number, chunk_sequence)
+```
+
+**Version Numbering:**
+- Sequential per document (1, 2, 3, ...)
+- Human-friendly and chronological
+- Automatic increment on new versions
+- Duplicate versions return existing record
+
+**Hashing Algorithm:**
+- SHA-256 for cryptographic quality
+- Page-level granularity for change detection
+- Document-level consistency check
+- Future-ready for partial re-indexing
+
+### Known Limitations
+
+- No automatic integration with indexing pipeline (v0.3.7b will add)
+- No partial re-indexing yet (page hashes stored but not used)
+- No retention policies (all versions kept indefinitely)
+- Binary-only hashing (no semantic change detection)
+
+### Migration Notes
+
+- New SQLite database created at ~/.ragged/versions.db
+- Existing documents have no version history (tracking starts from v0.3.7a onward)
+- No migration required for existing databases
+- Graceful degradation for documents without version history
+
 ## [0.3.6] - 2025-11-22
 
 ### Added - VectorStore Abstraction Layer

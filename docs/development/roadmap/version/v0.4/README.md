@@ -1,12 +1,12 @@
 # Ragged v0.4.x Roadmap Overview - Personal Memory & Knowledge Graphs
 
-**Version Series:** v0.4.0 - v0.4.9
+**Version Series:** v0.4.0 - v0.4.13
 
 **Status:** Planned
 
-**Total Hours:** 195-242 hours (across 10 incremental releases)
+**Total Hours:** 272-330 hours (across 14 incremental releases)
 
-**Focus:** Foundation-first architecture with plugin system, personal memory, knowledge graphs, and LEANN backend
+**Focus:** Foundation-first architecture with plugin system, personal memory, knowledge graphs, and mandatory LEANN backend integration
 
 **Breaking Changes:** None - All features are additive and optional
 
@@ -16,18 +16,18 @@
 
 ## Vision
 
-Version 0.4.x transforms ragged from a document retrieval tool into an intelligent personal knowledge assistant through **10 incremental releases** that prioritise architectural excellence, comprehensive testing, and production-ready stability.
+Version 0.4.x transforms ragged from a document retrieval tool into an intelligent personal knowledge assistant through **14 incremental releases** that prioritise architectural excellence, comprehensive testing, and production-ready stability.
 
 **Core Principle**: Foundation first, features second - establish rock-solid architecture, testing infrastructure (80%+ coverage), and code quality before introducing complex memory and personalisation features.
 
-**Key Capabilities** (by end of v0.4.0):
-- **Plugin Architecture**: Extensible system for custom embedders, retrievers, processors, and commands
-- **VectorStore Abstraction**: Support for multiple backends (ChromaDB, LEANN)
+**Key Capabilities** (by end of v0.4.13):
+- **Plugin Architecture**: Extensible system with security sandboxing for custom embedders, retrievers, processors, and commands
+- **VectorStore Abstraction**: Support for multiple backends with seamless migration
 - **Personal Memory System**: Persona management, behaviour learning, temporal memory
 - **Knowledge Graphs**: Connect topics, documents, and concepts over time
 - **Personalised Ranking**: Boost relevant documents based on learned interests
-- **LEANN Backend**: 97% storage savings through graph-based retrieval
-- **Production-Ready**: Comprehensive testing, performance optimisation, security hardening
+- **LEANN Backend**: 97% storage savings through graph-based retrieval (mandatory, platform-aware)
+- **Production-Ready**: Comprehensive testing, performance optimisation, security hardening, backend migration tools
 
 ---
 
@@ -68,17 +68,19 @@ Version 0.4.x transforms ragged from a document retrieval tool into an intellige
 ### Target Timeline
 
 **Earliest Start**: Q3 2026 (assuming v0.3.x complete by Q2-Q3 2026)
-**Estimated Duration**: 8 months (33 weeks, 195-242 hours)
-**Target Completion**: Q4 2026 (November-December)
+**Estimated Duration**: 11-12 months (45-48 weeks, 272-330 hours)
+**Target Completion**: Q2 2027 (May-June)
 
 **Critical Path**:
 ```
 v0.2.10/v0.2.11 (Complete) →
 v0.3.x (13 releases, Q2-Q3 2026) →
-Security Audit (2-3 weeks, during v0.4.0) →
-v0.4.0+ Memory System Implementation →
-LEANN Decision (evaluate at v0.4.0) →
-v0.4.0 Production Release (Q4 2026)
+Security Audit (2-3 weeks, during v0.4.2) →
+v0.4.0-v0.4.4 Foundation & Security →
+v0.4.5-v0.4.8 Memory System Core →
+v0.4.9-v0.4.10 Advanced Features →
+v0.4.11-v0.4.13 Stabilisation & Production →
+v0.4.13 Production Release (Q2 2027)
 ```
 
 ### Privacy & Security Commitment
@@ -91,89 +93,31 @@ v0.4.0 Production Release (Q4 2026)
 
 ---
 
-## LEANN Backend Decision Framework
-
-### Conditional Implementation (v0.4.0)
-
-**Status**: ⚠️ **CONDITIONAL** - Decision made after v0.4.0 evaluation
-
-**v0.4.0 (LEANN Backend Integration)** is **NOT guaranteed** - implementation depends on evaluation results at v0.4.0 completion.
-
-### Evaluation Checkpoint: After v0.4.0 Completes
-
-**When**: Immediately following v0.4.0 behaviour learning release
-**What**: Measure actual storage usage with memory system running
-**Who**: Development team + community feedback
-
-### Decision Criteria
-
-#### Proceed with v0.4.0 LEANN if:
-1. **Storage usage >10GB** - Storage efficiency becomes critical
-2. **Platform requirements met** - macOS OR Linux (not Windows initially)
-3. **Recall requirements acceptable** - Scientific use cases don't require 100% recall
-4. **Build complexity acceptable** - Team can handle C++ platform-specific builds
-
-#### Defer LEANN to v0.5.x if:
-1. **Storage manageable** - Memory system usage <10GB for typical users
-2. **Windows users critical** - Significant Windows user base (LEANN macOS/Linux only initially)
-3. **Recall requirements high** - Scientific/research use cases need 100% recall (ChromaDB better)
-4. **Resource constraints** - Team prefers focus on memory system stability
-
-### Implementation Options
-
-**Option A: Proceed with v0.4.0** (35-42 hours)
-- Implement LEANN backend per roadmap
-- 97% storage savings achieved
-- Optional `pip install ragged[leann]` dependency
-- Migration tools for ChromaDB ↔ LEANN
-
-**Option B: Defer to v0.5.x** (0 hours in v0.4)
-- Document evaluation results
-- Create v0.5.x LEANN planning document
-- Focus v0.4.0 time on memory system polish or additional features
-- Keep v0.4.0 stabilisation release as-is
-
-### Benefits & Trade-offs
-
-| Aspect | LEANN (Proceed) | Defer (Stability Focus) |
-|--------|----------------|------------------------|
-| **Storage** | 97% reduction | Standard (ChromaDB) |
-| **Complexity** | C++ builds, platform-specific | Pure Python, all platforms |
-| **Recall** | 90% top-3 | ~100% (lossless) |
-| **v0.4 Focus** | Alternative backends | Memory system polish |
-| **Windows Support** | Deferred | Full support maintained |
-| **Time Investment** | 35-42 hours | 0 hours (reallocate) |
-
-### Recommendation Framework
-
-**Proceed if**: Storage + Platform + Recall criteria all met
-**Defer if**: Any criterion NOT met OR team prefers stability focus
-
-**Note**: Either decision is valid - v0.4 succeeds with or without LEANN. The memory system is the core value.
-
----
-
 ## Release Strategy
 
-### Foundation Phase (v0.4.0 - v0.4.2)
-**Focus**: Architecture, testing infrastructure, code quality
-**Hours**: 55-67
-**Goal**: Establish foundation that enables safe, rapid feature development
+### Phase 1: Foundation & Security (v0.4.0 - v0.4.4)
+**Focus**: Security baseline, plugin system, multi-backend support, code quality
+**Hours**: 98-119
+**Releases**: 5
+**Goal**: Establish rock-solid architecture with security hardening, extensibility, and quality infrastructure
 
-### Core Features Phase (v0.4.3 - v0.4.5)
-**Focus**: Memory system implementation with stability
+### Phase 2: Memory System Core (v0.4.5 - v0.4.8)
+**Focus**: Personas, interaction tracking, behaviour learning, personalisation
 **Hours**: 85-98
-**Goal**: Deliver persona management, behaviour learning, and personalisation
+**Releases**: 4
+**Goal**: Deliver complete personal memory system with user behaviour learning
 
-### Advanced Features Phase (v0.4.6 - v0.4.8)
-**Focus**: Refactoring, temporal memory, LEANN backend
-**Hours**: 90-107
-**Goal**: Complete memory system and alternative storage backend
+### Phase 3: Advanced Features (v0.4.9 - v0.4.10)
+**Focus**: Refactoring, temporal memory, advanced reasoning
+**Hours**: 47-57
+**Releases**: 2
+**Goal**: Add time-aware memory and clean up technical debt
 
-### Stabilisation Phase (v0.4.9)
-**Focus**: Production readiness, comprehensive testing, performance
-**Hours**: 15-20
-**Goal**: Release-ready v0.4 with all features polished and tested
+### Phase 4: Stabilisation & Production (v0.4.11 - v0.4.13)
+**Focus**: LEANN migration, performance optimisation, production readiness
+**Hours**: 40-55
+**Releases**: 3
+**Goal**: Deploy LEANN backend, optimise performance, prepare for production
 
 ---
 
