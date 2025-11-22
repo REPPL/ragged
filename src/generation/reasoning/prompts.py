@@ -4,9 +4,9 @@ Prompt templates for chain-of-thought reasoning.
 v0.3.7b: Structured prompts for transparent reasoning at multiple depth levels.
 """
 
-from typing import List, Any
-from src.generation.reasoning.types import ReasoningMode
+from typing import Any
 
+from src.generation.reasoning.types import ReasoningMode
 
 # Base system instruction for all reasoning modes
 REASONING_SYSTEM_INSTRUCTION = """You are a helpful AI assistant that provides transparent reasoning.
@@ -143,7 +143,7 @@ Therefore, [resolution or acknowledgment of limitation]...
 
 def build_reasoning_prompt(
     query: str,
-    chunks: List[Any],
+    chunks: list[Any],
     mode: ReasoningMode = ReasoningMode.BASIC
 ) -> str:
     """
@@ -180,7 +180,7 @@ def build_reasoning_prompt(
     return prompt
 
 
-def _format_sources(chunks: List[Any]) -> str:
+def _format_sources(chunks: list[Any]) -> str:
     """
     Format chunks as numbered sources for the prompt.
 
@@ -221,7 +221,7 @@ def _format_sources(chunks: List[Any]) -> str:
     return "\n".join(sources)
 
 
-def build_confidence_prompt(reasoning_steps: List[str], answer: str) -> str:
+def build_confidence_prompt(reasoning_steps: list[str], answer: str) -> str:
     """
     Build a follow-up prompt to assess confidence (if needed).
 

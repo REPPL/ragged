@@ -143,7 +143,7 @@ class PDFAnalyzer:
 
             return result
 
-        except asyncio.TimeoutError as e:
+        except TimeoutError as e:
             duration = time.time() - start_time
             logger.error(f"Analysis timeout after {duration:.2f}s: {pdf_path}")
             raise TimeoutError(
@@ -183,7 +183,7 @@ class PDFAnalyzer:
                 asyncio.gather(*tasks, return_exceptions=True),
                 timeout=self.config.timeout_seconds,
             )
-        except asyncio.TimeoutError:
+        except TimeoutError:
             # Cancel all running tasks
             for task in tasks:
                 task.cancel()

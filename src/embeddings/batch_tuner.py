@@ -5,9 +5,9 @@ v0.2.9: Automatically adjusts batch size based on document characteristics
 and system resources for 15-25% throughput improvement.
 """
 
-import psutil
-from typing import List, Optional
 from collections import deque
+
+import psutil
 
 from src.utils.logging import get_logger
 
@@ -61,7 +61,7 @@ class BatchTuner:
         )
 
     def suggest_batch_size(
-        self, documents: List[str], memory_check: bool = True
+        self, documents: list[str], memory_check: bool = True
     ) -> int:
         """Suggest optimal batch size for these documents.
 

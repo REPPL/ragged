@@ -3,13 +3,13 @@
 Enhances chunks with surrounding context for better retrieval and generation.
 """
 
-from typing import List, Optional, Dict, Any
+import re
 from dataclasses import dataclass
 from pathlib import Path
-import re
+from typing import Any
 
-from src.ingestion.models import Document, Chunk, ChunkMetadata
 from src.chunking.splitters import RecursiveCharacterTextSplitter
+from src.ingestion.models import Chunk, ChunkMetadata, Document
 from src.utils.hashing import hash_content
 from src.utils.logging import get_logger
 
@@ -22,7 +22,7 @@ class ContextualChunk:
 
     content: str
     document_context: str  # e.g., "From: research_paper.pdf"
-    section_context: Optional[str] = None  # e.g., "Section: Introduction"
+    section_context: str | None = None  # e.g., "Section: Introduction"
     chunk_index: int = 0
     total_chunks: int = 0
 
@@ -41,7 +41,7 @@ class ContextualChunk:
 
         return "\n".join(parts)
 
-    def to_metadata(self) -> Dict[str, Any]:
+    def to_metadata(self) -> dict[str, Any]:
         """Convert to metadata dict.
 
         Returns:
@@ -63,8 +63,8 @@ class ContextualChunker:
 
     def __init__(
         self,
-        chunk_size: Optional[int] = None,
-        chunk_overlap: Optional[int] = None,
+        chunk_size: int | None = None,
+        chunk_overlap: int | None = None,
         add_document_context: bool = True,
         add_section_context: bool = True,
     ):
@@ -106,7 +106,7 @@ class ContextualChunker:
 
         return max_overlap
 
-    def chunk_document(self, document: Document) -> List[Chunk]:
+    def chunk_document(self, document: Document) -> list[Chunk]:
         """Chunk a document with contextual enrichment.
 
         Args:
@@ -213,7 +213,7 @@ class ContextualChunker:
 
         return f"From: {filename}"
 
-    def _extract_section_context(self, text: str) -> Optional[str]:
+    def _extract_section_context(self, text: str) -> str | None:
         """Extract section context from chunk text.
 
         Looks for common section headers like:
@@ -265,7 +265,7 @@ class ContextCompressor:
 
     def compress(
         self,
-        chunks: List[Chunk],
+        chunks: list[Chunk],
         query: str,
         preserve_order: bool = True
     ) -> str:
@@ -303,7 +303,7 @@ class ContextCompressor:
 
     def compress_with_query_focus(
         self,
-        chunks: List[Chunk],
+        chunks: list[Chunk],
         query: str
     ) -> str:
         """Compress context with focus on query-relevant sentences.

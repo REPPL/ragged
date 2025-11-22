@@ -6,13 +6,13 @@ and forensic analysis.
 SECURITY FIX (HIGH-3): Safe JSON parsing with depth and size limits
 """
 
-from dataclasses import dataclass, asdict
-from datetime import datetime
-from enum import Enum
-from typing import Optional, List, Dict, Any
-from pathlib import Path
 import json
 import logging
+from dataclasses import dataclass
+from datetime import datetime
+from enum import Enum
+from pathlib import Path
+from typing import Any
 
 logger = logging.getLogger(__name__)
 
@@ -72,7 +72,7 @@ def _validate_json_structure(obj: Any, depth: int = 0) -> None:
         raise AuditSecurityError(f"Unsupported JSON type: {type(obj).__name__}")
 
 
-def safe_json_loads(json_str: str) -> Dict[str, Any]:
+def safe_json_loads(json_str: str) -> dict[str, Any]:
     """Safely parse JSON with structure validation.
 
     SECURITY FIX (HIGH-3): Validates JSON structure before and after parsing.
@@ -103,7 +103,7 @@ def safe_json_loads(json_str: str) -> Dict[str, Any]:
     return obj
 
 
-def sanitize_details(details: Optional[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
+def sanitize_details(details: dict[str, Any] | None) -> dict[str, Any] | None:
     """Sanitize details dictionary for safe logging.
 
     SECURITY FIX (HIGH-3): Validates and sanitizes details before logging.
@@ -155,12 +155,12 @@ class AuditEvent:
     event_type: AuditEventType
     plugin_name: str
     plugin_version: str
-    user_id: Optional[str] = None
-    details: Optional[Dict[str, Any]] = None
+    user_id: str | None = None
+    details: dict[str, Any] | None = None
     result: str = "success"
     duration_ms: int = 0
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary for serialisation (with sanitization).
 
         SECURITY FIX (HIGH-3): Sanitizes details before serialisation.
@@ -182,7 +182,7 @@ class AuditEvent:
         return data
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> "AuditEvent":
+    def from_dict(cls, data: dict[str, Any]) -> "AuditEvent":
         """Create from dictionary."""
         return cls(
             timestamp=data["timestamp"],
@@ -199,7 +199,7 @@ class AuditEvent:
 class AuditLogger:
     """Manages audit logging for plugins."""
 
-    def __init__(self, log_path: Optional[Path] = None):
+    def __init__(self, log_path: Path | None = None):
         """Initialise audit logger.
 
         Args:
@@ -224,7 +224,7 @@ class AuditLogger:
             logger.error(f"Failed to log audit event: {e}")
 
     def log_plugin_loaded(
-        self, plugin_name: str, plugin_version: str, user_id: Optional[str] = None
+        self, plugin_name: str, plugin_version: str, user_id: str | None = None
     ) -> None:
         """Log plugin loaded event.
 
@@ -248,8 +248,8 @@ class AuditLogger:
         plugin_version: str,
         result: str,
         duration_ms: int,
-        permissions_used: List[str],
-        user_id: Optional[str] = None,
+        permissions_used: list[str],
+        user_id: str | None = None,
     ) -> None:
         """Log plugin execution event.
 
@@ -279,7 +279,7 @@ class AuditLogger:
         plugin_name: str,
         plugin_version: str,
         permission: str,
-        user_id: Optional[str] = None,
+        user_id: str | None = None,
     ) -> None:
         """Log permission-related event.
 
@@ -305,8 +305,8 @@ class AuditLogger:
         plugin_name: str,
         plugin_version: str,
         violation_type: str,
-        details: Dict[str, Any],
-        user_id: Optional[str] = None,
+        details: dict[str, Any],
+        user_id: str | None = None,
     ) -> None:
         """Log security violation event.
 
@@ -331,11 +331,11 @@ class AuditLogger:
 
     def get_events(
         self,
-        plugin_name: Optional[str] = None,
-        event_type: Optional[AuditEventType] = None,
-        since: Optional[datetime] = None,
+        plugin_name: str | None = None,
+        event_type: AuditEventType | None = None,
+        since: datetime | None = None,
         limit: int = 100,
-    ) -> List[AuditEvent]:
+    ) -> list[AuditEvent]:
         """Retrieve audit events with filtering.
 
         SECURITY FIX (HIGH-3): Uses safe JSON parsing with structure validation.
@@ -354,7 +354,7 @@ class AuditLogger:
             if not self.log_path.exists():
                 return events
 
-            with open(self.log_path, "r") as f:
+            with open(self.log_path) as f:
                 for line in f:
                     try:
                         # SECURITY FIX (HIGH-3): Use safe JSON parsing
@@ -384,7 +384,7 @@ class AuditLogger:
 
         return events
 
-    def get_security_violations(self, plugin_name: Optional[str] = None) -> List[AuditEvent]:
+    def get_security_violations(self, plugin_name: str | None = None) -> list[AuditEvent]:
         """Get all security violations.
 
         Args:
@@ -414,7 +414,7 @@ class AuditLogger:
         removed_count = 0
 
         try:
-            with open(self.log_path, "r") as f:
+            with open(self.log_path) as f:
                 for line in f:
                     try:
                         # SECURITY FIX (HIGH-3): Use safe JSON parsing

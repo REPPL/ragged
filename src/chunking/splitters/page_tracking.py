@@ -1,10 +1,9 @@
 """Page tracking and mapping for document chunks."""
 
 import re
-from typing import List, Tuple, Optional
 
 
-def build_page_position_map(content: str) -> List[Tuple[int, int]]:
+def build_page_position_map(content: str) -> list[tuple[int, int]]:
     """Build a map of page markers and their positions in the content.
 
     Args:
@@ -25,7 +24,7 @@ def build_page_position_map(content: str) -> List[Tuple[int, int]]:
     return page_positions
 
 
-def get_page_for_position(position: int, page_positions: List[Tuple[int, int]]) -> int:
+def get_page_for_position(position: int, page_positions: list[tuple[int, int]]) -> int:
     """Determine which page a given position falls on.
 
     Args:
@@ -49,7 +48,7 @@ def get_page_for_position(position: int, page_positions: List[Tuple[int, int]]) 
     return current_page
 
 
-def build_clean_to_orig_map(original_content: str) -> List[int]:
+def build_clean_to_orig_map(original_content: str) -> list[int]:
     """Build a mapping from cleaned content positions to original content positions.
 
     When we remove page markers for chunking, we need to map chunk positions
@@ -92,11 +91,11 @@ def build_clean_to_orig_map(original_content: str) -> List[int]:
 
 
 def map_chunks_to_pages(
-    text_chunks: List[str],
+    text_chunks: list[str],
     clean_content: str,
     original_content: str,
-    page_positions: List[Tuple[int, int]]
-) -> List[Tuple[Optional[int], Optional[str]]]:
+    page_positions: list[tuple[int, int]]
+) -> list[tuple[int | None, str | None]]:
     """Map text chunks to their page numbers.
 
     Args:
@@ -116,7 +115,7 @@ def map_chunks_to_pages(
     # Build position mapping
     clean_to_orig = build_clean_to_orig_map(original_content)
 
-    chunk_pages: List[Tuple[Optional[int], Optional[str]]] = []
+    chunk_pages: list[tuple[int | None, str | None]] = []
     current_pos = 0
 
     for chunk_text in text_chunks:

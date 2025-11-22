@@ -6,14 +6,12 @@ ensuring plugins can only access explicitly granted permissions.
 SECURITY FIX (HIGH-2): Added thread-safe locking for permission operations
 """
 
-from dataclasses import dataclass, field
-from enum import Enum
-from typing import Set, Dict, Optional, List
-from pathlib import Path
 import json
 import logging
 import threading
-from contextlib import contextmanager
+from dataclasses import dataclass, field
+from enum import Enum
+from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
@@ -44,11 +42,11 @@ class PluginPermission:
 
     permission_type: PermissionType
     granted: bool = False
-    granted_at: Optional[str] = None
+    granted_at: str | None = None
     required: bool = True
     description: str = ""
 
-    def to_dict(self) -> Dict:
+    def to_dict(self) -> dict:
         """Serialise to dictionary."""
         return {
             "type": self.permission_type.value,
@@ -59,7 +57,7 @@ class PluginPermission:
         }
 
     @classmethod
-    def from_dict(cls, data: Dict) -> "PluginPermission":
+    def from_dict(cls, data: dict) -> "PluginPermission":
         """Deserialise from dictionary."""
         return cls(
             permission_type=PermissionType(data["type"]),
@@ -79,9 +77,9 @@ class PluginPermissions:
 
     plugin_name: str
     plugin_version: str
-    required_permissions: Set[PermissionType] = field(default_factory=set)
-    optional_permissions: Set[PermissionType] = field(default_factory=set)
-    granted_permissions: Set[PermissionType] = field(default_factory=set)
+    required_permissions: set[PermissionType] = field(default_factory=set)
+    optional_permissions: set[PermissionType] = field(default_factory=set)
+    granted_permissions: set[PermissionType] = field(default_factory=set)
     _lock: threading.Lock = field(default_factory=threading.Lock, init=False, repr=False)
 
     def add_required(self, permission: PermissionType) -> None:
@@ -125,7 +123,7 @@ class PluginPermissions:
         with self._lock:
             return self.required_permissions.issubset(self.granted_permissions)
 
-    def to_dict(self) -> Dict:
+    def to_dict(self) -> dict:
         """Serialise to dictionary (thread-safe)."""
         with self._lock:
             return {
@@ -137,7 +135,7 @@ class PluginPermissions:
             }
 
     @classmethod
-    def from_dict(cls, data: Dict) -> "PluginPermissions":
+    def from_dict(cls, data: dict) -> "PluginPermissions":
         """Deserialise from dictionary.
 
         Note: Creates new instance, no locking needed during construction.
@@ -157,7 +155,7 @@ class PermissionManager:
     SECURITY FIX (HIGH-2): Thread-safe permission management with locking.
     """
 
-    def __init__(self, storage_path: Optional[Path] = None):
+    def __init__(self, storage_path: Path | None = None):
         """Initialise permission manager.
 
         Args:
@@ -167,7 +165,7 @@ class PermissionManager:
             storage_path = Path.home() / ".ragged" / "plugins" / "permissions.json"
         self.storage_path = storage_path
         self.storage_path.parent.mkdir(parents=True, exist_ok=True)
-        self._permissions: Dict[str, PluginPermissions] = {}
+        self._permissions: dict[str, PluginPermissions] = {}
         self._lock = threading.RLock()  # Reentrant lock for nested calls
         self._file_lock = threading.Lock()  # Separate lock for file I/O
         self._load()
@@ -179,9 +177,8 @@ class PermissionManager:
         """
         if self.storage_path.exists():
             try:
-                with self._file_lock:
-                    with open(self.storage_path, "r") as f:
-                        data = json.load(f)
+                with self._file_lock, open(self.storage_path) as f:
+                    data = json.load(f)
 
                 # Update in-memory permissions with lock
                 with self._lock:
@@ -193,18 +190,22 @@ class PermissionManager:
             except Exception as e:
                 logger.error(f"Failed to load permissions: {e}")
 
-    def _save(self) -> None:
-        """Save permissions to storage (thread-safe).
+    def _save_locked(self) -> None:
+        """Save permissions to storage (assumes _lock already held by caller).
 
-        SECURITY FIX (HIGH-2): Atomic file write with locking to prevent corruption.
+        SECURITY FIX (MEDIUM race condition): Internal method that assumes the caller
+        already holds self._lock. This ensures atomicity between permission
+        modification and serialization.
+
+        IMPORTANT: This method MUST be called while holding self._lock to prevent
+        race conditions where concurrent modifications could be lost.
         """
         import os
         import uuid
 
         try:
-            # Serialize permissions while holding lock
-            with self._lock:
-                data = {"plugins": [p.to_dict() for p in self._permissions.values()]}
+            # Serialize permissions (caller must hold _lock)
+            data = {"plugins": [p.to_dict() for p in self._permissions.values()]}
 
             # Write to file with file lock
             with self._file_lock:
@@ -233,7 +234,16 @@ class PermissionManager:
         except Exception as e:
             logger.error(f"Failed to save permissions: {e}")
 
-    def get_permissions(self, plugin_name: str) -> Optional[PluginPermissions]:
+    def _save(self) -> None:
+        """Save permissions to storage (thread-safe).
+
+        SECURITY FIX (HIGH-2): Atomic file write with locking to prevent corruption.
+        SECURITY FIX (MEDIUM race condition): Holds lock during serialization.
+        """
+        with self._lock:
+            self._save_locked()
+
+    def get_permissions(self, plugin_name: str) -> PluginPermissions | None:
         """Get permissions for a plugin (thread-safe).
 
         Args:
@@ -260,6 +270,7 @@ class PermissionManager:
         """Grant a permission to a plugin (thread-safe).
 
         SECURITY FIX (HIGH-2): Atomic check-and-grant to prevent TOCTOU race conditions.
+        SECURITY FIX (MEDIUM race condition): Holds lock during save to prevent stale data.
 
         Args:
             plugin_name: Name of the plugin
@@ -273,12 +284,14 @@ class PermissionManager:
                 raise ValueError(f"Plugin {plugin_name} not registered")
             # grant() is already thread-safe, but we hold manager lock during call
             self._permissions[plugin_name].grant(permission)
-        self._save()
+            # Save while holding lock to prevent race conditions
+            self._save_locked()
 
     def revoke_permission(self, plugin_name: str, permission: PermissionType) -> None:
         """Revoke a permission from a plugin (thread-safe).
 
         SECURITY FIX (HIGH-2): Atomic revocation to prevent race conditions.
+        SECURITY FIX (MEDIUM race condition): Holds lock during save to prevent stale data.
 
         Args:
             plugin_name: Name of the plugin
@@ -288,7 +301,8 @@ class PermissionManager:
             if plugin_name in self._permissions:
                 # revoke() is already thread-safe, but we hold manager lock during call
                 self._permissions[plugin_name].revoke(permission)
-        self._save()
+            # Save while holding lock to prevent race conditions
+            self._save_locked()
 
     def check_permission(self, plugin_name: str, permission: PermissionType) -> bool:
         """Check if a plugin has a specific permission (thread-safe).
@@ -306,7 +320,7 @@ class PermissionManager:
             # has_permission() is already thread-safe, but we hold manager lock during call
             return self._permissions[plugin_name].has_permission(permission)
 
-    def list_plugins(self) -> List[str]:
+    def list_plugins(self) -> list[str]:
         """List all registered plugins (thread-safe).
 
         Returns:
@@ -315,7 +329,7 @@ class PermissionManager:
         with self._lock:
             return list(self._permissions.keys())
 
-    def get_all_permissions(self) -> Dict[str, PluginPermissions]:
+    def get_all_permissions(self) -> dict[str, PluginPermissions]:
         """Get all permissions for all plugins (thread-safe).
 
         Returns:

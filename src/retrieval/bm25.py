@@ -1,8 +1,9 @@
 """BM25 keyword-based retrieval for ragged v0.2."""
 
-from typing import Any, List, Tuple, Optional
-from rank_bm25 import BM25Okapi
 import logging
+from typing import Any
+
+from rank_bm25 import BM25Okapi
 
 logger = logging.getLogger(__name__)
 
@@ -16,16 +17,16 @@ class BM25Retriever:
 
     def __init__(self) -> None:
         """Initialize BM25 retriever."""
-        self.index: Optional[BM25Okapi] = None
-        self.documents: List[str] = []
-        self.doc_ids: List[str] = []
-        self.metadatas: List[dict[str, Any]] = []
+        self.index: BM25Okapi | None = None
+        self.documents: list[str] = []
+        self.doc_ids: list[str] = []
+        self.metadatas: list[dict[str, Any]] = []
 
     def index_documents(
         self,
-        documents: List[str],
-        doc_ids: List[str],
-        metadatas: Optional[List[dict[str, Any]]] = None,
+        documents: list[str],
+        doc_ids: list[str],
+        metadatas: list[dict[str, Any]] | None = None,
     ) -> None:
         """Index documents for BM25 search.
 
@@ -56,7 +57,7 @@ class BM25Retriever:
         self,
         query: str,
         top_k: int = 5,
-    ) -> List[Tuple[str, str, float, dict[str, Any]]]:
+    ) -> list[tuple[str, str, float, dict[str, Any]]]:
         """Search for documents using BM25.
 
         Args:
@@ -101,7 +102,7 @@ class BM25Retriever:
 
         return results
 
-    def get_top_k_indices(self, query: str, top_k: int = 5) -> List[int]:
+    def get_top_k_indices(self, query: str, top_k: int = 5) -> list[int]:
         """Get indices of top-k documents for a query.
 
         Useful for fusion algorithms that need document indices.

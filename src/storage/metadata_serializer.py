@@ -8,14 +8,14 @@ like lists, dicts, Path objects, and datetimes.
 import json
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any
 
 from src.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
 
-def serialize_metadata(metadata: Dict[str, Any]) -> Dict[str, Any]:
+def serialize_metadata(metadata: dict[str, Any]) -> dict[str, Any]:
     """Serialise metadata for ChromaDB storage.
 
     Converts complex types to ChromaDB-compatible simple types:
@@ -49,7 +49,7 @@ def serialize_metadata(metadata: Dict[str, Any]) -> Dict[str, Any]:
             "active": True
         }
     """
-    serialized: Dict[str, Any] = {}
+    serialized: dict[str, Any] = {}
 
     for key, value in metadata.items():
         # Skip None values
@@ -84,7 +84,7 @@ def serialize_metadata(metadata: Dict[str, Any]) -> Dict[str, Any]:
     return serialized
 
 
-def deserialize_metadata(metadata: Dict[str, Any]) -> Dict[str, Any]:
+def deserialize_metadata(metadata: dict[str, Any]) -> dict[str, Any]:
     """Deserialise metadata from ChromaDB storage.
 
     Converts serialised values back to original types:
@@ -134,7 +134,7 @@ def deserialize_metadata(metadata: Dict[str, Any]) -> Dict[str, Any]:
     return deserialized
 
 
-def serialize_batch_metadata(metadatas: list[Dict[str, Any]]) -> list[Dict[str, Any]]:
+def serialize_batch_metadata(metadatas: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Serialise a batch of metadata dictionaries.
 
     Args:
@@ -146,7 +146,7 @@ def serialize_batch_metadata(metadatas: list[Dict[str, Any]]) -> list[Dict[str, 
     return [serialize_metadata(m) for m in metadatas]
 
 
-def deserialize_batch_metadata(metadatas: list[Dict[str, Any]]) -> list[Dict[str, Any]]:
+def deserialize_batch_metadata(metadatas: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Deserialise a batch of metadata dictionaries.
 
     Args:

@@ -6,7 +6,6 @@ Handles parsing of generated text to extract structured information.
 
 import re
 from dataclasses import dataclass
-from typing import List
 
 
 @dataclass
@@ -14,7 +13,7 @@ class GeneratedResponse:
     """Parsed response from LLM."""
 
     answer: str
-    citations: List[str]
+    citations: list[str]
     raw_response: str
 
     def __repr__(self) -> str:
@@ -58,7 +57,7 @@ def parse_response(response_text: str) -> GeneratedResponse:
     )
 
 
-def extract_citations(text: str) -> List[str]:
+def extract_citations(text: str) -> list[str]:
     """
     Extract citations from text.
 

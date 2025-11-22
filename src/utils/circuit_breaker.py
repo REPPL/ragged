@@ -8,7 +8,7 @@ import functools
 import threading
 import time
 from collections import deque
-from typing import Callable, Deque, Optional
+from collections.abc import Callable
 
 from src.exceptions import RaggedError
 from src.utils.logging import get_logger
@@ -100,14 +100,14 @@ class CircuitBreaker:
         self._state = CircuitState.CLOSED
         self._failure_count = 0
         self._success_count = 0
-        self._last_failure_time: Optional[float] = None
+        self._last_failure_time: float | None = None
         self._half_open_calls = 0
 
         # Thread safety
         self._lock = threading.Lock()
 
         # Recent failures for debugging
-        self._recent_failures: Deque[str] = deque(maxlen=10)
+        self._recent_failures: deque[str] = deque(maxlen=10)
 
         logger.info(
             f"CircuitBreaker '{name}' initialized "

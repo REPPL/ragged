@@ -5,7 +5,7 @@ Allows viewing and updating document metadata without re-ingestion.
 
 import json
 import sys
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 import click
 
@@ -64,7 +64,7 @@ def list_metadata(limit: int, output_format: str) -> None:
         # Group by document_path to show unique documents
         from collections import defaultdict
 
-        docs_by_path: Dict[str, Dict[str, Any]] = defaultdict(dict)
+        docs_by_path: dict[str, dict[str, Any]] = defaultdict(dict)
 
         for i, doc_id in enumerate(results["ids"]):
             metadata = results["metadatas"][i] if results.get("metadatas") else {}  # type: ignore
@@ -184,7 +184,7 @@ def update_metadata(document_path: str, updates: tuple, deletions: tuple) -> Non
         metadatas = results["metadatas"]  # type: ignore
 
         # Parse updates
-        update_dict: Dict[str, Any] = {}
+        update_dict: dict[str, Any] = {}
         for update_str in updates:
             if "=" not in update_str:
                 console.print(f"[red]Invalid update format: {update_str}. Use key=value[/red]")
@@ -248,7 +248,7 @@ def search_metadata(filters: tuple, output_format: str) -> None:
 
     try:
         # Parse filters
-        where: Dict[str, Any] = {}
+        where: dict[str, Any] = {}
         for filter_str in filters:
             if "=" not in filter_str:
                 console.print(f"[red]Invalid filter format: {filter_str}. Use key=value[/red]")
@@ -266,7 +266,7 @@ def search_metadata(filters: tuple, output_format: str) -> None:
         # Group by document
         from collections import defaultdict
 
-        docs_by_path: Dict[str, Dict[str, Any]] = defaultdict(dict)
+        docs_by_path: dict[str, dict[str, Any]] = defaultdict(dict)
 
         for i, doc_id in enumerate(results["ids"]):
             metadata = results["metadatas"][i] if results.get("metadatas") else {}  # type: ignore
@@ -278,7 +278,7 @@ def search_metadata(filters: tuple, output_format: str) -> None:
                     "chunks": 0,
                 }
                 # Add filter fields to output
-                for key in where.keys():
+                for key in where:
                     docs_by_path[doc_path][key] = metadata.get(key, "N/A")
 
             docs_by_path[doc_path]["chunks"] += 1

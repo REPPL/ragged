@@ -2,7 +2,7 @@
 
 import logging
 import os
-from typing import Any, Dict, List, cast
+from typing import Any, cast
 
 import requests  # type: ignore[import-untyped]
 
@@ -26,7 +26,7 @@ API_COLLECTIONS = f"{API_BASE_URL}/api/collections"
 
 def check_api_health(
     max_retries: int = UI_STARTUP_MAX_RETRIES, retry_delay: float = UI_STARTUP_RETRY_DELAY
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     """Check if API is healthy with retry logic.
 
     Args:
@@ -42,7 +42,7 @@ def check_api_health(
         try:
             response = requests.get(API_HEALTH, timeout=SHORT_API_TIMEOUT)
             response.raise_for_status()
-            health_data = cast(Dict[str, Any], response.json())
+            health_data = cast(dict[str, Any], response.json())
             logger.info(f"API health check successful on attempt {attempt + 1}")
             return health_data
         except Exception as e:  # noqa: BLE001 - Retry on any error
@@ -74,7 +74,7 @@ def get_api_status_display() -> str:
         return f"**API Status**: ❌ Unavailable ({error[:50]}...)"
 
 
-def get_collections() -> List[str]:
+def get_collections() -> list[str]:
     """Get list of available collections.
 
     Returns:
@@ -84,6 +84,6 @@ def get_collections() -> List[str]:
         response = requests.get(API_COLLECTIONS, timeout=SHORT_API_TIMEOUT)
         response.raise_for_status()
         data = response.json()
-        return cast(List[str], data.get("collections", ["default"]))
+        return cast(list[str], data.get("collections", ["default"]))
     except Exception:  # noqa: BLE001 - Return default on any error
         return ["default"]

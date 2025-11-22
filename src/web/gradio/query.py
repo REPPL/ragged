@@ -2,7 +2,8 @@
 
 import json
 import logging
-from typing import Any, Dict, Generator, List, Tuple
+from collections.abc import Generator
+from typing import Any
 
 import requests  # type: ignore[import-untyped]
 
@@ -12,7 +13,7 @@ from src.web.gradio.api import API_QUERY
 logger = logging.getLogger(__name__)
 
 
-def format_sources(sources: List[Dict[str, Any]]) -> str:
+def format_sources(sources: list[dict[str, Any]]) -> str:
     """Format sources as markdown.
 
     Args:
@@ -42,11 +43,11 @@ def format_sources(sources: List[Dict[str, Any]]) -> str:
 
 def query_with_streaming(
     message: str,
-    history: List[Tuple[str, str]],
+    history: list[tuple[str, str]],
     collection: str = "default",
     retrieval_method: str = "hybrid",
     top_k: int = 5,
-) -> Generator[Tuple[List[Tuple[str, str]], str], None, None]:
+) -> Generator[tuple[list[tuple[str, str]], str], None, None]:
     """Query the API with streaming response.
 
     Args:
@@ -144,11 +145,11 @@ def query_with_streaming(
 
 def query_non_streaming(
     message: str,
-    history: List[Tuple[str, str]],
+    history: list[tuple[str, str]],
     collection: str = "default",
     retrieval_method: str = "hybrid",
     top_k: int = 5,
-) -> Tuple[List[Tuple[str, str]], str]:
+) -> tuple[list[tuple[str, str]], str]:
     """Query the API without streaming.
 
     Args:

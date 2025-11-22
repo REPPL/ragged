@@ -3,12 +3,11 @@
 Handles user consent workflow for granting permissions to plugins.
 """
 
-from dataclasses import dataclass
-from enum import Enum
-from typing import Optional, Dict
-from pathlib import Path
 import json
 import logging
+from dataclasses import dataclass
+from enum import Enum
+from pathlib import Path
 
 from ragged.plugins.permissions import PermissionType, PluginPermissions
 
@@ -31,15 +30,15 @@ class PermissionConsent:
     plugin_name: str
     permission: PermissionType
     status: ConsentStatus
-    granted_at: Optional[str] = None
-    revoked_at: Optional[str] = None
-    reason: Optional[str] = None
+    granted_at: str | None = None
+    revoked_at: str | None = None
+    reason: str | None = None
 
 
 class ConsentManager:
     """Manages user consent for plugin permissions."""
 
-    def __init__(self, storage_path: Optional[Path] = None):
+    def __init__(self, storage_path: Path | None = None):
         """Initialise consent manager.
 
         Args:
@@ -49,14 +48,14 @@ class ConsentManager:
             storage_path = Path.home() / ".ragged" / "plugins" / "consent.json"
         self.storage_path = storage_path
         self.storage_path.parent.mkdir(parents=True, exist_ok=True)
-        self._consents: Dict[str, Dict[str, ConsentStatus]] = {}
+        self._consents: dict[str, dict[str, ConsentStatus]] = {}
         self._load()
 
     def _load(self) -> None:
         """Load consent records from storage."""
         if self.storage_path.exists():
             try:
-                with open(self.storage_path, "r") as f:
+                with open(self.storage_path) as f:
                     data = json.load(f)
                     for plugin, perms in data.items():
                         self._consents[plugin] = {

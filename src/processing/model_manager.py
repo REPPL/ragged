@@ -8,7 +8,7 @@ by document processors (primarily Docling models like DocLayNet and TableFormer)
 import hashlib
 import time
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any
 
 from src.utils.logging import get_logger
 
@@ -17,7 +17,7 @@ logger = get_logger(__name__)
 
 # HIGH-003: Model integrity verification with SHA-256 checksums
 # Expected checksums for known model versions (update as needed)
-MODEL_CHECKSUMS: Dict[str, str] = {
+MODEL_CHECKSUMS: dict[str, str] = {
     # Add checksums here when known model versions are verified
     # Format: "model_name:version": "sha256_hash"
     # Example: "DocLayNet:v1.0": "abc123..."
@@ -43,7 +43,7 @@ class ModelManager:
         >>> tableformer = manager.get_model("TableFormer")
     """
 
-    def __init__(self, cache_dir: Optional[Path] = None, verify_integrity: bool = True):
+    def __init__(self, cache_dir: Path | None = None, verify_integrity: bool = True):
         """
         Initialise the model manager.
 
@@ -57,7 +57,7 @@ class ModelManager:
 
         self.cache_dir = cache_dir
         self.verify_integrity = verify_integrity
-        self._loaded_models: Dict[str, Any] = {}
+        self._loaded_models: dict[str, Any] = {}
 
         logger.debug(f"Model manager initialised with cache dir: {cache_dir}")
 
@@ -251,7 +251,7 @@ class ModelManager:
         return checksum
 
     def verify_model_integrity(
-        self, model_path: Path, expected_checksum: Optional[str] = None
+        self, model_path: Path, expected_checksum: str | None = None
     ) -> bool:
         """
         Verify model file integrity using SHA-256 checksum.

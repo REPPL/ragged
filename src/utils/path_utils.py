@@ -4,14 +4,12 @@ Provides validated path operations to prevent security vulnerabilities
 like directory traversal and ensure consistent path handling.
 """
 
-import os
 from pathlib import Path
-from typing import List, Optional, Union
 
 from src.exceptions import InvalidPathError, ResourceNotFoundError
 
 
-def normalize_path(path: Union[str, Path]) -> Path:
+def normalize_path(path: str | Path) -> Path:
     """Normalize a path to absolute, resolved form.
 
     Resolves symlinks, removes redundant separators, and converts to absolute path.
@@ -29,7 +27,7 @@ def normalize_path(path: Union[str, Path]) -> Path:
     return Path(path).expanduser().resolve()
 
 
-def validate_path_exists(path: Union[str, Path], must_be_file: bool = False, must_be_dir: bool = False) -> Path:
+def validate_path_exists(path: str | Path, must_be_file: bool = False, must_be_dir: bool = False) -> Path:
     """Validate that a path exists and optionally check its type.
 
     Args:
@@ -73,7 +71,7 @@ def validate_path_exists(path: Union[str, Path], must_be_file: bool = False, mus
     return normalized
 
 
-def safe_join(base: Union[str, Path], *paths: Union[str, Path]) -> Path:
+def safe_join(base: str | Path, *paths: str | Path) -> Path:
     """Safely join paths and validate result is within base directory.
 
     Prevents directory traversal attacks by ensuring the result
@@ -105,7 +103,7 @@ def safe_join(base: Union[str, Path], *paths: Union[str, Path]) -> Path:
         result.relative_to(base_norm)
     except ValueError:
         raise InvalidPathError(
-            f"Path traversal attempt: result outside base directory",
+            "Path traversal attempt: result outside base directory",
             {
                 "base": str(base_norm),
                 "result": str(result),
@@ -116,7 +114,7 @@ def safe_join(base: Union[str, Path], *paths: Union[str, Path]) -> Path:
     return result
 
 
-def validate_file_extension(path: Union[str, Path], allowed_extensions: List[str]) -> Path:
+def validate_file_extension(path: str | Path, allowed_extensions: list[str]) -> Path:
     """Validate that a file has an allowed extension.
 
     Args:
@@ -148,7 +146,7 @@ def validate_file_extension(path: Union[str, Path], allowed_extensions: List[str
     return normalized
 
 
-def ensure_directory(path: Union[str, Path], parents: bool = True, exist_ok: bool = True) -> Path:
+def ensure_directory(path: str | Path, parents: bool = True, exist_ok: bool = True) -> Path:
     """Ensure a directory exists, creating it if necessary.
 
     Args:
@@ -181,7 +179,7 @@ def ensure_directory(path: Union[str, Path], parents: bool = True, exist_ok: boo
     return normalized
 
 
-def get_relative_path(path: Union[str, Path], base: Union[str, Path]) -> Path:
+def get_relative_path(path: str | Path, base: str | Path) -> Path:
     """Get relative path from base to path.
 
     Args:
@@ -201,7 +199,7 @@ def get_relative_path(path: Union[str, Path], base: Union[str, Path]) -> Path:
         return path_norm.relative_to(base_norm)
     except ValueError:
         raise InvalidPathError(
-            f"Path is not relative to base",
+            "Path is not relative to base",
             {
                 "path": str(path_norm),
                 "base": str(base_norm)
@@ -209,7 +207,7 @@ def get_relative_path(path: Union[str, Path], base: Union[str, Path]) -> Path:
         )
 
 
-def validate_directory_not_empty(path: Union[str, Path]) -> Path:
+def validate_directory_not_empty(path: str | Path) -> Path:
     """Validate that a directory exists and is not empty.
 
     Args:
@@ -233,7 +231,7 @@ def validate_directory_not_empty(path: Union[str, Path]) -> Path:
     return normalized
 
 
-def is_hidden_path(path: Union[str, Path]) -> bool:
+def is_hidden_path(path: str | Path) -> bool:
     """Check if a path or any of its parents are hidden.
 
     Hidden paths start with '.' (Unix convention).
@@ -300,7 +298,7 @@ def sanitize_filename(filename: str, replacement: str = "_") -> str:
     return sanitized
 
 
-def get_file_size_mb(path: Union[str, Path]) -> float:
+def get_file_size_mb(path: str | Path) -> float:
     """Get file size in megabytes.
 
     Args:
@@ -317,7 +315,7 @@ def get_file_size_mb(path: Union[str, Path]) -> float:
     return size_bytes / (1024 * 1024)
 
 
-def get_directory_size_mb(path: Union[str, Path]) -> float:
+def get_directory_size_mb(path: str | Path) -> float:
     """Get total size of directory contents in megabytes.
 
     Recursively sums all file sizes in directory.

@@ -151,5 +151,5 @@ def config() -> None:
     console.print()
 
     console.print("[dim]Configuration loaded from:[/dim]")
-    console.print(f"[dim]  ~/.config/ragged/config.yml (if exists)[/dim]")
-    console.print(f"[dim]  Environment variables (RAGGED_*)[/dim]")
+    console.print("[dim]  ~/.config/ragged/config.yml (if exists)[/dim]")
+    console.print("[dim]  Environment variables (RAGGED_*)[/dim]")

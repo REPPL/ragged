@@ -3,7 +3,7 @@
 import json
 import logging
 from pathlib import Path
-from typing import Any, List, Optional
+from typing import Any
 
 import numpy as np
 
@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 class FewShotExampleStore:
     """Store and retrieve few-shot examples."""
 
-    def __init__(self, storage_path: Optional[Path] = None, embedder: Any = None):
+    def __init__(self, storage_path: Path | None = None, embedder: Any = None):
         """Initialise example store.
 
         Args:
@@ -26,15 +26,15 @@ class FewShotExampleStore:
         """
         self.storage_path = storage_path or Path("data/few_shot_examples.json")
         self.embedder = embedder
-        self.examples: List[FewShotExample] = []
-        self.example_embeddings: List[np.ndarray] = []  # Query embeddings for examples
+        self.examples: list[FewShotExample] = []
+        self.example_embeddings: list[np.ndarray] = []  # Query embeddings for examples
         self._load_examples()
 
     def _load_examples(self) -> None:
         """Load examples from storage."""
         if self.storage_path.exists():
             try:
-                with open(self.storage_path, 'r') as f:
+                with open(self.storage_path) as f:
                     data = json.load(f)
                     self.examples = [
                         FewShotExample.from_dict(ex) for ex in data
@@ -86,8 +86,8 @@ class FewShotExampleStore:
         query: str,
         context: str,
         answer: str,
-        category: Optional[str] = None,
-        tags: Optional[List[str]] = None
+        category: str | None = None,
+        tags: list[str] | None = None
     ) -> FewShotExample:
         """Add a new example.
 
@@ -125,7 +125,7 @@ class FewShotExampleStore:
         logger.info(f"Added new example (total: {len(self.examples)})")
         return example
 
-    def get_all_examples(self) -> List[FewShotExample]:
+    def get_all_examples(self) -> list[FewShotExample]:
         """Get all examples.
 
         Returns:
@@ -133,7 +133,7 @@ class FewShotExampleStore:
         """
         return self.examples
 
-    def get_by_category(self, category: str) -> List[FewShotExample]:
+    def get_by_category(self, category: str) -> list[FewShotExample]:
         """Get examples by category.
 
         Args:
@@ -144,7 +144,7 @@ class FewShotExampleStore:
         """
         return [ex for ex in self.examples if ex.category == category]
 
-    def get_by_tags(self, tags: List[str]) -> List[FewShotExample]:
+    def get_by_tags(self, tags: list[str]) -> list[FewShotExample]:
         """Get examples matching any of the given tags.
 
         Args:
@@ -162,8 +162,8 @@ class FewShotExampleStore:
         self,
         query: str,
         top_k: int = 3,
-        category: Optional[str] = None
-    ) -> List[FewShotExample]:
+        category: str | None = None
+    ) -> list[FewShotExample]:
         """Search for similar examples using semantic similarity.
 
         Uses embedding-based cosine similarity if embedder available,
@@ -197,10 +197,10 @@ class FewShotExampleStore:
     def _search_by_embedding(
         self,
         query: str,
-        candidates: List[FewShotExample],
+        candidates: list[FewShotExample],
         top_k: int,
-        category: Optional[str] = None
-    ) -> List[FewShotExample]:
+        category: str | None = None
+    ) -> list[FewShotExample]:
         """Search using embedding-based cosine similarity.
 
         Args:
@@ -249,9 +249,9 @@ class FewShotExampleStore:
     def _search_by_keywords(
         self,
         query: str,
-        candidates: List[FewShotExample],
+        candidates: list[FewShotExample],
         top_k: int
-    ) -> List[FewShotExample]:
+    ) -> list[FewShotExample]:
         """Search using keyword matching (fallback).
 
         Args:

@@ -1,7 +1,8 @@
 """Pydantic models for API requests and responses."""
 
+from typing import Literal
+
 from pydantic import BaseModel, Field
-from typing import List, Optional, Literal
 
 
 class QueryRequest(BaseModel):
@@ -31,9 +32,9 @@ class QueryResponse(BaseModel):
     """Response model for query endpoint (non-streaming)."""
 
     answer: str
-    sources: List[Source]
+    sources: list[Source]
     retrieval_method: str
-    total_time: Optional[float] = None
+    total_time: float | None = None
 
 
 class UploadResponse(BaseModel):
@@ -42,7 +43,7 @@ class UploadResponse(BaseModel):
     filename: str
     size: int
     status: str
-    message: Optional[str] = None
+    message: str | None = None
 
 
 class HealthResponse(BaseModel):
@@ -57,5 +58,5 @@ class ErrorResponse(BaseModel):
     """Error response model."""
 
     error: str
-    detail: Optional[str] = None
+    detail: str | None = None
     status_code: int

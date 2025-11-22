@@ -3,12 +3,13 @@
 v0.2.9: Enhanced health checks for proactive issue detection.
 """
 
-import psutil  # type: ignore[import-untyped]
 import time
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
-from typing import Optional, List, Dict, Any
+from typing import Any
+
+import psutil  # type: ignore[import-untyped]
 
 from src.config.settings import get_settings
 from src.utils.logging import get_logger
@@ -32,9 +33,9 @@ class HealthCheckResult:
     name: str
     status: HealthStatus
     message: str
-    details: Optional[Dict[str, Any]] = None
+    details: dict[str, Any] | None = None
     duration_ms: float = 0.0
-    error: Optional[str] = None
+    error: str | None = None
 
     def is_healthy(self) -> bool:
         """Check if result is healthy.
@@ -362,8 +363,8 @@ class HealthChecker:
             Health check result
         """
         try:
-            from src.storage.vector_store import VectorStore
             from src.embeddings.factory import get_embedder
+            from src.storage.vector_store import VectorStore
 
             store = VectorStore()
 
@@ -528,7 +529,7 @@ class HealthChecker:
                 error=str(e),
             )
 
-    def run_basic_checks(self) -> List[HealthCheckResult]:
+    def run_basic_checks(self) -> list[HealthCheckResult]:
         """Run basic health checks.
 
         Returns:
@@ -543,7 +544,7 @@ class HealthChecker:
             self.check_cache_status(),
         ]
 
-    def run_deep_checks(self) -> List[HealthCheckResult]:
+    def run_deep_checks(self) -> list[HealthCheckResult]:
         """Run deep diagnostic checks.
 
         Returns:
@@ -555,7 +556,7 @@ class HealthChecker:
             self.check_network_latency(),
         ]
 
-    def run_all_checks(self, deep: bool = False) -> List[HealthCheckResult]:
+    def run_all_checks(self, deep: bool = False) -> list[HealthCheckResult]:
         """Run all health checks.
 
         Args:

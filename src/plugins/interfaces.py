@@ -5,9 +5,8 @@ functionality: Embedder, Retriever, Processor, and Command plugins.
 """
 
 from abc import ABC, abstractmethod
-from typing import List, Dict, Any, Optional
 from dataclasses import dataclass
-from pathlib import Path
+from typing import Any
 
 
 @dataclass
@@ -20,8 +19,8 @@ class PluginMetadata:
     description: str
     plugin_type: str  # "embedder", "retriever", "processor", "command"
     entry_point: str  # e.g., "my_plugin.embedder:CustomEmbedder"
-    dependencies: List[str] = None
-    config_schema: Optional[Dict[str, Any]] = None
+    dependencies: list[str] = None
+    config_schema: dict[str, Any] | None = None
 
     def __post_init__(self):
         """Initialise default dependencies."""
@@ -32,14 +31,14 @@ class PluginMetadata:
 class Plugin(ABC):
     """Base class for all plugins."""
 
-    def __init__(self, config: Optional[Dict[str, Any]] = None):
+    def __init__(self, config: dict[str, Any] | None = None):
         """Initialise plugin with optional configuration.
 
         Args:
             config: Plugin-specific configuration
         """
         self.config = config or {}
-        self._metadata: Optional[PluginMetadata] = None
+        self._metadata: PluginMetadata | None = None
 
     @abstractmethod
     def get_metadata(self) -> PluginMetadata:
@@ -73,7 +72,7 @@ class EmbedderPlugin(Plugin):
     """Plugin for custom embedding models."""
 
     @abstractmethod
-    def embed_text(self, text: str) -> List[float]:
+    def embed_text(self, text: str) -> list[float]:
         """Generate embedding for text.
 
         Args:
@@ -85,7 +84,7 @@ class EmbedderPlugin(Plugin):
         pass
 
     @abstractmethod
-    def embed_batch(self, texts: List[str]) -> List[List[float]]:
+    def embed_batch(self, texts: list[str]) -> list[list[float]]:
         """Generate embeddings for batch of texts.
 
         Args:
@@ -114,8 +113,8 @@ class RetrieverPlugin(Plugin):
         self,
         query: str,
         n_results: int = 10,
-        filters: Optional[Dict[str, Any]] = None,
-    ) -> List[Dict[str, Any]]:
+        filters: dict[str, Any] | None = None,
+    ) -> list[dict[str, Any]]:
         """Retrieve documents for a query.
 
         Args:
@@ -132,9 +131,9 @@ class RetrieverPlugin(Plugin):
     def rerank(
         self,
         query: str,
-        documents: List[Dict[str, Any]],
+        documents: list[dict[str, Any]],
         n_results: int = 10,
-    ) -> List[Dict[str, Any]]:
+    ) -> list[dict[str, Any]]:
         """Rerank retrieved documents.
 
         Args:
@@ -152,7 +151,7 @@ class ProcessorPlugin(Plugin):
     """Plugin for custom document processors."""
 
     @abstractmethod
-    def process(self, document: Dict[str, Any]) -> Dict[str, Any]:
+    def process(self, document: dict[str, Any]) -> dict[str, Any]:
         """Process a document.
 
         Args:
@@ -164,7 +163,7 @@ class ProcessorPlugin(Plugin):
         pass
 
     @abstractmethod
-    def process_batch(self, documents: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    def process_batch(self, documents: list[dict[str, Any]]) -> list[dict[str, Any]]:
         """Process a batch of documents.
 
         Args:
@@ -210,7 +209,7 @@ class CommandPlugin(Plugin):
         pass
 
     @abstractmethod
-    def execute(self, args: List[str], context: Dict[str, Any]) -> int:
+    def execute(self, args: list[str], context: dict[str, Any]) -> int:
         """Execute the command.
 
         Args:

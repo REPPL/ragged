@@ -27,8 +27,8 @@ from src.processing.base import (
     ProcessorError,
 )
 from src.processing.factory import ProcessorFactory
-from src.processing.metrics import ProcessingMetrics, RoutingMetric, MetricsSummary
-from src.processing.quality_assessor import QualityAssessment, QualityAssessor, PageQuality
+from src.processing.metrics import MetricsSummary, ProcessingMetrics, RoutingMetric
+from src.processing.quality_assessor import PageQuality, QualityAssessment, QualityAssessor
 from src.processing.router import ProcessingRoute, ProcessorRouter, RouterConfig
 
 __all__ = [

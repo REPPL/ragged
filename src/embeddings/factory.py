@@ -8,7 +8,6 @@ for 4-30x performance improvement (v0.2.9).
 
 import threading
 from collections import OrderedDict
-from typing import Dict, Optional
 
 from src.config.settings import EmbeddingModel, get_settings
 from src.embeddings.base import BaseEmbedder
@@ -27,8 +26,8 @@ _max_cache_size = 3  # Maximum number of models to cache (LRU eviction)
 
 
 def create_embedder(
-    model_type: Optional[EmbeddingModel] = None,
-    model_name: Optional[str] = None,
+    model_type: EmbeddingModel | None = None,
+    model_name: str | None = None,
 ) -> BaseEmbedder:
     """
     Create an embedder instance based on configuration.
@@ -75,8 +74,8 @@ def create_embedder(
 
 
 def get_embedder(
-    model_type: Optional[EmbeddingModel] = None,
-    model_name: Optional[str] = None
+    model_type: EmbeddingModel | None = None,
+    model_name: str | None = None
 ) -> BaseEmbedder:
     """
     Get a cached embedder instance (singleton pattern).
@@ -157,7 +156,7 @@ def clear_embedder_cache() -> int:
         return count
 
 
-def get_cache_stats() -> Dict[str, any]:
+def get_cache_stats() -> dict[str, any]:
     """
     Get embedder cache statistics.
 

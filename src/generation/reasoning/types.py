@@ -6,7 +6,7 @@ v0.3.7b: Transparent reasoning process with validation.
 
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import List, Optional, Dict, Any
+from typing import Any
 
 
 class ReasoningMode(Enum):
@@ -39,7 +39,7 @@ class ReasoningStep:
     thought: str
     action: str  # "understand", "retrieve", "analyze", "synthesize", "conclude"
     confidence: float = 1.0  # 0.0-1.0
-    evidence: List[int] = field(default_factory=list)  # Citation indices
+    evidence: list[int] = field(default_factory=list)  # Citation indices
 
 
 @dataclass
@@ -58,7 +58,7 @@ class ValidationFlag:
     type: str  # "contradiction", "uncertainty", "assumption", "low_confidence"
     description: str
     severity: str  # "low", "medium", "high"
-    step_numbers: List[int] = field(default_factory=list)
+    step_numbers: list[int] = field(default_factory=list)
 
 
 @dataclass
@@ -92,13 +92,13 @@ class ReasonedResponse:
         ... )
     """
     answer: str
-    citations: List[str]
-    reasoning_steps: List[ReasoningStep]
-    validation_flags: List[ValidationFlag]
+    citations: list[str]
+    reasoning_steps: list[ReasoningStep]
+    validation_flags: list[ValidationFlag]
     overall_confidence: float
     mode: ReasoningMode
     raw_response: str
-    metadata: Dict[str, Any] = field(default_factory=dict)
+    metadata: dict[str, Any] = field(default_factory=dict)
 
     def has_critical_issues(self) -> bool:
         """Check if response has high-severity validation issues.
@@ -108,7 +108,7 @@ class ReasonedResponse:
         """
         return any(flag.severity == "high" for flag in self.validation_flags)
 
-    def get_step_by_action(self, action: str) -> Optional[ReasoningStep]:
+    def get_step_by_action(self, action: str) -> ReasoningStep | None:
         """Get first reasoning step matching the specified action.
 
         Args:

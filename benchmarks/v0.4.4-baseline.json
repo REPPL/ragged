@@ -1,0 +1,57 @@
+{
+  "version": "0.4.4",
+  "timestamp": "2025-11-22 21:42:44",
+  "benchmarks": {
+    "startup": {
+      "time_sec": -1.0,
+      "target_sec": 2.0,
+      "passes": false
+    },
+    "memory": {
+      "current_bytes": 0,
+      "peak_bytes": 0,
+      "current_mb": 0.0,
+      "peak_mb": 0.0
+    },
+    "ingestion": {
+      "1_docs": {
+        "num_docs": 1,
+        "total_time_sec": 0.0,
+        "avg_time_per_doc_sec": 0.0,
+        "docs_per_min": 0.0
+      },
+      "10_docs": {
+        "num_docs": 10,
+        "total_time_sec": 0.0,
+        "avg_time_per_doc_sec": 0.0,
+        "docs_per_min": 0.0
+      },
+      "100_docs": {
+        "num_docs": 100,
+        "total_time_sec": 0.0,
+        "avg_time_per_doc_sec": 0.0,
+        "docs_per_min": 0.0
+      }
+    },
+    "query": {
+      "simple": {
+        "query": "what is machine learning",
+        "iterations": 10,
+        "latencies_ms": [],
+        "p50_ms": 0.0,
+        "p95_ms": 0.0,
+        "p99_ms": 0.0,
+        "mean_ms": 0.0
+      },
+      "complex": {
+        "query": "explain neural networks with examples",
+        "iterations": 5,
+        "latencies_ms": [],
+        "p50_ms": 0.0,
+        "p95_ms": 0.0,
+        "p99_ms": 0.0,
+        "mean_ms": 0.0
+      }
+    }
+  }
+}

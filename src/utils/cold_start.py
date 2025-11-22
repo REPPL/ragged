@@ -6,8 +6,8 @@ v0.2.9: Reduce cold start time through pooling, lazy init, and parallelization.
 import asyncio
 import threading
 import time
-from typing import Optional, List, Callable, Any
-from pathlib import Path
+from collections.abc import Callable
+from typing import Any, Optional
 
 from src.utils.logging import get_logger
 
@@ -39,7 +39,7 @@ class ChromaDBConnectionPool:
             pool_size: Maximum number of pooled connections
         """
         self.pool_size = pool_size
-        self.connections: List[Any] = []
+        self.connections: list[Any] = []
         self.in_use: set = set()
         self._pool_lock = threading.Lock()
 
@@ -200,7 +200,7 @@ class LazyLoader:
             self._instance = None
 
 
-async def parallel_init(*init_functions: Callable[[], Any]) -> List[Any]:
+async def parallel_init(*init_functions: Callable[[], Any]) -> list[Any]:
     """Initialize components in parallel.
 
     Args:
@@ -364,7 +364,7 @@ class ColdStartOptimizer:
 
 
 # Singleton accessor
-_optimizer: Optional[ColdStartOptimizer] = None
+_optimizer: ColdStartOptimizer | None = None
 _optimizer_lock = threading.Lock()
 
 

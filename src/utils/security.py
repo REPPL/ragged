@@ -7,7 +7,6 @@ like path traversal, file size attacks, and malicious content.
 
 import os
 from pathlib import Path
-from typing import Optional
 
 from src.config.settings import get_settings
 
@@ -18,7 +17,7 @@ class SecurityError(Exception):
     pass
 
 
-def validate_file_path(file_path: Path, allowed_base: Optional[Path] = None) -> Path:
+def validate_file_path(file_path: Path, allowed_base: Path | None = None) -> Path:
     """
     Validate a file path to prevent path traversal attacks.
 
@@ -60,7 +59,7 @@ def validate_file_path(file_path: Path, allowed_base: Optional[Path] = None) -> 
     return resolved
 
 
-def validate_file_size(file_path: Path, max_size_mb: Optional[int] = None) -> int:
+def validate_file_size(file_path: Path, max_size_mb: int | None = None) -> int:
     """
     Validate file size to prevent resource exhaustion.
 
@@ -96,7 +95,7 @@ def validate_file_size(file_path: Path, max_size_mb: Optional[int] = None) -> in
     return file_size
 
 
-def validate_mime_type(file_path: Path, expected_types: Optional[list[str]] = None) -> str:
+def validate_mime_type(file_path: Path, expected_types: list[str] | None = None) -> str:
     """
     Validate file MIME type based on content (magic bytes) not just extension.
 

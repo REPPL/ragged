@@ -5,12 +5,12 @@ Automated security checks for plugins before execution.
 SECURITY FIX (HIGH-1): Added strict manifest validation
 """
 
+import logging
+import re
 from dataclasses import dataclass
 from enum import Enum
-from typing import List, Optional, Dict, Set
 from pathlib import Path
-import re
-import logging
+
 import toml
 
 logger = logging.getLogger(__name__)
@@ -40,9 +40,9 @@ class ValidationIssue:
 
     severity: ValidationSeverity
     message: str
-    file: Optional[str] = None
-    line: Optional[int] = None
-    code: Optional[str] = None
+    file: str | None = None
+    line: int | None = None
+    code: str | None = None
 
 
 @dataclass
@@ -50,7 +50,7 @@ class ValidationResult:
     """Result of plugin validation."""
 
     passed: bool
-    issues: List[ValidationIssue]
+    issues: list[ValidationIssue]
     score: float = 0.0  # 0.0 to 1.0
 
     def has_critical(self) -> bool:
@@ -92,7 +92,7 @@ class PluginValidator:
         Returns:
             ValidationResult with any issues found
         """
-        issues: List[ValidationIssue] = []
+        issues: list[ValidationIssue] = []
 
         # Check plugin structure
         if not plugin_path.is_dir():
@@ -130,7 +130,7 @@ class PluginValidator:
 
         return ValidationResult(passed=passed, issues=issues, score=score)
 
-    def _scan_file(self, file_path: Path) -> List[ValidationIssue]:
+    def _scan_file(self, file_path: Path) -> list[ValidationIssue]:
         """Scan a Python file for dangerous patterns.
 
         Args:
@@ -139,7 +139,7 @@ class PluginValidator:
         Returns:
             List of validation issues found
         """
-        issues: List[ValidationIssue] = []
+        issues: list[ValidationIssue] = []
 
         try:
             content = file_path.read_text()
@@ -170,7 +170,7 @@ class PluginValidator:
 
         return issues
 
-    def _calculate_score(self, issues: List[ValidationIssue]) -> float:
+    def _calculate_score(self, issues: list[ValidationIssue]) -> float:
         """Calculate validation score based on issues.
 
         Args:
@@ -206,7 +206,7 @@ class PluginValidator:
         Returns:
             ValidationResult with any issues found
         """
-        issues: List[ValidationIssue] = []
+        issues: list[ValidationIssue] = []
 
         # Check manifest exists
         if not manifest_path.exists():
@@ -386,7 +386,7 @@ class PluginValidator:
 
         return ValidationResult(passed=passed, issues=issues, score=score)
 
-    def validate_permissions(self, requested: List[str], manifest: Dict) -> ValidationResult:
+    def validate_permissions(self, requested: list[str], manifest: dict) -> ValidationResult:
         """Validate that requested permissions match manifest.
 
         Args:
@@ -396,7 +396,7 @@ class PluginValidator:
         Returns:
             ValidationResult indicating if permissions are valid
         """
-        issues: List[ValidationIssue] = []
+        issues: list[ValidationIssue] = []
 
         # Check if manifest declares permissions
         if "permissions" not in manifest:

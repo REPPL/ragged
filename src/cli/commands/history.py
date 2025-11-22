@@ -11,7 +11,7 @@ import shutil
 import sys
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 import click
 
@@ -27,7 +27,7 @@ logger = get_logger(__name__)
 class QueryHistory:
     """Manages query history storage and retrieval."""
 
-    def __init__(self, history_file: Optional[Path] = None):
+    def __init__(self, history_file: Path | None = None):
         """Initialise query history manager.
 
         Args:
@@ -47,7 +47,7 @@ class QueryHistory:
             self.history_file.parent.mkdir(parents=True, exist_ok=True)
             self._save_history([])
 
-    def _load_history(self) -> List[Dict[str, Any]]:
+    def _load_history(self) -> list[dict[str, Any]]:
         """Load history from encrypted file.
 
         Returns:
@@ -79,7 +79,7 @@ class QueryHistory:
             # Try legacy plaintext migration
             return self._migrate_plaintext_history()
 
-    def _save_history(self, history: List[Dict[str, Any]]) -> None:
+    def _save_history(self, history: list[dict[str, Any]]) -> None:
         """Save history to encrypted file.
 
         Args:
@@ -104,7 +104,7 @@ class QueryHistory:
 
         logger.debug(f"Saved encrypted history: {len(history)} entries")
 
-    def _migrate_plaintext_history(self) -> List[Dict[str, Any]]:
+    def _migrate_plaintext_history(self) -> list[dict[str, Any]]:
         """One-time migration from plaintext to encrypted history.
 
         Returns:
@@ -118,7 +118,7 @@ class QueryHistory:
         if self.history_file.exists():
             try:
                 # Try reading as plaintext
-                with open(self.history_file, "r", encoding="utf-8") as f:
+                with open(self.history_file, encoding="utf-8") as f:
                     history = json.load(f)
 
                 logger.warning("Migrating plaintext history to encrypted format")
@@ -143,8 +143,8 @@ class QueryHistory:
         self,
         query: str,
         top_k: int = 5,
-        answer: Optional[str] = None,
-        sources: Optional[List[str]] = None,
+        answer: str | None = None,
+        sources: list[str] | None = None,
     ) -> None:
         """Add a query to history.
 
@@ -171,9 +171,9 @@ class QueryHistory:
 
     def get_history(
         self,
-        limit: Optional[int] = None,
-        search: Optional[str] = None,
-    ) -> List[Dict[str, Any]]:
+        limit: int | None = None,
+        search: str | None = None,
+    ) -> list[dict[str, Any]]:
         """Get query history with optional filtering.
 
         Args:
@@ -201,7 +201,7 @@ class QueryHistory:
 
         return history
 
-    def get_query_by_id(self, query_id: int) -> Optional[Dict[str, Any]]:
+    def get_query_by_id(self, query_id: int) -> dict[str, Any] | None:
         """Get a specific query by ID.
 
         Args:
@@ -272,8 +272,8 @@ def history() -> None:
     help="Output format",
 )
 def list_history(
-    limit: Optional[int],
-    search: Optional[str],
+    limit: int | None,
+    search: str | None,
     output_format: str,
 ) -> None:
     """List query history.
@@ -327,7 +327,7 @@ def list_history(
         sys.exit(1)
 
 
-def _print_text_history(entries: List[Dict[str, Any]]) -> None:
+def _print_text_history(entries: list[dict[str, Any]]) -> None:
     """Print history in text format."""
     console.print(f"\n[bold]Query History ({len(entries)} entries)[/bold]\n")
 
@@ -413,7 +413,7 @@ def show_history(query_id: int, output_format: str) -> None:
     type=int,
     help="Override number of results (uses original if not specified)",
 )
-def replay_query(query_id: int, top_k: Optional[int]) -> None:
+def replay_query(query_id: int, top_k: int | None) -> None:
     """Replay a query from history.
 
     \\b

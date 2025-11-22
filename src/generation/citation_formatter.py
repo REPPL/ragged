@@ -9,12 +9,12 @@ v0.3.7c: Enhanced citations with quotes, confidence scores, and chunk IDs.
 
 import re
 from pathlib import Path
-from typing import List, Optional, Dict, Any
+from typing import Any
 
 from src.retrieval.retriever import RetrievedChunk
 
 
-def extract_citation_numbers(text: str) -> List[int]:
+def extract_citation_numbers(text: str) -> list[int]:
     """
     Extract citation numbers from text (e.g., [1], [2], [3]).
 
@@ -36,8 +36,8 @@ def extract_citation_numbers(text: str) -> List[int]:
 
 def format_ieee_reference(
     title: str,
-    page: Optional[int] = None,
-    page_range: Optional[str] = None,
+    page: int | None = None,
+    page_range: str | None = None,
     file_path: str = ""
 ) -> str:
     """
@@ -72,8 +72,8 @@ def format_ieee_reference(
 
 
 def format_reference_list(
-    chunks: List[RetrievedChunk],
-    cited_numbers: Optional[List[int]] = None
+    chunks: list[RetrievedChunk],
+    cited_numbers: list[int] | None = None
 ) -> str:
     """
     Format a list of chunks as IEEE-style numbered references.
@@ -123,7 +123,7 @@ def format_reference_list(
 
 def format_response_with_references(
     response_text: str,
-    chunks: List[RetrievedChunk],
+    chunks: list[RetrievedChunk],
     show_file_path: bool = True,
     include_unused_refs: bool = False
 ) -> str:
@@ -172,7 +172,7 @@ def extract_quote_from_chunk(
     chunk: RetrievedChunk,
     max_length: int = 200,
     context_words: int = 5
-) -> Optional[str]:
+) -> str | None:
     """
     Extract a representative quote from a chunk.
 
@@ -261,8 +261,8 @@ def format_enhanced_citation(
 
 
 def format_enhanced_reference_list(
-    chunks: List[RetrievedChunk],
-    cited_numbers: Optional[List[int]] = None,
+    chunks: list[RetrievedChunk],
+    cited_numbers: list[int] | None = None,
     include_quotes: bool = True,
     include_confidence: bool = True,
     confidence_threshold: float = 0.0
@@ -317,7 +317,7 @@ def format_enhanced_reference_list(
 
 def format_response_with_enhanced_citations(
     response_text: str,
-    chunks: List[RetrievedChunk],
+    chunks: list[RetrievedChunk],
     include_quotes: bool = True,
     include_confidence: bool = True,
     confidence_threshold: float = 0.3,
@@ -368,7 +368,7 @@ def format_response_with_enhanced_citations(
     return formatted
 
 
-def deduplicate_citations(citations: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+def deduplicate_citations(citations: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """
     Deduplicate citations based on source and page.
 

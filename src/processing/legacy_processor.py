@@ -8,7 +8,6 @@ like layout analysis or table structure preservation.
 
 import time
 from pathlib import Path
-from typing import Dict
 
 from src.processing.base import BaseProcessor, ProcessedDocument, ProcessorConfig, ProcessorError
 from src.utils.logging import get_logger
@@ -161,7 +160,7 @@ class LegacyProcessor(BaseProcessor):
         """
         return file_path.suffix.lower() == ".pdf"
 
-    def get_capabilities(self) -> Dict[str, bool]:
+    def get_capabilities(self) -> dict[str, bool]:
         """
         Get capabilities of the legacy processor.
 

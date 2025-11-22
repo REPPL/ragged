@@ -7,11 +7,9 @@ sentences.
 """
 
 import re
-from typing import List, Optional
 
 import numpy as np
 
-from src.chunking.token_counter import count_tokens
 from src.config.settings import get_settings
 from src.utils.logging import get_logger
 
@@ -80,7 +78,7 @@ class SemanticChunker:
             logger.error(f"Failed to load sentence model: {e}", exc_info=True)
             raise
 
-    def split_text(self, text: str) -> List[str]:
+    def split_text(self, text: str) -> list[str]:
         """
         Split text into semantic chunks.
 
@@ -139,7 +137,7 @@ class SemanticChunker:
             logger.error(f"Semantic chunking failed: {e}", exc_info=True)
             return self._fallback_split(text)
 
-    def _split_sentences(self, text: str) -> List[str]:
+    def _split_sentences(self, text: str) -> list[str]:
         """
         Split text into sentences.
 
@@ -156,7 +154,7 @@ class SemanticChunker:
         sentences = [s.strip() for s in sentences if s.strip()]
         return sentences
 
-    def _calculate_similarities(self, embeddings: np.ndarray) -> List[float]:
+    def _calculate_similarities(self, embeddings: np.ndarray) -> list[float]:
         """
         Calculate cosine similarity between consecutive sentence embeddings.
 
@@ -177,7 +175,7 @@ class SemanticChunker:
 
         return similarities
 
-    def _identify_boundaries(self, similarities: List[float]) -> List[int]:
+    def _identify_boundaries(self, similarities: list[float]) -> list[int]:
         """
         Identify topic boundaries based on similarity drops.
 
@@ -196,7 +194,7 @@ class SemanticChunker:
 
         return boundaries
 
-    def _create_chunks(self, sentences: List[str], boundaries: List[int]) -> List[str]:
+    def _create_chunks(self, sentences: list[str], boundaries: list[int]) -> list[str]:
         """
         Create chunks from sentences and boundaries.
 
@@ -229,7 +227,7 @@ class SemanticChunker:
 
         return chunks
 
-    def _validate_chunks(self, chunks: List[str]) -> List[str]:
+    def _validate_chunks(self, chunks: list[str]) -> list[str]:
         """
         Validate chunk sizes and split/merge as needed.
 
@@ -264,7 +262,7 @@ class SemanticChunker:
 
         return validated
 
-    def _split_large_chunk(self, chunk: str) -> List[str]:
+    def _split_large_chunk(self, chunk: str) -> list[str]:
         """
         Split a too-large chunk into smaller pieces.
 
@@ -294,7 +292,7 @@ class SemanticChunker:
 
         return sub_chunks
 
-    def _fallback_split(self, text: str) -> List[str]:
+    def _fallback_split(self, text: str) -> list[str]:
         """
         Fallback to simple splitting if semantic chunking fails.
 

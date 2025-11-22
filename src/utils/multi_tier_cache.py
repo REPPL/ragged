@@ -9,18 +9,19 @@ Tiers:
 - L3: Retrieved results cache (comprehensive, existing QueryCache)
 """
 
-from typing import Optional, Any, Dict, List, Tuple
-from pathlib import Path
+import threading
 from collections import OrderedDict
 from dataclasses import dataclass, field
 from datetime import datetime
-import threading
+from pathlib import Path
+from typing import Any
+
 import numpy as np
 
+from src.retrieval.cache import QueryCache
 from src.utils.hashing import hash_content
 from src.utils.logging import get_logger
-from src.retrieval.cache import QueryCache
-from src.utils.serialization import save_json, load_json, numpy_array_to_list, list_to_numpy_array
+from src.utils.serialization import list_to_numpy_array, load_json, numpy_array_to_list, save_json
 
 logger = get_logger(__name__)
 
@@ -67,7 +68,7 @@ class L1QueryEmbeddingCache:
 
         logger.info(f"Initialized L1 query embedding cache (maxsize={maxsize})")
 
-    def get(self, query: str) -> Optional[np.ndarray]:
+    def get(self, query: str) -> np.ndarray | None:
         """Get cached query embedding.
 
         Args:
@@ -131,7 +132,7 @@ class L1QueryEmbeddingCache:
             self._misses = 0
             logger.info(f"Cleared L1 cache ({count} entries)")
 
-    def stats(self) -> Dict[str, Any]:
+    def stats(self) -> dict[str, Any]:
         """Get cache statistics.
 
         Returns:
@@ -189,7 +190,7 @@ class L2DocumentEmbeddingCache:
 
         # Disk index tracking all entries (v0.2.10: migrated from .pkl to .json)
         self._index_path = self.cache_dir / "l2_index.json"
-        self._index: OrderedDict[str, Dict[str, Any]] = self._load_index()
+        self._index: OrderedDict[str, dict[str, Any]] = self._load_index()
 
         self._lock = threading.RLock()
         self._hits = 0
@@ -287,7 +288,7 @@ class L2DocumentEmbeddingCache:
         }
         save_json(data, cache_path)
 
-    def get(self, doc_id: str) -> Optional[np.ndarray]:
+    def get(self, doc_id: str) -> np.ndarray | None:
         """Get cached document embedding.
 
         Args:
@@ -452,7 +453,7 @@ class L2DocumentEmbeddingCache:
 
             logger.info(f"Cleared L2 cache ({count} entries)")
 
-    def stats(self) -> Dict[str, Any]:
+    def stats(self) -> dict[str, Any]:
         """Get cache statistics.
 
         Returns:
@@ -518,9 +519,9 @@ class MultiTierCache:
         self.cache_dir.mkdir(parents=True, exist_ok=True)
 
         # Initialize tiers
-        self.l1: Optional[L1QueryEmbeddingCache] = None
-        self.l2: Optional[L2DocumentEmbeddingCache] = None
-        self.l3: Optional[QueryCache] = None
+        self.l1: L1QueryEmbeddingCache | None = None
+        self.l2: L2DocumentEmbeddingCache | None = None
+        self.l3: QueryCache | None = None
 
         if enable_l1:
             try:
@@ -552,7 +553,7 @@ class MultiTierCache:
         )
 
     # L1 operations
-    def get_query_embedding(self, query: str) -> Optional[np.ndarray]:
+    def get_query_embedding(self, query: str) -> np.ndarray | None:
         """Get cached query embedding from L1.
 
         Args:
@@ -577,7 +578,7 @@ class MultiTierCache:
             self.l1.set(query, embedding)
 
     # L2 operations
-    def get_document_embedding(self, doc_id: str) -> Optional[np.ndarray]:
+    def get_document_embedding(self, doc_id: str) -> np.ndarray | None:
         """Get cached document embedding from L2.
 
         Args:
@@ -608,7 +609,7 @@ class MultiTierCache:
         collection: str = "default",
         method: str = "hybrid",
         top_k: int = 5
-    ) -> Optional[Any]:
+    ) -> Any | None:
         """Get cached query result from L3.
 
         Args:
@@ -709,7 +710,7 @@ class MultiTierCache:
 
         logger.info("Cleared all cache tiers")
 
-    def get_stats(self) -> Dict[str, Any]:
+    def get_stats(self) -> dict[str, Any]:
         """Get unified statistics across all tiers.
 
         Returns:

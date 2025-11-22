@@ -9,14 +9,14 @@ Features:
 - Adaptive adjustment of batch sizes, cache sizes, worker pools
 """
 
-from typing import Dict, Any, Optional, Literal
+import os
+import threading
+from collections import deque
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
-import threading
-import time
+from typing import Any, Literal
+
 import psutil
-import os
-from collections import deque
 
 from src.utils.logging import get_logger
 
@@ -33,7 +33,7 @@ class HardwareCapabilities:
     cpu_count: int
     total_memory_gb: float
     available_memory_gb: float
-    disk_io_speed_mbps: Optional[float] = None  # Estimated
+    disk_io_speed_mbps: float | None = None  # Estimated
     has_gpu: bool = False
 
     def get_recommended_workers(self) -> int:
@@ -186,7 +186,7 @@ class TuningRecommendations:
     chunk_size: int = 512
     chunk_overlap: int = 50
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary."""
         return {
             "mode": self.mode,
@@ -237,11 +237,11 @@ class AdaptiveTuner:
         self.workload = WorkloadProfile()
 
         # Current recommendations
-        self._recommendations: Optional[TuningRecommendations] = None
+        self._recommendations: TuningRecommendations | None = None
         self._recommendations_lock = threading.RLock()
 
         # Background monitoring
-        self._monitoring_thread: Optional[threading.Thread] = None
+        self._monitoring_thread: threading.Thread | None = None
         self._stop_monitoring = threading.Event()
 
         logger.info(
@@ -367,7 +367,7 @@ class AdaptiveTuner:
 
         return recommendations
 
-    def get_recommendations(self) -> Optional[TuningRecommendations]:
+    def get_recommendations(self) -> TuningRecommendations | None:
         """Get current tuning recommendations.
 
         Returns:
@@ -451,7 +451,7 @@ class AdaptiveTuner:
 
         logger.info("Stopped adaptive tuning monitor")
 
-    def get_stats(self) -> Dict[str, Any]:
+    def get_stats(self) -> dict[str, Any]:
         """Get tuning statistics and current state.
 
         Returns:
@@ -484,7 +484,7 @@ class AdaptiveTuner:
 
 
 # Singleton instance
-_tuner: Optional[AdaptiveTuner] = None
+_tuner: AdaptiveTuner | None = None
 _tuner_lock = threading.Lock()
 
 

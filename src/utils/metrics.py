@@ -3,12 +3,13 @@
 v0.2.9: Unified metrics collection for monitoring and dashboards.
 """
 
-import psutil  # type: ignore[import-untyped]
-import time
 import threading
-from typing import Dict, Any, Optional, List
-from dataclasses import dataclass, field
+import time
 from collections import deque
+from dataclasses import dataclass
+from typing import Any, Optional
+
+import psutil  # type: ignore[import-untyped]
 
 from src.utils.logging import get_logger
 
@@ -20,7 +21,7 @@ class MetricSnapshot:
     """Snapshot of metrics at a point in time."""
 
     timestamp: float
-    metrics: Dict[str, Any]
+    metrics: dict[str, Any]
 
 
 class MetricsCollector:
@@ -51,9 +52,9 @@ class MetricsCollector:
         self.history: deque = deque(maxlen=history_size)
 
         # Metric counters
-        self.counters: Dict[str, int] = {}
-        self.gauges: Dict[str, float] = {}
-        self.timers: Dict[str, List[float]] = {}
+        self.counters: dict[str, int] = {}
+        self.gauges: dict[str, float] = {}
+        self.timers: dict[str, list[float]] = {}
 
         # Locks for thread safety
         self._counters_lock = threading.Lock()
@@ -117,7 +118,7 @@ class MetricsCollector:
             if len(self.timers[name]) > 100:
                 self.timers[name] = self.timers[name][-100:]
 
-    def collect_system_metrics(self) -> Dict[str, Any]:
+    def collect_system_metrics(self) -> dict[str, Any]:
         """Collect system resource metrics.
 
         Returns:
@@ -136,7 +137,7 @@ class MetricsCollector:
             "disk_free_gb": disk.free / (1024 ** 3),
         }
 
-    def collect_application_metrics(self) -> Dict[str, Any]:
+    def collect_application_metrics(self) -> dict[str, Any]:
         """Collect application-specific metrics.
 
         Returns:
@@ -198,7 +199,7 @@ class MetricsCollector:
 
         return metrics
 
-    def collect_metrics(self) -> Dict[str, Any]:
+    def collect_metrics(self) -> dict[str, Any]:
         """Collect all metrics.
 
         Returns:
@@ -219,7 +220,7 @@ class MetricsCollector:
 
         return metrics
 
-    def get_history(self, duration_seconds: Optional[float] = None) -> List[MetricSnapshot]:
+    def get_history(self, duration_seconds: float | None = None) -> list[MetricSnapshot]:
         """Get historical metrics.
 
         Args:
@@ -237,7 +238,7 @@ class MetricsCollector:
             if snapshot.timestamp >= cutoff_time
         ]
 
-    def get_metric_trend(self, metric_name: str, duration_seconds: float = 60.0) -> List[float]:
+    def get_metric_trend(self, metric_name: str, duration_seconds: float = 60.0) -> list[float]:
         """Get trend for a specific metric.
 
         Args:

@@ -6,7 +6,7 @@ Displays system and environment information for bug reports and troubleshooting.
 import platform
 import sys
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any
 
 import httpx
 
@@ -79,9 +79,9 @@ def env_info(format: str, copy: bool) -> None:
         console.print(output)
 
 
-def _gather_environment_info() -> Dict[str, Any]:
+def _gather_environment_info() -> dict[str, Any]:
     """Gather all environment information."""
-    info: Dict[str, Any] = {}
+    info: dict[str, Any] = {}
 
     # Ragged version
     info["ragged_version"] = __version__
@@ -132,7 +132,7 @@ def _gather_environment_info() -> Dict[str, Any]:
     return info
 
 
-def _get_package_versions() -> Dict[str, str]:
+def _get_package_versions() -> dict[str, str]:
     """Get versions of key installed packages."""
     packages = {}
     key_packages = [
@@ -162,7 +162,7 @@ def _get_package_versions() -> Dict[str, str]:
     return packages
 
 
-def _check_ollama_status() -> Dict[str, Any]:
+def _check_ollama_status() -> dict[str, Any]:
     """Check Ollama service status."""
     try:
         settings = get_settings()
@@ -187,7 +187,7 @@ def _check_ollama_status() -> Dict[str, Any]:
         return {"status": f"error: {e}"}
 
 
-def _check_storage() -> Dict[str, Any]:
+def _check_storage() -> dict[str, Any]:
     """Check storage space for data directories."""
     import shutil
 
@@ -215,7 +215,7 @@ def _check_storage() -> Dict[str, Any]:
     return storage
 
 
-def _format_text(info: Dict[str, Any]) -> str:
+def _format_text(info: dict[str, Any]) -> str:
     """Format information as plain text."""
     lines = []
 
@@ -289,14 +289,14 @@ def _format_text(info: Dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
-def _format_json(info: Dict[str, Any]) -> str:
+def _format_json(info: dict[str, Any]) -> str:
     """Format information as JSON."""
     import json
 
     return json.dumps(info, indent=2)
 
 
-def _format_markdown(info: Dict[str, Any]) -> str:
+def _format_markdown(info: dict[str, Any]) -> str:
     """Format information as Markdown for GitHub issues."""
     lines = []
 

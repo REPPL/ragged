@@ -7,7 +7,6 @@ Rationale: Answers are semantically closer to document chunks than questions.
 
 import hashlib
 from dataclasses import dataclass
-from typing import Any, List, Optional
 
 from src.config.settings import get_settings
 from src.generation.ollama_client import OllamaClient
@@ -59,7 +58,7 @@ class HyDEGenerator:
 
     def __init__(
         self,
-        ollama_client: Optional[OllamaClient] = None,
+        ollama_client: OllamaClient | None = None,
         enable_caching: bool = True,
         confidence_threshold: float = 0.5,
     ):

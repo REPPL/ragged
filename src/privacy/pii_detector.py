@@ -9,7 +9,6 @@ Prevents PII leakage through logs, metrics, and debug output.
 import hashlib
 import logging
 import re
-from typing import List, Optional, Tuple
 
 logger = logging.getLogger(__name__)
 
@@ -48,7 +47,7 @@ class PIIDetector:
         "date_of_birth": re.compile(r"\b\d{1,2}/\d{1,2}/\d{4}\b"),  # DOB: MM/DD/YYYY
     }
 
-    def detect(self, text: str) -> List[Tuple[str, str]]:
+    def detect(self, text: str) -> list[tuple[str, str]]:
         """Detect PII in text.
 
         Args:
@@ -149,7 +148,7 @@ class PIIRedactor:
             >>> hash2 = redactor.hash_for_logging("sensitive query")
             >>> assert hash1 == hash2  # Same query = same hash
         """
-        salted = f"{salt}:{text}".encode("utf-8")
+        salted = f"{salt}:{text}".encode()
         hash_digest = hashlib.sha256(salted).hexdigest()
 
         # Return first 16 chars for readability
@@ -157,8 +156,8 @@ class PIIRedactor:
 
 
 # Global instances (singleton pattern)
-_pii_detector: Optional[PIIDetector] = None
-_pii_redactor: Optional[PIIRedactor] = None
+_pii_detector: PIIDetector | None = None
+_pii_redactor: PIIRedactor | None = None
 
 
 def get_pii_detector() -> PIIDetector:
@@ -196,7 +195,7 @@ def get_pii_redactor() -> PIIRedactor:
 
 
 # Convenience functions
-def detect_pii(text: str) -> List[Tuple[str, str]]:
+def detect_pii(text: str) -> list[tuple[str, str]]:
     """Detect PII in text (convenience function).
 
     Args:

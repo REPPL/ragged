@@ -6,7 +6,6 @@ respecting ignore patterns and security constraints.
 
 import fnmatch
 from pathlib import Path
-from typing import List, Optional, Set
 
 from src.utils.logging import get_logger
 
@@ -37,8 +36,8 @@ class DocumentScanner:
     def __init__(
         self,
         follow_symlinks: bool = False,
-        max_depth: Optional[int] = None,
-        ignore_patterns: Optional[Set[str]] = None,
+        max_depth: int | None = None,
+        ignore_patterns: set[str] | None = None,
     ):
         """Initialize document scanner.
 
@@ -51,7 +50,7 @@ class DocumentScanner:
         self.max_depth = max_depth
         self.ignore_patterns = ignore_patterns or DEFAULT_IGNORE_PATTERNS
 
-    def scan(self, path: Path) -> List[Path]:
+    def scan(self, path: Path) -> list[Path]:
         """
         Recursively scan directory for supported documents.
 
@@ -81,14 +80,14 @@ class DocumentScanner:
             raise ValueError(f"Path is not a file or directory: {path}")
 
         # Directory - scan recursively
-        documents: List[Path] = []
+        documents: list[Path] = []
         self._scan_recursive(path, depth=0, results=documents)
 
         # Return sorted for deterministic order
         return sorted(documents)
 
     def _scan_recursive(
-        self, dir_path: Path, depth: int, results: List[Path]
+        self, dir_path: Path, depth: int, results: list[Path]
     ) -> None:
         """Recursive directory traversal.
 

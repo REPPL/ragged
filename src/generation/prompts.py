@@ -4,11 +4,9 @@ Prompt templates for RAG generation.
 Provides prompt engineering templates for answer generation with citations.
 """
 
-from typing import List, Optional
 
-from src.retrieval.retriever import RetrievedChunk
 from src.generation.few_shot import FewShotExampleStore, format_few_shot_prompt
-
+from src.retrieval.retriever import RetrievedChunk
 
 RAG_SYSTEM_PROMPT = """You are a helpful assistant that answers questions based on provided context.
 
@@ -32,7 +30,7 @@ Format your citations like this:
 """
 
 
-def build_rag_prompt(query: str, chunks: List[RetrievedChunk]) -> str:
+def build_rag_prompt(query: str, chunks: list[RetrievedChunk]) -> str:
     """
     Build a RAG prompt from query and retrieved chunks.
 
@@ -77,8 +75,8 @@ Answer:"""
 
 def build_few_shot_prompt(
     query: str,
-    chunks: List[RetrievedChunk],
-    example_store: Optional[FewShotExampleStore] = None,
+    chunks: list[RetrievedChunk],
+    example_store: FewShotExampleStore | None = None,
     num_examples: int = 3
 ) -> str:
     """Build a RAG prompt with few-shot examples.
@@ -124,7 +122,7 @@ Answer:"""
 
 def build_contextual_prompt(
     query: str,
-    chunks: List[RetrievedChunk],
+    chunks: list[RetrievedChunk],
     use_compression: bool = False
 ) -> str:
     """Build a RAG prompt with contextual chunks.

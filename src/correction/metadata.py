@@ -4,7 +4,7 @@ v0.3.5: Generates JSON metadata files documenting corrections and quality.
 """
 
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from src.correction.schemas import AnalysisResult, CorrectionResult, IssueType
@@ -189,7 +189,7 @@ class MetadataGenerator:
             Path to generated file.
         """
         uncertainties = {
-            "generated_at": datetime.now(timezone.utc).isoformat(),
+            "generated_at": datetime.now(UTC).isoformat(),
             "total_uncertain_pages": len(quality_issues),
             "pages": [
                 {

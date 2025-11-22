@@ -4,7 +4,7 @@ import sys
 
 import click
 
-from src.cli.common import console, TableType
+from src.cli.common import console
 from src.cli.formatters import FORMAT_CHOICES, print_formatted
 from src.utils.logging import get_logger
 

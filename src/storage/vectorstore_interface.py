@@ -9,7 +9,7 @@ v0.3.6: Initial abstraction layer for multi-backend support.
 """
 
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 import numpy as np
 
@@ -41,10 +41,10 @@ class VectorStore(ABC):
     @abstractmethod
     def add(
         self,
-        ids: List[str],
+        ids: list[str],
         embeddings: np.ndarray,
-        documents: List[str],
-        metadatas: List[Dict[str, Any]],
+        documents: list[str],
+        metadatas: list[dict[str, Any]],
     ) -> None:
         """
         Add documents with their embeddings to the vector store.
@@ -73,8 +73,8 @@ class VectorStore(ABC):
         self,
         query_embedding: np.ndarray,
         k: int = 5,
-        where: Optional[Dict[str, Any]] = None,
-    ) -> Dict[str, Any]:
+        where: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
         """
         Query the vector store for similar documents.
 
@@ -104,8 +104,8 @@ class VectorStore(ABC):
     @abstractmethod
     def delete(
         self,
-        ids: Optional[List[str]] = None,
-        where: Optional[Dict[str, Any]] = None,
+        ids: list[str] | None = None,
+        where: dict[str, Any] | None = None,
     ) -> None:
         """
         Delete documents from the vector store.
@@ -132,8 +132,8 @@ class VectorStore(ABC):
     @abstractmethod
     def update_metadata(
         self,
-        ids: List[str],
-        metadatas: List[Dict[str, Any]],
+        ids: list[str],
+        metadatas: list[dict[str, Any]],
     ) -> None:
         """
         Update metadata for existing documents.
@@ -160,8 +160,8 @@ class VectorStore(ABC):
     @abstractmethod
     def get_documents_by_metadata(
         self,
-        where: Dict[str, Any]
-    ) -> Dict[str, Any]:
+        where: dict[str, Any]
+    ) -> dict[str, Any]:
         """
         Retrieve documents matching a metadata filter.
 
@@ -191,8 +191,8 @@ class VectorStore(ABC):
         self,
         limit: int = 100,
         offset: int = 0,
-        where: Optional[Dict[str, Any]] = None,
-    ) -> Dict[str, Any]:
+        where: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
         """
         List documents with pagination support.
 
@@ -247,7 +247,7 @@ class VectorStore(ABC):
         pass
 
     @abstractmethod
-    def get_collection_info(self) -> Dict[str, Any]:
+    def get_collection_info(self) -> dict[str, Any]:
         """
         Get information about the vector store collection.
 

@@ -7,7 +7,6 @@ context quality for LLM generation.
 
 import re
 from dataclasses import dataclass
-from typing import List, Optional, Tuple
 
 import numpy as np
 
@@ -96,8 +95,8 @@ class ContextualCompressor:
     def compress(
         self,
         query: str,
-        chunks: List[RetrievedChunk],
-    ) -> Tuple[List[RetrievedChunk], CompressionResult]:
+        chunks: list[RetrievedChunk],
+    ) -> tuple[list[RetrievedChunk], CompressionResult]:
         """
         Compress chunks by extracting relevant sentences.
 
@@ -208,7 +207,7 @@ class ContextualCompressor:
                 sentences_extracted=0,
             )
 
-    def _split_sentences(self, text: str) -> List[str]:
+    def _split_sentences(self, text: str) -> list[str]:
         """
         Split text into sentences.
 
@@ -228,7 +227,7 @@ class ContextualCompressor:
     def _score_sentences(
         self,
         query_embedding: np.ndarray,
-        sentences: List[str],
+        sentences: list[str],
     ) -> np.ndarray:
         """
         Score sentences by relevance to query.
@@ -260,7 +259,7 @@ class ContextualCompressor:
         self,
         scores: np.ndarray,
         target_ratio: float,
-    ) -> List[int]:
+    ) -> list[int]:
         """
         Select most relevant sentences.
 
@@ -295,9 +294,9 @@ class ContextualCompressor:
 
     def _add_context(
         self,
-        selected_indices: List[int],
+        selected_indices: list[int],
         total_sentences: int,
-    ) -> List[int]:
+    ) -> list[int]:
         """
         Add surrounding sentences for coherence.
 
@@ -325,8 +324,8 @@ class ContextualCompressor:
 
     def _reconstruct_text(
         self,
-        sentences: List[str],
-        selected_indices: List[int],
+        sentences: list[str],
+        selected_indices: list[int],
     ) -> str:
         """
         Reconstruct text from selected sentences.

@@ -6,7 +6,7 @@ making ragged approachable for users who don't want to manually tune parameters.
 """
 
 from dataclasses import dataclass
-from typing import Dict, TYPE_CHECKING
+from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from src.config.config_manager import RaggedConfig
@@ -32,7 +32,7 @@ class PersonaManager:
     """Manage configuration personas."""
 
     # Built-in personas
-    PERSONAS: Dict[str, PersonaConfig] = {
+    PERSONAS: dict[str, PersonaConfig] = {
         "accuracy": PersonaConfig(
             name="accuracy",
             description="Maximum quality, slower responses",
@@ -114,7 +114,7 @@ class PersonaManager:
         return cls.PERSONAS[name]
 
     @classmethod
-    def list_personas(cls) -> Dict[str, str]:
+    def list_personas(cls) -> dict[str, str]:
         """
         List all personas with descriptions.
 

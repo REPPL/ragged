@@ -4,15 +4,12 @@ v0.2.9: Real-time metrics monitoring.
 """
 
 import time
-from typing import Optional
 
 import click
-from rich.live import Live
-from rich.table import Table
-from rich.console import Console
 from rich.layout import Layout
+from rich.live import Live
 from rich.panel import Panel
-from rich.progress import Progress, SpinnerColumn, TextColumn
+from rich.table import Table
 
 from src.cli.common import console
 from src.utils.metrics import get_metrics_collector
@@ -155,7 +152,7 @@ def create_dashboard(metrics: dict) -> Layout:
 @click.option("--interval", "-i", default=1.0, help="Refresh interval in seconds")
 @click.option("--duration", "-d", type=int, help="Duration to run in seconds (default: run forever)")
 @click.option("--prometheus", is_flag=True, help="Export Prometheus metrics instead of dashboard")
-def monitor(interval: float, duration: Optional[int], prometheus: bool) -> None:
+def monitor(interval: float, duration: int | None, prometheus: bool) -> None:
     """Live performance monitoring dashboard.
 
     Displays real-time metrics including:
@@ -200,4 +197,3 @@ def monitor(interval: float, duration: Optional[int], prometheus: bool) -> None:
 
 
 # Import fix for Optional
-from typing import Optional

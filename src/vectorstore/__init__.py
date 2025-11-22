@@ -10,16 +10,16 @@ Platform-aware backend selection:
 Version: 0.4.3
 """
 
-from ragged.vectorstore.interface import VectorStore, VectorStoreDocument, VectorStoreQueryResult
-from ragged.vectorstore.factory import VectorStoreFactory, VectorStoreType
 from ragged.vectorstore.exceptions import (
+    VectorStoreConnectionError,
     VectorStoreError,
     VectorStoreNotFoundError,
-    VectorStoreConnectionError,
 )
+from ragged.vectorstore.factory import VectorStoreFactory, VectorStoreType
+from ragged.vectorstore.interface import VectorStore, VectorStoreDocument, VectorStoreQueryResult
 from ragged.vectorstore.platform import (
-    get_default_backend,
     detect_platform_backend_support,
+    get_default_backend,
     get_platform_info,
 )
 

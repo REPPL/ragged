@@ -12,9 +12,9 @@ few_shot submodule. All functionality has been split into logical modules:
 
 # Import all public components for backwards compatibility
 from src.generation.few_shot.models import FewShotExample
-from src.generation.few_shot.store import FewShotExampleStore
-from src.generation.few_shot.seeding import seed_default_examples
 from src.generation.few_shot.prompt import format_few_shot_prompt
+from src.generation.few_shot.seeding import seed_default_examples
+from src.generation.few_shot.store import FewShotExampleStore
 
 __all__ = [
     "FewShotExample",

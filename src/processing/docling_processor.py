@@ -7,7 +7,7 @@ processing with layout analysis, table extraction, and reading order preservatio
 
 import time
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from src.processing.base import BaseProcessor, ProcessedDocument, ProcessorConfig, ProcessorError
 from src.processing.model_manager import ModelManager
@@ -64,7 +64,7 @@ class DoclingProcessor(BaseProcessor):
         self.model_manager = ModelManager(config.model_cache_dir)
 
         # Pipeline is created lazily on first use
-        self._pipeline: Optional[Any] = None
+        self._pipeline: Any | None = None
 
         logger.debug("Docling processor initialised")
 
@@ -104,9 +104,9 @@ class DoclingProcessor(BaseProcessor):
         logger.info("Initialising Docling pipeline...")
 
         try:
-            from docling.document_converter import DocumentConverter, PdfFormatOption
             from docling.datamodel.base_models import InputFormat
             from docling.datamodel.pipeline_options import PdfPipelineOptions
+            from docling.document_converter import DocumentConverter, PdfFormatOption
 
             # Configure pipeline options
             pipeline_options = PdfPipelineOptions()
@@ -168,7 +168,8 @@ class DoclingProcessor(BaseProcessor):
 
         try:
             # Wrap processing in timeout using concurrent.futures
-            from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeoutError
+            from concurrent.futures import ThreadPoolExecutor
+            from concurrent.futures import TimeoutError as FuturesTimeoutError
 
             def _do_processing():
                 # Convert document using Docling
@@ -270,7 +271,7 @@ class DoclingProcessor(BaseProcessor):
         # Fallback: return original markdown
         return markdown
 
-    def _extract_tables(self, result: Any) -> List[Dict[str, Any]]:
+    def _extract_tables(self, result: Any) -> list[dict[str, Any]]:
         """
         Extract tables from Docling result.
 
@@ -301,7 +302,7 @@ class DoclingProcessor(BaseProcessor):
 
         return tables
 
-    def _table_to_rows(self, table: Any) -> List[List[str]]:
+    def _table_to_rows(self, table: Any) -> list[list[str]]:
         """
         Convert Docling table to row-major list of lists.
 
@@ -324,7 +325,7 @@ class DoclingProcessor(BaseProcessor):
             logger.debug(f"Failed to convert table to rows: {e}")
             return []
 
-    def _extract_table_headers(self, table: Any) -> List[str]:
+    def _extract_table_headers(self, table: Any) -> list[str]:
         """
         Extract table headers if available.
 
@@ -346,7 +347,7 @@ class DoclingProcessor(BaseProcessor):
             logger.debug(f"Failed to extract table headers: {e}")
             return []
 
-    def _extract_images(self, result: Any) -> List[Dict[str, Any]]:
+    def _extract_images(self, result: Any) -> list[dict[str, Any]]:
         """
         Extract images from Docling result.
 
@@ -378,7 +379,7 @@ class DoclingProcessor(BaseProcessor):
 
         return images
 
-    def _extract_metadata(self, result: Any, file_path: Path) -> Dict[str, Any]:
+    def _extract_metadata(self, result: Any, file_path: Path) -> dict[str, Any]:
         """
         Extract metadata from Docling result.
 
@@ -448,8 +449,8 @@ class DoclingProcessor(BaseProcessor):
         super().validate_file(file_path)
 
         # CRITICAL-001: Add file size validation
-        from src.utils.security import validate_file_size, SecurityError
         from src.config.settings import get_settings
+        from src.utils.security import SecurityError, validate_file_size
 
         settings = get_settings()
         try:
@@ -465,8 +466,8 @@ class DoclingProcessor(BaseProcessor):
             logger.debug(f"Validated MIME type: {mime_type} for {file_path.name}")
         except SecurityError as e:
             raise ValueError(
-                f"File does not appear to be a valid PDF (detected type issue). "
-                f"Please ensure you're uploading an actual PDF file, not a renamed file."
+                "File does not appear to be a valid PDF (detected type issue). "
+                "Please ensure you're uploading an actual PDF file, not a renamed file."
             ) from e
 
     def supports_file_type(self, file_path: Path) -> bool:
@@ -481,7 +482,7 @@ class DoclingProcessor(BaseProcessor):
         """
         return file_path.suffix.lower() == ".pdf"
 
-    def get_capabilities(self) -> Dict[str, bool]:
+    def get_capabilities(self) -> dict[str, bool]:
         """
         Get capabilities of the Docling processor.
 

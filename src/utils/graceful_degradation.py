@@ -3,9 +3,9 @@
 v0.2.9: Fallback strategies to maintain >99% service availability.
 """
 
-from typing import Any, Callable, Optional, List, TypeVar, Union
+from collections.abc import Callable
 from functools import wraps
-import traceback
+from typing import Any, TypeVar
 
 from src.utils.logging import get_logger
 
@@ -39,7 +39,7 @@ class FallbackStrategy:
     def __init__(
         self,
         primary: Callable[[], T],
-        fallbacks: List[Callable[[], T]],
+        fallbacks: list[Callable[[], T]],
         name: str = "operation"
     ):
         """Initialize fallback strategy.
@@ -95,7 +95,7 @@ class FallbackStrategy:
 
 
 def with_fallback(
-    fallback_func: Optional[Callable] = None,
+    fallback_func: Callable | None = None,
     fallback_value: Any = None,
     exceptions: tuple = (Exception,),
     log_level: str = "warning"
@@ -198,7 +198,7 @@ class DegradedMode:
         return mode in cls._active_modes
 
     @classmethod
-    def get_active_modes(cls) -> List[str]:
+    def get_active_modes(cls) -> list[str]:
         """Get list of currently active degraded modes.
 
         Returns:
@@ -263,13 +263,13 @@ class FallbackChain:
             name: Chain name for logging
         """
         self.name = name
-        self.strategies: List[Callable] = []
-        self.strategy_names: List[str] = []
+        self.strategies: list[Callable] = []
+        self.strategy_names: list[str] = []
 
     def add(
         self,
         func: Callable,
-        name: Optional[str] = None,
+        name: str | None = None,
         exceptions: tuple = (Exception,)
     ) -> 'FallbackChain':
         """Add a fallback strategy to the chain.
@@ -406,7 +406,7 @@ class CircuitBreaker:
         self.failure_threshold = failure_threshold
         self.recovery_timeout = recovery_timeout
         self.failure_count = 0
-        self.last_failure_time: Optional[float] = None
+        self.last_failure_time: float | None = None
         self.state = "CLOSED"  # CLOSED, OPEN, HALF_OPEN
 
     def is_open(self) -> bool:

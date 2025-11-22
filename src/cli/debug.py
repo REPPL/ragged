@@ -6,7 +6,7 @@ v0.3.8: Step-by-step execution visualisation for understanding RAG pipeline.
 
 import time
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from src.utils.logging import get_logger
 
@@ -18,9 +18,9 @@ class DebugStep:
     """A single debug step in the pipeline."""
 
     name: str
-    details: Dict[str, Any] = field(default_factory=dict)
+    details: dict[str, Any] = field(default_factory=dict)
     start_time: float = field(default_factory=time.time)
-    end_time: Optional[float] = None
+    end_time: float | None = None
 
     @property
     def duration_ms(self) -> float:
@@ -49,8 +49,8 @@ class DebugLogger:
             enabled: Whether debug logging is enabled
         """
         self.enabled = enabled
-        self.steps: List[DebugStep] = []
-        self._current_step: Optional[DebugStep] = None
+        self.steps: list[DebugStep] = []
+        self._current_step: DebugStep | None = None
 
     def start_step(self, name: str, **details: Any) -> None:
         """
@@ -183,7 +183,7 @@ class DebugLogger:
 
         return "\n".join(output)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """
         Convert debug log to dictionary for serialisation.
 

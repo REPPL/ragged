@@ -6,7 +6,7 @@ enabling swappable backends (SentenceTransformers, Ollama, etc.).
 """
 
 from abc import ABC, abstractmethod
-from typing import List, cast
+from typing import cast
 
 import numpy as np
 
@@ -35,7 +35,7 @@ class BaseEmbedder(ABC):
         pass
 
     @abstractmethod
-    def embed_batch(self, texts: List[str]) -> np.ndarray:
+    def embed_batch(self, texts: list[str]) -> np.ndarray:
         """
         Embed multiple text strings efficiently.
 

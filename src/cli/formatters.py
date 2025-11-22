@@ -6,7 +6,7 @@ Provides consistent formatting across different output formats (JSON, CSV, table
 import csv
 import io
 import json
-from typing import Any, Dict, List, Literal, Optional, Union
+from typing import Any, Literal
 
 from rich.console import Console
 from rich.table import Table
@@ -17,16 +17,16 @@ FormatType = Literal["json", "csv", "table", "markdown", "yaml"]
 class OutputFormatter:
     """Unified output formatter for CLI commands."""
 
-    def __init__(self, console: Optional[Console] = None):
+    def __init__(self, console: Console | None = None):
         """Initialize formatter with optional console."""
         self.console = console or Console()
 
     def format(
         self,
-        data: Union[List[Dict[str, Any]], Dict[str, Any]],
+        data: list[dict[str, Any]] | dict[str, Any],
         format_type: FormatType = "table",
-        columns: Optional[List[str]] = None,
-        title: Optional[str] = None,
+        columns: list[str] | None = None,
+        title: str | None = None,
     ) -> str:
         """Format data according to specified format type.
 
@@ -73,11 +73,11 @@ class OutputFormatter:
         else:
             return "No results found."
 
-    def _format_json(self, data: List[Dict[str, Any]]) -> str:
+    def _format_json(self, data: list[dict[str, Any]]) -> str:
         """Format as JSON."""
         return json.dumps(data, indent=2, default=str)
 
-    def _format_csv(self, data: List[Dict[str, Any]]) -> str:
+    def _format_csv(self, data: list[dict[str, Any]]) -> str:
         """Format as CSV."""
         if not data:
             return ""
@@ -92,7 +92,7 @@ class OutputFormatter:
 
         return output.getvalue()
 
-    def _format_table(self, data: List[Dict[str, Any]], title: Optional[str] = None) -> str:
+    def _format_table(self, data: list[dict[str, Any]], title: str | None = None) -> str:
         """Format as Rich table."""
         if not data:
             return "No results found."
@@ -114,7 +114,7 @@ class OutputFormatter:
 
         return capture.get()
 
-    def _format_markdown(self, data: List[Dict[str, Any]], title: Optional[str] = None) -> str:
+    def _format_markdown(self, data: list[dict[str, Any]], title: str | None = None) -> str:
         """Format as Markdown table."""
         if not data:
             return "_No results found._"
@@ -144,7 +144,7 @@ class OutputFormatter:
 
         return "\n".join(lines)
 
-    def _format_yaml(self, data: List[Dict[str, Any]]) -> str:
+    def _format_yaml(self, data: list[dict[str, Any]]) -> str:
         """Format as YAML."""
         try:
             import yaml
@@ -163,11 +163,11 @@ class OutputFormatter:
 
 
 def format_output(
-    data: Union[List[Dict[str, Any]], Dict[str, Any]],
+    data: list[dict[str, Any]] | dict[str, Any],
     format_type: FormatType = "table",
-    columns: Optional[List[str]] = None,
-    title: Optional[str] = None,
-    console: Optional[Console] = None,
+    columns: list[str] | None = None,
+    title: str | None = None,
+    console: Console | None = None,
 ) -> str:
     """Convenience function for formatting output.
 
@@ -186,11 +186,11 @@ def format_output(
 
 
 def print_formatted(
-    data: Union[List[Dict[str, Any]], Dict[str, Any]],
+    data: list[dict[str, Any]] | dict[str, Any],
     format_type: FormatType = "table",
-    columns: Optional[List[str]] = None,
-    title: Optional[str] = None,
-    console: Optional[Console] = None,
+    columns: list[str] | None = None,
+    title: str | None = None,
+    console: Console | None = None,
 ) -> None:
     """Format and print data to console.
 

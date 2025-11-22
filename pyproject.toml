@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ragged"
-version = "0.3.4b"
+version = "0.4.4"
 description = "Privacy-first local RAG system for document question-answering"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
@@ -63,6 +63,11 @@ dependencies = [
     "docling-parse>=2.0.0",  # MIT licence - document parsing utilities
     # v0.3.4b intelligent routing dependencies
     "opencv-python>=4.8.0",  # Apache 2.0 licence - image quality analysis
+    # v0.5.0 vision dependencies
+    "torch>=2.0.0",  # Apache 2.0 licence - PyTorch for vision models
+    "transformers>=4.35.0",  # Apache 2.0 licence - HuggingFace model loading
+    "Pillow>=10.0.0",  # PIL licence - image processing
+    "pdf2image>=1.16.3",  # MIT licence - PDF to image conversion
 ]
 
 [project.optional-dependencies]
@@ -110,6 +115,8 @@ extend-exclude = '''
 [tool.ruff]
 line-length = 100
 target-version = "py312"
+
+[tool.ruff.lint]
 select = [
     "E",    # pycodestyle errors
     "W",    # pycodestyle warnings
@@ -127,9 +134,7 @@ ignore = [
     "B008",  # do not perform function calls in argument defaults
     "S101",  # use of assert (allowed in tests)
 ]
-
-[tool.ruff.per-file-ignores]
-"tests/**/*.py" = ["S101", "ARG"]  # Allow assert in tests
+per-file-ignores = {"tests/**/*.py" = ["S101", "ARG"]}  # Allow assert in tests
 
 [tool.mypy]
 python_version = "3.12"
@@ -161,6 +166,10 @@ module = [
     "docling_core.*",
     "docling_parse.*",
     "cv2.*",
+    "torch.*",
+    "transformers.*",
+    "PIL.*",
+    "pdf2image.*",
 ]
 ignore_missing_imports = true
 

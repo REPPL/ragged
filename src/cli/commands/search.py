@@ -4,7 +4,7 @@ Provides powerful search and filtering across documents and chunks.
 """
 
 import sys
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 import click
 
@@ -57,10 +57,10 @@ logger = get_logger(__name__)
     help="Output format",
 )
 def search(
-    query: Optional[str],
-    document_path: Optional[str],
+    query: str | None,
+    document_path: str | None,
     metadata_filters: tuple,
-    min_score: Optional[float],
+    min_score: float | None,
     limit: int,
     show_content: bool,
     output_format: str,
@@ -108,7 +108,7 @@ def search(
         vector_store = VectorStore()
 
         # Build metadata filter
-        where_filter: Optional[Dict[str, Any]] = None
+        where_filter: dict[str, Any] | None = None
         if document_path or metadata_filters:
             where_filter = {}
 
@@ -143,7 +143,6 @@ def search(
                 )
             else:
                 # Use retriever for simpler search
-                from src.models.chunk import RetrievedChunk
 
                 chunks = retriever.retrieve(query, top_k=limit)
                 # Convert to results format
@@ -196,7 +195,7 @@ def search(
 
 
 def _print_text_results(
-    results: Dict[str, Any], show_content: bool, has_query: bool
+    results: dict[str, Any], show_content: bool, has_query: bool
 ) -> None:
     """Print results in text format."""
     count = len(results["ids"])
@@ -230,7 +229,7 @@ def _print_text_results(
 
 
 def _print_formatted_results(
-    results: Dict[str, Any], output_format: str, show_content: bool
+    results: dict[str, Any], output_format: str, show_content: bool
 ) -> None:
     """Print results in structured format (JSON, CSV, etc.)."""
     # Prepare data for formatting

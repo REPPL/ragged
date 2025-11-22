@@ -8,10 +8,11 @@ import os
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 import yaml
-from pydantic import BaseModel, Field, ValidationError as PydanticValidationError
+from pydantic import BaseModel, Field
+from pydantic import ValidationError as PydanticValidationError
 
 from src.utils.logging import get_logger
 
@@ -31,7 +32,7 @@ class ValidationIssue:
     level: str  # 'error' or 'warning'
     category: str  # 'syntax', 'schema', 'semantic', 'security'
     message: str
-    field: Optional[str] = None
+    field: str | None = None
 
 
 @dataclass
@@ -39,8 +40,8 @@ class ValidationResult:
     """Result of configuration validation."""
 
     valid: bool
-    errors: List[ValidationIssue] = field(default_factory=list)
-    warnings: List[ValidationIssue] = field(default_factory=list)
+    errors: list[ValidationIssue] = field(default_factory=list)
+    warnings: list[ValidationIssue] = field(default_factory=list)
 
     @property
     def error_count(self) -> int:
@@ -57,14 +58,14 @@ class ValidationResult:
         """Total number of issues."""
         return self.error_count + self.warning_count
 
-    def add_error(self, category: str, message: str, field: Optional[str] = None):
+    def add_error(self, category: str, message: str, field: str | None = None):
         """Add an error."""
         self.errors.append(
             ValidationIssue(level="error", category=category, message=message, field=field)
         )
         self.valid = False
 
-    def add_warning(self, category: str, message: str, field: Optional[str] = None):
+    def add_warning(self, category: str, message: str, field: str | None = None):
         """Add a warning."""
         self.warnings.append(
             ValidationIssue(level="warning", category=category, message=message, field=field)
@@ -98,9 +99,9 @@ class GenerationConfig(BaseModel):
 class RaggedConfig(BaseModel):
     """Full ragged configuration schema."""
 
-    chunking: Optional[ChunkingConfig] = None
-    retrieval: Optional[RetrievalConfig] = None
-    generation: Optional[GenerationConfig] = None
+    chunking: ChunkingConfig | None = None
+    retrieval: RetrievalConfig | None = None
+    generation: GenerationConfig | None = None
 
 
 class ConfigValidator:
@@ -161,7 +162,7 @@ class ConfigValidator:
 
     def _validate_yaml_syntax(
         self, config_path: Path, result: ValidationResult
-    ) -> Optional[Dict[str, Any]]:
+    ) -> dict[str, Any] | None:
         """
         Validate YAML syntax.
 
@@ -173,7 +174,7 @@ class ConfigValidator:
             Parsed config data or None if syntax error
         """
         try:
-            with open(config_path, "r") as f:
+            with open(config_path) as f:
                 config_data = yaml.safe_load(f)
 
             if config_data is None:
@@ -194,7 +195,7 @@ class ConfigValidator:
             result.add_error("syntax", f"Failed to read configuration: {e}")
             return None
 
-    def _validate_schema(self, config_data: Dict[str, Any], result: ValidationResult):
+    def _validate_schema(self, config_data: dict[str, Any], result: ValidationResult):
         """
         Validate configuration schema using Pydantic.
 
@@ -216,7 +217,7 @@ class ConfigValidator:
         except Exception as e:
             result.add_error("schema", f"Schema validation failed: {e}")
 
-    def _validate_semantics(self, config_data: Dict[str, Any], result: ValidationResult):
+    def _validate_semantics(self, config_data: dict[str, Any], result: ValidationResult):
         """
         Validate semantic rules (best practices).
 
@@ -284,7 +285,7 @@ class ConfigValidator:
         logger.debug("Semantic validation complete")
 
     def _validate_security(
-        self, config_path: Path, config_data: Dict[str, Any], result: ValidationResult
+        self, config_path: Path, config_data: dict[str, Any], result: ValidationResult
     ):
         """
         Validate security aspects.

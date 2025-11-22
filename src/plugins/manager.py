@@ -3,15 +3,15 @@
 Central registry and lifecycle management for all plugins.
 """
 
-from typing import Dict, List, Optional, Any
-from pathlib import Path
 import json
 import logging
+from pathlib import Path
+from typing import Any
 
-from ragged.plugins.interfaces import Plugin, PluginMetadata
+from ragged.plugins.audit import AuditLogger
+from ragged.plugins.interfaces import Plugin
 from ragged.plugins.loader import PluginLoader
 from ragged.plugins.permissions import PermissionManager
-from ragged.plugins.audit import AuditLogger
 
 logger = logging.getLogger(__name__)
 
@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 class PluginManager:
     """Manages plugin lifecycle and registry."""
 
-    def __init__(self, config_path: Optional[Path] = None):
+    def __init__(self, config_path: Path | None = None):
         """Initialise plugin manager.
 
         Args:
@@ -34,14 +34,14 @@ class PluginManager:
         self.permission_manager = PermissionManager()
         self.audit_logger = AuditLogger()
 
-        self._enabled_plugins: Dict[str, Dict[str, Any]] = {}
+        self._enabled_plugins: dict[str, dict[str, Any]] = {}
         self._load_config()
 
     def _load_config(self) -> None:
         """Load plugin configuration from storage."""
         if self.config_path.exists():
             try:
-                with open(self.config_path, "r") as f:
+                with open(self.config_path) as f:
                     data = json.load(f)
                     self._enabled_plugins = data.get("enabled_plugins", {})
                 logger.info(f"Loaded configuration for {len(self._enabled_plugins)} enabled plugins")
@@ -58,7 +58,7 @@ class PluginManager:
         except Exception as e:
             logger.error(f"Failed to save plugin configuration: {e}")
 
-    def list_available_plugins(self, plugin_type: Optional[str] = None) -> List[str]:
+    def list_available_plugins(self, plugin_type: str | None = None) -> list[str]:
         """List all available plugins.
 
         Args:
@@ -69,7 +69,7 @@ class PluginManager:
         """
         return self.loader.discover_plugins(plugin_type=plugin_type)
 
-    def list_enabled_plugins(self, plugin_type: Optional[str] = None) -> List[str]:
+    def list_enabled_plugins(self, plugin_type: str | None = None) -> list[str]:
         """List enabled plugins.
 
         Args:
@@ -85,7 +85,7 @@ class PluginManager:
             ]
         return list(self._enabled_plugins.keys())
 
-    def enable_plugin(self, plugin_name: str, config: Optional[Dict] = None) -> bool:
+    def enable_plugin(self, plugin_name: str, config: dict | None = None) -> bool:
         """Enable a plugin.
 
         Args:
@@ -144,7 +144,7 @@ class PluginManager:
                 return False
         return False
 
-    def get_plugin(self, plugin_name: str) -> Optional[Plugin]:
+    def get_plugin(self, plugin_name: str) -> Plugin | None:
         """Get a loaded plugin instance.
 
         Args:
@@ -156,7 +156,7 @@ class PluginManager:
         loaded = self.loader.get_loaded_plugins()
         return loaded.get(plugin_name)
 
-    def configure_plugin(self, plugin_name: str, config: Dict[str, Any]) -> bool:
+    def configure_plugin(self, plugin_name: str, config: dict[str, Any]) -> bool:
         """Update plugin configuration.
 
         Args:
@@ -180,7 +180,7 @@ class PluginManager:
                 return False
         return False
 
-    def get_plugins_by_type(self, plugin_type: str) -> Dict[str, Plugin]:
+    def get_plugins_by_type(self, plugin_type: str) -> dict[str, Plugin]:
         """Get all loaded plugins of a specific type.
 
         Args:

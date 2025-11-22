@@ -4,16 +4,16 @@ v0.2.9: Enhanced async processing with queue depth limits and dynamic scaling.
 """
 
 import asyncio
-import psutil  # type: ignore[import-untyped]
 import time
+from collections.abc import Callable
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
-from typing import List, Optional, Callable, Any, TypeVar, Generic
-from concurrent.futures import ThreadPoolExecutor
+from typing import Any, Generic, TypeVar
+
+import psutil  # type: ignore[import-untyped]
 
 from src.ingestion.async_processor import AsyncDocumentProcessor, ProcessingResult
-from src.ingestion.models import Document
 from src.utils.logging import get_logger
 
 logger = get_logger(__name__)
@@ -60,7 +60,7 @@ class BackpressureConfig:
         cpu_threshold_percent: float = 80.0,
         enable_dynamic_scaling: bool = True,
         min_workers: int = 2,
-        max_workers: Optional[int] = None,
+        max_workers: int | None = None,
     ):
         """Initialize backpressure configuration.
 
@@ -99,8 +99,8 @@ class AsyncProcessorWithBackpressure(AsyncDocumentProcessor):
 
     def __init__(
         self,
-        config: Optional[BackpressureConfig] = None,
-        max_workers: Optional[int] = None,
+        config: BackpressureConfig | None = None,
+        max_workers: int | None = None,
     ):
         """Initialize processor with backpressure.
 
@@ -213,7 +213,7 @@ class AsyncProcessorWithBackpressure(AsyncDocumentProcessor):
         self,
         task: Any,
         priority: TaskPriority = TaskPriority.NORMAL,
-        timeout: Optional[float] = None,
+        timeout: float | None = None,
     ) -> bool:
         """Enqueue task with priority.
 
@@ -244,7 +244,7 @@ class AsyncProcessorWithBackpressure(AsyncDocumentProcessor):
 
             return True
 
-        except asyncio.TimeoutError:
+        except TimeoutError:
             await self._update_stats(queue_full_count=1)
             logger.warning(
                 f"Queue full ({self.config.max_queue_depth}), "
@@ -254,11 +254,11 @@ class AsyncProcessorWithBackpressure(AsyncDocumentProcessor):
 
     async def process_with_backpressure(
         self,
-        items: List[Any],
+        items: list[Any],
         process_fn: Callable[[Any], Any],
         priority: TaskPriority = TaskPriority.NORMAL,
-        progress_callback: Optional[Callable[[int, int], None]] = None,
-    ) -> List[Any]:
+        progress_callback: Callable[[int, int], None] | None = None,
+    ) -> list[Any]:
         """Process items with backpressure control.
 
         Args:
@@ -313,7 +313,7 @@ class AsyncProcessorWithBackpressure(AsyncDocumentProcessor):
                                 completed = self.stats["tasks_completed"] + self.stats["tasks_failed"]
                                 progress_callback(completed, len(items))
 
-                except asyncio.TimeoutError:
+                except TimeoutError:
                     # No tasks available, check if done
                     if self.task_queue.empty() and len(results) >= len(items):
                         break
@@ -349,12 +349,12 @@ class AsyncProcessorWithBackpressure(AsyncDocumentProcessor):
 
     async def process_documents_with_backpressure(
         self,
-        file_paths: List[Path],
+        file_paths: list[Path],
         chunker: Any,
-        embed_fn: Optional[Callable[..., Any]] = None,
+        embed_fn: Callable[..., Any] | None = None,
         priority: TaskPriority = TaskPriority.NORMAL,
-        progress_callback: Optional[Callable[[int, int], None]] = None,
-    ) -> List[ProcessingResult]:
+        progress_callback: Callable[[int, int], None] | None = None,
+    ) -> list[ProcessingResult]:
         """Process documents with backpressure control.
 
         Args:
@@ -429,12 +429,12 @@ class AsyncProcessorWithBackpressure(AsyncDocumentProcessor):
 
 # Convenience function
 async def process_with_backpressure(
-    items: List[Any],
+    items: list[Any],
     process_fn: Callable[[Any], Any],
     max_queue_depth: int = 100,
     max_concurrent: int = 10,
     priority: TaskPriority = TaskPriority.NORMAL,
-) -> List[Any]:
+) -> list[Any]:
     """Process items with backpressure (convenience function).
 
     Args:

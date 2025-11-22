@@ -6,7 +6,6 @@ Breaks complex queries into sub-queries, retrieves for each, then merges results
 
 import hashlib
 from dataclasses import dataclass
-from typing import List, Optional, Tuple
 
 from src.config.settings import get_settings
 from src.generation.ollama_client import OllamaClient
@@ -58,7 +57,7 @@ class DecomposedQuery:
     """Result of query decomposition."""
 
     original_query: str
-    sub_queries: List[str]
+    sub_queries: list[str]
     was_decomposed: bool  # False if query was simple and not split
 
     def __repr__(self) -> str:
@@ -79,7 +78,7 @@ class QueryDecomposer:
 
     def __init__(
         self,
-        ollama_client: Optional[OllamaClient] = None,
+        ollama_client: OllamaClient | None = None,
         enable_caching: bool = True,
     ):
         """
@@ -171,7 +170,7 @@ class QueryDecomposer:
             )
             return result
 
-    def _decompose_with_llm(self, query: str) -> List[str]:
+    def _decompose_with_llm(self, query: str) -> list[str]:
         """
         Decompose query using LLM.
 

@@ -6,7 +6,7 @@ v0.3.3: Updated to support intelligent chunking strategies (semantic, hierarchic
 
 import re
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 from src.chunking.splitters.page_tracking import (
     build_page_position_map,
@@ -20,7 +20,7 @@ from src.utils.logging import get_logger
 logger = get_logger(__name__)
 
 
-def chunk_document(document: Document, splitter: Optional[Any] = None, strategy: str | None = None) -> Document:
+def chunk_document(document: Document, splitter: Any | None = None, strategy: str | None = None) -> Document:
     """
     Chunk a document and add chunk metadata with page tracking.
 

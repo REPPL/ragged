@@ -3,7 +3,7 @@
 Provides helpers for commands to respect --verbose, --debug, and --quiet flags.
 """
 
-from typing import Literal, Optional
+from typing import Literal
 
 import click
 from rich.console import Console
@@ -11,7 +11,7 @@ from rich.console import Console
 VerbosityLevel = Literal["quiet", "normal", "verbose", "debug"]
 
 
-def get_verbosity(ctx: Optional[click.Context] = None) -> VerbosityLevel:
+def get_verbosity(ctx: click.Context | None = None) -> VerbosityLevel:
     """Get current verbosity level from Click context.
 
     Args:
@@ -29,7 +29,7 @@ def get_verbosity(ctx: Optional[click.Context] = None) -> VerbosityLevel:
     return "normal"
 
 
-def is_quiet(ctx: Optional[click.Context] = None) -> bool:
+def is_quiet(ctx: click.Context | None = None) -> bool:
     """Check if quiet mode is enabled.
 
     Args:
@@ -47,7 +47,7 @@ def is_quiet(ctx: Optional[click.Context] = None) -> bool:
     return False
 
 
-def is_verbose(ctx: Optional[click.Context] = None) -> bool:
+def is_verbose(ctx: click.Context | None = None) -> bool:
     """Check if verbose mode is enabled.
 
     Args:
@@ -65,7 +65,7 @@ def is_verbose(ctx: Optional[click.Context] = None) -> bool:
     return False
 
 
-def is_debug(ctx: Optional[click.Context] = None) -> bool:
+def is_debug(ctx: click.Context | None = None) -> bool:
     """Check if debug mode is enabled.
 
     Args:
@@ -85,9 +85,9 @@ def is_debug(ctx: Optional[click.Context] = None) -> bool:
 
 def vprint(
     message: str,
-    console: Optional[Console] = None,
+    console: Console | None = None,
     min_verbosity: VerbosityLevel = "normal",
-    ctx: Optional[click.Context] = None,
+    ctx: click.Context | None = None,
     **kwargs: any,
 ) -> None:
     """Print message only if verbosity level is sufficient.
@@ -117,8 +117,8 @@ def vprint(
 
 def vprint_debug(
     message: str,
-    console: Optional[Console] = None,
-    ctx: Optional[click.Context] = None,
+    console: Console | None = None,
+    ctx: click.Context | None = None,
 ) -> None:
     """Print debug message (only shown with --debug).
 
@@ -132,8 +132,8 @@ def vprint_debug(
 
 def vprint_verbose(
     message: str,
-    console: Optional[Console] = None,
-    ctx: Optional[click.Context] = None,
+    console: Console | None = None,
+    ctx: click.Context | None = None,
 ) -> None:
     """Print verbose message (only shown with --verbose or --debug).
 
@@ -147,8 +147,8 @@ def vprint_verbose(
 
 def vprint_info(
     message: str,
-    console: Optional[Console] = None,
-    ctx: Optional[click.Context] = None,
+    console: Console | None = None,
+    ctx: click.Context | None = None,
 ) -> None:
     """Print info message (shown in normal, verbose, and debug modes).
 

@@ -4,11 +4,11 @@ Reasoning generator for chain-of-thought responses.
 v0.3.7b: Generate responses with transparent reasoning.
 """
 
-from typing import List, Optional, Any
+from typing import Any
 
-from src.generation.reasoning.types import ReasoningMode, ReasonedResponse
-from src.generation.reasoning.prompts import build_reasoning_prompt
 from src.generation.reasoning.parser import ReasoningParser
+from src.generation.reasoning.prompts import build_reasoning_prompt
+from src.generation.reasoning.types import ReasonedResponse, ReasoningMode
 from src.utils.logging import get_logger
 
 logger = get_logger(__name__)
@@ -57,7 +57,7 @@ class ReasoningGenerator:
     def generate_with_reasoning(
         self,
         query: str,
-        chunks: List[Any],
+        chunks: list[Any],
         confidence_threshold: float = 0.3
     ) -> ReasonedResponse:
         """
@@ -108,7 +108,7 @@ class ReasoningGenerator:
                 )
 
             logger.info(
-                f"Generated response with reasoning",
+                "Generated response with reasoning",
                 extra={
                     "mode": self.mode.value,
                     "steps": len(response.reasoning_steps),

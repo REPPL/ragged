@@ -3,15 +3,12 @@
 v0.2.9: Performance profiling tools integration.
 """
 
-import time
 import tracemalloc
 from pathlib import Path
-from typing import Optional
 
 import click
-from rich.console import Console
-from rich.table import Table
 from rich.panel import Panel
+from rich.table import Table
 
 from src.cli.common import console
 from src.utils.benchmarks import Benchmark, time_it
@@ -40,7 +37,7 @@ def benchmark():
 @click.option("--runs", "-n", default=10, help="Number of benchmark runs")
 @click.option("--warmup", "-w", default=3, help="Number of warmup runs")
 @click.option("--model", "-m", default=None, help="Specific model to benchmark")
-def bench_embedding_init(runs: int, warmup: int, model: Optional[str]):
+def bench_embedding_init(runs: int, warmup: int, model: str | None):
     """Benchmark embedder initialization time.
 
     Measures cold start performance of embedding model loading.
@@ -50,9 +47,9 @@ def bench_embedding_init(runs: int, warmup: int, model: Optional[str]):
         ragged benchmark embedding-init --runs 20 --warmup 5
         ragged benchmark embedding-init --model all-MiniLM-L6-v2
     """
-    from src.embeddings.factory import get_embedder, _reset_embedder_cache
+    from src.embeddings.factory import _reset_embedder_cache, get_embedder
 
-    console.print(f"\n[bold cyan]Benchmarking Embedder Initialization[/bold cyan]")
+    console.print("\n[bold cyan]Benchmarking Embedder Initialization[/bold cyan]")
     console.print(f"Runs: {runs}, Warmup: {warmup}")
     if model:
         console.print(f"Model: {model}")
@@ -103,7 +100,7 @@ def bench_batch_embed(size: int, runs: int, warmup: int):
     """
     from src.embeddings.factory import get_embedder
 
-    console.print(f"\n[bold cyan]Benchmarking Batch Embedding[/bold cyan]")
+    console.print("\n[bold cyan]Benchmarking Batch Embedding[/bold cyan]")
     console.print(f"Batch size: {size}, Runs: {runs}, Warmup: {warmup}")
     console.print()
 
@@ -146,7 +143,7 @@ def bench_batch_embed(size: int, runs: int, warmup: int):
 @benchmark.command("query")
 @click.option("--count", "-c", default=20, help="Number of queries to benchmark")
 @click.option("--collection", "-col", default=None, help="Collection to query")
-def bench_query(count: int, collection: Optional[str]):
+def bench_query(count: int, collection: str | None):
     """Benchmark query performance.
 
     Measures retrieval latency for typical queries.
@@ -157,7 +154,7 @@ def bench_query(count: int, collection: Optional[str]):
     """
     from src.retrieval.hybrid import HybridRetriever
 
-    console.print(f"\n[bold cyan]Benchmarking Query Performance[/bold cyan]")
+    console.print("\n[bold cyan]Benchmarking Query Performance[/bold cyan]")
     console.print(f"Queries: {count}")
     if collection:
         console.print(f"Collection: {collection}")
@@ -211,7 +208,7 @@ def bench_query(count: int, collection: Optional[str]):
 @click.argument("operation", type=click.Choice(["add", "query", "embed"]))
 @click.argument("target", required=False)
 @click.option("--detailed", "-d", is_flag=True, help="Show detailed memory breakdown")
-def profile_memory(operation: str, target: Optional[str], detailed: bool):
+def profile_memory(operation: str, target: str | None, detailed: bool):
     """Profile memory usage of operations.
 
     Measures memory allocation and peak usage for different operations.
@@ -322,7 +319,7 @@ def bench_all(quick: bool):
         ragged benchmark all
         ragged benchmark all --quick
     """
-    from src.embeddings.factory import get_embedder, _reset_embedder_cache
+    from src.embeddings.factory import _reset_embedder_cache, get_embedder
     from src.retrieval.hybrid import HybridRetriever
 
     runs = 5 if quick else 10

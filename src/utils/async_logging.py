@@ -6,10 +6,9 @@ v0.2.9: Non-blocking logging with sampling for high-frequency events.
 import logging
 import threading
 import time
-from logging.handlers import QueueHandler, QueueListener, RotatingFileHandler
-from queue import Queue, Full
-from typing import List, Optional, Dict
 from collections import defaultdict
+from logging.handlers import QueueHandler, QueueListener, RotatingFileHandler
+from queue import Queue
 
 from src.utils.logging import get_logger
 
@@ -100,7 +99,7 @@ class AdaptiveSamplingFilter(logging.Filter):
         self.max_sample_rate = max_sample_rate
 
         # Per-logger tracking
-        self.log_counts: Dict[str, List[tuple[float, int]]] = defaultdict(list)
+        self.log_counts: dict[str, list[tuple[float, int]]] = defaultdict(list)
         self._lock = threading.Lock()
 
     def _calculate_current_rate(self, logger_name: str) -> float:
@@ -200,7 +199,7 @@ class AsyncLogHandler:
 
     def __init__(
         self,
-        handlers: Optional[List[logging.Handler]] = None,
+        handlers: list[logging.Handler] | None = None,
         queue_maxsize: int = 10000,
         overflow_strategy: str = "drop",  # "drop" or "block"
     ):
@@ -242,7 +241,7 @@ class AsyncLogHandler:
         # Running state
         self.running = False
 
-    def _get_default_handlers(self) -> List[logging.Handler]:
+    def _get_default_handlers(self) -> list[logging.Handler]:
         """Get default handlers (console + rotating file).
 
         Returns:
@@ -250,6 +249,7 @@ class AsyncLogHandler:
         """
         import sys
         from pathlib import Path
+
         from src.utils.logging import CustomJsonFormatter, PrivacyFilter
 
         handlers = []
@@ -343,12 +343,12 @@ class AsyncLogHandler:
 
 
 # Global instance (optional singleton)
-_async_handler: Optional[AsyncLogHandler] = None
+_async_handler: AsyncLogHandler | None = None
 _handler_lock = threading.Lock()
 
 
 def get_async_handler(
-    handlers: Optional[List[logging.Handler]] = None,
+    handlers: list[logging.Handler] | None = None,
     queue_maxsize: int = 10000,
 ) -> AsyncLogHandler:
     """Get singleton async log handler.
@@ -379,7 +379,7 @@ def get_async_handler(
 
 def setup_async_logging(
     queue_maxsize: int = 10000,
-    sample_rate: Optional[int] = None,
+    sample_rate: int | None = None,
     adaptive_sampling: bool = False,
 ) -> AsyncLogHandler:
     """Setup async logging for the application.

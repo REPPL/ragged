@@ -11,26 +11,28 @@ v0.3.4b: Added intelligent routing with quality assessment.
 import mimetypes
 import time
 from pathlib import Path
-from typing import Optional, Tuple
 
 from src.config.settings import get_settings
 from src.ingestion.models import Document
-from src.processing import ProcessorConfig, ProcessorFactory
-from src.processing import ProcessorRouter, RouterConfig, ProcessingMetrics
+from src.processing import (
+    ProcessingMetrics,
+    ProcessorConfig,
+    ProcessorFactory,
+    ProcessorRouter,
+    RouterConfig,
+)
 from src.utils.logging import get_logger
 from src.utils.security import (
-    SecurityError,
     validate_file_path,
     validate_file_size,
-    validate_mime_type,
 )
 
 logger = get_logger(__name__)
 settings = get_settings()
 
 # Global router and metrics (lazily initialized)
-_router: Optional[ProcessorRouter] = None
-_metrics: Optional[ProcessingMetrics] = None
+_router: ProcessorRouter | None = None
+_metrics: ProcessingMetrics | None = None
 
 
 def _get_router() -> ProcessorRouter:
@@ -82,7 +84,7 @@ def _get_metrics() -> ProcessingMetrics:
 
 def load_document(
     file_path: Path,
-    format: Optional[str] = None,
+    format: str | None = None,
 ) -> Document:
     """
     Load a document from file, auto-detecting format if not specified.
@@ -168,8 +170,8 @@ def _detect_format(file_path: Path) -> str:
 
 def load_pdf(
     file_path: Path,
-    processor_type: Optional[str] = None,
-    use_routing: Optional[bool] = None,
+    processor_type: str | None = None,
+    use_routing: bool | None = None,
 ) -> Document:
     """
     Load PDF using the configured document processor.
@@ -294,7 +296,7 @@ def _load_pdf_with_routing(file_path: Path) -> Document:
 
 def _load_pdf_direct(
     file_path: Path,
-    processor_type: Optional[str] = None,
+    processor_type: str | None = None,
 ) -> Document:
     """
     Load PDF directly without routing (legacy behaviour).

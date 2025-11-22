@@ -11,12 +11,12 @@ Provides reusable validation functions for:
 - Collection sizes
 """
 
-import re
-import os
-from pathlib import Path
-from typing import Any, List, Optional, Union
-from urllib.parse import urlparse
 import logging
+import os
+import re
+from pathlib import Path
+from typing import Any
+from urllib.parse import urlparse
 
 logger = logging.getLogger(__name__)
 
@@ -49,7 +49,7 @@ def validate_string(
     value: Any,
     min_length: int = 0,
     max_length: int = 10000,
-    pattern: Optional[re.Pattern] = None,
+    pattern: re.Pattern | None = None,
     field_name: str = "String"
 ) -> str:
     """Validate string value.
@@ -90,8 +90,8 @@ def validate_string(
 
 def validate_integer(
     value: Any,
-    min_value: Optional[int] = None,
-    max_value: Optional[int] = None,
+    min_value: int | None = None,
+    max_value: int | None = None,
     field_name: str = "Integer"
 ) -> int:
     """Validate integer value.
@@ -124,8 +124,8 @@ def validate_integer(
 
 def validate_float(
     value: Any,
-    min_value: Optional[float] = None,
-    max_value: Optional[float] = None,
+    min_value: float | None = None,
+    max_value: float | None = None,
     field_name: str = "Float"
 ) -> float:
     """Validate float value.
@@ -162,9 +162,9 @@ def validate_list(
     value: Any,
     min_length: int = 0,
     max_length: int = 1000,
-    item_type: Optional[type] = None,
+    item_type: type | None = None,
     field_name: str = "List"
-) -> List:
+) -> list:
     """Validate list value.
 
     SECURITY FIX (MEDIUM-2): Validates list size and item types.
@@ -227,7 +227,7 @@ def validate_email(value: str, field_name: str = "Email") -> str:
 
 def validate_url(
     value: str,
-    allowed_schemes: Optional[List[str]] = None,
+    allowed_schemes: list[str] | None = None,
     field_name: str = "URL"
 ) -> str:
     """Validate URL.
@@ -267,7 +267,7 @@ def validate_url(
 
 
 def validate_path(
-    value: Union[str, Path],
+    value: str | Path,
     must_exist: bool = False,
     must_be_file: bool = False,
     must_be_dir: bool = False,
@@ -413,7 +413,7 @@ def validate_plugin_name(value: str, field_name: str = "Plugin name") -> str:
 
 def validate_enum(
     value: Any,
-    allowed_values: List[Any],
+    allowed_values: list[Any],
     field_name: str = "Value"
 ) -> Any:
     """Validate value is in allowed set.

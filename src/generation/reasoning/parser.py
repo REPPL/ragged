@@ -5,14 +5,12 @@ v0.3.7b: Parse chain-of-thought reasoning with fallback strategies.
 """
 
 import re
-from typing import Tuple, Optional, List
-from xml.etree import ElementTree as ET
 
 from src.generation.reasoning.types import (
+    ReasonedResponse,
     ReasoningMode,
     ReasoningStep,
     ValidationFlag,
-    ReasonedResponse,
 )
 from src.utils.logging import get_logger
 
@@ -150,7 +148,7 @@ class ReasoningParser:
             raw_response=raw_response
         )
 
-    def _extract_sections(self, text: str) -> Tuple[Optional[str], str]:
+    def _extract_sections(self, text: str) -> tuple[str | None, str]:
         """
         Extract reasoning and answer sections using XML-style tags.
 
@@ -173,7 +171,7 @@ class ReasoningParser:
 
         return reasoning, answer
 
-    def _extract_with_regex(self, text: str) -> Tuple[Optional[str], str]:
+    def _extract_with_regex(self, text: str) -> tuple[str | None, str]:
         """
         Extract reasoning using regex patterns as fallback.
 
@@ -204,7 +202,7 @@ class ReasoningParser:
         self,
         reasoning_text: str,
         mode: ReasoningMode
-    ) -> List[ReasoningStep]:
+    ) -> list[ReasoningStep]:
         """
         Parse individual reasoning steps from reasoning text.
 
@@ -312,7 +310,7 @@ class ReasoningParser:
                 pass
         return 1.0
 
-    def _extract_evidence_from_text(self, text: str) -> List[int]:
+    def _extract_evidence_from_text(self, text: str) -> list[int]:
         """
         Extract citation numbers from text.
 
@@ -325,7 +323,7 @@ class ReasoningParser:
         matches = self.citation_pattern.findall(text)
         return [int(m) for m in matches]
 
-    def _extract_citations(self, text: str) -> List[str]:
+    def _extract_citations(self, text: str) -> list[str]:
         """
         Extract unique citation numbers from answer.
 
@@ -341,9 +339,9 @@ class ReasoningParser:
 
     def _validate_reasoning(
         self,
-        steps: List[ReasoningStep],
+        steps: list[ReasoningStep],
         answer: str
-    ) -> List[ValidationFlag]:
+    ) -> list[ValidationFlag]:
         """
         Detect issues in reasoning process.
 
@@ -370,7 +368,7 @@ class ReasoningParser:
 
         return flags
 
-    def _detect_contradictions(self, steps: List[ReasoningStep]) -> List[ValidationFlag]:
+    def _detect_contradictions(self, steps: list[ReasoningStep]) -> list[ValidationFlag]:
         """
         Detect contradictory statements in reasoning.
 
@@ -399,9 +397,9 @@ class ReasoningParser:
 
     def _detect_uncertainty(
         self,
-        steps: List[ReasoningStep],
+        steps: list[ReasoningStep],
         answer: str
-    ) -> List[ValidationFlag]:
+    ) -> list[ValidationFlag]:
         """
         Detect uncertainty markers in reasoning or answer.
 
@@ -444,9 +442,9 @@ class ReasoningParser:
 
     def _detect_unsupported_claims(
         self,
-        steps: List[ReasoningStep],
+        steps: list[ReasoningStep],
         answer: str
-    ) -> List[ValidationFlag]:
+    ) -> list[ValidationFlag]:
         """
         Detect claims without supporting citations.
 
@@ -471,7 +469,7 @@ class ReasoningParser:
 
         return flags
 
-    def _detect_low_confidence(self, steps: List[ReasoningStep]) -> List[ValidationFlag]:
+    def _detect_low_confidence(self, steps: list[ReasoningStep]) -> list[ValidationFlag]:
         """
         Detect steps with low confidence scores.
 
@@ -496,8 +494,8 @@ class ReasoningParser:
 
     def _calculate_confidence(
         self,
-        steps: List[ReasoningStep],
-        flags: List[ValidationFlag]
+        steps: list[ReasoningStep],
+        flags: list[ValidationFlag]
     ) -> float:
         """
         Calculate overall confidence from steps and validation.

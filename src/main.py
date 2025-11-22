@@ -5,12 +5,9 @@ Provides CLI commands for document ingestion, querying, and management.
 """
 
 import sys
-from pathlib import Path
-from typing import Any, Dict, Literal, Optional, cast
 
 from src import __version__
-from src.cli.common import click, console, ConsoleType, ProgressType, TableType
-from src.config.settings import get_settings
+from src.cli.common import click
 from src.utils.logging import get_logger, setup_logging
 
 logger = get_logger(__name__)
@@ -69,27 +66,27 @@ def cli(ctx: click.Context, verbose: bool, debug: bool, quiet: bool) -> None:
 
 # Import commands from modules
 from src.cli.commands.add import add
-from src.cli.commands.query import query
-from src.cli.commands.health import health
-from src.cli.commands.docs import list_docs, clear
-from src.cli.commands.config import config
-from src.cli.commands.completion import completion
-from src.cli.commands.validate import validate
-from src.cli.commands.envinfo import env_info
-from src.cli.commands.metadata import metadata
-from src.cli.commands.search import search
-from src.cli.commands.history import history
-from src.cli.commands.exportimport import export
-from src.cli.commands.cache import cache
-from src.cli.commands.feature_flags import feature_flags_group
-from src.cli.commands.monitor import monitor
 from src.cli.commands.benchmark import benchmark
+from src.cli.commands.cache import cache
+from src.cli.commands.completion import completion
+from src.cli.commands.config import config
+from src.cli.commands.docs import clear, list_docs
+from src.cli.commands.envinfo import env_info
 from src.cli.commands.explain import explain
+from src.cli.commands.exportimport import export
+from src.cli.commands.feature_flags import feature_flags_group
+from src.cli.commands.health import health
+from src.cli.commands.history import history
+from src.cli.commands.metadata import metadata
+from src.cli.commands.monitor import monitor
+from src.cli.commands.query import query
+from src.cli.commands.search import search
+from src.cli.commands.serve import serve  # v0.3.12: API server
 from src.cli.commands.show import show  # v0.3.5: PDF correction metadata viewer
-from src.cli.commands.versions import versions  # v0.3.7a: Document version tracking
 from src.cli.commands.template import template  # v0.3.11: Template commands
 from src.cli.commands.test import test  # v0.3.11: Testing commands
-from src.cli.commands.serve import serve  # v0.3.12: API server
+from src.cli.commands.validate import validate
+from src.cli.commands.versions import versions  # v0.3.7a: Document version tracking
 
 # Register commands
 cli.add_command(add)

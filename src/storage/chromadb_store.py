@@ -9,7 +9,7 @@ v0.3.6: Refactored to implement VectorStore interface for multi-backend support.
 """
 
 import os
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, cast
+from typing import TYPE_CHECKING, Any, cast
 from urllib.parse import urlparse
 
 import numpy as np
@@ -29,7 +29,6 @@ from src.config.settings import get_settings
 from src.exceptions import VectorStoreConnectionError, VectorStoreError
 from src.storage.metadata_serializer import (
     deserialize_batch_metadata,
-    deserialize_metadata,
     serialize_batch_metadata,
 )
 from src.storage.vectorstore_interface import VectorStore
@@ -69,8 +68,8 @@ class ChromaDBStore(VectorStore):
     def __init__(
         self,
         collection_name: str = "ragged_documents",
-        host: Optional[str] = None,
-        port: Optional[int] = None,
+        host: str | None = None,
+        port: int | None = None,
     ):
         """
         Initialize ChromaDB vector store connection.
@@ -126,10 +125,10 @@ class ChromaDBStore(VectorStore):
 
     def add(
         self,
-        ids: List[str],
+        ids: list[str],
         embeddings: np.ndarray,
-        documents: List[str],
-        metadatas: List[Dict[str, Any]],
+        documents: list[str],
+        metadatas: list[dict[str, Any]],
     ) -> None:
         """
         Add embeddings to ChromaDB.
@@ -156,10 +155,10 @@ class ChromaDBStore(VectorStore):
     @with_retry(max_attempts=3, base_delay=1.0, retryable_exceptions=(ConnectionError, TimeoutError, VectorStoreConnectionError))
     def _query_internal(
         self,
-        query_list: List[List[float]],
+        query_list: list[list[float]],
         k: int,
-        where: Optional[Dict[str, Any]],
-    ) -> Dict[str, Any]:
+        where: dict[str, Any] | None,
+    ) -> dict[str, Any]:
         """
         Internal query method with circuit breaker protection.
 
@@ -172,7 +171,7 @@ class ChromaDBStore(VectorStore):
                 n_results=k,
                 where=where,
             )
-            return cast(Dict[str, Any], results)
+            return cast(dict[str, Any], results)
         except (ConnectionError, TimeoutError) as e:
             raise VectorStoreConnectionError(f"ChromaDB connection failed: {e}")
         except Exception as e:
@@ -182,8 +181,8 @@ class ChromaDBStore(VectorStore):
         self,
         query_embedding: np.ndarray,
         k: int = 5,
-        where: Optional[Dict[str, Any]] = None,
-    ) -> Dict[str, Any]:
+        where: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
         """
         Query ChromaDB for similar vectors.
 
@@ -217,7 +216,7 @@ class ChromaDBStore(VectorStore):
                 n_results=k,
                 where=where,
             )
-            results = cast(Dict[str, Any], results)
+            results = cast(dict[str, Any], results)
 
         # Deserialise metadata in results
         if results and results.get("metadatas"):
@@ -238,8 +237,8 @@ class ChromaDBStore(VectorStore):
 
     def delete(
         self,
-        ids: Optional[List[str]] = None,
-        where: Optional[Dict[str, Any]] = None,
+        ids: list[str] | None = None,
+        where: dict[str, Any] | None = None,
     ) -> None:
         """
         Delete embeddings from ChromaDB.
@@ -257,8 +256,8 @@ class ChromaDBStore(VectorStore):
 
     def update_metadata(
         self,
-        ids: List[str],
-        metadatas: List[Dict[str, Any]],
+        ids: list[str],
+        metadatas: list[dict[str, Any]],
     ) -> None:
         """
         Update metadata for existing embeddings in ChromaDB.
@@ -282,7 +281,7 @@ class ChromaDBStore(VectorStore):
         )
         logger.info(f"Updated metadata for {len(ids)} embeddings")
 
-    def get_documents_by_metadata(self, where: Dict[str, Any]) -> Dict[str, Any]:
+    def get_documents_by_metadata(self, where: dict[str, Any]) -> dict[str, Any]:
         """
         Get documents from ChromaDB matching metadata filter.
 
@@ -304,7 +303,7 @@ class ChromaDBStore(VectorStore):
             if results and results.get("metadatas"):
                 results["metadatas"] = deserialize_batch_metadata(results["metadatas"])  # type: ignore[arg-type, typeddict-item]
 
-            return cast(Dict[str, Any], results)
+            return cast(dict[str, Any], results)
         except (ConnectionError, TimeoutError, KeyError, ValueError, TypeError) as e:
             logger.error(f"Failed to get documents by metadata: {e}")
             return {"ids": [], "documents": [], "metadatas": []}
@@ -313,8 +312,8 @@ class ChromaDBStore(VectorStore):
         self,
         limit: int = 100,
         offset: int = 0,
-        where: Optional[Dict[str, Any]] = None,
-    ) -> Dict[str, Any]:
+        where: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
         """
         List documents from ChromaDB with pagination.
 
@@ -349,7 +348,7 @@ class ChromaDBStore(VectorStore):
             # Add total count
             results["total"] = total  # type: ignore[typeddict-item]
 
-            return cast(Dict[str, Any], results)
+            return cast(dict[str, Any], results)
         except (ConnectionError, TimeoutError, KeyError, ValueError, TypeError) as e:
             logger.error(f"Failed to list documents: {e}")
             return {"ids": [], "documents": [], "metadatas": [], "total": 0}
@@ -383,7 +382,7 @@ class ChromaDBStore(VectorStore):
             logger.error(f"Failed to clear collection: {e}")
             raise VectorStoreError(f"Failed to clear collection: {e}")
 
-    def get_collection_info(self) -> Dict[str, Any]:
+    def get_collection_info(self) -> dict[str, Any]:
         """
         Get information about the ChromaDB collection.
 

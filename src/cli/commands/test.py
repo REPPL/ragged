@@ -8,10 +8,9 @@ from pathlib import Path
 
 import click
 from rich.console import Console
-from rich.panel import Panel
 from rich.table import Table
 
-from src.testing import ConfigValidator, create_config_validator
+from src.testing import create_config_validator
 from src.utils.logging import get_logger
 
 console = Console()

@@ -4,15 +4,15 @@ Enables concurrent document loading, chunking, and embedding.
 """
 
 import asyncio
-from typing import List, Optional, Callable, Any, Union
-from pathlib import Path
-from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
-from dataclasses import dataclass
 import time
+from collections.abc import Callable
+from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any
 
-from src.ingestion.models import Document
 from src.ingestion.loaders import load_document
-from src.chunking.splitters import RecursiveCharacterTextSplitter
+from src.ingestion.models import Document
 from src.utils.logging import get_logger
 
 logger = get_logger(__name__)
@@ -26,7 +26,7 @@ class ProcessingResult:
     success: bool
     duration: float
     chunks_created: int = 0
-    error: Optional[str] = None
+    error: str | None = None
 
 
 class AsyncDocumentProcessor:
@@ -37,7 +37,7 @@ class AsyncDocumentProcessor:
 
     def __init__(
         self,
-        max_workers: Optional[int] = None,
+        max_workers: int | None = None,
         use_process_pool: bool = False
     ):
         """Initialize async processor.
@@ -49,7 +49,7 @@ class AsyncDocumentProcessor:
         self.max_workers = max_workers
         self.use_process_pool = use_process_pool
 
-        self.executor: Union[ProcessPoolExecutor, ThreadPoolExecutor]
+        self.executor: ProcessPoolExecutor | ThreadPoolExecutor
         if use_process_pool:
             self.executor = ProcessPoolExecutor(max_workers=max_workers)
         else:
@@ -58,7 +58,7 @@ class AsyncDocumentProcessor:
     async def load_document_async(
         self,
         file_path: Path
-    ) -> Optional[Document]:
+    ) -> Document | None:
         """Load single document asynchronously.
 
         Args:
@@ -86,9 +86,9 @@ class AsyncDocumentProcessor:
 
     async def load_documents_async(
         self,
-        file_paths: List[Path],
-        progress_callback: Optional[Callable[[int, int], None]] = None
-    ) -> List[Document]:
+        file_paths: list[Path],
+        progress_callback: Callable[[int, int], None] | None = None
+    ) -> list[Document]:
         """Load multiple documents concurrently.
 
         Args:
@@ -131,7 +131,7 @@ class AsyncDocumentProcessor:
         self,
         document: Document,
         chunker: Any,  # RecursiveCharacterTextSplitter or ContextualChunker
-        embed_fn: Optional[Callable[..., Any]] = None
+        embed_fn: Callable[..., Any] | None = None
     ) -> ProcessingResult:
         """Process single document (chunk + embed) asynchronously.
 
@@ -165,7 +165,7 @@ class AsyncDocumentProcessor:
                 )
                 chunks = text_chunks  # For counting purposes
             else:
-                raise ValueError(f"Chunker must have chunk_document or split_text method")
+                raise ValueError("Chunker must have chunk_document or split_text method")
 
             # Embed chunks if function provided
             if embed_fn and chunks:
@@ -206,11 +206,11 @@ class AsyncDocumentProcessor:
 
     async def process_documents_async(
         self,
-        documents: List[Document],
+        documents: list[Document],
         chunker: Any,
-        embed_fn: Optional[Callable[..., Any]] = None,
-        progress_callback: Optional[Callable[[int, int], None]] = None
-    ) -> List[ProcessingResult]:
+        embed_fn: Callable[..., Any] | None = None,
+        progress_callback: Callable[[int, int], None] | None = None
+    ) -> list[ProcessingResult]:
         """Process multiple documents concurrently.
 
         Args:
@@ -258,11 +258,11 @@ class AsyncDocumentProcessor:
 
     async def process_batch_async(
         self,
-        file_paths: List[Path],
+        file_paths: list[Path],
         chunker: Any,
-        embed_fn: Optional[Callable[..., Any]] = None,
-        progress_callback: Optional[Callable[[int, int, str], None]] = None
-    ) -> List[ProcessingResult]:
+        embed_fn: Callable[..., Any] | None = None,
+        progress_callback: Callable[[int, int, str], None] | None = None
+    ) -> list[ProcessingResult]:
         """Load and process documents in one batch operation.
 
         Args:
@@ -336,9 +336,9 @@ class AsyncDocumentProcessor:
 # Convenience functions for common patterns
 
 async def load_documents_concurrent(
-    file_paths: List[Path],
-    max_workers: Optional[int] = None
-) -> List[Document]:
+    file_paths: list[Path],
+    max_workers: int | None = None
+) -> list[Document]:
     """Load documents concurrently (convenience function).
 
     Args:
@@ -356,10 +356,10 @@ async def load_documents_concurrent(
 
 
 async def process_documents_concurrent(
-    documents: List[Document],
+    documents: list[Document],
     chunker: Any,
-    max_workers: Optional[int] = None
-) -> List[ProcessingResult]:
+    max_workers: int | None = None
+) -> list[ProcessingResult]:
     """Process documents concurrently (convenience function).
 
     Args:

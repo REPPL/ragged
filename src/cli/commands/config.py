@@ -2,15 +2,15 @@
 
 import sys
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any
 
 import click
 import yaml
 
-from src.cli.common import console, TableType
-from src.config.settings import get_settings
-from src.config.config_manager import RaggedConfig, ConfigValidator
+from src.cli.common import TableType, console
+from src.config.config_manager import ConfigValidator, RaggedConfig
 from src.config.personas import PersonaManager
+from src.config.settings import get_settings
 
 
 @click.group()
@@ -95,7 +95,7 @@ def config_set(key: str, value: str) -> None:
 
     # Load existing config or create new
     config_path.parent.mkdir(parents=True, exist_ok=True)
-    user_config: Dict[str, Any] = {}
+    user_config: dict[str, Any] = {}
 
     if config_path.exists():
         with open(config_path) as f:
@@ -139,15 +139,16 @@ def config_set(key: str, value: str) -> None:
 @config.command("set-model")
 @click.argument("model_name", required=False)
 @click.option("--auto", is_flag=True, help="Automatically select recommended model")
-def config_set_model(model_name: Optional[str], auto: bool) -> None:
+def config_set_model(model_name: str | None, auto: bool) -> None:
     """Set the LLM model to use for generation.
 
     If no model specified, shows interactive selection menu.
     Use --auto to automatically select the recommended model.
     """
+    import yaml  # type: ignore[import-untyped]
+
     from src.config.model_manager import ModelManager
     from src.config.settings import get_settings
-    import yaml  # type: ignore[import-untyped]
 
     settings = get_settings()
     manager = ModelManager(settings.ollama_url)
@@ -204,10 +205,10 @@ def config_set_model(model_name: Optional[str], auto: bool) -> None:
     # Save to config file (ensure directory exists first)
     data_dir = settings.ensure_data_dir()
     config_file = data_dir / "config.yml"
-    config: Dict[str, Any] = {}
+    config: dict[str, Any] = {}
 
     if config_file.exists():
-        with open(config_file, "r") as f:
+        with open(config_file) as f:
             config = yaml.safe_load(f) or {}
 
     config["llm_model"] = model_name
@@ -257,7 +258,7 @@ def config_list_models() -> None:
         console.print(table)
         console.print()
         console.print(f"Current model: [bold]{current_model}[/bold]")
-        console.print(f"\nChange model with: ragged config set-model")
+        console.print("\nChange model with: ragged config set-model")
 
     except Exception as e:
         console.print(f"[red]✗[/red] Failed to list models: {e}")
@@ -266,7 +267,7 @@ def config_list_models() -> None:
 
 @config.command("validate")
 @click.option("--config-file", type=click.Path(exists=True), help="Config file to validate")
-def config_validate(config_file: Optional[str]) -> None:
+def config_validate(config_file: str | None) -> None:
     """Validate configuration file against constraints.
 
     \b

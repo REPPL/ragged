@@ -1,34 +1,33 @@
 """FastAPI application for ragged v0.2."""
 
-from fastapi import FastAPI, HTTPException, UploadFile, File
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
-import asyncio
 import json
 import tempfile
 import time
 from pathlib import Path
-from typing import Any, Dict, Literal, Optional, Union, cast
+from typing import Any, Literal
+
+from fastapi import FastAPI, File, HTTPException, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
 
 from src.chunking.splitters import chunk_document
 from src.config.settings import Settings, get_settings
 from src.embeddings.base import BaseEmbedder
 from src.embeddings.factory import get_embedder
 from src.generation.ollama_client import OllamaClient
-from src.generation.prompts import build_rag_prompt, RAG_SYSTEM_PROMPT
+from src.generation.prompts import RAG_SYSTEM_PROMPT, build_rag_prompt
 from src.ingestion.loaders import load_document
+from src.retrieval.bm25 import BM25Retriever
 from src.retrieval.hybrid import HybridRetriever
 from src.retrieval.retriever import Retriever
-from src.retrieval.bm25 import BM25Retriever
 from src.storage.vector_store import VectorStore
 from src.utils.logging import get_logger
 from src.web.models import (
+    HealthResponse,
     QueryRequest,
     QueryResponse,
     Source,
     UploadResponse,
-    HealthResponse,
-    ErrorResponse,
 )
 
 logger = get_logger(__name__)
@@ -49,11 +48,11 @@ app.add_middleware(
 )
 
 # Global state (initialized on startup)
-_settings: Optional[Settings] = None
-_embedder: Optional[BaseEmbedder] = None
-_vector_store: Optional[VectorStore] = None
-_hybrid_retriever: Optional[HybridRetriever] = None
-_llm_client: Optional[OllamaClient] = None
+_settings: Settings | None = None
+_embedder: BaseEmbedder | None = None
+_vector_store: VectorStore | None = None
+_hybrid_retriever: HybridRetriever | None = None
+_llm_client: OllamaClient | None = None
 
 
 @app.on_event("startup")
@@ -116,7 +115,7 @@ async def health() -> HealthResponse:
 
 
 @app.post("/api/query", response_model=None)
-async def query(request: QueryRequest) -> Union[StreamingResponse, QueryResponse]:
+async def query(request: QueryRequest) -> StreamingResponse | QueryResponse:
     """Query endpoint with optional SSE streaming.
 
     Retrieves relevant documents using hybrid search and generates
@@ -147,7 +146,7 @@ async def query(request: QueryRequest) -> Union[StreamingResponse, QueryResponse
                 """
                 try:
                     # Status: Retrieving
-                    yield f"event: status\n"
+                    yield "event: status\n"
                     yield f"data: {json.dumps({'message': 'Retrieving documents...'})}\n\n"
 
                     # Retrieve relevant chunks
@@ -157,13 +156,13 @@ async def query(request: QueryRequest) -> Union[StreamingResponse, QueryResponse
                     )
 
                     # Status: Retrieved
-                    yield f"event: retrieved\n"
+                    yield "event: retrieved\n"
                     yield f"data: {json.dumps({'count': len(results), 'method': request.retrieval_method})}\n\n"
 
                     if not results:
-                        yield f"event: status\n"
+                        yield "event: status\n"
                         yield f"data: {json.dumps({'message': 'No relevant documents found'})}\n\n"
-                        yield f"event: complete\n"
+                        yield "event: complete\n"
                         yield f"data: {json.dumps({'total_time': time.time() - start_time})}\n\n"
                         return
 
@@ -171,7 +170,7 @@ async def query(request: QueryRequest) -> Union[StreamingResponse, QueryResponse
                     prompt = build_rag_prompt(request.query, results)
 
                     # Status: Generating
-                    yield f"event: status\n"
+                    yield "event: status\n"
                     yield f"data: {json.dumps({'message': 'Generating answer...'})}\n\n"
 
                     # Generate answer (streaming)
@@ -181,7 +180,7 @@ async def query(request: QueryRequest) -> Union[StreamingResponse, QueryResponse
                     )
 
                     for token in answer_stream:
-                        yield f"event: token\n"
+                        yield "event: token\n"
                         yield f"data: {json.dumps({'token': token})}\n\n"
 
                     # Format sources
@@ -196,17 +195,17 @@ async def query(request: QueryRequest) -> Union[StreamingResponse, QueryResponse
                         }
                         sources.append(source)
 
-                    yield f"event: sources\n"
+                    yield "event: sources\n"
                     yield f"data: {json.dumps(sources)}\n\n"
 
                     # Complete
                     total_time = time.time() - start_time
-                    yield f"event: complete\n"
+                    yield "event: complete\n"
                     yield f"data: {json.dumps({'total_time': total_time})}\n\n"
 
                 except Exception as e:  # noqa: BLE001 - Send error event to client
                     logger.exception("Error during streaming query")
-                    yield f"event: error\n"
+                    yield "event: error\n"
                     yield f"data: {json.dumps({'error': str(e)})}\n\n"
 
             return StreamingResponse(stream_response(), media_type="text/event-stream")
@@ -361,14 +360,14 @@ async def upload(file: UploadFile = File(...)) -> UploadResponse:
 
 
 @app.get("/api/collections")
-async def list_collections() -> Dict[str, Any]:
+async def list_collections() -> dict[str, Any]:
     """List available collections."""
     # Placeholder
     return {"collections": ["default"]}
 
 
 @app.delete("/api/collections/{collection_name}")
-async def clear_collection(collection_name: str) -> Dict[str, Any]:
+async def clear_collection(collection_name: str) -> dict[str, Any]:
     """Clear all documents from a collection."""
     # Placeholder
     return {"status": "success", "collection": collection_name, "message": "Collection cleared (placeholder)"}

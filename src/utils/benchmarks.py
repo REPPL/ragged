@@ -3,14 +3,15 @@
 Tools for measuring and comparing system performance.
 """
 
-import time
+import json
 import statistics
-from typing import Any, Callable, Dict, Generator, List, Optional
+import time
+from collections.abc import Callable, Generator
+from contextlib import contextmanager
 from dataclasses import dataclass, field
 from datetime import datetime
-from contextlib import contextmanager
-import json
 from pathlib import Path
+from typing import Any
 
 from src.utils.logging import get_logger
 
@@ -30,9 +31,9 @@ class BenchmarkResult:
     min_time: float
     max_time: float
     timestamp: datetime = field(default_factory=datetime.now)
-    metadata: Dict[str, Any] = field(default_factory=dict)
+    metadata: dict[str, Any] = field(default_factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary."""
         return {
             "name": self.name,
@@ -89,9 +90,9 @@ class Timer:
 
     def __init__(self) -> None:
         """Initialize timer."""
-        self.start_time: Optional[float] = None
-        self.end_time: Optional[float] = None
-        self.elapsed: Optional[float] = None
+        self.start_time: float | None = None
+        self.end_time: float | None = None
+        self.elapsed: float | None = None
 
     def start(self) -> None:
         """Start timer."""
@@ -167,13 +168,13 @@ class Benchmark:
         self.name = name
         self.warmup_iterations = warmup_iterations
         self.test_iterations = test_iterations
-        self.results: List[BenchmarkResult] = []
+        self.results: list[BenchmarkResult] = []
 
     def run(
         self,
         func: Callable[..., Any],
         *args: Any,
-        metadata: Optional[Dict[str, Any]] = None,
+        metadata: dict[str, Any] | None = None,
         **kwargs: Any
     ) -> BenchmarkResult:
         """Run benchmark on function.
@@ -264,8 +265,8 @@ class BenchmarkSuite:
             name: Suite name
         """
         self.name = name
-        self.benchmarks: List[Benchmark] = []
-        self.results: List[BenchmarkResult] = []
+        self.benchmarks: list[Benchmark] = []
+        self.results: list[BenchmarkResult] = []
 
     def add_benchmark(
         self,
@@ -274,7 +275,7 @@ class BenchmarkSuite:
         *args: Any,
         warmup: int = 3,
         iterations: int = 10,
-        metadata: Optional[Dict[str, Any]] = None,
+        metadata: dict[str, Any] | None = None,
         **kwargs: Any
     ) -> BenchmarkResult:
         """Add and run benchmark.
@@ -349,7 +350,7 @@ class BenchmarkSuite:
         Returns:
             Loaded benchmark suite
         """
-        with open(input_path, "r") as f:
+        with open(input_path) as f:
             data = json.load(f)
 
         suite = BenchmarkSuite(data["suite_name"])
@@ -379,7 +380,7 @@ class BenchmarkSuite:
 def benchmark_function(
     func: Callable[..., Any],
     *args: Any,
-    name: Optional[str] = None,
+    name: str | None = None,
     iterations: int = 10,
     **kwargs: Any
 ) -> BenchmarkResult:

@@ -1,6 +1,5 @@
 """Recursive character text splitter implementation."""
 
-from typing import List, Optional
 
 from src.chunking.token_counter import count_tokens
 from src.config.settings import get_settings
@@ -11,9 +10,9 @@ class RecursiveCharacterTextSplitter:
 
     def __init__(
         self,
-        chunk_size: Optional[int] = None,
-        chunk_overlap: Optional[int] = None,
-        separators: Optional[List[str]] = None,
+        chunk_size: int | None = None,
+        chunk_overlap: int | None = None,
+        separators: list[str] | None = None,
     ):
         """Initialise the text splitter."""
         settings = get_settings()
@@ -25,14 +24,14 @@ class RecursiveCharacterTextSplitter:
 
         self.separators = separators or ["\n\n", "\n", ". ", " ", ""]
 
-    def split_text(self, text: str) -> List[str]:
+    def split_text(self, text: str) -> list[str]:
         """Split text into chunks using recursive splitting."""
         if not text:
             return []
 
         return self._split_recursive(text, self.separators)
 
-    def _split_recursive(self, text: str, separators: List[str]) -> List[str]:
+    def _split_recursive(self, text: str, separators: list[str]) -> list[str]:
         """Recursively split text by trying separators in order."""
         if not separators:
             # No more separators, split by character
@@ -80,7 +79,7 @@ class RecursiveCharacterTextSplitter:
         # Add overlap
         return self._add_overlap(chunks)
 
-    def _split_by_characters(self, text: str) -> List[str]:
+    def _split_by_characters(self, text: str) -> list[str]:
         """Split text by character count."""
         chunks = []
         start = 0
@@ -103,7 +102,7 @@ class RecursiveCharacterTextSplitter:
 
         return self._add_overlap(chunks)
 
-    def _add_overlap(self, chunks: List[str]) -> List[str]:
+    def _add_overlap(self, chunks: list[str]) -> list[str]:
         """Add overlap between chunks."""
         if len(chunks) <= 1 or self.chunk_overlap == 0:
             return chunks

@@ -4,9 +4,9 @@ Provides functionality to discover available models, calculate suitability score
 for RAG tasks, and recommend the best model for the user's needs.
 """
 
-import ollama
 from dataclasses import dataclass
-from typing import List, Optional
+
+import ollama
 
 from src.utils.logging import get_logger
 
@@ -36,7 +36,7 @@ class ModelManager:
         """
         self.client = ollama.Client(host=ollama_url)
 
-    def list_available_models(self) -> List[ModelInfo]:
+    def list_available_models(self) -> list[ModelInfo]:
         """Get list of locally available models with RAG suitability scores.
 
         Returns:
@@ -70,7 +70,7 @@ class ModelManager:
             logger.exception("Failed to list models")
             return []
 
-    def get_recommended_model(self) -> Optional[str]:
+    def get_recommended_model(self) -> str | None:
         """Get the best available model for RAG tasks.
 
         Returns:

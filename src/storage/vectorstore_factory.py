@@ -7,7 +7,6 @@ configuration, enabling easy switching between different backends.
 v0.3.6: Initial factory implementation for multi-backend support.
 """
 
-from typing import Optional
 
 from src.config.settings import get_settings
 from src.storage.vectorstore_interface import VectorStore
@@ -17,10 +16,10 @@ logger = get_logger(__name__)
 
 
 def get_vectorstore(
-    backend: Optional[str] = None,
+    backend: str | None = None,
     collection_name: str = "ragged_documents",
-    host: Optional[str] = None,
-    port: Optional[int] = None,
+    host: str | None = None,
+    port: int | None = None,
 ) -> VectorStore:
     """
     Factory function to create a VectorStore instance.

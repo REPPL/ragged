@@ -3,7 +3,7 @@
 v0.3.5: Data models for issue detection and correction tracking.
 """
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from enum import Enum
 from pathlib import Path
 from typing import Any
@@ -99,7 +99,7 @@ class AnalysisResult(BaseModel):
         description="Estimated correction time in seconds"
     )
     analysed_at: datetime = Field(
-        default_factory=lambda: datetime.now(timezone.utc),
+        default_factory=lambda: datetime.now(UTC),
         description="Analysis timestamp"
     )
     analysis_duration: float = Field(ge=0.0, description="Analysis duration in seconds")
@@ -166,7 +166,7 @@ class CorrectionAction(BaseModel):
     issue: IssueReport
     pages_affected: list[int] = Field(default_factory=list, description="Affected pages")
     applied_at: datetime = Field(
-        default_factory=lambda: datetime.now(timezone.utc),
+        default_factory=lambda: datetime.now(UTC),
         description="Application timestamp"
     )
     success: bool = Field(description="Whether correction succeeded")
@@ -198,7 +198,7 @@ class CorrectionResult(BaseModel):
     improvement: float | None = Field(default=None, description="Quality improvement")
     total_duration: float = Field(ge=0.0, description="Total correction duration in seconds")
     corrected_at: datetime = Field(
-        default_factory=lambda: datetime.now(timezone.utc),
+        default_factory=lambda: datetime.now(UTC),
         description="Correction timestamp"
     )
     metadata: dict[str, Any] = Field(default_factory=dict, description="Additional metadata")

@@ -5,7 +5,7 @@ Handles query processing, embedding, and retrieval of relevant document chunks.
 """
 
 from dataclasses import dataclass
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from src.config.settings import get_settings
 from src.embeddings.factory import get_embedder
@@ -26,7 +26,7 @@ class RetrievedChunk:
     document_id: str
     document_path: str
     chunk_position: int
-    metadata: Dict[str, Any]
+    metadata: dict[str, Any]
 
     def __repr__(self) -> str:
         """String representation."""
@@ -43,7 +43,7 @@ class Retriever:
 
     def __init__(
         self,
-        vector_store: Optional[VectorStore] = None,
+        vector_store: VectorStore | None = None,
         embedder: Any = None,
     ):
         """
@@ -60,7 +60,7 @@ class Retriever:
         settings = get_settings()
         if settings.feature_flags.enable_query_caching:
             # Default: 1000 entries, 1 hour TTL
-            self.query_cache: Optional[QueryCache] = QueryCache(maxsize=1000, ttl_seconds=3600)
+            self.query_cache: QueryCache | None = QueryCache(maxsize=1000, ttl_seconds=3600)
             logger.info("Query result caching enabled (maxsize=1000, ttl=3600s)")
         else:
             self.query_cache = None
@@ -75,9 +75,9 @@ class Retriever:
         self,
         query: str,
         k: int = 5,
-        filter_metadata: Optional[Dict[str, Any]] = None,
-        min_score: Optional[float] = None,
-    ) -> List[RetrievedChunk]:
+        filter_metadata: dict[str, Any] | None = None,
+        min_score: float | None = None,
+    ) -> list[RetrievedChunk]:
         """
         Retrieve relevant chunks for a query.
 
@@ -173,7 +173,7 @@ class Retriever:
         query: str,
         k: int = 5,
         context_chunks: int = 1,
-    ) -> List[RetrievedChunk]:
+    ) -> list[RetrievedChunk]:
         """
         Retrieve chunks with surrounding context.
 
@@ -196,7 +196,7 @@ class Retriever:
         # For v0.1, just call regular retrieve
         return self.retrieve(query, k=k)
 
-    def deduplicate_chunks(self, chunks: List[RetrievedChunk]) -> List[RetrievedChunk]:
+    def deduplicate_chunks(self, chunks: list[RetrievedChunk]) -> list[RetrievedChunk]:
         """
         Remove duplicate chunks from results.
 
@@ -219,7 +219,7 @@ class Retriever:
 
         return deduplicated
 
-    def get_cache_stats(self) -> Optional[Dict[str, Any]]:
+    def get_cache_stats(self) -> dict[str, Any] | None:
         """
         Get query cache statistics.
 

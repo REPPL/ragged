@@ -14,7 +14,6 @@ import logging
 import os
 import sys
 from pathlib import Path
-from typing import Optional
 
 from cryptography.fernet import Fernet, InvalidToken
 
@@ -42,7 +41,7 @@ class EncryptionManager:
     - Automatic IV (initialization vector) generation per encryption
     """
 
-    def __init__(self, key_file: Optional[Path] = None):
+    def __init__(self, key_file: Path | None = None):
         """Initialise encryption manager.
 
         Args:
@@ -168,7 +167,7 @@ class EncryptionManager:
             logger.error(f"Decryption failed: {e}")
             raise
 
-    def encrypt_file(self, plaintext_path: Path, encrypted_path: Optional[Path] = None) -> Path:
+    def encrypt_file(self, plaintext_path: Path, encrypted_path: Path | None = None) -> Path:
         """Encrypt a file.
 
         Args:
@@ -208,7 +207,7 @@ class EncryptionManager:
         logger.info(f"Encrypted file: {plaintext_path} → {encrypted_path}")
         return encrypted_path
 
-    def decrypt_file(self, encrypted_path: Path, decrypted_path: Optional[Path] = None) -> Path:
+    def decrypt_file(self, encrypted_path: Path, decrypted_path: Path | None = None) -> Path:
         """Decrypt a file.
 
         Args:
@@ -248,7 +247,7 @@ class EncryptionManager:
         logger.info(f"Decrypted file: {encrypted_path} → {decrypted_path}")
         return decrypted_path
 
-    def rotate_key(self, new_key_file: Optional[Path] = None) -> None:
+    def rotate_key(self, new_key_file: Path | None = None) -> None:
         """Rotate encryption key (re-encrypt all data with new key).
 
         WARNING: This is a destructive operation. Backup data first.
@@ -287,7 +286,7 @@ class EncryptionManager:
 
 
 # Global encryption manager (singleton)
-_encryption_manager: Optional[EncryptionManager] = None
+_encryption_manager: EncryptionManager | None = None
 
 
 def get_encryption_manager() -> EncryptionManager:

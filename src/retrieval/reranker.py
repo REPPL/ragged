@@ -5,7 +5,6 @@ Uses cross-encoder models to rerank retrieved chunks for better top-k accuracy.
 """
 
 from dataclasses import dataclass
-from typing import List, Optional, Tuple
 
 import numpy as np
 
@@ -89,9 +88,9 @@ class Reranker:
     def rerank(
         self,
         query: str,
-        chunks: List[RetrievedChunk],
-        top_k: Optional[int] = None,
-    ) -> Tuple[List[RetrievedChunk], RerankResult]:
+        chunks: list[RetrievedChunk],
+        top_k: int | None = None,
+    ) -> tuple[list[RetrievedChunk], RerankResult]:
         """
         Rerank retrieved chunks using cross-encoder.
 
@@ -190,9 +189,9 @@ class Reranker:
     def rerank_with_scores(
         self,
         query: str,
-        texts: List[str],
-        top_k: Optional[int] = None,
-    ) -> List[Tuple[str, float]]:
+        texts: list[str],
+        top_k: int | None = None,
+    ) -> list[tuple[str, float]]:
         """
         Rerank texts and return with scores.
 

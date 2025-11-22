@@ -5,7 +5,8 @@ Defines the contract that all vector database implementations must follow.
 
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import List, Dict, Any, Optional
+from typing import Any
+
 import numpy as np
 
 
@@ -15,10 +16,10 @@ class VectorStoreDocument:
 
     id: str
     content: str
-    embedding: Optional[np.ndarray] = None
-    metadata: Optional[Dict[str, Any]] = None
+    embedding: np.ndarray | None = None
+    metadata: dict[str, Any] | None = None
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary."""
         return {
             "id": self.id,
@@ -32,9 +33,9 @@ class VectorStoreDocument:
 class VectorStoreQueryResult:
     """Unified query result representation."""
 
-    documents: List[VectorStoreDocument]
-    distances: List[float]
-    ids: List[str]
+    documents: list[VectorStoreDocument]
+    distances: list[float]
+    ids: list[str]
 
 
 class VectorStore(ABC):
@@ -52,10 +53,10 @@ class VectorStore(ABC):
     @abstractmethod
     def add(
         self,
-        ids: List[str],
+        ids: list[str],
         embeddings: np.ndarray,
-        documents: List[str],
-        metadatas: List[Dict[str, Any]],
+        documents: list[str],
+        metadatas: list[dict[str, Any]],
         collection_name: str = "default",
     ) -> None:
         """Add documents to the vector store.
@@ -75,7 +76,7 @@ class VectorStore(ABC):
         query_embedding: np.ndarray,
         n_results: int = 10,
         collection_name: str = "default",
-        filter_dict: Optional[Dict[str, Any]] = None,
+        filter_dict: dict[str, Any] | None = None,
     ) -> VectorStoreQueryResult:
         """Search for similar documents.
 
@@ -93,7 +94,7 @@ class VectorStore(ABC):
     @abstractmethod
     def delete(
         self,
-        document_ids: List[str],
+        document_ids: list[str],
         collection_name: str = "default",
     ) -> int:
         """Delete documents from the vector store.
@@ -110,10 +111,10 @@ class VectorStore(ABC):
     @abstractmethod
     def update(
         self,
-        ids: List[str],
-        embeddings: Optional[np.ndarray] = None,
-        documents: Optional[List[str]] = None,
-        metadatas: Optional[List[Dict[str, Any]]] = None,
+        ids: list[str],
+        embeddings: np.ndarray | None = None,
+        documents: list[str] | None = None,
+        metadatas: list[dict[str, Any]] | None = None,
         collection_name: str = "default",
     ) -> int:
         """Update documents in the vector store.
@@ -133,9 +134,9 @@ class VectorStore(ABC):
     @abstractmethod
     def get(
         self,
-        document_ids: List[str],
+        document_ids: list[str],
         collection_name: str = "default",
-    ) -> List[VectorStoreDocument]:
+    ) -> list[VectorStoreDocument]:
         """Get documents by ID.
 
         Args:
@@ -160,7 +161,7 @@ class VectorStore(ABC):
         pass
 
     @abstractmethod
-    def list_collections(self) -> List[str]:
+    def list_collections(self) -> list[str]:
         """List all collections.
 
         Returns:
@@ -169,7 +170,7 @@ class VectorStore(ABC):
         pass
 
     @abstractmethod
-    def create_collection(self, name: str, metadata: Optional[Dict] = None) -> None:
+    def create_collection(self, name: str, metadata: dict | None = None) -> None:
         """Create a new collection.
 
         Args:

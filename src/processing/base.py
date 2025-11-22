@@ -8,7 +8,7 @@ implement, along with standardised data models for configuration and output.
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 
 @dataclass
@@ -23,7 +23,7 @@ class ProcessedDocument:
     content: str
     """Markdown-formatted text extracted from the document."""
 
-    tables: List[Dict[str, Any]] = field(default_factory=list)
+    tables: list[dict[str, Any]] = field(default_factory=list)
     """
     Extracted tables with structure preserved.
 
@@ -34,7 +34,7 @@ class ProcessedDocument:
     - 'confidence': float - Extraction confidence (0-1)
     """
 
-    images: List[Dict[str, Any]] = field(default_factory=list)
+    images: list[dict[str, Any]] = field(default_factory=list)
     """
     Extracted images with metadata.
 
@@ -45,7 +45,7 @@ class ProcessedDocument:
     - 'page': int - Page number where image appears
     """
 
-    metadata: Dict[str, Any] = field(default_factory=dict)
+    metadata: dict[str, Any] = field(default_factory=dict)
     """
     Processing metadata including:
     - 'page_count': int - Total number of pages
@@ -89,13 +89,13 @@ class ProcessorConfig:
     enable_ocr: bool = False
     """Whether to perform OCR on scanned documents (future feature)."""
 
-    model_cache_dir: Optional[Path] = None
+    model_cache_dir: Path | None = None
     """Directory for caching ML models (Docling models, etc.)."""
 
     batch_size: int = 1
     """Number of pages to process in a batch."""
 
-    options: Dict[str, Any] = field(default_factory=dict)
+    options: dict[str, Any] = field(default_factory=dict)
     """Processor-specific options as key-value pairs."""
 
 
@@ -159,7 +159,7 @@ class BaseProcessor(ABC):
         pass
 
     @abstractmethod
-    def get_capabilities(self) -> Dict[str, bool]:
+    def get_capabilities(self) -> dict[str, bool]:
         """
         Return the capabilities of this processor.
 

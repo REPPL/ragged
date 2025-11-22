@@ -7,7 +7,7 @@ v0.3.9: Timing and bottleneck identification.
 import time
 from contextlib import contextmanager
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from src.utils.logging import get_logger
 
@@ -20,9 +20,9 @@ class ProfileStage:
 
     name: str
     duration_ms: float
-    metadata: Dict[str, Any] = field(default_factory=dict)
-    start_time: Optional[float] = None
-    end_time: Optional[float] = None
+    metadata: dict[str, Any] = field(default_factory=dict)
+    start_time: float | None = None
+    end_time: float | None = None
 
     @property
     def duration_seconds(self) -> float:
@@ -46,8 +46,8 @@ class PerformanceProfiler:
             enabled: Whether profiling is enabled
         """
         self.enabled = enabled
-        self.stages: List[ProfileStage] = []
-        self._current_stage: Optional[ProfileStage] = None
+        self.stages: list[ProfileStage] = []
+        self._current_stage: ProfileStage | None = None
 
     @contextmanager
     def stage(self, name: str, **metadata: Any):
@@ -124,7 +124,7 @@ class PerformanceProfiler:
         """Get total duration in seconds."""
         return self.total_duration_ms / 1000.0
 
-    def get_slowest_stages(self, top_n: int = 3) -> List[ProfileStage]:
+    def get_slowest_stages(self, top_n: int = 3) -> list[ProfileStage]:
         """
         Get the slowest pipeline stages.
 
@@ -136,7 +136,7 @@ class PerformanceProfiler:
         """
         return sorted(self.stages, key=lambda s: s.duration_ms, reverse=True)[:top_n]
 
-    def analyse_bottlenecks(self, threshold_percent: float = 20.0) -> List[str]:
+    def analyse_bottlenecks(self, threshold_percent: float = 20.0) -> list[str]:
         """
         Analyse bottlenecks and generate recommendations.
 
@@ -237,7 +237,7 @@ class PerformanceProfiler:
             + (f", slowest: {slowest.name} ({slowest.duration_ms:.1f}ms)" if slowest else "")
         )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """
         Convert profiling data to dictionary.
 
