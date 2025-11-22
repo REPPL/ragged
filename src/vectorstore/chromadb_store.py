@@ -57,11 +57,18 @@ class ChromaDBStore(VectorStore):
     ) -> None:
         """Add documents to ChromaDB."""
         collection = self.client.get_or_create_collection(name=collection_name)
+
+        # ChromaDB requires non-empty metadata dictionaries
+        # Add a default key if metadata is empty
+        processed_metadatas = [
+            meta if meta else {"_default": "true"} for meta in metadatas
+        ]
+
         collection.add(
             ids=ids,
             embeddings=embeddings.tolist() if isinstance(embeddings, np.ndarray) else embeddings,
             documents=documents,
-            metadatas=metadatas,
+            metadatas=processed_metadatas,
         )
         logger.debug(f"Added {len(ids)} documents to collection '{collection_name}'")
 
@@ -174,7 +181,9 @@ class ChromaDBStore(VectorStore):
 
     def create_collection(self, name: str, metadata: Optional[Dict] = None) -> None:
         """Create a new collection."""
-        self.client.create_collection(name=name, metadata=metadata or {})
+        # ChromaDB requires non-empty metadata
+        collection_metadata = metadata if metadata else {"created_by": "ragged"}
+        self.client.create_collection(name=name, metadata=collection_metadata)
         logger.info(f"Created collection '{name}'")
 
     def delete_collection(self, name: str) -> None:

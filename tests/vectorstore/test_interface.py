@@ -115,7 +115,7 @@ class TestChromaDBStore:
         ids = ["doc1", "doc2"]
         embeddings = np.array([[0.1, 0.2], [0.3, 0.4]])
         documents = ["Doc 1", "Doc 2"]
-        metadatas = [{}, {}]
+        metadatas = [{"source": "test"}, {"source": "test"}]
 
         store.add(ids, embeddings, documents, metadatas, collection_name="count_test")
         count = store.count(collection_name="count_test")
@@ -126,7 +126,7 @@ class TestChromaDBStore:
         ids = ["doc1", "doc2", "doc3"]
         embeddings = np.array([[0.1, 0.2], [0.3, 0.4], [0.5, 0.6]])
         documents = ["Doc 1", "Doc 2", "Doc 3"]
-        metadatas = [{}, {}, {}]
+        metadatas = [{"source": "test"}, {"source": "test"}, {"source": "test"}]
 
         store.add(ids, embeddings, documents, metadatas, collection_name="delete_test")
         deleted = store.delete(["doc1"], collection_name="delete_test")
@@ -137,8 +137,8 @@ class TestChromaDBStore:
 
     def test_list_collections(self, store):
         """Test listing collections."""
-        store.create_collection("test_collection_1")
-        store.create_collection("test_collection_2")
+        store.create_collection("test_collection_1", metadata={"type": "test"})
+        store.create_collection("test_collection_2", metadata={"type": "test"})
 
         collections = store.list_collections()
         assert "test_collection_1" in collections
