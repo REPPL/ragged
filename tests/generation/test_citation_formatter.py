@@ -7,6 +7,12 @@ from src.generation.citation_formatter import (
     format_ieee_reference,
     format_reference_list,
     format_response_with_references,
+    # v0.3.7c: Enhanced citations
+    extract_quote_from_chunk,
+    format_enhanced_citation,
+    format_enhanced_reference_list,
+    format_response_with_enhanced_citations,
+    deduplicate_citations,
 )
 from src.retrieval.retriever import RetrievedChunk
 
@@ -455,3 +461,465 @@ Third paragraph discusses NLP [3]."""
         # Both should produce same output currently
         assert "document.pdf" in result1
         assert "document.pdf" in result2
+
+
+# v0.3.7c: Enhanced citation tests
+class TestEnhancedCitations:
+    """Tests for enhanced citation formatting with quotes and confidence."""
+
+    def test_extract_quote_short_content(self):
+        """Test quote extraction from short content."""
+        chunk = RetrievedChunk(
+            text="Machine learning is AI.",
+            score=0.95,
+            chunk_id="1",
+            document_id="doc1",
+            document_path="/path/to/doc.pdf",
+            chunk_position=0,
+            metadata={}
+        )
+
+        quote = extract_quote_from_chunk(chunk, max_length=200)
+
+        assert quote == '"Machine learning is AI."'
+
+    def test_extract_quote_long_content(self):
+        """Test quote extraction with truncation."""
+        long_text = "Machine learning is a subset of artificial intelligence " * 10
+        chunk = RetrievedChunk(
+            text=long_text,
+            score=0.95,
+            chunk_id="1",
+            document_id="doc1",
+            document_path="/path/to/doc.pdf",
+            chunk_position=0,
+            metadata={}
+        )
+
+        quote = extract_quote_from_chunk(chunk, max_length=100)
+
+        assert quote.startswith('"Machine learning')
+        assert quote.endswith('..."')
+        assert len(quote) <= 110  # Slightly more than max_length due to ellipsis
+
+    def test_extract_quote_empty_content(self):
+        """Test quote extraction from empty chunk."""
+        chunk = RetrievedChunk(
+            text="",
+            score=0.95,
+            chunk_id="1",
+            document_id="doc1",
+            document_path="/path/to/doc.pdf",
+            chunk_position=0,
+            metadata={}
+        )
+
+        quote = extract_quote_from_chunk(chunk)
+
+        assert quote is None
+
+    def test_extract_quote_word_boundary(self):
+        """Test that truncation respects word boundaries."""
+        chunk = RetrievedChunk(
+            text="The quick brown fox jumps over the lazy dog. " * 10,
+            score=0.95,
+            chunk_id="1",
+            document_id="doc1",
+            document_path="/path/to/doc.pdf",
+            chunk_position=0,
+            metadata={}
+        )
+
+        quote = extract_quote_from_chunk(chunk, max_length=50)
+
+        # Should not cut words in half
+        assert not quote[:-4].endswith("ju")  # Not "ju..." from "jumps"
+        assert quote.endswith('..."')
+
+    def test_format_enhanced_citation_basic(self):
+        """Test basic enhanced citation formatting."""
+        chunk = RetrievedChunk(
+            text="Machine learning is a subset of AI.",
+            score=0.95,
+            chunk_id="doc1_ch001",
+            document_id="doc1",
+            document_path="/path/to/ml_paper.pdf",
+            chunk_position=0,
+            metadata={"page_number": 42, "confidence": 0.95}
+        )
+
+        citation = format_enhanced_citation(
+            citation_num=1,
+            chunk=chunk,
+            include_quote=True,
+            include_confidence=True,
+            include_chunk_id=False
+        )
+
+        assert "[1] Source: ml_paper.pdf, Page 42, Confidence: 0.95" in citation
+        assert '"Machine learning is a subset of AI."' in citation
+
+    def test_format_enhanced_citation_with_chunk_id(self):
+        """Test enhanced citation with chunk ID."""
+        chunk = RetrievedChunk(
+            text="Test content",
+            score=0.95,
+            chunk_id="doc1_ch007",
+            document_id="doc1",
+            document_path="/path/to/doc.pdf",
+            chunk_position=0,
+            metadata={"page_number": 10}
+        )
+
+        citation = format_enhanced_citation(
+            citation_num=1,
+            chunk=chunk,
+            include_chunk_id=True
+        )
+
+        assert "Chunk ID: doc1_ch007" in citation
+
+    def test_format_enhanced_citation_no_quote(self):
+        """Test enhanced citation without quote."""
+        chunk = RetrievedChunk(
+            text="Some content",
+            score=0.95,
+            chunk_id="1",
+            document_id="doc1",
+            document_path="/path/to/doc.pdf",
+            chunk_position=0,
+            metadata={"page_number": 5, "confidence": 0.88}
+        )
+
+        citation = format_enhanced_citation(
+            citation_num=1,
+            chunk=chunk,
+            include_quote=False,
+            include_confidence=True
+        )
+
+        assert "[1] Source: doc.pdf, Page 5, Confidence: 0.88" in citation
+        assert '"Some content"' not in citation
+
+    def test_format_enhanced_citation_no_confidence(self):
+        """Test enhanced citation without confidence score."""
+        chunk = RetrievedChunk(
+            text="Content",
+            score=0.95,
+            chunk_id="1",
+            document_id="doc1",
+            document_path="/path/to/doc.pdf",
+            chunk_position=0,
+            metadata={"page_number": 3}
+        )
+
+        citation = format_enhanced_citation(
+            citation_num=1,
+            chunk=chunk,
+            include_confidence=False
+        )
+
+        assert "Confidence" not in citation
+        assert "[1] Source: doc.pdf, Page 3" in citation
+
+    def test_format_enhanced_citation_no_page(self):
+        """Test enhanced citation without page number."""
+        chunk = RetrievedChunk(
+            text="Content",
+            score=0.95,
+            chunk_id="1",
+            document_id="doc1",
+            document_path="/path/to/doc.txt",
+            chunk_position=0,
+            metadata={"confidence": 0.92}
+        )
+
+        citation = format_enhanced_citation(
+            citation_num=1,
+            chunk=chunk,
+            include_confidence=True
+        )
+
+        assert "[1] Source: doc.txt, Confidence: 0.92" in citation
+        assert "Page" not in citation
+
+    def test_format_enhanced_reference_list_basic(self):
+        """Test enhanced reference list formatting."""
+        chunks = [
+            RetrievedChunk(
+                text="ML is AI.",
+                score=0.95,
+                chunk_id="1",
+                document_id="doc1",
+                document_path="/path/to/ml.pdf",
+                chunk_position=0,
+                metadata={"page_number": 3, "confidence": 0.95}
+            ),
+            RetrievedChunk(
+                text="DL uses neural networks.",
+                score=0.90,
+                chunk_id="2",
+                document_id="doc2",
+                document_path="/path/to/dl.pdf",
+                chunk_position=0,
+                metadata={"page_number": 42, "confidence": 0.88}
+            ),
+        ]
+
+        references = format_enhanced_reference_list(
+            chunks=chunks,
+            include_quotes=True,
+            include_confidence=True
+        )
+
+        assert "[1] Source: ml.pdf, Page 3, Confidence: 0.95" in references
+        assert '"ML is AI."' in references
+        assert "[2] Source: dl.pdf, Page 42, Confidence: 0.88" in references
+        assert '"DL uses neural networks."' in references
+
+    def test_format_enhanced_reference_list_with_filter(self):
+        """Test enhanced reference list with cited_numbers filter."""
+        chunks = [
+            RetrievedChunk(
+                text="Content 1",
+                score=0.95,
+                chunk_id="1",
+                document_id="doc1",
+                document_path="/path/to/doc1.pdf",
+                chunk_position=0,
+                metadata={"confidence": 0.95}
+            ),
+            RetrievedChunk(
+                text="Content 2",
+                score=0.90,
+                chunk_id="2",
+                document_id="doc2",
+                document_path="/path/to/doc2.pdf",
+                chunk_position=0,
+                metadata={"confidence": 0.90}
+            ),
+            RetrievedChunk(
+                text="Content 3",
+                score=0.85,
+                chunk_id="3",
+                document_id="doc3",
+                document_path="/path/to/doc3.pdf",
+                chunk_position=0,
+                metadata={"confidence": 0.85}
+            ),
+        ]
+
+        # Only include citations 1 and 3
+        references = format_enhanced_reference_list(
+            chunks=chunks,
+            cited_numbers=[1, 3]
+        )
+
+        assert "[1]" in references
+        assert "[3]" in references
+        assert "[2]" not in references
+
+    def test_format_enhanced_reference_list_confidence_threshold(self):
+        """Test filtering by confidence threshold."""
+        chunks = [
+            RetrievedChunk(
+                text="High confidence",
+                score=0.95,
+                chunk_id="1",
+                document_id="doc1",
+                document_path="/path/to/doc1.pdf",
+                chunk_position=0,
+                metadata={"confidence": 0.95}
+            ),
+            RetrievedChunk(
+                text="Low confidence",
+                score=0.40,
+                chunk_id="2",
+                document_id="doc2",
+                document_path="/path/to/doc2.pdf",
+                chunk_position=0,
+                metadata={"confidence": 0.25}
+            ),
+        ]
+
+        # Filter out confidence < 0.5
+        references = format_enhanced_reference_list(
+            chunks=chunks,
+            confidence_threshold=0.5
+        )
+
+        assert "doc1.pdf" in references
+        assert "doc2.pdf" not in references
+
+    def test_format_enhanced_reference_list_empty(self):
+        """Test enhanced reference list with empty chunks."""
+        references = format_enhanced_reference_list([])
+
+        assert references == ""
+
+    def test_format_response_with_enhanced_citations_basic(self):
+        """Test formatting response with enhanced citations."""
+        response_text = "Machine learning is AI [1]. Deep learning uses neural nets [2]."
+        chunks = [
+            RetrievedChunk(
+                text="ML is a subset of AI that focuses on learning from data.",
+                score=0.95,
+                chunk_id="1",
+                document_id="doc1",
+                document_path="/path/to/ml.pdf",
+                chunk_position=0,
+                metadata={"page_number": 3, "confidence": 0.95}
+            ),
+            RetrievedChunk(
+                text="Deep learning uses neural networks with multiple layers.",
+                score=0.90,
+                chunk_id="2",
+                document_id="doc2",
+                document_path="/path/to/dl.pdf",
+                chunk_position=0,
+                metadata={"page_number": 42, "confidence": 0.88}
+            ),
+        ]
+
+        result = format_response_with_enhanced_citations(
+            response_text=response_text,
+            chunks=chunks,
+            include_quotes=True,
+            include_confidence=True
+        )
+
+        assert "Machine learning is AI [1]" in result
+        assert "**References:**" in result
+        assert "[1] Source: ml.pdf, Page 3, Confidence: 0.95" in result
+        assert '"ML is a subset of AI' in result
+        assert "[2] Source: dl.pdf, Page 42, Confidence: 0.88" in result
+
+    def test_format_response_with_enhanced_citations_no_quotes(self):
+        """Test enhanced response without quotes."""
+        response_text = "Text [1]."
+        chunks = [
+            RetrievedChunk(
+                text="Some content",
+                score=0.95,
+                chunk_id="1",
+                document_id="doc1",
+                document_path="/path/to/doc.pdf",
+                chunk_position=0,
+                metadata={"confidence": 0.92}
+            ),
+        ]
+
+        result = format_response_with_enhanced_citations(
+            response_text=response_text,
+            chunks=chunks,
+            include_quotes=False,
+            include_confidence=True
+        )
+
+        assert "[1] Source: doc.pdf, Confidence: 0.92" in result
+        assert '"Some content"' not in result
+
+    def test_format_response_with_enhanced_citations_threshold(self):
+        """Test enhanced response with confidence threshold."""
+        response_text = "Text [1] and [2]."
+        chunks = [
+            RetrievedChunk(
+                text="High confidence content",
+                score=0.95,
+                chunk_id="1",
+                document_id="doc1",
+                document_path="/path/to/doc1.pdf",
+                chunk_position=0,
+                metadata={"confidence": 0.95}
+            ),
+            RetrievedChunk(
+                text="Low confidence content",
+                score=0.50,
+                chunk_id="2",
+                document_id="doc2",
+                document_path="/path/to/doc2.pdf",
+                chunk_position=0,
+                metadata={"confidence": 0.25}
+            ),
+        ]
+
+        result = format_response_with_enhanced_citations(
+            response_text=response_text,
+            chunks=chunks,
+            confidence_threshold=0.5  # Filter out [2]
+        )
+
+        assert "doc1.pdf" in result
+        assert "doc2.pdf" not in result
+
+    def test_format_response_with_enhanced_citations_empty_chunks(self):
+        """Test enhanced response with no chunks."""
+        response_text = "Text with no sources."
+
+        result = format_response_with_enhanced_citations(
+            response_text=response_text,
+            chunks=[]
+        )
+
+        assert result == response_text
+        assert "References" not in result
+
+    def test_deduplicate_citations_basic(self):
+        """Test basic citation deduplication."""
+        citations = [
+            {"source": "paper.pdf", "page": 42, "quote": "First quote"},
+            {"source": "paper.pdf", "page": 42, "quote": "Second quote"},
+            {"source": "book.pdf", "page": 10, "quote": "Different source"},
+        ]
+
+        deduplicated = deduplicate_citations(citations)
+
+        assert len(deduplicated) == 2
+        assert deduplicated[0]["source"] == "paper.pdf"
+        assert deduplicated[1]["source"] == "book.pdf"
+
+    def test_deduplicate_citations_different_pages(self):
+        """Test that same source with different pages is not deduplicated."""
+        citations = [
+            {"source": "paper.pdf", "page": 42},
+            {"source": "paper.pdf", "page": 43},
+            {"source": "paper.pdf", "page": 44},
+        ]
+
+        deduplicated = deduplicate_citations(citations)
+
+        assert len(deduplicated) == 3
+
+    def test_deduplicate_citations_no_page(self):
+        """Test deduplication with None page numbers."""
+        citations = [
+            {"source": "doc.txt", "page": None, "quote": "First"},
+            {"source": "doc.txt", "page": None, "quote": "Second"},
+        ]
+
+        deduplicated = deduplicate_citations(citations)
+
+        # Should deduplicate based on (source, None) key
+        assert len(deduplicated) == 1
+
+    def test_deduplicate_citations_empty_list(self):
+        """Test deduplication of empty list."""
+        deduplicated = deduplicate_citations([])
+
+        assert deduplicated == []
+
+    def test_deduplicate_citations_preserves_order(self):
+        """Test that deduplication preserves first occurrence order."""
+        citations = [
+            {"source": "a.pdf", "page": 1},
+            {"source": "b.pdf", "page": 2},
+            {"source": "a.pdf", "page": 1},  # Duplicate
+            {"source": "c.pdf", "page": 3},
+        ]
+
+        deduplicated = deduplicate_citations(citations)
+
+        assert len(deduplicated) == 3
+        assert deduplicated[0]["source"] == "a.pdf"
+        assert deduplicated[1]["source"] == "b.pdf"
+        assert deduplicated[2]["source"] == "c.pdf"
