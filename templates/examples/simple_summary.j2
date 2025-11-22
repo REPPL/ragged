@@ -1,0 +1,22 @@
+# Summary Report
+
+**Document:** {{ document | default("N/A") }}
+**Generated:** {{ timestamp | default("N/A") }}
+
+## Overview
+
+This is a simple template example demonstrating variable substitution.
+
+## Details
+
+- Primary Topic: {{ topic | default("General") }}
+- Category: {{ category | default("Uncategorised") }}
+- Status: {{ status | default("Draft") }}
+
+## Notes
+
+{{ notes | default("No additional notes provided.") | truncate_words(50) }}
+
+---
+
+*Generated with ragged template engine*
