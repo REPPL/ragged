@@ -1,16 +1,28 @@
 """Plugin validation and security scanning.
 
 Automated security checks for plugins before execution.
+
+SECURITY FIX (HIGH-1): Added strict manifest validation
 """
 
 from dataclasses import dataclass
 from enum import Enum
-from typing import List, Optional, Dict
+from typing import List, Optional, Dict, Set
 from pathlib import Path
 import re
 import logging
+import toml
 
 logger = logging.getLogger(__name__)
+
+# SECURITY FIX (HIGH-1): Security constraints for plugin manifests
+MAX_PERMISSIONS = 5  # Maximum permissions a plugin can request
+MAX_DEPENDENCIES = 10  # Maximum dependencies a plugin can declare
+MAX_NAME_LENGTH = 50  # Maximum length for plugin name
+MAX_VERSION_LENGTH = 20  # Maximum length for version string
+MAX_DESCRIPTION_LENGTH = 500  # Maximum length for description
+ALLOWED_NAME_PATTERN = re.compile(r"^[a-zA-Z0-9_\-\.]+$")  # Alphanumeric, underscore, hyphen, dot
+ALLOWED_VERSION_PATTERN = re.compile(r"^\d+\.\d+\.\d+(-[a-zA-Z0-9]+)?$")  # Semantic versioning
 
 
 class ValidationSeverity(Enum):
@@ -182,6 +194,197 @@ class PluginValidator:
         score = max(0.0, 1.0 - penalty)
 
         return score
+
+    def validate_manifest(self, manifest_path: Path) -> ValidationResult:
+        """Validate plugin manifest structure and content.
+
+        SECURITY FIX (HIGH-1): Strict manifest validation
+
+        Args:
+            manifest_path: Path to plugin.toml manifest file
+
+        Returns:
+            ValidationResult with any issues found
+        """
+        issues: List[ValidationIssue] = []
+
+        # Check manifest exists
+        if not manifest_path.exists():
+            issues.append(
+                ValidationIssue(
+                    severity=ValidationSeverity.CRITICAL,
+                    message="Plugin manifest (plugin.toml) not found",
+                    file=str(manifest_path),
+                )
+            )
+            return ValidationResult(passed=False, issues=issues, score=0.0)
+
+        try:
+            # Parse TOML
+            manifest = toml.load(manifest_path)
+        except Exception as e:
+            issues.append(
+                ValidationIssue(
+                    severity=ValidationSeverity.CRITICAL,
+                    message=f"Failed to parse plugin.toml: {e}",
+                    file=str(manifest_path),
+                )
+            )
+            return ValidationResult(passed=False, issues=issues, score=0.0)
+
+        # Validate required sections
+        required_sections = ["plugin", "permissions"]
+        for section in required_sections:
+            if section not in manifest:
+                issues.append(
+                    ValidationIssue(
+                        severity=ValidationSeverity.ERROR,
+                        message=f"Missing required section [{section}] in manifest",
+                        file=str(manifest_path),
+                    )
+                )
+
+        # Validate [plugin] section
+        if "plugin" in manifest:
+            plugin_section = manifest["plugin"]
+
+            # Required fields in [plugin]
+            required_fields = ["name", "version", "type", "description", "author"]
+            for field in required_fields:
+                if field not in plugin_section:
+                    issues.append(
+                        ValidationIssue(
+                            severity=ValidationSeverity.ERROR,
+                            message=f"Missing required field '{field}' in [plugin] section",
+                            file=str(manifest_path),
+                        )
+                    )
+
+            # Validate name
+            name = plugin_section.get("name", "")
+            if not ALLOWED_NAME_PATTERN.match(name):
+                issues.append(
+                    ValidationIssue(
+                        severity=ValidationSeverity.ERROR,
+                        message=f"Plugin name '{name}' contains invalid characters. "
+                                "Only alphanumeric, underscore, hyphen, and dot allowed.",
+                        file=str(manifest_path),
+                    )
+                )
+            if len(name) > MAX_NAME_LENGTH:
+                issues.append(
+                    ValidationIssue(
+                        severity=ValidationSeverity.ERROR,
+                        message=f"Plugin name '{name}' exceeds maximum length of {MAX_NAME_LENGTH}",
+                        file=str(manifest_path),
+                    )
+                )
+
+            # Validate version
+            version = plugin_section.get("version", "")
+            if not ALLOWED_VERSION_PATTERN.match(version):
+                issues.append(
+                    ValidationIssue(
+                        severity=ValidationSeverity.ERROR,
+                        message=f"Plugin version '{version}' must follow semantic versioning (e.g., 1.0.0)",
+                        file=str(manifest_path),
+                    )
+                )
+            if len(version) > MAX_VERSION_LENGTH:
+                issues.append(
+                    ValidationIssue(
+                        severity=ValidationSeverity.ERROR,
+                        message=f"Plugin version exceeds maximum length of {MAX_VERSION_LENGTH}",
+                        file=str(manifest_path),
+                    )
+                )
+
+            # Validate description length
+            description = plugin_section.get("description", "")
+            if len(description) > MAX_DESCRIPTION_LENGTH:
+                issues.append(
+                    ValidationIssue(
+                        severity=ValidationSeverity.WARNING,
+                        message=f"Description exceeds recommended length of {MAX_DESCRIPTION_LENGTH}",
+                        file=str(manifest_path),
+                    )
+                )
+
+            # Validate plugin type
+            plugin_type = plugin_section.get("type", "")
+            valid_types = ["embedder", "retriever", "processor", "command"]
+            if plugin_type not in valid_types:
+                issues.append(
+                    ValidationIssue(
+                        severity=ValidationSeverity.ERROR,
+                        message=f"Invalid plugin type '{plugin_type}'. Must be one of: {valid_types}",
+                        file=str(manifest_path),
+                    )
+                )
+
+        # Validate [permissions] section
+        if "permissions" in manifest:
+            perms = manifest["permissions"]
+
+            # Count total permissions
+            required_perms = perms.get("required", [])
+            optional_perms = perms.get("optional", [])
+            total_perms = len(required_perms) + len(optional_perms)
+
+            if total_perms > MAX_PERMISSIONS:
+                issues.append(
+                    ValidationIssue(
+                        severity=ValidationSeverity.ERROR,
+                        message=f"Plugin requests {total_perms} permissions, "
+                                f"exceeding maximum of {MAX_PERMISSIONS}",
+                        file=str(manifest_path),
+                    )
+                )
+
+            # Validate permission format
+            valid_permission_pattern = re.compile(r"^[a-z]+:[a-z_]+$")
+            for perm in required_perms + optional_perms:
+                if not valid_permission_pattern.match(perm):
+                    issues.append(
+                        ValidationIssue(
+                            severity=ValidationSeverity.ERROR,
+                            message=f"Invalid permission format '{perm}'. "
+                                    "Must be 'category:permission' (e.g., 'read:documents')",
+                            file=str(manifest_path),
+                        )
+                    )
+
+        # Validate [dependencies] section if present
+        if "dependencies" in manifest:
+            dependencies = manifest["dependencies"]
+
+            if len(dependencies) > MAX_DEPENDENCIES:
+                issues.append(
+                    ValidationIssue(
+                        severity=ValidationSeverity.WARNING,
+                        message=f"Plugin declares {len(dependencies)} dependencies, "
+                                f"exceeding recommended maximum of {MAX_DEPENDENCIES}",
+                        file=str(manifest_path),
+                    )
+                )
+
+            # Check dependency version pinning
+            for dep_name, dep_spec in dependencies.items():
+                if dep_spec == "*" or not dep_spec:
+                    issues.append(
+                        ValidationIssue(
+                            severity=ValidationSeverity.WARNING,
+                            message=f"Dependency '{dep_name}' not version-pinned. "
+                                    "Recommend specific version for security.",
+                            file=str(manifest_path),
+                        )
+                    )
+
+        # Calculate score
+        score = self._calculate_score(issues)
+        passed = not any(i.severity in (ValidationSeverity.CRITICAL, ValidationSeverity.ERROR) for i in issues)
+
+        return ValidationResult(passed=passed, issues=issues, score=score)
 
     def validate_permissions(self, requested: List[str], manifest: Dict) -> ValidationResult:
         """Validate that requested permissions match manifest.
