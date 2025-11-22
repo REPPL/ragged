@@ -3,11 +3,13 @@ IEEE-style citation formatting for RAG responses.
 
 Provides functions to format retrieved chunks as numbered citations
 with a formatted reference list in IEEE style.
+
+v0.3.7c: Enhanced citations with quotes, confidence scores, and chunk IDs.
 """
 
 import re
 from pathlib import Path
-from typing import List, Optional
+from typing import List, Optional, Dict, Any
 
 from src.retrieval.retriever import RetrievedChunk
 
@@ -162,3 +164,238 @@ def format_response_with_references(
     formatted = f"{response_text}\n\n**References:**\n{references}"
 
     return formatted
+
+
+# v0.3.7c: Enhanced citation functions
+
+def extract_quote_from_chunk(
+    chunk: RetrievedChunk,
+    max_length: int = 200,
+    context_words: int = 5
+) -> Optional[str]:
+    """
+    Extract a representative quote from a chunk.
+
+    Args:
+        chunk: Retrieved chunk to extract quote from
+        max_length: Maximum quote length in characters
+        context_words: Number of words for context on each side
+
+    Returns:
+        Extracted quote string, or None if chunk has no content
+
+    Example:
+        >>> chunk = RetrievedChunk(text="Machine learning is...")
+        >>> extract_quote_from_chunk(chunk, max_length=50)
+        '"Machine learning is a subset of artificial..."'
+    """
+    if not hasattr(chunk, 'text') or not chunk.text:
+        return None
+
+    content = chunk.text.strip()
+
+    # If content is short enough, use it all
+    if len(content) <= max_length:
+        return f'"{content}"'
+
+    # Otherwise, extract first part with ellipsis
+    quote = content[:max_length].rsplit(' ', 1)[0]  # Break at word boundary
+    return f'"{quote}..."'
+
+
+def format_enhanced_citation(
+    citation_num: int,
+    chunk: RetrievedChunk,
+    include_quote: bool = True,
+    include_confidence: bool = True,
+    include_chunk_id: bool = False
+) -> str:
+    """
+    Format an enhanced citation with quote, confidence, and metadata.
+
+    Args:
+        citation_num: Citation number [N]
+        chunk: Retrieved chunk
+        include_quote: Whether to include direct quote
+        include_confidence: Whether to include confidence score
+        include_chunk_id: Whether to include chunk ID (for debugging)
+
+    Returns:
+        Enhanced citation string
+
+    Example:
+        [1] Source: paper.pdf, Page 42, Confidence: 0.95
+        "Machine learning is a subset of artificial intelligence that focuses..."
+        Chunk ID: doc1_ch007
+    """
+    lines = []
+
+    # Extract metadata
+    doc_path = chunk.document_path or "Unknown"
+    filename = Path(doc_path).name if doc_path != "Unknown" else "Unknown"
+    page = chunk.metadata.get("page_number") if chunk.metadata else None
+    confidence = getattr(chunk, 'confidence', None) or chunk.metadata.get("confidence") if chunk.metadata else None
+
+    # First line: Basic citation info
+    citation_parts = [f"Source: {filename}"]
+
+    if page is not None:
+        citation_parts.append(f"Page {page}")
+
+    if include_confidence and confidence is not None:
+        citation_parts.append(f"Confidence: {confidence:.2f}")
+
+    lines.append(f"[{citation_num}] {', '.join(citation_parts)}")
+
+    # Quote (if requested and available)
+    if include_quote:
+        quote = extract_quote_from_chunk(chunk)
+        if quote:
+            lines.append(quote)
+
+    # Chunk ID (if requested)
+    if include_chunk_id and hasattr(chunk, 'chunk_id'):
+        lines.append(f"Chunk ID: {chunk.chunk_id}")
+
+    return "\n".join(lines)
+
+
+def format_enhanced_reference_list(
+    chunks: List[RetrievedChunk],
+    cited_numbers: Optional[List[int]] = None,
+    include_quotes: bool = True,
+    include_confidence: bool = True,
+    confidence_threshold: float = 0.0
+) -> str:
+    """
+    Format enhanced reference list with quotes and confidence scores.
+
+    Args:
+        chunks: List of retrieved chunks
+        cited_numbers: Optional list of actually cited numbers
+        include_quotes: Whether to include direct quotes
+        include_confidence: Whether to show confidence scores
+        confidence_threshold: Minimum confidence to include (0.0-1.0)
+
+    Returns:
+        Formatted enhanced reference list
+
+    Example:
+        [1] Source: paper.pdf, Page 42, Confidence: 0.95
+        "Machine learning is a subset of artificial intelligence..."
+
+        [2] Source: book.pdf, Page 15, Confidence: 0.88
+        "Neural networks are computational models inspired by..."
+    """
+    if not chunks:
+        return ""
+
+    references = []
+
+    for i, chunk in enumerate(chunks, start=1):
+        # Skip if not cited
+        if cited_numbers is not None and i not in cited_numbers:
+            continue
+
+        # Skip if below confidence threshold
+        confidence = getattr(chunk, 'confidence', None) or chunk.metadata.get("confidence") if chunk.metadata else None
+        if confidence is not None and confidence < confidence_threshold:
+            continue
+
+        # Format enhanced citation
+        citation = format_enhanced_citation(
+            citation_num=i,
+            chunk=chunk,
+            include_quote=include_quotes,
+            include_confidence=include_confidence
+        )
+
+        references.append(citation)
+
+    return "\n\n".join(references)
+
+
+def format_response_with_enhanced_citations(
+    response_text: str,
+    chunks: List[RetrievedChunk],
+    include_quotes: bool = True,
+    include_confidence: bool = True,
+    confidence_threshold: float = 0.3,
+    include_unused_refs: bool = False
+) -> str:
+    """
+    Format response with enhanced citations including quotes and confidence.
+
+    Args:
+        response_text: Generated response with [N] citations
+        chunks: Retrieved chunks used
+        include_quotes: Whether to include direct quotes from sources
+        include_confidence: Whether to show confidence scores
+        confidence_threshold: Minimum confidence to include citation
+        include_unused_refs: Whether to include uncited references
+
+    Returns:
+        Formatted response with enhanced reference list
+
+    Example:
+        Machine learning is defined as... [1]
+
+        References:
+        [1] Source: ml_guide.pdf, Page 3, Confidence: 0.95
+        "Machine learning is a subset of artificial intelligence..."
+    """
+    if not chunks:
+        return response_text
+
+    # Extract cited numbers
+    cited_numbers = extract_citation_numbers(response_text) if not include_unused_refs else None
+
+    # Format enhanced references
+    references = format_enhanced_reference_list(
+        chunks=chunks,
+        cited_numbers=cited_numbers,
+        include_quotes=include_quotes,
+        include_confidence=include_confidence,
+        confidence_threshold=confidence_threshold
+    )
+
+    if not references:
+        return response_text
+
+    # Combine
+    formatted = f"{response_text}\n\n**References:**\n{references}"
+
+    return formatted
+
+
+def deduplicate_citations(citations: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """
+    Deduplicate citations based on source and page.
+
+    Args:
+        citations: List of citation dictionaries with 'source' and 'page' keys
+
+    Returns:
+        Deduplicated list of citations
+
+    Example:
+        >>> citations = [
+        ...     {"source": "paper.pdf", "page": 42, "quote": "ML is..."},
+        ...     {"source": "paper.pdf", "page": 42, "quote": "Machine learning..."},
+        ...     {"source": "book.pdf", "page": 10, "quote": "AI is..."}
+        ... ]
+        >>> deduplicated = deduplicate_citations(citations)
+        >>> len(deduplicated)
+        2
+    """
+    seen = set()
+    deduplicated = []
+
+    for citation in citations:
+        key = (citation.get('source'), citation.get('page'))
+
+        if key not in seen:
+            seen.add(key)
+            deduplicated.append(citation)
+
+    return deduplicated
