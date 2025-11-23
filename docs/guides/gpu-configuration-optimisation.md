@@ -139,21 +139,6 @@ Required VRAM = Model Size + (Batch Size × Page Size)
 
 ## Batch Size Optimisation
 
-### Automatic Optimisation
-
-Let ragged calculate optimal batch size:
-
-```bash
-ragged gpu optimize-batch-size
-```
-
-**Example output:**
-```
-Analysing GPU: NVIDIA RTX 4090 (24GB)
-Recommended batch size: 8
-Estimated performance: ~5 pages/second
-```
-
 ### Manual Configuration
 
 #### Environment Variable (Persistent)
@@ -384,9 +369,10 @@ RuntimeError: MPS backend out of memory
 
 **Solutions:**
 
-1. **Increase batch size:**
+1. **Benchmark different batch sizes:**
    ```bash
-   ragged gpu optimize-batch-size  # Get recommendation
+   ragged gpu benchmark --batch-size 4
+   ragged gpu benchmark --batch-size 8
    ```
 
 2. **Verify GPU is being used:**

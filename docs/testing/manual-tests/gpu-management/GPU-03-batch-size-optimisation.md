@@ -17,9 +17,6 @@ Verify automatic batch size optimization based on available GPU memory.
 ## Test Commands
 
 ```bash
-# Auto-detect optimal batch size
-ragged gpu optimize-batch-size
-
 # Test with different batch sizes
 ragged ingest pdf examples/sample_documents/*.pdf --vision --vision-batch-size 1
 ragged ingest pdf examples/sample_documents/*.pdf --vision --vision-batch-size 4
