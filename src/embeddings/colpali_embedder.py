@@ -30,6 +30,10 @@ import numpy as np
 import torch
 
 from ragged.embeddings.base import BaseEmbedder
+from src.gpu.batch_sizer import AdaptiveBatchSizer, BatchSizeConfig
+from src.gpu.device_manager import DeviceInfo, DeviceManager, DeviceType
+from src.gpu.memory_monitor import MemoryMonitor
+from src.gpu.oom_handler import OOMHandler
 
 logger = logging.getLogger(__name__)
 
@@ -49,61 +53,150 @@ class ColPaliEmbedder(BaseEmbedder):
     GPU acceleration is used when available, with automatic fallback to CPU.
     Supports CUDA (NVIDIA), MPS (Apple Silicon), and CPU devices.
 
+    Features (v0.5.2):
+    - Automatic device detection (CUDA > MPS > CPU priority)
+    - Adaptive batch sizing based on available GPU memory
+    - Memory monitoring with threshold callbacks
+    - Automatic OOM recovery (cache clearing → batch reduction → CPU fallback)
+
     Attributes:
         model_name (str): HuggingFace model identifier
-        device (str): Computation device ('cuda', 'mps', or 'cpu')
-        batch_size (int): Number of pages to process simultaneously
+        device_info (DeviceInfo): Computation device information
+        batch_size (int): Current batch size (adaptive if enabled)
         cache_dir (Optional[Path]): Model cache directory
         model: Loaded ColPali model
         processor: Image preprocessing pipeline
+        device_manager (DeviceManager): GPU/CPU device manager
+        memory_monitor (Optional[MemoryMonitor]): GPU memory monitor
+        batch_sizer (Optional[AdaptiveBatchSizer]): Adaptive batch sizer
+        oom_handler (Optional[OOMHandler]): OOM recovery handler
 
     Example:
+        >>> # Automatic device selection and adaptive batching
         >>> embedder = ColPaliEmbedder()
         >>> image = Image.open("document_page.png")
         >>> embedding = embedder.embed_page(image)
         >>> embedding.shape
         (128,)
+        >>> # With custom configuration
+        >>> embedder = ColPaliEmbedder(
+        ...     device="cuda",
+        ...     enable_adaptive_batching=True,
+        ...     enable_memory_monitoring=True
+        ... )
         >>> embedder.get_device_info()
-        {'device': 'cuda', 'name': 'NVIDIA RTX 4090', 'vram_free_gb': 18.5}
+        {'device': 'cuda', 'name': 'NVIDIA RTX 4090', 'total_memory_gb': 24.0, 'free_memory_gb': 18.5}
     """
 
     def __init__(
         self,
         model_name: str = "vidore/colpali-v1.3-hf",
         device: Optional[str] = None,
-        batch_size: int = 4,
+        batch_size: Optional[int] = None,
         cache_dir: Optional[Path] = None,
+        enable_adaptive_batching: bool = True,
+        enable_memory_monitoring: bool = True,
+        enable_oom_recovery: bool = True,
+        batch_size_config: Optional[BatchSizeConfig] = None,
     ) -> None:
         """
-        Initialise ColPali vision embedder.
+        Initialise ColPali vision embedder with GPU resource management.
 
         Args:
             model_name: HuggingFace model identifier for ColPali
                        Default: "vidore/colpali-v1.3-hf" (native transformers support)
             device: Computation device ('cuda', 'mps', 'cpu', or None for auto-detect)
                    Priority: CUDA > MPS > CPU
-            batch_size: Number of pages to process in parallel
-                       Guidelines: 4GB VRAM=1-2, 8GB=4-6, 16GB=8-12, 24GB+=16-32
+            batch_size: Fixed batch size (None = adaptive based on GPU memory)
+                       Guidelines if fixed: 4GB VRAM=1-2, 8GB=4-6, 16GB=8-12, 24GB+=16-32
             cache_dir: Directory for model cache (None = HuggingFace default ~/.cache)
+            enable_adaptive_batching: Automatically adjust batch size based on GPU memory
+            enable_memory_monitoring: Monitor GPU memory usage with threshold callbacks
+            enable_oom_recovery: Automatic OOM recovery (cache → batch reduction → CPU)
+            batch_size_config: Custom batch size configuration (overrides defaults)
 
         Raises:
-            RuntimeError: If model fails to load
-            ValueError: If specified device is unavailable
+            RuntimeError: If model fails to load or device unavailable
+            ValueError: If configuration is invalid
 
         Example:
-            >>> # Auto-detect best device
+            >>> # Auto-detect device with adaptive batching
             >>> embedder = ColPaliEmbedder()
-            >>> # Force specific device
+            >>> # Force specific device with fixed batch size
             >>> embedder = ColPaliEmbedder(device="cuda", batch_size=8)
-            >>> # Custom cache location
-            >>> embedder = ColPaliEmbedder(cache_dir=Path("/mnt/models"))
+            >>> # Custom batch size configuration
+            >>> config = BatchSizeConfig(min_batch_size=2, max_batch_size=16)
+            >>> embedder = ColPaliEmbedder(batch_size_config=config)
+            >>> # Disable adaptive features for deterministic behavior
+            >>> embedder = ColPaliEmbedder(
+            ...     enable_adaptive_batching=False,
+            ...     enable_memory_monitoring=False,
+            ...     batch_size=4
+            ... )
         """
         self.model_name = model_name
-        self.batch_size = batch_size
         self.cache_dir = cache_dir
 
-        # Detect optimal device
-        self.device = self._detect_device(device)
+        # Initialise GPU device manager
+        logger.info("Initialising GPU device manager")
+        self.device_manager = DeviceManager()
+        self.device_info = self.device_manager.get_optimal_device(
+            device_hint=device, min_memory_gb=4.0  # ColPali requires ~4GB minimum
+        )
+
+        logger.info(f"Selected device: {self.device_info}")
+
+        # Initialise memory monitoring (GPU only)
+        self.memory_monitor: Optional[MemoryMonitor] = None
+        if enable_memory_monitoring and self.device_info.device_type != DeviceType.CPU:
+            logger.info("Enabling GPU memory monitoring")
+            self.memory_monitor = MemoryMonitor(
+                device=self.device_info,
+                device_manager=self.device_manager,
+                warning_threshold_pct=85.0,
+                critical_threshold_pct=95.0,
+            )
+
+        # Initialise adaptive batch sizer
+        self.batch_sizer: Optional[AdaptiveBatchSizer] = None
+        if enable_adaptive_batching:
+            logger.info("Enabling adaptive batch sizing")
+            self.batch_sizer = AdaptiveBatchSizer(
+                device=self.device_info,
+                memory_monitor=self.memory_monitor,
+                config=batch_size_config or BatchSizeConfig(),
+            )
+
+        # Determine batch size
+        if batch_size is not None:
+            # User-specified fixed batch size
+            self.batch_size = batch_size
+            logger.info(f"Using fixed batch size: {batch_size}")
+        elif self.batch_sizer:
+            # Adaptive batch sizing
+            # ColPali: 768-dim embeddings (internal), 1024 sequence length
+            self.batch_size = self.batch_sizer.calculate_batch_size(
+                embedding_dim=768, sequence_length=1024, bytes_per_element=4
+            )
+            logger.info(f"Calculated adaptive batch size: {self.batch_size}")
+        else:
+            # Fallback default
+            self.batch_size = 4
+            logger.info(f"Using default batch size: {self.batch_size}")
+
+        # Initialise OOM handler
+        self.oom_handler: Optional[OOMHandler] = None
+        if enable_oom_recovery:
+            logger.info("Enabling OOM recovery")
+            self.oom_handler = OOMHandler(
+                device_manager=self.device_manager,
+                enable_cache_clearing=True,
+                enable_batch_reduction=True,
+                enable_cpu_fallback=True,
+            )
+
+        # Store device string for backward compatibility
+        self.device = self.device_info.device_type.value
 
         logger.info(f"Initialising ColPali embedder on device: {self.device}")
 
@@ -112,64 +205,6 @@ class ColPaliEmbedder(BaseEmbedder):
 
         logger.info("ColPali embedder initialised successfully")
 
-    def _detect_device(self, device: Optional[str]) -> str:
-        """
-        Detect optimal computation device (GPU/CPU).
-
-        Device selection priority: CUDA > MPS (Apple Silicon) > CPU
-
-        Args:
-            device: User-specified device or None for auto-detect
-
-        Returns:
-            Device string ('cuda', 'mps', or 'cpu')
-
-        Raises:
-            ValueError: If specified device is unavailable
-
-        Example:
-            >>> embedder = ColPaliEmbedder()
-            >>> embedder._detect_device(None)  # Auto-detect
-            'cuda'  # On NVIDIA system
-            >>> embedder._detect_device("mps")  # Force MPS
-            'mps'  # On Apple Silicon
-        """
-        if device:
-            # Validate user-specified device
-            if device == "cuda" and not torch.cuda.is_available():
-                raise ValueError(
-                    "CUDA device requested but not available. "
-                    "Ensure NVIDIA GPU is present and CUDA toolkit is installed. "
-                    "See docs/tutorials/installation.md for setup instructions."
-                )
-            if device == "mps" and not torch.backends.mps.is_available():
-                raise ValueError(
-                    "MPS device requested but not available. "
-                    "Ensure you're on Apple Silicon (M1/M2/M3) with macOS 12.3+. "
-                    "See docs/tutorials/installation.md for setup instructions."
-                )
-            logger.info(f"Using user-specified device: {device}")
-            return device
-
-        # Auto-detect optimal device
-        if torch.cuda.is_available():
-            cuda_device = torch.cuda.current_device()
-            cuda_name = torch.cuda.get_device_name(cuda_device)
-            vram_gb = torch.cuda.get_device_properties(cuda_device).total_memory / 1e9
-            logger.info(f"CUDA available: {cuda_name} ({vram_gb:.1f}GB VRAM)")
-            return "cuda"
-
-        if torch.backends.mps.is_available():
-            logger.info("MPS (Apple Silicon GPU) available")
-            return "mps"
-
-        logger.warning(
-            "No GPU available, using CPU. "
-            "Vision embedding will be 10x+ slower. "
-            "Consider adding GPU support for production use. "
-            "See docs/tutorials/installation.md for GPU setup."
-        )
-        return "cpu"
 
     def _load_model(self) -> None:
         """
@@ -284,29 +319,52 @@ class ColPaliEmbedder(BaseEmbedder):
 
     def get_device_info(self) -> dict[str, str | float]:
         """
-        Get information about computation device.
+        Get information about computation device and memory status.
 
         Returns:
-            Dictionary with device type, name, and available memory (if GPU)
+            Dictionary with device type, name, memory info, and monitoring status
 
         Example:
             >>> embedder = ColPaliEmbedder()
             >>> embedder.get_device_info()
-            {'device': 'cuda', 'name': 'NVIDIA RTX 4090', 'vram_total_gb': 24.0, 'vram_free_gb': 18.5}
+            {
+                'device': 'cuda',
+                'device_id': 0,
+                'name': 'NVIDIA RTX 4090',
+                'total_memory_gb': 24.0,
+                'free_memory_gb': 18.5,
+                'allocated_memory_gb': 5.5,
+                'memory_utilisation_pct': 22.9,
+                'batch_size': 8,
+                'adaptive_batching_enabled': True,
+                'memory_monitoring_enabled': True
+            }
         """
-        info: dict[str, str | float] = {"device": self.device}
+        info: dict[str, str | float] = {
+            "device": self.device_info.device_type.value,
+            "device_id": self.device_info.device_id,
+            "name": self.device_info.name or "Unknown",
+            "batch_size": self.batch_size,
+            "adaptive_batching_enabled": self.batch_sizer is not None,
+            "memory_monitoring_enabled": self.memory_monitor is not None,
+        }
 
-        if self.device == "cuda":
-            device_props = torch.cuda.get_device_properties(0)
-            info["name"] = torch.cuda.get_device_name(0)
-            info["vram_total_gb"] = device_props.total_memory / 1e9
-            info["vram_free_gb"] = (
-                device_props.total_memory - torch.cuda.memory_allocated(0)
-            ) / 1e9
-        elif self.device == "mps":
-            info["name"] = "Apple Silicon GPU"
-        else:
-            info["name"] = "CPU"
+        # Add memory information if GPU
+        if self.device_info.device_type != DeviceType.CPU:
+            try:
+                memory_info = self.device_manager.get_device_memory_info(self.device_info)
+                info["total_memory_gb"] = memory_info["total"] / 1e9
+                info["allocated_memory_gb"] = memory_info["allocated"] / 1e9
+                info["reserved_memory_gb"] = memory_info["reserved"] / 1e9
+                info["free_memory_gb"] = memory_info["free"] / 1e9
+
+                # Add utilisation percentage
+                if memory_info["total"] > 0:
+                    utilisation_pct = (memory_info["allocated"] / memory_info["total"]) * 100
+                    info["memory_utilisation_pct"] = round(utilisation_pct, 1)
+
+            except (ValueError, Exception) as e:
+                logger.debug(f"Could not retrieve memory info: {e}")
 
         return info
 
@@ -314,21 +372,40 @@ class ColPaliEmbedder(BaseEmbedder):
         """
         Estimate optimal batch size based on available VRAM.
 
-        Rule of thumb for ColPali: 2GB base + 0.5GB per page in batch
+        Uses AdaptiveBatchSizer if enabled, otherwise falls back to rule of thumb.
 
         Args:
             available_vram_gb: Available VRAM in GB
 
         Returns:
-            Recommended batch size (capped at 32)
+            Recommended batch size (capped at configured max)
+
+        Note:
+            Deprecated in v0.5.2 in favor of automatic adaptive batching.
+            Consider using enable_adaptive_batching=True in __init__ instead.
 
         Example:
             >>> embedder = ColPaliEmbedder()
             >>> embedder.estimate_batch_size_for_vram(8.0)
-            12  # (8GB - 2GB base) / 0.5GB per page = 12
+            12
             >>> embedder.estimate_batch_size_for_vram(4.0)
-            4   # (4GB - 2GB base) / 0.5GB per page = 4
+            4
         """
+        if self.batch_sizer:
+            # Use adaptive batch sizer with specified memory
+            # Convert GB to bytes and use as total memory
+            temp_device = DeviceInfo(
+                device_type=self.device_info.device_type,
+                total_memory=int(available_vram_gb * 1e9),
+            )
+            temp_sizer = AdaptiveBatchSizer(
+                device=temp_device, config=self.batch_sizer.config
+            )
+            return temp_sizer.calculate_batch_size(
+                embedding_dim=768, sequence_length=1024, bytes_per_element=4
+            )
+
+        # Fallback to rule of thumb for backward compatibility
         base_memory_gb = 2.0  # Model + overhead
         memory_per_page_gb = 0.5  # Per page in batch
 
@@ -388,10 +465,12 @@ class ColPaliEmbedder(BaseEmbedder):
 
     def embed_page(self, image) -> np.ndarray:
         """
-        Generate vision embedding for a single document page.
+        Generate vision embedding for a single document page with OOM recovery.
 
         Processes the image through ColPali model and returns mean-pooled
-        128-dimensional embedding vector.
+        128-dimensional embedding vector. Automatically handles OOM errors through:
+        1. Cache clearing and retry
+        2. CPU fallback
 
         Args:
             image: PIL Image of document page (any size, will be resized by processor)
@@ -401,7 +480,7 @@ class ColPaliEmbedder(BaseEmbedder):
 
         Raises:
             ValueError: If image is invalid or wrong type
-            RuntimeError: If embedding generation fails
+            RuntimeError: If embedding generation fails after all recovery attempts
 
         Example:
             >>> from PIL import Image
@@ -422,6 +501,25 @@ class ColPaliEmbedder(BaseEmbedder):
         if not isinstance(image, Image.Image):
             raise ValueError(f"Expected PIL Image, got {type(image)}")
 
+        # Use OOM handler if enabled
+        if self.oom_handler and self.device_info.device_type != DeviceType.CPU:
+            return self.oom_handler.handle_oom(
+                self._embed_page_impl, image=image, device=self.device_info
+            )
+        else:
+            # No OOM handling
+            return self._embed_page_impl(image=image)
+
+    def _embed_page_impl(self, image) -> np.ndarray:
+        """
+        Internal implementation of single page embedding.
+
+        Args:
+            image: PIL Image
+
+        Returns:
+            128-dimensional embedding vector
+        """
         try:
             with torch.no_grad():
                 # Preprocess image
@@ -451,10 +549,13 @@ class ColPaliEmbedder(BaseEmbedder):
 
     def embed_batch_images(self, images: list) -> np.ndarray:
         """
-        Generate vision embeddings for multiple pages (batched for efficiency).
+        Generate vision embeddings for multiple pages with automatic OOM recovery.
 
         Processes images in batches determined by self.batch_size for optimal
-        GPU memory usage and throughput.
+        GPU memory usage and throughput. Automatically handles OOM errors through:
+        1. Cache clearing and retry
+        2. Batch size reduction and retry
+        3. CPU fallback
 
         Args:
             images: List of PIL Images (document pages)
@@ -464,7 +565,7 @@ class ColPaliEmbedder(BaseEmbedder):
 
         Raises:
             ValueError: If images list is empty
-            RuntimeError: If batch processing fails
+            RuntimeError: If batch processing fails after all recovery attempts
 
         Example:
             >>> from PIL import Image
@@ -473,6 +574,7 @@ class ColPaliEmbedder(BaseEmbedder):
             >>> embeddings = embedder.embed_batch_images(pages)
             >>> embeddings.shape
             (10, 128)
+            >>> # Automatically handles OOM by reducing batch size or falling back to CPU
         """
         if not images:
             raise ValueError("Cannot embed empty image list")
@@ -490,11 +592,42 @@ class ColPaliEmbedder(BaseEmbedder):
             if not isinstance(img, Image.Image):
                 raise ValueError(f"Image at index {i} is not a PIL Image, got {type(img)}")
 
+        # Use OOM handler if enabled
+        if self.oom_handler and self.device_info.device_type != DeviceType.CPU:
+            return self.oom_handler.handle_oom(
+                self._embed_batch_images_impl,
+                images=images,
+                device=self.device_info,
+                batch_size=self.batch_size,
+            )
+        else:
+            # No OOM handling
+            return self._embed_batch_images_impl(images=images)
+
+    def _embed_batch_images_impl(self, images: list, batch_size: Optional[int] = None) -> np.ndarray:
+        """
+        Internal implementation of batch image embedding.
+
+        Args:
+            images: List of PIL Images
+            batch_size: Batch size to use (overrides self.batch_size if provided)
+
+        Returns:
+            Array of embeddings
+        """
+        current_batch_size = batch_size if batch_size is not None else self.batch_size
         embeddings_list = []
 
+        # Take memory snapshot before processing (if monitoring enabled)
+        if self.memory_monitor:
+            snapshot = self.memory_monitor.take_snapshot()
+            logger.debug(
+                f"Memory before batch processing: {snapshot.utilisation_pct:.1f}% utilisation"
+            )
+
         # Process in batches for efficiency
-        for i in range(0, len(images), self.batch_size):
-            batch = images[i : i + self.batch_size]
+        for i in range(0, len(images), current_batch_size):
+            batch = images[i : i + current_batch_size]
 
             try:
                 with torch.no_grad():
@@ -516,11 +649,28 @@ class ColPaliEmbedder(BaseEmbedder):
 
                     embeddings_list.append(batch_embeddings)
 
-                logger.debug(f"Processed batch {i // self.batch_size + 1} ({len(batch)} images)")
+                logger.debug(
+                    f"Processed batch {i // current_batch_size + 1} ({len(batch)} images)"
+                )
 
             except Exception as e:
-                logger.error(f"Batch {i // self.batch_size} failed: {e}")
+                logger.error(f"Batch {i // current_batch_size} failed: {e}")
                 raise RuntimeError(f"Batch embedding failed at index {i}: {e}") from e
+
+        # Take memory snapshot after processing (if monitoring enabled)
+        if self.memory_monitor:
+            snapshot = self.memory_monitor.take_snapshot()
+            logger.debug(
+                f"Memory after batch processing: {snapshot.utilisation_pct:.1f}% utilisation"
+            )
+
+            # Adjust batch size based on observed memory usage
+            if self.batch_sizer:
+                recommended_batch_size = self.batch_sizer.adjust_batch_size(
+                    current_batch_size
+                )
+                if recommended_batch_size != current_batch_size:
+                    self.batch_size = recommended_batch_size
 
         # Concatenate all batches
         return np.vstack(embeddings_list)
@@ -651,65 +801,32 @@ class ColPaliEmbedder(BaseEmbedder):
         """
         Generate embedding with automatic CPU fallback on GPU OOM.
 
-        Attempts to generate embedding on configured device (GPU),
-        and automatically retries on CPU if GPU runs out of memory.
+        Note:
+            Deprecated in v0.5.2. OOM handling is now automatic when
+            enable_oom_recovery=True (default). This method now simply
+            calls embed_page() which has built-in OOM recovery.
 
         Args:
             image: Document page image (PIL Image)
-            retry_on_cpu: If GPU fails with OOM, retry on CPU
+            retry_on_cpu: Ignored (kept for backward compatibility)
 
         Returns:
             Vision embedding (128-dim numpy array)
 
         Raises:
-            RuntimeError: If both GPU and CPU attempts fail
+            RuntimeError: If embedding fails after all recovery attempts
 
         Example:
             >>> embedder = ColPaliEmbedder(device="cuda")
             >>> image = Image.open("large_diagram.png")
             >>> embedding = embedder.embed_with_fallback(image)
-            # If GPU OOM occurs, automatically retries on CPU
             >>> embedding.shape
             (128,)
         """
-        try:
-            return self.embed_page(image)
-
-        except RuntimeError as e:
-            error_msg = str(e).lower()
-
-            # Check if error is GPU out-of-memory
-            is_oom = any(
-                keyword in error_msg
-                for keyword in ["out of memory", "oom", "cuda error", "mps error"]
-            )
-
-            if is_oom and retry_on_cpu and self.device != "cpu":
-                logger.warning(
-                    f"GPU out of memory on {self.device}, retrying on CPU. "
-                    f"Consider reducing batch size or using lower resolution images."
-                )
-
-                # Temporarily switch to CPU
-                original_device = self.device
-                self.device = "cpu"
-                self.model = self.model.to("cpu")
-
-                try:
-                    result = self.embed_page(image)
-
-                    # Restore original device
-                    self.device = original_device
-                    self.model = self.model.to(original_device)
-
-                    logger.info(f"CPU fallback successful, restored to {original_device}")
-                    return result
-
-                except Exception as cpu_error:
-                    logger.error(f"CPU fallback also failed: {cpu_error}")
-                    raise RuntimeError(
-                        f"Embedding failed on both {original_device} and CPU: {cpu_error}"
-                    ) from cpu_error
-            else:
-                # Not an OOM error, or CPU fallback disabled, or already on CPU
-                raise
+        # OOM handling is now automatic via OOMHandler
+        # This method is kept for backward compatibility
+        logger.debug(
+            "embed_with_fallback() is deprecated. Use embed_page() instead "
+            "(OOM recovery is now automatic)"
+        )
+        return self.embed_page(image)

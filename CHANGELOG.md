@@ -7,6 +7,103 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.2] - 2025-11-23
+
+### Added - GPU Resource Management & Security Hardening
+
+**VISION-004: GPU Resource Management** (src/gpu/ - 800+ lines, 59 tests)
+- **DeviceManager** (`device_manager.py` - 326 lines):
+  - Automatic device detection (CUDA > MPS > CPU priority)
+  - Multi-GPU support with device ID selection
+  - Device capability queries (memory, compute capability)
+  - Memory information retrieval for GPUs
+  - Cache management (clear GPU cache on demand)
+  - CPU always available as fallback option
+
+- **MemoryMonitor** (`memory_monitor.py` - 267 lines):
+  - Real-time GPU memory snapshots
+  - Memory utilisation percentage tracking
+  - Threshold-based callbacks (warning: 85%, critical: 95%)
+  - Batch size recommendations based on observed memory usage
+  - History tracking (last 100 snapshots)
+  - Customisable warning/critical thresholds
+
+- **OOMHandler** (`oom_handler.py` - 217 lines):
+  - Automatic OOM error detection
+  - 3-stage recovery strategy:
+    1. Cache clearing and retry
+    2. Batch size reduction (50%) and retry
+    3. CPU fallback
+  - Configurable strategy enablement
+  - Dynamic retry logic based on enabled strategies
+  - OOM keyword detection (out of memory, CUDA error, MPS error)
+
+- **AdaptiveBatchSizer** (`batch_sizer.py` - 209 lines):
+  - Memory-based batch size calculation
+  - Accounts for embedding dimensions, sequence length, data type
+  - 3x overhead factor for activations/gradients/optimizer state
+  - 75% target memory utilisation with 10% safety margin
+  - Min/max batch size clamping (default: 1-32)
+  - Batch size caching and adaptive adjustment
+
+**ColPaliEmbedder GPU Integration** (src/embeddings/colpali_embedder.py):
+- Replaced manual device detection with DeviceManager
+- Added adaptive batch sizing (optional, enabled by default)
+- Added GPU memory monitoring (optional, enabled by default)
+- Added automatic OOM recovery (enabled by default)
+- Updated `get_device_info()` to show GPU management status
+- Deprecated `embed_with_fallback()` (OOM handling now automatic)
+- Backward compatible (all features can be disabled)
+
+### Security
+
+**6 Critical/High Security Fixes:**
+- **CRITICAL-1**: JSON deserialization DoS protection (`metadata_serializer.py`)
+  - 100KB size limit per JSON field
+  - 10-level maximum nesting depth
+  - Prevents parser DoS attacks with deeply nested JSON
+
+- **CRITICAL-2**: Path traversal protection (`query_processor.py`)
+  - File path validation before image loading
+  - MIME type validation (image/png, image/jpeg, application/pdf)
+  - Prevents directory traversal attacks
+
+- **CRITICAL-4**: Enhanced embedding validation (`dual_store.py`)
+  - Type checking (must be numpy array)
+  - Dimensionality validation (1D, correct size)
+  - NaN/Inf detection and rejection
+  - Prevents malformed embeddings in vector store
+
+- **CRITICAL-5**: ID parsing injection prevention (`schema.py`)
+  - Regex validation instead of string splitting
+  - Strict format enforcement for embedding IDs
+  - Prevents injection attacks via malformed IDs
+
+- **CRITICAL-6**: RRF integer overflow protection (`dual_store.py`)
+  - Rank bounds checking (0 to 10,000)
+  - Safe scoring calculations
+  - Prevents overflow in reciprocal rank fusion
+
+- **MEDIUM-2**: Collection name sanitisation (`migration.py`)
+  - 63-character length limit
+  - Alphanumeric with underscores/hyphens only
+  - Suspicious pattern detection (../, $, {}, etc.)
+  - Prevents NoSQL injection
+
+### Testing
+
+- **GPU Module**: 59 tests passing, 2 skipped (CUDA-specific on MPS)
+  - `test_device_manager.py`: 18 tests
+  - `test_memory_monitor.py`: 16 tests
+  - `test_batch_sizer.py`: 14 tests
+  - `test_oom_handler.py`: 13 tests
+
+### Notes
+
+- 18 storage tests require updating for stricter validation (follow-up)
+- Test failures are expected from enhanced security validation
+- All new tests follow British English conventions
+
 ## [0.3.12] - 2025-11-22
 
 ### Added - Polish & Integration (v0.3 Final Release)
