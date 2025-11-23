@@ -1,15 +1,17 @@
 # v0.6.0 Planning: Web UI Focus & Architectural Improvements
 
 **Status:** Planned
-**Focus:** Web interface, API redesign, architectural enhancements
-**Estimated Effort:** 40-60 hours
+**Focus:** Web interface security, API enhancements, Gradio UI improvements
+**Estimated Effort:** 32-48 hours
 **Target:** Major feature release
 
 ---
 
 ## Overview
 
-v0.6.0 is a major release focusing on web UI improvements, API enhancements, and architectural changes. This release transitions from the security-focused v0.5.x series to user experience and scalability improvements.
+v0.6.0 is a major release focusing on web UI security, API enhancements, and Gradio interface improvements. This release transitions from the security-focused v0.5.x series to user experience and API maturity improvements.
+
+**Note:** Full Svelte UI redesign (from `docs/design/webUI/`) is planned for v0.6.7, not this version.
 
 ## Primary Goals
 
@@ -33,60 +35,7 @@ v0.6.0 is a major release focusing on web UI improvements, API enhancements, and
 
 ---
 
-## Features Deferred from v0.5.x
-
-### Pickle Migration to JSON/MessagePack (8-12 hours)
-
-**Priority:** HIGH
-**Category:** Architecture
-
-**Rationale for v0.6.0:**
-- Architectural change requiring significant refactoring
-- Needs data migration strategy
-- Impacts multiple components
-- Better suited for major version
-
-**Current State:**
-- Pickle used in 3 locations (incremental_index, multi_tier_cache, serialization)
-- Acknowledged security risk with `# noqa: S301`
-- File validation added in v0.5.8 (mitigation)
-
-**Proposed Solution:**
-
-**Phase 1: Design (2-3h)**
-1. Evaluate serialization libraries:
-   - JSON (human-readable, slower)
-   - MessagePack (binary, faster)
-   - Protobuf (structured, versioned)
-2. Design migration strategy
-3. Define backward compatibility approach
-
-**Phase 2: Implementation (4-6h)**
-1. Create new serialization interface
-2. Implement JSON/MessagePack serializers
-3. Add version detection
-4. Implement backward compatibility layer
-
-**Phase 3: Migration (2-3h)**
-1. Create migration tool
-2. Test migration scenarios
-3. Document migration process
-4. Performance benchmarking
-
-**Files Affected:**
-- `src/retrieval/incremental_index.py`
-- `src/utils/multi_tier_cache.py`
-- `src/utils/serialization.py`
-- New: `src/utils/safe_serialization.py`
-- New: `src/cli/commands/migrate.py`
-
-**Success Criteria:**
-- Pickle completely removed
-- Data migration successful
-- Performance maintained or improved
-- Backward compatibility working
-
----
+## Core Features
 
 ### Web UI Security Enhancements (6-8 hours)
 
@@ -258,17 +207,20 @@ class DistributedRateLimiter:
 
 ## Additional v0.6.0 Features
 
-### Web UI Improvements
-- Real-time query results
-- Better document visualization
-- Improved search UX
-- Dashboard enhancements
+### Gradio UI Improvements (10-15 hours)
+**Note:** Full Svelte redesign deferred to v0.6.7
 
-### API Enhancements
-- GraphQL API (exploration)
-- WebSocket support
-- Streaming responses
-- Batch operations
+- Real-time query results streaming
+- Better document visualization in results
+- Improved search UX and error handling
+- Enhanced upload experience
+- Dashboard metrics improvements
+
+### API Enhancements (9-15 hours)
+- GraphQL API (exploration phase only)
+- WebSocket support for real-time updates
+- Streaming response implementation
+- Batch operation endpoints
 
 ### Performance Optimization
 - Query optimization
@@ -286,17 +238,38 @@ class DistributedRateLimiter:
 
 ## Out of Scope for v0.6.0
 
+### Deferred to Future Versions
+
+**Query Optimisation (→ v0.7.x)**
+- Context scope management
+- Query classification
+- Intelligent model routing
+- Domain adaptation
+- Full feature set planned for v0.7 series
+
+**Data Connectivity (→ v0.8.x or v0.9.x)**
+- Google Drive, Dropbox, Notion connectors
+- Folder watch automation
+- Cloud storage integration
+- Deferred to focus on architectural improvements first
+
+**Full Svelte UI Redesign (→ v0.6.7)**
+- Complete UI implementation from `docs/design/webUI/`
+- SvelteKit framework migration
+- Modern component library
+- Planned for v0.6.7 with dedicated focus
+
 ### Requires Further Design
 
 **Multi-tenancy Support**
 - Needs isolation design
 - Complex architecture
 - Security implications
-- Consider for v0.7.0
+- Consider for v0.7.0+
 
 **GraphQL API (Full Implementation)**
 - Exploration only in v0.6.0
-- Full implementation in v0.7.0
+- Full implementation in v0.7.0+
 - Needs schema design
 - Requires resolver architecture
 
@@ -304,7 +277,7 @@ class DistributedRateLimiter:
 - Needs log aggregation strategy
 - Requires storage design
 - Consider ELK stack integration
-- Consider for v0.7.0
+- Consider for v0.7.0+
 
 **Compliance Certifications**
 - SOC2, ISO27001
@@ -317,22 +290,24 @@ class DistributedRateLimiter:
 ## Success Criteria
 
 **Web UI:**
-- ✅ Modern, responsive interface
-- ✅ Real-time updates functional
-- ✅ Security headers implemented
+- ✅ Security headers implemented (CSP, HSTS)
 - ✅ Session security enhanced
+- ✅ Real-time updates functional
+- ✅ Gradio UI improvements deployed
+- ✅ XSS protection active
 
 **API:**
-- ✅ RESTful best practices followed
-- ✅ API versioning implemented
 - ✅ Security middleware active
-- ✅ Documentation complete
+- ✅ Request validation enforced
+- ✅ Rate limiting operational
+- ✅ JWT improvements implemented
+- ✅ WebSocket support functional
 
-**Architecture:**
-- ✅ Pickle eliminated
-- ✅ Data migration successful
+**Quality:**
+- ✅ All security tests passing
 - ✅ Performance benchmarks met
-- ✅ Scalability improvements verified
+- ✅ No regressions in existing functionality
+- ✅ Documentation updated
 
 ---
 

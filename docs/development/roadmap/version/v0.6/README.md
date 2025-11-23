@@ -1,10 +1,10 @@
-# Ragged v0.6 Roadmap - Data Connectivity & UI Foundation
+# Ragged v0.6 Roadmap - Web UI Security & API Maturity
 
 **Status:** Planned
 
-**Duration:** 80-120 hours (AI implementation)
+**Duration:** 32-48 hours (AI implementation)
 
-**Focus:** Expand data source connectivity and establish modern web UI foundation
+**Focus:** Web UI security enhancements, API improvements, Gradio interface refinements
 
 **Breaking Changes:** None
 
@@ -12,15 +12,17 @@
 
 ## Overview
 
-Version 0.6 expands ragged beyond local files with cloud connectors and folder automation, while laying the foundation for a modern web interface. This addresses key gaps identified in the RAG ecosystem analysis—automated ingestion and professional UI.
+Version 0.6 focuses on securing and maturing the web interface and API layer. This release transitions from the security-focused v0.5.x series to user-facing improvements while maintaining architectural quality.
 
-**Dependencies:** Requires v0.5.x completion (vision RAG, GPU management)
+**Dependencies:** Requires v0.5.x completion (security implementation, vision RAG, GPU management)
 
-**Strategic Context:** Brings ragged in line with PrivateGPT's folder watch automation and begins UI modernisation toward AnythingLLM-level polish.
+**Strategic Context:** Prepares foundation for v0.6.7 Svelte UI redesign and v0.7.x query optimisation by ensuring secure, stable API and web layers.
+
+**Note:** Data connectivity features (Google Drive, Dropbox, Notion) deferred to v0.8.x or v0.9.x. Query optimisation features deferred to v0.7.x series.
 
 ---
 
-## CONNECT-001: Google Drive Connector (20-25 hours)
+## SECURITY-WEB-001: Web UI Security Enhancements (6-8 hours)
 
 **Problem:** Users cannot ingest documents from Google Drive, requiring manual download and local ingestion.
 
