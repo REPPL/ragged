@@ -1,6 +1,6 @@
 # ragged Development Roadmap - All Versions
 
-**Planning Horizon:** v0.7.0 (~750-950 total hours remaining)
+**Planning Horizon:** v2.0.0 (~790-1035 total hours remaining)
 
 ---
 
@@ -34,9 +34,15 @@ Next        v0.2.9 ━━━ Performance & Stability (42-53h)
             ═════════════════════════════════════════ ADVANCED
             v0.4.x ━━━━━━━━━━━━━ Personal Memory (195-242h, 10 releases)
             v0.5.0 ━━━━━━━━━━━━━ ColPali Vision (140-180h)
-            v0.6.0 ━━━━━━━━━━━━━ Optimisation (120-150h)
-            ═════════════════════════════════════════ PRODUCTION
-Future      v0.7.0 ━━━━━━━━━━━━━ Production Ready (150-200h)
+            ═════════════════════════════════════════ DATA & UI
+            v0.6.0 ━━━━━━━━━━━━━ Data Connectivity & UI Foundation (80-120h)
+            v0.7.0 ━━━━━━━━━━━━━ Enterprise Foundation (150-200h)
+            v0.8.0 ━━━━━━━━━━━━━ Agent Capabilities (60-80h)
+            v0.9.0 ━━━━━━━━━━━━━ Web UI Completion (120-180h)
+            ═════════════════════════════════════════ COLLABORATION
+Future      v1.5.0 ━━━━━━━━━━━━━ Collaboration & Multi-User (100-150h)
+            ═════════════════════════════════════════ ENTERPRISE
+            v2.0.0 ━━━━━━━━━━━━━ Enterprise & Applications (150-200h)
 ```
 
 ---
@@ -264,23 +270,28 @@ Future      v0.7.0 ━━━━━━━━━━━━━ Production Ready (150
 
 ---
 
-### v0.6.0 - Intelligent Optimisation (120-150 hours)
+### v0.6.0 - Data Connectivity & UI Foundation (80-120 hours)
 
 **Status:** Planned
-**Focus:** Automatic query routing, domain adaptation, advanced analytics
+**Focus:** Expand data sources and establish modern web UI
 
 **Key Features:**
-- Query classification and routing
-- Automatic model routing (30-50% latency reduction)
-- Domain adaptation for specialised terminology
-- Performance analytics and monitoring
-- Smart caching strategies
+- Cloud connectors (Google Drive, Dropbox, Notion)
+- Folder watch automation (PrivateGPT-inspired)
+- Svelte/SvelteKit web UI foundation
+- REST API stabilisation (OpenAPI spec)
+- Document library and search interface
+
+**Strategic Context:**
+- Addresses ecosystem gap: automated ingestion and professional UI
+- Brings ragged in line with PrivateGPT's folder watch
+- Begins UI modernisation toward AnythingLLM-level polish
 
 **Success Criteria:**
-- Query routing reduces latency for simple queries
-- Domain adaptation improves domain-specific retrieval
-- Analytics provide actionable insights
-- Cache hit rate improved 20-30%
+- Cloud connectors authenticate and sync correctly
+- Folder watch auto-ingests within 30 seconds
+- UI responsive on mobile and desktop
+- API versioned and documented (OpenAPI)
 
 **See:** [v0.6/README.md](./v0.6/README.md)
 
@@ -312,6 +323,133 @@ Future      v0.7.0 ━━━━━━━━━━━━━ Production Ready (150
 
 ---
 
+### v0.8.0 - Agent Capabilities (60-80 hours)
+
+**Status:** Planned
+**Focus:** Intelligent agents for complex workflows and tool use
+
+**Key Features:**
+- Agent framework (planner, executor, tools)
+- Tool library (RAG tools + external tools)
+- Visual workflow builder backend (JSON workflows)
+- Multi-agent orchestration (experimental)
+- CLI agent commands and templates
+
+**Strategic Context:**
+- Addresses major ecosystem gap: agentic workflows
+- Inspired by RAGFlow's multi-agent orchestration
+- Brings no-code agent capabilities (AnythingLLM-inspired)
+- Maintains privacy-first principles (local-only agents)
+
+**Success Criteria:**
+- Agents execute multi-step tasks successfully (>80% success rate)
+- Tool library complete and safe
+- Workflow backend functional (ready for v0.9 UI)
+- CLI agent templates accelerate adoption
+
+**See:** [v0.8/README.md](./v0.8/README.md)
+
+---
+
+### v0.9.0 - Web UI Completion (120-180 hours)
+
+**Status:** Planned
+**Focus:** Complete modern web interface with advanced features
+
+**Key Features:**
+- Block-based editor (TipTap, Notion-inspired)
+- Command palette (Cmd+K, VS Code-inspired)
+- Knowledge graph visualization (interactive D3.js/Cytoscape)
+- Visual workflow editor (RAGFlow-inspired DAG editor)
+- Dark mode & theming
+- Progressive Web App (PWA, offline support)
+- Advanced document library (faceted search, virtual scrolling)
+- Mobile responsive design
+
+**Strategic Context:**
+- Achieves AnythingLLM-level UI polish
+- Adds RAGFlow's visual workflow editor
+- Completes transformation from Gradio to professional web app
+- Enables daily-driver usage
+
+**Success Criteria:**
+- Block editor performance <100ms per keystroke
+- Graph visualization handles 1,000+ nodes smoothly
+- Workflow editor supports 50+ node workflows
+- PWA scores 90+ on Lighthouse
+- All features accessible on mobile
+
+**See:** [v0.9/README.md](./v0.9/README.md)
+
+---
+
+### v1.5.0 - Collaboration & Multi-User (100-150 hours)
+
+**Status:** Planned
+**Focus:** Team collaboration and document sharing
+
+**Key Features:**
+- Multi-user foundation (workspaces, teams)
+- Document sharing & granular permissions (RBAC + ACL)
+- Real-time collaboration (Yjs CRDT)
+- Team workflows (shared agents, templates)
+- Conversation sharing and comments
+- Notifications & activity feed
+- Optional end-to-end encryption
+
+**Strategic Context:**
+- Transforms ragged from personal to team tool
+- Inspired by Onyx/Danswer's permission mirroring
+- Adds AnythingLLM's team capabilities
+- Maintains privacy-first with optional E2EE
+
+**Success Criteria:**
+- Data isolation between workspaces enforced
+- Real-time collaboration supports 10+ concurrent users
+- Permission checks add <50ms query latency
+- Migration preserves 100% of single-user data
+- Zero permission bypass vulnerabilities
+
+**Note:** Major pivot toward team collaboration—validate demand before implementation
+
+**See:** [v1.5/README.md](./v1.5/README.md)
+
+---
+
+### v2.0.0 - Enterprise & Applications (150-200 hours)
+
+**Status:** Planned
+**Focus:** Enterprise compliance and native applications
+
+**Key Features:**
+- HIPAA compliance (encryption at rest, comprehensive audit logs)
+- SOC2 Type II compliance (MFA, security controls, monitoring)
+- Air-gapped deployment (offline installer, no internet dependency)
+- Desktop applications (Electron: macOS/Windows/Linux)
+- Browser extension (Chrome/Firefox web clipper)
+- Embeddable widget (one-line integration)
+- Advanced observability (Jaeger tracing, Grafana dashboards)
+
+**Strategic Context:**
+- Enterprise parity with Onyx/Danswer
+- Desktop apps like AnythingLLM
+- Air-gapped like LocalGPT for regulated industries
+- Completes transformation to enterprise-ready platform
+
+**Success Criteria:**
+- HIPAA audit logs capture 100% of PHI access
+- Air-gap deployment functional with zero internet requests
+- Desktop apps <200MB (all platforms)
+- Browser extension works in Chrome/Firefox/Edge/Safari
+- Widget loads <2 seconds, works on mobile
+- Zero compliance violations in testing
+
+**Note:** Enterprise pivot—consider separate "Enterprise Edition" to fund development
+
+**See:** [v2.0/README.md](./v2.0/README.md)
+
+---
+
 ## Key Principles
 
 ### 1. No Breaking Changes Before v1.0
@@ -338,26 +476,30 @@ Hour estimates reflect autonomous AI coding assistant capabilities. Clear marker
 
 ## Version Comparison
 
-| Feature | v0.2.2 | v0.2.3-6 | v0.2.7 | v0.3.0 | v0.4.0 | v0.5.0 | v0.6.0 | v0.7.0 |
-|---------|--------|----------|--------|--------|--------|--------|--------|--------|
-| **Status** | Current | Planned | Planned | Planned | Planned | Planned | Planned | Planned |
-| **Hours** | - | 44-59 | 80-100 | 180-220 | 160-200 | 140-180 | 120-150 | 150-200 |
-| **Focus** | - | Bugs | UX/Perf | RAG | Memory | Vision | Optimise | Production |
-| Web UI | ⚠️ Degraded | ✅ Fixed | ✅ Enhanced | ✅ | ✅ | ✅ Vision | ✅ | ✅ Enterprise |
-| Model Switching | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ Auto | ✅ |
-| Collections | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Caching | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ Smart | ✅ |
-| HyDE | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Reranking | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| RAGAS Eval | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ Analytics | ✅ |
-| Knowledge Graph | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ |
-| Personal Memory | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ |
-| Vision Retrieval | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ |
-| Query Routing | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
-| Domain Adaptation | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
-| API Versioning | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
-| Enterprise Auth | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
-| Horizontal Scale | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Feature | v0.3.0 | v0.4.0 | v0.5.0 | v0.6.0 | v0.7.0 | v0.8.0 | v0.9.0 | v1.5 | v2.0 |
+|---------|--------|--------|--------|--------|--------|--------|--------|------|------|
+| **Status** | Planned | Planned | Planned | Planned | Planned | Planned | Planned | Planned | Planned |
+| **Hours** | 180-220 | 160-200 | 140-180 | 80-120 | 150-200 | 60-80 | 120-180 | 100-150 | 150-200 |
+| **Focus** | RAG | Memory | Vision | Data/UI | Enterprise | Agents | UI Polish | Collab | Enterprise Apps |
+| Advanced RAG | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Knowledge Graph | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ KG Viz | ✅ | ✅ |
+| Personal Memory | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Vision Retrieval | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Cloud Connectors | ❌ | ❌ | ❌ | ✅ GDrive/Dropbox/Notion | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Folder Watch | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Svelte UI | ❌ | ❌ | ❌ | ✅ Foundation | ✅ | ✅ | ✅ Complete | ✅ | ✅ |
+| API Versioning | ❌ | ❌ | ❌ | ✅ OpenAPI | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Enterprise Auth | ❌ | ❌ | ❌ | ❌ | ✅ JWT/RBAC | ✅ | ✅ | ✅ MFA | ✅ |
+| Agents | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ Visual | ✅ Team | ✅ |
+| Block Editor | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ Realtime | ✅ |
+| Command Palette | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ |
+| PWA | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Multi-User | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Collaboration | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ CRDT | ✅ |
+| HIPAA | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Desktop Apps | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Browser Ext | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Embeddable Widget | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
 
 ---
 

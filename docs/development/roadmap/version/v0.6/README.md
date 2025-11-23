@@ -1,10 +1,10 @@
-# Ragged v0.6.0 Roadmap - Intelligent Optimisation
+# Ragged v0.6 Roadmap - Data Connectivity & UI Foundation
 
 **Status:** Planned
 
-**Total Hours:** 162-225 hours (AI implementation)
+**Duration:** 80-120 hours (AI implementation)
 
-**Focus:** Automatic query routing, domain adaptation, and advanced analytics
+**Focus:** Expand data source connectivity and establish modern web UI foundation
 
 **Breaking Changes:** None
 
@@ -12,434 +12,332 @@
 
 ## Overview
 
-Version 0.6.0 introduces intelligent optimisation that automatically routes queries to optimal models, adapts to domain-specific terminology, and provides advanced analytics for system performance.
+Version 0.6 expands ragged beyond local files with cloud connectors and folder automation, while laying the foundation for a modern web interface. This addresses key gaps identified in the RAG ecosystem analysis—automated ingestion and professional UI.
 
-**Dependencies:** Requires v0.5.0 completion (vision integration)
+**Dependencies:** Requires v0.5.x completion (vision RAG, GPU management)
+
+**Strategic Context:** Brings ragged in line with PrivateGPT's folder watch automation and begins UI modernisation toward AnythingLLM-level polish.
 
 ---
 
-## OPTIMISE-001: Context Scope Management (15-20 hours)
+## CONNECT-001: Google Drive Connector (20-25 hours)
 
-**Problem:** All queries use full context regardless of complexity. Simple queries waste tokens on broad context; complex queries may need comprehensive knowledge graph traversal.
+**Problem:** Users cannot ingest documents from Google Drive, requiring manual download and local ingestion.
 
-**Theoretical Foundation:** Implements [Context Engineering 2.0](../../acknowledgements/context-engineering-2.0.md) **dynamic context adaptation**—adjusting context scope based on query complexity and resource constraints.
+**Inspiration:** Onyx/Danswer's 40+ connectors demonstrate value of integrated cloud access.
 
 **Implementation:**
-1. Research context compression techniques [2-3 hours]
-2. Create ContextScopeManager with query complexity analysis [5-6 hours]
-3. Implement context selection strategies (narrow/medium/broad) [4-5 hours]
-4. Add context compression for complex queries [3-4 hours]
-5. Create scope recommendation system [1-2 hours]
+1. Research Google Drive API and authentication [3-4 hours]
+2. Implement OAuth2 authentication flow [6-8 hours]
+3. Create Drive document listing and filtering [5-6 hours]
+4. Add incremental sync (only new/modified files) [4-5 hours]
+5. Implement metadata preservation (author, created date, shared status) [2-3 hours]
 
-**Context Scopes:**
-- **Narrow** (simple factual): Recent documents only, no knowledge graph
-- **Medium** (standard queries): Recent + related topics from knowledge graph
-- **Broad** (complex analytical): Full knowledge graph + temporal memory + all relevant documents
+**Supported file types:**
+- Google Docs (export as PDF)
+- Google Sheets (export as PDF)
+- PDF files
+- Image files (for vision RAG)
 
-**Scope Selection Rules:**
-```python
-def determine_scope(query):
-    complexity = classify_complexity(query)
-    if complexity == "simple":
-        return ContextScope.NARROW  # Last 7 days, top 5 docs
-    elif complexity == "medium":
-        return ContextScope.MEDIUM  # Last 30 days, topic graph, top 15 docs
-    else:
-        return ContextScope.BROAD   # Full timeline, full graph, top 30 docs
+**CLI commands:**
+```bash
+ragged connect google-drive auth            # Authenticate
+ragged connect google-drive list            # List folders
+ragged ingest google-drive <folder_id>      # Ingest folder
+ragged connect google-drive sync <folder_id> # Incremental sync
 ```
 
-**Compression Strategies:**
-- Chain-of-context: Summarise intermediate documents
-- Entity-focused: Extract only relevant entities from knowledge graph
-- Time-windowed: Limit temporal memory to relevant periods
-
 **Files:**
-- `src/context/scope_manager.py` (new, ~250 lines)
-- `src/context/compression.py` (new, ~200 lines)
-- `tests/context/test_scope_manager.py` (~150 lines)
+- `src/connectors/google_drive.py` (new, ~350 lines)
+- `src/connectors/auth/oauth.py` (new, ~200 lines)
+- `src/connectors/base.py` (new abstract base, ~150 lines)
+- `tests/connectors/test_google_drive.py` (~250 lines)
 
-**⚠️ MANUAL TEST:** Test with simple vs complex queries, verify appropriate context scope selected, measure token usage reduction
+**Manual Testing:**
+- Authenticate with Google account
+- List Drive folders and files
+- Ingest folder with mixed file types
+- Verify incremental sync updates only changed files
+- Confirm metadata preserved in ChromaDB
 
-**Success:** Context usage optimised per query type, 30-50% token reduction on simple queries, no accuracy loss
-
----
-
-## OPTIMISE-002: Query Classification (25-30 hours)
-
-**Problem:** All queries treated identically, but different query types need different processing strategies.
-
-**Implementation:**
-1. Research query classification approaches [3-4 hours]
-2. Create QueryClassifier for query type detection [8-10 hours]
-3. Implement query complexity scoring [6-8 hours]
-4. Add query intent detection (factual, analytical, creative) [5-6 hours]
-5. Create classification metadata storage [3-4 hours]
-
-**Query types:**
-- Factual: "What is X?"
-- Analytical: "Compare X and Y"
-- Creative: "Suggest improvements to X"
-- Visual: "Show me documents with charts"
-
-**Files:** src/classification/query_classifier.py (new), src/retrieval/hybrid.py
-
-**⚠️ MANUAL TEST:** Test with various query types, verify correct classification
-
-**Success:** Queries classified accurately, appropriate strategies selected per type
+**Success:** Users can ingest and auto-sync Google Drive folders without manual downloads
 
 ---
 
-## OPTIMISE-003: Automatic Model Routing (30-40 hours)
+## CONNECT-002: Dropbox Connector (15-20 hours)
 
-**Problem:** Single model for all queries is suboptimal - complex queries need larger models, simple queries can use faster models.
-
-**Implementation:**
-1. Create ModelRouter with routing logic [10-12 hours]
-2. Implement model capability assessment [8-10 hours]
-3. Add query-to-model matching algorithm [6-8 hours]
-4. Create model performance profiling [4-6 hours]
-5. Add routing override options [2-3 hours]
-
-**Routing strategy:**
-- Simple factual → Small fast model (llama3.2:3b)
-- Complex analytical → Large capable model (llama3.2:70b)
-- Creative → Medium balanced model (mistral:latest)
-- Vision → Multi-modal model (llava)
-
-**Files:** src/routing/model_router.py (new), src/generation/ollama_client.py
-
-**⚠️ MANUAL TEST:** Test routing with different query complexities, verify appropriate models selected
-
-**Success:** Queries routed to optimal models, 30-50% latency reduction on simple queries
-
----
-
-## OPTIMISE-004: Domain Adaptation (25-35 hours)
-
-**Problem:** General-purpose embeddings may not capture domain-specific terminology and concepts.
+**Problem:** No Dropbox integration for personal knowledge workers who use Dropbox as primary storage.
 
 **Implementation:**
-1. Research domain adaptation techniques [3-4 hours]
-2. Implement domain vocabulary extraction [8-10 hours]
-3. Create domain-specific query expansion [6-8 hours]
-4. Add domain embedding fine-tuning (optional) [6-8 hours]
-5. Implement domain-aware retrieval boosting [2-3 hours]
+1. Implement Dropbox OAuth2 authentication [4-5 hours]
+2. Create folder browsing and file listing [4-5 hours]
+3. Add incremental sync with cursor-based pagination [4-5 hours]
+4. Implement metadata extraction [2-3 hours]
+5. Add conflict resolution for modified files [1-2 hours]
 
-**Domains to support:**
-- Technical/Engineering
-- Medical/Healthcare
-- Legal
-- Academic/Research
-- General
-
-**Files:** src/adaptation/domain_adapter.py (new), src/retrieval/hybrid.py
-
-**⚠️ MANUAL TEST:** Test with domain-specific documents, verify improved retrieval for domain terminology
-
-**Success:** Domain-specific queries retrieve more relevant results, terminology recognised correctly
-
----
-
-## OPTIMISE-005: Performance Analytics (20-25 hours)
-
-**Problem:** No visibility into system performance, bottlenecks, or quality metrics over time.
-
-**Implementation:**
-1. Create AnalyticsCollector for metrics gathering [6-8 hours]
-2. Implement query latency tracking and profiling [4-5 hours]
-3. Add cache hit rate monitoring [3-4 hours]
-4. Create model usage statistics [3-4 hours]
-5. Implement quality metrics (RAGAS integration) [4-5 hours]
-
-**Metrics to track:**
-- Query latency (p50, p95, p99)
-- Retrieval quality scores
-- Model routing decisions
-- Cache effectiveness
-- GPU utilisation
-- Memory usage patterns
-
-**Files:** src/analytics/collector.py (new), src/analytics/metrics.py (new)
-
-**⚠️ MANUAL TEST:** Run queries, verify metrics collected accurately
-
-**Success:** Comprehensive metrics collected, analytics queryable, trends visible
-
----
-
-## OPTIMISE-006: Smart Caching Strategy (20-25 hours)
-
-**Problem:** Basic caching in v0.2.7 needs intelligence - predict what to cache, when to invalidate.
-
-**Implementation:**
-1. Implement intelligent cache warming [5-6 hours]
-2. Add query pattern prediction [6-8 hours]
-3. Create cache priority scoring [4-5 hours]
-4. Implement adaptive cache sizing [3-4 hours]
-5. Add cache analytics dashboard [2-3 hours]
-
-**Caching strategies:**
-- Frequency-based (cache common queries)
-- Recency-based (cache recent queries)
-- Predictive (cache likely next queries)
-- Similarity-based (cache similar queries)
-
-**Files:** src/caching/smart_cache.py (new), src/retrieval/hybrid.py
-
-**⚠️ MANUAL TEST:** Monitor cache performance, verify hit rate improvement
-
-**Success:** Cache hit rate improved by 20-30%, latency reduced further
-
----
-
-## OPTIMISE-007: CLI Analytics Commands (15-20 hours)
-
-**Problem:** Need CLI interface to view analytics and optimisation status.
-
-**Implementation:**
-1. Create analytics view command [4-5 hours]
-2. Add routing statistics command [3-4 hours]
-3. Implement performance report generation [4-5 hours]
-4. Add optimisation suggestions [3-4 hours]
-5. Create export options (JSON, CSV) [1-2 hours]
-
-**Commands:**
-- `ragged analytics` - View performance metrics
-- `ragged analytics routing` - Model routing stats
-- `ragged analytics cache` - Cache performance
-- `ragged analytics domain` - Domain adaptation stats
-- `ragged analytics context` - Context scope usage statistics
-
-**Files:** src/main.py, src/analytics/reporter.py (new)
-
-**⚠️ MANUAL TEST:** Use CLI analytics commands, verify data accurate and useful
-
-**Success:** Analytics accessible via CLI, reports comprehensive and actionable
-
----
-
-## OPTIMISE-008: Streaming Response Generation (12-15 hours)
-
-**Problem:** Users wait for complete response generation before seeing any output, creating perception of slowness even when total latency is acceptable.
-
-**Theoretical Foundation:** Reduces perceived latency by streaming tokens as they're generated, providing immediate feedback and progress indication.
-
-**Implementation:**
-1. Enable Ollama streaming mode in client [3-4 hours]
-2. Implement streaming API endpoints [4-5 hours]
-3. Add CLI progressive display with token streaming [3-4 hours]
-4. Update Gradio UI for streaming responses [2-3 hours]
-
-**Streaming Approach:**
-```python
-async def stream_query(query: str):
-    # Retrieval phase (non-streaming)
-    context = await retrieve(query)
-
-    # Generation phase (streaming)
-    async for token in ollama_client.generate_stream(query, context):
-        yield token  # Stream to user immediately
+**CLI commands:**
+```bash
+ragged connect dropbox auth
+ragged connect dropbox list
+ragged ingest dropbox <path>
+ragged connect dropbox sync <path>
 ```
 
-**Benefits:**
-- **Time to first token:** <1 second (vs 3-8 seconds for full response)
-- **Perceived latency reduction:** 60-80%
-- **User experience:** Immediate feedback, progress indication
-- **No accuracy impact:** Same final response, different delivery
-
 **Files:**
-- `src/generation/ollama_client.py` (modify existing, add `generate_stream()`)
-- `src/web/api.py` (add `/query/stream` endpoint)
-- `src/cli/commands/query.py` (add progressive display)
-- `src/web/app.py` (update Gradio interface)
-- `tests/generation/test_streaming.py` (~100 lines)
+- `src/connectors/dropbox.py` (new, ~300 lines)
+- Reuses `src/connectors/auth/oauth.py` (OAuth flow generic)
+- `tests/connectors/test_dropbox.py` (~200 lines)
 
-**⚠️ MANUAL TEST:** Test streaming with various query types, verify smooth token delivery, no buffering delays
+**Manual Testing:**
+- Authenticate with Dropbox
+- Ingest shared folder
+- Verify sync detects file changes
 
-**Success:** Token streaming functional, time to first token <1s, CLI displays progressive output, Gradio shows real-time generation
+**Success:** Dropbox folders ingest and sync automatically
 
 ---
 
-## OPTIMISE-009: Parallel Retrieval Pipeline (15-20 hours)
+## CONNECT-003: Notion Connector (25-30 hours)
 
-**Problem:** Retrieval operations run sequentially (vector search → BM25 → reranking), wasting time when operations are independent.
+**Problem:** Knowledge workers increasingly use Notion for notes; no way to ingest without manual export.
 
-**Theoretical Foundation:** Parallelise independent retrieval operations to reduce total latency through concurrent execution.
+**Inspiration:** Onyx/Danswer's Notion connector is highly requested feature.
 
 **Implementation:**
-1. Refactor hybrid retrieval for async parallel execution [6-8 hours]
-2. Implement parallel retrieval orchestrator [5-6 hours]
-3. Add intelligent result merging and deduplication [3-4 hours]
-4. Benchmark and tune concurrency parameters [1-2 hours]
+1. Research Notion API (blocks, pages, databases) [4-5 hours]
+2. Implement Notion authentication [5-6 hours]
+3. Create recursive page traversal (handle nested pages) [6-8 hours]
+4. Convert Notion blocks to markdown or plain text [6-8 hours]
+5. Preserve structure (headings, lists, code blocks) [3-4 hours]
+6. Add database query support [1-2 hours]
 
-**Parallel Retrieval Architecture:**
-```python
-async def parallel_hybrid_retrieve(query: str, k: int):
-    # Run all retrievers concurrently
-    vector_task = asyncio.create_task(vector_retrieve(query, k))
-    bm25_task = asyncio.create_task(bm25_retrieve(query, k))
+**Challenges:**
+- Notion's block-based structure requires custom parsing
+- Handle nested pages and databases
+- Preserve formatting and structure
 
-    # Wait for both to complete
-    vector_results, bm25_results = await asyncio.gather(
-        vector_task, bm25_task
-    )
-
-    # Merge results (fast, in-memory)
-    merged = merge_and_rerank(vector_results, bm25_results, k)
-    return merged
+**CLI commands:**
+```bash
+ragged connect notion auth
+ragged connect notion list-pages
+ragged ingest notion <page_id>
+ragged ingest notion-database <database_id>
 ```
 
-**Sequential vs Parallel:**
-- **Sequential:** Vector (200ms) + BM25 (150ms) + Rerank (100ms) = 450ms
-- **Parallel:** max(Vector, BM25) + Rerank = 200ms + 100ms = 300ms
-- **Reduction:** 33% for this example, up to 60% for complex pipelines
-
 **Files:**
-- `src/retrieval/hybrid.py` (major refactor for async)
-- `src/retrieval/parallel_retriever.py` (new, ~250 lines)
-- `src/retrieval/result_merger.py` (new, ~150 lines)
-- `tests/retrieval/test_parallel.py` (~200 lines)
+- `src/connectors/notion.py` (new, ~450 lines)
+- `src/connectors/notion_parser.py` (block → text conversion, ~300 lines)
+- `tests/connectors/test_notion.py` (~250 lines)
 
-**⚠️ MANUAL TEST:** Benchmark sequential vs parallel retrieval, verify result quality unchanged, measure latency reduction
+**Manual Testing:**
+- Authenticate with Notion workspace
+- Ingest nested page hierarchies
+- Verify block formatting preserved
+- Ingest database as structured documents
 
-**Success:** Retrieval latency reduced by 40-60%, no accuracy regression, concurrent operations properly synchronized
+**Success:** Notion pages and databases ingest with structure preserved
 
 ---
 
-## OPTIMISE-010: Speculative RAG (Experimental) (25-35 hours)
+## CONNECT-004: Folder Watch Automation (20-25 hours)
 
-**Problem:** Large models provide high-quality responses but are slow; small models are fast but may lack quality. Users face latency-quality trade-off.
+**Problem:** Users must manually re-ingest documents when files change; no automatic monitoring.
 
-**Theoretical Foundation:** Based on Google Research's Speculative RAG (arXiv:2407.08223) - smaller specialist model drafts response, larger generalist model verifies and corrects if needed.
-
-**Status:** EXPERIMENTAL - Mark as optional, validate quality before production use
+**Inspiration:** PrivateGPT's folder watch feature enables "set it and forget it" document management.
 
 **Implementation:**
-1. Research speculative RAG implementation patterns [4-5 hours]
-2. Implement draft-verify orchestration [10-12 hours]
-3. Add draft quality assessment and acceptance criteria [6-8 hours]
-4. Create fallback mechanisms for draft rejection [3-4 hours]
-5. Comprehensive benchmark: accuracy vs latency trade-offs [2-3 hours]
+1. Research file system event monitoring (watchdog library) [2-3 hours]
+2. Implement folder monitoring daemon [6-8 hours]
+3. Add debouncing for rapid file changes [4-5 hours]
+4. Create ingestion queue and batch processing [4-5 hours]
+5. Implement conflict resolution (delete, update, new) [3-4 hours]
+6. Add CLI and configuration for watched folders [1-2 hours]
 
-**Speculative RAG Workflow:**
-```python
-async def speculative_rag_query(query: str, context: str):
-    # Step 1: Draft with fast small model
-    draft = await small_model.generate(query, context)
+**Folder watch features:**
+- Monitor local directories for changes
+- Auto-ingest new files
+- Update embeddings when files modified
+- Remove embeddings when files deleted
+- Batch processing to avoid rapid re-ingestion
 
-    # Step 2: Assess draft quality
-    quality_score = assess_draft_quality(draft, query)
-
-    # Step 3: Decide verification strategy
-    if quality_score > ACCEPTANCE_THRESHOLD:
-        return draft  # High confidence, accept draft
-    elif quality_score > REVISION_THRESHOLD:
-        # Medium confidence, verify specific sections
-        return await large_model.verify_and_correct(draft, query, context)
-    else:
-        # Low confidence, regenerate with large model
-        return await large_model.generate(query, context)
+**CLI commands:**
+```bash
+ragged watch add <folder_path>              # Start watching folder
+ragged watch list                           # List watched folders
+ragged watch remove <folder_path>           # Stop watching
+ragged watch status                         # Show watch daemon status
 ```
 
-**Model Pairing (Ollama):**
-- **Draft Model:** `llama3.2:3b` (fast, ~500 tokens/sec)
-- **Verify Model:** `llama3.2:70b` (quality, ~50 tokens/sec)
-- **Acceptance Rate:** Target 60-70% (Google reported 51% latency reduction at similar rates)
-
-**Expected Performance:**
-- **Simple queries:** Draft accepted → 80% latency reduction
-- **Medium queries:** Partial verification → 40-60% reduction
-- **Complex queries:** Full regeneration → No reduction (same as baseline)
-- **Overall (mixed workload):** 30-50% average latency reduction
-
-**Quality Safeguards:**
-- Accuracy validation against baseline
-- User feedback integration
-- Configurable acceptance thresholds
-- Automatic fallback to single-model mode if quality degrades
+**Background daemon:**
+- Runs as systemd service (Linux) or launchd (macOS)
+- Logs all ingestion events
+- Configurable file type filters
 
 **Files:**
-- `src/generation/speculative_rag.py` (new, ~350 lines)
-- `src/generation/draft_assessor.py` (new, ~200 lines)
-- `src/routing/model_router.py` (extend existing)
-- `tests/generation/test_speculative.py` (~250 lines)
+- `src/watch/folder_watcher.py` (new, ~400 lines)
+- `src/watch/daemon.py` (service management, ~250 lines)
+- `src/watch/queue.py` (ingestion queue, ~200 lines)
+- `systemd/ragged-watch.service` (new)
+- `tests/watch/test_folder_watcher.py` (~300 lines)
 
-**⚠️ MANUAL TEST:** Extensive quality validation across query types, verify no accuracy regression, measure actual latency gains
+**Manual Testing:**
+- Add watched folder
+- Create new file → verify auto-ingestion
+- Modify file → verify embedding update
+- Delete file → verify removal from ChromaDB
+- Restart daemon → verify watch persistence
 
-**Success:** 30-50% latency reduction on average, no accuracy loss, draft acceptance rate 60-70%, graceful degradation
+**Success:** Folders monitor continuously; changes sync automatically within 30 seconds
 
 ---
 
-## Success Criteria (Test Checkpoints)
+## UI-001: Svelte UI Foundation (30-40 hours)
 
-**Automated:**
-- [ ] Context scope selection correct for query complexity
-- [ ] Query classification accuracy >85%
-- [ ] Model routing selects appropriate models
-- [ ] Domain adaptation improves domain-specific retrieval
-- [ ] Analytics metrics collected correctly
-- [ ] Smart caching improves hit rate
-- [ ] Streaming response tokens delivered correctly
-- [ ] Parallel retrieval produces identical results to sequential
-- [ ] Speculative RAG draft acceptance rate 60-70%
+**Problem:** Current Gradio UI is basic and not suitable for daily use; users expect modern web applications.
+
+**Inspiration:** AnythingLLM's polished UI demonstrates importance of professional interface design.
+
+**Strategic Goal:** Establish foundation for v0.9's full Web UI completion.
+
+**Implementation:**
+1. Set up SvelteKit project structure [4-5 hours]
+2. Design component architecture and routing [6-8 hours]
+3. Create REST API client library [5-6 hours]
+4. Implement authentication UI (if RBAC in v0.7) [6-8 hours]
+5. Build document library interface (basic) [6-8 hours]
+6. Add search interface (basic) [3-4 hours]
+
+**UI pages (v0.6 foundation):**
+- **Home:** Quick search, recent documents
+- **Documents:** Library view with filtering
+- **Search:** Simple search interface
+- **Settings:** Basic configuration
+
+**Technology stack:**
+- **Framework:** SvelteKit (SSR, routing, fast)
+- **Styling:** TailwindCSS (utility-first, consistent design)
+- **Components:** shadcn-svelte (accessible, customisable)
+- **API:** REST client with type safety
+
+**Files:**
+- `web-ui/` (new directory)
+  - `src/routes/` (SvelteKit routes)
+  - `src/lib/components/` (reusable components)
+  - `src/lib/api/` (API client)
+  - `src/app.html`, `svelte.config.js`, etc.
+- `docker-compose.yml` (add web-ui service)
+- ~2000 lines total (foundation only)
+
+**Manual Testing:**
+- Navigate all pages
+- Verify API integration works
+- Test responsive design (mobile, tablet, desktop)
+- Verify authentication flow (if implemented)
+
+**Success:** Modern web UI foundation deployed; basic document browsing and search functional
+
+---
+
+## API-001: REST API Stabilisation (15-20 hours)
+
+**Problem:** REST API lacks formal specification; versioning unclear; breaking changes possible.
+
+**Implementation:**
+1. Create OpenAPI 3.1 specification [6-8 hours]
+2. Add API versioning (`/api/v1/`) [4-5 hours]
+3. Implement request/response validation [3-4 hours]
+4. Add comprehensive API documentation [2-3 hours]
+
+**API endpoints to formalise:**
+- `POST /api/v1/documents/ingest`
+- `POST /api/v1/query`
+- `GET /api/v1/documents`
+- `GET /api/v1/documents/{id}`
+- `DELETE /api/v1/documents/{id}`
+- `GET /api/v1/health`
+
+**OpenAPI spec features:**
+- Request/response schemas
+- Authentication requirements
+- Error response codes
+- Example requests/responses
+
+**Files:**
+- `docs/api/openapi.yaml` (new, ~500 lines)
+- `src/web/api.py` (add versioning middleware)
+- `src/web/validation.py` (request validation, ~200 lines)
+
+**Manual Testing:**
+- Import OpenAPI spec into Postman/Insomnia
+- Test all endpoints
+- Verify validation errors return correct codes
+- Generate API client from spec
+
+**Success:** OpenAPI spec complete; API versioned; breaking changes prevented
+
+---
+
+## Success Criteria
+
+**Automated Tests:**
+- [ ] Google Drive authentication and sync working
+- [ ] Dropbox authentication and sync working
+- [ ] Notion page parsing preserves structure
+- [ ] Folder watch detects file changes correctly
+- [ ] Folder watch debounces rapid changes
+- [ ] API validation enforces schemas
 - [ ] All existing tests pass
 
 **Manual Testing:**
-- [ ] ⚠️ MANUAL: Context scope reduces token usage without accuracy loss
-- [ ] ⚠️ MANUAL: Model routing reduces latency for simple queries
-- [ ] ⚠️ MANUAL: Domain adaptation improves domain-specific results
-- [ ] ⚠️ MANUAL: Analytics provide actionable insights
-- [ ] ⚠️ MANUAL: Cache warming improves performance
-- [ ] ⚠️ MANUAL: Routing decisions sensible for query types
-- [ ] ⚠️ MANUAL: Streaming provides smooth user experience
-- [ ] ⚠️ MANUAL: Parallel retrieval reduces latency measurably
-- [ ] ⚠️ MANUAL: Speculative RAG maintains quality while reducing latency
+- [ ] Authenticate with Google Drive, ingest folder
+- [ ] Sync Google Drive folder detects new files
+- [ ] Authenticate with Dropbox, ingest folder
+- [ ] Authenticate with Notion, ingest nested pages
+- [ ] Watch folder auto-ingests new file within 30s
+- [ ] Watch folder updates modified file
+- [ ] Watch folder removes deleted file
+- [ ] Svelte UI loads and navigation works
+- [ ] API endpoints work via OpenAPI client
 
 **Quality Gates:**
-- [ ] 30-50% token reduction for simple queries (context scope)
-- [ ] 60-80% perceived latency reduction (streaming - time to first token)
-- [ ] 40-60% retrieval latency reduction (parallel processing)
-- [ ] 30-50% average latency reduction (speculative RAG, experimental)
-- [ ] 30-50% latency reduction for simple queries (model routing)
-- [ ] 20-30% cache hit rate improvement (smart caching)
-- [ ] Domain-specific retrieval quality improvement measurable
-- [ ] Analytics overhead <5% of query time
-- [ ] No regression in accuracy for any query type
+- [ ] Folder watch latency <30 seconds for file changes
+- [ ] Cloud connectors handle 100+ files efficiently
+- [ ] Incremental sync faster than full re-ingestion
+- [ ] UI responsive on mobile and desktop
+- [ ] API specification complete and accurate
+- [ ] Zero breaking API changes
+- [ ] Documentation complete for all connectors
 
 ---
 
 ## Known Risks
 
-- Context scope determination may need query-specific tuning
-- Query classification may require tuning for accuracy
-- Model routing logic may need domain-specific adjustments
-- Domain adaptation effectiveness varies by domain
-- Analytics collection may impact performance
-- Smart caching prediction accuracy uncertain
-- Streaming may buffer on slow systems (test on various hardware)
-- Parallel retrieval requires careful concurrency management (deadlock risk)
-- Speculative RAG quality highly dependent on draft acceptance criteria (experimental)
+- **OAuth complexity:** Google/Dropbox/Notion authentication requires careful security handling
+- **Rate limiting:** Cloud APIs have rate limits; large folders may hit limits
+- **Notion structure:** Complex block parsing may not preserve all formatting
+- **Folder watch reliability:** File system events may be missed on some platforms
+- **UI scope creep:** Foundation only—defer advanced features to v0.9
+- **API changes:** Stabilising API may require refactoring existing endpoints
 
 ---
 
-## Next Version
+## Next Steps
 
-After v0.6.0 completion:
-- **v0.7.0:** Production readiness (scalability, enterprise features, stable API)
-- See: `roadmap/version/v0.7/README.md`
+After v0.6 completion:
+- **v0.7:** Enterprise Foundation (authentication, RBAC, monitoring) - keep existing plan
+- **v0.8:** Agent Capabilities (agentic workflows, tool use)
+- **v0.9:** Web UI Completion (block editor, visual DAG, PWA)
 
----
-
-
-**Status:** Requires v0.5.0 completion first
+See: `roadmap/version/v0.7/README.md`, `roadmap/version/v0.8/README.md`
 
 ---
 
 ## Related Documentation
 
-- [Previous Version](../v0.5/README.md) - Multi-model intelligence
-- [Next Version](../v0.7/README.md) - Enterprise & production
-- [Planning](../../planning/version/v0.6/) - Design goals for v0.6
+- [Previous Version](../v0.5/README.md) - Vision RAG and GPU management
+- [Next Version](../v0.7/README.md) - Enterprise foundation
+- [Planning](../../planning/version/v0.6/) - Design goals for v0.6 (if exists)
 - [Version Overview](../README.md) - Complete version comparison
+- [Projects to Learn From](../../../research/projects-to-learn-from.md) - Ecosystem analysis informing this roadmap
 
 ---

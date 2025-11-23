@@ -20,20 +20,21 @@ This directory contains research materials, methodology documentation, and exper
 ```text
 research/
 ├── README.md (this file)
-├── note/                    # Research notes and literature reviews
+├── projects-to-learn-from.md  # RAG ecosystem analysis and comparison
+├── note/                      # Research notes and literature reviews
 │   ├── README.md
 │   └── rag-latency-optimisation.md
-├── background/              # Research background (migrated from project-setup)
+├── background/                # Research background (migrated from project-setup)
 │   ├── rag-landscape.md
 │   ├── vector-databases.md
 │   └── ...
-├── methodology/             # Research methods
+├── methodology/               # Research methods
 │   └── (Will be added as experiments are conducted)
-├── experiments/             # Experimental results
+├── experiments/               # Experimental results
 │   └── (Will be added during development)
-├── benchmarks/              # Performance benchmarks
+├── benchmarks/                # Performance benchmarks
 │   └── (Will be added starting v0.2)
-└── citations.md             # Bibliography of referenced papers
+└── citations.md               # Bibliography of referenced papers
 ```
 
 ## Available Research Materials
@@ -48,6 +49,22 @@ research/
 
 **Available notes**:
 - [RAG Latency Optimisation](note/rag-latency-optimisation.md) - Latency reduction techniques research
+
+### RAG Ecosystem Analysis
+
+**[Projects to Learn From](projects-to-learn-from.md)**:
+- Comprehensive analysis of major open-source RAG projects
+- Feature comparison across privacy, multi-modal, document processing, and collaboration capabilities
+- Educational guide to the RAG ecosystem (non-competitive positioning)
+- Insights informing ragged's roadmap and feature prioritisation
+
+**Projects analysed**:
+- Privacy-first applications (PrivateGPT, LocalGPT)
+- Enterprise platforms (Onyx/Danswer, AnythingLLM)
+- Technical leaders (RAGFlow, Quivr)
+- Developer frameworks (Haystack)
+
+**Purpose**: Understand ecosystem trends, identify feature gaps, and learn from successful implementations whilst maintaining ragged's unique privacy-first vision.
 
 ### Background Research
 
