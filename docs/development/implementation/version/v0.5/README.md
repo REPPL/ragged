@@ -8,13 +8,45 @@ Implementation records for ragged version 0.5 series: Multi-Modal Vision RAG
 
 The v0.5 series introduces multi-modal capabilities to ragged, enabling visual document understanding through ColPali vision embeddings. This series represents a fundamental architectural evolution from text-only to multi-modal RAG, supporting queries over diagrams, tables, charts, and visual content.
 
-**Status:** 🔄 In Progress (3/12 releases completed)
+**Status:** 🔄 In Progress (5/12 releases completed)
 **Started:** 23 November 2025
 **Completion:** Estimated Q1 2026
 
 ---
 
 ## Completed Versions
+
+### v0.5.8 - Security Hardening (CLI & Supply Chain)
+**Completion Date:** 23 November 2025
+**Implementation:** 1,800+ lines changed (25+ files modified)
+
+Complete security hardening with CLI path validation integration, pickle removal, and supply chain security measures. Eliminates all CRITICAL and remaining MEDIUM vulnerabilities identified in security audit.
+
+**Key Deliverables:**
+- HIGH-5: CLI path validation integrated across 10 commands
+- CRITICAL-001: Complete pickle removal (CVSS 9.8 eliminated)
+- MEDIUM-3/4: Network binding secure defaults + warnings
+- MEDIUM-5: HuggingFace model revision pinning
+- 400+ lines of new security tests (22 path validation tests)
+
+[View v0.5.8 Documentation →](./v0.5.8/README.md)
+
+### v0.5.7 - Security Hardening (Vision Features)
+**Completion Date:** 23 November 2025
+**Implementation:** 2,700+ lines changed (implementation + tests)
+
+Comprehensive security hardening for vision-enabled RAG features. Addresses all CRITICAL and HIGH-priority vulnerabilities, implementing encryption, PII detection, and automated security monitoring.
+
+**Key Deliverables:**
+- CRITICAL-1: Vision embedding encryption (GDPR compliance)
+- HIGH-1: Visual PII detection with OCR
+- HIGH-2: CORS security hardening
+- HIGH-3: OOM error message sanitization
+- HIGH-4: Image size validation (DoS protection)
+- HIGH-5: CLI input validation framework (PathValidator)
+- HIGH-6: Automated dependency monitoring
+
+[View v0.5.7 Documentation →](./v0.5.7/README.md)
 
 ### v0.5.5 - Test Coverage & Import Fixes
 **Completion Date:** 23 November 2025
@@ -75,9 +107,13 @@ Comprehensive CLI exposing all vision features through intuitive command-line in
 - ✅ v0.5.4: Legacy Command Removal - **COMPLETED**
 - ✅ v0.5.5: Test Coverage & Import Fixes - **COMPLETED**
 
-### Enhanced Features (v0.5.6-v0.5.11)
+### Security Hardening (v0.5.7-v0.5.8)
+- ✅ v0.5.7: Security Hardening (Vision Features) - **COMPLETED**
+- ✅ v0.5.8: Security Hardening (CLI & Supply Chain) - **COMPLETED**
+
+### Enhanced Features (v0.5.6, v0.5.9-v0.5.11)
 - v0.5.6: Quality Metrics & Evaluation - Planned
-- v0.5.7-v0.5.11: Advanced features - Planned
+- v0.5.9-v0.5.11: Advanced features - Planned
 
 ---
 
@@ -129,14 +165,16 @@ Comprehensive CLI exposing all vision features through intuitive command-line in
 
 ## Implementation Statistics
 
-### Code Metrics (v0.5.3-v0.5.5 Completed)
+### Code Metrics (v0.5.3-v0.5.8 Completed)
 
 | Version | Type | Lines Changed | Files Modified | Purpose |
 |---------|------|---------------|----------------|---------|
 | v0.5.3 | Feature | +2,437 | 8 | Multi-modal CLI commands |
 | v0.5.4 | Breaking | ~500 docs | 4 | Legacy command removal |
 | v0.5.5 | Testing | +2,604 net | 301 | Test infrastructure fixes |
-| **Total** | | **~5,541** | **313** | **3 releases completed** |
+| v0.5.7 | Security | +2,700 | ~20 | Vision security hardening |
+| v0.5.8 | Security | +1,800 | 25+ | CLI & supply chain security |
+| **Total** | | **~10,041** | **~358** | **5 releases completed** |
 
 ### Component Breakdown (v0.5.3)
 
@@ -171,6 +209,8 @@ Comprehensive CLI exposing all vision features through intuitive command-line in
 - [v0.5.3 Roadmap](../../../roadmap/version/v0.5/v0.5.3.md) - CLI implementation plan
 
 ### Implementation
+- [v0.5.8 Implementation](./v0.5.8/README.md) - Security Hardening (CLI & Supply Chain)
+- [v0.5.7 Implementation](./v0.5.7/README.md) - Security Hardening (Vision Features)
 - [v0.5.5 Implementation](./v0.5.5/README.md) - Test Coverage & Import Fixes
 - [v0.5.4 Implementation](./v0.5.4/README.md) - Legacy Command Removal
 - [v0.5.3 Implementation](./v0.5.3/README.md) - Multi-Modal CLI Commands
@@ -180,5 +220,5 @@ Comprehensive CLI exposing all vision features through intuitive command-line in
 
 ---
 
-**Status:** v0.5.3-v0.5.5 Completed ✅ (3/12 releases)
-**Next:** v0.5.0-v0.5.2 (Vision foundation) or v0.5.6 (Quality metrics)
+**Status:** v0.5.3-v0.5.5, v0.5.7-v0.5.8 Completed ✅ (5/12 releases)
+**Next:** v0.5.0-v0.5.2 (Vision foundation) or v0.5.6 (Quality metrics) or v0.5.9+ (Enhanced features)

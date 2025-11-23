@@ -410,10 +410,12 @@ Users with legacy pickle cache files must:
 - [v0.5.7 Implementation](../v0.5.7/README.md) - Previous security hardening
 - [Security Audit](../../../../../audit/security/2025-11-23-security-audit.md) - Security findings
 - [Security Monitoring Guide](../../../../../guides/security-monitoring.md) - Operational procedures
-- [PathValidator Documentation](../../../../../src/validation/path_validator.py) - Path validation details
+- [PathValidator API Documentation](../../../../../api/src.utils.validation.rst) - Path validation details
 
 ---
 
 **Status:** Complete
+
 **Release:** v0.5.8
+
 **Date:** 2025-11-23
