@@ -136,7 +136,7 @@ class ColPaliEmbedder(BaseEmbedder):
             ...     batch_size=4
             ... )
         """
-        self.model_name = model_name
+        self._model_name = model_name
         self.cache_dir = cache_dir
 
         # Initialise GPU device manager
@@ -255,7 +255,7 @@ class ColPaliEmbedder(BaseEmbedder):
             # Determine optimal dtype
             dtype = torch.bfloat16 if self.device == "cuda" else torch.float32
 
-            logger.info(f"Loading ColPali model: {self.model_name}")
+            logger.info(f"Loading ColPali model: {self._model_name}")
             logger.info(f"Using dtype: {dtype}, device: {self.device}")
             logger.info("First-time download may take 10-30 minutes (~5GB model)")
             logger.info("Progress will be displayed below:")
@@ -263,7 +263,7 @@ class ColPaliEmbedder(BaseEmbedder):
             # Load model with HuggingFace transformers
             # transformers library automatically shows progress bars during download
             self.model = AutoModel.from_pretrained(
-                self.model_name,
+                self._model_name,
                 torch_dtype=dtype,
                 cache_dir=str(self.cache_dir) if self.cache_dir else None,
                 device_map=self.device if self.device != "cpu" else None,
@@ -282,7 +282,7 @@ class ColPaliEmbedder(BaseEmbedder):
             # Load processor (handles image preprocessing)
             logger.info("Loading ColPali processor")
             self.processor = AutoProcessor.from_pretrained(
-                self.model_name,
+                self._model_name,
                 cache_dir=str(self.cache_dir) if self.cache_dir else None,
                 local_files_only=False,
             )
@@ -293,7 +293,7 @@ class ColPaliEmbedder(BaseEmbedder):
             logger.error(f"Failed to load ColPali model: {e}")
             raise RuntimeError(
                 f"ColPali model loading failed: {e}. "
-                f"Ensure model '{self.model_name}' exists on HuggingFace and "
+                f"Ensure model '{self._model_name}' exists on HuggingFace and "
                 f"you have internet connection for first download."
             ) from e
 
@@ -331,7 +331,7 @@ class ColPaliEmbedder(BaseEmbedder):
         return self.get_embedding_dimension()
 
     @property
-    def model_name_property(self) -> str:
+    def model_name(self) -> str:
         """
         Get the name of the embedding model (BaseEmbedder property).
 
@@ -340,10 +340,10 @@ class ColPaliEmbedder(BaseEmbedder):
 
         Example:
             >>> embedder = ColPaliEmbedder()
-            >>> embedder.model_name_property
+            >>> embedder.model_name
             'vidore/colpali-v1.3-hf'
         """
-        return self.model_name
+        return self._model_name
 
     def get_device_info(self) -> dict[str, str | float]:
         """
