@@ -38,6 +38,24 @@ How to set up the ragged development environment using Docker with native Ollama
 - Architecture: Hybrid (Native Ollama + Containerised Application)
 - Topics: GPU acceleration, Metal framework, unified memory
 
+### Memory & Privacy
+
+**[Memory System User Guide](./memory-system.md)** (v0.4.5+)
+
+Comprehensive guide to ragged's personal memory system including personas, interaction tracking, and knowledge graphs.
+
+- Topics: Personas, interactions, knowledge graph, privacy controls
+- Level: Intermediate
+- Version: v0.4.5+
+
+**[Privacy & Data Control](./privacy.md)** (v0.4.5+)
+
+Understanding ragged's privacy-first approach and GDPR compliance for the memory system.
+
+- Topics: Local storage, GDPR rights, data deletion, export
+- Level: All users
+- Version: v0.4.5+
+
 ---
 
 ### Planned Guides

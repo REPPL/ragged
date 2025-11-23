@@ -1,8 +1,5 @@
 # Memory API Reference
 
-**Version:** v0.4.5
-**Last Updated:** 2025-11-23
-
 ## Module: `ragged.memory`
 
 The memory module provides three main components for personalised context management.
@@ -837,5 +834,4 @@ print(f"Topics: {len(graph_export['interests'])}")
 
 ---
 
-**Version:** v0.4.5
-**Status:** Production-ready
+**Status**: Production-ready (v0.4.5)

@@ -1,8 +1,5 @@
 # Memory System User Guide
 
-**Version:** v0.4.5
-**Last Updated:** 2025-11-23
-
 ## Overview
 
 The ragged memory system provides personalised, privacy-first context management through three interconnected components:

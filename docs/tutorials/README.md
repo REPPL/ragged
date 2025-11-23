@@ -20,7 +20,15 @@ Tutorials are **learning-oriented** guides that take you through hands-on exerci
 
 ## Available Tutorials
 
-*Tutorials will be added starting with v0.1 release.*
+### Memory System
+
+**[Getting Started with Personas](./personas-quickstart.md)** (v0.4.5+)
+
+Create and manage user personas for context-aware interactions with ragged's privacy-first memory system.
+
+- **Topics**: Personas, context switching, data privacy
+- **Level**: Beginner
+- **Time**: 15 minutes
 
 ### Planned Tutorials
 

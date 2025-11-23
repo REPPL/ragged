@@ -1,8 +1,5 @@
 # Getting Started with Personas
 
-**Version:** v0.4.5
-**Last Updated:** 2025-11-23
-
 ## What are Personas?
 
 Personas allow you to maintain separate user contexts within ragged. Each persona has its own:

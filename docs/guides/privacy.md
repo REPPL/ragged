@@ -1,8 +1,5 @@
 # Privacy & Data Control
 
-**Version:** v0.4.5
-**Last Updated:** 2025-11-23
-
 ## Overview
 
 Ragged's memory system is designed with **privacy-first** principles, ensuring complete user control over personal data with full GDPR compliance.
@@ -546,5 +543,6 @@ The ragged memory system (v0.4.5) implements:
 **Questions or Concerns?**
 File an issue: https://github.com/anthropics/ragged/issues
 
-**Version:** v0.4.5
-**Status:** Production-ready
+---
+
+**Status**: Production-ready (v0.4.5)
