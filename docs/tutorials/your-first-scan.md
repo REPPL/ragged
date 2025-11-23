@@ -435,12 +435,9 @@ scan_export_markdown: true  # Always export
 - **Privacy-first** - All data stays on your device
 - **Traceable** - Complete lineage tracking
 
-**Next tutorial:** [Processing Folders of Books](./batch-processing.md)
-
 ---
 
 ## See Also
 
 - [Scanning Books Guide](../guides/scanning-books.md)
 - [Configuration Reference](../reference/configuration.md)
-- [Troubleshooting Common Issues](../guides/troubleshooting-scans.md)

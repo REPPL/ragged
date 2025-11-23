@@ -30,6 +30,14 @@ Create and manage user personas for context-aware interactions with ragged's pri
 - **Level**: Beginner
 - **Time**: 15 minutes
 
+**[Your First Scan: Converting a Messy Book to Perfect PDF](./your-first-scan.md)** (v0.4.9+)
+
+Step-by-step tutorial for processing your first scanned book with ragged's scan processing pipeline.
+
+- **Topics**: Scan processing, OCR, metadata extraction, page reordering
+- **Level**: Beginner
+- **Time**: 10-15 minutes
+
 ### Planned Tutorials
 
 - [ ] **Your First RAG Pipeline** - Build a basic document QA system in 10 minutes

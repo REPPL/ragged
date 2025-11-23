@@ -1,6 +1,6 @@
 # ragged Documentation
 
-**Status:** Early Development (v0.2.2)
+**Status:** Early Development (v0.4.9)
 
 ---
 

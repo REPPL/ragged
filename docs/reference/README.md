@@ -25,6 +25,7 @@ Reference documentation is **information-oriented** material that provides preci
 
 - [x] **[CLI Reference](./cli/)** - Command-line interface specifications (v0.2.8)
 - [x] **[Memory API Reference](./memory-api.md)** - Personal memory system API (v0.4.5)
+- [x] **[Scan Processing API Reference](./scan-api.md)** - Scan processing modules and classes (v0.4.9)
 - [ ] **Python API Reference** - Complete API documentation (v0.3+)
 - [ ] **REST API Reference** - FastAPI endpoints (v0.3+)
 

@@ -68,7 +68,7 @@ Understanding ragged's privacy-first approach and GDPR compliance for the memory
 **Document Management**:
 - [ ] Processing academic papers (PDFs with citations)
 - [ ] Importing web articles (Medium, news sites)
-- [ ] Handling scanned documents (OCR)
+- [x] **[Scanning Books with Ragged](./scanning-books.md)** (v0.4.9) - Convert messy scans into perfect PDFs with OCR, page reordering, and metadata extraction
 - [ ] Managing document collections
 
 **Customization**:

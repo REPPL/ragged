@@ -43,6 +43,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 **Privacy**: 100% offline and local, no web lookups, no external APIs, no telemetry
 
+**Documentation**:
+  - User Guide: Scanning Books with Ragged (comprehensive reference)
+  - Tutorial: Your First Scan (step-by-step walkthrough)
+  - API Reference: Scan Processing API (complete technical reference)
+
 ## [0.5.4] - 2025-11-23
 
 ### Changed
