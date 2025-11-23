@@ -101,15 +101,14 @@ security = [
 ragged = "ragged.main:cli"
 
 [tool.setuptools]
-# Map root package directory to src/
-# This allows imports like "from ragged.web import ..." to find /src/web/
+# Map the ragged package to the src directory
+# This allows imports like "from ragged.storage import ..." to find /src/storage/
 package-dir = {"ragged" = "src"}
 
-[tool.setuptools.packages.find]
-# Automatically discover all Python packages in src/
-# Finds ragged, ragged.web, ragged.chunking, ragged.embeddings, etc.
-where = ["src"]
-include = ["ragged*"]
+[tool.setuptools.packages]
+# Explicitly list packages since the structure doesn't follow standard conventions
+# The ragged package is at src/, and subpackages are at src/storage/, src/embeddings/, etc.
+find = {where = ["src"], namespaces = false}
 
 [tool.black]
 line-length = 100

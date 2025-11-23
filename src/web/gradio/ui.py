@@ -26,10 +26,11 @@ def create_ui() -> gr.Blocks:
     api_status = health.get("status", "unknown")
     initial_status = "✅ Connected" if api_status in ["healthy", "degraded"] else "❌ Unavailable"
 
-    with gr.Blocks(
-        title="ragged - Privacy-First RAG",
-        theme=gr.themes.Soft(primary_hue="indigo")
-    ) as app:
+    # Gradio 6.0+: theme applied via .theme property, not constructor parameter
+    app = gr.Blocks(title="ragged - Privacy-First RAG")
+    app.theme = gr.themes.Soft(primary_hue="indigo")
+
+    with app:
         gr.Markdown(
             """
             # 🔍 ragged - Privacy-First Local RAG
@@ -48,10 +49,10 @@ def create_ui() -> gr.Blocks:
         with gr.Row():
             # Left column: Chat
             with gr.Column(scale=2):
+                # Gradio 6.0+: show_copy_button parameter removed
                 chatbot = gr.Chatbot(
                     label="Chat",
-                    height=500,
-                    show_copy_button=True
+                    height=500
                 )
 
                 with gr.Row():
