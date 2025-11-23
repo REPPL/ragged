@@ -17,6 +17,7 @@ services:
       - CHROMA_URL=${CHROMA_URL:-http://chromadb:8001}
       - PYTHONUNBUFFERED=${PYTHONUNBUFFERED:-1}
       - ENVIRONMENT=${ENVIRONMENT:-development}
+      - PYTHONPATH=/app  # Ensure Python can find the ragged package
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
@@ -25,7 +26,7 @@ services:
     networks:
       - ragged-network
     restart: unless-stopped
-    command: ["python", "-m", "uvicorn", "src.web.api:app", "--host", "0.0.0.0", "--port", "8000"]
+    command: ["python", "-m", "uvicorn", "ragged.web.api:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
       interval: 30s
@@ -48,13 +49,14 @@ services:
       - RAGGED_API_URL=${RAGGED_API_URL:-http://ragged-api:8000}
       - PYTHONUNBUFFERED=${PYTHONUNBUFFERED:-1}
       - ENVIRONMENT=${ENVIRONMENT:-development}
+      - PYTHONPATH=/app  # Ensure Python can find the ragged package
     depends_on:
       ragged-api:
         condition: service_healthy
     networks:
       - ragged-network
     restart: unless-stopped
-    command: ["python", "-m", "src.web.gradio_ui"]
+    command: ["python", "-m", "ragged.web.gradio_ui"]
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:7860"]
       interval: 30s

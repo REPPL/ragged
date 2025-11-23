@@ -219,6 +219,7 @@ __marimo__/
 
 # ragged-specific data directories
 data/
+data_backup*/
 .chroma/
 .ollama/
 models/

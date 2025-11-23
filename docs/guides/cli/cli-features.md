@@ -80,8 +80,8 @@ We've split CLI documentation into three progressive guides:
 All ragged CLI commands organised by category:
 
 ### Core Operations
-- `ragged add` - Add documents ([Essentials](./essentials.md#2-ragged-add---add-documents))
-- `ragged query` - Ask questions ([Essentials](./essentials.md#3-ragged-query---ask-questions))
+- `ragged ingest` - Add documents (pdf, batch, status commands) ([Essentials](./essentials.md#2-ragged-ingest---add-documents))
+- `ragged query` - Ask questions (text, image, hybrid, interactive modes) ([Essentials](./essentials.md#3-ragged-query---ask-questions))
 - `ragged list` - View documents ([Essentials](./essentials.md#4-ragged-list---view-documents))
 - `ragged clear` - Remove documents ([Essentials](./essentials.md#remove-documents))
 - `ragged health` - Check service status ([Essentials](./essentials.md#1-ragged-health---check-system-status))
@@ -163,7 +163,7 @@ All ragged CLI commands organised by category:
 **I want to...**
 
 ### ...add documents
-- **Single file**: [Essentials: Adding Documents](./essentials.md#2-ragged-add---add-documents)
+- **Single file**: [Essentials: Adding Documents](./essentials.md#2-ragged-ingest---add-documents)
 - **Folder**: [Essentials: Folder Ingestion](./essentials.md#folder-ingestion-options)
 - **With metadata**: [Intermediate: Metadata Management](./intermediate.md#adding-metadata-to-documents)
 
@@ -237,8 +237,8 @@ Read what you need when you need it.
 2. Run these commands:
    ```bash
    ragged health
-   ragged add document.pdf
-   ragged query "What is this about?"
+   ragged ingest pdf document.pdf
+   ragged query text "What is this about?"
    ```
 
 That's enough to be productive. Learn more features as needed.

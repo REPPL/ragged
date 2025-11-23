@@ -53,87 +53,99 @@
 
 ### Prerequisites
 
-- Python 3.12
-- [Ollama](https://ollama.ai) installed and running (optional for v0.2 web UI)
-- ChromaDB (via Docker or pip)
+- **Docker** and Docker Compose (recommended - easiest setup)
+- **[Ollama](https://ollama.ai)** installed and running (for LLM generation)
+- Python 3.12 (if running locally without Docker)
 
-### Installation
+### Installation with Docker (Recommended)
 
 ```bash
-# Clone the repository
+# 1. Clone the repository
 git clone https://github.com/REPPL/ragged.git
 cd ragged
 
-# Create virtual environment
-python3 -m venv .venv/ # or python, depending on your system
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+# 2. Create environment file (copy from example)
+cp .env.example .env
 
-# Install dependencies
-pip install -e .
+# 3. Start Ollama (in a separate terminal)
+ollama serve
 
-# Start services
-docker compose up -d  # Starts ChromaDB (if using Docker)
-ollama serve          # Start Ollama (in separate terminal)
+# 4. Build and start all containers
+docker compose up -d
+
+# 5. Verify containers are healthy
+docker compose ps
+
+# All services should show "healthy" or "running"
+# - ragged-api: FastAPI backend (http://localhost:8000)
+# - ragged-ui: Gradio interface (http://localhost:7860)
+# - chromadb: Vector database (http://localhost:8001)
 ```
 
-### Basic Usage
+**Troubleshooting**: If containers fail to start, see the [Troubleshooting Guide](docs/guides/troubleshooting.md).
+
+### Alternative: Local Installation (Without Docker)
+
+For development or if you prefer running ragged locally:
 
 ```bash
-# Ingest documents (v0.5.3+)
+# 1. Clone the repository
+git clone https://github.com/REPPL/ragged.git
+cd ragged
+
+# 2. Create virtual environment
+python3 -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+# 3. Install in editable mode
+# This installs ragged from pyproject.toml and makes the 'ragged' command available
+pip install -e .
+
+# 4. Verify installation
+ragged --version
+
+# 5. Start required services
+docker compose up chromadb -d  # Start ChromaDB only
+ollama serve                   # Start Ollama (in separate terminal)
+```
+
+**Note**: ragged uses modern Python packaging (`pyproject.toml`). There is no `requirements.txt` file - dependencies are defined in `pyproject.toml` and installed automatically with `pip install -e .`.
+
+### Basic Usage: Quick Start
+
+The essential commands to get started. For advanced features, see [CLI Features](#cli-features) below.
+
+```bash
+# Check system health
+ragged health
+
+# Add your first document
 ragged ingest pdf document.pdf                    # Single PDF (auto-corrects)
 ragged ingest pdf document.pdf --vision           # With vision embeddings
-ragged ingest batch ./docs/ --vision              # Batch ingest with vision
-ragged ingest status                              # Check ingestion stats
+ragged ingest batch ./docs/ --vision              # Batch process directory
 
-# View PDF quality and corrections (v0.3.5+)
-ragged show quality <document_id>                 # Quality report with issues
-ragged show corrections <document_id>             # Applied corrections
-ragged show uncertainties <document_id>           # Low-confidence sections
-
-# Multi-modal queries (v0.5.3+)
+# Ask questions about your documents
 ragged query text "What are the key findings?"    # Text query
 ragged query text "database schema" --boost-diagrams  # Boost visual content
-ragged query image architecture.png               # Image similarity search
-ragged query hybrid "auth flow" diagram.png       # Text + image query
-ragged query interactive                          # Interactive REPL mode
 
-# Advanced search and filtering (v0.2.8+)
-ragged search "machine learning" --path "research/*.pdf"
-ragged metadata update document.pdf --set category=research
+# View and manage your documents
+ragged list                                       # List all documents
+ragged clear                                      # Remove all documents
 
-# Query history and replay (v0.2.8+)
-ragged history list
-ragged history replay 5
+# Configuration
+ragged config show                                # View current settings
+ragged config set-model                           # Change embedding/LLM model
 
-# GPU & Storage Management (v0.5.3+)
-ragged gpu list                            # List GPU devices
-ragged gpu info cuda:0                     # Device specifications
-ragged gpu stats --watch                   # Real-time memory monitoring
-ragged gpu benchmark                       # Benchmark vision embeddings
-ragged storage info                        # Collection statistics
-ragged storage migrate                     # Migrate to v0.5 schema
-ragged storage vacuum                      # Clean orphaned embeddings
-
-# Manage your knowledge base
-ragged list                                # List documents
-ragged metadata list                       # Show document metadata (v0.2.8+)
-ragged clear                               # Clear all documents
-
-# Configuration and health
-ragged config show                         # View configuration
-ragged config set-model                    # Interactive model selection (v0.2.8+)
-ragged config reset                        # Reset to defaults (v0.5.3+)
-ragged health                              # Check service status
-ragged validate                            # Validate configuration (v0.2.8+)
-
-# Backup and maintenance (v0.2.8+)
-ragged export backup --compress            # Create compressed backup
-ragged cache clear --all                   # Clear caches
-
-# Environment information (v0.2.8+)
-ragged env-info                            # System information for bug reports
-ragged completion --install                # Install shell completion
+# Get help
+ragged --help                                     # Show all commands
+ragged ingest --help                              # Help for specific command
 ```
+
+**📚 More Commands Available:**
+- **Multi-modal queries** (image, hybrid, interactive) → See [CLI Features](#cli-features)
+- **GPU management** (list, info, stats, benchmark) → [Advanced Guide](docs/guides/cli/advanced.md)
+- **Metadata & search** (tagging, filtering) → [Intermediate Guide](docs/guides/cli/intermediate.md)
+- **Complete reference** → [Command Reference](docs/reference/cli/command-reference.md)
 
 ---
 
@@ -220,14 +232,48 @@ RAGGED_OLLAMA_URL=http://localhost:11434
 
 ## Troubleshooting
 
+### Common Installation Issues
+
+**"ModuleNotFoundError: No module named 'ragged'"**
+- **Cause**: Package not installed or Docker containers not built correctly
+- **Docker Solution**: Rebuild containers: `docker compose down && docker compose build --no-cache && docker compose up -d`
+- **Local Solution**: Install package: `pip install -e .` (with virtual environment activated)
+
+**"ragged: command not found"**
+- **Cause**: Package not installed or virtual environment not activated
+- **Solution**:
+  1. Activate virtual environment: `source .venv/bin/activate`
+  2. Install package: `pip install -e .`
+  3. Verify: `ragged --version`
+
+**"Container ragged-api is unhealthy"**
+- **Cause**: Import errors, missing dependencies, or configuration issues
+- **Solution**: Check container logs: `docker compose logs ragged-api`
+- **Common fix**: Rebuild containers with `docker compose build --no-cache`
+
+**"Cannot connect to Docker daemon"**
+- **Cause**: Docker Desktop not running
+- **Solution**: Start Docker Desktop and wait for it to be ready
+
+**"Address already in use" (Port Conflict)**
+- **Cause**: Ollama or another service already using port 11434/8000/7860
+- **Solution**:
+  - Check running processes: `lsof -i :11434` or `lsof -i :8000`
+  - Stop conflicting service or change port in `.env` file
+
+### Service-Specific Issues
+
 **ChromaDB Connection Issues:**
 
 ```bash
 # Check ChromaDB is running
-docker ps | grep chromadb
+docker compose ps chromadb
+
+# View ChromaDB logs
+docker compose logs chromadb
 
 # Restart ChromaDB
-docker-compose restart chromadb
+docker compose restart chromadb
 ```
 
 **Ollama Issues:**
@@ -236,10 +282,16 @@ docker-compose restart chromadb
 # Check Ollama is running
 ollama list
 
-# Pull required model
+# Pull required models
 ollama pull llama3.2
 ollama pull nomic-embed-text
 ```
+
+**Need More Help?**
+- Full troubleshooting guide: [docs/guides/troubleshooting.md](docs/guides/troubleshooting.md)
+- Check container health: `docker compose ps`
+- View all logs: `docker compose logs --tail=50`
+- File an issue: [GitHub Issues](https://github.com/REPPL/ragged/issues)
 
 ---
 

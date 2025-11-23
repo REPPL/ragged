@@ -1,7 +1,6 @@
 # RAG Latency Optimisation Research Notes
 
 **Status**: Reference material for future development
-**Created**: 2025-11-18
 **Purpose**: Track research on RAG system latency reduction techniques
 
 ---

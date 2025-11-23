@@ -16,10 +16,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy dependency files
+# Copy dependency files and minimal source structure for build
 COPY pyproject.toml .
+COPY src/ src/
 
 # Install Python dependencies
+# Dependencies are installed here, editable install happens in runtime stage
 RUN pip install --no-cache-dir --upgrade pip setuptools wheel && \
     pip install --no-cache-dir ".[dev]"
 
@@ -50,6 +52,9 @@ COPY --chown=ragged:ragged . /app/
 
 # Switch to non-root user
 USER ragged
+
+# Note: No editable install needed here - PYTHONPATH in docker-compose.yml
+# handles module resolution for mounted volumes
 
 # Expose application port
 EXPOSE 8000

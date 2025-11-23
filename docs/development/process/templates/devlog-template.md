@@ -194,8 +194,6 @@
 
 ## Version Progress
 
-**Current Version**: vX.X
-
 **Progress**: XX% complete (estimated)
 
 **On Track**: [Yes | No | At Risk]

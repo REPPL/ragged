@@ -72,7 +72,7 @@ ragged ingest pdf ml-research-2024.pdf --vision --device cuda:0
 ```
 
 **What happens**:
-1. PDF analyzed for quality issues
+1. PDF analysed for quality issues
 2. Text extracted and chunked (384-dim embeddings)
 3. Pages converted to images
 4. Vision embeddings generated (128-dim ColPali)

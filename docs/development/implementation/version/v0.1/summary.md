@@ -1,8 +1,6 @@
 # ragged v0.1 Development Summary
 
-**Version**: 0.1.0
 **Status:** Complete (11 of 14 phases, 79%)
-**Date**: November 2025
 **Development Time**: ~76 hours (~2 weeks calendar time)
 
 ## Executive Summary

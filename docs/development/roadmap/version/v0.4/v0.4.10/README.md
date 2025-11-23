@@ -1,6 +1,6 @@
-# v0.4.10 - Temporal Memory System
+# v0.4.10 - Temporal Memory: Facts & Timeline Basics (Part 1)
 
-**Hours**: 37-45 | **Priority**: P0 - Advanced Feature | **Status**: Planned
+**Hours**: 20-25 | **Priority**: P0 - Advanced Feature | **Status**: Planned
 
 **Dependencies**: v0.4.9 complete (Refactored codebase)
 
@@ -8,19 +8,36 @@
 
 ## Overview
 
-Implement comprehensive time-aware memory system enabling temporal fact storage, timeline queries, historical activity tracking, and time-based reasoning.
+**Phase 1 of Temporal Memory System**: Implement foundational temporal fact storage and basic timeline query capabilities. This release establishes the core temporal memory infrastructure, with advanced features (temporal reasoning, visualisations) deferred to v0.4.11.
 
-**Vision**: Ragged understands that information changes over time and can answer "what was I working on last week?" or "when did I first learn about RAG?"
+**Vision**: Ragged can store and query facts that change over time, answer "what was I working on last week?", and track activity timelines.
 
 **Theoretical Foundation**: Extends [Context Engineering 2.0](../../../../acknowledgements/context-engineering-2.0.md) **structured context layering** with a temporal dimension. Temporal knowledge graphs make time-based relationships explicit (when facts were valid, when topics were accessed, activity timelines), further reducing uncertainty through time-aware context organisation.
 
-**Multi-File Organisation**: Due to complexity and scope (37-45h), this release is organised across multiple supporting files for maintainability.
+**Two-Part Release Strategy**: To reduce risk and enable incremental validation, temporal memory is split across two releases:
+- **v0.4.10** (this release): Temporal facts, basic timeline queries, core CLI
+- **v0.4.11** (next release): Temporal reasoning, advanced visualisations, comprehensive testing
+
+**Multi-File Organisation**: Due to complexity, this release is organised across multiple supporting files for maintainability.
 
 ---
 
 ## Core Deliverables
 
-### 1. Temporal Fact Storage (8-10h)
+**v0.4.10 Scope** (Part 1 - This Release):
+1. ✅ Temporal Fact Storage (8-10h)
+2. ✅ Basic Timeline Query Engine (6-8h) - Core queries only
+3. ✅ CLI Temporal Commands (4-6h) - Essential commands
+4. ✅ Basic Testing (2h)
+
+**Deferred to v0.4.11** (Part 2 - Next Release):
+- Temporal Reasoning & Time Expression Parsing (10-12h)
+- Advanced Visualisations (3-5h)
+- Comprehensive Testing & Property-Based Tests (4h)
+
+---
+
+### 1. Temporal Fact Storage (8-10h) ✅ v0.4.10
 
 Support facts that change over time with versioning and validity periods.
 
@@ -92,9 +109,11 @@ history = temporal_store.get_fact_history(fact_id)
 
 ---
 
-### 2. Timeline Query Engine (12-15h)
+### 2. Basic Timeline Query Engine (6-8h) ✅ v0.4.10
 
-Support sophisticated time-based queries and activity tracking.
+**Simplified for Part 1**: Core timeline query functionality only. Advanced features (trending topics, period comparisons, complex aggregations) deferred to v0.4.11.
+
+Support essential time-based queries and activity tracking.
 
 #### Query Types Supported
 
@@ -228,7 +247,9 @@ class TemporalQueryEngine:
 
 ---
 
-### 3. Temporal Reasoning (10-12h)
+### 3. Temporal Reasoning (10-12h) ⏭️ MOVED TO v0.4.11
+
+**Note**: This deliverable has been moved to v0.4.11 (Part 2) to reduce v0.4.10 scope and enable incremental validation.
 
 Understand temporal context in queries and apply time-aware logic.
 
@@ -309,9 +330,11 @@ class TemporalReasoner:
 
 ---
 
-### 4. CLI Temporal Commands (6-8h)
+### 4. CLI Temporal Commands (4-6h) ✅ v0.4.10
 
-Comprehensive command-line interface for temporal queries.
+**Simplified for Part 1**: Essential CLI commands only. Advanced commands (period comparisons, topic evolution, visualizations) deferred to v0.4.11.
+
+Command-line interface for core temporal queries.
 
 ```bash
 # ========================================
@@ -393,9 +416,9 @@ ragged memory fact-history <fact-id>
 
 ---
 
-### 5. Visualisations (3-5h)
+### 5. Advanced Visualisations (3-5h) ⏭️ MOVED TO v0.4.11
 
-Visual representations of temporal data.
+**Note**: Visual representations moved to v0.4.11 (Part 2) to focus v0.4.10 on core functionality.
 
 **Timeline Visualisation**:
 ```bash
@@ -446,9 +469,11 @@ Total queries: 102
 
 ---
 
-### 6. Testing & Validation (6-8h)
+### 6. Basic Testing & Validation (2h) ✅ v0.4.10
 
-Comprehensive temporal logic testing.
+**Simplified for Part 1**: Essential testing for temporal facts and basic timeline queries. Comprehensive testing (property-based, edge cases, integration) in v0.4.11.
+
+Core temporal logic testing.
 
 **Test Coverage**:
 
@@ -548,22 +573,26 @@ Comprehensive temporal logic testing.
 
 ## Success Criteria
 
-Version 0.4.10 is successful if:
+**Version 0.4.10 (Part 1) is successful if**:
 
 1. ✅ Temporal fact storage works correctly
 2. ✅ Fact versioning tracks changes accurately
-3. ✅ Timeline queries produce accurate results
-4. ✅ Time expression parsing handles natural language
-5. ✅ Temporal reasoning enhances query relevance
-6. ✅ Timezone handling correct (including DST)
-7. ✅ Activity summaries accurate and insightful
-8. ✅ Trending topics detection meaningful
-9. ✅ CLI commands intuitive and functional
-10. ✅ Visualisations clear and helpful
-11. ✅ Performance targets met (see below)
-12. ✅ 85%+ test coverage
-13. ✅ Documentation complete
-14. ✅ No edge case bugs (leap years, DST, etc.)
+3. ✅ Basic timeline queries produce accurate results
+4. ✅ Activity summaries accurate
+5. ✅ Core CLI commands intuitive and functional
+6. ✅ Timezone handling correct (UTC storage)
+7. ✅ Performance targets met (see below)
+8. ✅ 80%+ test coverage for implemented features
+9. ✅ Documentation complete for Part 1 features
+10. ✅ Foundation established for v0.4.11 (Part 2)
+
+**Deferred to v0.4.11** (Part 2):
+- Time expression parsing (natural language)
+- Temporal reasoning enhancements
+- Trending topics detection
+- Advanced visualisations
+- Comprehensive edge case testing (leap years, DST)
+- Property-based testing
 
 ---
 
@@ -582,12 +611,17 @@ Version 0.4.10 is successful if:
 
 ## File Summary
 
-**New Files** (~4,650 lines):
-- Temporal core: ~1,950 lines
-- CLI: ~700 lines
-- Tests: ~1,200 lines
-- Documentation: ~2,000 lines
-- Visualisations: ~350 lines
+**v0.4.10 (Part 1) - New Files** (~2,100 lines):
+- Temporal core: ~850 lines (facts + basic timeline)
+- CLI: ~350 lines (core commands)
+- Tests: ~500 lines (basic testing)
+- Documentation: ~400 lines (Part 1 features)
+
+**Deferred to v0.4.11 (Part 2)** (~2,050 lines):
+- Temporal reasoning: ~650 lines
+- Advanced visualisations: ~350 lines
+- Comprehensive testing: ~600 lines
+- Documentation: ~450 lines
 
 **Supporting Documentation**:
 - [temporal-facts.md](./temporal-facts.md) - Temporal fact storage details

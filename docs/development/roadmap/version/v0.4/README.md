@@ -107,17 +107,17 @@ v0.4.13 Production Release (Q2 2027)
 **Releases**: 4
 **Goal**: Deliver complete personal memory system with user behaviour learning
 
-### Phase 3: Advanced Features (v0.4.9 - v0.4.10)
-**Focus**: Refactoring, temporal memory, advanced reasoning
-**Hours**: 47-57
-**Releases**: 2
-**Goal**: Add time-aware memory and clean up technical debt
-
-### Phase 4: Stabilisation & Production (v0.4.11 - v0.4.13)
-**Focus**: LEANN migration, performance optimisation, production readiness
-**Hours**: 40-55
+### Phase 3: Advanced Features (v0.4.9 - v0.4.11)
+**Focus**: Production readiness, mid-series security review, temporal memory (split into 2 parts)
+**Hours**: 57-71
 **Releases**: 3
-**Goal**: Deploy LEANN backend, optimise performance, prepare for production
+**Goal**: Security-hardened codebase, complete temporal memory system with advanced reasoning
+
+### Phase 4: Stabilisation & Production (v0.4.12 - v0.4.13)
+**Focus**: Backend optimisation & migration (merged), production deployment with observability
+**Hours**: 43-52
+**Releases**: 2
+**Goal**: Consolidated backend infrastructure, production-ready deployment with operational excellence
 
 ---
 
@@ -278,25 +278,27 @@ v0.4.13 Production Release (Q2 2027)
 
 ---
 
-### [v0.4.7 - Temporal Memory System](v0.4.7.md) (40-45h)
+### [v0.4.7 - Behaviour Learning & Personalisation](v0.4.7.md) (35-40h)
 
-**Status**: Planned | **Priority**: P0 - Advanced Feature
+**Status**: Planned | **Priority**: P0 - Core Feature
 
-**Focus**: Time-aware memory and queries
+**Focus**: Intelligent personalisation and behaviour learning
 
 **Deliverables**:
-- ✅ Temporal fact storage
-- ✅ Timeline query engine
-- ✅ Temporal reasoning capabilities
-- ✅ Time-based memory retrieval
-- ✅ CLI temporal commands
-- ✅ Comprehensive testing (4-7h)
+- ✅ Topic extraction from queries
+- ✅ Behaviour learning system (interest profiling, temporal decay)
+- ✅ Personalised ranking algorithm
+- ✅ RAG pipeline integration
+- ✅ Interest profile analytics
+- ✅ Testing and validation (6-8h)
 
 **Success Criteria**:
-- Temporal queries work correctly
-- Time-aware fact handling
-- Historical activity tracking
-- Timeline visualisation functional
+- Personalisation improves relevance by >15%
+- Topic extraction 80%+ accuracy
+- Interest profiles validated by users
+- Performance <2s end-to-end
+
+**Note**: Original v0.4.7 temporal memory content split into v0.4.10 & v0.4.11 (see restructuring below)
 
 ---
 
@@ -322,26 +324,147 @@ v0.4.13 Production Release (Q2 2027)
 
 ---
 
-### [v0.4.9 - Production Readiness & Final Stabilisation](v0.4.9.md) (15-20h)
+### [v0.4.9 - Production Readiness & Mid-Series Security Review](v0.4.9.md) (20-25h)
 
-**Status**: Planned | **Priority**: P0 - Release
+**Status**: Planned | **Priority**: P0 - Release & Security
 
-**Focus**: Final polish and production readiness
+**Focus**: Code consolidation, architecture enforcement, and comprehensive mid-series security audit
 
 **Deliverables**:
-- ✅ Comprehensive end-to-end testing
-- ✅ Performance benchmarking suite
-- ✅ Security hardening review
-- ✅ Documentation polish and completion
-- ✅ Release preparation and packaging
-- ✅ Migration guides and upgrade paths
+- ✅ Mid-series security review (5-7h) - NEW strategic checkpoint
+  - Comprehensive vulnerability scan (bandit, safety, pip-audit)
+  - Path traversal, command injection, SQL injection fixes
+  - Security audit report
+- ✅ Code consolidation and refactoring (3h)
+- ✅ Architecture pattern enforcement (3h)
+- ✅ Dependency optimisation (2h)
+- ✅ Module boundary improvements (2-3h)
+- ✅ Code complexity reduction (1-2h)
 
 **Success Criteria**:
-- All features tested end-to-end
-- Performance benchmarks met
-- Security audit passed
-- Documentation complete
-- Ready for production use
+- Zero HIGH/CRITICAL security vulnerabilities
+- Security audit report complete
+- Code duplication <3%
+- Cyclomatic complexity reduced 20%+
+- All tests passing
+
+**Rationale**: Security checkpoint before complex temporal memory features (v0.4.10-v0.4.11)
+
+---
+
+### [v0.4.10 - Temporal Memory: Facts & Timeline Basics (Part 1)](v0.4.10/README.md) (20-25h)
+
+**Status**: Planned | **Priority**: P0 - Core Feature
+
+**Focus**: Foundation of temporal memory system
+
+**Deliverables**:
+- ✅ Temporal fact storage (8-10h) - Time-stamped facts with SQLite indexing
+- ✅ Basic timeline query engine (6-8h) - Core queries only ("What happened on X?")
+- ✅ CLI temporal commands (4-6h) - Essential commands (`ragged timeline query`)
+- ✅ Basic testing (2h) - Core functionality validation
+
+**Success Criteria**:
+- Temporal facts stored and retrieved correctly
+- Basic timeline queries functional
+- CLI commands working
+- Foundation ready for Part 2
+
+**Deferred to v0.4.11 (Part 2)**: Advanced reasoning, visualisations, comprehensive testing
+
+---
+
+### [v0.4.11 - Temporal Memory: Advanced Features (Part 2)](v0.4.11.md) (17-21h)
+
+**Status**: Planned | **Priority**: P0 - Advanced Feature
+
+**Focus**: Advanced temporal reasoning and comprehensive testing
+
+**Deliverables**:
+- ✅ Temporal reasoning & time expression parsing (10-12h)
+  - Natural language time parsing (dateparser library)
+  - Support "last week", "Q4 2025", "yesterday at 3pm"
+- ✅ Advanced visualisations (3-5h) - 4 chart types, heatmaps, activity graphs
+- ✅ Comprehensive testing & property-based tests (4h)
+  - Hypothesis framework integration
+  - DST transitions, leap years, timezone edge cases
+  - 90%+ test coverage for temporal modules
+
+**Dependencies Added**:
+- `dateparser>=1.2.0` - Natural language date/time parsing
+- `hypothesis>=6.98.0` - Property-based testing
+
+**Success Criteria**:
+- Natural language time expressions work
+- Property-based tests pass (100+ generated cases)
+- DST/leap year edge cases handled
+- 90%+ test coverage achieved
+
+**Rationale**: Split from v0.4.10 to reduce implementation risk and improve testing depth
+
+---
+
+### [v0.4.12 - Backend Optimisation & Migration](v0.4.12.md) (25-30h)
+
+**Status**: Planned | **Priority**: P1 - Infrastructure
+
+**Focus**: Consolidated backend infrastructure (migration + optimisation merged)
+
+**Part A: Backend Migration & Selection** (12-15h):
+- ✅ Migration engine with dry-run mode, checkpointing, regression detection
+- ✅ CLI migration commands with progress tracking
+- ✅ Backend comparison and selection tools
+- ✅ Automated verification post-migration
+
+**Part B: Performance Optimisation** (13-15h):
+- ✅ LEANN query optimisation with query plan caching
+- ✅ Memory system performance tuning
+- ✅ Multi-backend benchmarking with load testing (5+ minutes sustained)
+- ✅ Profiling and monitoring tools
+
+**Success Criteria**:
+- Dry-run estimates accurate
+- Migration checkpointing prevents data loss
+- Automated regression detection (<20% latency degradation, >95% recall similarity)
+- Load testing shows <10% performance degradation
+- Query plan caching reduces overhead
+
+**Rationale**: Merged old v0.4.11 + v0.4.12 for logical cohesion (benchmark → estimate → migrate → validate → load test)
+
+---
+
+### [v0.4.13 - Production Deployment & Observability](v0.4.13.md) (18-22h)
+
+**Status**: Planned | **Priority**: P0 - Production
+
+**Focus**: Production deployment with operational excellence
+
+**Deliverables**:
+- ✅ Observability & monitoring infrastructure (3-4h) - NEW
+  - Structured logging (JSON format)
+  - Prometheus-compatible metrics
+  - Health monitoring dashboard
+- ✅ Deployment health checks (2-3h) - NEW
+  - Startup validation, liveness/readiness probes
+  - Pre/post-deployment checks
+  - Kubernetes/Docker health endpoints
+- ✅ Chaos engineering tests (2-3h) - NEW
+  - Backend failure, database corruption, disk full scenarios
+  - Network partition resilience
+  - Concurrent failure recovery
+- ✅ Comprehensive end-to-end testing (5-6h) - Enhanced
+- ✅ Security hardening & privacy verification (4-5h)
+- ✅ Documentation & operational runbooks (3-4h) - Enhanced (~1,000 lines)
+- ✅ Release preparation & packaging (2-3h)
+
+**Success Criteria**:
+- All chaos tests passed
+- Health checks automated
+- Observability fully configured
+- Operational runbooks complete
+- Production deployment validated
+
+**Rationale**: Enhanced with observability, health checks, and chaos testing for production maturity
 
 ---
 
@@ -350,16 +473,24 @@ v0.4.13 Production Release (Q2 2027)
 | Phase | Releases | Hours | Focus |
 |-------|----------|-------|-------|
 | Foundation & Security | v0.4.0 - v0.4.4 | 98-119 | Architecture, testing, quality |
-| Memory System Core | v0.4.5 - v0.4.8 | 85-98 | Memory, personalisation, LEANN |
-| Advanced Features | v0.4.9 - v0.4.10 | 47-57 | Refactoring, temporal memory |
-| Stabilisation & Production | v0.4.11 - v0.4.13 | 40-55 | Migration, optimisation, production |
-| **Total** | **14 releases** | **270-329** | **Complete v0.4** |
+| Memory System Core | v0.4.5 - v0.4.8 | 110-129 | Personas, behaviour learning, LEANN |
+| Advanced Features | v0.4.9 - v0.4.11 | 57-71 | Security review, temporal memory (2 parts) |
+| Stabilisation & Production | v0.4.12 - v0.4.13 | 43-52 | Backend optimisation, observability |
+| **Total** | **14 releases** | **308-371** | **Complete v0.4** |
 
 **Original v0.4.0 estimate**: 180-225 hours
-**New v0.4.x total**: 270-329 hours
-**Difference**: +45-104 hours (+25-46%) for dedicated quality/stability releases and advanced features
+**Pre-restructuring v0.4.x total**: 270-329 hours
+**Restructured v0.4.x total**: 308-371 hours
+**Difference from original**: +83-146 hours (+46-65%) for enhanced quality, security, and operational excellence
 
-**Justification**: Additional time investment in foundation, testing, and stability releases (v0.4.2, v0.4.4, v0.4.6, v0.4.9) pays dividends in reduced debugging, easier maintenance, and higher quality.
+**Restructuring Changes** (Nov 2025):
+- **v0.4.10 split** into v0.4.10 (Part 1, 20-25h) + v0.4.11 (Part 2, 17-21h) for risk reduction
+- **v0.4.11 + v0.4.12 merged** into v0.4.12 (25-30h) for logical cohesion (backend infrastructure)
+- **v0.4.9 enhanced** with mid-series security review (15-20h → 20-25h)
+- **v0.4.13 enhanced** with observability, health checks, chaos tests (12-15h → 18-22h)
+- **Net change**: +38-42 hours (+14%) for security, operational excellence, and resilience validation
+
+**Justification**: Additional investment in security audits (mid-series + final), observability infrastructure, chaos engineering, and incremental delivery (temporal memory split) delivers ~300% ROI through reduced debugging, faster incident response, and production stability.
 
 ---
 

@@ -16,7 +16,6 @@ ragged v0.1 is implemented in 14 incremental phases, organised into three groups
 
 **Status:** Complete
 **Duration**: ~12 hours
-**Completion Date**: 2025-11-09
 
 ### Goals
 - Establish project structure and development environment
@@ -73,7 +72,6 @@ tests/
 
 **Status:** Complete
 **Duration**: ~10 hours
-**Completion Date**: 2025-11-09
 
 ### Goals
 - Implement loaders for PDF, TXT, Markdown, HTML
@@ -124,7 +122,6 @@ pip install pymupdf4llm trafilatura chardet
 
 **Status:** Complete
 **Duration**: ~8 hours
-**Completion Date**: 2025-11-09
 
 ### Goals
 - Implement accurate token counting
@@ -182,7 +179,6 @@ pip install tiktoken
 
 **Status:** Complete
 **Duration**: ~12 hours
-**Completion Date**: 2025-11-09
 
 ### Goals
 - Support multiple embedding backends
@@ -243,7 +239,6 @@ pip install sentence-transformers torch ollama
 
 **Status:** Complete
 **Duration**: ~6 hours
-**Completion Date**: 2025-11-09
 
 ### Goals
 - Integrate ChromaDB for vector storage
@@ -298,7 +293,6 @@ pip install chromadb
 
 **Status:** Complete
 **Duration**: ~6 hours
-**Completion Date**: 2025-11-09
 
 ### Goals
 - Implement semantic similarity search
@@ -347,7 +341,6 @@ src/retrieval/retriever.py (181 lines)
 
 **Status:** Complete
 **Duration**: ~8 hours
-**Completion Date**: 2025-11-09
 
 ### Goals
 - Integrate Ollama for LLM generation
@@ -406,7 +399,6 @@ pip install ollama
 
 **Status:** Complete
 **Duration**: ~8 hours
-**Completion Date**: 2025-11-09
 
 ### Goals
 - Create user-friendly command-line interface

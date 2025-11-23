@@ -4,10 +4,6 @@
 
 **Status:** [Planning | In Progress | Completed]
 
-**Started**: YYYY-MM-DD
-
-**Completed**: YYYY-MM-DD
-
 **Total Time**: XXX.X hours over XX days
 
 ---
@@ -589,8 +585,6 @@ XX files changed, XXX insertions(+), XXX deletions(-)
 **Version**: vX.X
 
 **Status:** [Completed | In Progress]
-
-**Completion Date**: YYYY-MM-DD
 
 **Next Version**: [vX.X+1-summary.md](./vX.X+1-summary.md)
 
