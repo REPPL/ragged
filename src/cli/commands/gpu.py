@@ -25,6 +25,7 @@ def gpu() -> None:
         info      - Show device information
         stats     - Display memory statistics
         benchmark - Benchmark vision embeddings
+        download  - Pre-download vision models
 
     \b
     Examples:
@@ -32,6 +33,7 @@ def gpu() -> None:
         ragged gpu info cuda:0
         ragged gpu stats --watch
         ragged gpu benchmark --batch-size 8
+        ragged gpu download
     """
     pass
 
@@ -467,4 +469,168 @@ def benchmark(batch_size: Optional[int], num_pages: int, device: Optional[str]) 
     except Exception as e:
         console.print(f"[bold red]✗[/bold red] Benchmark failed: {e}")
         logger.error(f"Benchmark failed: {e}", exc_info=True)
+        sys.exit(1)
+
+
+@gpu.command()
+@click.option(
+    "--model",
+    "-m",
+    default="vidore/colpali-v1.3-hf",
+    help="Vision model to download (default: vidore/colpali-v1.3-hf)",
+)
+@click.option(
+    "--cache-dir",
+    type=click.Path(),
+    help="Directory for model cache (default: HuggingFace default ~/.cache)",
+)
+@click.option(
+    "--device",
+    "-d",
+    help="Device to test loading on (cuda, mps, cpu, or auto)",
+)
+@click.option(
+    "--verify",
+    is_flag=True,
+    help="Verify model works by generating test embedding",
+)
+def download(
+    model: str,
+    cache_dir: Optional[str],
+    device: Optional[str],
+    verify: bool,
+) -> None:
+    """Pre-download vision models for offline use.
+
+    \b
+    Downloads the ColPali vision model (~5GB) with progress indication.
+    Useful for preparing systems before first ingestion or for offline environments.
+
+    \b
+    The download happens once and is cached for future use.
+    Subsequent ingestions will use the cached model instantly.
+
+    \b
+    Examples:
+        # Download default ColPali model
+        ragged gpu download
+
+        # Download with verification
+        ragged gpu download --verify
+
+        # Download to custom cache directory
+        ragged gpu download --cache-dir /mnt/fast-ssd/models
+
+        # Download and test on specific device
+        ragged gpu download --device cuda:0 --verify
+
+    \b
+    First-time download:
+        - Model size: ~5GB
+        - Time: 10-30 minutes (depends on internet speed)
+        - Shows progress with estimated time remaining
+        - Cached locally for future use
+    """
+    from pathlib import Path
+    from ragged.embeddings.colpali_embedder import ColPaliEmbedder
+    from ragged.gpu.device_manager import DeviceManager
+
+    try:
+        console.print("[bold blue]Vision Model Download[/bold blue]")
+        console.print()
+        console.print(f"Model: {model}")
+
+        # Determine device
+        if device:
+            console.print(f"Target device: {device}")
+        else:
+            manager = DeviceManager()
+            optimal = manager.get_optimal_device()
+            device = optimal.device_type.value
+            console.print(f"Target device: {device} (auto-detected)")
+
+        if cache_dir:
+            console.print(f"Cache directory: {cache_dir}")
+        else:
+            console.print("Cache directory: ~/.cache/huggingface (default)")
+
+        console.print()
+        console.print("[yellow]Starting download...[/yellow]")
+        console.print()
+
+        # Initialize embedder (this triggers download)
+        # The _load_model method now has progress indication
+        embedder = ColPaliEmbedder(
+            model_name=model,
+            device=device,
+            cache_dir=Path(cache_dir) if cache_dir else None,
+            enable_adaptive_batching=False,  # Not needed for download
+            enable_memory_monitoring=False,  # Not needed for download
+            enable_oom_recovery=False,  # Not needed for download
+        )
+
+        console.print()
+        console.print("[bold green]✓[/bold green] Model downloaded successfully")
+        console.print()
+
+        # Show model info
+        info = embedder.get_device_info()
+        console.print("[bold]Model Information:[/bold]")
+        console.print(f"  Model: {embedder.model_name}")
+        console.print(f"  Device: {info['device']}")
+        console.print(f"  Embedding dimension: {embedder.dimensions}")
+        console.print(f"  Batch size: {info['batch_size']}")
+
+        if info.get("total_memory_gb"):
+            console.print(f"  GPU memory: {info['total_memory_gb']:.2f} GB total")
+
+        # Verify if requested
+        if verify:
+            console.print()
+            console.print("[yellow]Verifying model functionality...[/yellow]")
+
+            try:
+                from PIL import Image
+                import numpy as np
+
+                # Create synthetic test image
+                test_image = Image.new("RGB", (224, 224), color="white")
+
+                # Generate test embedding
+                start_time = time.time()
+                embedding = embedder.embed_page(test_image)
+                elapsed = time.time() - start_time
+
+                # Validate
+                if embedding.shape != (128,):
+                    raise ValueError(f"Unexpected embedding shape: {embedding.shape}")
+
+                console.print(f"[bold green]✓[/bold green] Verification passed")
+                console.print(f"  Generated 128-dim embedding in {elapsed*1000:.1f}ms")
+                console.print()
+
+            except Exception as e:
+                console.print(f"[bold red]✗[/bold red] Verification failed: {e}")
+                console.print()
+                sys.exit(1)
+
+        # Usage instructions
+        console.print("[bold]Next Steps:[/bold]")
+        console.print()
+        console.print("  The model is now cached and ready to use.")
+        console.print("  Ingest documents with vision embeddings:")
+        console.print()
+        console.print("    ragged ingest pdf document.pdf --vision")
+        console.print()
+        console.print("  The cached model will load instantly (no download).")
+
+    except KeyboardInterrupt:
+        console.print()
+        console.print("[yellow]Download cancelled by user[/yellow]")
+        sys.exit(130)
+
+    except Exception as e:
+        console.print()
+        console.print(f"[bold red]✗[/bold red] Download failed: {e}")
+        logger.error(f"Model download failed: {e}", exc_info=True)
         sys.exit(1)

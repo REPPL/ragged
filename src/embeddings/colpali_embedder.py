@@ -208,10 +208,11 @@ class ColPaliEmbedder(BaseEmbedder):
 
     def _load_model(self) -> None:
         """
-        Load ColPali model and processor from HuggingFace.
+        Load ColPali model and processor from HuggingFace with progress indication.
 
-        Downloads model on first use (~1.2GB, cached locally).
+        Downloads model on first use (~5GB, cached locally).
         Uses bfloat16 precision on CUDA for efficiency, float32 on MPS/CPU.
+        Shows download progress with estimated time remaining.
 
         Raises:
             RuntimeError: If model loading fails
@@ -219,7 +220,9 @@ class ColPaliEmbedder(BaseEmbedder):
 
         Example:
             >>> embedder = ColPaliEmbedder()
-            >>> # Model automatically loaded during initialization
+            >>> # Model automatically loaded during initialisation
+            >>> # Shows: "Downloading model: vidore/colpali-v1.3-hf (5.2GB)"
+            >>> # Progress: ████████████████░░░░░░░░░░░░ 50% | 2.6GB/5.2GB | ETA: 5min 30s
             >>> embedder.model  # Access loaded model
         """
         try:
@@ -231,18 +234,30 @@ class ColPaliEmbedder(BaseEmbedder):
             ) from e
 
         try:
+            import os
+
+            # Enable HuggingFace download progress bars
+            # Remove HF_HUB_DISABLE_PROGRESS_BARS if set
+            if 'HF_HUB_DISABLE_PROGRESS_BARS' in os.environ:
+                del os.environ['HF_HUB_DISABLE_PROGRESS_BARS']
+
             # Determine optimal dtype
             dtype = torch.bfloat16 if self.device == "cuda" else torch.float32
 
             logger.info(f"Loading ColPali model: {self.model_name}")
             logger.info(f"Using dtype: {dtype}, device: {self.device}")
+            logger.info("First-time download may take 10-30 minutes (~5GB model)")
+            logger.info("Progress will be displayed below:")
 
             # Load model with HuggingFace transformers
+            # transformers library automatically shows progress bars during download
             self.model = AutoModel.from_pretrained(
                 self.model_name,
                 torch_dtype=dtype,
                 cache_dir=str(self.cache_dir) if self.cache_dir else None,
                 device_map=self.device if self.device != "cpu" else None,
+                # force_download=False ensures we use cache if available
+                local_files_only=False,  # Allow downloads
             )
 
             # Move to device if not using device_map
@@ -256,7 +271,9 @@ class ColPaliEmbedder(BaseEmbedder):
             # Load processor (handles image preprocessing)
             logger.info("Loading ColPali processor")
             self.processor = AutoProcessor.from_pretrained(
-                self.model_name, cache_dir=str(self.cache_dir) if self.cache_dir else None
+                self.model_name,
+                cache_dir=str(self.cache_dir) if self.cache_dir else None,
+                local_files_only=False,
             )
 
             logger.info("Processor loaded successfully")

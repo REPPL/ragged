@@ -3,12 +3,15 @@ ChromaDB vector store implementation.
 
 Provides ChromaDB-specific implementation of the VectorStore interface,
 with automatic connection management, error handling, circuit breaker protection,
-and metadata serialization.
+keep-alive mechanism, and metadata serialisation.
 
 v0.3.6: Refactored to implement VectorStore interface for multi-backend support.
+v0.5.6: Added connection keep-alive for long-running operations.
 """
 
 import os
+import threading
+import time
 from typing import TYPE_CHECKING, Any, cast
 from urllib.parse import urlparse
 
@@ -52,7 +55,13 @@ class ChromaDBStore(VectorStore):
     ChromaDB implementation of VectorStore interface.
 
     Handles connection management, collection CRUD, and vector operations
-    with circuit breaker protection and automatic retry.
+    with circuit breaker protection, automatic retry, and connection keep-alive.
+
+    Features (v0.5.6):
+    - Circuit breaker protection against cascading failures
+    - Automatic retry with exponential backoff
+    - Connection keep-alive for long-running operations
+    - Automatic reconnection on connection loss
 
     Example:
         >>> from ragged.storage.chromadb_store import ChromaDBStore
@@ -70,22 +79,36 @@ class ChromaDBStore(VectorStore):
         collection_name: str = "ragged_documents",
         host: str | None = None,
         port: int | None = None,
+        enable_keepalive: bool = True,
+        keepalive_interval: float = 30.0,
     ):
         """
-        Initialize ChromaDB vector store connection.
+        Initialise ChromaDB vector store connection with keep-alive.
 
         Args:
             collection_name: Name of the ChromaDB collection
             host: ChromaDB server host (defaults to settings)
             port: ChromaDB server port (defaults to settings)
+            enable_keepalive: Enable connection keep-alive pings (recommended for Docker)
+            keepalive_interval: Seconds between keep-alive pings (default: 30s)
 
         Raises:
             ImportError: If chromadb is not installed
+
+        Example:
+            >>> # With keep-alive (recommended for long operations)
+            >>> store = ChromaDBStore(enable_keepalive=True, keepalive_interval=30.0)
+            >>> # Without keep-alive (for short operations)
+            >>> store = ChromaDBStore(enable_keepalive=False)
         """
         if chromadb is None:
             raise ImportError("chromadb required: pip install chromadb")
 
         self._collection_name = collection_name
+        self._enable_keepalive = enable_keepalive
+        self._keepalive_interval = keepalive_interval
+        self._keepalive_thread: threading.Thread | None = None
+        self._keepalive_stop_event = threading.Event()
 
         settings = get_settings()
 
@@ -95,6 +118,9 @@ class ChromaDBStore(VectorStore):
             parsed = urlparse(chroma_url)
             host = host or parsed.hostname or "localhost"
             port = port or parsed.port or 8001
+
+        self._host = host
+        self._port = port
 
         logger.info(f"Connecting to ChromaDB at {host}:{port}")
 
@@ -108,6 +134,106 @@ class ChromaDBStore(VectorStore):
         )
 
         logger.info(f"Using collection: {collection_name}")
+
+        # Start keep-alive if enabled
+        if self._enable_keepalive:
+            self._start_keepalive()
+            logger.info(f"Connection keep-alive enabled (interval: {keepalive_interval}s)")
+
+    def _start_keepalive(self) -> None:
+        """
+        Start background thread for connection keep-alive.
+
+        Periodically pings ChromaDB server to prevent connection timeout
+        during long-running operations (e.g., model downloads).
+        """
+        if self._keepalive_thread is not None and self._keepalive_thread.is_alive():
+            logger.debug("Keep-alive thread already running")
+            return
+
+        self._keepalive_stop_event.clear()
+
+        def keepalive_worker():
+            """Background worker that pings ChromaDB periodically."""
+            logger.debug("Keep-alive thread started")
+            while not self._keepalive_stop_event.is_set():
+                try:
+                    # Simple ping using heartbeat
+                    self.client.heartbeat()
+                    logger.debug("Keep-alive ping successful")
+                except Exception as e:
+                    logger.warning(f"Keep-alive ping failed: {e}")
+                    # Attempt reconnection
+                    try:
+                        self._reconnect()
+                    except Exception as reconnect_error:
+                        logger.error(f"Reconnection failed: {reconnect_error}")
+
+                # Wait for interval or stop event
+                self._keepalive_stop_event.wait(timeout=self._keepalive_interval)
+
+            logger.debug("Keep-alive thread stopped")
+
+        self._keepalive_thread = threading.Thread(
+            target=keepalive_worker,
+            daemon=True,
+            name="ChromaDB-KeepAlive"
+        )
+        self._keepalive_thread.start()
+
+    def _stop_keepalive(self) -> None:
+        """
+        Stop background keep-alive thread.
+
+        Signals the thread to stop and waits for clean shutdown.
+        """
+        if self._keepalive_thread is None or not self._keepalive_thread.is_alive():
+            return
+
+        logger.debug("Stopping keep-alive thread")
+        self._keepalive_stop_event.set()
+
+        # Wait for thread to finish (with timeout)
+        self._keepalive_thread.join(timeout=5.0)
+
+        if self._keepalive_thread.is_alive():
+            logger.warning("Keep-alive thread did not stop gracefully")
+
+        self._keepalive_thread = None
+
+    def _reconnect(self) -> None:
+        """
+        Attempt to reconnect to ChromaDB server.
+
+        Recreates the client connection and reacquires the collection.
+
+        Raises:
+            VectorStoreConnectionError: If reconnection fails
+        """
+        logger.info("Attempting ChromaDB reconnection...")
+
+        try:
+            # Recreate client
+            self.client = chromadb.HttpClient(host=self._host, port=self._port)
+
+            # Reacquire collection
+            self.collection = self.client.get_or_create_collection(
+                name=self._collection_name,
+                metadata={"description": "ragged document chunks"}
+            )
+
+            logger.info("Reconnection successful")
+
+        except Exception as e:
+            logger.error(f"Reconnection failed: {e}")
+            raise VectorStoreConnectionError(f"Failed to reconnect to ChromaDB: {e}") from e
+
+    def __del__(self):
+        """
+        Cleanup method to stop keep-alive thread on object destruction.
+        """
+        if hasattr(self, '_enable_keepalive') and self._enable_keepalive:
+            self._stop_keepalive()
 
     def health_check(self) -> bool:
         """
