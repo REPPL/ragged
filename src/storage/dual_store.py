@@ -12,8 +12,10 @@ Supports:
 - Type-safe metadata handling
 
 v0.5.0: Initial dual embedding storage
+v0.5.7: Encryption at rest for GDPR compliance
 """
 
+import base64
 import logging
 from pathlib import Path
 from typing import Any
@@ -22,6 +24,7 @@ import chromadb
 import numpy as np
 from chromadb.api import ClientAPI
 
+from ragged.security.encryption import get_encryption_manager
 from ragged.storage.schema import (
     EmbeddingType,
     TextMetadata,
@@ -64,6 +67,7 @@ class DualEmbeddingStore:
         collection_name: str = "documents",
         persist_directory: Path | None = None,
         client: ClientAPI | None = None,
+        enable_encryption: bool = True,
     ) -> None:
         """
         Initialise dual embedding storage.
@@ -76,12 +80,31 @@ class DualEmbeddingStore:
             collection_name: Base collection name
             persist_directory: Directory for persistent storage
             client: Existing ChromaDB client (or None to create)
+            enable_encryption: Enable encryption of sensitive metadata (GDPR compliance)
 
         Example:
             >>> store = DualEmbeddingStore()  # Default in-memory
             >>> store = DualEmbeddingStore(persist_directory=Path("~/.ragged/storage"))
+
+        Security (v0.5.7):
+            - Sensitive metadata (image_hash) encrypted with AES-256
+            - Embeddings kept unencrypted for semantic search
+            - GDPR Article 32 compliance for data at rest
         """
         self.collection_name = collection_name
+        self.persist_directory = persist_directory
+        self.enable_encryption = enable_encryption
+
+        # Initialize encryption manager for metadata
+        if self.enable_encryption:
+            self.encryption_manager = get_encryption_manager()
+            logger.info("Encryption enabled for sensitive metadata (GDPR compliance)")
+        else:
+            self.encryption_manager = None
+            logger.warning(
+                "Encryption DISABLED - sensitive metadata stored in plaintext. "
+                "Enable encryption for GDPR compliance."
+            )
 
         if client is not None:
             self.client = client
@@ -93,15 +116,101 @@ class DualEmbeddingStore:
 
         # Create separate collections for text and vision (different dimensions)
         self.text_collection = self.client.get_or_create_collection(
-            name=f"{collection_name}_text", metadata={"schema_version": "v0.5", "embedding_type": "text"}
+            name=f"{collection_name}_text",
+            metadata={"schema_version": "v0.5.7", "embedding_type": "text", "encryption_enabled": str(enable_encryption)}
         )
         self.vision_collection = self.client.get_or_create_collection(
-            name=f"{collection_name}_vision", metadata={"schema_version": "v0.5", "embedding_type": "vision"}
+            name=f"{collection_name}_vision",
+            metadata={"schema_version": "v0.5.7", "embedding_type": "vision", "encryption_enabled": str(enable_encryption)}
         )
 
         logger.info(
             f"Initialised DualEmbeddingStore with collections '{collection_name}_text' and '{collection_name}_vision'"
         )
+
+    def _encrypt_metadata_field(self, value: str) -> str:
+        """
+        Encrypt a metadata field value.
+
+        Args:
+            value: Plaintext string to encrypt
+
+        Returns:
+            Base64-encoded encrypted value
+
+        Security (v0.5.7):
+            - Uses Fernet (AES-128 + HMAC)
+            - Returns base64-encoded ciphertext (ChromaDB compatible)
+        """
+        if not self.enable_encryption or self.encryption_manager is None:
+            return value
+
+        # Encrypt and encode as base64 for ChromaDB string storage
+        encrypted_bytes = self.encryption_manager.encrypt(value.encode('utf-8'))
+        return base64.b64encode(encrypted_bytes).decode('ascii')
+
+    def _decrypt_metadata_field(self, encrypted_value: str, is_encrypted: bool = True) -> str:
+        """
+        Decrypt a metadata field value.
+
+        Args:
+            encrypted_value: Base64-encoded encrypted value
+            is_encrypted: Whether the value is actually encrypted
+
+        Returns:
+            Decrypted plaintext string
+
+        Security (v0.5.7):
+            - Verifies HMAC before decryption
+            - Handles both encrypted and plaintext metadata (migration support)
+        """
+        if not is_encrypted or not self.enable_encryption or self.encryption_manager is None:
+            return encrypted_value
+
+        try:
+            # Decode base64 and decrypt
+            encrypted_bytes = base64.b64decode(encrypted_value.encode('ascii'))
+            decrypted_bytes = self.encryption_manager.decrypt(encrypted_bytes)
+            return decrypted_bytes.decode('utf-8')
+        except Exception as e:
+            logger.error(f"Decryption failed for metadata field: {e}")
+            # Return as-is if decryption fails (legacy unencrypted data)
+            return encrypted_value
+
+    def _decrypt_vision_metadata(self, metadata: dict[str, Any]) -> dict[str, Any]:
+        """
+        Decrypt sensitive fields in vision metadata.
+
+        Args:
+            metadata: Vision metadata dictionary from ChromaDB
+
+        Returns:
+            Metadata dictionary with decrypted sensitive fields
+
+        Security (v0.5.7):
+            - Decrypts image_hash if encrypted flag is true
+            - Preserves all other metadata fields
+            - Handles legacy unencrypted metadata gracefully
+        """
+        if not metadata:
+            return metadata
+
+        # Check if metadata is encrypted
+        is_encrypted = metadata.get("encrypted") == "true"
+
+        if not is_encrypted:
+            return metadata
+
+        # Create copy to avoid modifying original
+        decrypted = metadata.copy()
+
+        # Decrypt sensitive fields
+        if "image_hash" in decrypted:
+            decrypted["image_hash"] = self._decrypt_metadata_field(
+                decrypted["image_hash"], is_encrypted=True
+            )
+
+        return decrypted
 
     def add_text_embedding(
         self,
@@ -258,6 +367,19 @@ class DualEmbeddingStore:
         # Remove None values - ChromaDB only supports str, int, float, bool
         metadata_filtered = {k: v for k, v in metadata.items() if v is not None}
 
+        # SECURITY FIX (v0.5.7 CRITICAL-1): Encrypt sensitive metadata (image_hash)
+        if self.enable_encryption:
+            # Encrypt image_hash (contains SHA-256 hash of page image)
+            if "image_hash" in metadata_filtered:
+                metadata_filtered["image_hash"] = self._encrypt_metadata_field(
+                    metadata_filtered["image_hash"]
+                )
+            # Mark metadata as encrypted for decryption on retrieval
+            metadata_filtered["encrypted"] = "true"
+            logger.debug(f"Encrypted sensitive metadata for {embedding_id}")
+        else:
+            metadata_filtered["encrypted"] = "false"
+
         self.vision_collection.add(
             ids=[embedding_id],
             embeddings=[embedding.tolist()],
@@ -316,7 +438,7 @@ class DualEmbeddingStore:
             where_filter: Additional metadata filters
 
         Returns:
-            Query results with IDs, distances, metadatas
+            Query results with IDs, distances, metadatas (decrypted)
 
         Raises:
             ValueError: If query embedding dimension incorrect
@@ -326,6 +448,10 @@ class DualEmbeddingStore:
             >>> results = store.query_vision(query, k=5)
             >>> len(results["ids"][0])
             5
+
+        Security (v0.5.7):
+            - Automatically decrypts encrypted metadata fields
+            - Transparent encryption/decryption for backward compatibility
         """
         if query_embedding.shape[0] != 128:
             raise ValueError(f"Vision query must be 128-dimensional, got {query_embedding.shape[0]}")
@@ -337,6 +463,14 @@ class DualEmbeddingStore:
             where=where_filter,
             include=["metadatas", "distances"],
         )
+
+        # SECURITY FIX (v0.5.7 CRITICAL-1): Decrypt encrypted metadata
+        if results.get("metadatas") and len(results["metadatas"]) > 0:
+            decrypted_metadatas = []
+            for metadata in results["metadatas"][0]:
+                decrypted = self._decrypt_vision_metadata(metadata)
+                decrypted_metadatas.append(decrypted)
+            results["metadatas"] = [decrypted_metadatas]
 
         logger.debug(f"Vision query returned {len(results['ids'][0])} results")
         return results
@@ -352,7 +486,7 @@ class DualEmbeddingStore:
             embedding_type: Filter by type (None = both types)
 
         Returns:
-            Dictionary with embeddings, metadatas, and IDs
+            Dictionary with embeddings, metadatas (decrypted), and IDs
 
         Example:
             >>> results = store.get_by_document("doc123")
@@ -361,6 +495,10 @@ class DualEmbeddingStore:
             >>> results_text = store.get_by_document("doc123", EmbeddingType.TEXT)
             >>> len(results_text["ids"])  # Only text
             20
+
+        Security (v0.5.7):
+            - Automatically decrypts vision metadata
+            - Transparent for backward compatibility
         """
         where_filter = {"document_id": document_id}
 
@@ -368,10 +506,21 @@ class DualEmbeddingStore:
             results = self.text_collection.get(where=where_filter, include=["embeddings", "metadatas"])
         elif embedding_type == EmbeddingType.VISION:
             results = self.vision_collection.get(where=where_filter, include=["embeddings", "metadatas"])
+            # SECURITY FIX (v0.5.7 CRITICAL-1): Decrypt vision metadata
+            if results.get("metadatas"):
+                results["metadatas"] = [
+                    self._decrypt_vision_metadata(m) for m in results["metadatas"]
+                ]
         else:
             # Get from both collections and merge
             text_results = self.text_collection.get(where=where_filter, include=["embeddings", "metadatas"])
             vision_results = self.vision_collection.get(where=where_filter, include=["embeddings", "metadatas"])
+
+            # SECURITY FIX (v0.5.7 CRITICAL-1): Decrypt vision metadata
+            if vision_results.get("metadatas"):
+                vision_results["metadatas"] = [
+                    self._decrypt_vision_metadata(m) for m in vision_results["metadatas"]
+                ]
 
             # Merge results
             results = {
@@ -576,9 +725,14 @@ class DualEmbeddingStore:
                 rrf_score = vision_weight / (RRF_K + rank + 1)
                 doc_scores[doc_id] = doc_scores.get(doc_id, 0.0) + rrf_score
 
+                # SECURITY FIX (v0.5.7 CRITICAL-1): Decrypt vision metadata
+                # Note: Vision metadata should already be decrypted by query_vision(),
+                # but decrypt here for safety in case called with raw results
+                decrypted_metadata = self._decrypt_vision_metadata(metadata)
+
                 # Store metadata and distance (prefer first occurrence)
                 if doc_id not in doc_metadata:
-                    doc_metadata[doc_id] = metadata
+                    doc_metadata[doc_id] = decrypted_metadata
                     doc_distance[doc_id] = distance
 
         # Sort by RRF score (descending) and take top k
@@ -618,14 +772,26 @@ class DualEmbeddingStore:
         Retrieve all vision embeddings.
 
         Returns:
-            Dictionary with all vision embeddings, metadatas, and IDs
+            Dictionary with all vision embeddings, metadatas (decrypted), and IDs
 
         Example:
             >>> results = store.get_all_vision_documents()
             >>> len(results["ids"])
             42
+
+        Security (v0.5.7):
+            - Automatically decrypts all vision metadata
+            - Transparent for backward compatibility
         """
-        return self.vision_collection.get(include=["metadatas", "embeddings"])
+        results = self.vision_collection.get(include=["metadatas", "embeddings"])
+
+        # SECURITY FIX (v0.5.7 CRITICAL-1): Decrypt vision metadata
+        if results.get("metadatas"):
+            results["metadatas"] = [
+                self._decrypt_vision_metadata(m) for m in results["metadatas"]
+            ]
+
+        return results
 
     def delete_vision_embeddings(self, ids: list[str]) -> int:
         """

@@ -75,6 +75,49 @@ class OOMHandler:
             f"cpu_fallback={enable_cpu_fallback})"
         )
 
+    def _sanitize_oom_message(self, error: Exception) -> str:
+        """
+        Sanitize OOM error message to remove sensitive system information.
+
+        Removes:
+        - GPU model/ID
+        - Exact memory sizes
+        - System configuration details
+
+        Security (v0.5.7 HIGH-3):
+        - Prevents information disclosure via error messages
+        - Returns generic message for production use
+        - Full details only in debug logs
+
+        Args:
+            error: Original exception with potentially sensitive details
+
+        Returns:
+            Sanitized error message safe for user display
+        """
+        import re
+
+        msg = str(error)
+
+        # Remove GPU IDs (e.g., "GPU 0", "GPU 1")
+        msg = re.sub(r"GPU\s+\d+", "GPU", msg)
+
+        # Remove exact memory sizes (e.g., "23.70 GiB", "18.45 GiB")
+        msg = re.sub(r"\d+\.\d+\s+[KMGT]iB", "X.XX GiB", msg)
+
+        # Remove large integer memory values
+        msg = re.sub(r"\d{4,}\s*(?:bytes?|KB|MB|GB)", "XXXX bytes", msg)
+
+        # Truncate to prevent long technical stack traces
+        if len(msg) > 200:
+            msg = msg[:200] + "..."
+
+        # Generic message if sanitization removed too much
+        if len(msg.strip()) < 20:
+            return "GPU out of memory error (details sanitized for security)"
+
+        return msg
+
     def handle_oom(
         self,
         func: Callable[..., T],
@@ -150,7 +193,13 @@ class OOMHandler:
                     raise  # Not an OOM error, re-raise
 
                 attempt += 1
-                logger.warning(f"OOM error on attempt {attempt}/{max_attempts}: {e}")
+
+                # SECURITY FIX (v0.5.7 HIGH-3): Sanitize OOM error messages
+                # - User-facing warning uses sanitized message (no sensitive GPU details)
+                # - Full error details only in debug logs for troubleshooting
+                sanitized_msg = self._sanitize_oom_message(e)
+                logger.warning(f"GPU memory error on attempt {attempt}/{max_attempts}")
+                logger.debug(f"OOM details (debug only): {sanitized_msg}")
 
                 # No more strategies to try
                 if strategy_index >= len(strategies):

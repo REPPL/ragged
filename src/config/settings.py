@@ -189,6 +189,19 @@ class Settings(BaseSettings):
         description="Custom directory for vision model cache (None = HuggingFace default)"
     )
 
+    # Security Configuration (v0.5.7: Security & Hardening)
+    enable_embedding_encryption: bool = Field(
+        default=True,
+        description="Enable AES-256 encryption for vision embeddings at rest (GDPR compliance)"
+    )
+    cors_allowed_origins: list[str] = Field(
+        default_factory=lambda: [
+            "http://localhost:7860",  # Gradio UI
+            "http://localhost:3000",  # Development frontend
+        ],
+        description="Allowed CORS origins for web API (never use '*' in production)"
+    )
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",

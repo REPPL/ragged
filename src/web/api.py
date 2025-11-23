@@ -38,13 +38,20 @@ app = FastAPI(
     description="Privacy-first local RAG system with hybrid retrieval"
 )
 
-# CORS middleware
+# SECURITY FIX (v0.5.7 HIGH-2): Secure CORS configuration
+# - Replace wildcard "*" with explicit allowed origins
+# - Restrict methods and headers to only what's needed
+# - Prevents CSRF attacks
+
+# Get settings early for CORS configuration
+_temp_settings = get_settings()
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=_temp_settings.cors_allowed_origins,  # Explicit whitelist (no "*")
+    allow_credentials=True,  # Safe with explicit origins
+    allow_methods=["GET", "POST", "DELETE"],  # Only needed methods
+    allow_headers=["Content-Type", "Authorization"],  # Only needed headers
 )
 
 # Global state (initialized on startup)
