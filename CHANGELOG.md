@@ -11,24 +11,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-**Web UI Upgrade**:
-- **Gradio 6.0**: Upgraded from Gradio 4.x to 6.0+ for improved UI capabilities
-  - **Breaking Change**: Theme API changed from constructor parameter to `.theme` property
-  - **Breaking Change**: `show_copy_button` parameter removed from `gr.Chatbot()`
-  - Users upgrading from v0.5.3 or earlier must rebuild Docker containers
+**Web UI**:
+- Upgraded to Gradio 6.0
 
 ### Fixed
 
 **Build & Installation**:
 - Fixed TOML syntax error in `pyproject.toml` causing Docker build failures
-  - Corrected inline table syntax: `{ragged = "src"}` (unquoted keys)
-  - Changed `[tool.setuptools.packages]` to proper `[tool.setuptools.packages.find]` section format
-- Fixed ModuleNotFoundError by using explicit package discovery configuration
+- Fixed ModuleNotFoundError with explicit package discovery configuration
 
 **Documentation**:
 - Added Gradio 6.0 requirement to installation guide
 - Added TOML syntax troubleshooting to troubleshooting guide
-- Documented Gradio 6.0 breaking changes with migration examples
 
 ## [0.4.7] - 2025-11-23
 
