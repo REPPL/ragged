@@ -220,7 +220,9 @@ class PageReorderTransformer:
                 )
 
         # Sanity check: ensure we're not reordering too many pages
-        if len(reorder_map) > total_pages * 0.8:
+        # For small documents (< 5 pages), allow any reordering
+        # For larger documents, limit to 80% to avoid catastrophic mistakes
+        if total_pages >= 5 and len(reorder_map) > total_pages * 0.8:
             logger.warning(
                 f"Reordering would affect {len(reorder_map)}/{total_pages} pages - "
                 "may be too risky, skipping"
