@@ -155,7 +155,7 @@ v0.3.4a introduced state-of-the-art document processing through IBM Research's D
 
 ## Security Findings
 
-**Post-Implementation Audit:** [v0.3.4a Security Audit](../../../security/v0.3.4a-security-audit.md)
+**Post-Implementation Audit:** [v0.3.4a Security Audit](../../../../../audit/security/baseline/v0.3.4a-security-audit.md)
 
 **Grade:** C+ (requires hardening)
 
@@ -197,7 +197,7 @@ v0.3.4a introduced state-of-the-art document processing through IBM Research's D
 
 - [Implementation Summary](../../../implementation/version/v0.3/v0.3.4a/summary.md)
 - [Lineage](../../../implementation/version/v0.3/v0.3.4a/lineage.md)
-- [Security Audit](../../../security/v0.3.4a-security-audit.md)
+- [Security Audit](../../../../../audit/security/baseline/v0.3.4a-security-audit.md)
 - [Time Log](../../time-logs/version/v0.3.4a/time-tracking.md)
 
 ---

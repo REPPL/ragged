@@ -5,14 +5,14 @@ This directory contains detailed roadmaps for all ragged versions from v0.2.3 th
 ## Quick Overview
 
 **Recently Completed:**
-- **[v0.2.3](version/v0.2.3/README.md)** - Critical bugs ✅ Complete
-- **[v0.2.4](version/v0.2.4/README.md)** - High priority bugs ✅ Complete
-- **[v0.2.5](version/v0.2.5/README.md)** - Code quality improvements ✅ Complete
+- **v0.2.3** - Critical bugs ✅ Complete
+- **v0.2.4** - High priority bugs ✅ Complete
+- **v0.2.5** - Code quality improvements ✅ Complete
 - **[v0.2.7](version/v0.2.7/README.md)** - CLI structure refactoring ✅ Complete
 - **[v0.2.8](version/v0.2.8/README.md)** - CLI enhancements ✅ Complete
 
 **Next 3 Versions:**
-- **[v0.2.9](version/v0.2.9/README.md)** - Stability & performance (42-53h) - START HERE
+- **[v0.2.9](version/v0.2/v0.2.9/README.md)** - Stability & performance (42-53h) - START HERE
 - **[v0.3.1](version/v0.3/v0.3.1.md)** - Foundation & metrics (30h)
 - **[v0.3.2](version/v0.3/v0.3.2.md)** - Configuration transparency (28-34h)
 

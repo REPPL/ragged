@@ -11,8 +11,8 @@
 This document outlines the comprehensive testing strategy for ragged's dynamic model selection and routing system.
 
 **Related Documentation:**
-- [Model Selection Design](../../core-concepts/model-selection.md)
-- [Model Selection Roadmap](../roadmap/features/model-selection-roadmap.md)
+- [Model Selection Design](../../planning/core-concepts/model-selection.md)
+- [Model Selection Roadmap](../../roadmap/features/model-selection-roadmap.md)
 
 ---
 

@@ -173,7 +173,7 @@ v0.3.4b implemented intelligent routing based on document quality assessment, en
 
 ## Security Findings
 
-**Post-Implementation Audit:** [v0.3.4b Security Audit](../../../security/v0.3.4b-security-audit.md)
+**Post-Implementation Audit:** [v0.3.4b Security Audit](../../../../../audit/security/baseline/v0.3.4b-security-audit.md)
 
 **Grade:** C (moderate risk)
 
@@ -250,7 +250,7 @@ v0.3.4b implemented intelligent routing based on document quality assessment, en
 
 - [Implementation Summary](../../../implementation/version/v0.3/v0.3.4b/summary.md)
 - [Lineage](../../../implementation/version/v0.3/v0.3.4b/lineage.md)
-- [Security Audit](../../../security/v0.3.4b-security-audit.md)
+- [Security Audit](../../../../../audit/security/baseline/v0.3.4b-security-audit.md)
 - [Time Log](../../time-logs/version/v0.3.4b/time-tracking.md)
 
 ---

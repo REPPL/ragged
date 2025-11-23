@@ -303,7 +303,7 @@ All decision documentation is now grouped under `decisions/` for easier navigati
 
 **Contains:**
 - **[methodology/](./process/methodology/)** - How we develop (AI assistance, time tracking)
-- **[devlog/](./process/devlog/)** - Daily and version-based development narratives
+- **devlog/** - Daily and version-based development narratives
 - **[time-logs/](./process/time-logs/)** - Actual hours spent (empirical data)
 - **[templates/](./process/templates/)** - Templates for various document types
 

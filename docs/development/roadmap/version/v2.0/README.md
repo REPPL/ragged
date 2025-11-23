@@ -485,7 +485,7 @@ After v2.0 completion, ragged is a comprehensive, enterprise-ready RAG platform 
 
 - [Previous Version](../v1.5/README.md) - Collaboration and multi-user
 - [Version Overview](../README.md) - Complete version comparison
-- [Projects to Learn From](../../../research/projects-to-learn-from.md) - Enterprise features inspiration
+- [Projects to Learn From](../../../../research/projects-to-learn-from.md) - Enterprise features inspiration
 
 ---
 

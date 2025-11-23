@@ -163,7 +163,7 @@ US-001: Professional Research Assistant
 
 ### Template
 
-Use the [User Story Template](../../development/templates/user-story-template.md) for consistency.
+Use the [User Story Template](../../../process/templates/user-story-template.md) for consistency.
 
 ### Naming Convention
 

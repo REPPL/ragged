@@ -348,7 +348,7 @@ EOF
 
 ## Related Documentation
 
-- [Master Roadmap](../../../roadmap/version/README.md) - All version statuses
+- [Master Roadmap](../../roadmap/version/README.md) - All version statuses
 - [Implementation Records](../../../implementation/version/) - Completed work
 - [Development Process](../) - Methodology overview
 - [Time Logging](../../time-logs/README.md) - Actual hours tracking

@@ -334,7 +334,7 @@ class DistributedRateLimiter:
 
 ## Related Documentation
 
-- [v0.5.10 Roadmap](../../roadmap/version/v0.5/v0.5.10.md) - Previous version
+- [v0.5.10 Roadmap](../../../roadmap/version/v0.5/v0.5.10.md) - Previous version
 - [v0.5 Series Overview](./README.md) - Context
 - [Architecture Decisions](../../../decisions/adrs/) - Design records
 

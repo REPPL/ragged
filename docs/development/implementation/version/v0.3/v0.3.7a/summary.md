@@ -518,7 +518,7 @@ Coverage: 96% on version_tracker.py
 
 ## Related Documentation
 
-- [ADR-0020: Document Version Tracking](../../../decisions/adrs/0020-document-version-tracking.md)
+- [ADR-0020: Document Version Tracking](../../../../decisions/adrs/0020-document-version-tracking.md)
 - [VectorStore Abstraction (v0.3.6)](../v0.3.6/summary.md)
 - [v0.3.7 Roadmap](../../../roadmap/version/v0.3.7/README.md)
 

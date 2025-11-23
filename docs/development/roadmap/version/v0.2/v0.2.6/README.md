@@ -369,7 +369,7 @@ After v0.2.6 completion:
 
 ## Related Documentation
 
-- [v0.2.6 Design Goals](../../planning/version/v0.2/v0.2.6-design.md) - Vision and decisions
-- [v0.2.5 Roadmap](../v0.2.5/README.md) - Previous version
+- [v0.2.6 Design Goals](../../../../planning/version/v0.2/v0.2.6-design.md) - Vision and decisions
+- v0.2.5 Roadmap - Previous version
 - [v0.2.7 Roadmap](../v0.2.7/README.md) - Next version
 

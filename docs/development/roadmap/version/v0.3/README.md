@@ -1376,7 +1376,7 @@ scheduler.schedule_cleanup(data_path, ttl_days=90)
 - [CLI Features](./features/cli-features.md) - Detailed specs
 
 ### Architecture Decisions
-- [CLI Enhancements Catalogue](../../planning/interfaces/cli/enhancements.md) - Comprehensive CLI specs
+- [CLI Enhancements Catalogue](../../../planning/interfaces/cli/enhancements.md) - Comprehensive CLI specs
 - [Docling OCR Decision](../../../decisions/2025-11-17-docling-ocr-decision.md) - Architecture decision record
 
 ### Implementation Records

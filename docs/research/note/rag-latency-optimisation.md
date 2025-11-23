@@ -230,10 +230,10 @@ Collection of research and articles exploring latency optimisation in RAG system
 
 ## Related Documentation
 
-- [Context Engineering 2.0](../acknowledgements/context-engineering-2.0.md) - Formal acknowledgement (theoretical framework)
-- [Autonomous Agentic RAG](../acknowledgements/autonomous-agentic-rag.md) - Formal acknowledgement (multi-agent inspiration)
-- [v0.6.0 Roadmap](../../roadmap/version/v0.6/README.md) - Latency optimisation features
-- [v0.3.x Roadmap](../../roadmap/version/v0.3/) - Semantic chunking
+- [Context Engineering 2.0](../../development/acknowledgements/context-engineering-2.0.md) - Formal acknowledgement (theoretical framework)
+- [Autonomous Agentic RAG](../../development/acknowledgements/autonomous-agentic-rag.md) - Formal acknowledgement (multi-agent inspiration)
+- [v0.6.0 Roadmap](../../development/roadmap/version/v0.6/README.md) - Latency optimisation features
+- [v0.3.x Roadmap](../../development/roadmap/version/v0.3) - Semantic chunking
 
 ---
 

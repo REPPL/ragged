@@ -467,7 +467,7 @@ results = {
 
 ### Detailed Policies
 
-- [Security Policy](../../../../security/policy.md#gdpr-compliance) - Data minimisation principles
+- [Security Policy](../../../../../security/policy.md#gdpr-compliance) - Data minimisation principles
 - [Privacy Architecture](../../../../security/privacy-architecture.md#privacy-principles) - Data minimisation and PII in test sets
 
 ## Implementation Phases

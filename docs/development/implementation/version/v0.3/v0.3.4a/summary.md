@@ -549,11 +549,11 @@ model_cache_dir: "~/.cache/docling"
 
 ## Related Documentation
 
-- [v0.3.4a Roadmap](../../roadmap/version/v0.3/v0.3.4/v0.3.4a.md) - Original plan
+- [v0.3.4a Roadmap](../../../../roadmap/version/v0.3/v0.3.4/v0.3.4a.md) - Original plan
 - [v0.3.4 Implementation Plan](../../planning/version/v0.3/v0.3.4-implementation-plan.md) - Overall strategy
-- [v0.3.4b Roadmap](../../roadmap/version/v0.3/v0.3.4/v0.3.4b.md) - Next phase: Quality assessment
-- [v0.3.4c Roadmap](../../roadmap/version/v0.3/v0.3.4/v0.3.4c.md) - Future phase: PaddleOCR
-- [CHANGELOG](../../../../CHANGELOG.md) - Release notes
+- [v0.3.4b Roadmap](../../../../roadmap/version/v0.3/v0.3.4/v0.3.4b.md) - Next phase: Quality assessment
+- [v0.3.4c Roadmap](../../../../roadmap/version/v0.3/v0.3.4/v0.3.4c.md) - Future phase: PaddleOCR
+- [CHANGELOG](../../v0.5.6/CHANGELOG.md) - Release notes
 
 ---
 

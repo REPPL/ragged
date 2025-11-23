@@ -66,7 +66,7 @@ Detailed implementation summary for ragged v0.4.2 - VectorStore Abstraction & Re
 
 - [v0.4.2 README](./README.md)
 - [v0.4.2 Lineage](./lineage.md)
-- [v0.4.2 Roadmap](../../../roadmap/version/v0.4/v0.4.2.md)
+- [v0.4.2 Roadmap](../../../../roadmap/version/v0.4/v0.4.2.md)
 
 ---
 

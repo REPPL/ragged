@@ -671,6 +671,6 @@ def test_academic_citation_format():
 
 - [Document Normalisation](./document-normalisation.md) - Normalisation process
 - [Duplicate Detection](./duplicate-detection.md) - Uniqueness tracking
-- [Storage Architecture](../../architecture/) - Data storage
+- [Storage Architecture](..) - Data storage
 
 ---

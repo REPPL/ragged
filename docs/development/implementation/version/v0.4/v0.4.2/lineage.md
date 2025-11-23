@@ -32,7 +32,7 @@ Documentation lineage for ragged v0.4.2, tracing the evolution from planning thr
 
 ## Roadmap Phase
 
-**Document:** [v0.4.2 Roadmap](../../../roadmap/version/v0.4/v0.4.2.md)
+**Document:** [v0.4.2 Roadmap](../../../../roadmap/version/v0.4/v0.4.2.md)
 
 **Core Deliverables:**
 1. VectorStore abstract interface
@@ -89,7 +89,7 @@ Documentation lineage for ragged v0.4.2, tracing the evolution from planning thr
 ## Related Documentation
 
 - [v0.4 Planning](../../../planning/version/v0.4/README.md)
-- [v0.4.2 Roadmap](../../../roadmap/version/v0.4/v0.4.2.md)
+- [v0.4.2 Roadmap](../../../../roadmap/version/v0.4/v0.4.2.md)
 - [v0.4.2 README](./README.md)
 - [v0.4.2 Summary](./summary.md)
 - [v0.4.3 Implementation](../v0.4.3/README.md)

@@ -149,7 +149,7 @@ All checked links are valid!
 ## Related Documentation
 
 - [v0.2.7 Planning](./planning/version/v0.2/README.md) - Design goals
-- [CLI Enhancements](./planning/interfaces/cli/enhancements.md) - Complete specs
+- [CLI Enhancements](../../development/planning/interfaces/cli/enhancements.md) - Complete specs
 
 ---
 ```

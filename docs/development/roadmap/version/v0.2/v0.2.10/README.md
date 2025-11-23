@@ -1383,7 +1383,7 @@ Task(
 ## Related Documentation
 
 - [v0.2.11 - Privacy Infrastructure](../v0.2.11/) - Next version (builds on v0.2.10)
-- [Security Policy](../../../../security/policy.md) - Overall security policy
+- [Security Policy](../../../../../security/policy.md) - Overall security policy
 - [Privacy Architecture](../../../../security/privacy-architecture.md) - Privacy design
 
 ---

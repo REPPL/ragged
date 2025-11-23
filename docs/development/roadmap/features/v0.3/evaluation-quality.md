@@ -553,7 +553,7 @@ def query(query_text: str):
 
 - [Evaluation Framework (v0.3.7)](../../version/v0.3/v0.3.7.md) - Implementation roadmap
 - [Benchmarking Suite (v0.3.8)](../../version/v0.3/v0.3.8.md) - Performance benchmarks
-- [Quality Measurement](../../../../planning/architecture/) - Architecture approach
+- [Quality Measurement](../../../planning/architecture) - Architecture approach
 - [v0.3 Planning](../../../../planning/version/v0.3/) - Design goals
 
 ---

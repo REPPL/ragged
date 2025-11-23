@@ -308,8 +308,8 @@ After v0.7.0 completion:
 ## Related Documentation
 
 - [Previous Version](../v0.6/README.md) - Intelligent optimisation
-- [Next Version](../../planning/version/v1.0/) - Production release planning
-- [Planning](../../planning/version/v0.7/) - Design goals for v0.7
+- [Next Version](../../../planning/version/v1.0) - Production release planning
+- [Planning](.) - Design goals for v0.7
 - [Version Overview](../README.md) - Complete version comparison
 
 ---

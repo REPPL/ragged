@@ -154,9 +154,9 @@ datasets = ">=2.14.0"    # Apache 2.0
 
 ## Related Documentation
 
-- [Roadmap: v0.3.0](../../../roadmap/version/v0.3/v0.3.0.md) - Original implementation plan
+- [Roadmap: v0.3.0](../../../../roadmap/version/v0.3/v0.3.0.md) - Original implementation plan
 - [Lineage: v0.3.0](./lineage.md) - Traceability from planning to implementation
-- [Test Report: v0.2.x](../../../testing/v0.2.x-test-report.md) - Baseline test context
+- [Test Report: v0.2.x](../../../../testing/v0.2.x-test-report.md) - Baseline test context
 
 ---
 

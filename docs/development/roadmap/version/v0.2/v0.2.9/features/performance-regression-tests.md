@@ -303,7 +303,7 @@ jobs:
 ## Related Documentation
 
 - [v0.2.9 Roadmap](../README.md)
-- [Benchmarking Framework](../../../../reference/benchmarks.md)
+- Benchmarking Framework
 - [CI/CD Documentation](../../../../development/process/ci-cd.md)
 
 ---

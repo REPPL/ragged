@@ -21,7 +21,7 @@
 
 ### 2. Roadmap Phase (HOW & WHEN)
 
-**Document:** [v0.3.0 Roadmap](../../../roadmap/version/v0.3/v0.3.0.md)
+**Document:** [v0.3.0 Roadmap](../../../../roadmap/version/v0.3/v0.3.0.md)
 
 **Implementation Plan:**
 - **Estimated Time:** 30 hours
@@ -56,12 +56,12 @@
 
 ### 4. Process Documentation (HOW IT WAS BUILT)
 
-**Development Logs:** [DevLogs Directory](../../../process/devlogs/)
+**Development Logs:** [DevLogs Directory](../../../../process/devlogs)
 - Daily development narratives (if created)
 - Technical challenges encountered
 - Problem-solving approaches
 
-**Time Logs:** [Time Logs Directory](../../../process/time-logs/)
+**Time Logs:** [Time Logs Directory](../../../../process/time-logs)
 - Actual hours spent per feature
 - Comparison with estimates
 
@@ -94,7 +94,7 @@
 - [Evaluation & Quality Features](../../../roadmap/version/v0.3/features/evaluation-quality.md) - Detailed specifications
 
 **Roadmap Documents:**
-- [v0.3.0 Roadmap](../../../roadmap/version/v0.3/v0.3.0.md) - Implementation plan
+- [v0.3.0 Roadmap](../../../../roadmap/version/v0.3/v0.3.0.md) - Implementation plan
 - [v0.3 Overview](../../../roadmap/version/v0.3/README.md) - Series context
 
 **Implementation Records:**
@@ -102,8 +102,8 @@
 - [v0.3 Implementation Index](../README.md) - All v0.3.x implementations
 
 **Process Documentation:**
-- [DevLogs](../../../process/devlogs/) - Development narratives
-- [Time Logs](../../../process/time-logs/) - Actual effort tracking
+- [DevLogs](../../../../process/devlogs) - Development narratives
+- [Time Logs](../../../../process/time-logs) - Actual effort tracking
 
 **Related Implementations:**
 - [v0.3.1 Implementation](../v0.3.1/summary.md) - Configuration Transparency (next)

@@ -82,7 +82,7 @@ These core concepts are referenced throughout the implementation plan and inform
 - Architecture decisions (see [architecture/](../architecture/))
 - Technology selection (see [technologies/](../technologies/))
 - Version-specific features (see [version/](../version/))
-- User story requirements (see [../../requirements/user-stories/](../../requirements/user-stories/))
+- User story requirements (see [../../requirements/user-stories/](../requirements/user-stories))
 
 ---
 
@@ -91,7 +91,7 @@ These core concepts are referenced throughout the implementation plan and inform
 - **Architecture**: [architecture/README.md](../architecture/README.md)
 - **Technology Stack**: [technologies/](../technologies/)
 - **Version Roadmap**: [version/](../version/)
-- **User Stories**: [../../requirements/user-stories/](../../requirements/user-stories/)
+- **User Stories**: [../../requirements/user-stories/](../requirements/user-stories)
 
 ---
 

@@ -286,7 +286,7 @@ Based on `ragged`'s [Time Tracking Methodology](./time-tracking-methodology.md):
 - **Code quality**: Same or better than manual (due to forced review)
 - **Learning**: Slower initially, faster as patterns emerge
 
-*(See [`time-logs/`](./time-logs/) for actual version-by-version data.)*
+*(See [`time-logs/`](../time-logs) for actual version-by-version data.)*
 
 ---
 
@@ -317,7 +317,7 @@ Based on `ragged`'s [Time Tracking Methodology](./time-tracking-methodology.md):
 - Qualitative observations in devlogs
 - Version-to-version changes
 
-See also [`time-logs/`](./time-logs/) and [`devlog/`](./devlog/).
+See also [`time-logs/`](../time-logs) and `devlog/`.
 
 ### Academic Context
 
@@ -347,7 +347,7 @@ Have suggestions for improving AI usage transparency?
 ## Related Documentation
 
 - [Time Tracking Methodology](./time-tracking-methodology.md) - How we track AI vs. manual time
-- [Development Logs](./devlog/) - Daily AI effectiveness ratings
+- Development Logs - Daily AI effectiveness ratings
 - [Contributing Guide](../../../../CONTRIBUTING.md) - General contribution guidelines
 
 

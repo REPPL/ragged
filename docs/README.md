@@ -231,7 +231,7 @@ All developer-facing documentation is now organised under [development/](./devel
 
 **Quick Links:**
 - [Web UI Design](./design/webUI/README.md) - Web interface design documentation
-- [Icons](./design/webUI/icons/) - Icon design files
+- Icons - Icon design files
 - [Wireframes](./design/webUI/wireframe/) - Layout wireframes
 
 **Relationship to Planning:**

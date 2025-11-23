@@ -1811,7 +1811,7 @@ v2.0: Feature X removed, Feature Y standard
 
 ragged implements a comprehensive **personal memory and persona system** that learns from user interactions, maintains conversation context, and adapts to different user workflows through switchable personas.
 
-**Full Documentation**: [Personal Memory & Personas](./core-concepts/personal-memory-personas.md)
+**Full Documentation**: [Personal Memory & Personas](../core-concepts/personal-memory-personas.md)
 
 ### Core Components
 
@@ -1902,7 +1902,7 @@ class MemoryCoordinator:
 
 ragged implements **intelligent model routing** that automatically selects the optimal model for each query based on task type, complexity, hardware capabilities, and persona preferences.
 
-**Full Documentation**: [Model Selection Strategy](./core-concepts/model-selection.md)
+**Full Documentation**: [Model Selection Strategy](../core-concepts/model-selection.md)
 
 ### Multi-Layer Routing Pipeline
 
@@ -2027,7 +2027,7 @@ class RAGPipeline:
 
 ragged is optimised for **Mac Studio M4 Max with 128GB unified memory** as the primary platform, while maintaining cross-platform compatibility with smaller Macs and NVIDIA GPU systems.
 
-**Full Documentation**: [Hardware Optimisation](./core-concepts/hardware-optimisation.md)
+**Full Documentation**: [Hardware Optimisation](../core-concepts/hardware-optimisation.md)
 
 ### Primary Target: Mac Studio M4 Max (128GB)
 
@@ -2160,7 +2160,7 @@ class ModelSelector:
 
 ragged implements a **hybrid testing approach** combining traditional software testing with LLM-specific evaluation frameworks, adapted to the non-deterministic nature of RAG systems.
 
-**Full Documentation**: [Testing Strategy](./core-concepts/testing-strategy.md)
+**Full Documentation**: [Testing Strategy](../core-concepts/testing-strategy.md)
 
 ### Test Pyramid Structure
 
@@ -2287,10 +2287,10 @@ ragged development is driven by **user stories** that define functional requirem
 
 | ID | Title | Persona | Priority | Versions |
 |----|-------|---------|----------|----------|
-| **US-001** | [Professional Research Assistant](../../requirements/user-stories/US-001-professional-research-assistant.md) | Researcher | Critical | v0.1-v1.0 |
-| **US-002** | [Personal Knowledge Vault](../../requirements/user-stories/US-002-personal-knowledge-vault.md) | Researcher | Critical | v0.1-v1.0 |
-| **US-003** | [Code Documentation RAG](../../requirements/user-stories/US-003-code-documentation-rag.md) | Developer | High | v0.3-v1.0 |
-| **US-004** | [Personal Knowledge Assistant](../../requirements/user-stories/US-004-personal-knowledge-assistant.md) | Casual | Medium | v0.2-v1.0 |
+| **US-001** | [Professional Research Assistant](../requirements/user-stories/US-001-professional-research-assistant.md) | Researcher | Critical | v0.1-v1.0 |
+| **US-002** | [Personal Knowledge Vault](../requirements/user-stories/US-002-personal-knowledge-vault.md) | Researcher | Critical | v0.1-v1.0 |
+| **US-003** | [Code Documentation RAG](../requirements/user-stories/US-003-code-documentation-rag.md) | Developer | High | v0.3-v1.0 |
+| **US-004** | [Personal Knowledge Assistant](../requirements/user-stories/US-004-personal-knowledge-assistant.md) | Casual | Medium | v0.2-v1.0 |
 
 ### Persona Alignment
 

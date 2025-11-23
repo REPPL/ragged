@@ -31,7 +31,7 @@ Documentation lineage for ragged v0.4.1, tracing the evolution from planning thr
 
 ## Roadmap Phase
 
-**Document:** [v0.4.1 Roadmap](../../../roadmap/version/v0.4/v0.4.1.md)
+**Document:** [v0.4.1 Roadmap](../../../../roadmap/version/v0.4/v0.4.1.md)
 
 **Core Deliverables:**
 1. Plugin interfaces (4 types)
@@ -86,7 +86,7 @@ Documentation lineage for ragged v0.4.1, tracing the evolution from planning thr
 ## Related Documentation
 
 - [v0.4 Planning](../../../planning/version/v0.4/README.md)
-- [v0.4.1 Roadmap](../../../roadmap/version/v0.4/v0.4.1.md)
+- [v0.4.1 Roadmap](../../../../roadmap/version/v0.4/v0.4.1.md)
 - [v0.4.1 README](./README.md)
 - [v0.4.1 Summary](./summary.md)
 - [v0.4.0 Implementation](../v0.4.0/README.md)

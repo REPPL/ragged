@@ -57,8 +57,8 @@ LEANN (Limited memory Exact Approximate Nearest Neighbour) achieves 97% storage 
 ## Related
 
 - [VectorStore Abstraction ADR](../decisions/adrs/0015-vectorstore-abstraction.md)
-- [v0.3.7 Roadmap](../roadmap/version/v0.3.0/v0.3.7.md)
-- [v0.4.9 Roadmap](../roadmap/version/v0.4.0/v0.4.9.md)
+- [v0.3.7 Roadmap](../roadmap/version/v0.3/v0.3.7.md)
+- [v0.4.9 Roadmap](../roadmap/version/v0.4/v0.4.9.md)
 
 ---
 

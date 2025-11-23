@@ -5,7 +5,7 @@ This document details the 11 CLI enhancements planned for v0.2.7, transforming r
 **Total Estimated Time**: 48-62 hours
 **Priority Distribution**: 6 high, 5 medium
 
-**Related Documentation:** [CLI Enhancements Catalogue](../../../../planning/interfaces/cli/enhancements.md)
+**Related Documentation:** [CLI Enhancements Catalogue](../../../../../planning/interfaces/cli/enhancements.md)
 
 ---
 
@@ -585,7 +585,7 @@ ragged completion install --shell bash
 ## Related Documentation
 
 - [Main v0.2.7 Roadmap](../README.md)
-- [CLI Enhancements Catalogue](../../../../planning/interfaces/cli/enhancements.md)
+- [CLI Enhancements Catalogue](../../../../../planning/interfaces/cli/enhancements.md)
 - [UX Improvements](./ux-improvements.md)
 - [Performance Optimisations](./performance-optimisations.md)
 

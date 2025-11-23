@@ -315,7 +315,7 @@ See: `roadmap/version/v0.7/README.md`, `roadmap/version/v0.8/README.md`
 - [Previous Version](../v0.5/README.md) - Security implementation and vision RAG
 - [Planning](../../planning/version/v0.6/) - Design goals for v0.6
 - [Version Overview](../README.md) - Complete version comparison
-- [Web UI Design](../../../design/webUI/) - Svelte UI mockups (v0.6.7 implementation)
+- [Web UI Design](../../../../design/webUI) - Svelte UI mockups (v0.6.7 implementation)
 
 ---
 

@@ -16,13 +16,13 @@ All ADRs are located in: `docs/development/decisions/adrs/`
 
 ### Core Architecture
 
-**[ADR-0001: Local-Only Processing](../../../decisions/adrs/0001-local-only-processing.md)**
+**[ADR-0001: Local-Only Processing](../../../../decisions/adrs/0001-local-only-processing.md)**
 - **Date:** 2025-11-09
 - **Area:** Architecture, Privacy
 - **Summary:** All processing 100% local, no external APIs
 - **Impact:** Fundamental principle shaping all technology choices
 
-**[ADR-0004: Factory Pattern for Embedders](../../../decisions/adrs/0004-factory-pattern-for-embedders.md)**
+**[ADR-0004: Factory Pattern for Embedders](../../../../decisions/adrs/0004-factory-pattern-for-embedders.md)**
 - **Date:** 2025-11-09
 - **Area:** Architecture, Embeddings
 - **Summary:** Use factory pattern with BaseEmbedder interface
@@ -30,13 +30,13 @@ All ADRs are located in: `docs/development/decisions/adrs/`
 
 ### Configuration & Data
 
-**[ADR-0002: Pydantic for Configuration](../../../decisions/adrs/0002-pydantic-for-configuration.md)**
+**[ADR-0002: Pydantic for Configuration](../../../../decisions/adrs/0002-pydantic-for-configuration.md)**
 - **Date:** 2025-11-09
 - **Area:** Configuration
 - **Summary:** Use Pydantic v2 for type-safe configuration
 - **Impact:** Type safety, validation, clear error messages
 
-**[ADR-0003: ChromaDB for Vector Storage](../../../decisions/adrs/0003-chromadb-for-vector-storage.md)**
+**[ADR-0003: ChromaDB for Vector Storage](../../../../decisions/adrs/0003-chromadb-for-vector-storage.md)**
 - **Date:** 2025-11-09
 - **Area:** Storage
 - **Summary:** ChromaDB as vector database
@@ -44,7 +44,7 @@ All ADRs are located in: `docs/development/decisions/adrs/`
 
 ### Embeddings
 
-**[ADR-0006: Dual Embedding Model Support](../../../decisions/adrs/0006-dual-embedding-model-support.md)**
+**[ADR-0006: Dual Embedding Model Support](../../../../decisions/adrs/0006-dual-embedding-model-support.md)**
 - **Date:** 2025-11-09
 - **Area:** Embeddings
 - **Summary:** Support sentence-transformers and Ollama embeddings
@@ -52,13 +52,13 @@ All ADRs are located in: `docs/development/decisions/adrs/`
 
 ### Document Processing
 
-**[ADR-0007: PyMuPDF4LLM for PDF Processing](../../../decisions/adrs/0007-pymupdf4llm-for-pdf-processing.md)**
+**[ADR-0007: PyMuPDF4LLM for PDF Processing](../../../../decisions/adrs/0007-pymupdf4llm-for-pdf-processing.md)**
 - **Date:** 2025-11-09
 - **Area:** Document Ingestion
 - **Summary:** Use PyMuPDF4LLM for PDF to Markdown conversion
 - **Impact:** Structure-preserving PDF extraction
 
-**[ADR-0014: Markdown as Intermediate Format](../../../decisions/adrs/0014-markdown-as-intermediate-format.md)**
+**[ADR-0014: Markdown as Intermediate Format](../../../../decisions/adrs/0014-markdown-as-intermediate-format.md)**
 - **Date:** 2025-11-09
 - **Area:** Document Processing
 - **Summary:** Markdown as common intermediate format for all documents
@@ -66,13 +66,13 @@ All ADRs are located in: `docs/development/decisions/adrs/`
 
 ### Chunking
 
-**[ADR-0008: tiktoken for Token Counting](../../../decisions/adrs/0008-tiktoken-for-token-counting.md)**
+**[ADR-0008: tiktoken for Token Counting](../../../../decisions/adrs/0008-tiktoken-for-token-counting.md)**
 - **Date:** 2025-11-09
 - **Area:** Chunking
 - **Summary:** Use tiktoken with cl100k_base encoding
 - **Impact:** Accurate token counting for chunk sizing
 
-**[ADR-0009: Recursive Character Text Splitter](../../../decisions/adrs/0009-recursive-character-text-splitter.md)**
+**[ADR-0009: Recursive Character Text Splitter](../../../../decisions/adrs/0009-recursive-character-text-splitter.md)**
 - **Date:** 2025-11-09
 - **Area:** Chunking
 - **Summary:** Recursive splitting strategy with semantic boundaries
@@ -80,7 +80,7 @@ All ADRs are located in: `docs/development/decisions/adrs/`
 
 ### LLM Generation
 
-**[ADR-0012: Ollama for LLM Generation](../../../decisions/adrs/0012-ollama-for-llm-generation.md)**
+**[ADR-0012: Ollama for LLM Generation](../../../../decisions/adrs/0012-ollama-for-llm-generation.md)**
 - **Date:** 2025-11-09
 - **Area:** LLM, Generation
 - **Summary:** Ollama with llama3.2 as default model
@@ -94,7 +94,7 @@ All ADRs are located in: `docs/development/decisions/adrs/`
 
 ### CLI & UX
 
-**[ADR-0010: Click + Rich for CLI](../../../decisions/adrs/0010-click-rich-for-cli.md)**
+**[ADR-0010: Click + Rich for CLI](../../../../decisions/adrs/0010-click-rich-for-cli.md)**
 - **Date:** 2025-11-09
 - **Area:** CLI Interface
 - **Summary:** Click for commands, Rich for beautiful output
@@ -102,7 +102,7 @@ All ADRs are located in: `docs/development/decisions/adrs/`
 
 ### Security & Privacy
 
-**[ADR-0011: Privacy-Safe Logging](../../../decisions/adrs/0011-privacy-safe-logging.md)**
+**[ADR-0011: Privacy-Safe Logging](../../../../decisions/adrs/0011-privacy-safe-logging.md)**
 - **Date:** 2025-11-09
 - **Area:** Logging, Security
 - **Summary:** Automatic PII filtering in logs
@@ -110,7 +110,7 @@ All ADRs are located in: `docs/development/decisions/adrs/`
 
 ### Development Process
 
-**[ADR-0005: 14-Phase Implementation Approach](../../../decisions/adrs/0005-14-phase-implementation-approach.md)**
+**[ADR-0005: 14-Phase Implementation Approach](../../../../decisions/adrs/0005-14-phase-implementation-approach.md)**
 - **Date:** 2025-11-09
 - **Area:** Development Process
 - **Summary:** Structured 14-phase implementation for v0.1
@@ -185,8 +185,8 @@ All decisions were made during the v0.1 planning and implementation phase (Novem
 - [v0.1 Implementation Notes](../../../../implementation/version/v0.1/implementation-notes.md)
 
 **Architecture:**
-- [Architecture Overview](../../../../architecture/README.md)
-- [Core Concepts](../../../../core-concepts/)
+- [Architecture Overview](../../../../planning/README.md)
+- [Core Concepts](../../../../planning/core-concepts)
 
 **Process:**
 - [v0.1 Development Log](../README.md)

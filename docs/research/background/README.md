@@ -126,10 +126,10 @@ This informed ragged's architecture and model choices.
 
 ## Related Documentation
 
-- **[Architecture](../architecture/)** - How these research insights informed the design
-- **[Decisions](../decisions/)** - ADRs explaining specific choices
-- **[Terminology](../terminology/)** - Key concepts and glossary
-- **[User Guide: Document Processing](../../user-guides/features/document-processing.md)** - Using these technologies
+- **[Architecture](../../development/planning/architecture)** - How these research insights informed the design
+- **[Decisions](../../development/decisions)** - ADRs explaining specific choices
+- **[Terminology](../../reference/terminology)** - Key concepts and glossary
+- **[User Guide: Document Processing](../../development/planning/technologies/document-processing.md)** - Using these technologies
 
 ---
 

@@ -426,9 +426,9 @@ See: `roadmap/version/v2.0/README.md`
 
 - [Previous Version](../v0.9/README.md) - Web UI completion
 - [Next Version](../v2.0/README.md) - Enterprise and applications
-- [Planning](../../planning/version/v1.5/) - Design goals for v1.5 (if exists)
+- [Planning](.) - Design goals for v1.5 (if exists)
 - [Version Overview](../README.md) - Complete version comparison
-- [Projects to Learn From](../../../research/projects-to-learn-from.md) - Onyx/Danswer team features, AnythingLLM collaboration
+- [Projects to Learn From](../../../../research/projects-to-learn-from.md) - Onyx/Danswer team features, AnythingLLM collaboration
 
 ---
 

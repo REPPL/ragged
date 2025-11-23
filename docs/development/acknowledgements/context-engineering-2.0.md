@@ -94,9 +94,9 @@ Theoretical framework positioning context engineering as entropy reduction—tra
 ## Related
 
 - [Knowledge Graph ADR](../decisions/adrs/) (when created)
-- [v0.4.4 Roadmap](../roadmap/version/v0.4.0/v0.4.4.md)
-- [v0.4.6 Roadmap](../roadmap/version/v0.4.0/v0.4.6.md)
-- [v0.4.8 Roadmap](../roadmap/version/v0.4.0/v0.4.8.md)
+- [v0.4.4 Roadmap](../roadmap/version/v0.4/v0.4.4.md)
+- [v0.4.6 Roadmap](../roadmap/version/v0.4/v0.4.6.md)
+- [v0.4.8 Roadmap](../roadmap/version/v0.4/v0.4.8.md)
 
 ---
 

@@ -486,9 +486,9 @@
 
 ### Daily Development Logs
 
-- [YYYY-MM-DD](../devlog/YYYY-MM-DD.md)
-- [YYYY-MM-DD](../devlog/YYYY-MM-DD.md)
-- [...](../devlog/)
+- YYYY-MM-DD
+- YYYY-MM-DD
+- ...
 
 ### Feature Time Logs
 

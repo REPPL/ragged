@@ -50,6 +50,6 @@ Each version directory contains:
 
 - [Daily Logs](../daily/) - Day-by-day progress
 - **[Implementations](../../../../implementation/version/)** - **Canonical source of truth**
-- [Decisions](../../../../decisions/adrs/) - Architectural decisions
+- [Decisions](../../../decisions/adrs) - Architectural decisions
 
 ---

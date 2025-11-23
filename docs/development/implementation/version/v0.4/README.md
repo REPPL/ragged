@@ -246,10 +246,10 @@ The memory system (v0.4.5-v0.4.8) will leverage both v0.4 foundations:
 
 ### Roadmap
 - [v0.4 Roadmap Overview](../../roadmap/version/v0.4/README.md) - Overall v0.4 strategy
-- [v0.4.0 Roadmap](../../roadmap/version/v0.4/v0.4.0.md)
-- [v0.4.1 Roadmap](../../roadmap/version/v0.4/v0.4.1.md)
-- [v0.4.2 Roadmap](../../roadmap/version/v0.4/v0.4.2.md)
-- [v0.4.3 Roadmap](../../roadmap/version/v0.4/v0.4.3.md)
+- [v0.4.0 Roadmap](../../../roadmap/version/v0.4/v0.4.0.md)
+- [v0.4.1 Roadmap](../../../roadmap/version/v0.4/v0.4.1.md)
+- [v0.4.2 Roadmap](../../../roadmap/version/v0.4/v0.4.2.md)
+- [v0.4.3 Roadmap](../../../roadmap/version/v0.4/v0.4.3.md)
 
 ### Implementation
 - [v0.4.0 Implementation](./v0.4.0/README.md) - Plugin Security Foundation
@@ -258,10 +258,10 @@ The memory system (v0.4.5-v0.4.8) will leverage both v0.4 foundations:
 - [v0.4.3 Implementation](./v0.4.3/README.md) - LEANN Integration
 
 ### Architecture Decisions
-- [ADR-0016: Memory System Architecture](../../decisions/adrs/0016-memory-system-architecture.md)
-- [ADR-0017: Code Quality Standards](../../decisions/adrs/0017-code-quality-standards.md)
-- [ADR-0018: LEANN Integration Decision](../../decisions/adrs/0018-leann-integration-decision.md)
-- [ADR-0019: v0.4.x Roadmap Restructuring](../../decisions/adrs/0019-v04x-restructuring-leann-mandatory.md)
+- [ADR-0016: Memory System Architecture](../../../decisions/adrs/0016-memory-system-architecture.md)
+- [ADR-0017: Code Quality Standards](../../../decisions/adrs/0017-code-quality-standards.md)
+- [ADR-0018: LEANN Integration Decision](../../../decisions/adrs/0018-leann-integration-decision.md)
+- [ADR-0019: v0.4.x Roadmap Restructuring](../../../decisions/adrs/0019-v04x-restructuring-leann-mandatory.md)
 
 ---
 

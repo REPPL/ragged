@@ -387,8 +387,8 @@
 **Part of Version**: [vX.X-summary.md](./vX.X-summary.md)
 
 **Daily Logs**:
-- [YYYY-MM-DD](../devlog/YYYY-MM-DD.md)
-- [YYYY-MM-DD](../devlog/YYYY-MM-DD.md)
+- YYYY-MM-DD
+- YYYY-MM-DD
 
 ---
 

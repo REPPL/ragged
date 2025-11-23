@@ -345,10 +345,10 @@ As specified in `pyproject.toml`:
 
 ## Related Documentation
 
-- [v0.3.3 Roadmap](../../roadmap/version/v0.3/v0.3.3.md) - Original plan
+- [v0.3.3 Roadmap](../../../../roadmap/version/v0.3/v0.3.3.md) - Original plan
 - [Chunking Strategies Feature Spec](../../roadmap/version/v0.3/features/chunking-strategies.md) - Detailed design
 - [v0.3 Planning](../../planning/version/v0.3/) - High-level goals
-- [CHANGELOG](../../../../CHANGELOG.md) - Release notes
+- [CHANGELOG](../../v0.5.6/CHANGELOG.md) - Release notes
 
 ---
 

@@ -471,6 +471,6 @@ The RAG (Retrieval-Augmented Generation) landscape includes diverse approaches s
 - [ragged Architecture Overview](../explanation/architecture-overview.md) - ragged's design principles
 - [Version Roadmap](../development/roadmap/version/README.md) - Planned features and milestones
 - [Privacy Design](../explanation/privacy-design.md) - Privacy-by-design architecture
-- [Vision RAG Guide](../guides/vision-rag.md) - Multi-modal document understanding
+- Vision RAG Guide - Multi-modal document understanding
 
 ---

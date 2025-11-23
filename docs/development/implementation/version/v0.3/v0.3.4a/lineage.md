@@ -88,7 +88,7 @@
    - Integration tests
 
 3. **Security Audit**
-   - [v0.3.4a Security Audit](../../../../security/v0.3.4a-security-audit.md)
+   - [v0.3.4a Security Audit](../../../../../audit/security/baseline/v0.3.4a-security-audit.md)
    - Grade: C+
    - 1 CRITICAL, 3 HIGH, 5 MEDIUM issues
    - Remediation: 37 hours across 3 phases
@@ -165,7 +165,7 @@
 
 ### Critical Security Gaps
 
-From [security audit](../../../../security/v0.3.4a-security-audit.md):
+From [security audit](../../../../../audit/security/baseline/v0.3.4a-security-audit.md):
 
 **CRITICAL-001**: No file size validation (DoS via large files)
 **HIGH-001**: No MIME type verification (file type confusion)
@@ -222,7 +222,7 @@ From [security audit](../../../../security/v0.3.4a-security-audit.md):
 
 **Development Logs**: [v0.3.4a DevLog](../../../../process/devlogs/version/v0.3.4a/summary.md)
 **Time Tracking**: [v0.3.4a Time Log](../../../../process/time-logs/version/v0.3.4a/time-tracking.md)
-**Security Audit**: [v0.3.4a Security Audit](../../../../security/v0.3.4a-security-audit.md)
+**Security Audit**: [v0.3.4a Security Audit](../../../../../audit/security/baseline/v0.3.4a-security-audit.md)
 
 ---
 
@@ -257,7 +257,7 @@ From [security audit](../../../../security/v0.3.4a-security-audit.md):
 - **Planning**: [v0.3.4 Planning](../../../../roadmap/version/v0.3/v0.3.4/README.md)
 - **Roadmap**: [v0.3.4a Roadmap](../../../../roadmap/version/v0.3/v0.3.4/v0.3.4a.md)
 - **Implementation**: [v0.3.4a Summary](./summary.md)
-- **Security**: [v0.3.4a Security Audit](../../../../security/v0.3.4a-security-audit.md)
+- **Security**: [v0.3.4a Security Audit](../../../../../audit/security/baseline/v0.3.4a-security-audit.md)
 - **Parent Version**: [v0.3 Overview](../../README.md)
 
 ---

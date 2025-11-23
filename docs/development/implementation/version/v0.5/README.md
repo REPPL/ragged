@@ -168,7 +168,7 @@ Comprehensive CLI exposing all vision features through intuitive command-line in
 
 ### Roadmap
 - [v0.5 Roadmap Overview](../../roadmap/version/v0.5/README.md) - Overall v0.5 strategy
-- [v0.5.3 Roadmap](../../roadmap/version/v0.5/v0.5.3.md) - CLI implementation plan
+- [v0.5.3 Roadmap](../../../roadmap/version/v0.5/v0.5.3.md) - CLI implementation plan
 
 ### Implementation
 - [v0.5.5 Implementation](./v0.5.5/README.md) - Test Coverage & Import Fixes

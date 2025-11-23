@@ -833,7 +833,7 @@ The completed phases (1, 4, 5) establish the critical foundation needed for auto
 
 **Implementation Roadmaps**:
 - [v0.3 Roadmap](../../v0.3/README.md) - Advanced retrieval & document intelligence (13 releases, Q2-Q3 2026)
-  - See especially [v0.3.7](../../v0.3/v0.3.7.md) - VectorStore abstraction foundation
+  - See especially [v0.3.7](../v0.3/v0.3.7.md) - VectorStore abstraction foundation
 - [v0.4 Detailed Spec](v0.4-detailed-spec.md) - Original comprehensive roadmap (kept for reference)
 - Individual release roadmaps:
   - Foundation & Security: [v0.4.0](v0.4.0.md) - [v0.4.4](v0.4.4.md)

@@ -7,6 +7,84 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.8] - 2025-11-23
+
+### Security - CLI & Supply Chain Hardening
+
+**Critical Security Fixes**:
+- **CRITICAL-001**: Complete pickle removal (eliminates arbitrary code execution vulnerability)
+  - Removed all pickle deserialization from codebase
+  - Updated incremental_index.py, multi_tier_cache.py, serialization.py
+  - No backward compatibility (users must rebuild caches with JSON)
+  - CVSS 9.8 vulnerability eliminated
+
+**High-Priority Security Features**:
+- **HIGH-5**: CLI path validation integration (completes v0.5.7 preparation)
+  - Integrated PathValidator into 10 CLI commands (add, ingest, backup, restore, scan, export, history, memory)
+  - 12 path arguments validated across CLI surface
+  - Protection against: path traversal (`../../etc/passwd`), null byte injection, symlink attacks
+  - 22 comprehensive security tests passing
+
+**Medium-Priority Security Features**:
+- **MEDIUM-3/4**: Network binding secure defaults
+  - Changed default from `0.0.0.0` to `127.0.0.1` (Gradio UI & API dev server)
+  - Added confirmation prompts for external network exposure
+  - Clear security warnings for users
+- **MEDIUM-5**: HuggingFace model revision pinning
+  - Pinned ColPali model to verified revision `7d3c8ab1c1908b32d701308fb1dfb2968d150c67`
+  - Prevents supply chain attacks via model substitution
+  - Ensures reproducible builds with verified weights
+
+**Test Improvements**:
+- Fixed false positives in security tests (PyTorch `.eval()` method, regex patterns)
+- Added 372 lines of comprehensive path validation tests
+- All 43 embeddings tests passing with model pinning
+
+**Documentation**:
+- Reorganised audit reports into `docs/audit/` (security/, documentation/, roadmap/)
+- Created comprehensive v0.5.8 implementation documentation
+- Clear separation: audit reports vs development docs vs user guides
+
+### Breaking Changes
+
+⚠️ **Pickle files no longer supported** (CRITICAL-001):
+- Legacy `.pkl` cache files must be deleted
+- Users must rebuild indices with secure JSON serialization
+- No automated migration (security by design)
+
+⚠️ **Network binding default changed** (MEDIUM-3):
+- Default changed from `0.0.0.0` to `127.0.0.1`
+- External network access requires explicit `--host 0.0.0.0` flag
+- Security confirmation prompt required
+
+### Migration Guide
+
+**For users with legacy pickle caches:**
+```bash
+# Remove legacy pickle files
+find ~/.ragged -name "*.pkl" -delete
+
+# Rebuild indices
+ragged add /path/to/documents --force-rebuild
+```
+
+**For users requiring external network access:**
+```bash
+# Gradio UI
+ragged --host 0.0.0.0 --port 7860
+
+# API server
+ragged serve --host 0.0.0.0 --port 8000
+# (Respond "yes" to security confirmation prompt)
+```
+
+### Security Posture
+
+- **Risk Level:** LOW (down from MEDIUM)
+- **Critical Vulnerabilities:** 0 (down from 1)
+- **Medium Vulnerabilities:** 0 (down from 3)
+- **Test Coverage:** 400+ lines of new security tests
+
 ## [0.4.9] - 2025-11-23
 
 ### Added - Messy Scans to Perfect PDFs

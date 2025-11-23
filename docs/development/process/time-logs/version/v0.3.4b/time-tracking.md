@@ -201,7 +201,7 @@ While AI generation was extremely fast for initial implementation, the security 
 
 - [Development Log](../../../devlogs/version/v0.3.4b/summary.md)
 - [Implementation Summary](../../../../implementation/version/v0.3/v0.3.4b/summary.md)
-- [Security Audit](../../../../security/v0.3.4b-security-audit.md)
+- [Security Audit](../../../../../audit/security/baseline/v0.3.4b-security-audit.md)
 
 ---
 

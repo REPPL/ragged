@@ -216,7 +216,7 @@ CLI and web UI share the **same ragged core**:
 - **v0.4.0** (plugin system) - See [v0.4.0 Roadmap](../../roadmap/version/v0.4.0/README.md)
 
 **Web UI Enhancements:**
-- **v0.2.5** (bug fixes) - See [v0.2.5 Roadmap](../../roadmap/version/v0.2.5/README.md)
+- **v0.2.5** (bug fixes) - See v0.2.5 Roadmap
 - **v0.3.0** (multi-modal) - See [v0.3.0 Roadmap](../../roadmap/version/v0.3.0/README.md)
 - **v0.4.0** (advanced features) - See [v0.4.0 Roadmap](../../roadmap/version/v0.4.0/README.md)
 

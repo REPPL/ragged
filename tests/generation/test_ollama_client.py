@@ -16,13 +16,15 @@ class TestOllamaClient:
 
     def test_init_success(self, mock_ollama):
         """Test successful initialization."""
-        client = OllamaClient(
-            base_url="http://localhost:11434",
-            model="llama3.2"
-        )
+        # Mock the model verification to avoid requiring actual Ollama connection
+        with patch("ragged.generation.ollama_client.OllamaClient._verify_model_available"):
+            client = OllamaClient(
+                base_url="http://localhost:11434",
+                model="llama3.2"
+            )
 
-        assert client is not None
-        assert client.model == "llama3.2"
+            assert client is not None
+            assert client.model == "llama3.2"
 
     def test_generate_success(self, mock_ollama):
         """Test successful text generation."""

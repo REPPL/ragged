@@ -391,7 +391,7 @@ tracker.list_interactions(persona="user", limit=10)  # Latest 10 for a user
 ## Related Documentation
 
 - [v0.4.6 Lineage](./lineage.md) - Planning → Roadmap → Implementation traceability
-- [CHANGELOG.md](../../../../../CHANGELOG.md#046---2025-11-23) - User-facing release notes
+- [CHANGELOG.md](../../v0.5.6/CHANGELOG.md#046---2025-11-23) - User-facing release notes
 - [Memory System Guide](../../../../../guides/memory-system.md) - User documentation
 
 ---

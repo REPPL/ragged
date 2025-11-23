@@ -127,8 +127,8 @@ Before claiming performance improvements in v0.2.7:
 
 ## Related Documentation
 
-- [v0.2.7 Planning](../../planning/version/v0.2.7/) - Performance improvement goals
-- [v0.2.7 Roadmap](../../roadmap/version/v0.2.7/) - Implementation plan
+- [v0.2.7 Planning](../../../roadmap/version/v0.2/v0.2.7) - Performance improvement goals
+- [v0.2.7 Roadmap](../../../roadmap/version/v0.2/v0.2.7) - Implementation plan
 - [Performance Benchmark Script](../../../../scripts/baseline_performance.py) - Automated benchmarking
 
 ---

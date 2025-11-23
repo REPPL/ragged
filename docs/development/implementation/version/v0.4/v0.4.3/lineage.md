@@ -18,7 +18,7 @@ Documentation lineage for ragged v0.4.3, tracing the evolution from planning thr
 
 **Documents:**
 - [v0.4 Planning Overview](../../../planning/version/v0.4/README.md)
-- [ADR-0018: LEANN Integration Decision](../../../decisions/adrs/0018-leann-integration-decision.md)
+- [ADR-0018: LEANN Integration Decision](../../../../decisions/adrs/0018-leann-integration-decision.md)
 
 **v0.4.3 Role:** Integrate LEANN backend for 97% storage savings on Apple Silicon
 
@@ -34,7 +34,7 @@ Documentation lineage for ragged v0.4.3, tracing the evolution from planning thr
 
 ## Roadmap Phase
 
-**Document:** [v0.4.3 Roadmap](../../../roadmap/version/v0.4/v0.4.3.md)
+**Document:** [v0.4.3 Roadmap](../../../../roadmap/version/v0.4/v0.4.3.md)
 
 **Core Deliverables:**
 1. LEANN backend (LEANNStore)
@@ -100,11 +100,11 @@ Documentation lineage for ragged v0.4.3, tracing the evolution from planning thr
 ## Related Documentation
 
 - [v0.4 Planning](../../../planning/version/v0.4/README.md)
-- [v0.4.3 Roadmap](../../../roadmap/version/v0.4/v0.4.3.md)
+- [v0.4.3 Roadmap](../../../../roadmap/version/v0.4/v0.4.3.md)
 - [v0.4.3 README](./README.md)
 - [v0.4.3 Summary](./summary.md)
 - [v0.4.2 Implementation](../v0.4.2/README.md)
-- [ADR-0018: LEANN Integration](../../../decisions/adrs/0018-leann-integration-decision.md)
+- [ADR-0018: LEANN Integration](../../../../decisions/adrs/0018-leann-integration-decision.md)
 
 ---
 

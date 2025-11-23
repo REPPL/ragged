@@ -167,4 +167,4 @@ See [ADR-012: Configuration Inheritance](../decisions/adr-012-configuration-inhe
 
 - [Profile Templates](../profile-templates/README.md) - Example configurations
 - [Terminology: Profiles vs Personas](../terminology/profiles-vs-personas.md) - Conceptual distinction
-- [User Guide: Profiles and Personas](../../user-guides/features/profiles-and-personas.md) - How to use them
+- User Guide: Profiles and Personas - How to use them

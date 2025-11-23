@@ -105,9 +105,9 @@ ragged gpu download      # Pre-download vision models (v0.5.6)
 ### 4. Enhanced Developer Experience
 
 **Documentation:**
-- [Multi-Modal Workflow Tutorial](../../../tutorials/multimodal-workflow.md)
-- [GPU Configuration Guide](../../../guides/gpu-configuration-optimisation.md)
-- [Installation Guide Updates](../../../tutorials/installation.md)
+- [Multi-Modal Workflow Tutorial](../../../../tutorials/multimodal-workflow.md)
+- [GPU Configuration Guide](../../../../guides/gpu-configuration-optimisation.md)
+- [Installation Guide Updates](../../../../tutorials/installation.md)
 - 3 Jupyter Notebooks in `examples/notebooks/`
 - Sphinx API Documentation in `docs/api/`
 
@@ -186,8 +186,8 @@ See [CHANGELOG.md](./CHANGELOG.md) for complete migration guide.
 
 ## Development Timeline
 
-**Planning:** [v0.5.6 Planning Docs](../../../planning/version/v0.5.6/)
-**Roadmap:** [v0.5.6 Roadmap](../../../roadmap/version/v0.5.6/)
+**Planning:** [v0.5.6 Planning Docs](.)
+**Roadmap:** [v0.5.6 Roadmap](.)
 **Implementation:** This directory
 
 **Key Milestones:**
@@ -206,10 +206,10 @@ See development logs in `docs/development/process/devlogs/` for detailed progres
 
 - [CHANGELOG.md](./CHANGELOG.md) - User-facing release notes
 - [DELIVERABLES-SUMMARY.md](./DELIVERABLES-SUMMARY.md) - Complete implementation record
-- [Multi-Modal Tutorial](../../../tutorials/multimodal-workflow.md) - Using vision embeddings
-- [GPU Guide](../../../guides/gpu-configuration-optimisation.md) - GPU optimisation
-- [Planning Documents](../../../planning/version/v0.5.6/) - Design goals
-- [Roadmap](../../../roadmap/version/v0.5.6/) - Implementation plan
+- [Multi-Modal Tutorial](../../../../tutorials/multimodal-workflow.md) - Using vision embeddings
+- [GPU Guide](../../../../guides/gpu-configuration-optimisation.md) - GPU optimisation
+- [Planning Documents](.) - Design goals
+- [Roadmap](.) - Implementation plan
 
 ---
 

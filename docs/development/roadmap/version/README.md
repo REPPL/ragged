@@ -61,7 +61,7 @@ Future      v1.5.0 ━━━━━━━━━━━━━ Collaboration & Multi
 - Logger issues resolved
 - Test coverage improved across multiple releases
 
-**See:** [v0.2.3/README.md](./v0.2.3/README.md)
+**See:** v0.2.3/README.md
 
 ---
 
@@ -83,7 +83,7 @@ Future      v1.5.0 ━━━━━━━━━━━━━ Collaboration & Multi
 - All P1 bugs resolved
 - 92 new tests added
 
-**See:** [v0.2.4/README.md](./v0.2.4/README.md) | [CHANGELOG](../../../CHANGELOG.md#024---2025-11-17)
+**See:** v0.2.4/README.md | [CHANGELOG](../../implementation/version/v0.5.6/CHANGELOG.md#024---2025-11-17)
 
 ---
 
@@ -105,7 +105,7 @@ Future      v1.5.0 ━━━━━━━━━━━━━ Collaboration & Multi
 - 100% test coverage for citation formatter
 - ~15 hours (vs 13-20h estimated)
 
-**See:** [v0.2.5/README.md](./v0.2.5/README.md) | [CHANGELOG](../../../CHANGELOG.md#025---2025-11-17)
+**See:** v0.2.5/README.md | [CHANGELOG](../../implementation/version/v0.5.6/CHANGELOG.md#025---2025-11-17)
 
 ---
 
@@ -188,7 +188,7 @@ Future      v1.5.0 ━━━━━━━━━━━━━ Collaboration & Multi
 - >95% error recovery rate
 - >80% test coverage maintained
 
-**See:** [v0.2.9/README.md](./v0.2.9/README.md)
+**See:** [v0.2.9/README.md](./v0.2/v0.2.9/README.md)
 
 ---
 

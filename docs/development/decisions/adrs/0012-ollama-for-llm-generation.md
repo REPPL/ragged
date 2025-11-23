@@ -159,7 +159,7 @@ v0.3+:
 - [ADR-0001: Local-Only Processing](./0001-local-only-processing.md)
 - [ADR-0006: Dual Embedding Model Support](./0006-dual-embedding-model-support.md)
 - [Core Concepts: Model Selection](../../planning/core-concepts/model-selection.md)
-- [Docker Setup Guide](../../guides/docker-setup.md)
+- [Docker Setup Guide](../../../guides/docker-setup.md)
 
 ---
 

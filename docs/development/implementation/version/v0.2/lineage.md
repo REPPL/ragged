@@ -19,7 +19,7 @@ This document traces the lineage from planning through decisions to implementati
 - [v0.2 Version Overview](../../../planning/version/v0.2/) - Enhanced retrieval goals
 
 **Architecture Enhancements:**
-- [Document Normalisation](../../../planning/architecture/document-normalisation.md) - Text cleaning
+- [Document Normalisation](../../../planning/core-concepts/document-normalisation.md) - Text cleaning
 - [Enhanced Retrieval](../../../planning/architecture/enhanced-retrieval.md) - Better search
 
 **Core Concepts:**
@@ -44,7 +44,7 @@ This document traces the lineage from planning through decisions to implementati
 
 **Current Status:**
 - [v0.2 Summary](./summary.md) - Partial implementation status
-- [v0.2 Implementation Notes](./implementation-notes.md) - Technical details (in progress)
+- [v0.2 Implementation Notes](../v0.1/implementation-notes.md) - Technical details (in progress)
 
 **Development Narrative:**
 - v0.2 Development Log (not yet created)
@@ -146,7 +146,7 @@ This document traces the lineage from planning through decisions to implementati
 
 **Implementation:**
 - [v0.2 Summary](./summary.md)
-- [Implementation Notes](./implementation-notes.md)
+- [Implementation Notes](../v0.1/implementation-notes.md)
 
 **Previous Version:**
 - [v0.1 Lineage](../v0.1/lineage.md) - Foundation
@@ -168,7 +168,7 @@ This document traces the lineage from planning through decisions to implementati
 
 **Implementation:**
 - [v0.2.5 Release Notes](./v0.2.5.md) - Completed features
-- [v0.2.5 Time Log](../../process/time-logs/version/v0.2/v0.2.5-time-log.md) - ~12 hours actual
+- [v0.2.5 Time Log](../../../process/time-logs/version/v0.2/v0.2.5-time-log.md) - ~12 hours actual
 - All 9 quality improvements successfully implemented
 
 ### Traceability Matrix
@@ -224,8 +224,8 @@ This document traces the lineage from planning through decisions to implementati
 - All 4 planned security features successfully implemented
 
 **Security Audits:**
-- [Baseline Security Audit](../../../security/baseline-audit-pre-v0.2.10.md) - 18 issues identified (3 CRITICAL)
-- [Post-Implementation Audit](../../../security/post-v0.2.10-audit.md) - All CRITICAL issues resolved, 9 issues remaining
+- [Baseline Security Audit](../../../../audit/security/baseline/baseline-audit-pre-v0.2.10.md) - 18 issues identified (3 CRITICAL)
+- [Post-Implementation Audit](../../../../audit/security/baseline/post-v0.2.10-audit.md) - All CRITICAL issues resolved, 9 issues remaining
 
 ### Traceability Matrix
 

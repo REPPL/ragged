@@ -330,8 +330,8 @@ All 4 features implemented exactly as planned with no deviations.
 
 - [Roadmap: v0.2.10](../../../roadmap/version/v0.2/v0.2.10/README.md) - Original security hardening plan
 - [Lineage: v0.2.10](./lineage.md) - Traceability from planning to implementation
-- [Baseline Security Audit](../../../security/baseline-audit-pre-v0.2.10.md) - Pre-implementation vulnerabilities
-- [Post-Implementation Audit](../../../security/post-v0.2.10-audit.md) - Verification of fixes
+- [Baseline Security Audit](../../../../../audit/security/baseline/baseline-audit-pre-v0.2.10.md) - Pre-implementation vulnerabilities
+- [Post-Implementation Audit](../../../../../audit/security/baseline/post-v0.2.10-audit.md) - Verification of fixes
 - [v0.2.11 Implementation](../v0.2.11.md) - Privacy Infrastructure (next)
 
 ---

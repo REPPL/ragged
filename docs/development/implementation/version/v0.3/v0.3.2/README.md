@@ -67,7 +67,7 @@ Traceability from planning to implementation:
 ## Navigation
 
 **Related Documentation:**
-- [Roadmap: v0.3.2](../../../roadmap/version/v0.3/v0.3.2.md) - Original plan
+- [Roadmap: v0.3.2](../../../../roadmap/version/v0.3/v0.3.2.md) - Original plan
 - [v0.3 Index](../README.md) - All v0.3.x implementations
 
 **Previous/Next Implementations:**

@@ -811,6 +811,6 @@ def test_semantic_duplicate_detection():
 
 - [Document Normalisation](./document-normalisation.md) - Related concept
 - [Metadata Schema](./metadata-schema.md) - Document tracking
-- [Storage Architecture](../../architecture/) - System design
+- [Storage Architecture](..) - System design
 
 ---

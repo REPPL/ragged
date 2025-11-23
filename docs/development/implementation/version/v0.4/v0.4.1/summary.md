@@ -205,7 +205,7 @@ v0.4.1 successfully integrates all v0.4.0 security components:
 
 - [v0.4.1 Implementation README](./README.md)
 - [v0.4.1 Lineage](./lineage.md)
-- [v0.4.1 Roadmap](../../../roadmap/version/v0.4/v0.4.1.md)
+- [v0.4.1 Roadmap](../../../../roadmap/version/v0.4/v0.4.1.md)
 - [v0.4.0 Implementation](../v0.4.0/README.md)
 
 ---

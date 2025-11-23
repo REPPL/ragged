@@ -24,7 +24,7 @@ Version 0.2.7 refactored the CLI from a monolithic structure to a modular comman
 
 **Key Achievement:** CLI entry point reduced from 586+ lines to 107 lines (82% reduction)
 
-**See:** [v0.2.7 Implementation Record](../../implementation/version/v0.2/v0.2.7.md)
+**See:** [v0.2.7 Implementation Record](../../../../implementation/version/v0.2/v0.2.7.md)
 
 ---
 
@@ -191,7 +191,7 @@ v0.2.7 is successful if:
 - [Previous Version](../v0.2.6/README.md) - Documentation & structural improvements
 - [Next Version](../v0.3/README.md) - Advanced RAG features
 - [Planning](../../planning/version/v0.2/) - Design goals for v0.2 series
-- [CLI Enhancements Catalogue](../../planning/interfaces/cli/enhancements.md) - Comprehensive CLI specifications
+- [CLI Enhancements Catalogue](../../../../planning/interfaces/cli/enhancements.md) - Comprehensive CLI specifications
 - [Version Overview](../README.md) - Complete version comparison
 
 ---
@@ -205,9 +205,9 @@ v0.2.7 is successful if:
 - [Previous Version](../v0.2.6/README.md) - Documentation & structural improvements
 - [Next Version](../v0.3/README.md) - Advanced RAG features
 - [Planning](../../planning/version/v0.2/) - Design goals for v0.2 series
-- [CLI Enhancements Catalogue](../../planning/interfaces/cli/enhancements.md) - Comprehensive CLI specifications
+- [CLI Enhancements Catalogue](../../../../planning/interfaces/cli/enhancements.md) - Comprehensive CLI specifications
 - [Version Overview](../README.md) - Complete version comparison
-- [v0.2.7 Implementation Record (In Progress)](../../implementation/version/v0.2/v0.2.7.md)
+- [v0.2.7 Implementation Record (In Progress)](../../../../implementation/version/v0.2/v0.2.7.md)
 
 ---
 

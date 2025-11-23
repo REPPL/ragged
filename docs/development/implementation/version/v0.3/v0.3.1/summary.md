@@ -189,7 +189,7 @@ Successfully implemented comprehensive configuration management system with laye
 
 ## Related Documentation
 
-- [Roadmap: v0.3.1](../../../roadmap/version/v0.3/v0.3.1.md) - Original implementation plan
+- [Roadmap: v0.3.1](../../../../roadmap/version/v0.3/v0.3.1.md) - Original implementation plan
 - [Lineage: v0.3.1](./lineage.md) - Traceability from planning to implementation
 - [v0.3.0 Implementation](../v0.3.0/summary.md) - Previous version (metrics foundation)
 

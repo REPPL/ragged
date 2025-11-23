@@ -32,7 +32,7 @@
 
 ## Roadmap Phase
 
-**Document**: [v0.4.4 Roadmap](../../roadmap/version/v0.4/v0.4.4.md)
+**Document**: [v0.4.4 Roadmap](../../../../roadmap/version/v0.4/v0.4.4.md)
 
 **Hours Estimated**: 12-15h
 
@@ -203,7 +203,7 @@
 ## Related Documentation
 
 - [v0.4 Planning Overview](../../planning/version/v0.4/README.md) - Overall vision
-- [v0.4.4 Roadmap](../../roadmap/version/v0.4/v0.4.4.md) - Detailed plan
+- [v0.4.4 Roadmap](../../../../roadmap/version/v0.4/v0.4.4.md) - Detailed plan
 - [v0.4.4 README](./README.md) - Implementation summary
 - [v0.4.4 Summary](./summary.md) - Implementation narrative
 

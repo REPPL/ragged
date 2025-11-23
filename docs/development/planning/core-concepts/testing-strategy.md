@@ -1921,8 +1921,8 @@ The strategy balances **development velocity** with **production quality**, ensu
 
 ## Related Documentation
 
-- [Testing Framework (v0.3.1)](../../../roadmap/version/v0.3/v0.3.1.md) - Testing implementation
-- [Test Template (v0.3.11)](../../../roadmap/version/v0.3/v0.3.11.md) - Template system
+- [Testing Framework (v0.3.1)](../../roadmap/version/v0.3/v0.3.1.md) - Testing implementation
+- [Test Template (v0.3.11)](../../roadmap/version/v0.3/v0.3.11.md) - Template system
 - [Testing Documentation](../../../process/testing/) - Test methodology
 
 ---

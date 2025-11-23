@@ -181,7 +181,7 @@ To access new resources:
 
 - [Deliverables Summary](./DELIVERABLES-SUMMARY.md) - Complete overview
 - [Manual Testing Framework](../../../testing/manual-tests/README.md) - Test procedures
-- [GPU Configuration Guide](../../../guides/gpu-configuration-optimisation.md) - GPU setup
+- [GPU Configuration Guide](../../../../guides/gpu-configuration-optimisation.md) - GPU setup
 - [Example Notebooks](../../../../examples/notebooks/) - Interactive tutorials
 
 ---

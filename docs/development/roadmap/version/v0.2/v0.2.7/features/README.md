@@ -44,8 +44,8 @@ Configuration management improvements (CONFIG-001 and CONFIG-002) enabling runti
 **Parent:** [v0.2.7 Roadmap](../README.md) - Main roadmap overview
 
 **Related:**
-- [CLI Enhancements Catalogue](../../../../planning/interfaces/cli/enhancements.md) - Comprehensive CLI specifications
-- [v0.2.7 Implementation Record](../../../../implementation/version/v0.2/v0.2.7.md) - Actual implementation progress
+- [CLI Enhancements Catalogue](../../../../../planning/interfaces/cli/enhancements.md) - Comprehensive CLI specifications
+- [v0.2.7 Implementation Record](../../../../../implementation/version/v0.2/v0.2.7.md) - Actual implementation progress
 
 ---
 

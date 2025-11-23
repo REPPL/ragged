@@ -60,7 +60,7 @@ Traceability from planning to implementation:
 ## Navigation
 
 **Related Documentation:**
-- [v0.3.3 Roadmap](../../../roadmap/version/v0.3/v0.3.3.md) - Original plan
+- [v0.3.3 Roadmap](../../../../roadmap/version/v0.3/v0.3.3.md) - Original plan
 - [v0.3 Index](../README.md) - All v0.3.x implementations
 - [v0.3.2 Implementation](../v0.3.2/) - Advanced Query Processing (previous)
 - [v0.3.4a Implementation](../v0.3.4a/) - Docling Core Integration (next)

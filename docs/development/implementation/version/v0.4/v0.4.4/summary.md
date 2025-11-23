@@ -148,6 +148,6 @@ Version 0.4.4 was developed with full AI assistance (Claude Code):
 
 - [README](./README.md) - Implementation overview
 - [Lineage](./lineage.md) - Planning → Roadmap → Implementation traceability
-- [v0.4.4 Roadmap](../../roadmap/version/v0.4/v0.4.4.md) - Original plan
+- [v0.4.4 Roadmap](../../../../roadmap/version/v0.4/v0.4.4.md) - Original plan
 
 ---

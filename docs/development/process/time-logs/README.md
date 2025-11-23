@@ -68,7 +68,7 @@ For each version/feature:
 ## Related Documentation
 
 - [Methodology](../methodology/) - How we develop with AI
-- [Development Logs](../devlog/) - Daily progress logs
+- Development Logs - Daily progress logs
 - [Roadmap](../roadmap/) - Planned work (estimates)
 - [Templates](../templates/) - Document templates
 

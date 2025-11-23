@@ -18,7 +18,7 @@ This directory contains:
 
 ## Documents in This Directory
 
-### [Security Policy](./policy.md)
+### [Security Policy](../../../security/policy.md)
 
 **Purpose:** Comprehensive security policy for ragged contributors and users.
 
@@ -116,7 +116,7 @@ This directory contains:
 ### For Contributors
 
 **Before contributing:**
-1. Read [Security Policy](./policy.md) (sections 1-3, 5)
+1. Read [Security Policy](../../../security/policy.md) (sections 1-3, 5)
 2. Review secure coding standards
 3. Understand privacy-by-design principles
 4. Set up pre-commit hooks (v0.2.10)
@@ -148,7 +148,7 @@ This directory contains:
 - MEDIUM: 30 days
 - LOW: 90 days
 
-**See:** [Vulnerability Disclosure Policy](./policy.md#vulnerability-disclosure-policy)
+**See:** [Vulnerability Disclosure Policy](../../../security/policy.md#vulnerability-disclosure-policy)
 
 ### For Users
 
@@ -285,7 +285,7 @@ ragged follows these security standards:
 - CWE-259: Hard-coded credentials (environment variables)
 - CWE-22: Path traversal (path validation)
 
-**See:** [Security Standards](./policy.md#compliance--standards)
+**See:** [Security Standards](../../../security/policy.md#compliance--standards)
 
 ---
 
@@ -345,7 +345,7 @@ Use the `codebase-security-auditor` agent:
 - [ ] GDPR deletion tested
 - [ ] GDPR export tested
 
-**See:** [Security Testing Requirements](./policy.md#security-testing-requirements)
+**See:** [Security Testing Requirements](../../../security/policy.md#security-testing-requirements)
 
 ---
 
@@ -383,7 +383,7 @@ Use the `codebase-security-auditor` agent:
 - Recovery: 24-48 hours
 - Post-Incident Review: 1 week
 
-**See:** [Incident Response](./policy.md#incident-response)
+**See:** [Incident Response](../../../security/policy.md#incident-response)
 
 ---
 
@@ -429,8 +429,8 @@ scheduler.schedule_cleanup(data_path, ttl_days=90)
 ```
 
 **See detailed integration examples:**
-- [v0.3.9 Privacy Implementation](../roadmap/version/v0.3/v0.3.9.md#privacy--security-implementation)
-- [v0.3.10 Privacy Implementation](../roadmap/version/v0.3/v0.3.10.md#privacy--security-implementation)
+- [v0.3.9 Privacy Implementation](../../../development/roadmap/version/v0.3/v0.3.9.md#privacy--security-implementation)
+- [v0.3.10 Privacy Implementation](../../../development/roadmap/version/v0.3/v0.3.10.md#privacy--security-implementation)
 - [v0.3.13 Privacy Implementation](../roadmap/version/v0.3/v0.3.13.md#privacy--security-implementation)
 
 ---
@@ -465,7 +465,7 @@ scheduler.schedule_cleanup(data_path, ttl_days=90)
 ## Related Documentation
 
 ### Security & Privacy
-- [Security Policy](./policy.md) - Comprehensive security policy
+- [Security Policy](../../../security/policy.md) - Comprehensive security policy
 - [Privacy Architecture](./privacy-architecture.md) - Technical privacy documentation
 
 ### Implementation Roadmaps
@@ -476,7 +476,7 @@ scheduler.schedule_cleanup(data_path, ttl_days=90)
 ### Development Documentation
 - [Development README](../README.md) - Main development hub
 - [Roadmap Documentation](../roadmap/) - Feature roadmaps
-- [ADRs](../decisions/adrs/) - Architecture decision records
+- [ADRs](../../../development/decisions/adrs) - Architecture decision records
 
 ---
 
@@ -493,7 +493,7 @@ We welcome contributions to improve ragged's security and privacy:
 - Vulnerability reports (responsible disclosure)
 
 **Before contributing:**
-1. Read [Security Policy](./policy.md)
+1. Read [Security Policy](../../../security/policy.md)
 2. Review secure coding standards
 3. Set up security development environment
 4. Understand privacy-by-design principles

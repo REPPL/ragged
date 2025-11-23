@@ -200,7 +200,7 @@ Query → [Decompose] → [HyDE] → Retrieve → Rerank → [Compress] → LLM
 
 ## Related Documentation
 
-- [Roadmap: v0.3.2](../../../roadmap/version/v0.3/v0.3.2.md) - Original implementation plan
+- [Roadmap: v0.3.2](../../../../roadmap/version/v0.3/v0.3.2.md) - Original implementation plan
 - [Lineage: v0.3.2](./lineage.md) - Traceability from planning to implementation
 - [v0.3.0 Implementation](../v0.3.0/summary.md) - RAGAS baseline for quality comparison
 - [v0.3.1 Implementation](../v0.3.1/summary.md) - Persona system integration

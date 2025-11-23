@@ -45,7 +45,7 @@ This document provides complete traceability for v0.4.0 (Plugin Security Foundat
 
 ### v0.4.0 Roadmap Specification
 
-**Document:** [v0.4.0 Roadmap](../../../roadmap/version/v0.4/v0.4.0.md)
+**Document:** [v0.4.0 Roadmap](../../../../roadmap/version/v0.4/v0.4.0.md)
 
 **Detailed Specifications:**
 
@@ -216,19 +216,19 @@ This document provides complete traceability for v0.4.0 (Plugin Security Foundat
 v0.4.0 implementation prompted three critical architecture decisions:
 
 #### ADR-0016: Memory System Architecture
-**Link:** [ADR-0016](../../../decisions/adrs/0016-memory-system-architecture.md)
+**Link:** [ADR-0016](../../../../decisions/adrs/0016-memory-system-architecture.md)
 **Status:** Accepted
 **Impact:** Defines architecture for v0.4.5-v0.4.8 memory system implementation
 **Connection to v0.4.0:** Memory system will use plugin security foundation
 
 #### ADR-0017: Code Quality Standards
-**Link:** [ADR-0017](../../../decisions/adrs/0017-code-quality-standards.md)
+**Link:** [ADR-0017](../../../../decisions/adrs/0017-code-quality-standards.md)
 **Status:** Accepted
 **Impact:** Establishes 90%+ coverage requirement, documentation standards
 **Connection to v0.4.0:** Defines quality bar that v0.4.0 partially deferred
 
 #### ADR-0018: LEANN Integration Decision
-**Link:** [ADR-0018](../../../decisions/adrs/0018-leann-integration-decision.md)
+**Link:** [ADR-0018](../../../../decisions/adrs/0018-leann-integration-decision.md)
 **Status:** Accepted
 **Impact:** Foundation for v0.4.3 LEANN backend integration
 **Connection to v0.4.0:** Part of overall v0.4 architecture planning
@@ -327,7 +327,7 @@ v0.4.0 demonstrates strong lineage from planning through implementation:
 - [v0.4 Planning Overview](../../../planning/version/v0.4/README.md)
 
 ### Roadmap
-- [v0.4.0 Roadmap Specification](../../../roadmap/version/v0.4/v0.4.0.md)
+- [v0.4.0 Roadmap Specification](../../../../roadmap/version/v0.4/v0.4.0.md)
 - [v0.4 Overall Roadmap](../../../roadmap/version/v0.4/README.md)
 
 ### Implementation
@@ -335,9 +335,9 @@ v0.4.0 demonstrates strong lineage from planning through implementation:
 - [v0.4.0 Implementation Summary](./summary.md)
 
 ### Decisions
-- [ADR-0016: Memory System Architecture](../../../decisions/adrs/0016-memory-system-architecture.md)
-- [ADR-0017: Code Quality Standards](../../../decisions/adrs/0017-code-quality-standards.md)
-- [ADR-0018: LEANN Integration Decision](../../../decisions/adrs/0018-leann-integration-decision.md)
+- [ADR-0016: Memory System Architecture](../../../../decisions/adrs/0016-memory-system-architecture.md)
+- [ADR-0017: Code Quality Standards](../../../../decisions/adrs/0017-code-quality-standards.md)
+- [ADR-0018: LEANN Integration Decision](../../../../decisions/adrs/0018-leann-integration-decision.md)
 
 ---
 

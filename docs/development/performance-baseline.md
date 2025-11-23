@@ -266,9 +266,9 @@ When comparing across different hardware:
 
 ## Related Documentation
 
-- [v0.2.9 Roadmap](./roadmap/version/v0.2.9/README.md)
-- [Performance Regression Tests Spec](./roadmap/version/v0.2.9/features/performance-regression-tests.md)
-- [Benchmarking Framework](../reference/benchmarks.md)
+- [v0.2.9 Roadmap](./roadmap/version/v0.2/v0.2.9/README.md)
+- [Performance Regression Tests Spec](roadmap/version/v0.2/v0.2.9/features/performance-regression-tests.md)
+- Benchmarking Framework
 
 ---
 

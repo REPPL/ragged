@@ -299,10 +299,10 @@ BREAKING CHANGE: Removed legacy `add` and `query` commands...
 
 - [Summary](./summary.md) - Detailed implementation metrics
 - [Lineage](./lineage.md) - Planning to implementation traceability
-- [v0.5.4 Roadmap](../../../roadmap/version/v0.5/v0.5.4.md) - Original plan (Gradio UI - not implemented)
+- [v0.5.4 Roadmap](../../../../roadmap/version/v0.5/v0.5.4.md) - Original plan (Gradio UI - not implemented)
 - [v0.5.4 Development Log](../../process/devlogs/version/v0.5.4/summary.md) - Development narrative
-- [CLI Essentials Guide](../../../../guides/cli/essentials.md) - Rewritten guide
-- [Multi-Modal Workflow Tutorial](../../../../tutorials/multimodal-workflow.md) - New tutorial
+- [CLI Essentials Guide](../../../../../guides/cli/essentials.md) - Rewritten guide
+- [Multi-Modal Workflow Tutorial](../../../../../tutorials/multimodal-workflow.md) - New tutorial
 
 ---
 

@@ -19,7 +19,7 @@ This directory contains version-specific design overviews that outline the featu
 
 ### Long-Term Strategic Planning (v1.0+)
 
-**Executive Summary:** [Strategic Roadmap](../../vision/strategic-roadmap.md) - Complete v1-v3 vision (~2600-3460 hours)
+**Executive Summary:** [Strategic Roadmap](../vision/strategic-roadmap.md) - Complete v1-v3 vision (~2600-3460 hours)
 
 - **[v1.0/](./v1.0/)** - Personal Knowledge Platform (400-500h)
   - State-of-the-art PKM with modern web UI
@@ -58,8 +58,8 @@ Version directories contain:
 
 ## Related Documentation
 
-- [Roadmaps](../../../roadmap/version/) - Detailed implementation plans with timelines
+- [Roadmaps](../../roadmap/version) - Detailed implementation plans with timelines
 - [Implementations](../../../implementation/version/) - Actual implementation records
-- [ADRs](../../../decisions/adrs/) - Decisions made during implementation
+- [ADRs](../../decisions/adrs) - Decisions made during implementation
 
 ---

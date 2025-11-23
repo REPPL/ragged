@@ -262,6 +262,6 @@ The system balances **performance, quality, and resource efficiency**, ensuring 
 
 **Document Status**: Design Complete
 **Related Documents**:
-- [Hardware Optimisation Strategy](./hardware-optimisation.md)
-- [Personal Memory & Personas](./personal-memory-personas.md)
-- [Testing Strategy](./testing-strategy.md) (pending)
+- [Hardware Optimisation Strategy](../../planning/core-concepts/hardware-optimisation.md)
+- [Personal Memory & Personas](../../planning/core-concepts/personal-memory-personas.md)
+- [Testing Strategy](../../planning/core-concepts/testing-strategy.md) (pending)

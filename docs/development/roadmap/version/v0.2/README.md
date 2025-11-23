@@ -209,7 +209,7 @@ v0.2.10 (Security) → v0.2.11 (Privacy) → v0.3.1 (First v0.3 Feature)
 ### Security & Privacy Documentation
 
 **Core Documents:**
-- [Security Policy](../../../security/policy.md) - Comprehensive security policy
+- [Security Policy](../../../../security/policy.md) - Comprehensive security policy
 - [Privacy Architecture](../../../security/privacy-architecture.md) - Technical privacy documentation
 - [Security README](../../../security/README.md) - Security documentation hub
 
@@ -228,7 +228,7 @@ After completing each version, document in:
 ## Related Documentation
 
 ### Security & Privacy
-- [Security Policy](../../../security/policy.md)
+- [Security Policy](../../../../security/policy.md)
 - [Privacy Architecture](../../../security/privacy-architecture.md)
 - [Security README](../../../security/README.md)
 

@@ -699,12 +699,12 @@ metrics_retention_days: 30
 
 ## Related Documentation
 
-- [v0.3.4b Roadmap](../../roadmap/version/v0.3/v0.3.4/v0.3.4b.md) - Original plan
+- [v0.3.4b Roadmap](../../../../roadmap/version/v0.3/v0.3.4/v0.3.4b.md) - Original plan
 - [v0.3.4 Implementation Plan](../../planning/version/v0.3.4-implementation-plan.md) - Architecture analysis
 - [v0.3.4a Implementation](../v0.3.4a/summary.md) - Prerequisite: Docling core
-- [v0.3.4c Roadmap](../../roadmap/version/v0.3/v0.3.4/v0.3.4c.md) - Next phase: PaddleOCR integration
+- [v0.3.4c Roadmap](../../../../roadmap/version/v0.3/v0.3.4/v0.3.4c.md) - Next phase: PaddleOCR integration
 - [v0.3.4 Overview](../../roadmap/version/v0.3/v0.3.4/README.md) - Progressive enhancement strategy
-- [CHANGELOG](../../../../../CHANGELOG.md) - Release notes
+- [CHANGELOG](../../v0.5.6/CHANGELOG.md) - Release notes
 
 ---
 

@@ -643,8 +643,8 @@ Expert:    5%  (researchers)
 
 ## Related Documentation
 
-- [Progressive Disclosure Explained](../../../../explanation/progressive-disclosure-explained.md) - User-facing explanation
-- [CLI Enhancements](../../interfaces/cli/enhancements.md) - CLI design
+- [Progressive Disclosure Explained](../../../explanation/progressive-disclosure-explained.md) - User-facing explanation
+- [CLI Enhancements](../interfaces/cli/enhancements.md) - CLI design
 - [User Personas](./personal-memory-personas.md) - Target users
 
 ---

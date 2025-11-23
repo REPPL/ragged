@@ -185,11 +185,11 @@ Version 0.4.4 establishes production-grade quality baseline for ragged through c
 
 ## Related Documentation
 
-- [v0.4.4 Roadmap](../../roadmap/version/v0.4/v0.4.4.md) - Original plan
+- [v0.4.4 Roadmap](../../../../roadmap/version/v0.4/v0.4.4.md) - Original plan
 - [v0.4 Overview](../README.md) - v0.4 series summary
-- [Security Guidelines](../../../../guides/security-guidelines.md) - Security best practices
-- [Performance Tuning Guide](../../../../guides/performance-tuning.md) - Performance optimisation
-- [ADR-0017: Code Quality Standards](../../../decisions/adrs/0017-code-quality-standards.md) - Quality standards
+- [Security Guidelines](../../../../../guides/security-guidelines.md) - Security best practices
+- [Performance Tuning Guide](../../../../../guides/performance-tuning.md) - Performance optimisation
+- [ADR-0017: Code Quality Standards](../../../../decisions/adrs/0017-code-quality-standards.md) - Quality standards
 
 ---
 

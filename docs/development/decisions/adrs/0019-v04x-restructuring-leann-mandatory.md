@@ -147,9 +147,9 @@ During roadmap planning, the following issues were identified:
 ## Related Documentation
 
 - [v0.4 Overview](../roadmap/version/v0.4/README.md) - 14-release structure
-- [v0.4.3](../roadmap/version/v0.4/v0.4.3.md) - LEANN Backend (platform-aware)
+- [v0.4.3](../../roadmap/version/v0.4/v0.4.3.md) - LEANN Backend (platform-aware)
 - [v0.4.5](../roadmap/version/v0.4/v0.4.5/README.md) - Memory Foundation (multi-backend)
-- [v0.4.11](../roadmap/version/v0.4/v0.4.11.md) - Backend Migration Tools
+- [v0.4.11](../../roadmap/version/v0.4/v0.4.11.md) - Backend Migration Tools
 - [ADR-0015: VectorStore Abstraction](./0015-vectorstore-abstraction.md) - Foundation
 
 ---

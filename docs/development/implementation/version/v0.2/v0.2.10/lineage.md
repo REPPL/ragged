@@ -73,7 +73,7 @@
 
 ### 4. Process Documentation (HOW IT WAS BUILT)
 
-**Time Logs:** [Time Logs Directory](../../../process/time-logs/)
+**Time Logs:** [Time Logs Directory](../../../../process/time-logs)
 - Actual time: ~20 hours (within 15-21h estimate, 95% accuracy)
 - Breakdown: Planning 2h, Pickle 6h, Session 6h, Testing 4h, Audits 2h
 
@@ -111,7 +111,7 @@
 
 **Planning Documents:**
 - [v0.2.10 Roadmap](../../../roadmap/version/v0.2/v0.2.10/README.md) - Planning + execution plan (combined)
-- [Baseline Security Audit](../../../security/baseline-audit-pre-v0.2.10.md) - Pre-implementation vulnerabilities
+- [Baseline Security Audit](../../../../../audit/security/baseline/baseline-audit-pre-v0.2.10.md) - Pre-implementation vulnerabilities
 - [v0.2 Planning](../../../planning/version/v0.2/) - Series-level design goals (if exists)
 
 **Roadmap Documents:**
@@ -123,13 +123,13 @@
 - [v0.2 Implementation Index](../README.md) - All v0.2.x implementations
 
 **Security Documentation:**
-- [Baseline Audit](../../../security/baseline-audit-pre-v0.2.10.md) - Before v0.2.10
-- [Post-Implementation Audit](../../../security/post-v0.2.10-audit.md) - After v0.2.10
-- [Security Policy](../../../security/policy.md) - Overall security policy (if exists)
+- [Baseline Audit](../../../../../audit/security/baseline/baseline-audit-pre-v0.2.10.md) - Before v0.2.10
+- [Post-Implementation Audit](../../../../../audit/security/baseline/post-v0.2.10-audit.md) - After v0.2.10
+- [Security Policy](../../../../../security/policy.md) - Overall security policy (if exists)
 
 **Process Documentation:**
-- [DevLogs](../../../process/devlogs/) - Development narratives (if created)
-- [Time Logs](../../../process/time-logs/) - Actual effort tracking
+- [DevLogs](../../../../process/devlogs) - Development narratives (if created)
+- [Time Logs](../../../../process/time-logs) - Actual effort tracking
 
 **Related Implementations:**
 - [v0.2.11 Implementation](../v0.2.11/) - Privacy Infrastructure (next)

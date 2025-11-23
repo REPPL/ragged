@@ -320,8 +320,8 @@ repos:
 
 ## Related Documentation
 
-- [Security Guidelines](../../guides/security-guidelines.md) - Security standards
-- [Performance Tuning Guide](../../guides/performance-tuning.md) - Performance baseline
+- [Security Guidelines](../../../guides/security-guidelines.md) - Security standards
+- [Performance Tuning Guide](../../../guides/performance-tuning.md) - Performance baseline
 - [v0.4.4 Roadmap](../../roadmap/version/v0.4/v0.4.4.md) - Code quality release plan
 
 ---

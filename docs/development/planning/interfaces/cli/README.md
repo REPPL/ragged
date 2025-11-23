@@ -43,7 +43,7 @@ When planning CLI features:
 ## Related Documentation
 
 - [CLI Enhancements Catalogue](./enhancements.md) - Complete feature specifications
-- [Roadmaps](../../../../roadmap/) - Implementation timelines
-- [ADR-0010: Click + Rich for CLI](../../../../decisions/adrs/0010-click-rich-for-cli.md)
+- [Roadmaps](../../../roadmap) - Implementation timelines
+- [ADR-0010: Click + Rich for CLI](../../../decisions/adrs/0010-click-rich-for-cli.md)
 
 ---

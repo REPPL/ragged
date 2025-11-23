@@ -410,10 +410,10 @@ See: `roadmap/version/v1.0/`, `roadmap/version/v1.5/`
 ## Related Documentation
 
 - [Previous Version](../v0.8/README.md) - Agent capabilities
-- [Next Version (v1.0)](../../planning/version/v1.0/) - Personal knowledge platform planning
+- [Next Version (v1.0)](../../../planning/version/v1.0) - Personal knowledge platform planning
 - [Next Version (v1.5)](../v1.5/README.md) - Collaboration features
-- [Planning](../../planning/version/v0.9/) - Design goals for v0.9 (if exists)
+- [Planning](.) - Design goals for v0.9 (if exists)
 - [Version Overview](../README.md) - Complete version comparison
-- [Projects to Learn From](../../../research/projects-to-learn-from.md) - AnythingLLM UI and RAGFlow workflow inspiration
+- [Projects to Learn From](../../../../research/projects-to-learn-from.md) - AnythingLLM UI and RAGFlow workflow inspiration
 
 ---

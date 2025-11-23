@@ -42,26 +42,26 @@ This directory contains the complete implementation documentation for ragged v0.
 - 📄 **[lineage.md](./lineage.md)** - Complete traceability from planning to implementation
 
 ### Test Results
-- 📊 **[Test Report: v0.2.x](../../testing/v0.2.x-test-report.md)** - Complete test results (154/156 tests passing, 98.7%)
+- 📊 **[Test Report: v0.2.x](../../../testing/v0.2.x-test-report.md)** - Complete test results (154/156 tests passing, 98.7%)
 
 ---
 
 ## Navigation by Concern
 
 ### 📋 Planning (What We Intend)
-- **[timeline.md](timeline.md)** - Development timeline, phase breakdown, time estimates
-- **[phases.md](phases.md)** - Detailed 8-phase plan with goals and deliverables
+- **[timeline.md](../../../process/devlogs/version/v0.1/timeline.md)** - Development timeline, phase breakdown, time estimates
+- **[phases.md](../../../process/devlogs/version/v0.1/phases.md)** - Detailed 8-phase plan with goals and deliverables
 - **[architecture.md](architecture.md)** - v0.2 architecture and design decisions
 
 ### 🔨 Implementation (What We're Doing)
-- **[checklist.md](checklist.md)** - Real-time implementation status
-- **[decisions.md](decisions.md)** - Architecture Decision Records (ADRs)
-- **[implementation-notes.md](implementation-notes.md)** - Technical implementation details
+- **[checklist.md](../../../process/devlogs/version/v0.2/checklist.md)** - Real-time implementation status
+- **[decisions.md](../../../process/devlogs/version/v0.1/decisions.md)** - Architecture Decision Records (ADRs)
+- **[implementation-notes.md](../v0.1/implementation-notes.md)** - Technical implementation details
 - **[testing.md](testing.md)** - Testing strategy and coverage
 
 ### 🔍 Retrospective (What We Learned)
-- **[lessons-learned.md](lessons-learned.md)** - What worked, what didn't
-- **[CHANGELOG.md](CHANGELOG.md)** - Detailed version changelog
+- **[lessons-learned.md](../../../process/devlogs/version/v0.1/lessons-learned.md)** - What worked, what didn't
+- **[CHANGELOG.md](../v0.5.6/CHANGELOG.md)** - Detailed version changelog
 - **[summary.md](summary.md)** - Executive summary (end of development)
 - **[lineage.md](lineage.md)** - Complete traceability from planning → decisions → implementation
 
@@ -134,11 +134,11 @@ test: Add integration tests for web UI (Phase 7)
 - [v0.3 Implementation Index](../v0.3/README.md) - Next version series
 
 ### Testing
-- [Test Report: v0.2.x](../../testing/v0.2.x-test-report.md) - Complete test results (154/156 tests, 98.7%)
+- [Test Report: v0.2.x](../../../testing/v0.2.x-test-report.md) - Complete test results (154/156 tests, 98.7%)
 
 ### Process Documentation
-- [DevLogs](../../process/devlogs/) - Development narratives (if created)
-- [Time Logs](../../process/time-logs/) - Actual effort tracking (if created)
+- [DevLogs](../../../process/devlogs) - Development narratives (if created)
+- [Time Logs](../../../process/time-logs) - Actual effort tracking (if created)
 
 ---
 

@@ -673,8 +673,8 @@ def test_full_pipeline_academic_paper():
 
 ## Related Documentation
 
-- [PDF Processing (ADR-0007)](../../../decisions/adrs/0007-pymupdf4llm-for-pdf-processing.md) - PDF handling
-- [Markdown Format (ADR-0014)](../../../decisions/adrs/0014-markdown-as-intermediate-format.md) - Intermediate format
+- [PDF Processing (ADR-0007)](../../decisions/adrs/0007-pymupdf4llm-for-pdf-processing.md) - PDF handling
+- [Markdown Format (ADR-0014)](../../decisions/adrs/0014-markdown-as-intermediate-format.md) - Intermediate format
 - [Metadata Schema](./metadata-schema.md) - Document metadata
 
 ---

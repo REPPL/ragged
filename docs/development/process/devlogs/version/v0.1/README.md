@@ -77,7 +77,7 @@ Documents tracking actual development work and decisions:
 |----------|-------------|
 | **[structure.md](structure.md)** | Project structure, organisation, and module layout |
 | **[decisions.md](decisions.md)** | Architecture Decision Records (why key choices were made) |
-| **[implementation-notes.md](implementation-notes.md)** | Technical implementation details, patterns, and solutions |
+| **[implementation-notes.md](../../../../implementation/version/v0.1/implementation-notes.md)** | Technical implementation details, patterns, and solutions |
 
 ### 🔍 Retrospective (What We Learned)
 
@@ -87,7 +87,7 @@ Documents reflecting on the process, quality, and outcomes:
 |----------|-------------|
 | **[testing.md](testing.md)** | Testing strategy, coverage reports, quality metrics |
 | **[lessons-learned.md](lessons-learned.md)** | Retrospective: what went well, what could improve |
-| **[CHANGELOG.md](CHANGELOG.md)** | Detailed changelog of all changes during v0.1 |
+| **[CHANGELOG.md](../../../../implementation/version/v0.5.6/CHANGELOG.md)** | Detailed changelog of all changes during v0.1 |
 | **[summary.md](summary.md)** | Executive summary and final version retrospective |
 
 ## Quick Links
@@ -146,7 +146,7 @@ This structure is designed to be reusable for future versions (v0.2, v0.3, etc.)
 - **Learn for next version**: Study [lessons-learned.md](lessons-learned.md)
 - **Track quality metrics**: Examine [testing.md](testing.md)
 - **See the development timeline**: Review [timeline.md](timeline.md)
-- **View what changed**: Read [CHANGELOG.md](CHANGELOG.md)
+- **View what changed**: Read [CHANGELOG.md](../../../../implementation/version/v0.5.6/CHANGELOG.md)
 - **See the original working docs**: Explore [archive/](archive/)
 
 ## Contributing to This Log

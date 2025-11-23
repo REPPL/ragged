@@ -157,7 +157,7 @@ ragged v0.1 successfully delivers a privacy-first, local RAG (Retrieval-Augmente
 13. Local-only processing (no external APIs)
 14. Markdown as intermediate format
 
-See [decisions.md](decisions.md) for full rationale.
+See [decisions.md](../../../process/devlogs/version/v0.1/decisions.md) for full rationale.
 
 ## Quality Metrics
 
@@ -241,7 +241,7 @@ See [decisions.md](decisions.md) for full rationale.
 - Document decisions immediately
 - Security audit from day 1
 
-See [lessons-learned.md](lessons-learned.md) for full analysis.
+See [lessons-learned.md](../../../process/devlogs/version/v0.1/lessons-learned.md) for full analysis.
 
 ## Traceability
 

@@ -57,9 +57,9 @@ Traceability from planning to implementation:
 ## Navigation
 
 **Related Documentation:**
-- [Roadmap: v0.3.0](../../../roadmap/version/v0.3/v0.3.0.md) - Original plan
+- [Roadmap: v0.3.0](../../../../roadmap/version/v0.3/v0.3.0.md) - Original plan
 - [v0.3 Index](../README.md) - All v0.3.x implementations
-- [Test Report](../../../testing/v0.2.x-test-report.md) - Test baseline context
+- [Test Report](../../../../testing/v0.2.x-test-report.md) - Test baseline context
 
 **Next Implementations:**
 - [v0.3.1](../v0.3.1/) - Configuration Transparency

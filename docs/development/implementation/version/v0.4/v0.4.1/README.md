@@ -284,7 +284,7 @@ v0.4.1 architecture enables:
 
 ## Related Documentation
 
-- [v0.4.1 Roadmap Specification](../../../roadmap/version/v0.4/v0.4.1.md) - Detailed implementation plan
+- [v0.4.1 Roadmap Specification](../../../../roadmap/version/v0.4/v0.4.1.md) - Detailed implementation plan
 - [v0.4 Planning Overview](../../../planning/version/v0.4/README.md) - High-level design goals
 - [v0.4.1 Implementation Summary](./summary.md) - Detailed metrics and results
 - [v0.4.1 Lineage](./lineage.md) - Traceability from planning to implementation

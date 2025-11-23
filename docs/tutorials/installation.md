@@ -32,9 +32,33 @@ For vision-based document understanding (ColPali), additional requirements apply
 
 ## Installation Methods
 
-### Option 1: Docker Installation (Recommended)
+Choose the installation method that best fits your use case:
 
-The easiest way to get started with ragged is using Docker, which includes all services (API, UI, and ChromaDB).
+| Method | Best For | Time | Complexity |
+|--------|----------|------|------------|
+| **Docker** | Production, Web UI users | 5 min | Easy |
+| **Local CLI** | CLI users, non-developers | 2 min | Very Easy |
+| **Development** | Contributors, developers | 10 min | Medium |
+
+---
+
+### Option 1: Docker Installation (Recommended for Production)
+
+The easiest way to get started with ragged's full stack (API + Web UI + ChromaDB).
+
+#### Quick Start
+
+```bash
+git clone https://github.com/REPPL/ragged.git
+cd ragged
+./scripts/setup.sh
+```
+
+The setup script automatically:
+- Checks prerequisites (Docker, Ollama)
+- Configures environment
+- Builds and starts all containers
+- Verifies health
 
 #### Prerequisites
 
@@ -42,11 +66,13 @@ The easiest way to get started with ragged is using Docker, which includes all s
 - [Ollama](https://ollama.ai) installed (for LLM generation)
 - Git for cloning the repository
 
-#### Installation Steps
+#### Manual Setup (Alternative)
+
+If you prefer manual control:
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/your-org/ragged.git
+git clone https://github.com/REPPL/ragged.git
 cd ragged
 
 # 2. Create environment configuration
@@ -93,39 +119,73 @@ docker compose up -d
 
 ---
 
-### Option 2: Local Installation (From Source)
+### Option 2: Local CLI Installation (Recommended for CLI Users)
 
-For contributors, local development, or CLI-only usage without Docker:
+**Zero-friction installation** for using ragged's CLI without Docker. Perfect for users who only need document ingestion and querying.
 
-**Note**: ragged is not yet published to PyPI. You must install from source.
+**Note**: ragged is not yet published to PyPI. Install from source using our automated scripts.
 
-#### 1. Clone and Setup
+#### Quick Start (Linux/macOS)
 
 ```bash
-# Clone repository
-git clone https://github.com/your-org/ragged.git
+curl -sSf https://raw.githubusercontent.com/REPPL/ragged/main/scripts/install-local.sh | bash
+```
+
+#### Quick Start (Windows)
+
+```powershell
+irm https://raw.githubusercontent.com/REPPL/ragged/main/scripts/install-local.ps1 | iex
+```
+
+#### What the Script Does
+
+The installation script automatically:
+1. Checks Python 3.12 availability
+2. Clones the repository to `~/.ragged`
+3. Creates virtual environment
+4. Installs ragged and dependencies
+5. Configures direnv (if available)
+6. Adds ragged to PATH (optional)
+7. Verifies installation
+
+#### From Cloned Repository
+
+If you've already cloned the repository:
+
+```bash
+# Linux/macOS
+cd ragged
+./scripts/install-local.sh
+
+# Windows
+cd ragged
+.\scripts\install-local.ps1
+```
+
+#### Manual Installation
+
+If you prefer manual control:
+
+```bash
+# 1. Clone repository
+git clone https://github.com/REPPL/ragged.git
 cd ragged
 
-# Create and activate virtual environment
+# 2. Create virtual environment
 python3.12 -m venv .venv
+
+# 3. Activate virtual environment
 source .venv/bin/activate  # Linux/macOS
-# .venv\Scripts\activate    # Windows
-```
+.venv\Scripts\Activate.ps1  # Windows PowerShell
 
-#### 2. Install Package
-
-```bash
-# Install in editable mode with development dependencies
-# The -e flag allows source code changes without reinstalling
+# 4. Install ragged
 pip install -e ".[dev]"
+
+# 5. Verify installation
+ragged --version
 ```
 
-**Why `pip install -e .`?**
-- Modern Python packaging uses `pyproject.toml` (not `requirements.txt`)
-- `-e` installs in editable mode for development
-- This makes the `ragged` command available in your terminal
-
-#### 3. Start Required Services
+#### Start Required Services
 
 ```bash
 # Start ChromaDB (via Docker)
@@ -135,7 +195,7 @@ docker compose up chromadb -d
 ollama serve
 ```
 
-#### 4. Verify Installation
+#### Verify Installation
 
 ```bash
 ragged --version
@@ -143,11 +203,123 @@ ragged --help
 ragged health  # Check service connectivity
 ```
 
-#### 5. Run Tests (Optional)
+---
+
+### Option 3: Development Installation (Recommended for Contributors)
+
+**Complete development environment** with modern tooling for contributors and developers.
+
+#### Prerequisites
+
+Install development tools:
 
 ```bash
+# macOS
+brew install direnv just
+
+# Linux (Debian/Ubuntu)
+sudo apt install direnv
+curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash
+
+# Windows
+# Install via Chocolatey or Scoop
+choco install just
+# direnv: Use WSL or Git Bash
+```
+
+#### Quick Setup
+
+```bash
+# 1. Clone repository
+git clone https://github.com/REPPL/ragged.git
+cd ragged
+
+# 2. Allow direnv (auto-activates venv when entering directory)
+direnv allow
+
+# 3. Complete setup (creates venv, installs deps, starts Docker)
+just setup
+
+# 4. Verify
+just version
+just health
+```
+
+#### What You Get
+
+**direnv**: Automatic venv activation
+- No need to manually activate virtual environment
+- Automatically loads when entering `ragged/` directory
+- Sets development environment variables
+- Status messages on activation
+
+**just**: Task runner with 40+ commands
+```bash
+just                    # List all commands
+just install            # Create venv and install
+just test               # Run tests
+just test-cov           # Run tests with coverage
+just docker-up          # Start Docker services
+just docker-down        # Stop Docker services
+just ragged --version   # Run ragged CLI (auto-activates venv)
+just lint               # Lint code
+just format             # Format code
+just docs-serve         # Serve documentation
+```
+
+#### Development Workflow
+
+```bash
+# Enter project directory (direnv auto-activates venv)
+cd ragged
+# ✓ ragged development environment activated
+
+# Run tests
+just test
+
+# Format and lint code
+just format
+just lint
+
+# Run ragged commands
+just ragged ingest pdf document.pdf
+just ragged query text "your question"
+
+# Start Docker services for API/UI development
+just docker-up
+
+# View logs
+just docker-logs
+
+# When done
+just docker-down
+```
+
+#### Manual Development Setup
+
+If you prefer not to use direnv/just:
+
+```bash
+# Clone and setup
+git clone https://github.com/REPPL/ragged.git
+cd ragged
+
+# Create virtual environment
+python3.12 -m venv .venv
+source .venv/bin/activate
+
+# Install with development dependencies
+pip install -e ".[dev]"
+
+# Run tests
 pytest
 pytest --cov=src  # With coverage
+
+# Start services
+docker compose up -d
+
+# Run ragged
+ragged --version
 ```
 
 ---

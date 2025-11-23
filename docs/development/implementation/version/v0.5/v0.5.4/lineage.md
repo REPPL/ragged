@@ -40,7 +40,7 @@ Documentation lineage for ragged v0.5.4, tracing the evolution from planning thr
 
 ## Roadmap Phase
 
-**Document:** [v0.5.4 Roadmap](../../../roadmap/version/v0.5/v0.5.4.md)
+**Document:** [v0.5.4 Roadmap](../../../../roadmap/version/v0.5/v0.5.4.md)
 
 **Planned Deliverables:**
 1. Gradio web application (~400 lines)
@@ -370,12 +370,12 @@ Documentation lineage for ragged v0.5.4, tracing the evolution from planning thr
 ## Related Documentation
 
 - [v0.5 Planning](../../../planning/version/v0.5/README.md)
-- [v0.5.4 Roadmap](../../../roadmap/version/v0.5/v0.5.4.md) - Original plan (Gradio UI)
+- [v0.5.4 Roadmap](../../../../roadmap/version/v0.5/v0.5.4.md) - Original plan (Gradio UI)
 - [v0.5.4 README](./README.md)
 - [v0.5.4 Summary](./summary.md)
 - [v0.5 Overview](../README.md)
-- [CLI Essentials Guide](../../../../guides/cli/essentials.md) - Rewritten guide
-- [Multi-Modal Workflow Tutorial](../../../../tutorials/multimodal-workflow.md) - New tutorial
+- [CLI Essentials Guide](../../../../../guides/cli/essentials.md) - Rewritten guide
+- [Multi-Modal Workflow Tutorial](../../../../../tutorials/multimodal-workflow.md) - New tutorial
 
 ---
 

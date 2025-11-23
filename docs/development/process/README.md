@@ -188,7 +188,7 @@ Documents **how to create** consistent development documentation.
 
 - **Curious about AI development?** Read [methodology/ai-assistance.md](./methodology/ai-assistance.md)
 - **Want to understand decisions?** Check ADRs in [../decisions/adrs/](../decisions/adrs/)
-- **See actual progress?** Read [devlog/daily/](./devlog/daily/)
+- **See actual progress?** Read [devlog/daily/](devlogs/daily)
 - **View planned features?** Check [../roadmap/version/](../roadmap/version/)
 
 ### For Contributors
@@ -209,7 +209,7 @@ Documents **how to create** consistent development documentation.
 
 - **"Why did we do X?"** → Check [../decisions/adrs/](../decisions/adrs/) (ADRs)
 - **"How long did Y take?"** → Check [time-logs/version/](./time-logs/version/)
-- **"What happened on date Z?"** → Check [devlog/daily/](./devlog/daily/)
+- **"What happened on date Z?"** → Check [devlog/daily/](devlogs/daily)
 - **"What's planned next?"** → Check [../roadmap/version/](../roadmap/version/)
 
 ---
@@ -301,7 +301,7 @@ When contributing to ragged:
 2. **Making architectural decisions?** Create ADR in [../decisions/adrs/](../decisions/adrs/)
 3. **Proposing major features?** Write RFC in [../decisions/rfcs/](../decisions/rfcs/)
 4. **Significant time investment?** Create time log in [time-logs/](./time-logs/)
-5. **Daily development?** Log in [devlog/daily/](./devlog/daily/)
+5. **Daily development?** Log in [devlog/daily/](devlogs/daily)
 
 See [Contributing Guide](../../../CONTRIBUTING.md) for details.
 

@@ -27,7 +27,7 @@ Development logs for v0.3.4a (when created).
 ## Related Documentation
 
 - [v0.3.4a Implementation](../../../../implementation/version/v0.3/v0.3.4a/) - Technical implementation record
-- [v0.3.4a Roadmap](../../../../roadmap/version/v0.3/v0.3.4a.md) - Original plan
+- [v0.3.4a Roadmap](../../../../roadmap/version/v0.3/v0.3.4/v0.3.4a.md) - Original plan
 - [Development Logs Overview](../../README.md) - All development logs
 
 ---

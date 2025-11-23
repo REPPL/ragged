@@ -12,7 +12,7 @@ Version 0.3 transforms ragged from a functional RAG system into a production-rea
 **Goal**: Achieve production-ready quality with comprehensive evaluation, advanced retrieval, and multi-modal support.
 
 **For detailed implementation plans, see:**
-- [Roadmap: v0.3.0](../../../roadmap/version/v0.3.0/) - Detailed feature specifications (234-260 hours)
+- [Roadmap: v0.3.0](../../../implementation/version/v0.3/v0.3.0) - Detailed feature specifications (234-260 hours)
 
 ---
 
@@ -340,7 +340,7 @@ While not part of v0.3's deliverables, this version includes preparatory work fo
 - [v0.2 Planning](../v0.2/) - Current version design
 - [v0.4 Planning](../v0.4/) - Knowledge graphs
 - [v0.5 Planning](../v0.5/) - Advanced memory
-- [Roadmap: v0.3.0](../../../roadmap/version/v0.3.0/) - Detailed implementation plan
+- [Roadmap: v0.3.0](../../../implementation/version/v0.3/v0.3.0) - Detailed implementation plan
 - [Architecture](../../architecture/) - System architecture
 - [CLI Enhancements Catalogue](../../interfaces/cli/enhancements.md) - Complete CLI specs
 

@@ -98,8 +98,8 @@ Detailed implementation summary for ragged v0.4.3 - LEANN Backend Integration (P
 
 - [v0.4.3 README](./README.md)
 - [v0.4.3 Lineage](./lineage.md)
-- [v0.4.3 Roadmap](../../../roadmap/version/v0.4/v0.4.3.md)
-- [ADR-0018: LEANN Integration](../../../decisions/adrs/0018-leann-integration-decision.md)
+- [v0.4.3 Roadmap](../../../../roadmap/version/v0.4/v0.4.3.md)
+- [ADR-0018: LEANN Integration](../../../../decisions/adrs/0018-leann-integration-decision.md)
 
 ---
 

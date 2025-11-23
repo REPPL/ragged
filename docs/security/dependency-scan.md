@@ -211,10 +211,10 @@ pip-audit --desc
 
 ## Related Documentation
 
-- [v0.3.3 Security Audit](./v0.3.3-security-audit.md)
-- [v0.3.4a Security Audit](./v0.3.4a-security-audit.md)
-- [v0.3.4b Security Audit](./v0.3.4b-security-audit.md)
-- [Security Testing Guide](./security-testing-guide.md) (to be created)
+- [v0.3.3 Security Audit](../audit/security/baseline/v0.3.3-security-audit.md)
+- [v0.3.4a Security Audit](../audit/security/baseline/v0.3.4a-security-audit.md)
+- [v0.3.4b Security Audit](../audit/security/baseline/v0.3.4b-security-audit.md)
+- Security Testing Guide (to be created)
 
 ---
 
@@ -226,8 +226,8 @@ pip-audit --desc
 
 ## Related Documentation
 
-- [Privacy-Safe Logging (ADR-0011)](../decisions/adrs/0011-privacy-safe-logging.md) - Security approach
-- [Local-Only Processing (ADR-0001)](../decisions/adrs/0001-local-only-processing.md) - Privacy foundation
+- [Privacy-Safe Logging (ADR-0011)](../development/decisions/adrs/0011-privacy-safe-logging.md) - Security approach
+- [Local-Only Processing (ADR-0001)](../development/decisions/adrs/0001-local-only-processing.md) - Privacy foundation
 - [Security Best Practices](./README.md) - Security overview
 
 ---

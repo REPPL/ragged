@@ -52,8 +52,8 @@ Documents capturing initial plans, scope, and structure:
 
 | Document | Description |
 |----------|-------------|
-| **[timeline.md](timeline.md)** | Development timeline, phase breakdown, time estimates |
-| **[phases.md](phases.md)** | Detailed phase-by-phase plan with goals and deliverables |
+| **[timeline.md](../../../process/devlogs/version/v0.1/timeline.md)** | Development timeline, phase breakdown, time estimates |
+| **[phases.md](../../../process/devlogs/version/v0.1/phases.md)** | Detailed phase-by-phase plan with goals and deliverables |
 
 ### 🔨 Implementation (What We Did)
 
@@ -61,8 +61,8 @@ Documents tracking actual development work and decisions:
 
 | Document | Description |
 |----------|-------------|
-| **[structure.md](structure.md)** | Project structure, organisation, and module layout |
-| **[decisions.md](decisions.md)** | Architecture Decision Records (why key choices were made) |
+| **[structure.md](../../../process/devlogs/version/v0.1/structure.md)** | Project structure, organisation, and module layout |
+| **[decisions.md](../../../process/devlogs/version/v0.1/decisions.md)** | Architecture Decision Records (why key choices were made) |
 | **[implementation-notes.md](implementation-notes.md)** | Technical implementation details, patterns, and solutions |
 
 ### 🔍 Retrospective (What We Learned)
@@ -72,8 +72,8 @@ Documents reflecting on the process, quality, and outcomes:
 | Document | Description |
 |----------|-------------|
 | **[testing.md](testing.md)** | Testing strategy, coverage reports, quality metrics |
-| **[lessons-learned.md](lessons-learned.md)** | Retrospective: what went well, what could improve |
-| **[CHANGELOG.md](CHANGELOG.md)** | Detailed changelog of all changes during v0.1 |
+| **[lessons-learned.md](../../../process/devlogs/version/v0.1/lessons-learned.md)** | Retrospective: what went well, what could improve |
+| **[CHANGELOG.md](../v0.5.6/CHANGELOG.md)** | Detailed changelog of all changes during v0.1 |
 | **[summary.md](summary.md)** | Executive summary and final version retrospective |
 | **[lineage.md](lineage.md)** | Complete traceability from planning → decisions → implementation |
 
@@ -81,11 +81,11 @@ Documents reflecting on the process, quality, and outcomes:
 
 ### 🎯 Current Status
 - **Status**: See "Implementation Status Summary" section above
-- **Structure**: [structure.md](structure.md) - Understand the codebase organisation
+- **Structure**: [structure.md](../../../process/devlogs/version/v0.1/structure.md) - Understand the codebase organisation
 
 ### 📚 Key Resources
-- **Decisions**: [decisions.md](decisions.md) - Why we made key architectural choices
-- **Lessons**: [lessons-learned.md](lessons-learned.md) - What to carry forward to v0.2
+- **Decisions**: [decisions.md](../../../process/devlogs/version/v0.1/decisions.md) - Why we made key architectural choices
+- **Lessons**: [lessons-learned.md](../../../process/devlogs/version/v0.1/lessons-learned.md) - What to carry forward to v0.2
 
 ### 📦 Archive
 - **[archive/](archive/)** - Original working documents created during development
@@ -119,21 +119,21 @@ This structure is designed to be reusable for future versions (v0.2, v0.3, etc.)
 - [v0.1 Implementation Plan](../../plans/v0.1-implementation-plan.md) - Original detailed implementation plan
 
 ### Templates Used
-- [devlog-template.md](../../../templates/devlog-template.md) - Daily development log template
-- [version-summary-template.md](../../../templates/version-summary-template.md) - Version summary template
-- [adr-template.md](../../../templates/adr-template.md) - Architecture Decision Record template
+- [devlog-template.md](../../../process/templates/devlog-template.md) - Daily development log template
+- [version-summary-template.md](../../../process/templates/version-summary-template.md) - Version summary template
+- [adr-template.md](../../../process/templates/adr-template.md) - Architecture Decision Record template
 
 ## How to Navigate
 
 ### If you want to...
 - **Understand what v0.1 accomplished**: Read [summary.md](summary.md)
 - **See current implementation status**: See "Implementation Status Summary" above
-- **Understand the codebase structure**: Review [structure.md](structure.md)
-- **Know why decisions were made**: Browse [decisions.md](decisions.md)
-- **Learn for next version**: Study [lessons-learned.md](lessons-learned.md)
+- **Understand the codebase structure**: Review [structure.md](../../../process/devlogs/version/v0.1/structure.md)
+- **Know why decisions were made**: Browse [decisions.md](../../../process/devlogs/version/v0.1/decisions.md)
+- **Learn for next version**: Study [lessons-learned.md](../../../process/devlogs/version/v0.1/lessons-learned.md)
 - **Track quality metrics**: Examine [testing.md](testing.md)
-- **See the development timeline**: Review [timeline.md](timeline.md)
-- **View what changed**: Read [CHANGELOG.md](CHANGELOG.md)
+- **See the development timeline**: Review [timeline.md](../../../process/devlogs/version/v0.1/timeline.md)
+- **View what changed**: Read [CHANGELOG.md](../v0.5.6/CHANGELOG.md)
 - **See the original working docs**: Explore [archive/](archive/)
 
 ## Contributing to This Log

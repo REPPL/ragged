@@ -80,7 +80,7 @@
    - `tests/chunking/test_hierarchical_chunker.py` (339 lines)
 
 3. **Security Audit**
-   - [v0.3.3 Security Audit](../../../../security/v0.3.3-security-audit.md)
+   - [v0.3.3 Security Audit](../../../../../audit/security/baseline/v0.3.3-security-audit.md)
    - Grade: B+
    - 3 HIGH, 5 MEDIUM issues identified
    - Remediation roadmap: 38 hours
@@ -202,7 +202,7 @@
 
 **Development Logs**: [v0.3.3 DevLog](../../../../process/devlogs/version/v0.3.3/summary.md)
 **Time Tracking**: [v0.3.3 Time Log](../../../../process/time-logs/version/v0.3.3/time-tracking.md)
-**Security Audit**: [v0.3.3 Security Audit](../../../../security/v0.3.3-security-audit.md)
+**Security Audit**: [v0.3.3 Security Audit](../../../../../audit/security/baseline/v0.3.3-security-audit.md)
 
 ---
 
@@ -211,7 +211,7 @@
 - **Planning**: [v0.3 Planning README](../../../../planning/version/v0.3/README.md)
 - **Roadmap**: [v0.3.3 Roadmap](../../../../roadmap/version/v0.3/v0.3.3.md)
 - **Implementation**: [v0.3.3 Summary](./summary.md)
-- **Security**: [v0.3.3 Security Audit](../../../../security/v0.3.3-security-audit.md)
+- **Security**: [v0.3.3 Security Audit](../../../../../audit/security/baseline/v0.3.3-security-audit.md)
 - **Feature Spec**: [Chunking Strategies Feature](../../../../roadmap/version/v0.3/features/chunking-strategies.md)
 
 ---

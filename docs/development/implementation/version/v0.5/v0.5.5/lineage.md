@@ -39,7 +39,7 @@ Documentation lineage for ragged v0.5.5, tracing the evolution from planning thr
 
 ## Roadmap Phase
 
-**Document:** [v0.5.5 Roadmap](../../../roadmap/version/v0.5/v0.5.5.md)
+**Document:** [v0.5.5 Roadmap](../../../../roadmap/version/v0.5/v0.5.5.md)
 
 **Planned Deliverables:**
 1. Integration test suite (400 lines)
@@ -397,7 +397,7 @@ Documentation lineage for ragged v0.5.5, tracing the evolution from planning thr
 ## Related Documentation
 
 - [v0.5 Planning](../../../planning/version/v0.5/README.md)
-- [v0.5.5 Roadmap](../../../roadmap/version/v0.5/v0.5.5.md) - Original plan (integration tests)
+- [v0.5.5 Roadmap](../../../../roadmap/version/v0.5/v0.5.5.md) - Original plan (integration tests)
 - [v0.5.5 README](./README.md)
 - [v0.5.5 Summary](./summary.md)
 - [v0.5 Overview](../README.md)

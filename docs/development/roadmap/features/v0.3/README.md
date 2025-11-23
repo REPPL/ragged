@@ -65,6 +65,6 @@ This directory contains detailed feature specifications for ragged v0.3.0, extra
 ## Related Documentation
 
 - [v0.3.0 Overview](../README.md) - Main roadmap
-- [CLI Enhancements Catalogue](../../../../planning/interfaces/cli/enhancements.md) - Detailed CLI specs
+- [CLI Enhancements Catalogue](../../../planning/interfaces/cli/enhancements.md) - Detailed CLI specs
 
 ---

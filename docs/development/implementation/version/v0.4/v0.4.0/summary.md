@@ -350,11 +350,11 @@ v0.4.0 establishes the security foundation for eventual third-party plugins:
 
 - [v0.4.0 Implementation README](./README.md) - Implementation overview
 - [v0.4.0 Lineage](./lineage.md) - Traceability from planning to implementation
-- [v0.4.0 Roadmap](../../../roadmap/version/v0.4/v0.4.0.md) - Detailed specifications
+- [v0.4.0 Roadmap](../../../../roadmap/version/v0.4/v0.4.0.md) - Detailed specifications
 - [v0.4 Planning](../../../planning/version/v0.4/README.md) - High-level design goals
-- [ADR-0016](../../../decisions/adrs/0016-memory-system-architecture.md) - Memory System Architecture
-- [ADR-0017](../../../decisions/adrs/0017-code-quality-standards.md) - Code Quality Standards
-- [ADR-0018](../../../decisions/adrs/0018-leann-integration-decision.md) - LEANN Integration Decision
+- [ADR-0016](../../../../decisions/adrs/0016-memory-system-architecture.md) - Memory System Architecture
+- [ADR-0017](../../../../decisions/adrs/0017-code-quality-standards.md) - Code Quality Standards
+- [ADR-0018](../../../../decisions/adrs/0018-leann-integration-decision.md) - LEANN Integration Decision
 
 ---
 

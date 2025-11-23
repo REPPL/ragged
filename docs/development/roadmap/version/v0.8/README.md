@@ -349,8 +349,8 @@ See: `roadmap/version/v0.9/README.md`
 
 - [Previous Version](../v0.7/README.md) - Enterprise foundation
 - [Next Version](../v0.9/README.md) - Web UI completion
-- [Planning](../../planning/version/v0.8/) - Design goals for v0.8 (if exists)
+- [Planning](.) - Design goals for v0.8 (if exists)
 - [Version Overview](../README.md) - Complete version comparison
-- [Projects to Learn From](../../../research/projects-to-learn-from.md) - RAGFlow multi-agent inspiration
+- [Projects to Learn From](../../../../research/projects-to-learn-from.md) - RAGFlow multi-agent inspiration
 
 ---

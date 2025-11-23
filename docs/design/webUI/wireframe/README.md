@@ -41,6 +41,6 @@ Wireframes should:
 ## Related Documentation
 
 - [Web UI Design](../README.md) - Overall web interface design
-- [Web UI Icons](../icons/README.md) - Icon design specifications
+- Web UI Icons - Icon design specifications
 
 ---

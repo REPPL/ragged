@@ -101,7 +101,7 @@ This methodology documentation provides:
 ## Related Documentation
 
 - [Time Logs](../time-logs/) - Actual time spent per version/feature
-- [Development Logs](../devlog/) - Daily development progress
+- Development Logs - Daily development progress
 - [Roadmap](../roadmap/) - Planned features and estimates
 - [Templates](../templates/) - Document templates
 

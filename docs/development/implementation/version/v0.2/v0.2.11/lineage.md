@@ -72,7 +72,7 @@
 
 ### 4. Process Documentation (HOW IT WAS BUILT)
 
-**Time Logs:** [Time Logs Directory](../../../process/time-logs/)
+**Time Logs:** [Time Logs Directory](../../../../process/time-logs)
 - Actual time: [To be documented in time logs]
 - Breakdown: [To be recorded]
 
@@ -123,11 +123,11 @@
 - [v0.2 Implementation Index](../README.md) - All v0.2.x implementations
 
 **Security Documentation:**
-- [Post-v0.2.10 Audit](../../../security/post-v0.2.10-audit.md) - Security foundation before privacy work
+- [Post-v0.2.10 Audit](../../../../../audit/security/baseline/post-v0.2.10-audit.md) - Security foundation before privacy work
 
 **Process Documentation:**
-- [DevLogs](../../../process/devlogs/) - Development narratives
-- [Time Logs](../../../process/time-logs/) - Actual effort tracking
+- [DevLogs](../../../../process/devlogs) - Development narratives
+- [Time Logs](../../../../process/time-logs) - Actual effort tracking
 
 **Related Implementations:**
 - [v0.2.10 Implementation](../v0.2.10/) - Security Hardening (previous)
