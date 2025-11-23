@@ -232,3 +232,4 @@ docker-data/
 .venv-*
 .mailmap
 DOCSTRING_AUDIT_FINDINGS.md
+chroma/

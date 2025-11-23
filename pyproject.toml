@@ -103,12 +103,13 @@ ragged = "ragged.main:cli"
 [tool.setuptools]
 # Map the ragged package to the src directory
 # This allows imports like "from ragged.storage import ..." to find /src/storage/
-package-dir = {"ragged" = "src"}
+package-dir = {ragged = "src"}
 
-[tool.setuptools.packages]
+[tool.setuptools.packages.find]
 # Explicitly list packages since the structure doesn't follow standard conventions
 # The ragged package is at src/, and subpackages are at src/storage/, src/embeddings/, etc.
-find = {where = ["src"], namespaces = false}
+where = ["src"]
+namespaces = false
 
 [tool.black]
 line-length = 100

@@ -12,19 +12,17 @@ from ragged.storage.schema import EmbeddingType
 @pytest.fixture
 def in_memory_client() -> ClientAPI:
     """Create in-memory ChromaDB client for testing."""
-    return chromadb.Client()
+    # Create a brand new ephemeral client for each test
+    # EphemeralClient provides complete isolation - no shared state
+    client = chromadb.EphemeralClient()
+    return client
 
 
 @pytest.fixture
 def dual_store(in_memory_client: ClientAPI) -> DualEmbeddingStore:
     """Create DualEmbeddingStore with in-memory client."""
-    store = DualEmbeddingStore(client=in_memory_client)
-    yield store
-    # Cleanup: delete collections after test
-    try:
-        in_memory_client.delete_collection("ragged_embeddings")
-    except:
-        pass
+    # Create a new store for each test with the fresh client
+    return DualEmbeddingStore(client=in_memory_client)
 
 
 class TestInitialisation:
@@ -54,16 +52,16 @@ class TestInitialisation:
         assert store.collection_name == "custom_docs"
 
     def test_collections_have_v05_schema(self, dual_store: DualEmbeddingStore):
-        """Test that created collections have v0.5 schema metadata."""
+        """Test that created collections have v0.5.7 schema metadata."""
         text_metadata = dual_store.text_collection.metadata
         vision_metadata = dual_store.vision_collection.metadata
 
         assert text_metadata is not None
-        assert text_metadata.get("schema_version") == "v0.5"
+        assert text_metadata.get("schema_version") == "v0.5.7"
         assert text_metadata.get("embedding_type") == "text"
 
         assert vision_metadata is not None
-        assert vision_metadata.get("schema_version") == "v0.5"
+        assert vision_metadata.get("schema_version") == "v0.5.7"
         assert vision_metadata.get("embedding_type") == "vision"
 
 
