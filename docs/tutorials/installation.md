@@ -28,42 +28,74 @@ For vision-based document understanding (ColPali), additional requirements apply
 
 ## Installation Methods
 
-### Option 1: Standard Installation (pip)
+### Option 1: Docker Installation (Recommended)
 
-#### 1. Create Virtual Environment
+The easiest way to get started with ragged is using Docker, which includes all services (API, UI, and ChromaDB).
+
+#### Prerequisites
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed and running
+- [Ollama](https://ollama.ai) installed (for LLM generation)
+- Git for cloning the repository
+
+#### Installation Steps
 
 ```bash
-# Create Python 3.12 virtual environment
-python3.12 -m venv ~/.ragged-venv
+# 1. Clone the repository
+git clone https://github.com/your-org/ragged.git
+cd ragged
 
-# Activate environment
-source ~/.ragged-venv/bin/activate  # Linux/macOS
-# or
-~/.ragged-venv/Scripts/activate  # Windows
+# 2. Create environment configuration
+cp .env.example .env
+# Edit .env if you need to customise ports or settings
+
+# 3. Start Ollama (in a separate terminal)
+ollama serve
+
+# 4. Build and start all containers
+docker compose up -d
+
+# 5. Verify containers are healthy
+docker compose ps
+
+# Expected output:
+# ragged-api      Up (healthy)
+# ragged-ui       Up (healthy)
+# chromadb        Up (healthy)
 ```
 
-#### 2. Install ragged
+#### Accessing Services
 
+- **API**: http://localhost:8000
+- **Web UI**: http://localhost:7860
+- **API Docs**: http://localhost:8000/docs
+- **ChromaDB**: http://localhost:8001
+
+#### Troubleshooting
+
+If containers fail to start:
 ```bash
-# Basic installation (text-only RAG)
-pip install ragged
+# View logs for all services
+docker compose logs
 
-# With development dependencies
-pip install ragged[dev]
-```
+# View specific service logs
+docker compose logs ragged-api
 
-#### 3. Verify Installation
-
-```bash
-ragged --version
-ragged --help
+# Rebuild containers (fixes most issues)
+docker compose down
+docker compose build --no-cache
+docker compose up -d
 ```
 
 ---
 
-### Option 2: From Source (Development)
+### Option 2: Local Installation (From Source)
 
-For contributors or those wanting the latest features:
+For contributors, local development, or CLI-only usage without Docker:
+
+**Note**: ragged is not yet published to PyPI. You must install from source.
+
+#### 1. Clone and Setup
 
 ```bash
 # Clone repository
@@ -72,13 +104,46 @@ cd ragged
 
 # Create and activate virtual environment
 python3.12 -m venv .venv
-source .venv/bin/activate
+source .venv/bin/activate  # Linux/macOS
+# .venv\Scripts\activate    # Windows
+```
 
-# Install in editable mode with dev dependencies
+#### 2. Install Package
+
+```bash
+# Install in editable mode with development dependencies
+# The -e flag allows source code changes without reinstalling
 pip install -e ".[dev]"
+```
 
-# Run tests to verify
+**Why `pip install -e .`?**
+- Modern Python packaging uses `pyproject.toml` (not `requirements.txt`)
+- `-e` installs in editable mode for development
+- This makes the `ragged` command available in your terminal
+
+#### 3. Start Required Services
+
+```bash
+# Start ChromaDB (via Docker)
+docker compose up chromadb -d
+
+# Start Ollama (in separate terminal)
+ollama serve
+```
+
+#### 4. Verify Installation
+
+```bash
+ragged --version
+ragged --help
+ragged health  # Check service connectivity
+```
+
+#### 5. Run Tests (Optional)
+
+```bash
 pytest
+pytest --cov=src  # With coverage
 ```
 
 ---
@@ -442,5 +507,5 @@ rm -rf ~/.cache/huggingface/hub/models--sentence-transformers*
 
 - [Docker Setup Guide](../guides/docker-setup.md) - Docker installation
 - [Configuration Guide](../guides/configuration.md) - Configuration options
-- [Quick Start Guide](./quickstart.md) - First steps after installation
+- [Complete Beginner's Guide](./complete-beginners-guide.md) - First steps after installation
 - [FAQ](../guides/faq.md) - Common questions
