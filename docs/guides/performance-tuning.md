@@ -10,12 +10,13 @@
 
 1. [Performance Targets](#performance-targets)
 2. [Benchmarking](#benchmarking)
-3. [Ingestion Optimisation](#ingestion-optimisation)
-4. [Query Optimisation](#query-optimisation)
-5. [Memory Optimisation](#memory-optimisation)
-6. [Vector Store Selection](#vector-store-selection)
-7. [Configuration Tuning](#configuration-tuning)
-8. [Profiling](#profiling)
+3. [GPU Benchmarking](#gpu-benchmarking)
+4. [Ingestion Optimisation](#ingestion-optimisation)
+5. [Query Optimisation](#query-optimisation)
+6. [Memory Optimisation](#memory-optimisation)
+7. [Vector Store Selection](#vector-store-selection)
+8. [Configuration Tuning](#configuration-tuning)
+9. [Profiling](#profiling)
 
 ---
 
@@ -88,6 +89,184 @@ Performance regressions are detected automatically in CI/CD:
 
 - **Hard limits** (CI fails): +10% query latency, +15% memory, -10% throughput
 - **Soft limits** (warning): +5-10% query latency, +10-15% memory, -5-10% throughput
+
+---
+
+## GPU Benchmarking
+
+### Vision Embedding Performance (v0.5.3+)
+
+For vision-based document understanding, GPU performance is critical. Vision embeddings are 10x+ slower on CPU than GPU.
+
+### Quick Benchmark
+
+```bash
+# Benchmark all available devices
+ragged gpu benchmark
+
+# Benchmark specific device
+ragged gpu benchmark --device cuda:0
+ragged gpu benchmark --device mps
+```
+
+**Example output:**
+
+```
+Vision Embedding Benchmark
+Pages: 10
+Batch size: adaptive
+
+Benchmarking cuda:0...
+  Total time: 2.45s
+  Throughput: 4.08 pages/sec
+  Latency: 245.0ms/page
+  Batch size: 8
+
+Benchmarking cpu...
+  Total time: 24.15s
+  Throughput: 0.41 pages/sec
+  Latency: 2415.0ms/page
+  Batch size: 1
+
+Summary:
+[1] cuda:0: 4.08 pages/sec (245.0ms/page)
+[2] cpu: 0.41 pages/sec (2415.0ms/page)
+
+cuda:0 is 9.9x faster than cpu
+```
+
+### Performance Targets (Vision RAG)
+
+**Vision Embedding (ColPali)**:
+- CUDA (8GB VRAM): 3-5 pages/sec
+- CUDA (16GB VRAM): 5-8 pages/sec
+- CUDA (24GB+ VRAM): 8-12 pages/sec
+- Apple Silicon (M1/M2): 2-4 pages/sec
+- CPU (fallback): 0.3-0.5 pages/sec
+
+**Total Ingestion Time** (with vision):
+- Small document (5 pages): 2-5 seconds (GPU), 50-100 seconds (CPU)
+- Medium document (20 pages): 5-10 seconds (GPU), 200-400 seconds (CPU)
+- Large document (100 pages): 20-40 seconds (GPU), 1000-2000 seconds (CPU)
+
+### Optimising Vision Performance
+
+**1. Use GPU acceleration**:
+```bash
+# Verify GPU detected
+ragged gpu list
+
+# Check GPU memory available
+ragged gpu info
+```
+
+**2. Find optimal batch size**:
+```bash
+# Test different batch sizes
+ragged gpu benchmark --batch-size 4
+ragged gpu benchmark --batch-size 8
+ragged gpu benchmark --batch-size 16
+
+# Use batch size with best throughput and <90% memory
+```
+
+**Guidelines**:
+- 4GB VRAM: batch size 1-2
+- 8GB VRAM: batch size 4-6
+- 16GB VRAM: batch size 8-12
+- 24GB+ VRAM: batch size 16-32
+
+**3. Monitor memory during ingestion**:
+```bash
+# Terminal 1: Monitor GPU
+ragged gpu stats --watch
+
+# Terminal 2: Ingest documents
+ragged ingest batch ~/Documents/ --vision --vision-batch-size 8
+```
+
+Watch for:
+- Memory utilisation >95%: Reduce batch size
+- Memory utilisation <50%: Increase batch size for better performance
+
+**4. Enable adaptive batching** (default):
+```bash
+# Automatically finds optimal batch size
+ragged ingest pdf document.pdf --vision
+
+# Adaptive batching:
+# - Detects available VRAM
+# - Starts conservatively
+# - Monitors for OOM errors
+# - Adjusts dynamically
+```
+
+**5. Multi-GPU selection**:
+```bash
+# List all GPUs
+ragged gpu list
+
+# Benchmark to find fastest
+ragged gpu benchmark
+
+# Use fastest GPU
+ragged ingest pdf document.pdf --vision --device cuda:0
+```
+
+### Vision Benchmarking Best Practices
+
+**Establish baseline**:
+```bash
+# Run comprehensive benchmark
+ragged gpu benchmark --num-pages 50 > baseline_vision.txt
+
+# Save for future comparison
+cp baseline_vision.txt benchmarks/vision_$(date +%Y%m%d).txt
+```
+
+**Compare after changes**:
+```bash
+# After driver update, PyTorch upgrade, or configuration changes
+ragged gpu benchmark --num-pages 50 > new_vision.txt
+
+# Compare
+diff baseline_vision.txt new_vision.txt
+```
+
+**Test with real documents**:
+```bash
+# Benchmark uses synthetic images - test with actual PDF
+time ragged ingest pdf sample_document.pdf --vision --debug
+
+# Compare against benchmark estimate:
+# Benchmark: 5 pages/sec
+# Document: 20 pages
+# Expected time: 20 / 5 = 4 seconds
+# Actual time: 5-6 seconds (includes PDF rendering overhead)
+```
+
+### Performance Regression Detection
+
+Monitor vision performance over time:
+
+```bash
+# Automated benchmark tracking
+ragged gpu benchmark --num-pages 20 --batch-size 8 > benchmarks/vision_$(date +%Y%m%d).json
+
+# Weekly comparison
+python scripts/compare_benchmarks.py \
+    benchmarks/vision_baseline.json \
+    benchmarks/vision_$(date +%Y%m%d).json
+```
+
+**Acceptable ranges**:
+- Throughput: ±5% (normal variation)
+- Memory: ±10% (depends on available VRAM)
+
+**Warning signs**:
+- Throughput drops >20%: Check GPU drivers, thermal throttling
+- Memory increases >30%: Possible memory leak
+- Batch size decreases: Available VRAM reduced (other processes using GPU)
 
 ---
 
@@ -406,6 +585,9 @@ python scripts/compare_benchmarks.py \
 
 ## Related Documentation
 
+- [GPU Management Guide](./gpu-management.md) - GPU commands and workflows
+- [GPU Troubleshooting](./troubleshooting/gpu-issues.md) - GPU-related issues
+- [Installation Guide: GPU Setup](../tutorials/installation.md#gpu-setup-for-vision-rag-v050) - GPU driver installation
 - [VectorStore Backend Comparison](../development/implementation/version/v0.4/v0.4.3/README.md) - LEANN vs ChromaDB details
 - [Performance Baseline](../../benchmarks/v0.4.4-baseline.json) - v0.4.4 baseline metrics
 - [Architecture Overview](../explanation/architecture-overview.md) - System architecture
