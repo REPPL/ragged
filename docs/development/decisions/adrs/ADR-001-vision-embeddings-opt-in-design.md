@@ -2,12 +2,6 @@
 
 **Status:** Accepted
 
-**Date**: 2025-11-23
-
-**Decision Makers**: ragged development team
-
-**AI Assistance**: Significant - Claude Code used for architecture analysis and technical investigation
-
 ---
 
 ## Context and Problem Statement

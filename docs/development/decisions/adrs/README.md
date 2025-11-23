@@ -33,9 +33,15 @@ Each ADR follows the template at [adr-template.md](../../process/templates/adr-t
 
 ## Accepted ADRs
 
-| ID | Title | Date | Status |
-|----|-------|------|--------|
-| [ADR-001](./ADR-001-vision-embeddings-opt-in-design.md) | Vision Embeddings Opt-In Design | 2025-11-23 | Accepted |
+| ID | Title | Status |
+|----|-------|--------|
+| [ADR-001](./ADR-001-vision-embeddings-opt-in-design.md) | Vision Embeddings Opt-In Design | Accepted |
+| [ADR-002](./ADR-002-chromadb-as-vector-database.md) | ChromaDB as Vector Database | Accepted |
+| [ADR-003](./ADR-003-privacy-first-local-only-design.md) | Privacy-First Local-Only Design Philosophy | Accepted |
+| [ADR-004](./ADR-004-gpl-3-license-choice.md) | GPL-3.0 License Choice | Accepted |
+| [ADR-005](./ADR-005-dual-embedding-storage-architecture.md) | Dual Embedding Storage Architecture | Accepted |
+| [ADR-006](./ADR-006-ollama-for-llm-generation.md) | Ollama for LLM Generation | Accepted |
+| [ADR-007](./ADR-007-gradio-for-web-ui.md) | Gradio for Web UI | Accepted |
 
 ---
 
