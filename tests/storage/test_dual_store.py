@@ -18,7 +18,13 @@ def in_memory_client() -> ClientAPI:
 @pytest.fixture
 def dual_store(in_memory_client: ClientAPI) -> DualEmbeddingStore:
     """Create DualEmbeddingStore with in-memory client."""
-    return DualEmbeddingStore(client=in_memory_client)
+    store = DualEmbeddingStore(client=in_memory_client)
+    yield store
+    # Cleanup: delete collections after test
+    try:
+        in_memory_client.delete_collection("ragged_embeddings")
+    except:
+        pass
 
 
 class TestInitialisation:

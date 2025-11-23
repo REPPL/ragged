@@ -108,7 +108,7 @@ class TestEmbedderCaching:
         """Clear cache before each test."""
         clear_embedder_cache()
         # Reset warm-up flag
-        import src.embeddings.factory as factory
+        import ragged.embeddings.factory as factory
         factory._warmup_started = False
 
     def test_caching_disabled_creates_new_instance_each_time(self):
@@ -358,8 +358,8 @@ class TestEmbedderCaching:
                 warmup_embedder_cache()
                 warmup_embedder_cache()
 
-                # Give background thread time
-                time.sleep(0.1)
+                # Give background thread time to complete
+                time.sleep(0.5)
 
                 # Should only create once
                 mock_create.assert_called_once()
