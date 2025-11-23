@@ -2,8 +2,6 @@
 
 **Purpose:** Validate hybrid text+vision query functionality
 
-**Last Updated:** 2025-11-23
-
 ---
 
 ## Overview

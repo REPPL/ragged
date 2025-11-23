@@ -2,8 +2,6 @@
 
 **Purpose:** Manual test execution results for v0.5.6 multi-modal features
 
-**Last Updated:** 2025-11-23
-
 ---
 
 ## Overview

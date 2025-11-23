@@ -2,8 +2,6 @@
 
 **Purpose:** Validate functionality across operating systems and hardware
 
-**Last Updated:** 2025-11-23
-
 ---
 
 ## Overview

@@ -2,8 +2,6 @@
 
 **Purpose:** Validate PDF ingestion and vision embedding functionality
 
-**Last Updated:** 2025-11-23
-
 ---
 
 ## Overview

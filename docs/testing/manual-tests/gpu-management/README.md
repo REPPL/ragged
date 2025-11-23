@@ -2,8 +2,6 @@
 
 **Purpose:** Validate GPU detection, optimization, and monitoring
 
-**Last Updated:** 2025-11-23
-
 ---
 
 ## Overview
