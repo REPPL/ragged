@@ -221,6 +221,64 @@ class Settings(BaseSettings):
         description="Maximum image memory footprint in MB (DoS protection)"
     )
 
+    # Scan Processing Configuration (v0.4.9: Messy Scans to Perfect PDFs)
+    scan_ocr_engine: Literal["auto", "easyocr", "paddleocr"] = Field(
+        default="auto",
+        description="OCR engine for scan processing: 'auto' (quality-based), 'easyocr' (fast), 'paddleocr' (accurate)"
+    )
+    scan_ocr_language: str = Field(
+        default="eng",
+        description="OCR language code (ISO 639-2/3, e.g., 'eng', 'fra', 'deu')"
+    )
+    scan_ocr_gpu: bool = Field(
+        default=False,
+        description="Prefer GPU for OCR if available (faster but requires CUDA or Metal)"
+    )
+    scan_force_ocr: bool = Field(
+        default=False,
+        description="Force OCR even if text layer exists in PDF"
+    )
+    scan_pdf_dpi: int = Field(
+        default=300,
+        gt=0,
+        le=600,
+        description="DPI for PDF to image conversion (300 recommended, higher=slower/larger)"
+    )
+    scan_enable_preprocessing: bool = Field(
+        default=True,
+        description="Enable image preprocessing (deskew, denoise, contrast adjustment)"
+    )
+    scan_auto_reorder: bool = Field(
+        default=True,
+        description="Automatically reorder pages based on detected page numbers"
+    )
+    scan_export_markdown: bool = Field(
+        default=True,
+        description="Automatically export processed PDFs to markdown"
+    )
+    scan_keep_originals: bool = Field(
+        default=True,
+        description="Keep backup copies of original scanned files"
+    )
+    scan_output_dir: Path | None = Field(
+        default=None,
+        description="Output directory for processed scans (None = ~/.ragged/documents)"
+    )
+    scan_naming_convention: Literal["title-author-year", "hash", "original"] = Field(
+        default="title-author-year",
+        description="File naming convention: 'title-author-year' (semantic), 'hash' (content-based), 'original' (keep original name)"
+    )
+    scan_metadata_titlepage_pages: int = Field(
+        default=3,
+        gt=0,
+        le=10,
+        description="Number of pages to analyse for metadata extraction (title, author, year)"
+    )
+    scan_enable_lineage_tracking: bool = Field(
+        default=True,
+        description="Track processing lineage in JSONL log file"
+    )
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
