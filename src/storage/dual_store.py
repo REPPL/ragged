@@ -598,3 +598,52 @@ class DualEmbeddingStore:
             "documents": [result_documents],
             "rrf_scores": [result_scores],  # Additional field for debugging
         }
+
+    def count_vision_embeddings(self) -> int:
+        """
+        Count total vision embeddings in storage.
+
+        Returns:
+            Number of vision embeddings
+
+        Example:
+            >>> count = store.count_vision_embeddings()
+            >>> count
+            42
+        """
+        return self.vision_collection.count()
+
+    def get_all_vision_documents(self) -> dict[str, Any]:
+        """
+        Retrieve all vision embeddings.
+
+        Returns:
+            Dictionary with all vision embeddings, metadatas, and IDs
+
+        Example:
+            >>> results = store.get_all_vision_documents()
+            >>> len(results["ids"])
+            42
+        """
+        return self.vision_collection.get(include=["metadatas", "embeddings"])
+
+    def delete_vision_embeddings(self, ids: list[str]) -> int:
+        """
+        Delete specific vision embeddings by ID.
+
+        Args:
+            ids: List of embedding IDs to delete
+
+        Returns:
+            Number of embeddings deleted
+
+        Example:
+            >>> deleted = store.delete_vision_embeddings(["id1", "id2"])
+            >>> deleted
+            2
+        """
+        if not ids:
+            return 0
+
+        self.vision_collection.delete(ids=ids)
+        return len(ids)

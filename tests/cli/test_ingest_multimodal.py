@@ -38,35 +38,31 @@ class TestIngestPdfCommand:
         assert result.exit_code != 0
         assert "Missing argument" in result.output or "required" in result.output.lower()
 
-    @patch("ragged.cli.commands.ingest.PDFProcessor")
-    @patch("ragged.cli.commands.ingest.VectorStore")
-    def test_ingest_pdf_basic(self, mock_store, mock_processor, cli_runner, sample_pdf):
+    @patch("ragged.storage.vector_store.VectorStore")
+    @patch("ragged.ingestion.loaders.load_document")
+    def test_ingest_pdf_basic(self, mock_loader, mock_store, cli_runner, sample_pdf):
         """Test basic PDF ingestion without vision."""
-        # Mock processor
-        mock_proc = MagicMock()
-        mock_proc.process.return_value = {"chunks": [{"text": "sample"}], "metadata": {}}
-        mock_processor.return_value = mock_proc
+        # Mock loader
+        mock_loader.return_value = {"text": "sample document", "metadata": {}}
 
         result = cli_runner.invoke(ingest, ["pdf", str(sample_pdf)])
 
         # Should succeed or gracefully handle missing services
         assert result.exit_code in [0, 1]
 
-    @patch("ragged.cli.commands.ingest.ColPaliEmbedder")
-    @patch("ragged.cli.commands.ingest.PDFProcessor")
-    @patch("ragged.cli.commands.ingest.DualVectorStore")
-    def test_ingest_pdf_with_vision(self, mock_store, mock_processor, mock_embedder,
+    @patch("ragged.embeddings.colpali_embedder.ColPaliEmbedder")
+    @patch("ragged.storage.dual_store.DualEmbeddingStore")
+    @patch("ragged.ingestion.loaders.load_document")
+    def test_ingest_pdf_with_vision(self, mock_loader, mock_store, mock_embedder,
                                     cli_runner, sample_pdf):
         """Test PDF ingestion with vision embeddings."""
+        # Mock loader
+        mock_loader.return_value = {"text": "sample", "metadata": {}}
+
         # Mock embedder
         mock_emb = MagicMock()
-        mock_emb.embed_pdf.return_value = [[0.1] * 128]  # Sample vision embedding
+        mock_emb.embed_pdf.return_value = [[0.1] * 128]
         mock_embedder.return_value = mock_emb
-
-        # Mock processor
-        mock_proc = MagicMock()
-        mock_proc.process.return_value = {"chunks": [{"text": "sample"}], "metadata": {}}
-        mock_processor.return_value = mock_proc
 
         result = cli_runner.invoke(ingest, ["pdf", str(sample_pdf), "--vision"])
 
@@ -129,7 +125,7 @@ class TestIngestStatusCommand:
         assert result.exit_code == 0
         assert "status" in result.output.lower() or "statistics" in result.output.lower()
 
-    @patch("ragged.cli.commands.ingest.VectorStore")
+    @patch("ragged.storage.vector_store.VectorStore")
     def test_ingest_status_basic(self, mock_store, cli_runner):
         """Test basic status display."""
         # Mock store statistics

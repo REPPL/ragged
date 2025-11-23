@@ -254,7 +254,7 @@ def pdf(
 
                 # Import vision components
                 from ragged.embeddings.colpali_embedder import ColPaliEmbedder
-                from ragged.storage.dual_storage import DualVectorStore
+                from ragged.storage.dual_store import DualEmbeddingStore
 
                 # Initialize vision embedder with GPU management
                 vision_embedder = ColPaliEmbedder(
@@ -280,7 +280,7 @@ def pdf(
                 vision_embeddings = vision_embedder.embed_batch_images(images)
 
                 # Store vision embeddings
-                dual_store = DualVectorStore()
+                dual_store = DualEmbeddingStore()
                 dual_store.add_vision_embeddings(
                     document_id=document.document_id,
                     page_embeddings=vision_embeddings,
@@ -506,12 +506,12 @@ def batch(
                 if vision and vision_embedder:
                     from pdf2image import convert_from_path
 
-                    from ragged.storage.dual_storage import DualVectorStore
+                    from ragged.storage.dual_store import DualEmbeddingStore
 
                     images = convert_from_path(str(file_path))
                     vision_embeddings = vision_embedder.embed_batch_images(images)
 
-                    dual_store = DualVectorStore()
+                    dual_store = DualEmbeddingStore()
                     dual_store.add_vision_embeddings(
                         document_id=document.document_id,
                         page_embeddings=vision_embeddings,
@@ -548,7 +548,7 @@ def status() -> None:
     Examples:
         ragged ingest status
     """
-    from ragged.storage.dual_storage import DualVectorStore
+    from ragged.storage.dual_store import DualEmbeddingStore
     from ragged.storage.vector_store import VectorStore
 
     console.print("[bold blue]Ingestion Status:[/bold blue]")
@@ -572,7 +572,7 @@ def status() -> None:
 
         # Vision collection statistics (if exists)
         try:
-            dual_store = DualVectorStore()
+            dual_store = DualEmbeddingStore()
             vision_count = dual_store.count_vision_embeddings()
 
             if vision_count > 0:

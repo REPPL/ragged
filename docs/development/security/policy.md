@@ -2,8 +2,6 @@
 
 **Project:** ragged - Privacy-first Retrieval-Augmented Generation system
 
-**License:** GPL-3.0
-
 ---
 
 ## Executive Summary

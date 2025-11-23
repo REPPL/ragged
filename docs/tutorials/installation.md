@@ -444,7 +444,3 @@ rm -rf ~/.cache/huggingface/hub/models--sentence-transformers*
 - [Configuration Guide](../guides/configuration.md) - Configuration options
 - [Quick Start Guide](./quickstart.md) - First steps after installation
 - [FAQ](../guides/faq.md) - Common questions
-
----
-
-**Last Updated:** 2025-11-22 (v0.5.0)

@@ -22,7 +22,7 @@ class TestStorageInfoCommand:
         assert result.exit_code == 0
         assert "info" in result.output.lower() or "statistics" in result.output.lower()
 
-    @patch("ragged.cli.commands.storage.DualVectorStore")
+    @patch("ragged.storage.dual_store.DualEmbeddingStore")
     def test_storage_info_basic(self, mock_store, cli_runner):
         """Test basic storage info display."""
         # Mock dual store
@@ -36,7 +36,7 @@ class TestStorageInfoCommand:
         # Should succeed or handle missing storage gracefully
         assert result.exit_code in [0, 1]
 
-    @patch("ragged.cli.commands.storage.DualVectorStore")
+    @patch("ragged.storage.dual_store.DualEmbeddingStore")
     def test_storage_info_shows_counts(self, mock_store, cli_runner):
         """Test that info shows document and chunk counts."""
         mock_ds = MagicMock()
@@ -60,8 +60,8 @@ class TestStorageMigrateCommand:
         assert "migrate" in result.output.lower()
         assert "--dry-run" in result.output or "dry" in result.output.lower()
 
-    @patch("ragged.cli.commands.storage.DualVectorStore")
-    @patch("ragged.cli.commands.storage.VectorStore")
+    @patch("ragged.storage.dual_store.DualEmbeddingStore")
+    @patch("ragged.storage.vector_store.VectorStore")
     def test_storage_migrate_dry_run(self, mock_old_store, mock_new_store, cli_runner):
         """Test migration dry run."""
         mock_old = MagicMock()
@@ -75,16 +75,16 @@ class TestStorageMigrateCommand:
         # Should complete dry run
         assert result.exit_code in [0, 1]
 
-    @patch("ragged.cli.commands.storage.DualVectorStore")
-    @patch("ragged.cli.commands.storage.VectorStore")
+    @patch("ragged.storage.dual_store.DualEmbeddingStore")
+    @patch("ragged.storage.vector_store.VectorStore")
     def test_storage_migrate_with_backup(self, mock_old_store, mock_new_store, cli_runner):
         """Test migration with backup option."""
         result = cli_runner.invoke(storage, ["migrate", "--backup", "--dry-run"])
         # Should accept backup flag
         assert result.exit_code in [0, 1]
 
-    @patch("ragged.cli.commands.storage.DualVectorStore")
-    @patch("ragged.cli.commands.storage.VectorStore")
+    @patch("ragged.storage.dual_store.DualEmbeddingStore")
+    @patch("ragged.storage.vector_store.VectorStore")
     def test_storage_migrate_actual(self, mock_old_store, mock_new_store, cli_runner):
         """Test actual migration (not dry run)."""
         mock_old = MagicMock()
@@ -109,7 +109,7 @@ class TestStorageVacuumCommand:
         assert result.exit_code == 0
         assert "vacuum" in result.output.lower() or "clean" in result.output.lower()
 
-    @patch("ragged.cli.commands.storage.DualVectorStore")
+    @patch("ragged.storage.dual_store.DualEmbeddingStore")
     def test_storage_vacuum_dry_run(self, mock_store, cli_runner):
         """Test vacuum dry run."""
         mock_ds = MagicMock()
@@ -119,7 +119,7 @@ class TestStorageVacuumCommand:
         result = cli_runner.invoke(storage, ["vacuum", "--dry-run"])
         assert result.exit_code in [0, 1]
 
-    @patch("ragged.cli.commands.storage.DualVectorStore")
+    @patch("ragged.storage.dual_store.DualEmbeddingStore")
     def test_storage_vacuum_actual(self, mock_store, cli_runner):
         """Test actual vacuum operation."""
         mock_ds = MagicMock()
@@ -130,7 +130,7 @@ class TestStorageVacuumCommand:
         result = cli_runner.invoke(storage, ["vacuum"])
         assert result.exit_code in [0, 1]
 
-    @patch("ragged.cli.commands.storage.DualVectorStore")
+    @patch("ragged.storage.dual_store.DualEmbeddingStore")
     def test_storage_vacuum_shows_count(self, mock_store, cli_runner):
         """Test that vacuum shows orphaned count."""
         mock_ds = MagicMock()
@@ -163,7 +163,7 @@ class TestStorageGroupCommand:
 class TestStorageErrorHandling:
     """Test storage command error handling."""
 
-    @patch("ragged.cli.commands.storage.DualVectorStore")
+    @patch("ragged.storage.dual_store.DualEmbeddingStore")
     def test_storage_info_connection_error(self, mock_store, cli_runner):
         """Test info when storage connection fails."""
         mock_store.side_effect = ConnectionError("Cannot connect to ChromaDB")
@@ -172,7 +172,7 @@ class TestStorageErrorHandling:
         # Should handle error gracefully
         assert result.exit_code in [0, 1]
 
-    @patch("ragged.cli.commands.storage.DualVectorStore")
+    @patch("ragged.storage.dual_store.DualEmbeddingStore")
     def test_storage_migrate_no_data(self, mock_store, cli_runner):
         """Test migrate when no data to migrate."""
         mock_ds = MagicMock()
@@ -183,7 +183,7 @@ class TestStorageErrorHandling:
         # Should handle empty state
         assert result.exit_code in [0, 1]
 
-    @patch("ragged.cli.commands.storage.DualVectorStore")
+    @patch("ragged.storage.dual_store.DualEmbeddingStore")
     def test_storage_vacuum_no_orphans(self, mock_store, cli_runner):
         """Test vacuum when no orphaned embeddings."""
         mock_ds = MagicMock()
@@ -198,7 +198,7 @@ class TestStorageErrorHandling:
 class TestStorageIntegration:
     """Test storage command integration scenarios."""
 
-    @patch("ragged.cli.commands.storage.DualVectorStore")
+    @patch("ragged.storage.dual_store.DualEmbeddingStore")
     def test_storage_info_after_ingest(self, mock_store, cli_runner):
         """Test that info reflects ingested documents."""
         mock_ds = MagicMock()
@@ -210,8 +210,8 @@ class TestStorageIntegration:
         result = cli_runner.invoke(storage, ["info"])
         assert result.exit_code in [0, 1]
 
-    @patch("ragged.cli.commands.storage.VectorStore")
-    @patch("ragged.cli.commands.storage.DualVectorStore")
+    @patch("ragged.storage.vector_store.VectorStore")
+    @patch("ragged.storage.dual_store.DualEmbeddingStore")
     def test_storage_migrate_preserves_data(self, mock_new, mock_old, cli_runner):
         """Test that migration preserves document count."""
         # This is a conceptual test - real migration would be more complex

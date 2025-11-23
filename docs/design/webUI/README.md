@@ -198,11 +198,11 @@ Sizes:
 1. **Open Excalidraw wireframe** for quick layout changes
 2. **Export to SVG** when structure is stable
 3. **Import SVG to Penpot** for detailed design work
-4. **Refine colors, spacing, states** in Penpot
+4. **Refine colours, spacing, states** in Penpot
 5. **Export final components** for development
 
 ### For Development:
-1. **Reference webUI.svg** for exact dimensions, colors, typography
+1. **Reference webUI.svg** for exact dimensions, colours, typography
 2. **Extract component specs** from this README
 3. **Use colour palette** as CSS variables
 4. **Implement responsive breakpoints** (sidebar collapse at 768px)
@@ -240,6 +240,4 @@ Sizes:
 
 ---
 
-**Last Updated:** 2024-11-22
-**Design Tool:** Excalidraw (wireframe) → SVG → Penpot (high-fidelity)
 **Status:** Production mockup ready for implementation

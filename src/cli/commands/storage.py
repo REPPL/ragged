@@ -55,7 +55,7 @@ def info(verbose: bool) -> None:
         ragged storage info
         ragged storage info --verbose
     """
-    from ragged.storage.dual_storage import DualVectorStore
+    from ragged.storage.dual_store import DualEmbeddingStore
     from ragged.storage.vector_store import VectorStore
 
     try:
@@ -91,7 +91,7 @@ def info(verbose: bool) -> None:
         console.print("[bold]Vision Collection:[/bold]")
 
         try:
-            dual_store = DualVectorStore()
+            dual_store = DualEmbeddingStore()
             vision_count = dual_store.count_vision_embeddings()
 
             if vision_count > 0:
@@ -189,7 +189,7 @@ def migrate(dry_run: bool, backup: bool) -> None:
         ragged storage migrate
         ragged storage migrate --no-backup
     """
-    from ragged.storage.dual_storage import DualVectorStore
+    from ragged.storage.dual_store import DualEmbeddingStore
     from ragged.storage.vector_store import VectorStore
 
     try:
@@ -209,7 +209,7 @@ def migrate(dry_run: bool, backup: bool) -> None:
 
         # Check if vision collection exists
         try:
-            dual_store = DualVectorStore()
+            dual_store = DualEmbeddingStore()
             vision_count = dual_store.count_vision_embeddings()
             console.print(f"  Vision embeddings: {vision_count}")
 
@@ -262,7 +262,7 @@ def migrate(dry_run: bool, backup: bool) -> None:
 
             # Create vision collection
             progress.update(task, description="Creating vision collection...", advance=30)
-            dual_store = DualVectorStore()
+            dual_store = DualEmbeddingStore()
 
             # Verify text embeddings still accessible
             progress.update(task, description="Verifying text embeddings...", advance=30)
@@ -322,7 +322,7 @@ def vacuum(dry_run: bool, orphaned_only: bool) -> None:
         ragged storage vacuum --dry-run
         ragged storage vacuum
     """
-    from ragged.storage.dual_storage import DualVectorStore
+    from ragged.storage.dual_store import DualEmbeddingStore
     from ragged.storage.vector_store import VectorStore
 
     try:
@@ -365,7 +365,7 @@ def vacuum(dry_run: bool, orphaned_only: bool) -> None:
         console.print("[bold]Scanning vision embeddings...[/bold]")
 
         try:
-            dual_store = DualVectorStore()
+            dual_store = DualEmbeddingStore()
             all_vision = dual_store.get_all_vision_documents()
 
             if all_vision and all_vision.get("ids"):

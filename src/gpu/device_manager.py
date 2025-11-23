@@ -97,6 +97,22 @@ class DeviceManager:
             f"Available devices: {[str(d) for d in self._available_devices]}"
         )
 
+    @property
+    def available_devices(self) -> list[DeviceInfo]:
+        """
+        Get list of available compute devices.
+
+        Returns:
+            List of detected devices
+
+        Example:
+            >>> manager = DeviceManager()
+            >>> devices = manager.available_devices
+            >>> len(devices)
+            2
+        """
+        return self._available_devices
+
     def _check_torch_available(self) -> bool:
         """
         Check if PyTorch is available.

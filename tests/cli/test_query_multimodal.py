@@ -38,7 +38,7 @@ class TestQueryTextCommand:
         result = cli_runner.invoke(query_group, ["text"])
         assert result.exit_code != 0
 
-    @patch("ragged.cli.commands.query_multimodal.VisionRetriever")
+    @patch("ragged.retrieval.vision_retriever.VisionRetriever")
     def test_query_text_basic(self, mock_retriever, cli_runner):
         """Test basic text query."""
         # Mock retriever
@@ -52,7 +52,7 @@ class TestQueryTextCommand:
         result = cli_runner.invoke(query_group, ["text", "test query"])
         assert result.exit_code in [0, 1]
 
-    @patch("ragged.cli.commands.query_multimodal.VisionRetriever")
+    @patch("ragged.retrieval.vision_retriever.VisionRetriever")
     def test_query_text_with_boost_diagrams(self, mock_retriever, cli_runner):
         """Test text query with diagram boosting."""
         mock_ret = MagicMock()
@@ -62,7 +62,7 @@ class TestQueryTextCommand:
         result = cli_runner.invoke(query_group, ["text", "test", "--boost-diagrams"])
         assert result.exit_code in [0, 1]
 
-    @patch("ragged.cli.commands.query_multimodal.VisionRetriever")
+    @patch("ragged.retrieval.vision_retriever.VisionRetriever")
     def test_query_text_with_boost_tables(self, mock_retriever, cli_runner):
         """Test text query with table boosting."""
         mock_ret = MagicMock()
@@ -72,7 +72,7 @@ class TestQueryTextCommand:
         result = cli_runner.invoke(query_group, ["text", "test", "--boost-tables"])
         assert result.exit_code in [0, 1]
 
-    @patch("ragged.cli.commands.query_multimodal.VisionRetriever")
+    @patch("ragged.retrieval.vision_retriever.VisionRetriever")
     def test_query_text_num_results(self, mock_retriever, cli_runner):
         """Test text query with custom result count."""
         mock_ret = MagicMock()
@@ -97,7 +97,7 @@ class TestQueryImageCommand:
         result = cli_runner.invoke(query_group, ["image"])
         assert result.exit_code != 0
 
-    @patch("ragged.cli.commands.query_multimodal.VisionRetriever")
+    @patch("ragged.retrieval.vision_retriever.VisionRetriever")
     def test_query_image_basic(self, mock_retriever, cli_runner, sample_image):
         """Test basic image query."""
         mock_ret = MagicMock()
@@ -110,7 +110,7 @@ class TestQueryImageCommand:
         result = cli_runner.invoke(query_group, ["image", str(sample_image)])
         assert result.exit_code in [0, 1]
 
-    @patch("ragged.cli.commands.query_multimodal.VisionRetriever")
+    @patch("ragged.retrieval.vision_retriever.VisionRetriever")
     def test_query_image_num_results(self, mock_retriever, cli_runner, sample_image):
         """Test image query with custom result count."""
         mock_ret = MagicMock()
@@ -137,7 +137,7 @@ class TestQueryHybridCommand:
         result = cli_runner.invoke(query_group, ["hybrid"])
         assert result.exit_code != 0
 
-    @patch("ragged.cli.commands.query_multimodal.VisionRetriever")
+    @patch("ragged.retrieval.vision_retriever.VisionRetriever")
     def test_query_hybrid_basic(self, mock_retriever, cli_runner, sample_image):
         """Test basic hybrid query."""
         mock_ret = MagicMock()
@@ -151,7 +151,7 @@ class TestQueryHybridCommand:
                                                   str(sample_image)])
         assert result.exit_code in [0, 1]
 
-    @patch("ragged.cli.commands.query_multimodal.VisionRetriever")
+    @patch("ragged.retrieval.vision_retriever.VisionRetriever")
     def test_query_hybrid_custom_weights(self, mock_retriever, cli_runner, sample_image):
         """Test hybrid query with custom fusion weights."""
         mock_ret = MagicMock()
@@ -173,7 +173,7 @@ class TestQueryInteractiveCommand:
         assert result.exit_code == 0
         assert "interactive" in result.output.lower() or "repl" in result.output.lower()
 
-    @patch("ragged.cli.commands.query_multimodal.VisionRetriever")
+    @patch("ragged.retrieval.vision_retriever.VisionRetriever")
     def test_query_interactive_quit(self, mock_retriever, cli_runner):
         """Test interactive mode can be quit."""
         mock_ret = MagicMock()
@@ -207,7 +207,7 @@ class TestQueryGroupCommand:
 class TestQueryOutputFormats:
     """Test query output formatting."""
 
-    @patch("ragged.cli.commands.query_multimodal.VisionRetriever")
+    @patch("ragged.retrieval.vision_retriever.VisionRetriever")
     def test_query_text_json_format(self, mock_retriever, cli_runner):
         """Test JSON output format."""
         mock_ret = MagicMock()
@@ -218,7 +218,7 @@ class TestQueryOutputFormats:
         # Should produce JSON output
         assert result.exit_code in [0, 1]
 
-    @patch("ragged.cli.commands.query_multimodal.VisionRetriever")
+    @patch("ragged.retrieval.vision_retriever.VisionRetriever")
     def test_query_with_metadata(self, mock_retriever, cli_runner):
         """Test --show-metadata flag."""
         mock_ret = MagicMock()

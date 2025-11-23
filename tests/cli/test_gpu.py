@@ -22,15 +22,33 @@ class TestGpuListCommand:
         assert result.exit_code == 0
         assert "list" in result.output.lower() or "devices" in result.output.lower()
 
-    @patch("ragged.cli.commands.gpu.DeviceManager")
-    def test_gpu_list_basic(self, mock_manager, cli_runner):
+    @patch("ragged.gpu.device_manager.DeviceManager")
+    @patch("ragged.gpu.device_manager.DeviceType")
+    def test_gpu_list_basic(self, mock_device_type, mock_manager, cli_runner):
         """Test basic device listing."""
+        # Mock device type enum
+        mock_device_type.CPU.value = "cpu"
+        mock_device_type.CUDA.value = "cuda"
+
         # Mock device manager
         mock_mgr = MagicMock()
-        mock_mgr.list_devices.return_value = [
-            {"id": "cuda:0", "name": "NVIDIA RTX 4090", "type": "cuda"},
-            {"id": "cpu", "name": "CPU", "type": "cpu"}
-        ]
+
+        # Create mock devices
+        cuda_device = MagicMock()
+        cuda_device.device_type = mock_device_type.CUDA
+        cuda_device.device_id = 0
+        cuda_device.name = "NVIDIA RTX 4090"
+        cuda_device.total_memory = 24 * 1024**3
+        cuda_device.compute_capability = (8, 9)
+
+        cpu_device = MagicMock()
+        cpu_device.device_type = mock_device_type.CPU
+        cpu_device.device_id = 0
+        cpu_device.name = "CPU"
+        cpu_device.total_memory = None
+        cpu_device.compute_capability = None
+
+        mock_mgr.available_devices = [cuda_device, cpu_device]
         mock_manager.return_value = mock_mgr
 
         result = cli_runner.invoke(gpu, ["list"])
@@ -38,11 +56,11 @@ class TestGpuListCommand:
         # Should show device information
         assert "cuda" in result.output.lower() or "cpu" in result.output.lower()
 
-    @patch("ragged.cli.commands.gpu.DeviceManager")
+    @patch("ragged.gpu.device_manager.DeviceManager")
     def test_gpu_list_verbose(self, mock_manager, cli_runner):
         """Test verbose device listing."""
         mock_mgr = MagicMock()
-        mock_mgr.list_devices.return_value = []
+        mock_mgr.available_devices = []
         mock_manager.return_value = mock_mgr
 
         result = cli_runner.invoke(gpu, ["list", "--verbose"])
@@ -58,7 +76,7 @@ class TestGpuInfoCommand:
         assert result.exit_code == 0
         assert "info" in result.output.lower() or "device" in result.output.lower()
 
-    @patch("ragged.cli.commands.gpu.DeviceManager")
+    @patch("ragged.gpu.device_manager.DeviceManager")
     def test_gpu_info_basic(self, mock_manager, cli_runner):
         """Test device info display."""
         mock_mgr = MagicMock()
@@ -74,10 +92,23 @@ class TestGpuInfoCommand:
         # Should succeed or gracefully handle missing device
         assert result.exit_code in [0, 1]
 
-    def test_gpu_info_requires_device(self, cli_runner):
-        """Test that info command requires device argument."""
+    @patch("ragged.gpu.device_manager.DeviceManager")
+    def test_gpu_info_defaults_optimal(self, mock_manager, cli_runner):
+        """Test that info command defaults to optimal device when no device specified."""
+        mock_mgr = MagicMock()
+        # Mock optimal device
+        optimal_device = MagicMock()
+        optimal_device.device_type.value = "cpu"
+        optimal_device.device_id = 0
+        optimal_device.name = "CPU"
+        optimal_device.total_memory = None
+        optimal_device.compute_capability = None
+        mock_mgr.get_optimal_device.return_value = optimal_device
+        mock_manager.return_value = mock_mgr
+
         result = cli_runner.invoke(gpu, ["info"])
-        assert result.exit_code != 0
+        # Should succeed and show optimal device info
+        assert result.exit_code in [0, 1]
 
 
 class TestGpuStatsCommand:
@@ -89,7 +120,7 @@ class TestGpuStatsCommand:
         assert result.exit_code == 0
         assert "stats" in result.output.lower() or "memory" in result.output.lower()
 
-    @patch("ragged.cli.commands.gpu.DeviceManager")
+    @patch("ragged.gpu.device_manager.DeviceManager")
     def test_gpu_stats_basic(self, mock_manager, cli_runner):
         """Test memory statistics display."""
         mock_mgr = MagicMock()
@@ -105,7 +136,7 @@ class TestGpuStatsCommand:
         # Should succeed or handle missing GPU gracefully
         assert result.exit_code in [0, 1]
 
-    @patch("ragged.cli.commands.gpu.DeviceManager")
+    @patch("ragged.gpu.device_manager.DeviceManager")
     def test_gpu_stats_watch(self, mock_manager, cli_runner):
         """Test watch mode for stats."""
         mock_mgr = MagicMock()
@@ -118,7 +149,7 @@ class TestGpuStatsCommand:
         result = cli_runner.invoke(gpu, ["stats", "--help"])
         assert "--watch" in result.output
 
-    @patch("ragged.cli.commands.gpu.DeviceManager")
+    @patch("ragged.gpu.device_manager.DeviceManager")
     def test_gpu_stats_interval(self, mock_manager, cli_runner):
         """Test custom refresh interval."""
         result = cli_runner.invoke(gpu, ["stats", "--help"])
@@ -134,8 +165,8 @@ class TestGpuBenchmarkCommand:
         assert result.exit_code == 0
         assert "benchmark" in result.output.lower()
 
-    @patch("ragged.cli.commands.gpu.ColPaliEmbedder")
-    @patch("ragged.cli.commands.gpu.DeviceManager")
+    @patch("ragged.embeddings.colpali_embedder.ColPaliEmbedder")
+    @patch("ragged.gpu.device_manager.DeviceManager")
     def test_gpu_benchmark_basic(self, mock_manager, mock_embedder, cli_runner):
         """Test basic benchmarking."""
         mock_mgr = MagicMock()
@@ -159,7 +190,7 @@ class TestGpuBenchmarkCommand:
         result = cli_runner.invoke(gpu, ["benchmark", "--help"])
         assert "--batch-size" in result.output
 
-    @patch("ragged.cli.commands.gpu.DeviceManager")
+    @patch("ragged.gpu.device_manager.DeviceManager")
     def test_gpu_benchmark_specific_device(self, mock_manager, cli_runner):
         """Test benchmarking specific device."""
         mock_mgr = MagicMock()
@@ -192,11 +223,11 @@ class TestGpuGroupCommand:
 class TestGpuErrorHandling:
     """Test GPU command error handling."""
 
-    @patch("ragged.cli.commands.gpu.DeviceManager")
+    @patch("ragged.gpu.device_manager.DeviceManager")
     def test_gpu_list_no_devices(self, mock_manager, cli_runner):
         """Test listing when no GPU devices available."""
         mock_mgr = MagicMock()
-        mock_mgr.list_devices.return_value = []
+        mock_mgr.available_devices = []
         mock_manager.return_value = mock_mgr
 
         result = cli_runner.invoke(gpu, ["list"])
@@ -204,7 +235,7 @@ class TestGpuErrorHandling:
         # Should indicate no devices found
         assert "no" in result.output.lower() or "cpu" in result.output.lower()
 
-    @patch("ragged.cli.commands.gpu.DeviceManager")
+    @patch("ragged.gpu.device_manager.DeviceManager")
     def test_gpu_info_invalid_device(self, mock_manager, cli_runner):
         """Test info for invalid device."""
         mock_mgr = MagicMock()
