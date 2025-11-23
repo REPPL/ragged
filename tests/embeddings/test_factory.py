@@ -92,12 +92,12 @@ class TestEmbedderFactory:
             mock_instance = Mock(spec=BaseEmbedder)
             mock_create.return_value = mock_instance
 
-            # get_embedder() should call create_embedder with no args
+            # get_embedder() should call create_embedder with default None args
             # which causes create_embedder to use settings
             embedder = get_embedder()
 
-            # Should call create_embedder with no parameters
-            mock_create.assert_called_once_with()
+            # Should call create_embedder with None parameters (defaults)
+            mock_create.assert_called_once_with(None, None)
             assert embedder == mock_instance
 
 
