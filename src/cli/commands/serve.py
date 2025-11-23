@@ -89,13 +89,18 @@ def serve(
     )
     console.print()
 
+    # v0.5.8 MEDIUM-4: Add confirmation prompt for external network exposure
     if host == "0.0.0.0":
         console.print(
-            "[yellow]Warning:[/yellow] Server is accessible from external network"
+            "[bold yellow]⚠ Security Warning:[/bold yellow] Server will be accessible from external network\n"
         )
-        console.print(
-            "  Ensure proper authentication and firewall rules are configured\n"
-        )
+        console.print("  • Anyone on your network can access the API")
+        console.print("  • Ensure proper authentication is configured")
+        console.print("  • Ensure firewall rules are in place\n")
+
+        if not click.confirm("Do you want to continue with external network binding?", default=False):
+            console.print("[red]Server startup cancelled[/red]")
+            raise click.Abort()
 
     console.print("[dim]Press Ctrl+C to stop the server[/dim]\n")
 

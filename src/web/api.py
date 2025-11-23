@@ -381,5 +381,6 @@ async def clear_collection(collection_name: str) -> dict[str, Any]:
 
 
 if __name__ == "__main__":
+    # v0.5.8 MEDIUM-3: Changed default from 0.0.0.0 to 127.0.0.1 for security
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="127.0.0.1", port=8000)
