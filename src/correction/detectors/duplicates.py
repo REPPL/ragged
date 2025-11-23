@@ -123,8 +123,8 @@ class DuplicateDetector:
             pix = page.get_pixmap(matrix=pymupdf.Matrix(0.5, 0.5))  # 50% scale
             img_bytes = pix.tobytes()
 
-            # Quick hash (MD5)
-            quick_hash = hashlib.md5(img_bytes).hexdigest()
+            # Quick hash (SHA-256) - Security: Replaced MD5 (v0.4 mid-series audit 2025-11-23)
+            quick_hash = hashlib.sha256(img_bytes).hexdigest()
             hash_to_pages[quick_hash].add(page_num + 1)  # 1-indexed
 
         # Return groups with more than one page

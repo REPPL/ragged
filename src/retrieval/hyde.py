@@ -230,7 +230,8 @@ class HyDEGenerator:
         Returns:
             Cache key (hash)
         """
-        return hashlib.md5(query.lower().encode()).hexdigest()
+        # Security: Use SHA-256 instead of deprecated MD5 (v0.4 mid-series audit 2025-11-23)
+        return hashlib.sha256(query.lower().encode()).hexdigest()
 
     def clear_cache(self) -> None:
         """Clear the HyDE cache."""

@@ -47,7 +47,7 @@ class TemplateEngine:
         retrieve_fn: Callable | None = None,
         summarise_fn: Callable | None = None,
         template_dir: Path | None = None,
-        autoescape: bool = False,
+        autoescape: bool = True,  # Security: Enable by default (v0.4 mid-series audit 2025-11-23)
     ):
         """
         Initialise template engine.
@@ -69,12 +69,12 @@ class TemplateEngine:
 
         logger.info(f"TemplateEngine initialised with template_dir={template_dir}")
 
-    def _create_environment(self, autoescape: bool = False) -> Environment:
+    def _create_environment(self, autoescape: bool = True) -> Environment:
         """
         Create Jinja2 environment with custom functions.
 
         Args:
-            autoescape: Enable HTML autoescaping
+            autoescape: Enable HTML autoescaping (default: True for security)
 
         Returns:
             Configured Jinja2 environment
@@ -83,7 +83,8 @@ class TemplateEngine:
         loader = FileSystemLoader(str(self.template_dir))
 
         # Create environment
-        env = Environment(
+        # Security: autoescape defaults to True (see method signature line 72 and __init__ line 50)
+        env = Environment(  # nosec B701 (autoescape defaults to True, explicitly set)
             loader=loader,
             autoescape=autoescape,
             trim_blocks=True,
