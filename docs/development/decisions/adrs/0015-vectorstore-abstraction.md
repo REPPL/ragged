@@ -384,7 +384,7 @@ Phase 1 and Phase 2 were completed in v0.3.6 with the following key deliverables
   - Circuit breaker protection (_chroma_circuit_breaker)
   - Automatic retry with exponential backoff (@with_retry decorator)
   - Metadata serialization for complex types
-- Zero behavioral changes from original implementation
+- Zero behavioural changes from original implementation
 - All 14 storage tests passing
 
 **3. Factory Function** (`src/storage/vectorstore_factory.py`)

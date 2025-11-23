@@ -41,7 +41,7 @@ Traceability from planning to implementation:
    - ChromaDBStore(VectorStore) implementation
    - Preserved circuit breaker and retry patterns
    - Maintained metadata serialization
-   - Zero behavioral changes from original
+   - Zero behavioural changes from original
 
 3. Factory Pattern
    - get_vectorstore() factory function
@@ -74,7 +74,7 @@ Traceability from planning to implementation:
 - Zero overhead (pure refactoring)
 - Numpy arrays for embeddings (performance improvement)
 - Circuit breaker and retry preserved
-- No behavioral changes
+- No behavioural changes
 
 ---
 

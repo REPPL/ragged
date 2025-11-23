@@ -97,7 +97,7 @@ class VectorStore(ABC):
 
 **Capabilities:**
 - ChromaDBStore(VectorStore) implements full abstract interface
-- Moved entire implementation from vector_store.py with zero behavioral changes
+- Moved entire implementation from vector_store.py with zero behavioural changes
 - Preserved all existing resilience patterns:
   - Circuit breaker protection (`_chroma_circuit_breaker`)
   - Automatic retry with exponential backoff (`@with_retry` decorator)
@@ -276,7 +276,7 @@ __all__ = [
 
 **Strengths:**
 - ✅ Clean abstraction (follows interface segregation principle)
-- ✅ Zero behavioral changes (all existing tests pass)
+- ✅ Zero behavioural changes (all existing tests pass)
 - ✅ 100% backward compatible (re-export pattern)
 - ✅ Foundation for v0.4.0 (LEANN integration ready)
 - ✅ Factory pattern enables backend selection
