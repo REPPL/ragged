@@ -298,8 +298,10 @@ class PageReorderTransformer:
                         # Assign same number as previous (or don't assign)
                         # For now, leave as None to avoid confusion
 
-        # Handle leading pages (before first known page number)
-        if known_pages:
+        # Handle leading/trailing pages (requires at least 2 known pages for confidence)
+        # With only 1 known page, we can't reliably infer sequence direction
+        if len(known_pages) >= 2:
+            # Handle leading pages (before first known page number)
             first_known_idx, first_physical, first_logical = known_pages[0]
             if first_known_idx > 0 and first_logical > 1:
                 # There are pages before first numbered page, and first number > 1
@@ -313,8 +315,7 @@ class PageReorderTransformer:
                             f"Inferred leading: Page {physical_idx + 1} → logical page {inferred_logical}"
                         )
 
-        # Handle trailing pages (after last known page number)
-        if known_pages:
+            # Handle trailing pages (after last known page number)
             last_known_idx, last_physical, last_logical = known_pages[-1]
             if last_known_idx < len(result) - 1:
                 # There are pages after last numbered page

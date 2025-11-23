@@ -283,7 +283,9 @@ class ColPaliEmbedder(BaseEmbedder):
             if self.device == "cpu":
                 self.model = self.model.to(self.device)
 
-            self.model.eval()  # Set to inference mode (disable dropout, etc.)
+            # Set to inference mode (disable dropout, etc.)
+            # PyTorch's eval() method - not the dangerous built-in eval()
+            self.model.eval()
 
             logger.info("Model loaded successfully")
 

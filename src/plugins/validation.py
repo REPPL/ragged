@@ -66,6 +66,7 @@ class PluginValidator:
     """Validates plugins for security and safety."""
 
     # Dangerous patterns to detect
+    # Note: These are regex pattern definitions, not actual calls to eval/exec
     DANGEROUS_PATTERNS = [
         (r"eval\s*\(", "Use of eval() is dangerous", ValidationSeverity.CRITICAL),
         (r"exec\s*\(", "Use of exec() is dangerous", ValidationSeverity.CRITICAL),

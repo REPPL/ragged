@@ -62,6 +62,7 @@ class TestPageReorderTransformer:
             (0, None),  # Front matter
             (1, None),  # Front matter
             (2, 5),     # First numbered page is 5
+            (3, 6),     # Second page (provides anchor for confidence)
         ]
 
         result = transformer._interpolate_page_numbers(page_mappings)
@@ -70,21 +71,24 @@ class TestPageReorderTransformer:
         assert result[0] == (0, 3)
         assert result[1] == (1, 4)
         assert result[2] == (2, 5)
+        assert result[3] == (3, 6)
 
     def test_interpolate_trailing_pages(self, transformer):
         """Test interpolation of pages after last numbered page."""
         page_mappings = [
             (0, 1),
-            (1, None),  # After last numbered page
+            (1, 2),     # Second page (provides anchor for confidence)
             (2, None),  # After last numbered page
+            (3, None),  # After last numbered page
         ]
 
         result = transformer._interpolate_page_numbers(page_mappings)
 
-        # Should infer pages 1 and 2 as 2 and 3
+        # Should infer pages 2 and 3 as 3 and 4
         assert result[0] == (0, 1)
         assert result[1] == (1, 2)
         assert result[2] == (2, 3)
+        assert result[3] == (3, 4)
 
     def test_interpolate_gap_in_numbering(self, transformer):
         """Test detection of gap (missing pages in physical document)."""
@@ -277,10 +281,10 @@ class TestPageReorderTransformer:
         [
             # Perfect sequence
             ([(0, 1), (1, None), (2, 3)], [(0, 1), (1, 2), (2, 3)]),
-            # Leading pages
-            ([(0, None), (1, 3)], [(0, 2), (1, 3)]),
-            # Trailing pages
-            ([(0, 1), (1, None)], [(0, 1), (1, 2)]),
+            # Leading pages (requires 2+ known pages)
+            ([(0, None), (1, 3), (2, 4)], [(0, 2), (1, 3), (2, 4)]),
+            # Trailing pages (requires 2+ known pages)
+            ([(0, 1), (1, 2), (2, None)], [(0, 1), (1, 2), (2, 3)]),
             # No interpolation needed
             ([(0, 1), (1, 2), (2, 3)], [(0, 1), (1, 2), (2, 3)]),
             # Gap (no interpolation)

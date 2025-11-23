@@ -199,6 +199,14 @@ class TestPickleBan:
                     if description == "compile()" and "re.compile(" in line:
                         continue
 
+                    # Skip .eval() - PyTorch/TensorFlow method, not built-in eval()
+                    if description == "eval()" and ".eval(" in line:
+                        continue
+
+                    # Skip regex pattern definitions (in strings/tuples)
+                    if description in ["eval()", "exec()"] and 'r"' in line and line.strip().startswith("(r"):
+                        continue
+
                     line_num = content[:match.start()].count("\n") + 1
                     violations.append(f"{relative_path}:{line_num}: Uses {description}")
 
