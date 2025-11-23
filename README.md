@@ -3,15 +3,11 @@
 [![Status: Alpha](https://img.shields.io/badge/status-alpha-red.svg)]()
 
 
----
-
 *This project is my attempt to learn fully AI-based 'vibe' coding and to document my use of AI coding assistants [transparently](./docs/development/process/methodology/ai-assistance.md). Expect breaking changes before v1.0.*
 
 ---
 
 ![ragged logo](docs/assets/img/logo.png)
-
-# `ragged`
 
 ## Privacy-First Local RAG System
 
@@ -275,16 +271,3 @@ ruff check src/ tests/
 # Type check
 mypy src/
 ```
-
----
-
-## Acknowledgments
-
-Built with:
-
-- [Ollama](https://ollama.ai) - Local LLM inference
-- [ChromaDB](https://www.trychroma.com/) - Vector database
-- [sentence-transformers](https://www.sbert.net/) - Embeddings
-- [PyMuPDF4LLM](https://github.com/pymupdf/RAG) - PDF processing
-- [Click](https://click.palletsprojects.com/) & [Rich](https://rich.readthedocs.io/) - CLI
-
