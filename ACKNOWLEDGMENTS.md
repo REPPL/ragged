@@ -53,6 +53,7 @@ These projects influenced ragged's v0.4.x memory system design.
 - **PyMuPDF4LLM** - PDF processing
 - **Click** - CLI framework
 - **Rich** - CLI formatting and output
+- **[Excalidraw](https://excalidraw.com/)** - Preferred drawing tool for wireframes
 
 ---
 
