@@ -325,8 +325,8 @@ except PlatformNotSupportedError:
 
 ## Related Documentation
 
-- [Implementation Summary](../../../../implementation/version/v0.4/v0.4.3/summary.md)
-- [Lineage](../../../../implementation/version/v0.4/v0.4.3/lineage.md)
+- Implementation Summary
+- Lineage
 - [Time Log](../../../time-logs/version/v0.4.3/time-tracking.md)
 - [ADR-0018: LEANN Integration](../../../../decisions/adrs/0018-leann-integration-decision.md)
 - [ADR-0019: v0.4.x Restructuring](../../../../decisions/adrs/0019-v04x-restructuring-leann-mandatory.md)

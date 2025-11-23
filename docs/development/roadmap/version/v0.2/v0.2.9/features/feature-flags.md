@@ -299,8 +299,8 @@ feature_flags:
 ## Related Documentation
 
 - [v0.2.9 Roadmap](../README.md)
-- [Settings Documentation](../../../../reference/configuration.md)
-- [CLI Documentation](../../../../reference/cli.md)
+- Settings Documentation
+- CLI Documentation
 
 ---
 

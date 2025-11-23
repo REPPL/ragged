@@ -18,7 +18,7 @@ Documentation lineage for ragged v0.5.5, tracing the evolution from planning thr
 
 ## Planning Phase
 
-**Document:** [v0.5 Planning Overview](../../../planning/version/v0.5/README.md)
+**Document:** v0.5 Planning Overview
 
 **v0.5.5 Role (Original):** Quality Assurance - Integration and E2E testing
 
@@ -67,7 +67,7 @@ Documentation lineage for ragged v0.5.5, tracing the evolution from planning thr
 
 ## Implementation Phase
 
-**Documents:** [README](./README.md) | [Summary](./summary.md)
+**Documents:** README
 
 **Git Commit:** `955ae96345907e221c80039a4c68376fe912d830`
 **Date:** 23 November 2025
@@ -396,7 +396,7 @@ Documentation lineage for ragged v0.5.5, tracing the evolution from planning thr
 
 ## Related Documentation
 
-- [v0.5 Planning](../../../planning/version/v0.5/README.md)
+- v0.5 Planning
 - [v0.5.5 Roadmap](../../../../roadmap/version/v0.5/v0.5.5.md) - Original plan (integration tests)
 - [v0.5.5 README](./README.md)
 - [v0.5.5 Summary](./summary.md)

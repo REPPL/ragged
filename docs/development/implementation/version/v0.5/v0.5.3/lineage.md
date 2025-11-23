@@ -16,7 +16,7 @@ Documentation lineage for ragged v0.5.3, tracing the evolution from planning thr
 
 ## Planning Phase
 
-**Document:** [v0.5 Planning Overview](../../../planning/version/v0.5/README.md)
+**Document:** v0.5 Planning Overview
 
 **v0.5.3 Role:** User Interface layer - CLI exposure of vision features
 
@@ -57,7 +57,7 @@ Make all multi-modal vision capabilities accessible via command-line interface f
 
 ## Implementation Phase
 
-**Documents:** [README](./README.md) | [Summary](./summary.md)
+**Documents:** README
 
 **Git Commit:** `e5e9754f973c3ff82bb64f43eeb0f4235864a5b9`
 **Date:** 23 November 2025
@@ -294,7 +294,7 @@ Make all multi-modal vision capabilities accessible via command-line interface f
 
 ## Related Documentation
 
-- [v0.5 Planning](../../../planning/version/v0.5/README.md)
+- v0.5 Planning
 - [v0.5.3 Roadmap](../../../../roadmap/version/v0.5/v0.5.3.md)
 - [v0.5.3 README](./README.md)
 - [v0.5.3 Summary](./summary.md)

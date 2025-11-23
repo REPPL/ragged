@@ -96,9 +96,10 @@ ragged query "charts about neural networks" --hybrid
 
 **Commands:**
 ```bash
-ragged gpu detect        # Detect available GPUs
-ragged gpu benchmark     # Run performance tests
-ragged gpu optimize      # Find optimal batch size
+ragged gpu list          # List all available devices
+ragged gpu info          # Show device information
+ragged gpu stats         # Display memory statistics
+ragged gpu benchmark     # Benchmark vision embeddings
 ragged gpu download      # Pre-download vision models (v0.5.6)
 ```
 

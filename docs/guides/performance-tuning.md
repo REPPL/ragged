@@ -587,8 +587,8 @@ python scripts/compare_benchmarks.py \
 
 - [GPU Management Guide](./gpu-management.md) - GPU commands and workflows
 - [GPU Troubleshooting](./troubleshooting/gpu-issues.md) - GPU-related issues
-- [Installation Guide: GPU Setup](../tutorials/installation.md#gpu-setup-for-vision-rag-v050) - GPU driver installation
-- [VectorStore Backend Comparison](../development/implementation/version/v0.4/v0.4.3/README.md) - LEANN vs ChromaDB details
+- Installation Guide: GPU Setup - GPU driver installation
+- [VectorStore Backend Comparison](../development/implementation/version/v0.4/README.md) - LEANN vs ChromaDB details
 - [Performance Baseline](../../benchmarks/v0.4.4-baseline.json) - v0.4.4 baseline metrics
 - [Architecture Overview](../explanation/architecture-overview.md) - System architecture
 

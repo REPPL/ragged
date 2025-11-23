@@ -8,7 +8,7 @@
 
 ### 1. Planning Phase (WHAT & WHY)
 
-**Document:** [v0.2.11 Roadmap](../../../roadmap/version/v0.2/v0.2.11/README.md)
+**Document:** v0.2.11 Roadmap
 
 **Note:** v0.2.11 planning is integrated into the roadmap, which contains the design rationale.
 
@@ -31,7 +31,7 @@
 
 ### 2. Roadmap Phase (HOW & WHEN)
 
-**Document:** [v0.2.11 Roadmap](../../../roadmap/version/v0.2/v0.2.11/README.md)
+**Document:** v0.2.11 Roadmap
 
 **Implementation Plan:**
 - **Features:**
@@ -111,12 +111,12 @@
 ## Cross-References
 
 **Planning Documents:**
-- [v0.2.11 Roadmap](../../../roadmap/version/v0.2/v0.2.11/README.md) - Planning + execution plan (combined)
-- [v0.2 Planning](../../../planning/version/v0.2/) - Series-level design goals
+- v0.2.11 Roadmap - Planning + execution plan (combined)
+- v0.2 Planning - Series-level design goals
 
 **Roadmap Documents:**
-- [v0.2.11 Roadmap](../../../roadmap/version/v0.2/v0.2.11/README.md) - HOW & WHEN
-- [Privacy Features Spec](../../../roadmap/version/v0.2/v0.2.11/README.md#features) - Detailed feature specs
+- v0.2.11 Roadmap - HOW & WHEN
+- Privacy Features Spec - Detailed feature specs
 
 **Implementation Records:**
 - [v0.2.11 Summary](./summary.md) - What was built

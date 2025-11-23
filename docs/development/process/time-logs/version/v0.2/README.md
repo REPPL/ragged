@@ -67,8 +67,8 @@ Time logs feed back into planning:
 
 ## Related Documentation
 
-- [v0.2 Development Logs](../../devlogs/version/v0.2/) - Daily development narratives
-- [v0.2 Implementation Records](../../../implementation/version/v0.2/) - What was built
-- [v0.2 Roadmap](../../../roadmap/version/v0.2/) - Original time estimates
+- v0.2 Development Logs - Daily development narratives
+- v0.2 Implementation Records - What was built
+- v0.2 Roadmap - Original time estimates
 
 ---

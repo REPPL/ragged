@@ -247,9 +247,9 @@ If `pip-audit` reports a vulnerability that doesn't apply:
 
 ## Related Documentation
 
-- [Security Framework](../development/roadmap/version/v0.5.7/README.md) - v0.5.7 security features
+- Security Framework - v0.5.7 security features
 - [CI/CD Pipeline](../development/process/methodology/ci-cd.md) - GitHub Actions setup
-- [Dependency Policy](../development/decisions/adrs/dependency-policy.md) - Dependency selection criteria
+- Dependency Policy - Dependency selection criteria
 
 ---
 

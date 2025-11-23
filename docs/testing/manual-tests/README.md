@@ -218,7 +218,7 @@ Tests are version-specific:
 
 ## Related Documentation
 
-- [Automated Tests](../../../tests/README.md) - Pytest test suite
+- [Automated Tests](../../../tests/) - Pytest test suite
 - [Multi-Modal Workflow Tutorial](../../tutorials/multimodal-workflow.md) - User guide
 - [GPU Configuration Guide](../../guides/gpu-configuration-optimisation.md) - GPU setup
 - [API Reference](../../reference/api/) - Technical specifications

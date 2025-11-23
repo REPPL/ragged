@@ -434,7 +434,7 @@ Detailed manual testing procedures documented in v0.5.6. Key categories:
 **Context:**
 - [Previous Version: v0.4.x](../v0.4/README.md) - Personal memory & knowledge graphs
 - [Next Version: v0.6.x](../v0.6/README.md) - FastAPI + Svelte UI + intelligent optimisation
-- [Planning: v0.5 Design Goals](../../planning/version/v0.5/) - What & why
+- [Planning: v0.5 Design Goals](../../../planning/version/v0.5/) - What & why
 - [Version Overview](../README.md) - Complete version comparison
 
 ---

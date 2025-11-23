@@ -18,7 +18,7 @@ Documentation lineage for ragged v0.5.4, tracing the evolution from planning thr
 
 ## Planning Phase
 
-**Document:** [v0.5 Planning Overview](../../../planning/version/v0.5/README.md)
+**Document:** v0.5 Planning Overview
 
 **v0.5.4 Role (Original):** Demo UI layer - Web interface for stakeholder demonstrations
 
@@ -69,7 +69,7 @@ Documentation lineage for ragged v0.5.4, tracing the evolution from planning thr
 
 ## Implementation Phase
 
-**Documents:** [README](./README.md) | [Summary](./summary.md)
+**Documents:** README
 
 **Git Commit:** `900d36f6dfa8c0944cc0e3726cafaa352fe9c84b`
 **Date:** 23 November 2025
@@ -369,7 +369,7 @@ Documentation lineage for ragged v0.5.4, tracing the evolution from planning thr
 
 ## Related Documentation
 
-- [v0.5 Planning](../../../planning/version/v0.5/README.md)
+- v0.5 Planning
 - [v0.5.4 Roadmap](../../../../roadmap/version/v0.5/v0.5.4.md) - Original plan (Gradio UI)
 - [v0.5.4 README](./README.md)
 - [v0.5.4 Summary](./summary.md)

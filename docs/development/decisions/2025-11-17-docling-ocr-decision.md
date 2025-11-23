@@ -455,9 +455,9 @@ Pillow = "^10.0.0"              # HPND (already planned)
 
 ## Related Documentation
 
-- [v0.3.5 Implementation Plan](../roadmap/version/v0.3.0/IMPLEMENTATION-PLAN.md#v035---modern-document-processing-55-62-hours)
-- [Multi-Modal Support Feature](../roadmap/version/v0.3.0/features/multi-modal-support.md) (needs update)
-- [v0.3.0 Roadmap](../roadmap/version/v0.3.0/README.md)
+- v0.3.5 Implementation Plan
+- Multi-Modal Support Feature (needs update)
+- v0.3.0 Roadmap
 
 ---
 

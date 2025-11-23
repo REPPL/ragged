@@ -165,7 +165,7 @@ See project `tests/README.md` for comprehensive test suite documentation.
 ## Related Documentation
 
 - [Manual Test Procedures](./manual-tests/README.md) - Detailed manual testing guide
-- [Automated Test Suite](../../tests/README.md) - Pytest test documentation
+- [Automated Test Suite](../../tests/) - Pytest test documentation
 - [Contributing Guide](../../CONTRIBUTING.md) - How to contribute tests
 - [Multi-Modal Tutorial](../tutorials/multimodal-workflow.md) - Testing multi-modal features
 

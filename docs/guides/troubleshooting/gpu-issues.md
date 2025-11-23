@@ -586,7 +586,7 @@ except Exception as e:
 
 ## Related Documentation
 
-- [Installation Guide: GPU Setup](../../tutorials/installation.md#gpu-setup-for-vision-rag-v050) - Initial GPU configuration
+- Installation Guide: GPU Setup - Initial GPU configuration
 - [GPU Management Guide](../gpu-management.md) - GPU commands and workflows
 - [Performance Tuning Guide](../performance-tuning.md) - Optimisation techniques
 - [Setup Issues](./setup-issues.md) - General troubleshooting

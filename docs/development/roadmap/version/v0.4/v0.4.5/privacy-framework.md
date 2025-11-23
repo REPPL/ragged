@@ -574,6 +574,6 @@ Before v0.4.3 release, verify:
 - [v0.4.3 README](./README.md) - Main implementation roadmap
 - [Security Audit Requirements](./security-audit.md) - Security validation
 - [Testing Scenarios](./testing-scenarios.md) - Privacy test scenarios
-- [v0.2.11 Privacy Infrastructure](../../v0.2/v0.2.11.md) - Foundation (encryption, PII detection, GDPR toolkit)
+- [v0.2.11 Privacy Infrastructure](../../v0.2/v0.2.11/) - Foundation (encryption, PII detection, GDPR toolkit)
 
 ---

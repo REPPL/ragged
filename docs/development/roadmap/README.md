@@ -8,8 +8,8 @@ This directory contains detailed roadmaps for all ragged versions from v0.2.3 th
 - **v0.2.3** - Critical bugs ✅ Complete
 - **v0.2.4** - High priority bugs ✅ Complete
 - **v0.2.5** - Code quality improvements ✅ Complete
-- **[v0.2.7](version/v0.2.7/README.md)** - CLI structure refactoring ✅ Complete
-- **[v0.2.8](version/v0.2.8/README.md)** - CLI enhancements ✅ Complete
+- **[v0.2.7](version/v0.2/v0.2.7/README.md)** - CLI structure refactoring ✅ Complete
+- **[v0.2.8](version/v0.2/v0.2.8.md)** - CLI enhancements ✅ Complete
 
 **Next 3 Versions:**
 - **[v0.2.9](version/v0.2/v0.2.9/README.md)** - Stability & performance (42-53h) - START HERE

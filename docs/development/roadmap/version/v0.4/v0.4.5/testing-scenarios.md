@@ -718,6 +718,6 @@ Before v0.4.0 release, manually verify:
 - [v0.4.0 README](./README.md) - Main implementation roadmap
 - [Security Audit Requirements](./security-audit.md) - Security validation
 - [Privacy Framework](./privacy-framework.md) - User privacy controls specification
-- [v0.2.11 Privacy Infrastructure](../../v0.2/v0.2.11.md) - Foundation (encryption, PII detection)
+- [v0.2.11 Privacy Infrastructure](../../v0.2/v0.2.11/) - Foundation (encryption, PII detection)
 
 ---

@@ -8,7 +8,7 @@
 
 ### 1. Planning Phase (WHAT & WHY)
 
-**Document:** [v0.3 Planning Overview](../../../planning/version/v0.3/README.md)
+**Document:** v0.3 Planning Overview
 
 **Key Decisions:**
 - Establish metrics BEFORE improvements
@@ -90,12 +90,12 @@
 ## Cross-References
 
 **Planning Documents:**
-- [v0.3 Vision](../../../planning/version/v0.3/README.md) - High-level objectives
-- [Evaluation & Quality Features](../../../roadmap/version/v0.3/features/evaluation-quality.md) - Detailed specifications
+- v0.3 Vision - High-level objectives
+- Evaluation & Quality Features - Detailed specifications
 
 **Roadmap Documents:**
 - [v0.3.0 Roadmap](../../../../roadmap/version/v0.3/v0.3.0.md) - Implementation plan
-- [v0.3 Overview](../../../roadmap/version/v0.3/README.md) - Series context
+- v0.3 Overview - Series context
 
 **Implementation Records:**
 - [v0.3.0 Summary](./summary.md) - What was built

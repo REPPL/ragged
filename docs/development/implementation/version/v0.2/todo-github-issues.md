@@ -98,7 +98,7 @@ The `_format_context_for_prompt()` method currently returns the full context fro
 ## Related Documentation
 
 - v0.2.5 Roadmap - QUALITY-009
-- [v0.2.7 Planning](../../planning/version/v0.2/v0.2.7-design.md) - Future enhancements
+- v0.2.7 Planning - Future enhancements
 - [Chunking ADR](../../../decisions/adrs) - Contextual chunking decisions
 
 ---

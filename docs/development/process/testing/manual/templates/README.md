@@ -96,6 +96,6 @@ All templates follow this structure:
 
 - [Manual Testing Guide](../) - Manual testing methodology
 - [Testing Process](../../) - Overall testing approach
-- [Quality Assurance](../../../roadmap/) - Version quality gates
+- Quality Assurance - Version quality gates
 
 ---

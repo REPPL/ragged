@@ -548,8 +548,8 @@ For each feature:
 
 ## Related Documentation
 
-- [v0.2.8 Roadmap](../v0.2.8/README.md) - Previous version
-- [v0.2.7 Implementation](../../implementation/version/v0.2/README.md) - Current baseline
+- [v0.2.8 Roadmap](../v0.2.8.md) - Previous version
+- v0.2.7 Implementation - Current baseline
 - [Performance Planning](../../../planning/technologies/README.md) - Technical context
-- [v0.2 Planning](../../../planning/version/v0.2/README.md) - High-level design goals
+- v0.2 Planning - High-level design goals
 

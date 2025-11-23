@@ -304,7 +304,7 @@ Add "Related Documentation" sections to:
 
 ## Related Documentation
 
-- [Link Title](./relative/path.md) - Brief description
+- Link Title - Brief description
 - [Another Link](../path.md) - Brief description
 
 ---
@@ -612,9 +612,9 @@ Add pre-commit hook or CI check for British English compliance
 
    ## Related Documentation
 
-   - [Planning](../planning/version/vX.X/) - Design goals
-   - [Roadmap](../roadmap/version/vX.X.X/) - Implementation plan
-   - [Implementation](../implementation/version/vX.X/) - What was built
+   - Planning - Design goals
+   - Roadmap - Implementation plan
+   - Implementation - What was built
 
    ---
    ```

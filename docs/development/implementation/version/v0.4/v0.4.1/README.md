@@ -285,11 +285,11 @@ v0.4.1 architecture enables:
 ## Related Documentation
 
 - [v0.4.1 Roadmap Specification](../../../../roadmap/version/v0.4/v0.4.1.md) - Detailed implementation plan
-- [v0.4 Planning Overview](../../../planning/version/v0.4/README.md) - High-level design goals
+- v0.4 Planning Overview - High-level design goals
 - [v0.4.1 Implementation Summary](./summary.md) - Detailed metrics and results
 - [v0.4.1 Lineage](./lineage.md) - Traceability from planning to implementation
 - [v0.4.0 Implementation](../v0.4.0/README.md) - Security foundation
-- [Plugin System Documentation](../../../../reference/plugins/) - Plugin developer guide (future)
+- Plugin System Documentation - Plugin developer guide (future)
 
 ---
 

@@ -174,7 +174,7 @@ This document traces the complete evolution of v0.4.5 Memory Foundation from ini
 - [Privacy & Data Control](../../../../../guides/privacy.md) - Privacy guide
 
 ### Release Documentation
-- [CHANGELOG v0.4.5](../../../../../../CHANGELOG.md#045---2025-11-23) - Release notes
+- CHANGELOG v0.4.5 - Release notes
 - [Git Tag v0.4.5](https://github.com/REPPL/ragged/releases/tag/v0.4.5) - GitHub release
 
 ---

@@ -149,8 +149,8 @@ session = session_mgr.get_or_create_session()
 
 ### Detailed Policies
 
-- [Security Policy](../../../../../security/policy.md#relevant-section) - [What aspect]
-- [Privacy Architecture](../../../../security/privacy-architecture.md#relevant-section) - [What aspect]
+- Security Policy - [What aspect]
+- Privacy Architecture - [What aspect]
 
 ## Implementation Phases
 
@@ -330,11 +330,11 @@ See individual version roadmaps for detailed implementation plans.
 
 ## Related Documentation
 
-- [v0.3.X Roadmap](../v0.3.X.md) - Detailed implementation for version X
-- [v0.3 Planning](../../../planning/version/v0.3/README.md) - High-level design goals
+- v0.3.X Roadmap - Detailed implementation for version X
+- v0.3 Planning - High-level design goals
 - [v0.3 Master Roadmap](../README.md) - Complete v0.3 overview
 - [Security Policy](../../../../../security/policy.md) - Security requirements
-- [ADR-XXX](../../../../decisions/adrs/XXX-title.md) - Related architectural decision
+- ADR-XXX - Related architectural decision
 
 ---
 

@@ -126,7 +126,7 @@
 ## Related Personas
 
 ### Primary: [Persona Name]
-**Definition**: [Link to persona definition](../../planning/core-concepts/personal-memory-personas.md#[persona-name]-persona)
+**Definition**: Link to persona definition
 
 **Characteristics**:
 - [Characteristic 1]
@@ -153,16 +153,16 @@ focus_areas:
 ## Cross-References
 
 ### Implementation
-- [Link to related implementation doc](../../planning/core-concepts/[doc-name].md)
-- [Link to related architecture doc](../../planning/architecture/README.md#[section])
+- Link to related implementation doc
+- Link to related architecture doc
 
 ### Architecture
-- [Link to architectural decision](../../planning/architecture/README.md#[component])
-- [Link to system design](../../planning/core-concepts/[doc-name].md#[section])
+- Link to architectural decision
+- Link to system design
 
 ### Testing
-- [Link to test strategy](../../planning/core-concepts/testing-strategy.md#[section])
-- [Link to golden dataset](../../testing/golden-dataset/)
+- Link to test strategy
+- Link to golden dataset
 
 ---
 

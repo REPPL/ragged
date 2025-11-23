@@ -56,7 +56,7 @@ assets/
 
 **Markdown Reference:**
 ```markdown
-![Alt text](../assets/img/screenshot.png)
+!Alt text
 ```
 
 **Relative Paths:**

@@ -125,8 +125,8 @@ test: Add integration tests for web UI (Phase 7)
 ## Related Documentation
 
 ### Planning & Roadmap
-- [v0.2 Planning](../../planning/version/v0.2/) - High-level design goals (if exists)
-- [v0.2 Roadmap](../../roadmap/version/v0.2/) - Detailed implementation plans (if exists)
+- v0.2 Planning - High-level design goals (if exists)
+- v0.2 Roadmap - Detailed implementation plans (if exists)
 
 ### Implementation Records
 - [v0.2.10 Implementation](./v0.2.10/) - Security Hardening

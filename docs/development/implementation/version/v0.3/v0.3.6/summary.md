@@ -577,8 +577,8 @@ Continue v0.3.x roadmap as planned
 ## Related Documentation
 
 - [ADR-0015: VectorStore Abstraction](../../../../decisions/adrs/0015-vectorstore-abstraction.md) - Architecture decision
-- [v0.3 Roadmap](../../../roadmap/version/v0.3/README.md) - v0.3.x master plan
-- [v0.4 Roadmap](../../../roadmap/version/v0.4/README.md) - LEANN integration plan
+- v0.3 Roadmap - v0.3.x master plan
+- v0.4 Roadmap - LEANN integration plan
 - [ChromaDB Store Implementation](../../../../../src/storage/chromadb_store.py) - Production code
 - [VectorStore Interface](../../../../../src/storage/vectorstore_interface.py) - Abstract interface
 - [Factory Function](../../../../../src/storage/vectorstore_factory.py) - Backend creation

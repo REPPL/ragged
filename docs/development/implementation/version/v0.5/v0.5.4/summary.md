@@ -407,7 +407,7 @@ Unlike v0.5.3 (+95% code), v0.5.4 had **net code reduction** (-489 lines from gu
 - [README](./README.md) - Implementation overview
 - [Lineage](./lineage.md) - Planning → roadmap → implementation traceability
 - [v0.5.4 Roadmap](../../../../roadmap/version/v0.5/v0.5.4.md) - Original plan (Gradio UI - deferred)
-- [v0.5.4 Development Log](../../process/devlogs/version/v0.5.4/summary.md) - Development narrative
+- v0.5.4 Development Log - Development narrative
 - [CLI Essentials Guide](../../../../../guides/cli/essentials.md) - Rewritten guide
 - [Multi-Modal Workflow Tutorial](../../../../../tutorials/multimodal-workflow.md) - New tutorial
 

@@ -100,7 +100,7 @@ current_facts = temporal_store.get_current_facts(persona)
 history = temporal_store.get_fact_history(fact_id)
 ```
 
-**See**: [temporal-facts.md](./temporal-facts.md) for complete implementation details
+**See**: temporal-facts.md for complete implementation details
 
 **Files**:
 - `ragged/memory/temporal_facts.py` (~350 lines)
@@ -237,7 +237,7 @@ class TemporalQueryEngine:
         pass
 ```
 
-**See**: [timeline-engine.md](./timeline-engine.md) for complete implementation details
+**See**: timeline-engine.md for complete implementation details
 
 **Files**:
 - `ragged/memory/temporal_query.py` (~500 lines)
@@ -624,8 +624,8 @@ Core temporal logic testing.
 - Documentation: ~450 lines
 
 **Supporting Documentation**:
-- [temporal-facts.md](./temporal-facts.md) - Temporal fact storage details
-- [timeline-engine.md](./timeline-engine.md) - Timeline query engine details
+- temporal-facts.md - Temporal fact storage details
+- timeline-engine.md - Timeline query engine details
 - [temporal-reasoning.md](./temporal-reasoning.md) - Temporal reasoning details
 - [cli-examples.md](./cli-examples.md) - CLI command examples
 - [documentation-plan.md](./documentation-plan.md) - Documentation structure
@@ -759,8 +759,8 @@ temporal_memory:
 
 This release includes supporting documentation files in this directory:
 
-1. **[temporal-facts.md](./temporal-facts.md)** - Temporal fact storage implementation details
-2. **[timeline-engine.md](./timeline-engine.md)** - Timeline query engine implementation
+1. **temporal-facts.md** - Temporal fact storage implementation details
+2. **timeline-engine.md** - Timeline query engine implementation
 3. **[temporal-reasoning.md](./temporal-reasoning.md)** - Temporal reasoning implementation
 4. **[cli-examples.md](./cli-examples.md)** - Comprehensive CLI examples
 5. **[documentation-plan.md](./documentation-plan.md)** - Documentation structure and plan

@@ -69,7 +69,7 @@ For each version/feature:
 
 - [Methodology](../methodology/) - How we develop with AI
 - Development Logs - Daily progress logs
-- [Roadmap](../roadmap/) - Planned work (estimates)
+- Roadmap - Planned work (estimates)
 - [Templates](../templates/) - Document templates
 
 ---

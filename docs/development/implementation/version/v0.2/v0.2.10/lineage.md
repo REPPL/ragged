@@ -8,7 +8,7 @@
 
 ### 1. Planning Phase (WHAT & WHY)
 
-**Document:** [v0.2.10 Roadmap](../../../roadmap/version/v0.2/v0.2.10/README.md)
+**Document:** v0.2.10 Roadmap
 
 **Note:** v0.2.10 planning is integrated into the roadmap, which contains the design rationale.
 
@@ -30,7 +30,7 @@
 
 ### 2. Roadmap Phase (HOW & WHEN)
 
-**Document:** [v0.2.10 Roadmap](../../../roadmap/version/v0.2/v0.2.10/README.md)
+**Document:** v0.2.10 Roadmap
 
 **Implementation Plan:**
 - **Estimated Time:** 15-21 hours
@@ -110,13 +110,13 @@
 ## Cross-References
 
 **Planning Documents:**
-- [v0.2.10 Roadmap](../../../roadmap/version/v0.2/v0.2.10/README.md) - Planning + execution plan (combined)
+- v0.2.10 Roadmap - Planning + execution plan (combined)
 - [Baseline Security Audit](../../../../../audit/security/baseline/baseline-audit-pre-v0.2.10.md) - Pre-implementation vulnerabilities
-- [v0.2 Planning](../../../planning/version/v0.2/) - Series-level design goals (if exists)
+- v0.2 Planning - Series-level design goals (if exists)
 
 **Roadmap Documents:**
-- [v0.2.10 Roadmap](../../../roadmap/version/v0.2/v0.2.10/README.md) - HOW & WHEN
-- [Security Features Spec](../../../roadmap/version/v0.2/v0.2.10/README.md#features) - Detailed feature specs
+- v0.2.10 Roadmap - HOW & WHEN
+- Security Features Spec - Detailed feature specs
 
 **Implementation Records:**
 - [v0.2.10 Summary](./summary.md) - What was built

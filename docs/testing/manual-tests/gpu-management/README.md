@@ -38,4 +38,4 @@ These tests validate ragged's GPU management capabilities across different hardw
 ## Related Documentation
 
 - [GPU Configuration Guide](../../../guides/gpu-configuration-optimisation.md)
-- [Device Management Reference](../../../reference/gpu/device-manager.md)
+- Device Management Reference

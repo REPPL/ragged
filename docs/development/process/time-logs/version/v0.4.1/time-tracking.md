@@ -221,7 +221,7 @@ For v0.4.1-style plugin architectures, time tracking should capture:
 ## Related Documentation
 
 - [Development Log](../../../devlogs/version/v0.4.1/summary.md)
-- [Implementation Summary](../../../../implementation/version/v0.4/v0.4.1/summary.md)
+- Implementation Summary
 - [v0.4.0 Time Log](../v0.4.0/time-tracking.md) - Security foundation timing
 
 ---

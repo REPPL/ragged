@@ -8,7 +8,7 @@
 
 ### 1. Planning Phase (WHAT & WHY)
 
-**Document:** [v0.3 Planning Overview](../../../planning/version/v0.3/README.md)
+**Document:** v0.3 Planning Overview
 
 **Key Decisions:**
 - Implement state-of-the-art retrieval techniques for quality improvement
@@ -94,12 +94,12 @@
 ## Cross-References
 
 **Planning Documents:**
-- [v0.3 Vision](../../../planning/version/v0.3/README.md) - High-level objectives
-- [Query Processing Features Spec](../../../roadmap/version/v0.3/features/query-processing.md) - Detailed specifications
+- v0.3 Vision - High-level objectives
+- Query Processing Features Spec - Detailed specifications
 
 **Roadmap Documents:**
 - [v0.3.2 Roadmap](../../../../roadmap/version/v0.3/v0.3.2.md) - Implementation plan
-- [v0.3 Overview](../../../roadmap/version/v0.3/README.md) - Series context
+- v0.3 Overview - Series context
 
 **Implementation Records:**
 - [v0.3.2 Summary](./summary.md) - What was built

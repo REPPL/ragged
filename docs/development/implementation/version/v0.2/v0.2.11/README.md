@@ -80,7 +80,7 @@ Traceability from planning to implementation:
 ## Navigation
 
 **Related Documentation:**
-- [Roadmap: v0.2.11](../../../roadmap/version/v0.2/v0.2.11/) - Original plan
+- Roadmap: v0.2.11 - Original plan
 - [v0.2 Index](../README.md) - All v0.2.x implementations
 - [v0.2.10 Implementation](../v0.2.10/) - Security Hardening (previous)
 

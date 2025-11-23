@@ -18,7 +18,7 @@ This document provides complete traceability for v0.4.0 (Plugin Security Foundat
 
 ### v0.4 Overall Planning
 
-**Document:** [v0.4 Planning Overview](../../../planning/version/v0.4/README.md)
+**Document:** v0.4 Planning Overview
 
 **Scope:** v0.4.0 is part of the overall v0.4 series (Personal Memory System & Knowledge Graphs)
 
@@ -324,11 +324,11 @@ v0.4.0 demonstrates strong lineage from planning through implementation:
 ## Related Documentation
 
 ### Planning
-- [v0.4 Planning Overview](../../../planning/version/v0.4/README.md)
+- v0.4 Planning Overview
 
 ### Roadmap
 - [v0.4.0 Roadmap Specification](../../../../roadmap/version/v0.4/v0.4.0.md)
-- [v0.4 Overall Roadmap](../../../roadmap/version/v0.4/README.md)
+- v0.4 Overall Roadmap
 
 ### Implementation
 - [v0.4.0 Implementation README](./README.md)

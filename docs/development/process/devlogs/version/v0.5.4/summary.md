@@ -419,8 +419,8 @@ v0.5.4 represents a strategic pivot from the original roadmap. Instead of delive
 
 ## Related Documentation
 
-- [Implementation Summary](../../../../implementation/version/v0.5/v0.5.4/summary.md)
-- [Lineage](../../../../implementation/version/v0.5/v0.5.4/lineage.md)
+- Implementation Summary
+- Lineage
 - [Time Log](../../../time-logs/version/v0.5.4/time-tracking.md)
 - [CLI Essentials Guide](../../../../../guides/cli/essentials.md)
 - [Multi-Modal Workflow Tutorial](../../../../../tutorials/multimodal-workflow.md)

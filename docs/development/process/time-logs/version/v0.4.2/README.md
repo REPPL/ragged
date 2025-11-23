@@ -25,8 +25,8 @@ Actual hours spent implementing v0.4.2 vector storage abstraction.
 
 ## Related Documentation
 
-- [v0.4.2 Development Logs](../../devlogs/version/v0.4.2/) - Daily development narratives
-- [v0.4.2 Implementation](../../../implementation/version/v0.4/v0.4.2/) - Technical record
+- v0.4.2 Development Logs - Daily development narratives
+- v0.4.2 Implementation - Technical record
 - [Time Logs Overview](../../README.md) - All time tracking
 
 ---

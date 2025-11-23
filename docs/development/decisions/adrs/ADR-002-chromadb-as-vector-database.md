@@ -216,7 +216,7 @@ ChromaDB aligns perfectly with ragged's core principles:
 
 - [ChromaDB Documentation](https://docs.trychroma.com/)
 - [ChromaDB GitHub](https://github.com/chroma-core/chroma)
-- [Storage Implementation](../../../src/storage/)
+- Storage Implementation
 - [ADR-003: Privacy-First Design](./ADR-003-privacy-first-local-only-design.md)
 - [ADR-005: Dual Embedding Storage](./ADR-005-dual-embedding-storage-architecture.md)
 

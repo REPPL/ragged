@@ -242,10 +242,10 @@ The memory system (v0.4.5-v0.4.8) will leverage both v0.4 foundations:
 ## Related Documentation
 
 ### Planning
-- [v0.4 Planning Overview](../../planning/version/v0.4/README.md) - High-level design goals
+- v0.4 Planning Overview - High-level design goals
 
 ### Roadmap
-- [v0.4 Roadmap Overview](../../roadmap/version/v0.4/README.md) - Overall v0.4 strategy
+- v0.4 Roadmap Overview - Overall v0.4 strategy
 - [v0.4.0 Roadmap](../../../roadmap/version/v0.4/v0.4.0.md)
 - [v0.4.1 Roadmap](../../../roadmap/version/v0.4/v0.4.1.md)
 - [v0.4.2 Roadmap](../../../roadmap/version/v0.4/v0.4.2.md)

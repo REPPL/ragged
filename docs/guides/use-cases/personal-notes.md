@@ -38,9 +38,9 @@ While this guide is in development, you can still use ragged effectively for per
 
 **See these guides for features useful for personal notes**:
 
-- **[CLI Intermediate: Metadata Management](../cli/intermediate.md#metadata-management-tagging-and-organisation)** - Tag and organise notes by topic, date, or type
-- **[CLI Intermediate: Query History](../cli/intermediate.md#query-history-track-your-research-journey)** - Track your thinking over time
-- **[CLI Essentials: Interactive Mode](../cli/essentials.md#interactive-mode)** - Conversational exploration of your notes
+- **CLI Intermediate: Metadata Management** - Tag and organise notes by topic, date, or type
+- **CLI Intermediate: Query History** - Track your thinking over time
+- **CLI Essentials: Interactive Mode** - Conversational exploration of your notes
 
 ---
 

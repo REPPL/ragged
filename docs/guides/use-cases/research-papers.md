@@ -38,10 +38,10 @@ While this guide is in development, you can still use ragged effectively for res
 
 **See these guides for features useful for research**:
 
-- **[CLI Intermediate: Metadata Management](../cli/intermediate.md#metadata-management-tagging-and-organisation)** - Tag papers by author, year, topic, methodology
-- **[CLI Intermediate: Advanced Search](../cli/intermediate.md#advanced-search-beyond-basic-querying)** - Find relevant papers quickly
-- **[CLI Intermediate: Query History](../cli/intermediate.md#query-history-track-your-research-journey)** - Track your research questions and evolution
-- **[CLI Advanced: Backup](../cli/advanced.md#export-and-backup-protect-your-data)** - Protect your research database
+- **CLI Intermediate: Metadata Management** - Tag papers by author, year, topic, methodology
+- **CLI Intermediate: Advanced Search** - Find relevant papers quickly
+- **CLI Intermediate: Query History** - Track your research questions and evolution
+- **CLI Advanced: Backup** - Protect your research database
 
 ---
 

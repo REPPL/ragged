@@ -116,7 +116,7 @@ Traditional hour estimates remain useful for planning but should be adjusted for
 ## Related Documentation
 
 - [Development Log](../../../devlogs/version/v0.3.3/summary.md)
-- [Implementation Summary](../../../../implementation/version/v0.3/v0.3.3/summary.md)
+- Implementation Summary
 
 ---
 

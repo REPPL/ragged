@@ -498,7 +498,7 @@ ragged ingest batch ~/Papers/ --vision --enable-oom-recovery
 
 ## Related Documentation
 
-- [Installation Guide: GPU Setup](../tutorials/installation.md#gpu-setup-for-vision-rag-v050) - GPU driver installation
+- Installation Guide: GPU Setup - GPU driver installation
 - [Troubleshooting: GPU Issues](./troubleshooting/gpu-issues.md) - Common GPU problems
 - [Performance Tuning Guide](./performance-tuning.md) - Optimisation techniques
 - [CLI Reference](../reference/cli/) - Complete command reference

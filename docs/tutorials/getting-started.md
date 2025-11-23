@@ -9,7 +9,7 @@ For immediate help getting started with ragged, please see:
 
 - **[CLI Features Guide](../guides/cli/cli-features.md)** - Comprehensive tutorial covering all CLI features
 - **[CLI Command Reference](../reference/cli/command-reference.md)** - Complete technical specifications
-- **[README.md Quick Start](../../README.md#basic-usage)** - Quick start guide in the main README
+- **README.md Quick Start** - Quick start guide in the main README
 
 ## What's Coming
 

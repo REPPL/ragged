@@ -8,8 +8,8 @@ Complete configuration reference documentation is planned for a future release.
 For configuration information, please see:
 
 - **[.env.example](../../.env.example)** - Example configuration file with all available settings
-- **[CLI Command Reference - Environment Variables](./cli/command-reference.md#environment-variables)** - All RAGGED_* environment variables documented
-- **[README.md Configuration](../../README.md#configuration)** - Basic configuration guide
+- **CLI Command Reference - Environment Variables** - All RAGGED_* environment variables documented
+- **README.md Configuration** - Basic configuration guide
 
 ## Configuration Options
 

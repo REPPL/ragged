@@ -225,7 +225,7 @@ Traditional hour estimates remain useful for planning but should account for:
 ## Related Documentation
 
 - [Development Log](../../../devlogs/version/v0.4.0/summary.md)
-- [Implementation Summary](../../../../implementation/version/v0.4/v0.4.0/summary.md)
+- Implementation Summary
 - [ADR-0016: Memory System Architecture](../../../../decisions/adrs/0016-memory-system-architecture.md)
 - [ADR-0017: Code Quality Standards](../../../../decisions/adrs/0017-code-quality-standards.md)
 - [ADR-0018: LEANN Integration](../../../../decisions/adrs/0018-leann-integration-decision.md)

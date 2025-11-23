@@ -231,7 +231,7 @@
 **Dependencies**: v0.4.4 complete
 
 **Steps**:
-1. **Read**: [v0.4.5.md](v0.4.5.md) - Personalisation system
+1. **Read**: [v0.4.5.md](v0.4.5/README.md) - Personalisation system
 2. **Implementation** (26-30 hours):
    - Topic extraction from queries
    - Behaviour learning system
@@ -369,7 +369,7 @@ git push origin v0.4.X
 
 ## Progress Tracking
 
-See [progress-tracker.md](progress-tracker.md) for detailed status tracking.
+See progress-tracker.md for detailed status tracking.
 
 **Quick Status Check**:
 ```bash
@@ -398,7 +398,7 @@ Version 0.4.x is successful if all criteria met:
 ## Related Documentation
 
 - [v0.4 Overview](README.md) - Series overview and decision framework
-- [Progress Tracker](progress-tracker.md) - Status tracking
+- Progress Tracker - Status tracking
 - [v0.4.0](v0.4.0.md) through [v0.4.9](v0.4.9.md) - Individual release specs
 - [v0.4.3 Security Audit](v0.4.5/security-audit.md) - **Critical gate requirements**
 

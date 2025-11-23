@@ -164,10 +164,10 @@ Comprehensive CLI exposing all vision features through intuitive command-line in
 ## Related Documentation
 
 ### Planning
-- [v0.5 Planning Overview](../../planning/version/v0.5/README.md) - High-level design goals
+- v0.5 Planning Overview - High-level design goals
 
 ### Roadmap
-- [v0.5 Roadmap Overview](../../roadmap/version/v0.5/README.md) - Overall v0.5 strategy
+- v0.5 Roadmap Overview - Overall v0.5 strategy
 - [v0.5.3 Roadmap](../../../roadmap/version/v0.5/v0.5.3.md) - CLI implementation plan
 
 ### Implementation

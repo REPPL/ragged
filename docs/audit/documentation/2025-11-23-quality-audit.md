@@ -619,9 +619,9 @@ The ragged project demonstrates **exceptional documentation practices** with:
 
 ## Related Documentation
 
-- [Global Standards](~/.claude/CLAUDE.md) - British English, SSOT principles
-- [Development Standards](~/Development/.claude/CLAUDE.md) - Directory structure, coverage requirements
-- [Project Standards](ragged/.claude/CLAUDE.md) - AI transparency, versioning, Python conventions
+- Global Standards - British English, SSOT principles
+- Development Standards - Directory structure, coverage requirements
+- Project Standards - AI transparency, versioning, Python conventions
 - [Documentation Structure](docs/README.md) - Diátaxis framework, navigation guide
 
 ---

@@ -526,7 +526,7 @@ def test_storage_vacuum_cleanup()
 - [README](./README.md) - Implementation overview
 - [Lineage](./lineage.md) - Planning → roadmap → implementation traceability
 - [v0.5.5 Roadmap](../../../../roadmap/version/v0.5/v0.5.5.md) - Original plan (integration tests)
-- [v0.5.5 Development Log](../../process/devlogs/version/v0.5.5/summary.md) - Development narrative
+- v0.5.5 Development Log - Development narrative
 - [v0.5.3 Implementation](../v0.5.3/README.md) - Features tested in this release
 
 ---

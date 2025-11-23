@@ -17,7 +17,7 @@ Documentation lineage for ragged v0.4.3, tracing the evolution from planning thr
 ## Planning Phase
 
 **Documents:**
-- [v0.4 Planning Overview](../../../planning/version/v0.4/README.md)
+- v0.4 Planning Overview
 - [ADR-0018: LEANN Integration Decision](../../../../decisions/adrs/0018-leann-integration-decision.md)
 
 **v0.4.3 Role:** Integrate LEANN backend for 97% storage savings on Apple Silicon
@@ -50,7 +50,7 @@ Documentation lineage for ragged v0.4.3, tracing the evolution from planning thr
 
 ## Implementation Phase
 
-**Documents:** [README](./README.md) | [Summary](./summary.md)
+**Documents:** README
 
 **Git Commit:** `57eb65f19302d57d925fc8558a1a7f85e0a45a96`
 
@@ -99,7 +99,7 @@ Documentation lineage for ragged v0.4.3, tracing the evolution from planning thr
 
 ## Related Documentation
 
-- [v0.4 Planning](../../../planning/version/v0.4/README.md)
+- v0.4 Planning
 - [v0.4.3 Roadmap](../../../../roadmap/version/v0.4/v0.4.3.md)
 - [v0.4.3 README](./README.md)
 - [v0.4.3 Summary](./summary.md)

@@ -189,8 +189,8 @@ v0.2.7 is successful if:
 ## Related Documentation
 
 - [Previous Version](../v0.2.6/README.md) - Documentation & structural improvements
-- [Next Version](../v0.3/README.md) - Advanced RAG features
-- [Planning](../../planning/version/v0.2/) - Design goals for v0.2 series
+- [Next Version](../README.md) - Advanced RAG features
+- Planning - Design goals for v0.2 series
 - [CLI Enhancements Catalogue](../../../../planning/interfaces/cli/enhancements.md) - Comprehensive CLI specifications
 - [Version Overview](../README.md) - Complete version comparison
 
@@ -203,8 +203,8 @@ v0.2.7 is successful if:
 ## Related Documentation
 
 - [Previous Version](../v0.2.6/README.md) - Documentation & structural improvements
-- [Next Version](../v0.3/README.md) - Advanced RAG features
-- [Planning](../../planning/version/v0.2/) - Design goals for v0.2 series
+- [Next Version](../README.md) - Advanced RAG features
+- Planning - Design goals for v0.2 series
 - [CLI Enhancements Catalogue](../../../../planning/interfaces/cli/enhancements.md) - Comprehensive CLI specifications
 - [Version Overview](../README.md) - Complete version comparison
 - [v0.2.7 Implementation Record (In Progress)](../../../../implementation/version/v0.2/v0.2.7.md)

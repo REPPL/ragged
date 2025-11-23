@@ -281,7 +281,7 @@ class DistributedRateLimiter:
 
 **Compliance Certifications**
 - SOC2, ISO27001
-- Requires organizational process
+- Requires organisational process
 - Not just technical
 - Long-term goal
 

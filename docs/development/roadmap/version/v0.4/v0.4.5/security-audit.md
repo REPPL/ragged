@@ -4,7 +4,7 @@
 
 **Timeline**: 2-3 weeks (concurrent with v0.4.2 development)
 
-**Preparation**: See [v0.4.2.md Security Audit Preparation](../v0.4.2.md#security-audit-preparation)
+**Preparation**: See v0.4.2.md Security Audit Preparation
 
 ---
 
@@ -208,7 +208,7 @@ Formal security audit of the personal memory system design **required before v0.
 
 ### Phase 1: Preparation (During v0.4.2) - 3h
 
-**Deliverables** (see [v0.4.2.md](../v0.4.2.md#security-audit-preparation)):
+**Deliverables** (see v0.4.2.md):
 1. Memory system architecture documentation
 2. Data flow diagrams
 3. Privacy threat model (LINDDUN)
@@ -462,7 +462,7 @@ Before starting v0.4.0 implementation, verify:
 ## Related Documentation
 
 - [v0.4.0 README](./README.md) - Main implementation roadmap (blocked until audit passes)
-- [v0.4.0 Security Audit Preparation](../v0.4.0.md#security-audit-preparation) - Preparation phase
+- v0.4.0 Security Audit Preparation - Preparation phase
 - [Privacy Framework](./privacy-framework.md) - User privacy controls and validation
 - [Testing Scenarios](./testing-scenarios.md) - Privacy testing requirements
 

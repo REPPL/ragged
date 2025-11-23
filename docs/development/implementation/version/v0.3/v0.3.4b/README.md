@@ -74,10 +74,10 @@ Traceability from planning to implementation:
 ## Navigation
 
 **Related Documentation:**
-- [v0.3.4b Roadmap](../../../roadmap/version/v0.3/v0.3.4b/) - Original plan
+- v0.3.4b Roadmap - Original plan
 - [v0.3 Index](../README.md) - All v0.3.x implementations
 - [v0.3.4a Implementation](../v0.3.4a/) - Docling Core Integration (previous)
-- [v0.3.4c Implementation](../v0.3.4c/) - PaddleOCR Integration (next, planned)
+- v0.3.4c Implementation - PaddleOCR Integration (next, planned)
 
 ---
 

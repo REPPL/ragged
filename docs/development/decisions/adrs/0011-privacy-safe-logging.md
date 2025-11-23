@@ -168,6 +168,6 @@ v0.2+:
 
 - [Local-Only Processing (ADR-0001)](./0001-local-only-processing.md) - Privacy foundation
 - [Privacy Design](../../../explanation/privacy-design.md) - Privacy architecture
-- [Security Practices](../../security/) - Security documentation
+- Security Practices - Security documentation
 
 ---

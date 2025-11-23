@@ -301,9 +301,9 @@ Code Estimate = Base Complexity × Production Quality Multiplier (2.0)
 
 ## Related Documentation
 
-- [v0.5.3 Development Log](../../devlogs/version/v0.5.3/summary.md) - Development narrative
-- [v0.5.3 Implementation Summary](../../../implementation/version/v0.5/v0.5.3/summary.md) - Technical metrics
-- [v0.5.3 Lineage](../../../implementation/version/v0.5/v0.5.3/lineage.md) - Planning to implementation traceability
+- v0.5.3 Development Log - Development narrative
+- v0.5.3 Implementation Summary - Technical metrics
+- v0.5.3 Lineage - Planning to implementation traceability
 - [v0.5.3 Roadmap](../../../../roadmap/version/v0.5/v0.5.3.md) - Original estimates
 
 ---

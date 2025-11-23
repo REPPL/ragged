@@ -25,8 +25,8 @@ Actual hours spent implementing v0.4.4 quality improvements.
 
 ## Related Documentation
 
-- [v0.4.4 Development Logs](../../devlogs/version/v0.4.4/) - Daily development narratives
-- [v0.4.4 Implementation](../../../implementation/version/v0.4/v0.4.4/) - Technical record
+- v0.4.4 Development Logs - Daily development narratives
+- v0.4.4 Implementation - Technical record
 - [Time Logs Overview](../../README.md) - All time tracking
 
 ---

@@ -16,7 +16,7 @@ Documentation lineage for ragged v0.4.2, tracing the evolution from planning thr
 
 ## Planning Phase
 
-**Document:** [v0.4 Planning Overview](../../../planning/version/v0.4/README.md)
+**Document:** v0.4 Planning Overview
 
 **v0.4.2 Role:** Refactor vector storage layer for backend pluggability
 
@@ -48,7 +48,7 @@ Documentation lineage for ragged v0.4.2, tracing the evolution from planning thr
 
 ## Implementation Phase
 
-**Documents:** [README](./README.md) | [Summary](./summary.md)
+**Documents:** README
 
 **Git Commit:** `8b1cb52e7d284be58725e0859cd5aa7ced3df0af`
 
@@ -88,7 +88,7 @@ Documentation lineage for ragged v0.4.2, tracing the evolution from planning thr
 
 ## Related Documentation
 
-- [v0.4 Planning](../../../planning/version/v0.4/README.md)
+- v0.4 Planning
 - [v0.4.2 Roadmap](../../../../roadmap/version/v0.4/v0.4.2.md)
 - [v0.4.2 README](./README.md)
 - [v0.4.2 Summary](./summary.md)

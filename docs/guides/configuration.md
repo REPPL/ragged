@@ -7,9 +7,9 @@ A comprehensive configuration guide is planned for a future release.
 
 For configuration guidance, please see:
 
-- **[README.md Configuration](../../README.md#configuration)** - Basic configuration setup
+- **README.md Configuration** - Basic configuration setup
 - **[Configuration Reference](../reference/configuration.md)** - All available settings
-- **[CLI validate command](../reference/cli/command-reference.md#validate)** - Validate your configuration
+- **CLI validate command** - Validate your configuration
 
 ## Quick Configuration
 
@@ -53,7 +53,7 @@ The configuration guide will include:
 ## Related Documentation
 
 - [Pydantic Configuration (ADR-0002)](../development/decisions/adrs/0002-pydantic-for-configuration.md) - Configuration design
-- [Settings Reference](../reference/configuration/) - All settings
+- Settings Reference - All settings
 - [Installation Tutorial](../tutorials/installation.md) - Getting started
 
 ---

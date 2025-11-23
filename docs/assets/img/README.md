@@ -115,12 +115,12 @@ convert image.png -resize 1920x image-resized.png
 
 **Standard Reference:**
 ```markdown
-![CLI query command](../assets/img/cli-query-command.png)
+!CLI query command
 ```
 
 **With Caption:**
 ```markdown
-![Web UI upload page](../assets/img/web-ui-upload-page.png)
+!Web UI upload page
 *Figure 1: Web UI document upload interface*
 ```
 

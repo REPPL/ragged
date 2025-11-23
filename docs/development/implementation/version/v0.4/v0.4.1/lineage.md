@@ -16,7 +16,7 @@ Documentation lineage for ragged v0.4.1, tracing the evolution from planning thr
 
 ## Planning Phase
 
-**Document:** [v0.4 Planning Overview](../../../planning/version/v0.4/README.md)
+**Document:** v0.4 Planning Overview
 
 **v0.4.1 Role:** Establish plugin architecture foundation for extensibility
 
@@ -46,7 +46,7 @@ Documentation lineage for ragged v0.4.1, tracing the evolution from planning thr
 
 ## Implementation Phase
 
-**Documents:** [README](./README.md) | [Summary](./summary.md)
+**Documents:** README
 
 **Git Commit:** `ae37c7434932ceb8b885dfb0d3c9e85441c5b930`
 
@@ -85,7 +85,7 @@ Documentation lineage for ragged v0.4.1, tracing the evolution from planning thr
 
 ## Related Documentation
 
-- [v0.4 Planning](../../../planning/version/v0.4/README.md)
+- v0.4 Planning
 - [v0.4.1 Roadmap](../../../../roadmap/version/v0.4/v0.4.1.md)
 - [v0.4.1 README](./README.md)
 - [v0.4.1 Summary](./summary.md)

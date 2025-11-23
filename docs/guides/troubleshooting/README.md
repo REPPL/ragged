@@ -73,8 +73,8 @@ docker compose up -d      # Start if needed
 ## Related Documentation
 
 - [Setup Issues Guide](./setup-issues.md) - Detailed troubleshooting
-- [CLI Essentials: Health Checks](../cli/essentials.md#1-ragged-health---check-system-status) - Service verification
-- [CLI Advanced: Environment Info](../cli/advanced.md#environment-information-debug-and-report-issues) - Debug information
+- CLI Essentials: Health Checks - Service verification
+- CLI Advanced: Environment Info - Debug information
 - [FAQ](../faq.md) - Common questions and answers
 
 ---

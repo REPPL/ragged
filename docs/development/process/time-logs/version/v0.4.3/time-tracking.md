@@ -384,7 +384,7 @@ For complex backend integrations like v0.4.3:
 ## Related Documentation
 
 - [Development Log](../../../devlogs/version/v0.4.3/summary.md)
-- [Implementation Summary](../../../../implementation/version/v0.4/v0.4.3/summary.md)
+- Implementation Summary
 - [ADR-0018: LEANN Integration](../../../../decisions/adrs/0018-leann-integration-decision.md)
 - [ADR-0019: v0.4.x Restructuring](../../../../decisions/adrs/0019-v04x-restructuring-leann-mandatory.md)
 - [v0.4.2 Time Log](../v0.4.2/time-tracking.md) - VectorStore abstraction timing

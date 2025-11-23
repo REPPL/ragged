@@ -238,8 +238,8 @@ v0.4.1 delivered ragged's core plugin architecture with four plugin types (Embed
 
 ## Related Documentation
 
-- [Implementation Summary](../../../../implementation/version/v0.4/v0.4.1/summary.md)
-- [Lineage](../../../../implementation/version/v0.4/v0.4.1/lineage.md)
+- Implementation Summary
+- Lineage
 - [Time Log](../../../time-logs/version/v0.4.1/time-tracking.md)
 - [v0.4.0 DevLog](../v0.4.0/summary.md) - Security foundation
 

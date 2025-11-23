@@ -25,8 +25,8 @@ Actual hours spent implementing v0.4.1 plugin architecture.
 
 ## Related Documentation
 
-- [v0.4.1 Development Logs](../../devlogs/version/v0.4.1/) - Daily development narratives
-- [v0.4.1 Implementation](../../../implementation/version/v0.4/v0.4.1/) - Technical record
+- v0.4.1 Development Logs - Daily development narratives
+- v0.4.1 Implementation - Technical record
 - [Time Logs Overview](../../README.md) - All time tracking
 
 ---

@@ -381,8 +381,8 @@ for image_path in extracted_images:
 
 ### Detailed Policies
 
-- [Security Policy](../../../../../security/policy.md#secure-coding-standards) - File upload validation and input sanitisation
-- [Privacy Architecture](../../../../security/privacy-architecture.md#data-lifecycle-management) - Temporary file cleanup
+- Security Policy - File upload validation and input sanitisation
+- Privacy Architecture - Temporary file cleanup
 
 ## Implementation Phases
 
@@ -879,10 +879,10 @@ All new dependencies are GPL-3.0 compatible.
 
 - [Docling OCR Decision ADR](../../../../decisions/2025-11-17-docling-ocr-decision.md) - Full rationale for Docling + PaddleOCR selection
 - [v0.3.0 Roadmap](../v0.3.0.md) - Detailed implementation plan for multi-modal processing
-- [v0.3 Planning](../../../planning/version/v0.3/README.md) - High-level v0.3 design goals
+- v0.3 Planning - High-level v0.3 design goals
 - [v0.3 Master Roadmap](../README.md) - Complete v0.3 overview with all 13 versions
-- [Security Policy](../../../../../security/policy.md#input-validation) - File upload security requirements
-- [Privacy Architecture](../../../../security/privacy-architecture.md#data-lifecycle) - Temporary file management
+- Security Policy - File upload security requirements
+- Privacy Architecture - Temporary file management
 
 ---
 

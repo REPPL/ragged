@@ -555,10 +555,10 @@ ragged ingest pdf original-documents/
 
 ## Related Documentation
 
-- [Complete Beginner's Guide: Troubleshooting](../../tutorials/complete-beginners-guide.md#troubleshooting) - Setup issues
-- [CLI Essentials: Health Checks](../cli/essentials.md#1-ragged-health---check-system-status) - Service verification
-- [CLI Advanced: Configuration Validation](../cli/advanced.md#configuration-validation-catch-issues-early) - Config checking
-- [CLI Advanced: Environment Info](../cli/advanced.md#environment-information-debug-and-report-issues) - System diagnostics
+- Complete Beginner's Guide: Troubleshooting - Setup issues
+- CLI Essentials: Health Checks - Service verification
+- CLI Advanced: Configuration Validation - Config checking
+- CLI Advanced: Environment Info - System diagnostics
 - [FAQ](../faq.md) - Quick answers
 
 ---

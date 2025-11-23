@@ -66,7 +66,7 @@ Traceability from planning to implementation:
 ## Navigation
 
 **Related Documentation:**
-- [v0.3.4a Roadmap](../../../roadmap/version/v0.3/v0.3.4a/) - Original plan
+- v0.3.4a Roadmap - Original plan
 - [v0.3 Index](../README.md) - All v0.3.x implementations
 - [v0.3.3 Implementation](../v0.3.3/) - Intelligent Chunking (previous)
 - [v0.3.4b Implementation](../v0.3.4b/) - Intelligent Routing (next)

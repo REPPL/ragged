@@ -294,7 +294,7 @@ For abstraction-heavy releases like v0.4.2:
 ## Related Documentation
 
 - [Development Log](../../../devlogs/version/v0.4.2/summary.md)
-- [Implementation Summary](../../../../implementation/version/v0.4/v0.4.2/summary.md)
+- Implementation Summary
 - [ADR-0015: VectorStore Abstraction](../../../../decisions/adrs/0015-vectorstore-abstraction.md)
 - [ADR-0017: Code Quality Standards](../../../../decisions/adrs/0017-code-quality-standards.md)
 

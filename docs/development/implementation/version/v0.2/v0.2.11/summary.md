@@ -254,7 +254,7 @@ All 4 features implemented as planned with no major deviations.
 
 ## Related Documentation
 
-- [Roadmap: v0.2.11](../../../roadmap/version/v0.2/v0.2.11/) - Original implementation plan
+- Roadmap: v0.2.11 - Original implementation plan
 - [Lineage: v0.2.11](./lineage.md) - Traceability from planning to implementation
 - [v0.2.10 Implementation](../v0.2.10/) - Security Hardening (previous)
 - [v0.3.0 Implementation](../../v0.3/v0.3.0/) - Foundation & Metrics (next series)

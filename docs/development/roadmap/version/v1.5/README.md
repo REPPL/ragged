@@ -261,7 +261,7 @@ async def query(user_id: str, query: str) -> QueryResult:
 **Conversation features:**
 - **Share conversation:** Share entire query + response thread
 - **Comments:** Team members can comment on conversations
-- **Tagging:** Tag conversations for organization
+- **Tagging:** Tag conversations for organisation
 - **Search:** Find conversations by content or tags
 - **Bookmarking:** Save important conversations
 

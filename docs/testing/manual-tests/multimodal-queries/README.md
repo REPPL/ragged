@@ -57,5 +57,5 @@ These tests validate ragged's multi-modal query capabilities, enabling users to 
 ## Related Documentation
 
 - [Multi-Modal Workflow Tutorial](../../../tutorials/multimodal-workflow.md)
-- [Query Command Reference](../../../reference/cli/query.md)
+- Query Command Reference
 - [Manual Testing README](../README.md)

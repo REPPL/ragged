@@ -287,7 +287,7 @@ When status changes:
 
 **In Implementation:**
 ```markdown
-**See:** [v0.2.7 Roadmap](../../roadmap/version/v0.2.7/README.md)
+**See:** [v0.2.7 Roadmap](../../roadmap/version/v0.2/v0.2.7/README.md)
 ```
 
 ### Bi-directional Linking
@@ -349,7 +349,7 @@ EOF
 ## Related Documentation
 
 - [Master Roadmap](../../roadmap/version/README.md) - All version statuses
-- [Implementation Records](../../../implementation/version/) - Completed work
+- Implementation Records - Completed work
 - [Development Process](../) - Methodology overview
 - [Time Logging](../../time-logs/README.md) - Actual hours tracking
 

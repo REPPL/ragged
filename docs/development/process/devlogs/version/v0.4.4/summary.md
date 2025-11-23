@@ -437,8 +437,8 @@ v0.4.4 established production-grade quality baseline for ragged through comprehe
 
 ## Related Documentation
 
-- [Implementation Summary](../../../../implementation/version/v0.4/v0.4.4/summary.md)
-- [Lineage](../../../../implementation/version/v0.4/v0.4.4/lineage.md)
+- Implementation Summary
+- Lineage
 - [Time Log](../../../time-logs/version/v0.4.4/time-tracking.md)
 - [Security Guidelines](../../../../../guides/security-guidelines.md)
 - [Performance Tuning Guide](../../../../../guides/performance-tuning.md)

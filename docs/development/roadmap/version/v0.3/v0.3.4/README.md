@@ -202,7 +202,7 @@ enable_paddleocr: bool = False  # Optional advanced features
 ## Related Documentation
 
 - [v0.3.4 Original Roadmap](../v0.3.4.md) - Original monolithic plan (for reference)
-- [v0.3.4 Implementation Plan](../../../planning/version/v0.3.4-implementation-plan.md) - Architectural analysis
+- v0.3.4 Implementation Plan - Architectural analysis
 - [v0.3 Overview](../README.md) - All v0.3.x versions
 
 ---

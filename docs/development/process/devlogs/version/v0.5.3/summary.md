@@ -322,8 +322,8 @@ v0.5.3 delivered comprehensive CLI functionality exposing all v0.5 multi-modal v
 
 ## Related Documentation
 
-- [Implementation Summary](../../../../implementation/version/v0.5/v0.5.3/summary.md)
-- [Lineage](../../../../implementation/version/v0.5/v0.5.3/lineage.md)
+- Implementation Summary
+- Lineage
 - [Time Log](../../../time-logs/version/v0.5.3/time-tracking.md)
 - [CLI Essentials Guide](../../../../../guides/cli/essentials.md)
 - [Multi-Modal Workflow Tutorial](../../../../../tutorials/multimodal-workflow.md)

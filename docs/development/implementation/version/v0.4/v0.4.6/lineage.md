@@ -209,7 +209,7 @@ This document traces v0.4.6's evolution as a stability and performance release a
 - [v0.4.6 Implementation Summary](./README.md) - Complete implementation details
 
 ### Release Documentation
-- [CHANGELOG v0.4.6](../../../../../../CHANGELOG.md#046---2025-11-23) - Release notes
+- CHANGELOG v0.4.6 - Release notes
 
 ---
 

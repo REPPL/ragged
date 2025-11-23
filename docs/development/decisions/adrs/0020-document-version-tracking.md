@@ -441,7 +441,7 @@ for chunk in chunks:
 
 - [v0.3.7a Implementation Summary](../../implementation/version/v0.3/v0.3.7a/summary.md)
 - [VectorStore Abstraction (ADR-0015)](./0015-vectorstore-abstraction.md)
-- [v0.3.7 Roadmap](../../roadmap/version/v0.3.7/README.md)
+- v0.3.7 Roadmap
 
 ---
 

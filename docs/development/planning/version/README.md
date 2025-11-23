@@ -59,7 +59,7 @@ Version directories contain:
 ## Related Documentation
 
 - [Roadmaps](../../roadmap/version) - Detailed implementation plans with timelines
-- [Implementations](../../../implementation/version/) - Actual implementation records
+- Implementations - Actual implementation records
 - [ADRs](../../decisions/adrs) - Decisions made during implementation
 
 ---

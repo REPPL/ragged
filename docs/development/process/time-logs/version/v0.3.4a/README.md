@@ -25,8 +25,8 @@ Time tracking files for v0.3.4a (when created).
 
 ## Related Documentation
 
-- [v0.3.4a Development Logs](../../devlogs/version/v0.3.4a/) - Daily development narratives
-- [v0.3.4a Implementation](../../../implementation/version/v0.3/v0.3.4a/) - Technical record
+- v0.3.4a Development Logs - Daily development narratives
+- v0.3.4a Implementation - Technical record
 - [Time Logs Overview](../../README.md) - All time tracking
 
 ---

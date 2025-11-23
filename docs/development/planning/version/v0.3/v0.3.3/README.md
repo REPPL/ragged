@@ -287,8 +287,8 @@ Transform ragged's chunking from fixed-size boundaries to intelligent, semantic-
 ## Related Documentation
 
 - **Roadmap**: [v0.3.3 Roadmap](../../../../roadmap/version/v0.3/v0.3.3.md) - Detailed HOW & WHEN
-- **Implementation**: [v0.3.3 Summary](../../../implementation/version/v0.3/v0.3.3/summary.md) - WHAT was built
-- **Lineage**: [v0.3.3 Lineage](../../../implementation/version/v0.3/v0.3.3/lineage.md) - Evolution trace
+- **Implementation**: v0.3.3 Summary - WHAT was built
+- **Lineage**: v0.3.3 Lineage - Evolution trace
 - **Parent Plan**: [v0.3 Planning](../README.md) - Overall v0.3 vision
 
 ---

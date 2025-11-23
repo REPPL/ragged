@@ -32,7 +32,7 @@ Individual feature specification files:
 
 ## Related Documentation
 
-- [v0.5 Planning](../../../planning/version/v0.5/) - High-level vision and goals
+- v0.5 Planning - High-level vision and goals
 - [v0.5 Roadmap Overview](../) - Complete roadmap structure
 
 ---

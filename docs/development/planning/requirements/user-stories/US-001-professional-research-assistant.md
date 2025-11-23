@@ -325,7 +325,7 @@
 ## Related Personas
 
 ### Primary: Researcher
-**Definition**: [Researcher Persona](../../core-concepts/personal-memory-personas.md#researcher-persona)
+**Definition**: Researcher Persona
 
 **Characteristics**:
 - Academic or professional researcher
@@ -356,12 +356,12 @@ focus_areas:
 - [Testing Strategy](../../core-concepts/testing-strategy.md)
 
 ### Architecture
-- [Citation Management System](../../architecture/README.md#citation-management)
-- [Memory Coordinator](../../core-concepts/personal-memory-personas.md#memory-coordinator)
+- Citation Management System
+- Memory Coordinator
 
 ### Testing
-- [Golden Dataset - Research Queries](../../../process/testing/golden-dataset/)
-- [RAGAS Evaluation](../../core-concepts/testing-strategy.md#ragas-metrics)
+- Golden Dataset - Research Queries
+- RAGAS Evaluation
 
 ---
 

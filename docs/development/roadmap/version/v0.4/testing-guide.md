@@ -837,7 +837,7 @@ echo "✅ Ready to tag release"
 ## Related Documentation
 
 - [Execution Playbook](./execution-playbook.md) - Implementation guide
-- [Progress Tracker](./progress-tracker.md) - Status tracking
+- Progress Tracker - Status tracking
 - [v0.4.3 Privacy Testing](./v0.4.5/testing-scenarios.md) - Detailed privacy test scenarios
 - [v0.4.3 Security Audit](./v0.4.5/security-audit.md) - Security requirements
 

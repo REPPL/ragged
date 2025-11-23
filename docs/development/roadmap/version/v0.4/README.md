@@ -832,7 +832,7 @@ The completed phases (1, 4, 5) establish the critical foundation needed for auto
 - [v0.4 Planning](../../../planning/version/v0.4/) - Memory system design overview
 
 **Implementation Roadmaps**:
-- [v0.3 Roadmap](../../v0.3/README.md) - Advanced retrieval & document intelligence (13 releases, Q2-Q3 2026)
+- [v0.3 Roadmap](../../README.md) - Advanced retrieval & document intelligence (13 releases, Q2-Q3 2026)
   - See especially [v0.3.7](../v0.3/v0.3.7.md) - VectorStore abstraction foundation
 - [v0.4 Detailed Spec](v0.4-detailed-spec.md) - Original comprehensive roadmap (kept for reference)
 - Individual release roadmaps:
@@ -843,7 +843,7 @@ The completed phases (1, 4, 5) establish the critical foundation needed for auto
 
 **Implementation Guides**:
 - [Execution Playbook](execution-playbook.md) - Step-by-step implementation guide for autonomous execution
-- [Progress Tracker](progress-tracker.md) - Real-time status tracking across all 14 releases
+- Progress Tracker - Real-time status tracking across all 14 releases
 - [Testing Guide](testing-guide.md) - Comprehensive testing standards, quality gates, and success criteria
 
 **Enhancement Opportunities** (beyond baseline):

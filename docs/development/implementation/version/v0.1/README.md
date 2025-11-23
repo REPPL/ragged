@@ -88,7 +88,7 @@ Documents reflecting on the process, quality, and outcomes:
 - **Lessons**: [lessons-learned.md](../../../process/devlogs/version/v0.1/lessons-learned.md) - What to carry forward to v0.2
 
 ### 📦 Archive
-- **[archive/](archive/)** - Original working documents created during development
+- **archive/** - Original working documents created during development
   - Preserved for transparency and historical reference
   - See the messy reality of iterative development
   - Contains: implementation guides, checklists, phase completion notes, skeleton summaries
@@ -114,9 +114,9 @@ This structure is designed to be reusable for future versions (v0.2, v0.3, etc.)
 ## Related Documentation
 
 ### Project-Wide Documentation
-- [Project Vision](../../plan/PROJECT-VISION.md) - Overall ragged vision and goals
-- [Development Guide](../../plan/DEVELOPMENT-GUIDE.md) - Development methodology and standards
-- [v0.1 Implementation Plan](../../plans/v0.1-implementation-plan.md) - Original detailed implementation plan
+- Project Vision - Overall ragged vision and goals
+- Development Guide - Development methodology and standards
+- v0.1 Implementation Plan - Original detailed implementation plan
 
 ### Templates Used
 - [devlog-template.md](../../../process/templates/devlog-template.md) - Daily development log template
@@ -134,7 +134,7 @@ This structure is designed to be reusable for future versions (v0.2, v0.3, etc.)
 - **Track quality metrics**: Examine [testing.md](testing.md)
 - **See the development timeline**: Review [timeline.md](../../../process/devlogs/version/v0.1/timeline.md)
 - **View what changed**: Read [CHANGELOG.md](../v0.5.6/CHANGELOG.md)
-- **See the original working docs**: Explore [archive/](archive/)
+- **See the original working docs**: Explore archive/
 
 ## Contributing to This Log
 

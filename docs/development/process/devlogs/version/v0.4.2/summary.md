@@ -265,8 +265,8 @@ v0.4.2 refined ragged's vector storage layer into a clean abstraction with facto
 
 ## Related Documentation
 
-- [Implementation Summary](../../../../implementation/version/v0.4/v0.4.2/summary.md)
-- [Lineage](../../../../implementation/version/v0.4/v0.4.2/lineage.md)
+- Implementation Summary
+- Lineage
 - [Time Log](../../../time-logs/version/v0.4.2/time-tracking.md)
 - [ADR-0015: VectorStore Abstraction](../../../../decisions/adrs/0015-vectorstore-abstraction.md) (from v0.3)
 

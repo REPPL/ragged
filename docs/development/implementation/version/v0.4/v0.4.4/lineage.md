@@ -6,7 +6,7 @@
 
 ## Planning Phase
 
-**Document**: [v0.4 Overview](../../planning/version/v0.4/README.md)
+**Document**: v0.4 Overview
 
 **Vision**: Establish ragged as production-ready RAG system with plugin architecture, memory system, and behaviour learning.
 
@@ -202,7 +202,7 @@
 
 ## Related Documentation
 
-- [v0.4 Planning Overview](../../planning/version/v0.4/README.md) - Overall vision
+- v0.4 Planning Overview - Overall vision
 - [v0.4.4 Roadmap](../../../../roadmap/version/v0.4/v0.4.4.md) - Detailed plan
 - [v0.4.4 README](./README.md) - Implementation summary
 - [v0.4.4 Summary](./summary.md) - Implementation narrative

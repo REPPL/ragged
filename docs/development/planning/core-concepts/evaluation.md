@@ -165,7 +165,7 @@ class Evaluator:
 ## Related Documentation
 
 - **[Testing Strategy](testing-strategy.md)** - Testing approach
-- **[Development Guide](../DEVELOPMENT-GUIDE.md)** - Development process
+- **Development Guide** - Development process
 - **[RAG Fundamentals](rag-fundamentals.md)** - RAG technical background
 - **[Best Practices](../../../research/background/best-practices.md)** - Research best practices
 

@@ -80,21 +80,21 @@ We've split CLI documentation into three progressive guides:
 All ragged CLI commands organised by category:
 
 ### Core Operations
-- `ragged ingest` - Add documents (pdf, batch, status commands) ([Essentials](./essentials.md#2-ragged-ingest---add-documents))
-- `ragged query` - Ask questions (text, image, hybrid, interactive modes) ([Essentials](./essentials.md#3-ragged-query---ask-questions))
-- `ragged list` - View documents ([Essentials](./essentials.md#4-ragged-list---view-documents))
-- `ragged clear` - Remove documents ([Essentials](./essentials.md#remove-documents))
-- `ragged health` - Check service status ([Essentials](./essentials.md#1-ragged-health---check-system-status))
-- `ragged config` - Manage configuration ([Essentials](./essentials.md#5-ragged-config---manage-configuration))
+- `ragged ingest` - Add documents (pdf, batch, status commands) (Essentials)
+- `ragged query` - Ask questions (text, image, hybrid, interactive modes) (Essentials)
+- `ragged list` - View documents (Essentials)
+- `ragged clear` - Remove documents (Essentials)
+- `ragged health` - Check service status (Essentials)
+- `ragged config` - Manage configuration (Essentials)
 
 ### Organisation (Intermediate)
-- `ragged metadata` - Tag and organise documents ([Intermediate](./intermediate.md#metadata-management-tagging-and-organisation))
+- `ragged metadata` - Tag and organise documents (Intermediate)
   - `ragged metadata update` - Add/change tags
   - `ragged metadata show` - View document tags
   - `ragged metadata list` - See all metadata
   - `ragged metadata search` - Find by tags
-- `ragged search` - Search without AI generation ([Intermediate](./intermediate.md#advanced-search-beyond-basic-querying))
-- `ragged history` - Query history tracking ([Intermediate](./intermediate.md#query-history-track-your-research-journey))
+- `ragged search` - Search without AI generation (Intermediate)
+- `ragged history` - Query history tracking (Intermediate)
   - `ragged history list` - View past queries
   - `ragged history show` - Show query details
   - `ragged history replay` - Re-run a query
@@ -102,14 +102,14 @@ All ragged CLI commands organised by category:
   - `ragged history clear` - Clear history
 
 ### System Maintenance (Advanced)
-- `ragged cache` - Manage caches ([Advanced](./advanced.md#cache-management-performance-and-disk-space))
+- `ragged cache` - Manage caches (Advanced)
   - `ragged cache info` - View cache stats
   - `ragged cache clear` - Clear caches
-- `ragged export` - Export and backup ([Advanced](./advanced.md#export-and-backup-protect-your-data))
+- `ragged export` - Export and backup (Advanced)
   - `ragged export backup` - Create backup
-- `ragged validate` - Validate configuration ([Advanced](./advanced.md#configuration-validation-catch-issues-early))
-- `ragged env-info` - Environment information ([Advanced](./advanced.md#environment-information-debug-and-report-issues))
-- `ragged completion` - Shell completion ([Advanced](./advanced.md#shell-completion-faster-command-entry))
+- `ragged validate` - Validate configuration (Advanced)
+- `ragged env-info` - Environment information (Advanced)
+- `ragged completion` - Shell completion (Advanced)
 
 ---
 
@@ -120,7 +120,7 @@ All ragged CLI commands organised by category:
 **Goal**: Get ragged working and ask your first question.
 
 **Steps**:
-1. Complete [installation](../../tutorials/complete-beginners-guide.md#installation-step-by-step)
+1. Complete installation
 2. Learn [5 essential commands](./essentials.md)
 3. Add your first 5-10 documents
 4. Practice querying
@@ -135,8 +135,8 @@ All ragged CLI commands organised by category:
 
 **Steps**:
 1. Master [CLI Essentials](./essentials.md)
-2. Learn [metadata management](./intermediate.md#metadata-management-tagging-and-organisation)
-3. Use [query history](./intermediate.md#query-history-track-your-research-journey)
+2. Learn metadata management
+3. Use query history
 4. Follow [Research Papers Guide](../use-cases/research-papers.md)
 
 **Time**: 3-4 hours total
@@ -149,10 +149,10 @@ All ragged CLI commands organised by category:
 
 **Steps**:
 1. Complete Essentials and Intermediate
-2. Set up [automated backups](./advanced.md#backup-strategies)
-3. Configure [shell completion](./advanced.md#shell-completion-faster-command-entry)
-4. Implement [cache management](./advanced.md#cache-management-performance-and-disk-space)
-5. Tune [performance settings](./advanced.md#performance-tuning)
+2. Set up automated backups
+3. Configure shell completion
+4. Implement cache management
+5. Tune performance settings
 
 **Time**: 5-6 hours total
 
@@ -163,35 +163,35 @@ All ragged CLI commands organised by category:
 **I want to...**
 
 ### ...add documents
-- **Single file**: [Essentials: Adding Documents](./essentials.md#2-ragged-ingest---add-documents)
-- **Folder**: [Essentials: Folder Ingestion](./essentials.md#folder-ingestion-options)
-- **With metadata**: [Intermediate: Metadata Management](./intermediate.md#adding-metadata-to-documents)
+- **Single file**: Essentials: Adding Documents
+- **Folder**: Essentials: Folder Ingestion
+- **With metadata**: Intermediate: Metadata Management
 
 ### ...ask questions
-- **Simple query**: [Essentials: Querying](./essentials.md#3-ragged-query---ask-questions)
-- **With filters**: [Intermediate: Advanced Search](./intermediate.md#advanced-search-beyond-basic-querying)
-- **Interactive mode**: [Essentials: Interactive Mode](./essentials.md#interactive-mode)
+- **Simple query**: Essentials: Querying
+- **With filters**: Intermediate: Advanced Search
+- **Interactive mode**: Essentials: Interactive Mode
 
 ### ...organise my collection
-- **Tag documents**: [Intermediate: Metadata Management](./intermediate.md#metadata-management-tagging-and-organisation)
-- **Search by tags**: [Intermediate: Search by Metadata](./intermediate.md#search-by-metadata)
-- **View organisation**: [Intermediate: List Metadata](./intermediate.md#list-all-metadata-keys-and-values)
+- **Tag documents**: Intermediate: Metadata Management
+- **Search by tags**: Intermediate: Search by Metadata
+- **View organisation**: Intermediate: List Metadata
 
 ### ...track my research
-- **View query history**: [Intermediate: Query History](./intermediate.md#view-query-history)
-- **Replay queries**: [Intermediate: Replay a Query](./intermediate.md#replay-a-query)
-- **Export history**: [Intermediate: Export Query History](./intermediate.md#export-query-history)
+- **View query history**: Intermediate: Query History
+- **Replay queries**: Intermediate: Replay a Query
+- **Export history**: Intermediate: Export Query History
 
 ### ...maintain my system
-- **Backup data**: [Advanced: Export and Backup](./advanced.md#create-a-backup)
-- **Clear cache**: [Advanced: Cache Management](./advanced.md#clear-specific-caches)
-- **Validate setup**: [Advanced: Configuration Validation](./advanced.md#basic-validation)
-- **Debug issues**: [Advanced: Environment Information](./advanced.md#basic-environment-info)
+- **Backup data**: Advanced: Export and Backup
+- **Clear cache**: Advanced: Cache Management
+- **Validate setup**: Advanced: Configuration Validation
+- **Debug issues**: Advanced: Environment Information
 
 ### ...improve performance
-- **Shell completion**: [Advanced: Install Completion](./advanced.md#install-completion)
-- **Cache tuning**: [Advanced: Cache Best Practices](./advanced.md#cache-best-practices)
-- **Performance tuning**: [Advanced: Performance Tuning](./advanced.md#performance-tuning)
+- **Shell completion**: Advanced: Install Completion
+- **Cache tuning**: Advanced: Cache Best Practices
+- **Performance tuning**: Advanced: Performance Tuning
 
 ---
 
@@ -289,7 +289,7 @@ Found an error in these guides? Have a suggestion?
 
 - **Documentation issues**: [Report on GitHub](https://github.com/REPPL/ragged/issues)
 - **Feature requests**: [Discuss on GitHub](https://github.com/REPPL/ragged/discussions)
-- **Pull requests**: [Contributing Guide](../../CONTRIBUTING.md)
+- **Pull requests**: Contributing Guide
 
 ---
 

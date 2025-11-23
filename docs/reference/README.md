@@ -78,6 +78,6 @@ See [contributing guide](../../CONTRIBUTING.md) for how to help.
 
 
 **See Also**:
-- [API Source Code](../../src/ragged/) - Implementation
+- API Source Code - Implementation
 - [Tutorials](../tutorials/) - Learn to use the API
 - [Guides](../guides/) - Solve specific problems

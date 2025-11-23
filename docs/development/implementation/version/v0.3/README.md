@@ -184,8 +184,8 @@ The v0.3 series transforms ragged from a functional RAG system into an intellige
 
 ## Related Documentation
 
-- [v0.3 Planning](../../planning/version/v0.3/) - High-level design goals
-- [v0.3 Roadmap](../../roadmap/version/v0.3/) - Detailed implementation plans
-- [v0.3 Features](../../roadmap/version/v0.3/features/) - Feature specifications
+- v0.3 Planning - High-level design goals
+- v0.3 Roadmap - Detailed implementation plans
+- v0.3 Features - Feature specifications
 
 ---

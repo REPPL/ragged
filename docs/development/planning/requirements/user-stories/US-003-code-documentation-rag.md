@@ -313,7 +313,7 @@
 ## Related Personas
 
 ### Primary: Developer
-**Definition**: [Developer Persona](../../core-concepts/personal-memory-personas.md#developer-persona)
+**Definition**: Developer Persona
 
 **Characteristics**:
 - Software developer/engineer
@@ -344,15 +344,15 @@ focus_areas:
 ## Cross-References
 
 ### Implementation
-- [Model Selection - Code Generation](../../core-concepts/model-selection.md#task-based-routing)
-- [Developer Persona](../../core-concepts/personal-memory-personas.md#developer-persona)
+- Model Selection - Code Generation
+- Developer Persona
 
 ### Architecture
-- [Code-Specific Routing](../../core-concepts/model-selection.md#routing-strategies)
-- [Specialised Models](../../core-concepts/hardware-optimisation.md#model-recommendations)
+- Code-Specific Routing
+- Specialised Models
 
 ### Testing
-- [Code Generation Testing](../../core-concepts/testing-strategy.md#component-level-testing)
+- Code Generation Testing
 
 ---
 

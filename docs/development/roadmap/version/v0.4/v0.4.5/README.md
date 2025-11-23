@@ -37,13 +37,13 @@ v0.4.5 introduces the **personal memory system**—the most privacy-sensitive co
 5. ✅ GDPR compliance confirmed
 6. ✅ No critical security findings
 
-**Pass Criteria**: See [security-audit.md](./security-audit.md#success-criteria)
+**Pass Criteria**: See security-audit.md
 
 ### Implementation Checklist
 
 Before starting v0.4.5 implementation, verify:
 
-- [ ] Security audit complete (see [v0.4.4.md](../v0.4.4.md#security-audit-preparation))
+- [ ] Security audit complete (see v0.4.4.md)
 - [ ] Audit report shows **NO critical findings**
 - [ ] All high-priority recommendations addressed in design
 - [ ] Privacy framework documented (see [privacy-framework.md](./privacy-framework.md))
@@ -189,7 +189,7 @@ ragged memory export <output-file> --persona researcher
 ragged memory clear --persona researcher --confirm
 ```
 
-**Privacy-Focused Commands** (see [privacy-framework.md](./privacy-framework.md#user-privacy-controls)):
+**Privacy-Focused Commands** (see privacy-framework.md):
 ```bash
 # View all collected data
 ragged memory show-all --persona researcher

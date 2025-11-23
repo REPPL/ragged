@@ -255,7 +255,7 @@ LEANN is **mandatory in the architecture** but **optional at runtime** based on 
 ## Related Documentation
 
 - [v0.4.3 Roadmap Specification](../../../../roadmap/version/v0.4/v0.4.3.md) - Detailed implementation plan
-- [v0.4 Planning Overview](../../../planning/version/v0.4/README.md) - High-level design goals
+- v0.4 Planning Overview - High-level design goals
 - [v0.4.3 Implementation Summary](./summary.md) - Detailed metrics and results
 - [v0.4.3 Lineage](./lineage.md) - Traceability from planning to implementation
 - [ADR-0018: LEANN Integration Decision](../../../../decisions/adrs/0018-leann-integration-decision.md) - Architecture decision

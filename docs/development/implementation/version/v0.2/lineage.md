@@ -23,8 +23,8 @@ This document traces the lineage from planning through decisions to implementati
 - [Enhanced Retrieval](../../../planning/architecture/enhanced-retrieval.md) - Better search
 
 **Core Concepts:**
-- [Chunking Strategy](../../../planning/core-concepts/chunking.md) - Overlap optimisation
-- [Metadata Extraction](../../../planning/core-concepts/metadata.md) - Document metadata
+- Chunking Strategy - Overlap optimisation
+- Metadata Extraction - Document metadata
 
 ### 2. Architectural Decisions
 
@@ -43,7 +43,7 @@ This document traces the lineage from planning through decisions to implementati
 ### 3. Implementation Records
 
 **Current Status:**
-- [v0.2 Summary](./summary.md) - Partial implementation status
+- v0.2 Summary - Partial implementation status
 - [v0.2 Implementation Notes](../v0.1/implementation-notes.md) - Technical details (in progress)
 
 **Development Narrative:**
@@ -145,7 +145,7 @@ This document traces the lineage from planning through decisions to implementati
 - v0.2 ADRs (to be created)
 
 **Implementation:**
-- [v0.2 Summary](./summary.md)
+- v0.2 Summary
 - [Implementation Notes](../v0.1/implementation-notes.md)
 
 **Previous Version:**
@@ -162,7 +162,7 @@ This document traces the lineage from planning through decisions to implementati
 - Identified 9 high-priority quality improvements (QUALITY-001 through QUALITY-009)
 
 **Roadmap:**
-- [v0.2.5 Roadmap](../../../roadmap/version/v0.2.5/) - Detailed implementation plan
+- v0.2.5 Roadmap - Detailed implementation plan
 - Estimated 13-20 hours for quality improvements
 - Prioritised type safety, test coverage, and error handling
 
@@ -219,7 +219,7 @@ This document traces the lineage from planning through decisions to implementati
 - Prioritised CRITICAL vulnerabilities: pickle RCE and session isolation
 
 **Implementation:**
-- [v0.2.10 Release Notes](./v0.2.10.md) - Completed security features
+- [v0.2.10 Release Notes](./v0.2.10/README.md) - Completed security features
 - ~20 hours actual (within estimate)
 - All 4 planned security features successfully implemented
 

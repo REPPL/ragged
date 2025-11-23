@@ -31,7 +31,7 @@
 - [ ] Noted key differences from prior art
 
 **External Inspirations**:
-- [Project Name](../../acknowledgements/project-name.md) - Concept X adapted
+- Project Name - Concept X adapted
 - [Research Paper] - Technique Y influenced design
 
 **Key Differences**: [How ragged's approach differs from prior art]

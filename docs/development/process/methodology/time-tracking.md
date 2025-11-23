@@ -305,7 +305,7 @@ To enhance transparency and reproducibility of ragged's development process, we 
 ---
 
 **Next Version**: [v0.3 summary](./v0.3-summary.md)
-**Detailed Logs**: [v0.2 feature logs](./v0.2/)
+**Detailed Logs**: v0.2 feature logs
 ```
 
 ---

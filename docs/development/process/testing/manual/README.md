@@ -132,7 +132,7 @@ Each version test directory links to test plan:
 ## Test Plan
 
 Detailed test scenarios and checklists:
-- [v0.2.9 Manual Test Plan](../../../docs/development/process/testing/manual/v0.2/v0.2.9-manual-tests.md)
+- v0.2.9 Manual Test Plan
 ```
 
 ---

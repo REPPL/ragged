@@ -8,7 +8,7 @@
 
 This directory contains **development logs** organised by version, providing a narrative account of how each version was built.
 
-**Important:** This is NOT the canonical source for implementation records. For technical documentation, see [implementation/version/](../../../../implementation/version/).
+**Important:** This is NOT the canonical source for implementation records. For technical documentation, see implementation/version/.
 
 ### Distinction
 
@@ -34,22 +34,22 @@ Each version directory contains:
 ## Current Versions
 
 - **[v0.1/](./v0.1/)** - MVP development narrative (complete)
-  - Canonical docs: [implementation/version/v0.1/](../../../../implementation/version/v0.1/)
+  - Canonical docs: implementation/version/v0.1/
 - **[v0.2/](./v0.2/)** - Enhanced retrieval development (complete)
-  - Canonical docs: [implementation/version/v0.2/](../../../../implementation/version/v0.2/)
+  - Canonical docs: implementation/version/v0.2/
 - **[v0.3.3/](./v0.3.3/)** - Intelligent Chunking development
-  - Canonical docs: [implementation/version/v0.3/v0.3.3/](../../../../implementation/version/v0.3/v0.3.3/)
+  - Canonical docs: implementation/version/v0.3/v0.3.3/
 - **[v0.3.4a/](./v0.3.4a/)** - Vector Scaling & Optimisation (planned)
-  - Canonical docs: [implementation/version/v0.3/v0.3.4a/](../../../../implementation/version/v0.3/v0.3.4a/)
+  - Canonical docs: implementation/version/v0.3/v0.3.4a/
 - **[v0.3.4b/](./v0.3.4b/)** - Hybrid Search & Query Optimisation (planned)
-  - Canonical docs: [implementation/version/v0.3/v0.3.4b/](../../../../implementation/version/v0.3/v0.3.4b/)
+  - Canonical docs: implementation/version/v0.3/v0.3.4b/
 
 ---
 
 ## Related Documentation
 
 - [Daily Logs](../daily/) - Day-by-day progress
-- **[Implementations](../../../../implementation/version/)** - **Canonical source of truth**
+- **Implementations** - **Canonical source of truth**
 - [Decisions](../../../decisions/adrs) - Architectural decisions
 
 ---

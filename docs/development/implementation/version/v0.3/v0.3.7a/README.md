@@ -158,7 +158,7 @@ ragged versions compare doc_abc123 1 2
 **Related Documentation:**
 - [ADR-0020: Document Version Tracking](../../../../decisions/adrs/0020-document-version-tracking.md) - Architecture decision
 - [v0.3 Index](../README.md) - All v0.3.x implementations
-- [v0.3.7 Roadmap](../../../../roadmap/version/v0.3.7/README.md) - Full v0.3.7 plan (5 features)
+- v0.3.7 Roadmap - Full v0.3.7 plan (5 features)
 
 **Source Code:**
 - [VersionTracker](../../../../../../src/storage/version_tracker.py) - Core implementation

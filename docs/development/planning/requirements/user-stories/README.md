@@ -85,7 +85,7 @@ User stories are organised by **persona** and linked to **implementation version
 
 ### Researcher
 **Primary Stories**: US-001, US-002
-**Persona Definition**: [Personal Memory & Personas](../../core-concepts/personal-memory-personas.md#researcher-persona)
+**Persona Definition**: Personal Memory & Personas
 
 **Key Needs**:
 - Academic paper management
@@ -100,7 +100,7 @@ User stories are organised by **persona** and linked to **implementation version
 
 ### Developer
 **Primary Stories**: US-003
-**Persona Definition**: [Personal Memory & Personas](../../core-concepts/personal-memory-personas.md#developer-persona)
+**Persona Definition**: Personal Memory & Personas
 
 **Key Needs**:
 - Code documentation search
@@ -115,7 +115,7 @@ User stories are organised by **persona** and linked to **implementation version
 
 ### Casual
 **Primary Stories**: US-004
-**Persona Definition**: [Personal Memory & Personas](../../core-concepts/personal-memory-personas.md#casual-persona)
+**Persona Definition**: Personal Memory & Personas
 
 **Key Needs**:
 - Personal note management

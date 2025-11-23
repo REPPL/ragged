@@ -4,8 +4,6 @@
 
 **Target Audience:** Users with NVIDIA CUDA or Apple Silicon GPUs
 
-**Last Updated:** 2025-11-23
-
 ---
 
 ## Overview

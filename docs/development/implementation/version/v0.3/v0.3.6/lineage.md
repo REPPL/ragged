@@ -32,7 +32,7 @@
 
 ### Phase 2: Roadmap (HOW & WHEN)
 
-**Document**: [ADR-0015: Implementation Plan, Phase 1-2](../../../../decisions/adrs/0015-vectorstore-abstraction.md#implementation-plan)
+**Document**: ADR-0015: Implementation Plan, Phase 1-2
 
 **Implementation Strategy**:
 

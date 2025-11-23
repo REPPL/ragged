@@ -217,7 +217,7 @@ v0.4.2 delivered a clean vector store abstraction layer, refining the architectu
 ## Related Documentation
 
 - [v0.4.2 Roadmap Specification](../../../../roadmap/version/v0.4/v0.4.2.md) - Detailed implementation plan
-- [v0.4 Planning Overview](../../../planning/version/v0.4/README.md) - High-level design goals
+- v0.4 Planning Overview - High-level design goals
 - [v0.4.2 Implementation Summary](./summary.md) - Detailed metrics and results
 - [v0.4.2 Lineage](./lineage.md) - Traceability from planning to implementation
 - [ADR-0015: VectorStore Abstraction](../../../../decisions/adrs/0015-vectorstore-abstraction.md) - Architecture decision (if exists)

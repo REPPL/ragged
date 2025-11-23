@@ -901,7 +901,7 @@ ragged validate --verbose
 - [Personal Notes Guide](../use-cases/personal-notes.md) - Personal knowledge management workflows
 - [Research Papers Guide](../use-cases/research-papers.md) - Academic literature workflows
 - [Architecture Overview](../../explanation/architecture-overview.md) - Understanding ragged's internals
-- [Contributing Guide](../../CONTRIBUTING.md) - Help improve ragged
+- Contributing Guide - Help improve ragged
 - [API Reference](../../reference/api/README.md) - Programmatic usage (v0.3+)
 
 ---

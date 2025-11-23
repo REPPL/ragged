@@ -457,8 +457,8 @@ logger.info(f"Processing query: {query_hash}, sub-queries: {len(sub_queries)}")
 
 ### Detailed Policies
 
-- [Security Policy](../../../../../security/policy.md#secure-coding-standards) - Input validation and query handling
-- [Privacy Architecture](../../../../security/privacy-architecture.md#session-isolation) - Session-scoped caching
+- Security Policy - Input validation and query handling
+- Privacy Architecture - Session-scoped caching
 
 ## Implementation Phases
 
@@ -893,10 +893,10 @@ All dependencies are GPL-3.0 compatible.
 
 - [v0.3.0 Roadmap](../v0.3.0.md) - Detailed implementation plan for advanced query processing
 - [v0.3.0 Roadmap](../v0.3.0.md) - RAGAS evaluation (baseline scores)
-- [v0.3 Planning](../../../planning/version/v0.3/README.md) - High-level v0.3 design goals
+- v0.3 Planning - High-level v0.3 design goals
 - [v0.3 Master Roadmap](../README.md) - Complete v0.3 overview
-- [Security Policy](../../../../../security/policy.md#data-minimisation) - Query hashing
-- [Privacy Architecture](../../../../security/privacy-architecture.md#session-isolation) - Session-scoped caching
+- Security Policy - Query hashing
+- Privacy Architecture - Session-scoped caching
 
 ---
 

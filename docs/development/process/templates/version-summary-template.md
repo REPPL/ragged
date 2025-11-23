@@ -498,8 +498,8 @@
 
 ### Architecture Decision Records
 
-- [ADR-XXXX: Title](../decisions/XXXX-title.md)
-- [ADR-YYYY: Title](../decisions/YYYY-title.md)
+- ADR-XXXX: Title
+- ADR-YYYY: Title
 
 ### Commits and PRs
 

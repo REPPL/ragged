@@ -229,9 +229,9 @@ config = {
 
 ## Related Documentation
 
-- [Link to planning doc](../../planning/version/vX.X/file.md)
-- [Link to implementation](../../implementation/version/vX.X/file.md)
-- [Link to ADR](../../../decisions/adrs/XXX-title.md)
+- Link to planning doc
+- Link to implementation
+- Link to ADR
 
 ---
 

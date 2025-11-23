@@ -127,9 +127,9 @@ This structure is designed to be reusable for future versions (v0.2, v0.3, etc.)
 ## Related Documentation
 
 ### Project-Wide Documentation
-- [Project Vision](../../plan/PROJECT-VISION.md) - Overall ragged vision and goals
-- [Development Guide](../../plan/DEVELOPMENT-GUIDE.md) - Development methodology and standards
-- [v0.1 Implementation Plan](../../plans/v0.1-implementation-plan.md) - Original detailed implementation plan
+- Project Vision - Overall ragged vision and goals
+- Development Guide - Development methodology and standards
+- v0.1 Implementation Plan - Original detailed implementation plan
 
 ### Templates Used
 - [devlog-template.md](../../../templates/devlog-template.md) - Daily development log template

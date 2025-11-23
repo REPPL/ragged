@@ -2356,8 +2356,3 @@ Each architectural component maps to specific user story acceptance criteria:
 
 ### User Documentation
 - [Architecture Overview (User-facing)](../../../explanation/architecture-overview.md) - High-level architecture explanation
-
----
-
-**Document Last Updated:** 2025-11-09
-**Architecture Version:** 2025 State-of-the-Art with Personal Memory, Hardware Optimisation, and User Stories

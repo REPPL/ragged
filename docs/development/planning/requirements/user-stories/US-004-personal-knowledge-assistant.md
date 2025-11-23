@@ -329,7 +329,7 @@
 ## Related Personas
 
 ### Primary: Casual
-**Definition**: [Casual Persona](../../core-concepts/personal-memory-personas.md#casual-persona)
+**Definition**: Casual Persona
 
 **Characteristics**:
 - Non-technical user
@@ -356,8 +356,8 @@ auto_features:
 ## Cross-References
 
 ### Implementation
-- [Casual Persona](../../core-concepts/personal-memory-personas.md#casual-persona)
-- [Fast Tier Models](../../core-concepts/hardware-optimisation.md#performance-tiers)
+- Casual Persona
+- Fast Tier Models
 
 ### Architecture
 - [Simple UI/CLI](../../architecture/README.md)
@@ -365,7 +365,7 @@ auto_features:
 
 ### Testing
 - [User Experience Testing](../../core-concepts/testing-strategy.md)
-- [Performance Testing](../../core-concepts/testing-strategy.md#performance-testing)
+- Performance Testing
 
 ---
 

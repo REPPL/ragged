@@ -164,7 +164,7 @@ See [v0.3.0 roadmap](../v0.3.0.md) for detailed implementation.
 ## Related Documentation
 
 - [v0.3.0 Roadmap](../v0.3.0.md) - Detailed implementation
-- [v0.3 Planning](../../../planning/version/v0.3/README.md) - Design goals
+- v0.3 Planning - Design goals
 - [v0.3 Master Roadmap](../README.md) - Complete v0.3 overview
 
 ---

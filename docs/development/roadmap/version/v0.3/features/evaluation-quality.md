@@ -467,8 +467,8 @@ results = {
 
 ### Detailed Policies
 
-- [Security Policy](../../../../../security/policy.md#gdpr-compliance) - Data minimisation principles
-- [Privacy Architecture](../../../../security/privacy-architecture.md#privacy-principles) - Data minimisation and PII in test sets
+- Security Policy - Data minimisation principles
+- Privacy Architecture - Data minimisation and PII in test sets
 
 ## Implementation Phases
 
@@ -904,10 +904,10 @@ All dependencies are GPL-3.0 compatible.
 ## Related Documentation
 
 - [v0.3.0 Roadmap](../v0.3.0.md) - Detailed implementation plan for RAGAS evaluation
-- [v0.3 Planning](../../../planning/version/v0.3/README.md) - High-level v0.3 design goals
+- v0.3 Planning - High-level v0.3 design goals
 - [v0.3 Master Roadmap](../README.md) - Complete v0.3 overview
 - [RAGAS Framework](https://github.com/explodinggradients/ragas) - Official RAGAS documentation
-- [Privacy Architecture](../../../../security/privacy-architecture.md#data-minimisation) - Query hashing requirements
+- Privacy Architecture - Query hashing requirements
 
 ---
 

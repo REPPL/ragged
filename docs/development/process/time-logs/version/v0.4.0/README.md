@@ -25,8 +25,8 @@ Actual hours spent implementing v0.4.0 security features.
 
 ## Related Documentation
 
-- [v0.4.0 Development Logs](../../devlogs/version/v0.4.0/) - Daily development narratives
-- [v0.4.0 Implementation](../../../implementation/version/v0.4/v0.4.0/) - Technical record
+- v0.4.0 Development Logs - Daily development narratives
+- v0.4.0 Implementation - Technical record
 - [Time Logs Overview](../../README.md) - All time tracking
 
 ---

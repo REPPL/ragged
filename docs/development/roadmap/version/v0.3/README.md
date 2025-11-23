@@ -49,7 +49,7 @@ Without v0.2.10 and v0.2.11, these features would:
 - Security testing framework
 - Pre-commit security validation
 
-**[→ v0.2.10 Roadmap](../../v0.2/v0.2.10/)**
+**[→ v0.2.10 Roadmap](../v0.2/v0.2.10/)**
 
 ### Privacy Infrastructure (v0.2.11)
 
@@ -65,7 +65,7 @@ Without v0.2.10 and v0.2.11, these features would:
 - GDPR compliance foundations (deletion, export, access rights)
 - Privacy configuration system
 
-**[→ v0.2.11 Roadmap](../../v0.2/v0.2.11/)**
+**[→ v0.2.11 Roadmap](../v0.2/v0.2.11/)**
 
 ### How v0.3.x Uses the Foundation
 
@@ -1365,7 +1365,7 @@ scheduler.schedule_cleanup(data_path, ttl_days=90)
 - [v0.2.11 Roadmap](../v0.2/v0.2.11/) - Privacy Infrastructure (REQUIRED before v0.3.x)
 
 ### Planning Documentation
-- [v0.3.0 Planning](../../planning/version/v0.3/) - Design goals and requirements
+- [v0.3.0 Planning](../../../planning/version/v0.3/) - Design goals and requirements
 
 ### Feature Specifications
 - [Query Processing Features](./features/query-processing.md) - Detailed specs

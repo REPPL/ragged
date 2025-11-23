@@ -400,11 +400,11 @@ v0.5.5 represents a strategic pivot from planned integration testing to addressi
 
 ## Related Documentation
 
-- [Implementation Summary](../../../../implementation/version/v0.5/v0.5.5/summary.md)
-- [Lineage](../../../../implementation/version/v0.5/v0.5.5/lineage.md)
+- Implementation Summary
+- Lineage
 - [Time Log](../../../time-logs/version/v0.5.5/time-tracking.md)
 - [v0.5.5 Roadmap](../../../../roadmap/version/v0.5/v0.5.5.md) - Original plan
-- [v0.5.3 Implementation](../../../../implementation/version/v0.5/v0.5.3/README.md) - Features tested
+- [v0.5.3 Implementation](../../../../implementation/version/v0.5/README.md) - Features tested
 
 ---
 

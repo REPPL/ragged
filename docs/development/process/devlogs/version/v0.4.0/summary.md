@@ -214,8 +214,8 @@ Three Architecture Decision Records created during v0.4.0:
 
 ## Related Documentation
 
-- [Implementation Summary](../../../../implementation/version/v0.4/v0.4.0/summary.md)
-- [Lineage](../../../../implementation/version/v0.4/v0.4.0/lineage.md)
+- Implementation Summary
+- Lineage
 - [Time Log](../../../time-logs/version/v0.4.0/time-tracking.md)
 - [ADR-0016: Memory System Architecture](../../../../decisions/adrs/0016-memory-system-architecture.md)
 - [ADR-0017: Code Quality Standards](../../../../decisions/adrs/0017-code-quality-standards.md)

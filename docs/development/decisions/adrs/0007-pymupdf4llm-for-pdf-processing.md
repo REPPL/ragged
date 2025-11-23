@@ -126,6 +126,6 @@ Markdown output is significantly superior to plain text for RAG use cases. The p
 
 - [PDF Correction (v0.3.10)](../../roadmap/version/v0.3/v0.3.10.md) - PDF improvements
 - [Document Processing Architecture](../../planning/architecture/) - Ingestion pipeline
-- [PDF Correction Implementation](../../implementation/version/v0.3/v0.3.10/) - What was built
+- PDF Correction Implementation - What was built
 
 ---

@@ -414,7 +414,7 @@ This suggests that...
 ## Related Personas
 
 ### Primary: Researcher
-**Definition**: [Researcher Persona](../../core-concepts/personal-memory-personas.md#researcher-persona)
+**Definition**: Researcher Persona
 
 **Use Case**: Personal research notes, hypotheses, observations
 
@@ -429,7 +429,7 @@ memory_scope: persona_only
 ```
 
 ### Secondary: Casual
-**Definition**: [Casual Persona](../../core-concepts/personal-memory-personas.md#casual-persona)
+**Definition**: Casual Persona
 
 **Use Case**: Personal knowledge management, meeting notes, ideas
 
@@ -449,16 +449,16 @@ response_style: conversational
 
 ### Implementation
 - [Personal Memory & Personas](../../core-concepts/personal-memory-personas.md)
-- [Temporal Memory (Kuzu)](../../core-concepts/personal-memory-personas.md#temporal-memory-kuzu)
-- [Privacy & Security](../../core-concepts/personal-memory-personas.md#privacy-security)
+- Temporal Memory (Kuzu)
+- Privacy & Security
 
 ### Architecture
-- [Memory Coordinator](../../core-concepts/personal-memory-personas.md#memory-coordinator)
-- [Encryption Strategy](../../architecture/README.md#encryption)
+- Memory Coordinator
+- Encryption Strategy
 
 ### Testing
-- [Security Testing](../../core-concepts/testing-strategy.md#safety-and-security-testing)
-- [Privacy Testing](../../core-concepts/testing-strategy.md#pii-detection)
+- Security Testing
+- Privacy Testing
 
 ---
 

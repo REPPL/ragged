@@ -401,7 +401,7 @@ v0.4.4 leveraged **automated tooling** (ruff auto-fix) extensively, achieving ev
 ## Related Documentation
 
 - [Development Log](../../../devlogs/version/v0.4.4/summary.md)
-- [Implementation Summary](../../../../implementation/version/v0.4/v0.4.4/summary.md)
+- Implementation Summary
 - [Security Guidelines](../../../../../guides/security-guidelines.md)
 - [Performance Tuning Guide](../../../../../guides/performance-tuning.md)
 - [ADR-0017: Code Quality Standards](../../../../decisions/adrs/0017-code-quality-standards.md)

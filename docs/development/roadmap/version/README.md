@@ -83,7 +83,7 @@ Future      v1.5.0 ━━━━━━━━━━━━━ Collaboration & Multi
 - All P1 bugs resolved
 - 92 new tests added
 
-**See:** v0.2.4/README.md | [CHANGELOG](../../implementation/version/v0.5.6/CHANGELOG.md#024---2025-11-17)
+**See:** v0.2.4/README.md | CHANGELOG
 
 ---
 
@@ -105,7 +105,7 @@ Future      v1.5.0 ━━━━━━━━━━━━━ Collaboration & Multi
 - 100% test coverage for citation formatter
 - ~15 hours (vs 13-20h estimated)
 
-**See:** v0.2.5/README.md | [CHANGELOG](../../implementation/version/v0.5.6/CHANGELOG.md#025---2025-11-17)
+**See:** v0.2.5/README.md | CHANGELOG
 
 ---
 
@@ -120,7 +120,7 @@ Future      v1.5.0 ━━━━━━━━━━━━━ Collaboration & Multi
 - Some improvements incorporated into v0.2.7-v0.2.8 CLI work
 - Remaining structural changes scheduled for v0.3+ as needed
 
-**See:** [v0.2.6/README.md](./v0.2.6/README.md)
+**See:** [v0.2.6/README.md](./v0.2/v0.2.6/README.md)
 
 ---
 
@@ -140,7 +140,7 @@ Future      v1.5.0 ━━━━━━━━━━━━━ Collaboration & Multi
 - Performance optimisations
 - Additional CLI enhancements
 
-**See:** [v0.2.7/README.md](./v0.2.7/README.md)
+**See:** [v0.2.7/README.md](./v0.2/v0.2.7/README.md)
 
 ---
 
@@ -164,7 +164,7 @@ Future      v1.5.0 ━━━━━━━━━━━━━ Collaboration & Multi
 - Testing and documentation
 - Integration with v0.2.7 features
 
-**See:** [v0.2.8/README.md](./v0.2.8/README.md)
+**See:** v0.2.8/README.md
 
 ---
 
