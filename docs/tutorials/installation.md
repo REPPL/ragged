@@ -390,10 +390,10 @@ On first run, ragged downloads required models:
 ragged --help
 
 # Test document ingestion
-ragged add path/to/document.pdf
+ragged ingest pdf path/to/document.pdf
 
 # Test vision capabilities (v0.5.0+)
-ragged add --vision path/to/document.pdf
+ragged ingest pdf path/to/document.pdf --vision
 ```
 
 ---
@@ -437,7 +437,7 @@ pip install torch==2.5.1 torchvision torchaudio
 export RAGGED_VISION_BATCH_SIZE=2  # or 1 for 4GB GPUs
 
 # Or use CLI flag
-ragged add --vision --vision-batch-size 2 document.pdf
+ragged ingest pdf document.pdf --vision --vision-batch-size 2
 ```
 
 #### 5. Slow vision embedding on CPU
