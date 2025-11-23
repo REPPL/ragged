@@ -78,6 +78,7 @@ class TestHierarchicalChunker:
         chunker = HierarchicalChunker(
             parent_chunk_size=200,
             child_chunk_size=80,
+            parent_overlap=50,  # Must be < parent_chunk_size
         )
 
         text = "This is a test document. " * 20  # ~500 chars
@@ -94,6 +95,7 @@ class TestHierarchicalChunker:
         chunker = HierarchicalChunker(
             parent_chunk_size=200,
             child_chunk_size=80,
+            parent_overlap=50,  # Must be < parent_chunk_size
         )
 
         text = "Short text."
@@ -144,6 +146,7 @@ class TestHierarchicalChunker:
         """Test parent chunk creation."""
         chunker = HierarchicalChunker(
             parent_chunk_size=200,
+            child_chunk_size=80,  # Must be < parent_chunk_size
             parent_overlap=50,
         )
 

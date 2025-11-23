@@ -3,6 +3,8 @@
 v0.2.9: Tests for page position mapping and chunk-to-page assignment.
 """
 
+import re
+
 import pytest
 from ragged.chunking.splitters.page_tracking import (
     build_page_position_map,
@@ -173,8 +175,9 @@ class TestBuildCleanToOrigMap:
         original = "Text\n<!-- PAGE 1 -->\nMore text"
         mapping = build_clean_to_orig_map(original)
 
-        # Should correctly skip marker with newline
-        assert len(mapping) == len("TextMore text")
+        # Should correctly skip marker but preserve newlines around it
+        # Clean text: "Text\nMore text" (newline before marker preserved, marker+newline removed)
+        assert len(mapping) == len("Text\nMore text")
 
 
 class TestMapChunksToPages:

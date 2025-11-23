@@ -76,6 +76,14 @@ class HierarchicalChunker:
             raise ValueError(
                 f"parent_chunk_size ({parent_chunk_size}) must be > child_chunk_size ({child_chunk_size})"
             )
+        if parent_overlap >= parent_chunk_size:
+            raise ValueError(
+                f"parent_overlap ({parent_overlap}) must be < parent_chunk_size ({parent_chunk_size})"
+            )
+        if child_overlap >= child_chunk_size:
+            raise ValueError(
+                f"child_overlap ({child_overlap}) must be < child_chunk_size ({child_chunk_size})"
+            )
 
         # Get chunk_overlap from settings for compatibility with existing interface
         settings = get_settings()
@@ -231,6 +239,9 @@ class HierarchicalChunker:
         text_len = len(text)
 
         while start < text_len:
+            # Store previous start to detect infinite loops
+            prev_start = start
+
             # End position
             end = min(start + chunk_size, text_len)
 
@@ -246,11 +257,19 @@ class HierarchicalChunker:
                 chunks.append(chunk)
 
             # Move start forward by (chunk_size - overlap)
-            start += chunk_size - overlap
+            # Ensure we always make forward progress
+            next_start = start + max(chunk_size - overlap, 1)
 
-            # Prevent infinite loop
-            if start <= len(chunks[-1] if chunks else ""):
+            # If we're at the end of the current chunk, jump to end
+            if next_start >= end:
                 start = end
+            else:
+                start = next_start
+
+            # Safety check: ensure we made progress
+            if start <= prev_start:
+                logger.warning(f"Infinite loop detected in chunking at position {start}")
+                start = end  # Force progress
 
         return chunks
 
