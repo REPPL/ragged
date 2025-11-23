@@ -67,6 +67,16 @@ This AI assistance policy was developed with assistance from **Claude Code** (An
 
 *(See also [Time Tracking](./time-tracking-methodology.md) for detailed metrics.)*
 
+### Google Gemini Pro 3
+
+**Version**: Gemini Pro 3
+**Usage**: Graphics and visual assets
+
+**Owns**:
+
+- Logos (project branding)
+- Graphics and visual assets
+
 ---
 
 ## Learnings (so far)

@@ -223,9 +223,11 @@ data/
 .ollama/
 models/
 
+# Working files (temporary, not committed)
+.work/
+
 # Docker volumes
 docker-data/
 .venv-*
 .mailmap
 DOCSTRING_AUDIT_FINDINGS.md
-DOCUMENTATION_AUDIT_REPORT.md
