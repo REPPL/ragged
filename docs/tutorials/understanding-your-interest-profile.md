@@ -547,8 +547,8 @@ ragged memory forget-topic "low-confidence-topic" --yes
 Now that you understand interest profiles, explore:
 
 - **[Behaviour Learning System Guide](../guides/behaviour-learning.md)** - Technical details on how learning works
-- **[Persona Management Tutorial](./managing-personas.md)** - Advanced persona workflows
-- **[Privacy Features Guide](../guides/privacy-features.md)** - Complete privacy controls
+<!-- TODO v0.4.8+: Add Persona Management Tutorial -->
+<!-- TODO v0.4.8+: Add Privacy Features Guide -->
 
 ---
 
@@ -573,8 +573,8 @@ Now that you understand interest profiles, explore:
 
 - [Behaviour Learning System Guide](../guides/behaviour-learning.md) - How behaviour learning works
 - [Behaviour Learning API Reference](../reference/behaviour-learning-api.md) - API documentation
-- [Memory Management Guide](../guides/memory-management.md) - Managing interaction history
-- [Privacy Features Guide](../guides/privacy-features.md) - Privacy and GDPR features
+<!-- TODO v0.4.8+: Add Memory Management Guide -->
+<!-- TODO v0.4.8+: Add Privacy Features Guide -->
 
 ---
 

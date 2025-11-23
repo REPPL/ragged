@@ -982,7 +982,7 @@ for name, interest in profile.topics.items():
 
 - [Understanding Your Interest Profile Tutorial](../tutorials/understanding-your-interest-profile.md) - User-focused guide
 - [Behaviour Learning API Reference](../reference/behaviour-learning-api.md) - Complete API documentation
-- [Memory Management Guide](./memory-management.md) - Interaction tracking and history
-- [Privacy Features Guide](./privacy-features.md) - GDPR and privacy controls
+<!-- TODO v0.4.8+: Add Memory Management Guide -->
+<!-- TODO v0.4.8+: Add Privacy Features Guide -->
 
 ---

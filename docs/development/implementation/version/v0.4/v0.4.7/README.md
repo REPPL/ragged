@@ -688,10 +688,10 @@ With profile (RAG-focused): Latest RAG techniques prioritised
 ## Related Documentation
 
 - [v0.4.7 Lineage](./lineage.md) - Planning → Roadmap → Implementation traceability (to be created)
-- [Understanding Your Interest Profile Tutorial](../../../../tutorials/understanding-your-interest-profile.md) - User guide
-- [Behaviour Learning System Guide](../../../../guides/behaviour-learning.md) - Technical details
-- [Behaviour Learning API Reference](../../../../reference/behaviour-learning-api.md) - API documentation
-- [CHANGELOG.md](../../../../../CHANGELOG.md) - User-facing release notes (to be updated)
+- [Understanding Your Interest Profile Tutorial](../../../../../tutorials/understanding-your-interest-profile.md) - User guide
+- [Behaviour Learning System Guide](../../../../../guides/behaviour-learning.md) - Technical details
+- [Behaviour Learning API Reference](../../../../../reference/behaviour-learning-api.md) - API documentation
+- [CHANGELOG.md](../../../../../../CHANGELOG.md) - User-facing release notes
 
 ---
 

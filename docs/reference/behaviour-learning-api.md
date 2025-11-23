@@ -831,6 +831,6 @@ ragged memory forget-topic "sensitive-topic" --yes
 
 - [Understanding Your Interest Profile Tutorial](../tutorials/understanding-your-interest-profile.md) - User-focused guide
 - [Behaviour Learning System Guide](../guides/behaviour-learning.md) - Technical implementation details
-- [Memory Management Guide](../guides/memory-management.md) - Interaction tracking
+<!-- TODO v0.4.8+: Add Memory Management Guide -->
 
 ---
