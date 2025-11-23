@@ -15,7 +15,6 @@ Submodules
    src.storage.chromadb_store
    src.storage.dual_store
    src.storage.metadata_serializer
-   src.storage.migration
    src.storage.schema
    src.storage.vector_store
    src.storage.vectorstore_factory
