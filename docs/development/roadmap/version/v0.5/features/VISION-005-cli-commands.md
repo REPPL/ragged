@@ -879,8 +879,9 @@ def benchmark(device: str, batch_size: int):
     click.echo(f"✓ Using device: {embedder.device_info}\n")
 
     # Create synthetic test images
+    # Note: 'color' parameter uses American English as required by PIL/Pillow API
     test_images = [
-        Image.new("RGB", (800, 1200), color=(255, 255, 255))
+        Image.new("RGB", (800, 1200), color=(255, 255, 255))  # PIL API requires 'color'
         for _ in range(batch_size * 5)  # 5 batches
     ]
 

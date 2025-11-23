@@ -550,6 +550,9 @@ class RaggedWebUI:
         """
         Format query results as HTML.
 
+        Note: CSS property names use American English spelling ('color', not 'colour')
+        as required by the CSS specification. This is standard across all web technologies.
+
         Args:
             response: RetrievalResponse object
 

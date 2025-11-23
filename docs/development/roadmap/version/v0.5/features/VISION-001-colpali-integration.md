@@ -618,8 +618,11 @@ from src.embeddings.colpali_embedder import ColPaliEmbedder
 
 @pytest.fixture
 def mock_image():
-    """Create a mock document page image."""
-    return Image.new("RGB", (800, 1100), color="white")
+    """Create a mock document page image.
+
+    Note: 'color' parameter uses American English as required by PIL/Pillow API.
+    """
+    return Image.new("RGB", (800, 1100), color="white")  # PIL API requires 'color'
 
 
 @pytest.fixture
