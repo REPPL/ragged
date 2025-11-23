@@ -39,6 +39,12 @@ from ragged.validation.image_validator import ImageValidator
 
 logger = logging.getLogger(__name__)
 
+# v0.5.8 MEDIUM-5: Pin ColPali model to specific revision for security
+# Prevents automatic updates that could introduce vulnerabilities
+# Revision: 7d3c8ab1c1908b32d701308fb1dfb2968d150c67 (vidore/colpali-v1.3-hf)
+# Verified: 2025-11-23
+COLPALI_MODEL_REVISION = "7d3c8ab1c1908b32d701308fb1dfb2968d150c67"
+
 
 class ColPaliEmbedder(BaseEmbedder):
     """
@@ -262,8 +268,10 @@ class ColPaliEmbedder(BaseEmbedder):
 
             # Load model with HuggingFace transformers
             # transformers library automatically shows progress bars during download
+            # v0.5.8 MEDIUM-5: Pin to specific revision for security
             self.model = AutoModel.from_pretrained(
                 self._model_name,
+                revision=COLPALI_MODEL_REVISION,
                 torch_dtype=dtype,
                 cache_dir=str(self.cache_dir) if self.cache_dir else None,
                 device_map=self.device if self.device != "cpu" else None,
@@ -281,8 +289,10 @@ class ColPaliEmbedder(BaseEmbedder):
 
             # Load processor (handles image preprocessing)
             logger.info("Loading ColPali processor")
+            # v0.5.8 MEDIUM-5: Pin to specific revision for security
             self.processor = AutoProcessor.from_pretrained(
                 self._model_name,
+                revision=COLPALI_MODEL_REVISION,
                 cache_dir=str(self.cache_dir) if self.cache_dir else None,
                 local_files_only=False,
             )
