@@ -664,8 +664,8 @@ ragged m[Tab]
 ragged metadata [Tab]
 # Shows: update, show, list, search
 
-ragged query --[Tab]
-# Shows: --k, --min-score, --path, --metadata, --format, --stream, --interactive
+ragged query [Tab]
+# Shows: text, image, hybrid, interactive
 ```
 
 ---
@@ -682,14 +682,14 @@ ragged qu[Tab]  →  ragged query
 ragged metadata sh[Tab]  →  ragged metadata show
 ```
 
-**Option completion**:
+**Subcommand completion with query modes**:
 ```bash
-ragged query --fo[Tab]  →  ragged query --format
+ragged query te[Tab]  →  ragged query text
 ```
 
 **File path completion**:
 ```bash
-ragged add ~/Doc[Tab]  →  ragged add ~/Documents/
+ragged ingest pdf ~/Doc[Tab]  →  ragged ingest pdf ~/Documents/
 ```
 
 ---
@@ -773,7 +773,7 @@ EMBEDDING_MODEL=sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
 ragged cache clear --embedding-cache
 
 # Re-add documents (will use new model)
-ragged add ./documents/ --force
+ragged ingest batch ./documents/
 ```
 
 **Trade-offs**:

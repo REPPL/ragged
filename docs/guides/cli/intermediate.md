@@ -53,7 +53,7 @@ You don't need all these features immediately, but they become valuable as your 
 
 **After adding a document**:
 ```bash
-ragged add paper.pdf
+ragged ingest pdf paper.pdf
 ragged metadata update paper.pdf --set category=research --set year=2023
 ```
 
@@ -633,7 +633,7 @@ Include in methodology appendix.
 ### Quiet mode (errors only)
 
 ```bash
-ragged add document.pdf --quiet
+ragged ingest pdf document.pdf --quiet
 ```
 
 **Output** (only if error):
@@ -650,7 +650,7 @@ No output on success.
 ### Normal mode (default)
 
 ```bash
-ragged add document.pdf
+ragged ingest pdf document.pdf
 ```
 
 **Output**:
@@ -667,7 +667,7 @@ Concise success messages.
 ### Verbose mode (detailed info)
 
 ```bash
-ragged add document.pdf --verbose
+ragged ingest pdf document.pdf --verbose
 ```
 
 **Output**:
@@ -727,7 +727,7 @@ For automation, use `--quiet` and check exit codes:
 
 ```bash
 #!/bin/bash
-ragged add document.pdf --quiet
+ragged ingest pdf document.pdf --quiet
 if [ $? -eq 0 ]; then
   echo "Success"
 else
@@ -745,7 +745,7 @@ fi
 
 ```bash
 # Step 1: Add all documents
-ragged add ./research-papers/
+ragged ingest pdf ./research-papers/
 
 # Step 2: Tag by year (using filename pattern)
 for file in ./research-papers/*2023*.pdf; do
@@ -775,7 +775,7 @@ ragged query "What are recent advances?" \
 
 ```bash
 # Step 1: Add documents
-ragged add quantum-computing/*.pdf
+ragged ingest pdf quantum-computing/*.pdf
 
 # Step 2: Use search to explore what's there
 ragged search "quantum" --k 20

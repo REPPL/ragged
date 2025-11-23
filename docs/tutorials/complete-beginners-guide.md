@@ -367,8 +367,10 @@ Knowledge capitals are not born but built through deliberate policy decisions ar
 ### Add the document to ragged
 
 ```bash
-ragged add sample.txt
+ragged ingest pdf sample.txt
 ```
+
+**Note:** Despite the command name `ingest pdf`, this works for text files too. The name refers to the primary use case.
 
 **What you'll see**:
 ```
@@ -395,7 +397,7 @@ Successfully added: sample.txt
 Now let's query the document:
 
 ```bash
-ragged query "What cities were studied in the research?"
+ragged query text "What cities were studied in the research?"
 ```
 
 **What you'll see**:
@@ -441,13 +443,13 @@ Now that you understand the process, try these queries:
 
 ```bash
 # Ask about methodology
-ragged query "How was the research conducted?"
+ragged query text "How was the research conducted?"
 
 # Ask about findings
-ragged query "What factors contribute to knowledge capital?"
+ragged query text "What factors contribute to knowledge capital?"
 
 # Ask something not in the document
-ragged query "What is the population of London?"
+ragged query text "What is the population of London?"
 ```
 
 **Notice**: The last query will say "No relevant information found" because that information isn't in your document. ragged only answers based on what you've added.
@@ -460,13 +462,13 @@ You can add multiple documents:
 
 ```bash
 # Add a PDF
-ragged add research-paper.pdf
+ragged ingest pdf research-paper.pdf
 
-# Add multiple files
-ragged add paper1.pdf paper2.pdf notes.txt
+# Add multiple files at once
+ragged ingest batch ./ --pattern "*.pdf"
 
 # Add an entire folder
-ragged add ./my-research-papers/
+ragged ingest batch ./my-research-papers/
 ```
 
 **Supported formats**:
@@ -543,7 +545,7 @@ Common reasons and fixes:
    - **Fix**: Add more documents covering the topic
 
 2. **Information spread across multiple chunks**
-   - **Fix**: Use `ragged query "your question" --k 10` to retrieve more chunks (default is 5)
+   - **Fix**: Use `ragged query text "your question" --k 10` to retrieve more chunks (default is 5)
 
 3. **Question too vague**
    - **Fix**: Be more specific. Instead of "What does it say?", ask "What methodology was used?"
@@ -574,7 +576,7 @@ Now that you're set up, explore these features:
 ### 1. Interactive mode
 Ask multiple questions in a conversation:
 ```bash
-ragged query --interactive
+ragged query interactive
 ```
 
 Type your questions, see answers, refine your questions - all in one session.
