@@ -26,7 +26,7 @@ These tests ensure ragged works correctly across:
 - [ ] Core functionality works on all platforms
 - [ ] GPU acceleration when available
 - [ ] Graceful CPU fallback
-- [ ] Consistent CLI behavior
+- [ ] Consistent CLI behaviour
 - [ ] No platform-specific bugs
 
 ---

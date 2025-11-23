@@ -13,6 +13,14 @@
 - **RAM:** 4GB minimum, 8GB+ recommended
 - **Disk Space:** 2GB for dependencies + storage for your documents
 
+### Web UI Requirements (v0.5.4+)
+
+- **Gradio:** 6.0+ (automatically installed via pyproject.toml)
+- **Breaking Change**: Gradio 6.0 introduces API changes from previous versions
+  - Theme API: Applied via `.theme` property instead of constructor parameter
+  - Removed parameters: `show_copy_button` deprecated in Gradio 6.0
+- **Note**: If upgrading from v0.5.3 or earlier, rebuild Docker containers
+
 ### Vision RAG Requirements (v0.5.0+)
 
 For vision-based document understanding (ColPali), additional requirements apply:

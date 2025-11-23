@@ -153,6 +153,65 @@ curl http://localhost:8000/api/health
 
 ---
 
+### "TOML Parsing Error" During Docker Build
+
+**Symptoms:**
+```
+ERROR: Exception:
+tomllib.TOMLDecodeError: Expected '=' after a key in a key/value pair (at line 106, column 25)
+```
+
+**Common Causes:**
+1. Incorrect TOML syntax in `pyproject.toml`
+2. Inline table formatting errors
+3. Invalid key-value pair syntax
+
+**Diagnostic Steps:**
+
+```bash
+# Check pyproject.toml syntax at the reported line
+sed -n '100,112p' pyproject.toml
+
+# Validate TOML syntax (requires tomli package)
+python3 -c "import tomllib; tomllib.loads(open('pyproject.toml').read())"
+```
+
+**Solutions:**
+
+**Fix 1: Correct Inline Table Syntax**
+```toml
+# ❌ WRONG: Quoted keys in inline tables
+package-dir = {"ragged" = "src"}
+
+# ✅ CORRECT: Unquoted keys in inline tables
+package-dir = {ragged = "src"}
+```
+
+**Fix 2: Use Proper Section Format**
+```toml
+# ❌ WRONG: Inline table for complex configuration
+[tool.setuptools.packages]
+find = {where = ["src"], namespaces = false}
+
+# ✅ CORRECT: Separate key-value pairs
+[tool.setuptools.packages.find]
+where = ["src"]
+namespaces = false
+```
+
+**Rebuild After Fix:**
+```bash
+docker compose down
+docker compose build --no-cache
+docker compose up -d
+```
+
+**Related Documentation:**
+- [TOML Specification](https://toml.io/en/v1.0.0)
+- [setuptools pyproject.toml Reference](https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html)
+
+---
+
 ### "Cannot connect to Docker daemon"
 
 **Symptoms:**
