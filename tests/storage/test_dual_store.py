@@ -12,10 +12,18 @@ from ragged.storage.schema import EmbeddingType
 @pytest.fixture
 def in_memory_client() -> ClientAPI:
     """Create in-memory ChromaDB client for testing."""
-    # Create a brand new ephemeral client for each test
-    # EphemeralClient provides complete isolation - no shared state
+    # EphemeralClient creates in-memory database but may share state
+    # Solution: explicitly reset/clear all collections after each test
     client = chromadb.EphemeralClient()
-    return client
+
+    yield client
+
+    # Cleanup: delete all collections to prevent pollution
+    try:
+        for collection in client.list_collections():
+            client.delete_collection(collection.name)
+    except Exception:
+        pass
 
 
 @pytest.fixture

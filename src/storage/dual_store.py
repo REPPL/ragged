@@ -522,10 +522,25 @@ class DualEmbeddingStore:
                     self._decrypt_vision_metadata(m) for m in vision_results["metadatas"]
                 ]
 
-            # Merge results
+            # Merge results - handle different embedding dimensions (text: 384, vision: 128)
+            # Explicitly convert to lists to avoid numpy broadcasting issues
+            text_embeddings = text_results.get("embeddings")
+            vision_embeddings = vision_results.get("embeddings")
+
+            # Convert None or numpy arrays to lists
+            if text_embeddings is None:
+                text_embeddings = []
+            elif hasattr(text_embeddings, 'tolist'):
+                text_embeddings = text_embeddings.tolist()
+
+            if vision_embeddings is None:
+                vision_embeddings = []
+            elif hasattr(vision_embeddings, 'tolist'):
+                vision_embeddings = vision_embeddings.tolist()
+
             results = {
                 "ids": text_results["ids"] + vision_results["ids"],
-                "embeddings": text_results["embeddings"] + vision_results["embeddings"],
+                "embeddings": list(text_embeddings) + list(vision_embeddings),
                 "metadatas": text_results["metadatas"] + vision_results["metadatas"],
             }
 
