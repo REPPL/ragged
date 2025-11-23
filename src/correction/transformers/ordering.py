@@ -260,46 +260,43 @@ class PageReorderTransformer:
             if logical_num is not None
         ]
 
-        if len(known_pages) < 2:
-            # Not enough information to interpolate
-            return result
+        # Interpolate gaps between known pages (requires at least 2 known pages)
+        if len(known_pages) >= 2:
+            for i in range(len(known_pages) - 1):
+                current_idx, current_physical, current_logical = known_pages[i]
+                next_idx, next_physical, next_logical = known_pages[i + 1]
 
-        # Interpolate gaps between known pages
-        for i in range(len(known_pages) - 1):
-            current_idx, current_physical, current_logical = known_pages[i]
-            next_idx, next_physical, next_logical = known_pages[i + 1]
+                # Check if there's a gap to fill
+                gap_size = next_idx - current_idx - 1
+                logical_gap = next_logical - current_logical - 1
 
-            # Check if there's a gap to fill
-            gap_size = next_idx - current_idx - 1
-            logical_gap = next_logical - current_logical - 1
-
-            if gap_size > 0 and logical_gap >= 0:
-                # Interpolate: assume sequential page numbers
-                if logical_gap == gap_size:
-                    # Perfect match: fill in sequential numbers
-                    for j in range(1, gap_size + 1):
-                        interpolated_logical = current_logical + j
-                        gap_idx = current_idx + j
-                        gap_physical_idx = result[gap_idx][0]
-                        result[gap_idx] = (gap_physical_idx, interpolated_logical)
+                if gap_size > 0 and logical_gap >= 0:
+                    # Interpolate: assume sequential page numbers
+                    if logical_gap == gap_size:
+                        # Perfect match: fill in sequential numbers
+                        for j in range(1, gap_size + 1):
+                            interpolated_logical = current_logical + j
+                            gap_idx = current_idx + j
+                            gap_physical_idx = result[gap_idx][0]
+                            result[gap_idx] = (gap_physical_idx, interpolated_logical)
+                            logger.debug(
+                                f"Interpolated: Page {gap_physical_idx + 1} → logical page {interpolated_logical}"
+                            )
+                    elif logical_gap > gap_size:
+                        # Missing pages in physical document (gap in numbering)
                         logger.debug(
-                            f"Interpolated: Page {gap_physical_idx + 1} → logical page {interpolated_logical}"
+                            f"Gap detected: {gap_size} physical pages but {logical_gap} logical pages "
+                            f"between {current_logical} and {next_logical} - some pages missing"
                         )
-                elif logical_gap > gap_size:
-                    # Missing pages in physical document (gap in numbering)
-                    logger.debug(
-                        f"Gap detected: {gap_size} physical pages but {logical_gap} logical pages "
-                        f"between {current_logical} and {next_logical} - some pages missing"
-                    )
-                    # Don't interpolate - could be intentional gaps
-                elif logical_gap == 0 and gap_size > 0:
-                    # Multiple physical pages with same logical number
-                    # (e.g., all blank pages, all chapter starts)
-                    logger.debug(
-                        f"Found {gap_size} unnumbered pages between logical {current_logical} and {next_logical}"
-                    )
-                    # Assign same number as previous (or don't assign)
-                    # For now, leave as None to avoid confusion
+                        # Don't interpolate - could be intentional gaps
+                    elif logical_gap == 0 and gap_size > 0:
+                        # Multiple physical pages with same logical number
+                        # (e.g., all blank pages, all chapter starts)
+                        logger.debug(
+                            f"Found {gap_size} unnumbered pages between logical {current_logical} and {next_logical}"
+                        )
+                        # Assign same number as previous (or don't assign)
+                        # For now, leave as None to avoid confusion
 
         # Handle leading pages (before first known page number)
         if known_pages:
