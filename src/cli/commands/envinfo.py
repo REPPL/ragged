@@ -344,3 +344,7 @@ def _format_markdown(info: dict[str, Any]) -> str:
     lines.append("*Generated with `ragged env-info --format markdown`*")
 
     return "\n".join(lines)
+
+
+# Alias for backward compatibility with tests
+envinfo = env_info

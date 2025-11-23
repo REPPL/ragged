@@ -6,7 +6,7 @@ import pytest
 from click.testing import CliRunner
 
 from src.cli.commands.query import query
-from src.retrieval.models import RetrievedChunk
+from src.retrieval.retriever import RetrievedChunk
 
 
 @pytest.fixture

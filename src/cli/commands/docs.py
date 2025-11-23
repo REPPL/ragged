@@ -11,7 +11,16 @@ from src.utils.logging import get_logger
 logger = get_logger(__name__)
 
 
-@click.command("list")
+@click.group()
+def docs() -> None:
+    """Manage documents in the vector store.
+
+    Commands for listing and clearing ingested documents.
+    """
+    pass
+
+
+@docs.command("list")
 @click.option(
     "--format",
     "-f",
@@ -52,7 +61,7 @@ def list_docs(output_format: str) -> None:
         sys.exit(1)
 
 
-@click.command()
+@docs.command()
 @click.option("--force", "-f", is_flag=True, help="Skip confirmation")
 def clear(force: bool) -> None:
     """Clear all ingested documents from the database."""

@@ -236,3 +236,29 @@ def add_format_option(func: Any) -> Any:
         default="table",
         help="Output format",
     )(func)
+
+
+# Backward compatibility wrappers for tests
+def format_json(data: list[dict[str, Any]] | dict[str, Any]) -> str:
+    """Format data as JSON (backward compatibility wrapper)."""
+    return format_output(data, format_type="json")
+
+
+def format_csv(data: list[dict[str, Any]] | dict[str, Any]) -> str:
+    """Format data as CSV (backward compatibility wrapper)."""
+    return format_output(data, format_type="csv")
+
+
+def format_table(data: list[dict[str, Any]] | dict[str, Any]) -> str:
+    """Format data as table (backward compatibility wrapper)."""
+    return format_output(data, format_type="table")
+
+
+def format_markdown(data: list[dict[str, Any]] | dict[str, Any]) -> str:
+    """Format data as Markdown (backward compatibility wrapper)."""
+    return format_output(data, format_type="markdown")
+
+
+def format_yaml(data: list[dict[str, Any]] | dict[str, Any]) -> str:
+    """Format data as YAML (backward compatibility wrapper)."""
+    return format_output(data, format_type="yaml")
