@@ -201,6 +201,10 @@ class Settings(BaseSettings):
         ],
         description="Allowed CORS origins for web API (never use '*' in production)"
     )
+    strict_pii_mode: bool = Field(
+        default=False,
+        description="Block ingestion of documents containing visual PII (GDPR/HIPAA compliance)"
+    )
 
     model_config = SettingsConfigDict(
         env_file=".env",

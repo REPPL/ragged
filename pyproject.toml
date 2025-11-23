@@ -53,7 +53,7 @@ dependencies = [
     "uvicorn[standard]>=0.24.0",
     "sse-starlette>=1.8.0",
     "python-multipart>=0.0.6",
-    "gradio>=4.9.0",
+    "gradio>=6.0.0",  # Gradio 6.0+ - migrated theme API (v0.5.4)
     "rank-bm25>=0.2.2",
     "aiofiles>=23.2.0",
     "pyyaml>=6.0.0",
@@ -90,6 +90,11 @@ dev = [
     "types-PyYAML>=6.0.0",
     "types-requests>=2.31.0",
     "types-psutil>=5.9.0",
+]
+security = [
+    # Visual PII Detection (v0.5.7 HIGH-1)
+    "pytesseract>=0.3.10",  # OCR engine wrapper
+    "pdf2image>=1.16.3",    # PDF to image conversion
 ]
 
 [project.scripts]
