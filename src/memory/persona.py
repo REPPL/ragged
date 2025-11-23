@@ -292,6 +292,41 @@ class PersonaManager:
             return self.personas.get(self.active_persona)
         return None
 
+    def export_persona(self, name: str, output_path: Path | None = None) -> Path:
+        """Export persona data to JSON file (GDPR Article 20: Data Portability).
+
+        Args:
+            name: Persona name to export
+            output_path: Optional custom output path
+
+        Returns:
+            Path to exported JSON file
+
+        Raises:
+            ValueError: If persona not found
+        """
+        if name not in self.personas:
+            raise ValueError(f"Persona '{name}' not found")
+
+        persona = self.personas[name]
+        export_data = {
+            "export_type": "persona",
+            "export_timestamp": datetime.now().isoformat(),
+            "persona": persona.to_dict(),
+        }
+
+        if output_path is None:
+            export_dir = self.storage_dir / "exports"
+            export_dir.mkdir(exist_ok=True)
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            output_path = export_dir / f"persona_{name}_{timestamp}.json"
+
+        with open(output_path, "w") as f:
+            json.dump(export_data, f, indent=2, default=str)
+
+        logger.info(f"Exported persona '{name}' to {output_path}")
+        return output_path
+
     def _load_personas(self) -> None:
         """Load personas from YAML file."""
         if not self.personas_file.exists():

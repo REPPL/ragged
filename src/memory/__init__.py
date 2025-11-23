@@ -32,14 +32,16 @@ Example:
     >>> tracker.record_interaction(query="What is RAG?", response="...")
 """
 
-from ragged.memory.persona import Persona, PersonaManager
+from ragged.memory.graph import KnowledgeGraph
 from ragged.memory.interactions import Interaction, InteractionTracker
+from ragged.memory.persona import Persona, PersonaManager
 
 __all__ = [
     "Persona",
     "PersonaManager",
     "Interaction",
     "InteractionTracker",
+    "KnowledgeGraph",
 ]
 
 __version__ = "0.4.5"
