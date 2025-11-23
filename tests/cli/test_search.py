@@ -9,7 +9,7 @@ from ragged.cli.commands.search import search
 
 
 
-pytestmark = pytest.mark.skip(reason="Skipped: legacy test needs updating for v0.5.x API changes")
+# pytestmark = pytest.mark.skip(reason="Skipped: legacy test needs updating for v0.5.x API changes")
 
 class TestSearch:
     """Test search command functionality."""

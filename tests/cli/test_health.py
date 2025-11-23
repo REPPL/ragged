@@ -8,7 +8,7 @@ from ragged.cli.commands.health import health
 
 
 
-pytestmark = pytest.mark.skip(reason="Skipped: legacy test needs updating for v0.5.x API changes")
+# pytestmark = pytest.mark.skip(reason="Skipped: legacy test needs updating for v0.5.x API changes")
 
 class TestHealthCommand:
     """Test health check command."""
@@ -19,8 +19,8 @@ class TestHealthCommand:
         assert result.exit_code == 0
         assert "Check system health" in result.output or "health" in result.output.lower()
 
-    @patch("ragged.cli.commands.health.VectorStore")
-    @patch("ragged.cli.commands.health.OllamaClient")
+    @patch("ragged.storage.vector_store.VectorStore")
+    @patch("ragged.generation.ollama_client.OllamaClient")
     def test_health_all_services_ok(self, mock_ollama, mock_store, cli_runner):
         """Test when all services are healthy."""
         # Mock VectorStore health check
@@ -40,8 +40,8 @@ class TestHealthCommand:
         assert "Ollama" in result.output or "LLM" in result.output
         assert "✓" in result.output or "OK" in result.output or "healthy" in result.output.lower()
 
-    @patch("ragged.cli.commands.health.VectorStore")
-    @patch("ragged.cli.commands.health.OllamaClient")
+    @patch("ragged.storage.vector_store.VectorStore")
+    @patch("ragged.generation.ollama_client.OllamaClient")
     def test_health_chromadb_down(self, mock_ollama, mock_store, cli_runner):
         """Test when ChromaDB is down."""
         store_instance = MagicMock()
@@ -58,8 +58,8 @@ class TestHealthCommand:
         assert "ChromaDB" in result.output or "Vector" in result.output
         assert "✗" in result.output or "FAIL" in result.output or "down" in result.output.lower()
 
-    @patch("ragged.cli.commands.health.VectorStore")
-    @patch("ragged.cli.commands.health.OllamaClient")
+    @patch("ragged.storage.vector_store.VectorStore")
+    @patch("ragged.generation.ollama_client.OllamaClient")
     def test_health_ollama_down(self, mock_ollama, mock_store, cli_runner):
         """Test when Ollama is down."""
         store_instance = MagicMock()
@@ -76,8 +76,8 @@ class TestHealthCommand:
         assert "Ollama" in result.output or "LLM" in result.output
         assert "✗" in result.output or "FAIL" in result.output or "down" in result.output.lower()
 
-    @patch("ragged.cli.commands.health.VectorStore")
-    @patch("ragged.cli.commands.health.OllamaClient")
+    @patch("ragged.storage.vector_store.VectorStore")
+    @patch("ragged.generation.ollama_client.OllamaClient")
     def test_health_both_down(self, mock_ollama, mock_store, cli_runner):
         """Test when both services are down."""
         store_instance = MagicMock()
@@ -92,8 +92,8 @@ class TestHealthCommand:
 
         assert result.exit_code != 0
 
-    @patch("ragged.cli.commands.health.VectorStore")
-    @patch("ragged.cli.commands.health.OllamaClient")
+    @patch("ragged.storage.vector_store.VectorStore")
+    @patch("ragged.generation.ollama_client.OllamaClient")
     def test_health_json_format(self, mock_ollama, mock_store, cli_runner):
         """Test health check with JSON output."""
         import json
