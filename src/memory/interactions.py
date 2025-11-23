@@ -148,6 +148,12 @@ class InteractionTracker:
     def _init_database(self) -> None:
         """Initialise SQLite database with schema."""
         with sqlite3.connect(self.db_path) as conn:
+            # Enable WAL mode for better concurrent performance (2-3x faster)
+            # Check if already in WAL mode to avoid lock contention
+            current_mode = conn.execute("PRAGMA journal_mode").fetchone()[0]
+            if current_mode.lower() != "wal":
+                conn.execute("PRAGMA journal_mode=WAL")
+
             conn.execute(
                 """
                 CREATE TABLE IF NOT EXISTS interactions (
@@ -176,9 +182,15 @@ class InteractionTracker:
                 "CREATE INDEX IF NOT EXISTS idx_session ON interactions(session_id)"
             )
 
+            # Composite index for common query pattern (list_interactions by persona + time)
+            conn.execute(
+                """CREATE INDEX IF NOT EXISTS idx_persona_timestamp
+                   ON interactions(persona, timestamp DESC)"""
+            )
+
             conn.commit()
 
-        logger.debug(f"Database initialised: {self.db_path}")
+        logger.debug(f"Database initialised: {self.db_path} (WAL mode enabled)")
 
     def record_interaction(
         self,

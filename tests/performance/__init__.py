@@ -1,1 +1,1 @@
-# Performance tests
+"""Performance benchmarks for memory system."""

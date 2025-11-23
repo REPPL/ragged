@@ -167,8 +167,8 @@ class TestDataLocality:
         memory_dir = mock_settings / "memory"
         assert memory_dir.exists(), "Memory directory should exist"
 
-        # Verify database file exists
-        db_file = memory_dir / "interactions.db"
+        # Verify database file exists (in interactions subdirectory)
+        db_file = memory_dir / "interactions" / "queries.db"
         assert db_file.exists(), "Interactions database should exist"
 
         # Verify it's a valid SQLite database
@@ -531,7 +531,7 @@ class TestDataDeletionGuarantees:
 
         # Verify record exists
         import sqlite3
-        db_file = mock_settings / "memory" / "interactions.db"
+        db_file = mock_settings / "memory" / "interactions" / "queries.db"
         conn = sqlite3.connect(db_file)
         cursor = conn.cursor()
         cursor.execute("SELECT COUNT(*) FROM interactions WHERE persona = ?", ("researcher",))
@@ -809,7 +809,12 @@ class TestMemorySystemIntegration:
             trackers[persona].clear_interactions(confirm=True)
             graphs[persona].delete_user_data(persona, confirm=True)
             graphs[persona].close()
-            manager.delete(persona, confirm=True)
+            # Only delete persona if it was explicitly created in PersonaManager
+            try:
+                manager.delete(persona, confirm=True)
+            except KeyError:
+                # Persona was never explicitly created in PersonaManager, which is fine
+                pass
 
 
 # Mark all tests as privacy and integration tests

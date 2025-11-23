@@ -19,7 +19,7 @@ from pathlib import Path
 from typing import Any
 
 import yaml
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from ragged.config.settings import get_settings
 from ragged.utils.logging import get_logger
@@ -30,16 +30,18 @@ logger = get_logger(__name__)
 class PersonaConfig(BaseModel):
     """Persona configuration model."""
 
+    model_config = ConfigDict(validate_assignment=True)
+
     name: str = Field(..., min_length=1, max_length=50, description="Persona name")
     description: str = Field(default="", max_length=500, description="Persona description")
     focus_areas: list[str] = Field(
-        default_factory=list, max_items=20, description="Focus areas/topics"
+        default_factory=list, max_length=20, description="Focus areas/topics"
     )
     preferences: dict[str, Any] = Field(
         default_factory=dict, description="User preferences"
     )
     active_projects: list[str] = Field(
-        default_factory=list, max_items=10, description="Active projects"
+        default_factory=list, max_length=10, description="Active projects"
     )
     created_at: datetime = Field(default_factory=datetime.now)
     last_used: datetime = Field(default_factory=datetime.now)

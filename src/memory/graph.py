@@ -536,3 +536,11 @@ class KnowledgeGraph:
     def __exit__(self, exc_type, exc_val, exc_tb):
         """Context manager exit."""
         self.close()
+
+    def __del__(self):
+        """Finalizer to ensure connection is closed."""
+        try:
+            self.close()
+        except Exception:
+            # Silently ignore errors during cleanup
+            pass
