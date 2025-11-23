@@ -111,23 +111,14 @@ class StorageMigration:
             raise ValueError(f"Collection '{collection_name}' not found") from e
 
         # Check collection metadata for schema version
+        # Only trust collection-level metadata as source of truth for "fully migrated"
         if hasattr(collection, "metadata") and collection.metadata:
             schema_version = collection.metadata.get("schema_version")
             if schema_version:
                 return schema_version
 
-        # Check first few embeddings for embedding_type field
-        results = collection.peek(limit=10)
-
-        if not results["metadatas"]:
-            logger.warning(f"Collection '{collection_name}' is empty, assuming v0.4")
-            return "v0.4"
-
-        # Check if any metadata has embedding_type field
-        for metadata in results["metadatas"]:
-            if metadata and "embedding_type" in metadata:
-                return "v0.5"
-
+        # If no collection metadata, assume v0.4 (even if some embeddings have embedding_type)
+        # This allows migration to handle partially migrated collections
         return "v0.4"
 
     def migrate_collection(

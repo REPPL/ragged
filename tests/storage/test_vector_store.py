@@ -157,7 +157,8 @@ class TestVectorStore:
         store = VectorStore(
             host="localhost",
             port=8001,
-            collection_name="test_collection"
+            collection_name="test_collection",
+            enable_keepalive=False  # Disable keep-alive to avoid extra heartbeat calls
         )
 
         mock_client.heartbeat.return_value = 12345

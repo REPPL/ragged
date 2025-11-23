@@ -202,17 +202,17 @@ class TestParseEmbeddingId:
 
     def test_parse_invalid_format(self):
         """Test parsing invalid ID format."""
-        with pytest.raises(ValueError, match="Invalid embedding type"):
+        with pytest.raises(ValueError, match="Invalid embedding ID format"):
             parse_embedding_id("invalid_id")
 
     def test_parse_invalid_type(self):
         """Test parsing ID with invalid embedding type."""
-        with pytest.raises(ValueError, match="Invalid embedding type"):
+        with pytest.raises(ValueError, match="Invalid embedding ID format"):
             parse_embedding_id("doc123_chunk_5_invalid")
 
     def test_parse_invalid_index(self):
         """Test parsing ID with non-numeric index."""
-        with pytest.raises(ValueError, match="Invalid index"):
+        with pytest.raises(ValueError, match="Invalid embedding ID format"):
             parse_embedding_id("doc123_chunk_abc_text")
 
     def test_parse_zero_index(self):
