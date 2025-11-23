@@ -7,6 +7,136 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.4] - 2025-11-23
+
+### Changed - Breaking: Legacy Command Removal
+
+**BREAKING CHANGES** (Pre-v1.0: Breaking changes allowed)
+
+Removed legacy commands in favour of new multi-modal CLI structure:
+
+**Removed Commands**:
+- ❌ `ragged add` → Use `ragged ingest pdf` instead
+- ❌ `ragged query` (single command) → Use `ragged query text` instead
+
+**Migration Guide**:
+
+```bash
+# Before (v0.5.3 and earlier)
+ragged add document.pdf
+ragged query "question"
+
+# After (v0.5.4+)
+ragged ingest pdf document.pdf
+ragged query text "question"
+```
+
+**New Command Structure** (v0.5.3):
+- `ingest pdf` - PDF ingestion with vision support
+- `ingest batch` - Batch directory processing
+- `ingest status` - Ingestion statistics
+- `query text` - Text queries with visual boosting
+- `query image` - Visual similarity search
+- `query hybrid` - Multi-modal text+image queries
+- `query interactive` - Interactive REPL mode
+
+**Rationale**:
+- Clearer command hierarchy (groups: ingest, query, gpu, storage)
+- Explicit mode selection for queries (text/image/hybrid)
+- Better discoverability via `ragged --help`
+- Consistency with multi-modal architecture
+
+### Added - Comprehensive Documentation
+
+**Updated Documentation** (~500 lines):
+
+**README.md**:
+- Updated Basic Usage with new CLI commands
+- Added GPU & Storage Management section
+- Expanded CLI Features to 25+ commands
+- Multi-modal query examples
+
+**CLI Essentials Guide** (`docs/guides/cli/essentials.md` - complete rewrite):
+- 7 essential commands (was 5)
+- Added `ingest pdf`, `ingest batch` detailed examples
+- Added `query text/image/hybrid` usage patterns
+- Added `gpu list` GPU verification
+- Visual content boosting guide
+- When to use vision embeddings decision tree
+- Query mode selection guide
+- Quick reference card
+
+**New Tutorial** (`docs/tutorials/multimodal-workflow.md` - 425 lines):
+- Step-by-step multi-modal workflow
+- GPU availability check
+- Vision ingestion (single + batch)
+- Text/Image/Hybrid query patterns
+- Interactive mode walkthrough
+- Real-world examples (architecture docs, research papers, manuals)
+- Troubleshooting OOM errors
+- Performance optimization guide
+- Best practices for vision embeddings
+
+**Documentation Coverage**:
+- Installation and setup
+- Core command usage
+- Advanced multi-modal workflows
+- GPU management and benchmarking
+- Storage maintenance
+- Troubleshooting common issues
+
+### Fixed
+
+**CLI Consistency**:
+- Main CLI help updated to show new command examples
+- Removed backward compatibility command registrations
+- Clean command hierarchy without legacy aliases
+
+### Technical Details
+
+**Files Modified**:
+- `src/main.py`: Removed legacy command imports and registrations
+- `README.md`: Updated CLI examples and feature list
+- `docs/guides/cli/essentials.md`: Complete rewrite for v0.5.3 CLI
+- `docs/tutorials/multimodal-workflow.md`: New comprehensive tutorial
+
+**Testing**: Core functionality validated via imports (test environment pending setup)
+
+### Migration Notes
+
+**For v0.5.3 users upgrading to v0.5.4**:
+
+1. **Update all scripts**:
+   ```bash
+   # Find usage
+   grep -r "ragged add" your-scripts/
+   grep -r "ragged query" your-scripts/
+
+   # Replace
+   sed -i 's/ragged add/ragged ingest pdf/g' your-scripts/*.sh
+   sed -i 's/ragged query/ragged query text/g' your-scripts/*.sh
+   ```
+
+2. **Update documentation**:
+   - Check project READMEs
+   - Update automation scripts
+   - Update CI/CD pipelines
+
+3. **No data migration needed**: Only CLI command names changed, not data structure
+
+**For new users (v0.5.4+)**:
+- Start with [Getting Started](docs/tutorials/getting-started.md)
+- Follow [CLI Essentials](docs/guides/cli/essentials.md)
+- Explore [Multi-Modal Workflow](docs/tutorials/multimodal-workflow.md)
+
+### Deprecation Timeline
+
+**Pre-v1.0 Policy**: Breaking changes allowed without deprecation period.
+
+- v0.5.3: Legacy commands (`add`, `query`) kept for compatibility
+- v0.5.4: Legacy commands removed
+- v1.0: API stability guarantee begins
+
 ## [0.5.3] - 2025-11-23
 
 ### Added - Multi-Modal CLI Commands

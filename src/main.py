@@ -24,10 +24,11 @@ def cli(ctx: click.Context, verbose: bool, debug: bool, quiet: bool) -> None:
 
     \b
     Examples:
-        ragged add document.pdf          # Normal output
-        ragged add document.pdf -v       # Verbose output
-        ragged add document.pdf --debug  # Debug output
-        ragged add document.pdf --quiet  # Minimal output
+        ragged ingest pdf document.pdf           # Normal output
+        ragged ingest pdf document.pdf -v        # Verbose output
+        ragged ingest pdf document.pdf --debug   # Debug output
+        ragged ingest pdf document.pdf --quiet   # Minimal output
+        ragged query text "your question"        # Multi-modal query
     """
     if click is None:
         print("Error: click and rich required. Install with: pip install click rich")
@@ -65,7 +66,6 @@ def cli(ctx: click.Context, verbose: bool, debug: bool, quiet: bool) -> None:
 
 
 # Import commands from modules
-from src.cli.commands.add import add
 from src.cli.commands.benchmark import benchmark
 from src.cli.commands.cache import cache
 from src.cli.commands.completion import completion
@@ -81,7 +81,6 @@ from src.cli.commands.history import history
 from src.cli.commands.ingest import ingest  # v0.5.3: Multi-modal ingestion
 from src.cli.commands.metadata import metadata
 from src.cli.commands.monitor import monitor
-from src.cli.commands.query import query  # v0.4.x: Legacy text-only query
 from src.cli.commands.query_multimodal import query_group  # v0.5.3: Multi-modal query
 from src.cli.commands.search import search
 from src.cli.commands.serve import serve  # v0.3.12: API server
@@ -93,8 +92,6 @@ from src.cli.commands.validate import validate
 from src.cli.commands.versions import versions  # v0.3.7a: Document version tracking
 
 # Register commands
-cli.add_command(add)
-cli.add_command(query)  # v0.4.x: Keep for backward compatibility
 cli.add_command(query_group)  # v0.5.3: Multi-modal query group
 cli.add_command(health)
 cli.add_command(list_docs)

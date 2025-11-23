@@ -78,19 +78,23 @@ ollama serve          # Start Ollama (in separate terminal)
 ### Basic Usage
 
 ```bash
-# Add documents to your knowledge base
-ragged add document.pdf                    # Single file (auto-corrects PDFs, v0.3.5+)
-ragged add /path/to/folder/ --recursive    # Entire folder (v0.2.7+)
-ragged add messy.pdf --no-auto-correct-pdf # Skip PDF correction (v0.3.5+)
+# Ingest documents (v0.5.3+)
+ragged ingest pdf document.pdf                    # Single PDF (auto-corrects)
+ragged ingest pdf document.pdf --vision           # With vision embeddings
+ragged ingest batch ./docs/ --vision              # Batch ingest with vision
+ragged ingest status                              # Check ingestion stats
 
 # View PDF quality and corrections (v0.3.5+)
-ragged show quality <document_id>          # Quality report with issues
-ragged show corrections <document_id>      # Applied corrections
-ragged show uncertainties <document_id>    # Low-confidence sections
+ragged show quality <document_id>                 # Quality report with issues
+ragged show corrections <document_id>             # Applied corrections
+ragged show uncertainties <document_id>           # Low-confidence sections
 
-# Ask questions
-ragged query "What are the key findings?"
-ragged query "Explain the methodology" --show-sources
+# Multi-modal queries (v0.5.3+)
+ragged query text "What are the key findings?"    # Text query
+ragged query text "database schema" --boost-diagrams  # Boost visual content
+ragged query image architecture.png               # Image similarity search
+ragged query hybrid "auth flow" diagram.png       # Text + image query
+ragged query interactive                          # Interactive REPL mode
 
 # Advanced search and filtering (v0.2.8+)
 ragged search "machine learning" --path "research/*.pdf"
@@ -100,6 +104,15 @@ ragged metadata update document.pdf --set category=research
 ragged history list
 ragged history replay 5
 
+# GPU & Storage Management (v0.5.3+)
+ragged gpu list                            # List GPU devices
+ragged gpu info cuda:0                     # Device specifications
+ragged gpu stats --watch                   # Real-time memory monitoring
+ragged gpu benchmark                       # Benchmark vision embeddings
+ragged storage info                        # Collection statistics
+ragged storage migrate                     # Migrate to v0.5 schema
+ragged storage vacuum                      # Clean orphaned embeddings
+
 # Manage your knowledge base
 ragged list                                # List documents
 ragged metadata list                       # Show document metadata (v0.2.8+)
@@ -108,6 +121,7 @@ ragged clear                               # Clear all documents
 # Configuration and health
 ragged config show                         # View configuration
 ragged config set-model                    # Interactive model selection (v0.2.8+)
+ragged config reset                        # Reset to defaults (v0.5.3+)
 ragged health                              # Check service status
 ragged validate                            # Validate configuration (v0.2.8+)
 
@@ -124,21 +138,40 @@ ragged completion --install                # Install shell completion
 
 ## CLI Features
 
-ragged includes a comprehensive CLI with 15 commands:
+ragged includes a comprehensive CLI with 25+ commands organised into groups:
+
+**Document Ingestion (v0.5.3+):**
+- `ingest pdf` - Ingest PDFs with vision embeddings and auto-correction
+- `ingest batch` - Batch process directories with pattern matching
+- `ingest status` - View ingestion statistics
+
+**Multi-Modal Queries (v0.5.3+):**
+- `query text` - Text queries with visual content boosting
+- `query image` - Visual similarity search
+- `query hybrid` - Combined text + image queries with RRF fusion
+- `query interactive` - Interactive REPL mode
+
+**GPU Management (v0.5.3+):**
+- `gpu list` - List available devices (CUDA/MPS/CPU)
+- `gpu info` - Device specifications and memory
+- `gpu stats` - Real-time memory monitoring
+- `gpu benchmark` - Performance testing
+
+**Storage Management (v0.5.3+):**
+- `storage info` - Collection statistics
+- `storage migrate` - Schema migration (v0.4→v0.5)
+- `storage vacuum` - Clean orphaned embeddings
 
 **Document Management:**
-- `add` - Ingest documents with automatic PDF quality detection and correction (v0.3.5+)
 - `list` / `clear` - View or remove documents
 - `metadata` - Tag, update, and search document metadata
 - `search` - Advanced search with filters
 - `show` - View PDF quality reports, corrections, and uncertainties (v0.3.5+)
 
-**Querying:**
-- `query` - Ask questions and get answers with citations
-- `history` - View, replay, and export query history
-
 **Configuration:**
-- `config` - View and manage settings
+- `config show` - View settings
+- `config set` - Update configuration
+- `config reset` - Reset to defaults (v0.5.3+)
 - `validate` - Validate configuration and environment
 - `env-info` - System information for bug reports
 
@@ -146,6 +179,7 @@ ragged includes a comprehensive CLI with 15 commands:
 - `health` - Check service connectivity
 - `cache` - Manage caches and temporary files
 - `export` - Backup and restore data
+- `history` - View, replay, and export query history
 
 **Utilities:**
 - `completion` - Install shell completion (bash/zsh/fish)
