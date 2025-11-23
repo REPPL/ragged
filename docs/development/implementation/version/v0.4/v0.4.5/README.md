@@ -550,6 +550,11 @@ Future versions will maintain backward compatibility for imports.
 - [CHANGELOG](../../../../../../CHANGELOG.md) - v0.4.5 release notes
 - [Lineage](./lineage.md) - Traceability from concept to completion
 
+### Next Version
+
+- [v0.4.6 Implementation](../v0.4.6/README.md) - Stability and performance improvements
+- [v0.4.6 Lineage](../v0.4.6/lineage.md) - Evolution from v0.4.5 issues to solutions
+
 ---
 
 ## Success Criteria (from Roadmap)
