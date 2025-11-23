@@ -495,7 +495,6 @@ Phase 1 and Phase 2 were completed in v0.3.6 with the following key deliverables
 
 ## Related Decisions
 
-- [ADR-0006: Docker for Development](./0006-docker-for-development.md) - Deployment architecture
 - [ADR-0010: Click and Rich for CLI](./0010-click-rich-for-cli.md) - CLI architecture
 - [LEANN Integration Analysis](../2025-11-16-leann-integration-analysis.md) - Context for this decision
 

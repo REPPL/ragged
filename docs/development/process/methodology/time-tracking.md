@@ -304,7 +304,6 @@ To enhance transparency and reproducibility of ragged's development process, we 
 
 ---
 
-**Next Version**: [v0.3 summary](./v0.3-summary.md)
 **Detailed Logs**: v0.2 feature logs
 ```
 
@@ -412,7 +411,6 @@ None today
 
 ---
 
-**Previous**: [2025-11-08](./2025-11-08.md)
 **Next**: [2025-11-10](../devlogs/daily/2025-11-10.md)
 ```
 
@@ -655,10 +653,6 @@ Where `TL-2025-11` = Time Log November 2025
 > **AI Assistance**: 54% of time (~31% faster than manual)
 >
 > **Features Completed** (with individual time logs):
-> - Document normalisation: [21.5h](./time-logs/2025-11-doc-normalisation.md)
-> - Hybrid search: [11.0h](./time-logs/2025-11-hybrid-search.md)
-> - Web UI: [12.0h](./time-logs/2025-12-web-ui.md)
-> - [Full breakdown](./time-logs/v0.2-summary.md)
 
 ---
 

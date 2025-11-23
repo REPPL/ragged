@@ -146,7 +146,6 @@ v0.3.3 introduced semantic and hierarchical chunking strategies to improve RAG r
 - Implementation Summary
 - Lineage
 - [Security Audit](../../../../../audit/security/baseline/v0.3.3-security-audit.md)
-- [Time Log](../../time-logs/version/v0.3.3/time-tracking.md)
 
 ---
 

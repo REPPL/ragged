@@ -65,7 +65,7 @@ This AI assistance policy was developed with assistance from **Claude Code** (An
 - Architectural decisions
 - Documentation (user facing)
 
-*(See also [Time Tracking](./time-tracking-methodology.md) for detailed metrics.)*
+*(See also [Time Tracking](./time-tracking.md) for detailed metrics.)*
 
 ### Google Gemini Pro 3
 
@@ -279,7 +279,7 @@ Based on actual `ragged` development data:
 
 ### Overall Metrics (Target)
 
-Based on `ragged`'s [Time Tracking Methodology](./time-tracking-methodology.md):
+Based on `ragged`'s [Time Tracking Methodology](./time-tracking.md):
 
 - **Overall AI-assisted time**: ~50-55% of development
 - **Overall time saved**: ~30-35% faster than manual
@@ -346,7 +346,7 @@ Have suggestions for improving AI usage transparency?
 
 ## Related Documentation
 
-- [Time Tracking Methodology](./time-tracking-methodology.md) - How we track AI vs. manual time
+- [Time Tracking Methodology](./time-tracking.md) - How we track AI vs. manual time
 - Development Logs - Daily AI effectiveness ratings
 - [Contributing Guide](../../../../CONTRIBUTING.md) - General contribution guidelines
 

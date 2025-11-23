@@ -176,7 +176,6 @@ For visual content tests to pass:
 ## Related Documentation
 
 - [Multi-Modal Workflow Tutorial](../../../tutorials/multimodal-workflow.md)
-- [Storage Management Guide](../../../guides/storage-management.md)
 - [GPU Configuration Guide](../../../guides/gpu-configuration-optimisation.md)
 - [Manual Testing README](../README.md)
 

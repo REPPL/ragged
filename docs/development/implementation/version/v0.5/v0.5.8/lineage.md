@@ -11,8 +11,7 @@ This document provides complete traceability from planning through implementatio
 ## Planning Phase
 
 ### v0.5 Series Planning
-- [v0.5 Planning Overview](../../../planning/version/v0.5/README.md) - Multi-modal vision strategy and security foundation
-- [Security Architecture Planning](../../../planning/architecture/security-architecture.md) - Security-by-design principles
+- [v0.5 Planning Overview](../../../../planning/version/v0.5/README.md) - Multi-modal vision strategy and security foundation
 
 ### Security Hardening Planning
 - **Origin:** v0.5.7 identified need for CLI path validation integration and supply chain security
@@ -56,7 +55,7 @@ This document provides complete traceability from planning through implementatio
 ### Implementation Documentation
 - [v0.5.8 README](./README.md) - Complete implementation details (419 lines, 12 sections)
 - [v0.5.8 Summary](./summary.md) - Quick reference and key achievements
-- [v0.5.8 CHANGELOG](../../../../../CHANGELOG.md#058---2025-11-23) - User-facing release notes
+- [v0.5.8 CHANGELOG](../../../../../../CHANGELOG.md#058---2025-11-23) - User-facing release notes
 
 ### Implementation Summary
 - **Total Lines Changed:** 1,800+
@@ -78,8 +77,7 @@ This document provides complete traceability from planning through implementatio
 ## Security Audit Trail
 
 ### Pre-Implementation Audits
-- [2025-11-23 Security Audit](../../../../audit/security/2025-11-23-security-audit.md) - Identified security gaps
-- [v0.5.7 Security Baseline](../../../../audit/security/baseline/v0.5.7-baseline.md) - Established baseline for continuation
+- [2025-11-23 Security Audit](../../../../../audit/security/2025-11-23-security-audit.md) - Identified security gaps
 
 ### Implementation Verification
 - **Test Results:** All security tests passing
@@ -116,7 +114,6 @@ This document provides complete traceability from planning through implementatio
 
 ### Documentation Links
 - [v0.5.7 Implementation](../v0.5.7/README.md) - Previous security hardening
-- [v0.5.7 Lineage](../v0.5.7/lineage.md) - Previous version lineage
 - [v0.5 Series Overview](../README.md) - Multi-modal vision strategy (to be updated)
 
 ---
@@ -124,26 +121,15 @@ This document provides complete traceability from planning through implementatio
 ## Related Documentation
 
 ### Planning
-- [v0.5 Planning](../../../planning/version/v0.5/README.md) - High-level design goals
-- [Security Planning](../../../planning/architecture/) - Security architecture
-
-### Roadmap
-- [v0.5.7 Roadmap](../../../roadmap/version/v0.5/v0.5.7.md) - PathValidator preparation
-- [Security Hardening Roadmap](../../../roadmap/security/) - Multi-version security plan
+- [v0.5 Planning](../../../../planning/version/v0.5/README.md) - High-level design goals
 
 ### Implementation
 - [v0.5.8 README](./README.md) - Complete implementation record
 - [v0.5.8 Summary](./summary.md) - Quick reference
-- [CHANGELOG](../../../../../CHANGELOG.md) - User-facing release notes
+- [CHANGELOG](../../../../../../CHANGELOG.md) - User-facing release notes
 
 ### Security
 - [Security Audit Reports](../../../../audit/security/) - All security audits
-- [Security Policy](../../../../security/policy.md) - Security guidelines
-- [Security Monitoring Guide](../../../../guides/security-monitoring.md) - Operational procedures
-
-### Process
-- [Development Methodology](../../../process/methodology/) - How v0.5.8 was built
-- [Time Tracking](../../../process/time-logs/version/v0.5.8/) - Actual hours spent (if tracked)
 
 ---
 

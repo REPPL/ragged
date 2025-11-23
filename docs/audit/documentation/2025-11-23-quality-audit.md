@@ -622,7 +622,7 @@ The ragged project demonstrates **exceptional documentation practices** with:
 - Global Standards - British English, SSOT principles
 - Development Standards - Directory structure, coverage requirements
 - Project Standards - AI transparency, versioning, Python conventions
-- [Documentation Structure](docs/README.md) - Diátaxis framework, navigation guide
+- [Documentation Structure](../../README.md) - Diátaxis framework, navigation guide
 
 ---
 

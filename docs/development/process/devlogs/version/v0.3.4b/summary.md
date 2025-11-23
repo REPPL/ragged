@@ -251,7 +251,6 @@ v0.3.4b implemented intelligent routing based on document quality assessment, en
 - Implementation Summary
 - Lineage
 - [Security Audit](../../../../../audit/security/baseline/v0.3.4b-security-audit.md)
-- [Time Log](../../time-logs/version/v0.3.4b/time-tracking.md)
 
 ---
 

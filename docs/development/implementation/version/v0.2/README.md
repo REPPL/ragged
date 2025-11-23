@@ -51,18 +51,15 @@ This directory contains the complete implementation documentation for ragged v0.
 ### 📋 Planning (What We Intend)
 - **[timeline.md](../../../process/devlogs/version/v0.1/timeline.md)** - Development timeline, phase breakdown, time estimates
 - **[phases.md](../../../process/devlogs/version/v0.1/phases.md)** - Detailed 8-phase plan with goals and deliverables
-- **[architecture.md](architecture.md)** - v0.2 architecture and design decisions
 
 ### 🔨 Implementation (What We're Doing)
 - **[checklist.md](../../../process/devlogs/version/v0.2/checklist.md)** - Real-time implementation status
 - **[decisions.md](../../../process/devlogs/version/v0.1/decisions.md)** - Architecture Decision Records (ADRs)
 - **[implementation-notes.md](../v0.1/implementation-notes.md)** - Technical implementation details
-- **[testing.md](testing.md)** - Testing strategy and coverage
 
 ### 🔍 Retrospective (What We Learned)
 - **[lessons-learned.md](../../../process/devlogs/version/v0.1/lessons-learned.md)** - What worked, what didn't
 - **[CHANGELOG.md](../v0.5.6/CHANGELOG.md)** - Detailed version changelog
-- **[summary.md](summary.md)** - Executive summary (end of development)
 - **[lineage.md](lineage.md)** - Complete traceability from planning → decisions → implementation
 
 ---

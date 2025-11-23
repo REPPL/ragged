@@ -216,7 +216,6 @@ Comprehensive CLI exposing all vision features through intuitive command-line in
 - [v0.5.3 Implementation](./v0.5.3/README.md) - Multi-Modal CLI Commands
 
 ### Architecture Decisions
-- [ADR-0020: Vision System Architecture](../../decisions/adrs/0020-vision-system-architecture.md) (if exists)
 
 ---
 

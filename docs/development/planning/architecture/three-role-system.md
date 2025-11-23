@@ -141,7 +141,6 @@ Response returned to user
 
 ## Design Rationale
 
-See [ADR-007: Role-Based System](../decisions/adr-007-role-based-system.md) for the full decision record.
 
 **Key Benefits**:
 - **Separation of Concerns**: Each role has a focused responsibility
@@ -154,4 +153,3 @@ See [ADR-007: Role-Based System](../decisions/adr-007-role-based-system.md) for 
 
 - [Storage Model](./storage-model.md) - Where each role stores data
 - [Configuration System](./configuration-system.md) - How roles are configured
-- [Profile Templates](../profile-templates/README.md) - Example role configurations

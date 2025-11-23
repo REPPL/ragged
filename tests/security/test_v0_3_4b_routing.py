@@ -76,7 +76,7 @@ class TestQualityAssessorSecurity:
         mock_doc.__len__.return_value = 10000  # 10,000 pages
 
         # Mock pymupdf.open to return our mock document
-        with patch('src.processing.quality_assessor.pymupdf') as mock_pymupdf:
+        with patch('ragged.processing.quality_assessor.pymupdf') as mock_pymupdf:
             mock_pymupdf.open.return_value = mock_doc
 
             test_file = tmp_path / "test.pdf"

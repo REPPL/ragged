@@ -8,7 +8,7 @@ from ragged.config.model_manager import ModelManager, ModelInfo
 @pytest.fixture
 def mock_ollama_client():
     """Create a mock Ollama client."""
-    with patch('src.config.model_manager.ollama.Client') as MockClient:
+    with patch('ragged.config.model_manager.ollama.Client') as MockClient:
         mock_client = MagicMock()
         MockClient.return_value = mock_client
         yield mock_client

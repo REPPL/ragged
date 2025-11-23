@@ -180,7 +180,7 @@ To access new resources:
 ## Related Documentation
 
 - [Deliverables Summary](./DELIVERABLES-SUMMARY.md) - Complete overview
-- [Manual Testing Framework](../../../testing/manual-tests/README.md) - Test procedures
+- [Manual Testing Framework](../../../process/testing/manual/README.md) - Test procedures
 - [GPU Configuration Guide](../../../../guides/gpu-configuration-optimisation.md) - GPU setup
 - Example Notebooks - Interactive tutorials
 

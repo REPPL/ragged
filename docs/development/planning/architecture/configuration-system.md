@@ -154,7 +154,7 @@ Uses technical profile but overrides chunk size.
 
 ## Design Rationale
 
-See [ADR-012: Configuration Inheritance](../decisions/adr-012-configuration-inheritance.md) for the full decision record.
+See [ADR-012: Configuration Inheritance](../../decisions/adrs/0012-ollama-for-llm-generation.md) for the full decision record.
 
 **Key Benefits**:
 - **Layered Customization**: Start with sensible defaults, override as needed
@@ -165,6 +165,4 @@ See [ADR-012: Configuration Inheritance](../decisions/adr-012-configuration-inhe
 
 ## Related Documentation
 
-- [Profile Templates](../profile-templates/README.md) - Example configurations
-- [Terminology: Profiles vs Personas](../terminology/profiles-vs-personas.md) - Conceptual distinction
 - User Guide: Profiles and Personas - How to use them

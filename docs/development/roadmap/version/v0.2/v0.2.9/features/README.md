@@ -208,7 +208,6 @@ Before marking a spec as "Ready for implementation":
 
 - [v0.2.9 Roadmap](../README.md) - Overall roadmap and timeline
 - v0.2 Planning - High-level design goals
-- [Architecture Decisions](../../../decisions/adrs/README.md) - ADRs for v0.2.9
 
 ---
 

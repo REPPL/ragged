@@ -89,9 +89,6 @@ Self-improving RAG system for clinical trial design with autonomous evolution of
 
 ## Related Inspirations
 
-- [Mem0](./mem0.md) - Personalised memory layer (when created)
-- [Graphiti](./graphiti.md) - Temporal knowledge graphs (when created)
-- [LangGraph](./langgraph.md) - Agent workflow orchestration (when created)
 
 ---
 

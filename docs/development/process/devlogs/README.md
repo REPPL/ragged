@@ -52,7 +52,6 @@ Daily logs will begin when v0.1 implementation starts (target: mid-November 2025
 ## Related Documentation
 
 - **[DevLog Template](../templates/devlog-template.md)** - Template for new logs
-- **[Time Tracking Methodology](../time-tracking-methodology.md)** - How time is tracked
 - **[AI Assistance](../methodology/ai-assistance.md)** - AI development disclosure
 
 ---

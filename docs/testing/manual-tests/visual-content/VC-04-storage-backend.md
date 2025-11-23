@@ -140,9 +140,6 @@ ragged storage info
 
 ## Related Documentation
 
-- [Storage Architecture](../../../reference/storage-architecture.md)
-- [Dual Embedding Store Design](../../../explanation/dual-storage.md)
-- [Database Management](../../../guides/database-management.md)
 
 ---
 

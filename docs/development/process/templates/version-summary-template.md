@@ -586,7 +586,7 @@ XX files changed, XXX insertions(+), XXX deletions(-)
 
 **Status:** [Completed | In Progress]
 
-**Next Version**: [vX.X+1-summary.md](./vX.X+1-summary.md)
+**Next Version**: [vX.X+1-summary.md](./vX.X+1-summary.md) (example path)
 
 **Previous Version**: [v(X-1).(X-1)-summary.md](./v(X-1).(X-1)-summary.md)
 

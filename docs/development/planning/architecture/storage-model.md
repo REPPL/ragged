@@ -123,7 +123,6 @@ ragged vault add "Domain.interests: [RAG, LLMs]"
 
 ## Design Rationale
 
-See [ADR-008: Library vs Private Vault](../decisions/adr-008-library-vs-vault.md) for the full decision record.
 
 **Key Benefits**:
 - **Privacy**: User context never mixed with documents
@@ -134,5 +133,3 @@ See [ADR-008: Library vs Private Vault](../decisions/adr-008-library-vs-vault.md
 ## Related Documentation
 
 - [Three-Role System](./three-role-system.md) - How roles interact with storage
-- [Terminology: Library vs Vault](../terminology/library-vs-vault.md) - Conceptual distinction
-- [Profile Templates](../profile-templates/README.md) - Examples of persona/vault usage

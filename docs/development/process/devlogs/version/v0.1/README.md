@@ -85,7 +85,6 @@ Documents reflecting on the process, quality, and outcomes:
 
 | Document | Description |
 |----------|-------------|
-| **[testing.md](testing.md)** | Testing strategy, coverage reports, quality metrics |
 | **[lessons-learned.md](lessons-learned.md)** | Retrospective: what went well, what could improve |
 | **[CHANGELOG.md](../../../../implementation/version/v0.5.6/CHANGELOG.md)** | Detailed changelog of all changes during v0.1 |
 | **[summary.md](summary.md)** | Executive summary and final version retrospective |
@@ -144,7 +143,6 @@ This structure is designed to be reusable for future versions (v0.2, v0.3, etc.)
 - **Understand the codebase structure**: Review [structure.md](structure.md)
 - **Know why decisions were made**: Browse [decisions.md](decisions.md)
 - **Learn for next version**: Study [lessons-learned.md](lessons-learned.md)
-- **Track quality metrics**: Examine [testing.md](testing.md)
 - **See the development timeline**: Review [timeline.md](timeline.md)
 - **View what changed**: Read [CHANGELOG.md](../../../../implementation/version/v0.5.6/CHANGELOG.md)
 - **See the original working docs**: Explore [archive/](archive/)

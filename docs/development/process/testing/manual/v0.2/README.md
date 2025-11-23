@@ -14,13 +14,6 @@ This directory contains detailed test plans, verification checklists, and test s
 
 | Version | Status | Features | Test Plan |
 |---------|--------|----------|-----------|
-| v0.2.4 | ✅ COMPLETE | Base functionality | [v0.2.4 Manual Tests](./v0.2.4-manual-tests.md) |
-| v0.2.5 | ✅ COMPLETE | Quality improvements | [v0.2.5 Manual Tests](./v0.2.5-manual-tests.md) |
-| v0.2.7 | ✅ COMPLETE | CLI refactoring, folder ingestion | [v0.2.7 Manual Tests](./v0.2.7-manual-tests.md) |
-| v0.2.8 | ✅ COMPLETE | CLI enhancements, formatters | [v0.2.8 Manual Tests](./v0.2.8-manual-tests.md) |
-| v0.2.9 | ✅ COMPLETE | Performance optimisation | [v0.2.9 Manual Tests](./v0.2.9-manual-tests.md) |
-| v0.2.10 | 📅 PLANNED | Security foundation | [v0.2.10 Manual Tests](./v0.2.10-manual-tests.md) |
-| v0.2.11 | 📅 PLANNED | Privacy infrastructure | [v0.2.11 Manual Tests](./v0.2.11-manual-tests.md) |
 
 ---
 

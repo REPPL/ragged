@@ -304,7 +304,6 @@ jobs:
 
 - [v0.2.9 Roadmap](../README.md)
 - Benchmarking Framework
-- [CI/CD Documentation](../../../../development/process/ci-cd.md)
 
 ---
 

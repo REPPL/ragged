@@ -43,7 +43,6 @@ v0.5 processes visual content which may reveal sensitive information:
 - ❌ GDPR non-compliance for visual data
 
 **See:**
-- [Security & Privacy Foundation](../../security/README.md)
 - [v0.2.10 Roadmap](../../../roadmap/version/v0.2/v0.2.10/)
 - [v0.2.11 Roadmap](../../../roadmap/version/v0.2/v0.2.11/)
 

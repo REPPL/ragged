@@ -474,8 +474,6 @@ All dependencies are GPL-3.0 compatible.
 
 - [v0.3.5 Roadmap](../../roadmap/version/v0.3/v0.3.5.md) - Implementation plan
 - [v0.3.0 Implementation](../../implementation/version/v0.3/v0.3.0/) - Docling integration
-- [ADR 001: Docling Integration](001-docling-integration.md) - OCR foundation
-- [ADR 002: Intelligent Routing](002-intelligent-routing.md) - Quality-based routing
 
 ---
 

@@ -33,7 +33,7 @@ def temp_data_dir(temp_dir):
 @pytest.fixture
 def mock_vector_store():
     """Create a mock vector store."""
-    with patch('src.ingestion.batch.VectorStore') as MockVectorStore:
+    with patch('ragged.ingestion.batch.VectorStore') as MockVectorStore:
         mock_store = MagicMock()
         MockVectorStore.return_value = mock_store
         yield mock_store
@@ -42,7 +42,7 @@ def mock_vector_store():
 @pytest.fixture
 def mock_embedder():
     """Create a mock embedder."""
-    with patch('src.ingestion.batch.get_embedder') as mock_get_embedder:
+    with patch('ragged.ingestion.batch.get_embedder') as mock_get_embedder:
         mock_embed = MagicMock()
         mock_embed.embed_batch.return_value = [[0.1] * 384]  # Mock embeddings
         mock_get_embedder.return_value = mock_embed
@@ -155,8 +155,8 @@ class TestBatchIngestion:
 
         ingester = BatchIngester(console, continue_on_error=True)
 
-        with patch('src.ingestion.batch.load_document') as mock_load, \
-             patch('src.ingestion.batch.chunk_document') as mock_chunk:
+        with patch('ragged.ingestion.batch.load_document') as mock_load, \
+             patch('ragged.ingestion.batch.chunk_document') as mock_chunk:
             # Create proper mock document
             mock_doc = MagicMock()
             mock_doc.metadata.file_hash = "hash1"
@@ -197,8 +197,8 @@ class TestBatchIngestion:
 
         ingester = BatchIngester(console, continue_on_error=False)
 
-        with patch('src.ingestion.batch.load_document') as mock_load, \
-             patch('src.ingestion.batch.chunk_document') as mock_chunk:
+        with patch('ragged.ingestion.batch.load_document') as mock_load, \
+             patch('ragged.ingestion.batch.chunk_document') as mock_chunk:
 
             # Create proper mock documents
             mock_doc1 = MagicMock()
@@ -470,7 +470,7 @@ class TestMetadataHandling:
 
         ingester = BatchIngester(console, skip_duplicates=False)
 
-        with patch('src.ingestion.batch.chunk_document') as mock_chunk:
+        with patch('ragged.ingestion.batch.chunk_document') as mock_chunk:
             # Create mock chunks with Path in metadata
             mock_doc = MagicMock()
             mock_chunk_obj = MagicMock()
@@ -500,7 +500,7 @@ class TestMetadataHandling:
 
         ingester = BatchIngester(console, skip_duplicates=False)
 
-        with patch('src.ingestion.batch.chunk_document') as mock_chunk:
+        with patch('ragged.ingestion.batch.chunk_document') as mock_chunk:
             # Create mock chunks with None values in metadata
             mock_doc = MagicMock()
             mock_chunk_obj = MagicMock()

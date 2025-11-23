@@ -381,7 +381,6 @@ All features maintain backward compatibility:
 ## Related Documentation
 
 - [v0.5.7 Roadmap](../../../../roadmap/version/v0.5/v0.5.7.md) - Original planning
-- [Security Audit](../../process/audit/2025-11-23/v0.5.7-security-audit.md) - Initial findings
 - [Security Monitoring Guide](../../../../../guides/security-monitoring.md) - Operational procedures
 - v0.5.6 Implementation - Previous version context
 

@@ -20,7 +20,6 @@ This document traces the lineage from planning through decisions to implementati
 
 **Architecture Enhancements:**
 - [Document Normalisation](../../../planning/core-concepts/document-normalisation.md) - Text cleaning
-- [Enhanced Retrieval](../../../planning/architecture/enhanced-retrieval.md) - Better search
 
 **Core Concepts:**
 - Chunking Strategy - Overlap optimisation

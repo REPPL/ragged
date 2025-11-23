@@ -148,7 +148,6 @@ All checked links are valid!
 ```markdown
 ## Related Documentation
 
-- [v0.2.7 Planning](./planning/version/v0.2/README.md) - Design goals
 - [CLI Enhancements](../../development/planning/interfaces/cli/enhancements.md) - Complete specs
 
 ---
@@ -305,7 +304,6 @@ Add "Related Documentation" sections to:
 ## Related Documentation
 
 - Link Title - Brief description
-- [Another Link](../path.md) - Brief description
 
 ---
 ```

@@ -321,7 +321,6 @@ class TemporalReasoner:
 - Don't use facts that were valid in past but not now
 - Historical queries use facts valid at that time
 
-**See**: [temporal-reasoning.md](./temporal-reasoning.md) for complete implementation details
 
 **Files**:
 - `ragged/memory/temporal_reasoning.py` (~400 lines)
@@ -406,7 +405,6 @@ ragged memory facts --current --persona researcher
 ragged memory fact-history <fact-id>
 ```
 
-**Output Examples**: See [cli-examples.md](./cli-examples.md)
 
 **Files**:
 - `ragged/cli/commands/timeline.py` (~300 lines)
@@ -567,7 +565,6 @@ Core temporal logic testing.
    - Temporal fact management
    - Activity tracking patterns
 
-**See**: [documentation-plan.md](./documentation-plan.md) for complete documentation structure
 
 ---
 
@@ -626,9 +623,6 @@ Core temporal logic testing.
 **Supporting Documentation**:
 - temporal-facts.md - Temporal fact storage details
 - timeline-engine.md - Timeline query engine details
-- [temporal-reasoning.md](./temporal-reasoning.md) - Temporal reasoning details
-- [cli-examples.md](./cli-examples.md) - CLI command examples
-- [documentation-plan.md](./documentation-plan.md) - Documentation structure
 
 **Dependencies**:
 - `python-dateutil>=2.8` - Temporal operations
@@ -761,8 +755,5 @@ This release includes supporting documentation files in this directory:
 
 1. **temporal-facts.md** - Temporal fact storage implementation details
 2. **timeline-engine.md** - Timeline query engine implementation
-3. **[temporal-reasoning.md](./temporal-reasoning.md)** - Temporal reasoning implementation
-4. **[cli-examples.md](./cli-examples.md)** - Comprehensive CLI examples
-5. **[documentation-plan.md](./documentation-plan.md)** - Documentation structure and plan
 
 ---

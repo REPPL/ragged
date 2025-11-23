@@ -136,7 +136,6 @@ ragged storage info
 ## Related Documentation
 
 - [Multi-Modal Workflow Tutorial](../../../tutorials/multimodal-workflow.md)
-- [Batch Processing Guide](../../../guides/batch-processing.md)
 
 ---
 

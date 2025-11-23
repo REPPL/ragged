@@ -71,7 +71,6 @@ Documentation audits use the `documentation-auditor` agent:
 /verify-docs
 ```
 
-See [Development Standards](../../Development/.claude/CLAUDE.md) for documentation quality standards.
 
 ### Roadmap Audits
 

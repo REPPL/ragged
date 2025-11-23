@@ -48,8 +48,6 @@ docs/api/
 ## Related Documentation
 
 - [Main Documentation Hub](../README.md) - Overview of all documentation
-- [Contributing Guide](../guides/contributing.md) - How to contribute to documentation
-- [Documentation Standards](../development/process/methodology/documentation-standards.md) - Documentation guidelines
 
 ---
 

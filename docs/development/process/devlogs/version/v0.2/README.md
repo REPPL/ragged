@@ -40,18 +40,15 @@ This directory contains the **development log** (daily narrative). The **impleme
 ### 📋 Planning (What We Intend)
 - **[timeline.md](../v0.1/timeline.md)** - Development timeline, phase breakdown, time estimates
 - **[phases.md](../v0.1/phases.md)** - Detailed 8-phase plan with goals and deliverables
-- **[architecture.md](architecture.md)** - v0.2 architecture and design decisions
 
 ### 🔨 Implementation (What We're Doing)
 - **[checklist.md](checklist.md)** - Real-time implementation status
 - **[decisions.md](../v0.1/decisions.md)** - Architecture Decision Records (ADRs)
 - **[implementation-notes.md](../../../../implementation/version/v0.1/implementation-notes.md)** - Technical implementation details
-- **[testing.md](testing.md)** - Testing strategy and coverage
 
 ### 🔍 Retrospective (What We Learned)
 - **[lessons-learned.md](../v0.1/lessons-learned.md)** - What worked, what didn't
 - **[CHANGELOG.md](../../../../implementation/version/v0.5.6/CHANGELOG.md)** - Detailed version changelog
-- **[summary.md](summary.md)** - Executive summary (end of development)
 
 ---
 

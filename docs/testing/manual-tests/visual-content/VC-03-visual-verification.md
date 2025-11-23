@@ -136,8 +136,6 @@ ragged storage info --format json
 
 ## Related Documentation
 
-- [Multi-Modal Query Guide](../../../guides/multimodal-queries.md)
-- [Vision Embedding Architecture](../../../reference/vision-embeddings.md)
 
 ---
 

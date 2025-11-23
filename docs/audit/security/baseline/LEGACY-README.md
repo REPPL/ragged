@@ -43,7 +43,6 @@ This directory contains:
 
 ---
 
-### [Privacy Architecture](./privacy-architecture.md)
 
 **Purpose:** Technical documentation of ragged's privacy architecture.
 
@@ -179,7 +178,6 @@ ragged config set privacy.pii_detection_sensitivity strict
 - ❌ Queries in plaintext (NEVER stored)
 - ❌ Telemetry or usage tracking (NEVER enabled by default)
 
-**See:** [Privacy Architecture](./privacy-architecture.md)
 
 ---
 
@@ -237,7 +235,6 @@ Features that store/process user data have detailed privacy implementations:
 - 50-69: Moderate privacy, improvements needed
 - <50: Poor privacy, urgent action required
 
-**See:** [Privacy Risk Assessment](./privacy-architecture.md#privacy-risk-assessment)
 
 ---
 
@@ -260,7 +257,6 @@ ragged complies with GDPR requirements:
 - ✅ Right to erasure (Article 17): `ragged privacy delete`
 - ✅ Right to portability (Article 20): `ragged privacy export`
 
-**See:** [GDPR Compliance](./privacy-architecture.md#gdpr-compliance)
 
 ### Security Standards
 
@@ -431,7 +427,6 @@ scheduler.schedule_cleanup(data_path, ttl_days=90)
 **See detailed integration examples:**
 - [v0.3.9 Privacy Implementation](../../../development/roadmap/version/v0.3/v0.3.9.md#privacy--security-implementation)
 - [v0.3.10 Privacy Implementation](../../../development/roadmap/version/v0.3/v0.3.10.md#privacy--security-implementation)
-- [v0.3.13 Privacy Implementation](../roadmap/version/v0.3/v0.3.13.md#privacy--security-implementation)
 
 ---
 
@@ -458,7 +453,6 @@ scheduler.schedule_cleanup(data_path, ttl_days=90)
 - Security certification (ISO 27001, SOC 2)
 - Bug bounty programme
 
-**See:** [Future Enhancements](./privacy-architecture.md#future-enhancements)
 
 ---
 
@@ -466,12 +460,10 @@ scheduler.schedule_cleanup(data_path, ttl_days=90)
 
 ### Security & Privacy
 - [Security Policy](../../../security/policy.md) - Comprehensive security policy
-- [Privacy Architecture](./privacy-architecture.md) - Technical privacy documentation
 
 ### Implementation Roadmaps
 - [v0.2.10 Roadmap](../roadmap/version/v0.2/v0.2.10/) - Security Hardening
 - [v0.2.11 Roadmap](../roadmap/version/v0.2/v0.2.11/) - Privacy Infrastructure
-- [v0.3 README](../roadmap/version/v0.3/README.md) - How v0.3.x uses security foundation
 
 ### Development Documentation
 - [Development README](../README.md) - Main development hub

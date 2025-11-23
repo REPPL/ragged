@@ -384,7 +384,7 @@
 - [Feature name]: [Link to time log]
 - [Feature name]: [Link to time log]
 
-**Part of Version**: [vX.X-summary.md](./vX.X-summary.md)
+**Part of Version**: [vX.X-summary.md](./vX.X-summary.md) (example path)
 
 **Daily Logs**:
 - YYYY-MM-DD

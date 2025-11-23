@@ -225,7 +225,7 @@ class TestDynamicScaling:
         assert processor.current_workers == initial_workers
 
     @pytest.mark.asyncio
-    @patch('src.ingestion.backpressure.psutil.cpu_percent')
+    @patch('ragged.ingestion.backpressure.psutil.cpu_percent')
     async def test_scale_down_on_high_cpu(self, mock_cpu):
         """Test worker pool scales down on high CPU."""
         config = BackpressureConfig(
@@ -248,7 +248,7 @@ class TestDynamicScaling:
         assert processor.current_workers >= config.min_workers
 
     @pytest.mark.asyncio
-    @patch('src.ingestion.backpressure.psutil.cpu_percent')
+    @patch('ragged.ingestion.backpressure.psutil.cpu_percent')
     async def test_scale_up_on_low_cpu_and_queue(self, mock_cpu):
         """Test worker pool scales up on low CPU and growing queue."""
         config = BackpressureConfig(
@@ -256,6 +256,7 @@ class TestDynamicScaling:
             cpu_threshold_percent=80.0,
             min_workers=2,
             max_workers=4,
+            max_queue_depth=10,  # Set to 10 so 6 tasks > 50% threshold
         )
         processor = AsyncProcessorWithBackpressure(config)
         processor.current_workers = 2  # Start at min
@@ -299,8 +300,8 @@ class TestDocumentProcessing:
     """Tests for document processing with backpressure."""
 
     @pytest.mark.asyncio
-    @patch('src.ingestion.backpressure.AsyncProcessorWithBackpressure.load_document_async')
-    @patch('src.ingestion.backpressure.AsyncProcessorWithBackpressure.process_document_async')
+    @patch('ragged.ingestion.backpressure.AsyncProcessorWithBackpressure.load_document_async')
+    @patch('ragged.ingestion.backpressure.AsyncProcessorWithBackpressure.process_document_async')
     async def test_process_documents_with_backpressure(
         self, mock_process, mock_load, processor
     ):
@@ -394,7 +395,7 @@ class TestErrorHandling:
         assert processor.stats["tasks_failed"] == 1
 
     @pytest.mark.asyncio
-    @patch('src.ingestion.backpressure.AsyncProcessorWithBackpressure.load_document_async')
+    @patch('ragged.ingestion.backpressure.AsyncProcessorWithBackpressure.load_document_async')
     async def test_document_load_failure(self, mock_load, processor):
         """Test handling of document load failures."""
         mock_load.return_value = None  # Simulate load failure

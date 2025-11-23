@@ -198,7 +198,6 @@ v0.3.4a introduced state-of-the-art document processing through IBM Research's D
 - Implementation Summary
 - Lineage
 - [Security Audit](../../../../../audit/security/baseline/v0.3.4a-security-audit.md)
-- [Time Log](../../time-logs/version/v0.3.4a/time-tracking.md)
 
 ---
 

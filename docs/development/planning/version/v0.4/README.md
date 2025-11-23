@@ -43,7 +43,6 @@ v0.4 introduces the most privacy-sensitive features yet:
 - ❌ GDPR non-compliance
 
 **See:**
-- [Security & Privacy Foundation](../../security/README.md)
 - [v0.2.10 Roadmap](../../../roadmap/version/v0.2/v0.2.10/)
 - [v0.2.11 Roadmap](../../../roadmap/version/v0.2/v0.2.11/)
 

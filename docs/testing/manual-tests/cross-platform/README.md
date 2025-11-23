@@ -34,4 +34,3 @@ These tests ensure ragged works correctly across:
 ## Related Documentation
 
 - [Installation Guide](../../../tutorials/installation.md)
-- [Platform-Specific Notes](../../../guides/platform-compatibility.md)

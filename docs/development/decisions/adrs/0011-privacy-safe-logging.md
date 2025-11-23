@@ -160,7 +160,6 @@ v0.2+:
 
 - [ADR-0001: Local-Only Processing](./0001-local-only-processing.md)
 - [Core Concepts: Privacy Architecture](../../planning/core-concepts/privacy-architecture.md)
-- [Security Considerations](../../planning/architecture/security.md)
 
 ---
 

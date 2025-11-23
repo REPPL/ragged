@@ -494,7 +494,6 @@ v0.4.13 (production deployment with observability)
 
 - [v0.4 Overview README](./README.md) - Complete series overview (updated with new sequence)
 - [v0.4.9](../../development/roadmap/version/v0.4/v0.4.9.md) - Enhanced with mid-series security review
-- [v0.4.10](./v0.4.10/README.md) - Temporal memory Part 1 (facts & timeline basics)
 - [v0.4.11](../../development/roadmap/version/v0.4/v0.4.11.md) - Temporal memory Part 2 (advanced features)
 - [v0.4.12](../../development/roadmap/version/v0.4/v0.4.12.md) - Backend optimisation & migration (merged)
 - [v0.4.13](../../development/roadmap/version/v0.4/v0.4.13.md) - Production deployment & observability (enhanced)

@@ -256,7 +256,6 @@ LEANN (Lightweight Embedding-Aware Neural Network) is a vector database that ach
 
 ## Related Documentation
 
-- [ADR-0004: VectorStore Abstraction Architecture](./adrs/0004-vectorstore-abstraction.md)
 - [v0.3 Planning: Evaluation Framework](../planning/version/v0.3/README.md)
 - v0.4 Roadmap: Plugin Architecture
 - [LEANN GitHub Repository](https://github.com/yichuan-w/LEANN)
