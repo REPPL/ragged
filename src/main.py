@@ -75,14 +75,18 @@ from src.cli.commands.envinfo import env_info
 from src.cli.commands.explain import explain
 from src.cli.commands.exportimport import export
 from src.cli.commands.feature_flags import feature_flags_group
+from src.cli.commands.gpu import gpu  # v0.5.3: GPU management
 from src.cli.commands.health import health
 from src.cli.commands.history import history
+from src.cli.commands.ingest import ingest  # v0.5.3: Multi-modal ingestion
 from src.cli.commands.metadata import metadata
 from src.cli.commands.monitor import monitor
-from src.cli.commands.query import query
+from src.cli.commands.query import query  # v0.4.x: Legacy text-only query
+from src.cli.commands.query_multimodal import query_group  # v0.5.3: Multi-modal query
 from src.cli.commands.search import search
 from src.cli.commands.serve import serve  # v0.3.12: API server
 from src.cli.commands.show import show  # v0.3.5: PDF correction metadata viewer
+from src.cli.commands.storage import storage  # v0.5.3: Storage management
 from src.cli.commands.template import template  # v0.3.11: Template commands
 from src.cli.commands.test import test  # v0.3.11: Testing commands
 from src.cli.commands.validate import validate
@@ -90,7 +94,8 @@ from src.cli.commands.versions import versions  # v0.3.7a: Document version trac
 
 # Register commands
 cli.add_command(add)
-cli.add_command(query)
+cli.add_command(query)  # v0.4.x: Keep for backward compatibility
+cli.add_command(query_group)  # v0.5.3: Multi-modal query group
 cli.add_command(health)
 cli.add_command(list_docs)
 cli.add_command(clear)
@@ -112,6 +117,9 @@ cli.add_command(versions)  # v0.3.7a: Document version tracking
 cli.add_command(template)  # v0.3.11: Template commands
 cli.add_command(test)  # v0.3.11: Testing commands
 cli.add_command(serve)  # v0.3.12: API server
+cli.add_command(ingest)  # v0.5.3: Multi-modal ingestion
+cli.add_command(gpu)  # v0.5.3: GPU management
+cli.add_command(storage)  # v0.5.3: Storage management
 
 
 def main() -> None:

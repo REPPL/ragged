@@ -421,3 +421,59 @@ def config_set_persona(persona_name: str) -> None:
     console.print(f"  HyDE: {'enabled' if persona_config.enable_hyde else 'disabled'}")
     console.print()
     console.print("View full config with: ragged config show")
+
+
+@config.command("reset")
+@click.option(
+    "--confirm",
+    is_flag=True,
+    help="Skip confirmation prompt",
+)
+def config_reset(confirm: bool) -> None:
+    """Reset configuration to defaults.
+
+    \b
+    Warning:
+    This will delete your user configuration file and reset all settings
+    to defaults. This action cannot be undone.
+
+    \b
+    Examples:
+        ragged config reset
+        ragged config reset --confirm
+    """
+    config_path = Path.home() / ".config" / "ragged" / "config.yml"
+
+    # Check if config file exists
+    if not config_path.exists():
+        console.print("[yellow]No user configuration file found.[/yellow]")
+        console.print("Already using default settings.")
+        return
+
+    # Confirm deletion
+    if not confirm:
+        console.print("[yellow]⚠ Warning:[/yellow] This will delete your configuration file:")
+        console.print(f"  {config_path}")
+        console.print()
+        console.print("All custom settings will be lost. This cannot be undone.")
+        console.print()
+
+        confirmed = click.confirm("Reset to defaults?", default=False)
+        if not confirmed:
+            console.print("[dim]Cancelled. No changes made.[/dim]")
+            return
+
+    # Delete config file
+    try:
+        config_path.unlink()
+        console.print("[green]✓[/green] Configuration reset to defaults")
+        console.print(f"  Deleted: {config_path}")
+        console.print()
+        console.print("Default configuration is now active.")
+        console.print()
+        console.print("Generate new config with:")
+        console.print("  ragged config generate")
+
+    except Exception as e:
+        console.print(f"[red]✗[/red] Failed to reset configuration: {e}")
+        sys.exit(1)

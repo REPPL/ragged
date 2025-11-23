@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ragged"
-version = "0.5.2"
+version = "0.5.3"
 description = "Privacy-first local RAG system for document question-answering"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
@@ -45,6 +45,9 @@ dependencies = [
     "chardet>=5.2.0",
     "httpx>=0.25.0",
     "requests>=2.31.0",
+    # Security: Minimum versions for transitive dependencies (v0.4 mid-series audit 2025-11-23)
+    "urllib3>=2.5.0",  # CVE-2025-50182, CVE-2025-50181 (redirect bypass, SSRF)
+    "langchain-core>=1.0.7",  # CVE-2025-65106 (template injection)
     # v0.2 new dependencies
     "fastapi>=0.104.0",
     "uvicorn[standard]>=0.24.0",
