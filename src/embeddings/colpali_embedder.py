@@ -29,11 +29,13 @@ from typing import Optional
 import numpy as np
 import torch
 
+from ragged.config.settings import get_settings
 from ragged.embeddings.base import BaseEmbedder
 from ragged.gpu.batch_sizer import AdaptiveBatchSizer, BatchSizeConfig
 from ragged.gpu.device_manager import DeviceInfo, DeviceManager, DeviceType
 from ragged.gpu.memory_monitor import MemoryMonitor
 from ragged.gpu.oom_handler import OOMHandler
+from ragged.validation.image_validator import ImageValidator
 
 logger = logging.getLogger(__name__)
 
@@ -199,6 +201,15 @@ class ColPaliEmbedder(BaseEmbedder):
         self.device = self.device_info.device_type.value
 
         logger.info(f"Initialising ColPali embedder on device: {self.device}")
+
+        # Initialise image validator (v0.5.7 HIGH-4)
+        settings = get_settings()
+        self.image_validator = ImageValidator(
+            max_file_size_mb=settings.max_image_file_size_mb,
+            max_dimension=settings.max_image_dimension,
+            max_memory_mb=settings.max_image_memory_mb,
+        )
+        logger.info("Image size validation enabled (v0.5.7 HIGH-4)")
 
         # Load model and processor
         self._load_model()
@@ -537,6 +548,9 @@ class ColPaliEmbedder(BaseEmbedder):
         Returns:
             128-dimensional embedding vector
         """
+        # SECURITY FIX (v0.5.7 HIGH-4): Validate image size before processing
+        self.image_validator.validate(image)
+
         try:
             with torch.no_grad():
                 # Preprocess image
@@ -632,6 +646,9 @@ class ColPaliEmbedder(BaseEmbedder):
         Returns:
             Array of embeddings
         """
+        # SECURITY FIX (v0.5.7 HIGH-4): Validate all images before processing
+        self.image_validator.validate_batch(images)
+
         current_batch_size = batch_size if batch_size is not None else self.batch_size
         embeddings_list = []
 
@@ -748,6 +765,10 @@ class ColPaliEmbedder(BaseEmbedder):
                 thread_count=4,  # Parallel PDF rendering
             )
             logger.debug(f"Extracted {len(images)} pages from {pdf_path.name}")
+
+            # SECURITY FIX (v0.5.7 HIGH-4): Validate extracted images
+            self.image_validator.validate_batch(images)
+
             return images
 
         except Exception as e:

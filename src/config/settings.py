@@ -205,6 +205,21 @@ class Settings(BaseSettings):
         default=False,
         description="Block ingestion of documents containing visual PII (GDPR/HIPAA compliance)"
     )
+    max_image_file_size_mb: float = Field(
+        default=50.0,
+        gt=0,
+        description="Maximum image file size in MB (DoS protection)"
+    )
+    max_image_dimension: int = Field(
+        default=10000,
+        gt=0,
+        description="Maximum image width or height in pixels (DoS protection)"
+    )
+    max_image_memory_mb: float = Field(
+        default=500.0,
+        gt=0,
+        description="Maximum image memory footprint in MB (DoS protection)"
+    )
 
     model_config = SettingsConfigDict(
         env_file=".env",
