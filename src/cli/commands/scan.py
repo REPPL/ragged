@@ -10,6 +10,7 @@ v0.4.9: Initial scan processing CLI
 
 import asyncio
 import logging
+import sys
 from pathlib import Path
 
 import click
