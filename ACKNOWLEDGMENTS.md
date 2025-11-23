@@ -49,6 +49,10 @@ These projects influenced ragged's v0.4.x memory system design.
 - **ChromaDB** - Primary vector storage backend
 - **Ollama** - Local LLM deployment
 - **Kuzu** - Embedded graph database (v0.4.4+)
+- **sentence-transformers** - Embeddings
+- **PyMuPDF4LLM** - PDF processing
+- **Click** - CLI framework
+- **Rich** - CLI formatting and output
 
 ---
 
