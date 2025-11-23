@@ -7,6 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.9] - 2025-11-23
+
+### Added - Messy Scans to Perfect PDFs
+
+**Core Features**:
+- **Scan Processing Pipeline**: Convert messy scanned documents into perfect, searchable PDFs
+  - Handle various input formats (single PDF/image, folders, mixed content)
+  - Intelligent file sorting (natural, alphabetic, date-based)
+  - Image preprocessing (deskew, denoise, contrast adjustment via CLAHE)
+  - Automatic OCR with quality-based engine selection
+  - Intelligent page reordering with number interpolation
+  - Offline metadata extraction (title, author, year, publisher)
+  - Markdown export and semantic file naming
+- **OCR Engine Support**: Flexible OCR with automatic routing
+  - **PaddleOCR**: State-of-the-art (95-98% accuracy), offline, Apache 2.0
+  - **EasyOCR**: Fast alternative (90-95%), Docling-integrated
+  - **Auto-selection**: Quality-based routing (threshold 0.70), 80+ languages
+- **Automatic Page Reordering**: Intelligent reordering based on logical page numbers
+  - Extract from headers/footers, interpolate missing numbers (chapter starts, blank pages)
+  - Handle gaps in numbering, safety check (skip if >80% affected)
+- **Metadata Extraction**: Offline, privacy-first extraction
+  - Cascading: PDF metadata → OCR + regex → fallback
+  - Confidence scoring, no web lookups
+- **Output Organization**: Structured management with lineage tracking
+  - Semantic naming (Title-Author-Year.pdf), content-based deduplication (SHA256)
+  - Directory structure: originals/[hash]/, corrected/, markdown/
+  - Lineage tracking (processing_log.jsonl)
+
+**CLI**: `ragged scan process PATH [OPTIONS]` - 5-phase pipeline with rich progress indicators
+
+**Configuration**: 15 new settings (scan_ocr_engine, scan_auto_reorder, scan_naming_convention, etc.)
+
+**Technical**: 5 new modules (~3,065 lines), 2 enhanced modules (+340 lines), 6 new dependencies
+
+**Privacy**: 100% offline and local, no web lookups, no external APIs, no telemetry
+
 ## [0.5.4] - 2025-11-23
 
 ### Changed
