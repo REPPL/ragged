@@ -20,6 +20,7 @@ from ragged.cli.formatters import FORMAT_CHOICES, print_formatted
 from ragged.config.settings import get_settings
 from ragged.security.encryption import get_encryption_manager
 from ragged.utils.logging import get_logger
+from ragged.validation.path_validator import PathTraversalError, PathValidator
 
 logger = get_logger(__name__)
 
@@ -497,8 +498,20 @@ def export_history(output_file: str) -> None:
         ragged history export ~/Desktop/queries.json
     """
     try:
+        # v0.5.8 HIGH-5: Validate output path for security
+        try:
+            validator = PathValidator(
+                allowed_base=None,  # Allow export anywhere
+                allow_absolute=True,  # Users commonly use absolute paths
+                allow_symlinks=False,  # Block symlinks for security
+            )
+            output_path = validator.validate(Path(output_file))
+        except PathTraversalError as e:
+            console.print(f"[bold red]✗ Security Error:[/bold red] {e}")
+            logger.error(f"Path validation failed: {e}")
+            sys.exit(1)
+
         history_manager = QueryHistory()
-        output_path = Path(output_file)
 
         # Check if file exists
         if output_path.exists():

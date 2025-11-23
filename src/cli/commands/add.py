@@ -7,6 +7,7 @@ import click
 
 from ragged.cli.common import ProgressType, console
 from ragged.utils.logging import get_logger
+from ragged.validation.path_validator import PathTraversalError, PathValidator
 
 logger = get_logger(__name__)
 
@@ -61,6 +62,19 @@ def add(
     When PATH is a directory, all supported documents are ingested recursively.
     Supported formats: PDF, TXT, MD, HTML
     """
+    # v0.5.8 HIGH-5: Validate path for security (prevent path traversal attacks)
+    try:
+        validator = PathValidator(
+            allowed_base=None,  # Allow paths anywhere (user files)
+            allow_absolute=True,  # Users commonly use absolute paths
+            allow_symlinks=False,  # Block symlinks for security
+        )
+        path = validator.validate(path)
+    except PathTraversalError as e:
+        console.print(f"[bold red]✗ Security Error:[/bold red] {e}")
+        logger.error(f"Path validation failed: {e}")
+        sys.exit(1)
+
     from ragged.chunking.splitters import chunk_document
     from ragged.embeddings.factory import get_embedder
     from ragged.ingestion.batch import BatchIngester, IngestionStatus

@@ -220,23 +220,14 @@ class L2DocumentEmbeddingCache:
             except Exception as e:
                 logger.warning(f"Failed to load L2 JSON index: {e}")
 
-        # Try loading legacy pickle index for migration
+        # Legacy pickle files are no longer supported (v0.5.8: removed for security)
         pkl_index_path = self.cache_dir / "l2_index.pkl"
         if pkl_index_path.exists():
-            try:
-                import pickle
-                with open(pkl_index_path, "rb") as f:
-                    index = pickle.load(f)  # noqa: S301 (migration only)
-                logger.info(f"Loaded legacy L2 pickle index: {len(index)} entries")
-                logger.info("Auto-migrating L2 index from pickle to JSON...")
-                # Save as JSON and remove legacy pkl
-                self._index = index
-                self._save_index()
-                pkl_index_path.unlink()
-                logger.info("L2 index migration complete")
-                return index
-            except Exception as e:
-                logger.warning(f"Failed to load legacy L2 pickle index: {e}")
+            logger.warning(
+                f"Legacy pickle index found: {pkl_index_path}. "
+                f"Pickle support removed in v0.5.8 for security. "
+                f"Please delete {pkl_index_path} - cache will rebuild automatically."
+            )
 
         return OrderedDict()
 
@@ -328,17 +319,17 @@ class L2DocumentEmbeddingCache:
                 if cache_path.exists():
                     data = load_json(cache_path)
                     embedding = list_to_numpy_array(data["embedding"])
-                # Fallback to legacy pickle for migration
+                # Legacy pickle files no longer supported (v0.5.8: removed for security)
                 elif pkl_cache_path.exists():
-                    import pickle
-                    with open(pkl_cache_path, "rb") as f:
-                        embedding = pickle.load(f)  # noqa: S301 (migration only)
-                    logger.debug(f"Auto-migrating embedding {key[:16]}... from pickle to JSON")
-                    # Save as JSON and remove legacy pkl
-                    self._save_embedding_to_disk(key, embedding)
-                    pkl_cache_path.unlink()
+                    logger.warning(
+                        f"Legacy pickle embedding found: {pkl_cache_path}. "
+                        f"Pickle support removed in v0.5.8 for security. "
+                        f"Embedding will be regenerated. Delete {pkl_cache_path.parent} to clean up."
+                    )
+                    self._misses += 1
+                    return None
                 else:
-                    # Should not reach here due to earlier check
+                    # Cache file not found
                     self._misses += 1
                     return None
 

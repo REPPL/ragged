@@ -15,6 +15,7 @@ from ragged import __version__
 from ragged.cli.common import console
 from ragged.config.settings import get_settings
 from ragged.utils.logging import get_logger
+from ragged.validation.path_validator import PathTraversalError, PathValidator
 
 logger = get_logger(__name__)
 
@@ -79,7 +80,18 @@ def backup_command(
             extension = ".json.gz" if compress else ".json"
             output_file = f"ragged_backup_{timestamp}{extension}"
 
-        output_path = Path(output_file)
+        # v0.5.8 HIGH-5: Validate output path for security (prevent path traversal)
+        try:
+            validator = PathValidator(
+                allowed_base=None,  # Allow output anywhere
+                allow_absolute=True,  # Users commonly use absolute paths
+                allow_symlinks=False,  # Block symlinks for security
+            )
+            output_path = validator.validate(Path(output_file))
+        except PathTraversalError as e:
+            console.print(f"[bold red]✗ Security Error:[/bold red] {e}")
+            logger.error(f"Path validation failed: {e}")
+            sys.exit(1)
 
         console.print("[bold]Creating backup...[/bold]")
         console.print(f"Output: {output_path}")
@@ -200,7 +212,18 @@ def restore_command(
 
         from ragged.storage.vector_store import VectorStore
 
-        backup_path = Path(backup_file)
+        # v0.5.8 HIGH-5: Validate backup file path for security
+        try:
+            validator = PathValidator(
+                allowed_base=None,  # Allow reading from anywhere
+                allow_absolute=True,  # Users commonly use absolute paths
+                allow_symlinks=False,  # Block symlinks for security
+            )
+            backup_path = validator.validate(Path(backup_file))
+        except PathTraversalError as e:
+            console.print(f"[bold red]✗ Security Error:[/bold red] {e}")
+            logger.error(f"Path validation failed: {e}")
+            sys.exit(1)
 
         console.print("[bold]Restoring from backup...[/bold]")
         console.print(f"File: {backup_path}")
@@ -340,7 +363,18 @@ def info_command(backup_file: str) -> None:
         ragged export info backup.json.gz
     """
     try:
-        backup_path = Path(backup_file)
+        # v0.5.8 HIGH-5: Validate backup file path for security
+        try:
+            validator = PathValidator(
+                allowed_base=None,  # Allow reading from anywhere
+                allow_absolute=True,  # Users commonly use absolute paths
+                allow_symlinks=False,  # Block symlinks for security
+            )
+            backup_path = validator.validate(Path(backup_file))
+        except PathTraversalError as e:
+            console.print(f"[bold red]✗ Security Error:[/bold red] {e}")
+            logger.error(f"Path validation failed: {e}")
+            sys.exit(1)
 
         # Read backup file
         if backup_path.suffix == ".gz":
@@ -412,7 +446,18 @@ def list_backups(directory: str) -> None:
         ragged export list --directory ~/backups
     """
     try:
-        dir_path = Path(directory)
+        # v0.5.8 HIGH-5: Validate directory path for security
+        try:
+            validator = PathValidator(
+                allowed_base=None,  # Allow listing from anywhere
+                allow_absolute=True,  # Users commonly use absolute paths
+                allow_symlinks=False,  # Block symlinks for security
+            )
+            dir_path = validator.validate(Path(directory))
+        except PathTraversalError as e:
+            console.print(f"[bold red]✗ Security Error:[/bold red] {e}")
+            logger.error(f"Path validation failed: {e}")
+            sys.exit(1)
 
         # Find backup files
         backup_files = list(dir_path.glob("ragged_backup_*.json"))

@@ -34,13 +34,7 @@ from ragged.utils.serialization import (
 # Test Configuration
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 SRC_DIR = PROJECT_ROOT / "src"
-ALLOWED_PICKLE_FILES = {
-    # Migration utilities are allowed to import pickle temporarily
-    "src/utils/serialization.py",  # Contains migrate_pickle_to_json()
-    # Legacy files during migration (remove after migration complete)
-    "src/retrieval/incremental_index.py",  # Temporary for legacy .pkl migration
-    "src/utils/multi_tier_cache.py",  # Temporary for legacy .pkl migration
-}
+ALLOWED_PICKLE_FILES = set()  # v0.5.8: All pickle usage removed (no backward compatibility before v1.0)
 
 
 class TestPickleBan:

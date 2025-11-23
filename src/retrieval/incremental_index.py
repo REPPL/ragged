@@ -373,23 +373,19 @@ class IncrementalBM25Retriever(BM25Retriever):
                     logger.warning("No checkpoints found")
                     return False
 
-            # Load checkpoint based on file type
+            # Load checkpoint (JSON only, pickle removed in v0.5.8 for security)
             if checkpoint_path.suffix == ".json":
                 checkpoint_data = load_json(checkpoint_path)
             else:
-                # Legacy pickle migration (temporary for backward compatibility)
-                import pickle
-                with open(checkpoint_path, 'rb') as f:
-                    checkpoint_obj: IndexCheckpoint = pickle.load(f)  # noqa: S301
-                # Convert to dict format
-                checkpoint_data = {
-                    "documents": checkpoint_obj.documents,
-                    "doc_ids": checkpoint_obj.doc_ids,
-                    "metadatas": checkpoint_obj.metadatas,
-                    "deleted_ids": list(checkpoint_obj.deleted_ids),
-                    "timestamp": checkpoint_obj.timestamp,
-                    "version": checkpoint_obj.version,
-                }
+                # Legacy pickle files are no longer supported (security: removed in v0.5.8)
+                logger.error(
+                    f"Legacy pickle checkpoint found: {checkpoint_path}. "
+                    f"Pickle support removed for security. Please delete and rebuild index."
+                )
+                raise ValueError(
+                    "Legacy pickle checkpoints are no longer supported (removed in v0.5.8). "
+                    "Please delete the checkpoint file and rebuild your index."
+                )
 
             with self._lock:
                 self.documents = checkpoint_data["documents"]

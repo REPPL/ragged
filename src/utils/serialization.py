@@ -8,10 +8,10 @@ Key Design Principles:
 - No arbitrary code execution (unlike pickle)
 - Type-safe serialization/deserialization
 - Support for common Python types (dict, list, str, int, float, bool, None)
-- Migration utilities for legacy pickle files
 - Comprehensive error handling
 
 Security: This module addresses CRITICAL-001 from the baseline security audit.
+Note: v0.5.8 removed all pickle migration utilities (no backward compatibility before v1.0).
 """
 
 import json
@@ -211,65 +211,9 @@ def load_cache_entry(filepath: Path) -> tuple[str, Any, dict[str, Any]]:
     )
 
 
-def migrate_pickle_to_json(
-    pickle_path: Path,
-    json_path: Path,
-    migration_type: str = "bm25",
-) -> bool:
-    """Migrate legacy pickle file to secure JSON format.
-
-    This utility helps transition from pickle-based persistence to JSON-based.
-    Only use this for trusted pickle files created by previous versions of ragged.
-
-    WARNING: This function uses pickle.load() (migration only) and should only be run on trusted files.
-    Never use this on pickle files from untrusted sources.
-
-    Args:
-        pickle_path: Path to legacy .pkl file
-        json_path: Path to save migrated .json file
-        migration_type: Type of data being migrated ("bm25" or "cache")
-
-    Returns:
-        True if migration successful, False otherwise
-
-    Raises:
-        ValueError: If migration_type is not supported
-        FileNotFoundError: If pickle file doesn't exist
-
-    Security Warning: Uses pickle.load() - migration only for trusted legacy files
-    """
-    import pickle  # Import locally to avoid exposing pickle globally
-
-    if migration_type not in ("bm25", "cache"):
-        raise ValueError(f"Unsupported migration type: {migration_type}")
-
-    if not pickle_path.exists():
-        raise FileNotFoundError(f"Pickle file not found: {pickle_path}")
-
-    try:
-        # Load legacy pickle file (SECURITY: Only for trusted ragged-generated files)
-        with open(pickle_path, "rb") as f:
-            data = pickle.load(f)  # noqa: S301 (only for migration of trusted files)
-
-        # Save as JSON based on migration type
-        if migration_type == "bm25":
-            # Assume pickle contains tuple (corpus_processed, idf, doc_len, avgdl)
-            corpus_processed, idf, doc_len, avgdl = data
-            save_bm25_index(corpus_processed, idf, doc_len, avgdl, json_path)
-        elif migration_type == "cache":
-            # Assume pickle contains dict with key, value, metadata
-            save_cache_entry(
-                data["key"],
-                data["value"],
-                data.get("metadata", {}),
-                json_path,
-            )
-
-        return True
-
-    except Exception as e:
-        print(f"Migration failed: {e}")
-        return False
+# migrate_pickle_to_json removed in v0.5.8
+# Pickle support eliminated entirely (no backward compatibility before v1.0)
+# Legacy pickle files are no longer supported for security reasons
 
 
 def numpy_array_to_list(arr: npt.NDArray[Any]) -> list[Any]:

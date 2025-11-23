@@ -12,6 +12,7 @@ import click
 
 from ragged.cli.common import ProgressType, console
 from ragged.utils.logging import get_logger
+from ragged.validation.path_validator import PathTraversalError, PathValidator
 
 logger = get_logger(__name__)
 
@@ -100,6 +101,19 @@ def pdf(
         ragged ingest pdf document.pdf --vision --device cuda:0
         ragged ingest pdf document.pdf --vision --batch-size 8
     """
+    # v0.5.8 HIGH-5: Validate path for security (prevent path traversal attacks)
+    try:
+        validator = PathValidator(
+            allowed_base=None,  # Allow paths anywhere (user files)
+            allow_absolute=True,  # Users commonly use absolute paths
+            allow_symlinks=False,  # Block symlinks for security
+        )
+        path = validator.validate(path)
+    except PathTraversalError as e:
+        console.print(f"[bold red]✗ Security Error:[/bold red] {e}")
+        logger.error(f"Path validation failed: {e}")
+        sys.exit(1)
+
     from ragged.chunking.splitters import chunk_document
     from ragged.embeddings.factory import get_embedder
     from ragged.ingestion.loaders import load_document
@@ -398,6 +412,19 @@ def batch(
         ragged ingest batch ./docs --pattern "*.pdf" --max-depth 2
         ragged ingest batch ./docs --vision --fail-fast
     """
+    # v0.5.8 HIGH-5: Validate directory for security (prevent path traversal attacks)
+    try:
+        validator = PathValidator(
+            allowed_base=None,  # Allow paths anywhere (user directories)
+            allow_absolute=True,  # Users commonly use absolute paths
+            allow_symlinks=False,  # Block symlinks for security
+        )
+        directory = validator.validate(directory)
+    except PathTraversalError as e:
+        console.print(f"[bold red]✗ Security Error:[/bold red] {e}")
+        logger.error(f"Path validation failed: {e}")
+        sys.exit(1)
+
     from ragged.ingestion.batch import BatchIngester
     from ragged.ingestion.scanner import DocumentScanner
 

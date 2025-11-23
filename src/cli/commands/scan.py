@@ -22,6 +22,7 @@ from ragged.processing.metadata_extractor import MetadataExtractor
 from ragged.processing.output_organizer import OutputOrganizer
 from ragged.processing.scan_preprocessor import ScanPreprocessor
 from ragged.utils.logging import get_logger
+from ragged.validation.path_validator import PathTraversalError, PathValidator
 
 logger = get_logger(__name__)
 console = Console()
@@ -128,8 +129,32 @@ def process(
     """
     settings = get_settings()
 
-    # Validate path
-    path = Path(path).expanduser().resolve()
+    # v0.5.8 HIGH-5: Validate input path for security (prevent path traversal)
+    try:
+        validator = PathValidator(
+            allowed_base=None,  # Allow scanning files anywhere
+            allow_absolute=True,  # Users commonly use absolute paths
+            allow_symlinks=False,  # Block symlinks for security
+        )
+        path = validator.validate(path)
+    except PathTraversalError as e:
+        console.print(f"[bold red]✗ Security Error:[/bold red] {e}")
+        logger.error(f"Path validation failed: {e}")
+        sys.exit(1)
+
+    # v0.5.8 HIGH-5: Validate output directory if provided
+    if output_dir:
+        try:
+            validator_output = PathValidator(
+                allowed_base=None,  # Allow output anywhere
+                allow_absolute=True,  # Users commonly use absolute paths
+                allow_symlinks=False,  # Block symlinks for security
+            )
+            output_dir = validator_output.validate(output_dir, create_if_missing=True)
+        except PathTraversalError as e:
+            console.print(f"[bold red]✗ Security Error:[/bold red] {e}")
+            logger.error(f"Output directory validation failed: {e}")
+            sys.exit(1)
 
     if dry_run:
         console.print(f"[yellow]DRY RUN: Would process {path}[/yellow]")

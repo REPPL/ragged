@@ -17,6 +17,7 @@ from ragged.memory.behaviour import create_behaviour_learner
 from ragged.memory.interactions import InteractionTracker
 from ragged.memory.persona import PersonaManager
 from ragged.utils.logging import get_logger
+from ragged.validation.path_validator import PathTraversalError, PathValidator
 
 logger = get_logger(__name__)
 
@@ -299,11 +300,23 @@ def export_interactions(output_file: str, persona: str | None) -> None:
         ragged memory export interactions.json --persona researcher
     """
     try:
+        # v0.5.8 HIGH-5: Validate output path for security
+        try:
+            validator = PathValidator(
+                allowed_base=None,  # Allow export anywhere
+                allow_absolute=True,  # Users commonly use absolute paths
+                allow_symlinks=False,  # Block symlinks for security
+            )
+            output_path = validator.validate(Path(output_file))
+        except PathTraversalError as e:
+            console.print(f"[bold red]✗ Security Error:[/bold red] {e}")
+            logger.error(f"Path validation failed: {e}")
+            sys.exit(1)
+
         # Use active persona if not specified
         persona = persona or _get_active_persona()
 
         tracker = InteractionTracker()
-        output_path = Path(output_file)
 
         export_data = tracker.export_interactions(
             persona=persona,
