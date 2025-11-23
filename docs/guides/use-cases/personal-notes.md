@@ -17,7 +17,7 @@ While this guide is in development, you can still use ragged effectively for per
 
 1. **Add your notes**:
    ```bash
-   ragged add ~/Documents/Notes/
+   ragged ingest batch ~/Documents/Notes/
    ```
 
 2. **Tag by topic**:

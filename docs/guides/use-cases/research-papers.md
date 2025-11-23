@@ -17,7 +17,7 @@ While this guide is in development, you can still use ragged effectively for res
 
 1. **Add your papers**:
    ```bash
-   ragged add ~/Research/Papers/
+   ragged ingest batch ~/Research/Papers/
    ```
 
 2. **Tag by field and year**:

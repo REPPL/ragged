@@ -304,7 +304,7 @@ Convert unsupported formats to PDF or text first.
 
 3. **Add to ragged**:
    ```bash
-   ragged add unlocked-document.pdf
+   ragged ingest pdf unlocked-document.pdf
    ```
 
 ---
@@ -323,8 +323,8 @@ Convert unsupported formats to PDF or text first.
 2. **Process documents in batches**:
    ```bash
    # Instead of adding 100 at once
-   ragged add document-1.pdf
-   ragged add document-2.pdf
+   ragged ingest pdf document-1.pdf
+   ragged ingest pdf document-2.pdf
    # ...
    ```
 
@@ -384,13 +384,13 @@ mv ragged_data /path/to/ssd/ragged_data
 
 2. **Process in background**:
    ```bash
-   ragged add large-folder/ &
+   ragged ingest pdf large-folder/ &
    # Continue working while it processes
    ```
 
 3. **Monitor progress with verbose flag**:
    ```bash
-   ragged add folder/ --verbose
+   ragged ingest pdf folder/ --verbose
    ```
 
 ---
@@ -512,7 +512,7 @@ pip install -e .
 ragged config --reset
 
 # 5. Re-add documents
-ragged add original-documents/
+ragged ingest pdf original-documents/
 ```
 
 ---

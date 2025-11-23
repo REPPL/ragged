@@ -28,7 +28,7 @@ No subscriptions, no usage limits, no hidden costs. You only need your own compu
 
 **No.** ragged has a command-line interface (CLI) but you don't need programming knowledge.
 
-If you can open a terminal and type commands like `ragged add file.pdf`, you're ready to use ragged.
+If you can open a terminal and type commands like `ragged ingest pdf file.pdf`, you're ready to use ragged.
 
 **New to terminals?** [Complete Beginner's Guide](../tutorials/complete-beginners-guide.md) walks you through everything.
 
@@ -50,7 +50,7 @@ If you can open a terminal and type commands like `ragged add file.pdf`, you're 
 
 **Three commands after setup**:
 ```bash
-ragged add your-document.pdf    # Add a document
+ragged ingest pdf your-document.pdf    # Add a document
 ragged query "your question?"   # Ask a question
 ragged list                     # See what you've added
 ```
@@ -357,7 +357,7 @@ ragged metadata search --filter category=research --filter year=2023
 **Currently**: Remove old version, add new version.
 ```bash
 ragged clear old-document.pdf
-ragged add updated-document.pdf
+ragged ingest pdf updated-document.pdf
 ```
 
 **Future**: Automatic update detection (v0.3 planned).
