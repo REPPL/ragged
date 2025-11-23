@@ -10,8 +10,8 @@ import logging
 from dataclasses import dataclass
 from typing import Optional
 
-from src.gpu.device_manager import DeviceInfo, DeviceType
-from src.gpu.memory_monitor import MemoryMonitor
+from ragged.gpu.device_manager import DeviceInfo, DeviceType
+from ragged.gpu.memory_monitor import MemoryMonitor
 
 logger = logging.getLogger(__name__)
 

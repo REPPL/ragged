@@ -6,7 +6,7 @@ import yaml
 from rich.console import Console
 from rich.table import Table
 
-from src.config import get_settings
+from ragged.config import get_settings
 
 console = Console()
 

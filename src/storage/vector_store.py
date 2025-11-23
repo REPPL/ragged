@@ -3,7 +3,7 @@ ChromaDB vector store interface (backward compatibility).
 
 v0.3.6: This module now re-exports ChromaDBStore as VectorStore for backward
 compatibility. New code should use:
-    from src.storage.vectorstore_factory import get_vectorstore
+    from ragged.storage.vectorstore_factory import get_vectorstore
 
 The VectorStore class is now an abstract interface. See:
     - src/storage/vectorstore_interface.py for the abstract interface
@@ -12,7 +12,7 @@ The VectorStore class is now an abstract interface. See:
 """
 
 # Backward compatibility: Import ChromaDBStore and alias as VectorStore
-from src.storage.chromadb_store import ChromaDBStore as VectorStore  # noqa: F401
+from ragged.storage.chromadb_store import ChromaDBStore as VectorStore  # noqa: F401
 
 # Re-export for backward compatibility
 __all__ = ["VectorStore"]
@@ -20,7 +20,7 @@ __all__ = ["VectorStore"]
 
 # v0.3.6: Legacy VectorStore class is now ChromaDBStore
 # For new code, use:
-#   from src.storage.vectorstore_factory import get_vectorstore
+#   from ragged.storage.vectorstore_factory import get_vectorstore
 #   store = get_vectorstore(backend="chromadb")
 #
 # This maintains 100% backward compatibility while enabling future multi-backend support.

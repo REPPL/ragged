@@ -11,8 +11,8 @@ Child chunks link to their parent for improved context during generation.
 import re
 from dataclasses import dataclass
 
-from src.config.settings import get_settings
-from src.utils.logging import get_logger
+from ragged.config.settings import get_settings
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

@@ -6,8 +6,8 @@ from typing import Literal, cast
 
 import click
 
-from src.cli.common import ProgressType, console
-from src.utils.logging import get_logger
+from ragged.cli.common import ProgressType, console
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
@@ -38,13 +38,13 @@ def query(query: str, k: int, show_sources: bool, output_format: str, no_history
         ragged query "Explain the process" --show-sources
         ragged query "Summary?" --format json > result.json
     """
-    from src.config.settings import get_settings
-    from src.generation.citation_formatter import format_response_with_references
-    from src.generation.ollama_client import OllamaClient
-    from src.generation.prompts import RAG_SYSTEM_PROMPT, build_rag_prompt
-    from src.retrieval.bm25 import BM25Retriever
-    from src.retrieval.hybrid import HybridRetriever
-    from src.retrieval.retriever import Retriever
+    from ragged.config.settings import get_settings
+    from ragged.generation.citation_formatter import format_response_with_references
+    from ragged.generation.ollama_client import OllamaClient
+    from ragged.generation.prompts import RAG_SYSTEM_PROMPT, build_rag_prompt
+    from ragged.retrieval.bm25 import BM25Retriever
+    from ragged.retrieval.hybrid import HybridRetriever
+    from ragged.retrieval.retriever import Retriever
 
     if output_format == "text":
         console.print(f"[bold blue]Question:[/bold blue] {query}")
@@ -139,7 +139,7 @@ def query(query: str, k: int, show_sources: bool, output_format: str, no_history
         # Save to history unless disabled
         if not no_history:
             try:
-                from src.cli.commands.history import QueryHistory
+                from ragged.cli.commands.history import QueryHistory
 
                 history_manager = QueryHistory()
                 source_list = [

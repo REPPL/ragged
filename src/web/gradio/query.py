@@ -7,8 +7,8 @@ from typing import Any
 
 import requests  # type: ignore[import-untyped]
 
-from src.config.constants import LONG_API_TIMEOUT
-from src.web.gradio.api import API_QUERY
+from ragged.config.constants import LONG_API_TIMEOUT
+from ragged.web.gradio.api import API_QUERY
 
 logger = logging.getLogger(__name__)
 

@@ -4,9 +4,9 @@ import sys
 
 import click
 
-from src.cli.common import console
-from src.cli.formatters import FORMAT_CHOICES, print_formatted
-from src.utils.logging import get_logger
+from ragged.cli.common import console
+from ragged.cli.formatters import FORMAT_CHOICES, print_formatted
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
@@ -39,7 +39,7 @@ def list_docs(output_format: str) -> None:
         ragged list --format csv       # Export as CSV
         ragged list --format markdown  # Export as Markdown
     """
-    from src.storage.vector_store import VectorStore
+    from ragged.storage.vector_store import VectorStore
 
     try:
         vector_store = VectorStore()
@@ -65,7 +65,7 @@ def list_docs(output_format: str) -> None:
 @click.option("--force", "-f", is_flag=True, help="Skip confirmation")
 def clear(force: bool) -> None:
     """Clear all ingested documents from the database."""
-    from src.storage.vector_store import VectorStore
+    from ragged.storage.vector_store import VectorStore
 
     try:
         vector_store = VectorStore()

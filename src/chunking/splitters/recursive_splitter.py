@@ -1,8 +1,8 @@
 """Recursive character text splitter implementation."""
 
 
-from src.chunking.token_counter import count_tokens
-from src.config.settings import get_settings
+from ragged.chunking.token_counter import count_tokens
+from ragged.config.settings import get_settings
 
 
 class RecursiveCharacterTextSplitter:

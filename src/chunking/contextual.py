@@ -8,10 +8,10 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from src.chunking.splitters import RecursiveCharacterTextSplitter
-from src.ingestion.models import Chunk, ChunkMetadata, Document
-from src.utils.hashing import hash_content
-from src.utils.logging import get_logger
+from ragged.chunking.splitters import RecursiveCharacterTextSplitter
+from ragged.ingestion.models import Chunk, ChunkMetadata, Document
+from ragged.utils.hashing import hash_content
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

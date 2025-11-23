@@ -11,8 +11,8 @@ from typing import Optional
 import click
 from PIL import Image
 
-from src.cli.common import ProgressType, console
-from src.utils.logging import get_logger
+from ragged.cli.common import ProgressType, console
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
@@ -90,7 +90,7 @@ def text(
         ragged query text "financial data" --boost-tables --num-results 10
         ragged query text "architecture" --format json > results.json
     """
-    from src.retrieval.vision_retriever import VisionRetriever
+    from ragged.retrieval.vision_retriever import VisionRetriever
 
     if output_format == "text":
         console.print(f"[bold blue]Query:[/bold blue] {query_text}")
@@ -215,7 +215,7 @@ def image(
         ragged query image sketch.jpg --device cuda:0
         ragged query image chart.png --format json
     """
-    from src.retrieval.vision_retriever import VisionRetriever
+    from ragged.retrieval.vision_retriever import VisionRetriever
 
     if output_format == "text":
         console.print(f"[bold blue]Image Query:[/bold blue] {image_path.name}")
@@ -350,7 +350,7 @@ def hybrid(
         ragged query hybrid "API design" sketch.jpg --num-results 10
         ragged query hybrid "architecture" design.png --format json
     """
-    from src.retrieval.vision_retriever import VisionRetriever
+    from ragged.retrieval.vision_retriever import VisionRetriever
 
     # Validate weights
     if not (0 <= text_weight <= 1):
@@ -475,7 +475,7 @@ def interactive(default_mode: str) -> None:
         ragged query interactive
         ragged query interactive --default-mode hybrid
     """
-    from src.retrieval.vision_retriever import VisionRetriever
+    from ragged.retrieval.vision_retriever import VisionRetriever
 
     console.print("[bold blue]Interactive Query Mode[/bold blue]")
     console.print("[dim]Type ':help' for commands, ':quit' to exit[/dim]")

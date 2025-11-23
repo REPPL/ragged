@@ -10,8 +10,8 @@ from typing import Protocol
 
 from pydantic import BaseModel, Field
 
-from src.correction.schemas import AnalysisResult, IssueReport, QualityGrade
-from src.utils.logging import get_logger
+from ragged.correction.schemas import AnalysisResult, IssueReport, QualityGrade
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

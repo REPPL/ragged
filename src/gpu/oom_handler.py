@@ -10,7 +10,7 @@ import logging
 from functools import wraps
 from typing import Any, Callable, TypeVar
 
-from src.gpu.device_manager import DeviceInfo, DeviceManager, DeviceType
+from ragged.gpu.device_manager import DeviceInfo, DeviceManager, DeviceType
 
 logger = logging.getLogger(__name__)
 

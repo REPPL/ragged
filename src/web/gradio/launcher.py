@@ -1,6 +1,6 @@
 """Gradio UI launcher."""
 
-from src.web.gradio.ui import create_ui
+from ragged.web.gradio.ui import create_ui
 
 
 def launch(

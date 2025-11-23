@@ -9,7 +9,7 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from src.config.config_manager import RaggedConfig
+    from ragged.config.config_manager import RaggedConfig
 
 
 @dataclass

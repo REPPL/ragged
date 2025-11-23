@@ -11,7 +11,7 @@ from typing import Any, Optional
 
 import psutil  # type: ignore[import-untyped]
 
-from src.utils.logging import get_logger
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
@@ -147,7 +147,7 @@ class MetricsCollector:
 
         # Cache metrics
         try:
-            from src.retrieval.cache import get_query_cache
+            from ragged.retrieval.cache import get_query_cache
             cache = get_query_cache()
             cache_stats = cache.stats()
             metrics["cache_hit_rate"] = cache_stats.get("hit_rate", 0.0)
@@ -159,7 +159,7 @@ class MetricsCollector:
 
         # Resource governor metrics
         try:
-            from src.utils.resource_governor import get_governor
+            from ragged.utils.resource_governor import get_governor
             governor = get_governor()
             gov_stats = governor.get_stats()
             metrics["active_operations"] = gov_stats.get("active_reservations", 0)
@@ -171,7 +171,7 @@ class MetricsCollector:
 
         # Async logging metrics
         try:
-            from src.utils.async_logging import get_async_handler
+            from ragged.utils.async_logging import get_async_handler
             async_handler = get_async_handler()
             log_stats = async_handler.get_stats()
             metrics["log_queue_size"] = log_stats.get("queue_size", 0)

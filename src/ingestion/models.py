@@ -11,7 +11,7 @@ from uuid import uuid4
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
-from src.utils.hashing import hash_content, hash_file_content
+from ragged.utils.hashing import hash_content, hash_file_content
 
 
 class DocumentMetadata(BaseModel):

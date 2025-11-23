@@ -6,7 +6,7 @@ from typing import Any, cast
 
 import requests  # type: ignore[import-untyped]
 
-from src.config.constants import (
+from ragged.config.constants import (
     SHORT_API_TIMEOUT,
     UI_HEALTH_CHECK_MAX_RETRIES,
     UI_HEALTH_CHECK_RETRY_DELAY,

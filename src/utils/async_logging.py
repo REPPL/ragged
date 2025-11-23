@@ -10,7 +10,7 @@ from collections import defaultdict
 from logging.handlers import QueueHandler, QueueListener, RotatingFileHandler
 from queue import Queue
 
-from src.utils.logging import get_logger
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
@@ -250,7 +250,7 @@ class AsyncLogHandler:
         import sys
         from pathlib import Path
 
-        from src.utils.logging import CustomJsonFormatter, PrivacyFilter
+        from ragged.utils.logging import CustomJsonFormatter, PrivacyFilter
 
         handlers = []
 
@@ -265,7 +265,7 @@ class AsyncLogHandler:
 
         # File handler (rotating, 10MB max)
         try:
-            from src.utils.path_utils import ensure_directory
+            from ragged.utils.path_utils import ensure_directory
 
             log_file = Path("logs/ragged.log")
             ensure_directory(log_file.parent)

@@ -7,7 +7,7 @@ import functools
 import time
 from collections.abc import Callable
 
-from src.exceptions import (
+from ragged.exceptions import (
     EmbeddingError,
     LLMConnectionError,
     ResourceExhaustedError,
@@ -15,7 +15,7 @@ from src.exceptions import (
     VectorStoreConnectionError,
     VectorStoreError,
 )
-from src.utils.logging import get_logger
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

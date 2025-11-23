@@ -10,8 +10,8 @@ from typing import Optional
 
 import click
 
-from src.cli.common import ProgressType, console
-from src.utils.logging import get_logger
+from ragged.cli.common import ProgressType, console
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
@@ -100,10 +100,10 @@ def pdf(
         ragged ingest pdf document.pdf --vision --device cuda:0
         ragged ingest pdf document.pdf --vision --batch-size 8
     """
-    from src.chunking.splitters import chunk_document
-    from src.embeddings.factory import get_embedder
-    from src.ingestion.loaders import load_document
-    from src.storage.vector_store import VectorStore
+    from ragged.chunking.splitters import chunk_document
+    from ragged.embeddings.factory import get_embedder
+    from ragged.ingestion.loaders import load_document
+    from ragged.storage.vector_store import VectorStore
 
     console.print(f"[bold blue]Ingesting PDF:[/bold blue] {path}")
 
@@ -115,7 +115,7 @@ def pdf(
     try:
         # PDF Correction: Analyze and correct PDFs before processing
         if auto_correct and path.suffix.lower() == ".pdf":
-            from src.correction import CorrectionPipeline
+            from ragged.correction import CorrectionPipeline
 
             console.print("[dim]Analysing PDF quality...[/dim]")
 
@@ -253,8 +253,8 @@ def pdf(
                 progress.update(task, description="Generating vision embeddings...", advance=0)
 
                 # Import vision components
-                from src.embeddings.colpali_embedder import ColPaliEmbedder
-                from src.storage.dual_storage import DualVectorStore
+                from ragged.embeddings.colpali_embedder import ColPaliEmbedder
+                from ragged.storage.dual_storage import DualVectorStore
 
                 # Initialize vision embedder with GPU management
                 vision_embedder = ColPaliEmbedder(
@@ -298,7 +298,7 @@ def pdf(
         # Generate PDF correction metadata
         if pdf_analysis is not None:
             try:
-                from src.correction import MetadataGenerator
+                from ragged.correction import MetadataGenerator
 
                 metadata_dir = Path("data/documents/.ragged") / document.document_id
                 metadata_dir.mkdir(parents=True, exist_ok=True)
@@ -398,8 +398,8 @@ def batch(
         ragged ingest batch ./docs --pattern "*.pdf" --max-depth 2
         ragged ingest batch ./docs --vision --fail-fast
     """
-    from src.ingestion.batch import BatchIngester
-    from src.ingestion.scanner import DocumentScanner
+    from ragged.ingestion.batch import BatchIngester
+    from ragged.ingestion.scanner import DocumentScanner
 
     console.print(f"[bold blue]Scanning:[/bold blue] {directory}")
 
@@ -424,7 +424,7 @@ def batch(
     # Initialize vision embedder if needed
     vision_embedder = None
     if vision:
-        from src.embeddings.colpali_embedder import ColPaliEmbedder
+        from ragged.embeddings.colpali_embedder import ColPaliEmbedder
 
         vision_embedder = ColPaliEmbedder(
             device=None if device == "auto" else device,
@@ -457,10 +457,10 @@ def batch(
 
                 # Use the pdf command logic for each file
                 # (simplified version without interactive prompts)
-                from src.chunking.splitters import chunk_document
-                from src.embeddings.factory import get_embedder
-                from src.ingestion.loaders import load_document
-                from src.storage.vector_store import VectorStore
+                from ragged.chunking.splitters import chunk_document
+                from ragged.embeddings.factory import get_embedder
+                from ragged.ingestion.loaders import load_document
+                from ragged.storage.vector_store import VectorStore
 
                 # Load and chunk
                 document = load_document(file_path)
@@ -506,7 +506,7 @@ def batch(
                 if vision and vision_embedder:
                     from pdf2image import convert_from_path
 
-                    from src.storage.dual_storage import DualVectorStore
+                    from ragged.storage.dual_storage import DualVectorStore
 
                     images = convert_from_path(str(file_path))
                     vision_embeddings = vision_embedder.embed_batch_images(images)
@@ -548,8 +548,8 @@ def status() -> None:
     Examples:
         ragged ingest status
     """
-    from src.storage.dual_storage import DualVectorStore
-    from src.storage.vector_store import VectorStore
+    from ragged.storage.dual_storage import DualVectorStore
+    from ragged.storage.vector_store import VectorStore
 
     console.print("[bold blue]Ingestion Status:[/bold blue]")
     console.print()

@@ -8,9 +8,9 @@ from typing import cast
 import gradio as gr
 import requests  # type: ignore[import-untyped]
 
-from src.web.gradio.api import check_api_health, get_api_status_display, get_collections
-from src.web.gradio.query import query_non_streaming, query_with_streaming
-from src.web.gradio.upload import upload_document
+from ragged.web.gradio.api import check_api_health, get_api_status_display, get_collections
+from ragged.web.gradio.query import query_non_streaming, query_with_streaming
+from ragged.web.gradio.upload import upload_document
 
 logger = logging.getLogger(__name__)
 

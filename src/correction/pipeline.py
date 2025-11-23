@@ -5,15 +5,15 @@ v0.3.5: Integrates PDF analysis and correction into document ingestion.
 
 from pathlib import Path
 
-from src.correction.analyzer import AnalyzerConfig, PDFAnalyzer
-from src.correction.corrector import CorrectorConfig, PDFCorrector
-from src.correction.schemas import AnalysisResult, CorrectionResult
-from src.correction.transformers import (
+from ragged.correction.analyzer import AnalyzerConfig, PDFAnalyzer
+from ragged.correction.corrector import CorrectorConfig, PDFCorrector
+from ragged.correction.schemas import AnalysisResult, CorrectionResult
+from ragged.correction.transformers import (
     DuplicateRemover,
     PageReorderTransformer,
     RotationTransformer,
 )
-from src.utils.logging import get_logger
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
@@ -40,7 +40,7 @@ class CorrectionPipeline:
         self.analyzer = PDFAnalyzer(analyzer_config or AnalyzerConfig())
 
         # Register detectors
-        from src.correction.detectors import (
+        from ragged.correction.detectors import (
             DuplicateDetector,
             PageOrderDetector,
             QualityDetector,

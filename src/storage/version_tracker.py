@@ -15,7 +15,7 @@ from pathlib import Path
 from typing import Any
 from uuid import uuid4
 
-from src.utils.logging import get_logger
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
@@ -82,7 +82,7 @@ class VersionTracker:
                      Defaults to ~/.ragged/versions.db
         """
         if db_path is None:
-            from src.config.settings import get_settings
+            from ragged.config.settings import get_settings
             settings = get_settings()
             db_path = settings.config_dir / "versions.db"
 

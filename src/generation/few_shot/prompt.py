@@ -1,7 +1,7 @@
 """Few-shot prompt formatting."""
 
 
-from src.generation.few_shot.models import FewShotExample
+from ragged.generation.few_shot.models import FewShotExample
 
 
 def format_few_shot_prompt(

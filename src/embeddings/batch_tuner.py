@@ -9,7 +9,7 @@ from collections import deque
 
 import psutil
 
-from src.utils.logging import get_logger
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

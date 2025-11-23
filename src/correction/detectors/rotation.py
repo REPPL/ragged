@@ -8,8 +8,8 @@ from pathlib import Path
 
 import pymupdf
 
-from src.correction.schemas import IssueReport, IssueType
-from src.utils.logging import get_logger
+from ragged.correction.schemas import IssueReport, IssueType
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

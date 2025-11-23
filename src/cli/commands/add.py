@@ -5,8 +5,8 @@ from pathlib import Path
 
 import click
 
-from src.cli.common import ProgressType, console
-from src.utils.logging import get_logger
+from ragged.cli.common import ProgressType, console
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
@@ -61,12 +61,12 @@ def add(
     When PATH is a directory, all supported documents are ingested recursively.
     Supported formats: PDF, TXT, MD, HTML
     """
-    from src.chunking.splitters import chunk_document
-    from src.embeddings.factory import get_embedder
-    from src.ingestion.batch import BatchIngester, IngestionStatus
-    from src.ingestion.loaders import load_document
-    from src.ingestion.scanner import DocumentScanner
-    from src.storage.vector_store import VectorStore
+    from ragged.chunking.splitters import chunk_document
+    from ragged.embeddings.factory import get_embedder
+    from ragged.ingestion.batch import BatchIngester, IngestionStatus
+    from ragged.ingestion.loaders import load_document
+    from ragged.ingestion.scanner import DocumentScanner
+    from ragged.storage.vector_store import VectorStore
 
     # Determine if we're processing a single file or directory
     is_directory = path.is_dir()
@@ -135,7 +135,7 @@ def add(
         if auto_correct_pdf and path.suffix.lower() == ".pdf":
             import asyncio
 
-            from src.correction import CorrectionPipeline, MetadataGenerator
+            from ragged.correction import CorrectionPipeline, MetadataGenerator
 
             console.print("[dim]Analyzing PDF quality...[/dim]")
 
@@ -273,7 +273,7 @@ def add(
         # Generate PDF correction metadata (v0.3.5)
         if pdf_analysis is not None:
             try:
-                from src.correction import MetadataGenerator
+                from ragged.correction import MetadataGenerator
 
                 # Create metadata directory
                 metadata_dir = Path("data/documents/.ragged") / document.document_id

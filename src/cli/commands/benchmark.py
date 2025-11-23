@@ -10,9 +10,9 @@ import click
 from rich.panel import Panel
 from rich.table import Table
 
-from src.cli.common import console
-from src.utils.benchmarks import Benchmark, time_it
-from src.utils.logging import get_logger
+from ragged.cli.common import console
+from ragged.utils.benchmarks import Benchmark, time_it
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
@@ -47,7 +47,7 @@ def bench_embedding_init(runs: int, warmup: int, model: str | None):
         ragged benchmark embedding-init --runs 20 --warmup 5
         ragged benchmark embedding-init --model all-MiniLM-L6-v2
     """
-    from src.embeddings.factory import _reset_embedder_cache, get_embedder
+    from ragged.embeddings.factory import _reset_embedder_cache, get_embedder
 
     console.print("\n[bold cyan]Benchmarking Embedder Initialization[/bold cyan]")
     console.print(f"Runs: {runs}, Warmup: {warmup}")
@@ -98,7 +98,7 @@ def bench_batch_embed(size: int, runs: int, warmup: int):
         ragged benchmark batch-embed --size 50
         ragged benchmark batch-embed --size 200 --runs 10
     """
-    from src.embeddings.factory import get_embedder
+    from ragged.embeddings.factory import get_embedder
 
     console.print("\n[bold cyan]Benchmarking Batch Embedding[/bold cyan]")
     console.print(f"Batch size: {size}, Runs: {runs}, Warmup: {warmup}")
@@ -152,7 +152,7 @@ def bench_query(count: int, collection: str | None):
         ragged benchmark query --count 50
         ragged benchmark query --collection my-docs
     """
-    from src.retrieval.hybrid import HybridRetriever
+    from ragged.retrieval.hybrid import HybridRetriever
 
     console.print("\n[bold cyan]Benchmarking Query Performance[/bold cyan]")
     console.print(f"Queries: {count}")
@@ -235,7 +235,7 @@ def profile_memory(operation: str, target: str | None, detailed: bool):
                 console.print("[red]Error: TARGET file path required for 'add' operation[/red]")
                 return
 
-            from src.ingestion.pipeline import process_document
+            from ragged.ingestion.pipeline import process_document
 
             console.print(f"[dim]Processing document: {target}[/dim]")
             snapshot_before = tracemalloc.take_snapshot()
@@ -249,7 +249,7 @@ def profile_memory(operation: str, target: str | None, detailed: bool):
             if not target:
                 target = "What is machine learning?"
 
-            from src.retrieval.hybrid import HybridRetriever
+            from ragged.retrieval.hybrid import HybridRetriever
 
             console.print(f"[dim]Executing query: {target}[/dim]")
             snapshot_before = tracemalloc.take_snapshot()
@@ -260,7 +260,7 @@ def profile_memory(operation: str, target: str | None, detailed: bool):
             snapshot_after = tracemalloc.take_snapshot()
 
         elif operation == "embed":
-            from src.embeddings.factory import get_embedder
+            from ragged.embeddings.factory import get_embedder
 
             text = target or "Sample text for embedding" * 100
             console.print(f"[dim]Embedding text ({len(text)} chars)[/dim]")
@@ -319,8 +319,8 @@ def bench_all(quick: bool):
         ragged benchmark all
         ragged benchmark all --quick
     """
-    from src.embeddings.factory import _reset_embedder_cache, get_embedder
-    from src.retrieval.hybrid import HybridRetriever
+    from ragged.embeddings.factory import _reset_embedder_cache, get_embedder
+    from ragged.retrieval.hybrid import HybridRetriever
 
     runs = 5 if quick else 10
     warmup = 1 if quick else 3
@@ -363,8 +363,8 @@ def bench_all(quick: bool):
 
     # 4. Document chunking
     console.print("[bold]4/5[/bold] Benchmarking document chunking...")
-    from src.chunking.orchestrator import chunk_document
-    from src.ingestion.models import Document, DocumentMetadata
+    from ragged.chunking.orchestrator import chunk_document
+    from ragged.ingestion.models import Document, DocumentMetadata
 
     test_doc = Document(
         document_id="test",

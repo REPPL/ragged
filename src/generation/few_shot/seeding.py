@@ -2,7 +2,7 @@
 
 import logging
 
-from src.generation.few_shot.store import FewShotExampleStore
+from ragged.generation.few_shot.store import FewShotExampleStore
 
 logger = logging.getLogger(__name__)
 

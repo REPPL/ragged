@@ -6,7 +6,7 @@ v0.3.12: Intelligent query refinement to improve retrieval quality.
 import re
 from dataclasses import dataclass
 
-from src.utils.logging import get_logger
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

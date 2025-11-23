@@ -9,8 +9,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from src.config.settings import get_settings
-from src.utils.logging import get_logger
+from ragged.config.settings import get_settings
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
@@ -406,7 +406,7 @@ def start_interactive_mode() -> None:
     Start interactive REPL mode.
 
     Example:
-        >>> from src.cli.interactive import start_interactive_mode
+        >>> from ragged.cli.interactive import start_interactive_mode
         >>> start_interactive_mode()
     """
     try:

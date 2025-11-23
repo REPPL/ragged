@@ -13,9 +13,9 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from src.processing.base import BaseProcessor, ProcessorConfig
-from src.processing.quality_assessor import QualityAssessment, QualityAssessor
-from src.utils.logging import get_logger
+from ragged.processing.base import BaseProcessor, ProcessorConfig
+from ragged.processing.quality_assessor import QualityAssessment, QualityAssessor
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

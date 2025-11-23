@@ -20,10 +20,10 @@ else:
         SentenceTransformerType = None  # type: ignore[assignment, misc]
         torch_module = None  # type: ignore[assignment]
 
-from src.config.settings import get_settings
-from src.embeddings.base import BaseEmbedder
-from src.embeddings.batch_tuner import BatchTuner
-from src.utils.logging import get_logger
+from ragged.config.settings import get_settings
+from ragged.embeddings.base import BaseEmbedder
+from ragged.embeddings.batch_tuner import BatchTuner
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

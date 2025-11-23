@@ -15,9 +15,9 @@ else:
     except ImportError:
         ollama_module = None  # type: ignore[assignment]
 
-from src.config.constants import DEFAULT_API_TIMEOUT, DEFAULT_LLM_TEMPERATURE
-from src.config.settings import get_settings
-from src.utils.logging import get_logger
+from ragged.config.constants import DEFAULT_API_TIMEOUT, DEFAULT_LLM_TEMPERATURE
+from ragged.config.settings import get_settings
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
@@ -67,7 +67,7 @@ class OllamaClient:
             RuntimeError: If model not found, with actionable suggestions
         """
         try:
-            from src.config.model_manager import ModelManager
+            from ragged.config.model_manager import ModelManager
 
             manager = ModelManager(self.base_url)
 

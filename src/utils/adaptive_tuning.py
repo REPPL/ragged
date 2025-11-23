@@ -18,7 +18,7 @@ from typing import Any, Literal
 
 import psutil
 
-from src.utils.logging import get_logger
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
@@ -385,7 +385,7 @@ class AdaptiveTuner:
         Args:
             recommendations: Recommendations to apply
         """
-        from src.config.settings import get_settings
+        from ragged.config.settings import get_settings
 
         settings = get_settings()
 

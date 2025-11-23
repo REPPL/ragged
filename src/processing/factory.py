@@ -6,8 +6,8 @@ document processor based on configuration.
 """
 
 
-from src.processing.base import BaseProcessor, ProcessorConfig
-from src.utils.logging import get_logger
+from ragged.processing.base import BaseProcessor, ProcessorConfig
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
@@ -128,7 +128,7 @@ def _register_default_processors() -> None:
     """
     # Register legacy processor (always available - no optional deps)
     try:
-        from src.processing.legacy_processor import LegacyProcessor
+        from ragged.processing.legacy_processor import LegacyProcessor
 
         ProcessorFactory.register_processor("legacy", LegacyProcessor)
     except ImportError as e:
@@ -136,7 +136,7 @@ def _register_default_processors() -> None:
 
     # Register Docling processor (optional dependency)
     try:
-        from src.processing.docling_processor import DoclingProcessor
+        from ragged.processing.docling_processor import DoclingProcessor
 
         ProcessorFactory.register_processor("docling", DoclingProcessor)
     except ImportError as e:

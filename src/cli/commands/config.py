@@ -7,10 +7,10 @@ from typing import Any
 import click
 import yaml
 
-from src.cli.common import TableType, console
-from src.config.config_manager import ConfigValidator, RaggedConfig
-from src.config.personas import PersonaManager
-from src.config.settings import get_settings
+from ragged.cli.common import TableType, console
+from ragged.config.config_manager import ConfigValidator, RaggedConfig
+from ragged.config.personas import PersonaManager
+from ragged.config.settings import get_settings
 
 
 @click.group()
@@ -147,8 +147,8 @@ def config_set_model(model_name: str | None, auto: bool) -> None:
     """
     import yaml  # type: ignore[import-untyped]
 
-    from src.config.model_manager import ModelManager
-    from src.config.settings import get_settings
+    from ragged.config.model_manager import ModelManager
+    from ragged.config.settings import get_settings
 
     settings = get_settings()
     manager = ModelManager(settings.ollama_url)
@@ -224,8 +224,8 @@ def config_set_model(model_name: str | None, auto: bool) -> None:
 @config.command("list-models")
 def config_list_models() -> None:
     """List all available Ollama models with RAG suitability scores."""
-    from src.config.model_manager import ModelManager
-    from src.config.settings import get_settings
+    from ragged.config.model_manager import ModelManager
+    from ragged.config.settings import get_settings
 
     settings = get_settings()
     manager = ModelManager(settings.ollama_url)

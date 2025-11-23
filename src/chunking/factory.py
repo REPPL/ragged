@@ -6,11 +6,11 @@ v0.3.3: Intelligent Chunking integration
 
 from typing import Union
 
-from src.chunking.hierarchical_chunker import HierarchicalChunker
-from src.chunking.semantic_chunker import SemanticChunker
-from src.chunking.splitters.recursive_splitter import RecursiveCharacterTextSplitter
-from src.config.settings import get_settings
-from src.utils.logging import get_logger
+from ragged.chunking.hierarchical_chunker import HierarchicalChunker
+from ragged.chunking.semantic_chunker import SemanticChunker
+from ragged.chunking.splitters.recursive_splitter import RecursiveCharacterTextSplitter
+from ragged.config.settings import get_settings
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

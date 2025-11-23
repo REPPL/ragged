@@ -25,16 +25,16 @@ else:
     except ImportError:
         chromadb = None  # type: ignore[assignment]
 
-from src.config.settings import get_settings
-from src.exceptions import VectorStoreConnectionError, VectorStoreError
-from src.storage.metadata_serializer import (
+from ragged.config.settings import get_settings
+from ragged.exceptions import VectorStoreConnectionError, VectorStoreError
+from ragged.storage.metadata_serializer import (
     deserialize_batch_metadata,
     serialize_batch_metadata,
 )
-from src.storage.vectorstore_interface import VectorStore
-from src.utils.circuit_breaker import CircuitBreaker
-from src.utils.logging import get_logger
-from src.utils.retry import with_retry
+from ragged.storage.vectorstore_interface import VectorStore
+from ragged.utils.circuit_breaker import CircuitBreaker
+from ragged.utils.logging import get_logger
+from ragged.utils.retry import with_retry
 
 logger = get_logger(__name__)
 
@@ -55,7 +55,7 @@ class ChromaDBStore(VectorStore):
     with circuit breaker protection and automatic retry.
 
     Example:
-        >>> from src.storage.chromadb_store import ChromaDBStore
+        >>> from ragged.storage.chromadb_store import ChromaDBStore
         >>> store = ChromaDBStore(collection_name="my_docs")
         >>> store.add(
         ...     ids=["doc1"],

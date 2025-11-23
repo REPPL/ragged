@@ -6,10 +6,10 @@ v0.3.7b: Generate responses with transparent reasoning.
 
 from typing import Any
 
-from src.generation.reasoning.parser import ReasoningParser
-from src.generation.reasoning.prompts import build_reasoning_prompt
-from src.generation.reasoning.types import ReasonedResponse, ReasoningMode
-from src.utils.logging import get_logger
+from ragged.generation.reasoning.parser import ReasoningParser
+from ragged.generation.reasoning.prompts import build_reasoning_prompt
+from ragged.generation.reasoning.types import ReasonedResponse, ReasoningMode
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
@@ -22,7 +22,7 @@ class ReasoningGenerator:
     capabilities with minimal changes to existing pipeline.
 
     Example:
-        >>> from src.generation.ollama_client import Ollama Client
+        >>> from ragged.generation.ollama_client import Ollama Client
         >>> client = OllamaClient()
         >>> generator = ReasoningGenerator(
         ...     ollama_client=client,
@@ -97,7 +97,7 @@ class ReasoningGenerator:
 
             # Apply confidence threshold check
             if response.overall_confidence < confidence_threshold:
-                from src.generation.reasoning.types import ValidationFlag
+                from ragged.generation.reasoning.types import ValidationFlag
                 response.validation_flags.append(
                     ValidationFlag(
                         type="low_confidence",
@@ -154,7 +154,7 @@ class ReasoningGenerator:
         Returns:
             Basic ReasonedResponse with error information
         """
-        from src.generation.reasoning.types import ValidationFlag
+        from ragged.generation.reasoning.types import ValidationFlag
 
         return ReasonedResponse(
             answer=f"Unable to generate response: {error_msg}",

@@ -11,8 +11,8 @@ from typing import Any
 
 import psutil  # type: ignore[import-untyped]
 
-from src.config.settings import get_settings
-from src.utils.logging import get_logger
+from ragged.config.settings import get_settings
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
@@ -105,7 +105,7 @@ class HealthChecker:
             Health check result
         """
         try:
-            from src.generation.ollama_client import OllamaClient
+            from ragged.generation.ollama_client import OllamaClient
 
             result, duration = self._time_check(
                 lambda: OllamaClient().health_check()
@@ -141,7 +141,7 @@ class HealthChecker:
             Health check result
         """
         try:
-            from src.storage.vector_store import VectorStore
+            from ragged.storage.vector_store import VectorStore
 
             store = VectorStore()
             result, duration = self._time_check(store.health_check)
@@ -178,7 +178,7 @@ class HealthChecker:
             Health check result
         """
         try:
-            from src.embeddings.factory import get_embedder
+            from ragged.embeddings.factory import get_embedder
 
             # Time embedder initialization
             start = time.time()
@@ -314,7 +314,7 @@ class HealthChecker:
         """
         try:
             # Check if embedder caching is enabled and working
-            from src.config.settings import get_settings
+            from ragged.config.settings import get_settings
 
             settings = get_settings()
 
@@ -327,7 +327,7 @@ class HealthChecker:
                 )
 
             # Check if cache is populated
-            from src.embeddings.factory import _embedder_cache
+            from ragged.embeddings.factory import _embedder_cache
 
             cache_size = len(_embedder_cache)
 
@@ -363,8 +363,8 @@ class HealthChecker:
             Health check result
         """
         try:
-            from src.embeddings.factory import get_embedder
-            from src.storage.vector_store import VectorStore
+            from ragged.embeddings.factory import get_embedder
+            from ragged.storage.vector_store import VectorStore
 
             store = VectorStore()
 
@@ -423,7 +423,7 @@ class HealthChecker:
             Health check result
         """
         try:
-            from src.storage.vector_store import VectorStore
+            from ragged.storage.vector_store import VectorStore
 
             store = VectorStore()
             count = store.count()
@@ -493,7 +493,7 @@ class HealthChecker:
             Health check result
         """
         try:
-            from src.generation.ollama_client import OllamaClient
+            from ragged.generation.ollama_client import OllamaClient
 
             client = OllamaClient()
 

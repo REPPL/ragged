@@ -12,7 +12,7 @@ Components:
 - AdaptiveBatchSizer: Memory-based batch size calculation
 
 Example:
-    >>> from src.gpu import DeviceManager, MemoryMonitor, AdaptiveBatchSizer
+    >>> from ragged.gpu import DeviceManager, MemoryMonitor, AdaptiveBatchSizer
     >>> # Initialize device manager
     >>> manager = DeviceManager()
     >>> device = manager.get_optimal_device()
@@ -23,10 +23,10 @@ Example:
     >>> batch_size = sizer.calculate_batch_size(embedding_dim=768, sequence_length=1024)
 """
 
-from src.gpu.batch_sizer import AdaptiveBatchSizer, BatchSizeConfig
-from src.gpu.device_manager import DeviceInfo, DeviceManager, DeviceType
-from src.gpu.memory_monitor import MemoryMonitor, MemorySnapshot
-from src.gpu.oom_handler import OOMHandler
+from ragged.gpu.batch_sizer import AdaptiveBatchSizer, BatchSizeConfig
+from ragged.gpu.device_manager import DeviceInfo, DeviceManager, DeviceType
+from ragged.gpu.memory_monitor import MemoryMonitor, MemorySnapshot
+from ragged.gpu.oom_handler import OOMHandler
 
 __all__ = [
     "DeviceInfo",

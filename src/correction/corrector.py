@@ -11,14 +11,14 @@ from typing import Protocol
 
 from pydantic import BaseModel, Field
 
-from src.correction.schemas import (
+from ragged.correction.schemas import (
     AnalysisResult,
     CorrectionAction,
     CorrectionResult,
     IssueReport,
     IssueType,
 )
-from src.utils.logging import get_logger
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

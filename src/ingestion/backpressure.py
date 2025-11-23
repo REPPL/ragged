@@ -13,8 +13,8 @@ from typing import Any, Generic, TypeVar
 
 import psutil  # type: ignore[import-untyped]
 
-from src.ingestion.async_processor import AsyncDocumentProcessor, ProcessingResult
-from src.utils.logging import get_logger
+from ragged.ingestion.async_processor import AsyncDocumentProcessor, ProcessingResult
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

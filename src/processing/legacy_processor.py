@@ -9,8 +9,8 @@ like layout analysis or table structure preservation.
 import time
 from pathlib import Path
 
-from src.processing.base import BaseProcessor, ProcessedDocument, ProcessorConfig, ProcessorError
-from src.utils.logging import get_logger
+from ragged.processing.base import BaseProcessor, ProcessedDocument, ProcessorConfig, ProcessorError
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

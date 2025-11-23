@@ -246,7 +246,7 @@ def get_gdpr_toolkit(data_dir: Path | None = None) -> GDPRToolkit:
         GDPRToolkit singleton
 
     Usage:
-        >>> from src.privacy.gdpr import get_gdpr_toolkit
+        >>> from ragged.privacy.gdpr import get_gdpr_toolkit
         >>> toolkit = get_gdpr_toolkit()
         >>> export = toolkit.export_user_data()
     """

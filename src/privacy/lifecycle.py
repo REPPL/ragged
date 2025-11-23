@@ -215,7 +215,7 @@ def get_lifecycle_manager(
         DataLifecycleManager singleton
 
     Usage:
-        >>> from src.privacy.lifecycle import get_lifecycle_manager
+        >>> from ragged.privacy.lifecycle import get_lifecycle_manager
         >>> manager = get_lifecycle_manager()
         >>> manager.start_automatic_cleanup()
     """

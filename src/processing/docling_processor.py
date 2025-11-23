@@ -9,9 +9,9 @@ import time
 from pathlib import Path
 from typing import Any
 
-from src.processing.base import BaseProcessor, ProcessedDocument, ProcessorConfig, ProcessorError
-from src.processing.model_manager import ModelManager
-from src.utils.logging import get_logger
+from ragged.processing.base import BaseProcessor, ProcessedDocument, ProcessorConfig, ProcessorError
+from ragged.processing.model_manager import ModelManager
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
@@ -160,7 +160,7 @@ class DoclingProcessor(BaseProcessor):
         logger.debug(f"Processing PDF with Docling: {file_path}")
 
         # HIGH-002: Add processing timeout
-        from src.config.settings import get_settings
+        from ragged.config.settings import get_settings
         settings = get_settings()
 
         # Use processing timeout if configured
@@ -449,8 +449,8 @@ class DoclingProcessor(BaseProcessor):
         super().validate_file(file_path)
 
         # CRITICAL-001: Add file size validation
-        from src.config.settings import get_settings
-        from src.utils.security import SecurityError, validate_file_size
+        from ragged.config.settings import get_settings
+        from ragged.utils.security import SecurityError, validate_file_size
 
         settings = get_settings()
         try:
@@ -459,7 +459,7 @@ class DoclingProcessor(BaseProcessor):
             raise ValueError(f"File size validation failed: {e}") from e
 
         # HIGH-001: Add MIME type verification (magic bytes check)
-        from src.utils.security import validate_mime_type
+        from ragged.utils.security import validate_mime_type
 
         try:
             mime_type = validate_mime_type(file_path, expected_types=["application/pdf"])

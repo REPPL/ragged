@@ -6,7 +6,7 @@ v0.3.7b: Structured prompts for transparent reasoning at multiple depth levels.
 
 from typing import Any
 
-from src.generation.reasoning.types import ReasoningMode
+from ragged.generation.reasoning.types import ReasoningMode
 
 # Base system instruction for all reasoning modes
 REASONING_SYSTEM_INSTRUCTION = """You are a helpful AI assistant that provides transparent reasoning.

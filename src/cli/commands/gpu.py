@@ -9,8 +9,8 @@ from typing import Optional
 
 import click
 
-from src.cli.common import ProgressType, console
-from src.utils.logging import get_logger
+from ragged.cli.common import ProgressType, console
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
@@ -59,7 +59,7 @@ def list(verbose: bool) -> None:
         ragged gpu list
         ragged gpu list --verbose
     """
-    from src.gpu.device_manager import DeviceManager, DeviceType
+    from ragged.gpu.device_manager import DeviceManager, DeviceType
 
     try:
         manager = DeviceManager()
@@ -132,7 +132,7 @@ def info(device: Optional[str]) -> None:
         ragged gpu info mps
         ragged gpu info cpu
     """
-    from src.gpu.device_manager import DeviceManager
+    from ragged.gpu.device_manager import DeviceManager
 
     try:
         manager = DeviceManager()
@@ -159,7 +159,7 @@ def info(device: Optional[str]) -> None:
             console.print(f"Total Memory: {memory_gb:.2f} GB")
 
             # Get current memory usage if GPU
-            from src.gpu.device_manager import DeviceType
+            from ragged.gpu.device_manager import DeviceType
 
             if device_info.device_type != DeviceType.CPU:
                 try:
@@ -226,7 +226,7 @@ def stats(device: Optional[str], watch: bool, interval: int) -> None:
         ragged gpu stats --watch
         ragged gpu stats mps --watch --interval 2
     """
-    from src.gpu.device_manager import DeviceManager, DeviceType
+    from ragged.gpu.device_manager import DeviceManager, DeviceType
 
     try:
         manager = DeviceManager()
@@ -362,8 +362,8 @@ def benchmark(batch_size: Optional[int], num_pages: int, device: Optional[str]) 
         ragged gpu benchmark --device cuda:0
         ragged gpu benchmark --device mps
     """
-    from src.embeddings.colpali_embedder import ColPaliEmbedder
-    from src.gpu.device_manager import DeviceManager
+    from ragged.embeddings.colpali_embedder import ColPaliEmbedder
+    from ragged.gpu.device_manager import DeviceManager
 
     try:
         manager = DeviceManager()

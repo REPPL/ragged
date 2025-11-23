@@ -10,8 +10,8 @@ import time
 from collections import deque
 from collections.abc import Callable
 
-from src.exceptions import RaggedError
-from src.utils.logging import get_logger
+from ragged.exceptions import RaggedError
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

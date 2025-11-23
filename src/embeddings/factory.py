@@ -9,11 +9,11 @@ for 4-30x performance improvement (v0.2.9).
 import threading
 from collections import OrderedDict
 
-from src.config.settings import EmbeddingModel, get_settings
-from src.embeddings.base import BaseEmbedder
-from src.embeddings.ollama_embedder import OllamaEmbedder
-from src.embeddings.sentence_transformer import SentenceTransformerEmbedder
-from src.utils.logging import get_logger
+from ragged.config.settings import EmbeddingModel, get_settings
+from ragged.embeddings.base import BaseEmbedder
+from ragged.embeddings.ollama_embedder import OllamaEmbedder
+from ragged.embeddings.sentence_transformer import SentenceTransformerEmbedder
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

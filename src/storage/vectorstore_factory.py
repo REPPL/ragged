@@ -8,9 +8,9 @@ v0.3.6: Initial factory implementation for multi-backend support.
 """
 
 
-from src.config.settings import get_settings
-from src.storage.vectorstore_interface import VectorStore
-from src.utils.logging import get_logger
+from ragged.config.settings import get_settings
+from ragged.storage.vectorstore_interface import VectorStore
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
@@ -58,7 +58,7 @@ def get_vectorstore(
     logger.info(f"Creating VectorStore with backend: {backend}")
 
     if backend == "chromadb":
-        from src.storage.chromadb_store import ChromaDBStore
+        from ragged.storage.chromadb_store import ChromaDBStore
         return ChromaDBStore(
             collection_name=collection_name,
             host=host,

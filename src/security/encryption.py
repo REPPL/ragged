@@ -296,7 +296,7 @@ def get_encryption_manager() -> EncryptionManager:
         EncryptionManager singleton instance
 
     Usage:
-        >>> from src.security.encryption import get_encryption_manager
+        >>> from ragged.security.encryption import get_encryption_manager
         >>> manager = get_encryption_manager()
         >>> encrypted = manager.encrypt(b"sensitive data")
 

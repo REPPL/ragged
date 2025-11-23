@@ -11,10 +11,10 @@ from typing import Any
 
 import click
 
-from src.cli.common import console
-from src.cli.formatters import FORMAT_CHOICES, print_formatted
-from src.config.settings import get_settings
-from src.utils.logging import get_logger
+from ragged.cli.common import console
+from ragged.cli.formatters import FORMAT_CHOICES, print_formatted
+from ragged.config.settings import get_settings
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
@@ -452,7 +452,7 @@ def embedder_cache_stats(output_format: str) -> None:
         ragged cache embedders --format json
     """
     try:
-        from src.embeddings.factory import get_cache_stats
+        from ragged.embeddings.factory import get_cache_stats
 
         stats = get_cache_stats()
 
@@ -502,7 +502,7 @@ def clear_embedder_cache_cmd(yes: bool) -> None:
         ragged cache clear-embedders --yes
     """
     try:
-        from src.embeddings.factory import clear_embedder_cache, get_cache_stats
+        from ragged.embeddings.factory import clear_embedder_cache, get_cache_stats
 
         # Get stats before clearing
         stats = get_cache_stats()

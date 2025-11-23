@@ -7,9 +7,9 @@ from typing import Any
 
 import numpy as np
 
-from src.config.constants import FALLBACK_EMBEDDING_DIMENSION
-from src.generation.few_shot.models import FewShotExample
-from src.utils.path_utils import ensure_directory
+from ragged.config.constants import FALLBACK_EMBEDDING_DIMENSION
+from ragged.generation.few_shot.models import FewShotExample
+from ragged.utils.path_utils import ensure_directory
 
 logger = logging.getLogger(__name__)
 

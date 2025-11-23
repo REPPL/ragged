@@ -10,8 +10,8 @@ import click
 from rich.console import Console
 from rich.table import Table
 
-from src.testing import create_config_validator
-from src.utils.logging import get_logger
+from ragged.testing import create_config_validator
+from ragged.utils.logging import get_logger
 
 console = Console()
 logger = get_logger(__name__)

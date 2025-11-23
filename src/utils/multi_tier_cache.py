@@ -18,10 +18,10 @@ from typing import Any
 
 import numpy as np
 
-from src.retrieval.cache import QueryCache
-from src.utils.hashing import hash_content
-from src.utils.logging import get_logger
-from src.utils.serialization import list_to_numpy_array, load_json, numpy_array_to_list, save_json
+from ragged.retrieval.cache import QueryCache
+from ragged.utils.hashing import hash_content
+from ragged.utils.logging import get_logger
+from ragged.utils.serialization import list_to_numpy_array, load_json, numpy_array_to_list, save_json
 
 logger = get_logger(__name__)
 

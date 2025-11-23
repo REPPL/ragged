@@ -10,8 +10,8 @@ import click
 from rich.panel import Panel
 from rich.table import Table
 
-from src.cli.common import console
-from src.utils.logging import get_logger
+from ragged.cli.common import console
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

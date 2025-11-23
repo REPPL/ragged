@@ -10,10 +10,10 @@ from typing import Any
 
 import httpx
 
-from src import __version__
-from src.cli.common import click, console
-from src.config.settings import get_settings
-from src.utils.logging import get_logger
+from ragged import __version__
+from ragged.cli.common import click, console
+from ragged.config.settings import get_settings
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

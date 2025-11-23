@@ -5,8 +5,8 @@ import sys
 import click
 from rich.table import Table
 
-from src.cli.common import console
-from src.utils.health import HealthChecker, HealthStatus
+from ragged.cli.common import console
+from ragged.utils.health import HealthChecker, HealthStatus
 
 
 @click.command()

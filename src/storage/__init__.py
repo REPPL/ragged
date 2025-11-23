@@ -7,17 +7,17 @@ v0.3.7a: Document version tracking.
 
 # Abstract interface (for type hints and subclassing)
 # Specific implementations
-from src.storage.chromadb_store import ChromaDBStore
+from ragged.storage.chromadb_store import ChromaDBStore
 
 # ChromaDB implementation (backward compatible)
-from src.storage.vector_store import VectorStore
+from ragged.storage.vector_store import VectorStore
 
 # Factory function (recommended for new code)
-from src.storage.vectorstore_factory import get_vectorstore
-from src.storage.vectorstore_interface import VectorStore as VectorStoreInterface
+from ragged.storage.vectorstore_factory import get_vectorstore
+from ragged.storage.vectorstore_interface import VectorStore as VectorStoreInterface
 
 # Version tracking (v0.3.7a)
-from src.storage.version_tracker import DocumentVersion, VersionTracker
+from ragged.storage.version_tracker import DocumentVersion, VersionTracker
 
 __all__ = [
     # Abstract interface

@@ -13,15 +13,15 @@ import psutil  # type: ignore[import-untyped]
 from rich.console import Console
 from rich.progress import Progress
 
-from src.chunking.splitters import chunk_document
-from src.config.constants import DEFAULT_MEMORY_LIMIT_PERCENTAGE
-from src.embeddings.base import BaseEmbedder
-from src.embeddings.factory import get_embedder
-from src.exceptions import MemoryLimitExceededError
-from src.ingestion.loaders import load_document
-from src.storage.vector_store import VectorStore
-from src.utils.logging import get_logger
-from src.utils.resource_governor import ResourcePriority, get_governor
+from ragged.chunking.splitters import chunk_document
+from ragged.config.constants import DEFAULT_MEMORY_LIMIT_PERCENTAGE
+from ragged.embeddings.base import BaseEmbedder
+from ragged.embeddings.factory import get_embedder
+from ragged.exceptions import MemoryLimitExceededError
+from ragged.ingestion.loaders import load_document
+from ragged.storage.vector_store import VectorStore
+from ragged.utils.logging import get_logger
+from ragged.utils.resource_governor import ResourcePriority, get_governor
 
 logger = get_logger(__name__)
 

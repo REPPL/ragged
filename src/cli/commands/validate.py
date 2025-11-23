@@ -9,9 +9,9 @@ from pathlib import Path
 import httpx
 from pydantic import ValidationError
 
-from src.cli.common import click, console
-from src.config.settings import Settings, get_settings
-from src.utils.logging import get_logger
+from ragged.cli.common import click, console
+from ragged.config.settings import Settings, get_settings
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

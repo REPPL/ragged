@@ -16,17 +16,17 @@ else:
     except ImportError:
         ollama_module = None  # type: ignore[assignment]
 
-from src.config.constants import (
+from ragged.config.constants import (
     DEFAULT_API_TIMEOUT,
     DEFAULT_EMBEDDING_DIMENSION,
     DEFAULT_MAX_RETRIES,
 )
-from src.config.settings import get_settings
-from src.embeddings.base import BaseEmbedder
-from src.exceptions import EmbeddingError, LLMConnectionError
-from src.utils.circuit_breaker import CircuitBreaker
-from src.utils.logging import get_logger
-from src.utils.retry import with_retry
+from ragged.config.settings import get_settings
+from ragged.embeddings.base import BaseEmbedder
+from ragged.exceptions import EmbeddingError, LLMConnectionError
+from ragged.utils.circuit_breaker import CircuitBreaker
+from ragged.utils.logging import get_logger
+from ragged.utils.retry import with_retry
 
 logger = get_logger(__name__)
 

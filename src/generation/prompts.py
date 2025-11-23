@@ -5,8 +5,8 @@ Provides prompt engineering templates for answer generation with citations.
 """
 
 
-from src.generation.few_shot import FewShotExampleStore, format_few_shot_prompt
-from src.retrieval.retriever import RetrievedChunk
+from ragged.generation.few_shot import FewShotExampleStore, format_few_shot_prompt
+from ragged.retrieval.retriever import RetrievedChunk
 
 RAG_SYSTEM_PROMPT = """You are a helpful assistant that answers questions based on provided context.
 
@@ -137,7 +137,7 @@ def build_contextual_prompt(
     Returns:
         Prompt with contextual information
     """
-    from src.chunking.contextual import ContextCompressor
+    from ragged.chunking.contextual import ContextCompressor
 
     if use_compression:
         compressor = ContextCompressor(max_tokens=2000)

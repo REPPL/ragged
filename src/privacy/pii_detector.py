@@ -167,7 +167,7 @@ def get_pii_detector() -> PIIDetector:
         PIIDetector singleton
 
     Usage:
-        >>> from src.privacy.pii_detector import get_pii_detector
+        >>> from ragged.privacy.pii_detector import get_pii_detector
         >>> detector = get_pii_detector()
         >>> has_pii = detector.contains_pii("text to check")
     """
@@ -184,7 +184,7 @@ def get_pii_redactor() -> PIIRedactor:
         PIIRedactor singleton
 
     Usage:
-        >>> from src.privacy.pii_detector import get_pii_redactor
+        >>> from ragged.privacy.pii_detector import get_pii_redactor
         >>> redactor = get_pii_redactor()
         >>> clean_text = redactor.redact("text with PII")
     """
@@ -205,7 +205,7 @@ def detect_pii(text: str) -> list[tuple[str, str]]:
         List of (pii_type, value) tuples
 
     Usage:
-        >>> from src.privacy.pii_detector import detect_pii
+        >>> from ragged.privacy.pii_detector import detect_pii
         >>> findings = detect_pii("My email is john@example.com")
     """
     return get_pii_detector().detect(text)
@@ -221,7 +221,7 @@ def contains_pii(text: str) -> bool:
         True if PII detected
 
     Usage:
-        >>> from src.privacy.pii_detector import contains_pii
+        >>> from ragged.privacy.pii_detector import contains_pii
         >>> if contains_pii(user_input):
         ...     print("Warning: input contains PII")
     """
@@ -238,7 +238,7 @@ def redact_pii(text: str) -> str:
         Text with PII redacted
 
     Usage:
-        >>> from src.privacy.pii_detector import redact_pii
+        >>> from ragged.privacy.pii_detector import redact_pii
         >>> safe_text = redact_pii("My SSN is 123-45-6789")
         >>> print(safe_text)
         'My SSN is [REDACTED-SSN]'
@@ -258,7 +258,7 @@ def hash_query(query: str) -> str:
     Security: One-way hash for privacy-preserving logging.
 
     Usage:
-        >>> from src.privacy.pii_detector import hash_query
+        >>> from ragged.privacy.pii_detector import hash_query
         >>> import logging
         >>> logger = logging.getLogger(__name__)
         >>> query_hash = hash_query(user_query)

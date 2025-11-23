@@ -11,10 +11,10 @@ from typing import Any
 
 import click
 
-from src import __version__
-from src.cli.common import console
-from src.config.settings import get_settings
-from src.utils.logging import get_logger
+from ragged import __version__
+from ragged.cli.common import console
+from ragged.config.settings import get_settings
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
@@ -71,7 +71,7 @@ def backup_command(
         ragged export backup --output backup.json.gz --compress
     """
     try:
-        from src.storage.vector_store import VectorStore
+        from ragged.storage.vector_store import VectorStore
 
         # Generate output filename if not provided
         if output_file is None:
@@ -198,7 +198,7 @@ def restore_command(
     try:
         import numpy as np
 
-        from src.storage.vector_store import VectorStore
+        from ragged.storage.vector_store import VectorStore
 
         backup_path = Path(backup_file)
 
@@ -296,7 +296,7 @@ def restore_command(
                 else:
                     # If no embeddings in backup, we need to generate them
                     console.print("\n[yellow]Embeddings not found in backup. Generating embeddings...[/yellow]")
-                    from src.embedding.embedder import Embedder
+                    from ragged.embedding.embedder import Embedder
 
                     embedder = Embedder()
                     embeddings_batch = embedder.embed_batch(documents_to_add[i:end_idx])

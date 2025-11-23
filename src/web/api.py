@@ -10,19 +10,19 @@ from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 
-from src.chunking.splitters import chunk_document
-from src.config.settings import Settings, get_settings
-from src.embeddings.base import BaseEmbedder
-from src.embeddings.factory import get_embedder
-from src.generation.ollama_client import OllamaClient
-from src.generation.prompts import RAG_SYSTEM_PROMPT, build_rag_prompt
-from src.ingestion.loaders import load_document
-from src.retrieval.bm25 import BM25Retriever
-from src.retrieval.hybrid import HybridRetriever
-from src.retrieval.retriever import Retriever
-from src.storage.vector_store import VectorStore
-from src.utils.logging import get_logger
-from src.web.models import (
+from ragged.chunking.splitters import chunk_document
+from ragged.config.settings import Settings, get_settings
+from ragged.embeddings.base import BaseEmbedder
+from ragged.embeddings.factory import get_embedder
+from ragged.generation.ollama_client import OllamaClient
+from ragged.generation.prompts import RAG_SYSTEM_PROMPT, build_rag_prompt
+from ragged.ingestion.loaders import load_document
+from ragged.retrieval.bm25 import BM25Retriever
+from ragged.retrieval.hybrid import HybridRetriever
+from ragged.retrieval.retriever import Retriever
+from ragged.storage.vector_store import VectorStore
+from ragged.utils.logging import get_logger
+from ragged.web.models import (
     HealthResponse,
     QueryRequest,
     QueryResponse,

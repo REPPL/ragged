@@ -4,9 +4,9 @@ import logging
 from dataclasses import dataclass
 from typing import Any, Literal
 
-from src.retrieval.bm25 import BM25Retriever
-from src.retrieval.fusion import reciprocal_rank_fusion, weighted_fusion
-from src.retrieval.retriever import RetrievedChunk, Retriever
+from ragged.retrieval.bm25 import BM25Retriever
+from ragged.retrieval.fusion import reciprocal_rank_fusion, weighted_fusion
+from ragged.retrieval.retriever import RetrievedChunk, Retriever
 
 logger = logging.getLogger(__name__)
 

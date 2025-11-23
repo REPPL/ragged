@@ -10,8 +10,8 @@ import re
 
 import numpy as np
 
-from src.config.settings import get_settings
-from src.utils.logging import get_logger
+from ragged.config.settings import get_settings
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

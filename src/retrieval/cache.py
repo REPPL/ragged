@@ -10,8 +10,8 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Any
 
-from src.utils.hashing import hash_content, hash_query
-from src.utils.logging import get_logger
+from ragged.utils.hashing import hash_content, hash_query
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

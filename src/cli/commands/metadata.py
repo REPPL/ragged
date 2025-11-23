@@ -9,9 +9,9 @@ from typing import Any
 
 import click
 
-from src.cli.common import console
-from src.cli.formatters import FORMAT_CHOICES, print_formatted
-from src.utils.logging import get_logger
+from ragged.cli.common import console
+from ragged.cli.formatters import FORMAT_CHOICES, print_formatted
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
@@ -49,7 +49,7 @@ def list_metadata(limit: int, output_format: str) -> None:
         ragged metadata list --limit 50
         ragged metadata list --format json
     """
-    from src.storage.vector_store import VectorStore
+    from ragged.storage.vector_store import VectorStore
 
     try:
         vector_store = VectorStore()
@@ -115,7 +115,7 @@ def show_metadata(document_path: str, output_format: str) -> None:
         ragged metadata show document.pdf
         ragged metadata show document.pdf --format json
     """
-    from src.storage.vector_store import VectorStore
+    from ragged.storage.vector_store import VectorStore
 
     try:
         vector_store = VectorStore()
@@ -164,7 +164,7 @@ def update_metadata(document_path: str, updates: tuple, deletions: tuple) -> Non
         ragged metadata update document.pdf --set tags=ml,ai --set priority=high
         ragged metadata update document.pdf --delete old_key
     """
-    from src.storage.vector_store import VectorStore
+    from ragged.storage.vector_store import VectorStore
 
     if not updates and not deletions:
         console.print("[yellow]No updates specified. Use --set or --delete.[/yellow]")
@@ -240,7 +240,7 @@ def search_metadata(filters: tuple, output_format: str) -> None:
         ragged metadata search --filter category=research --filter priority=high
         ragged metadata search --filter tags=ml --format json
     """
-    from src.storage.vector_store import VectorStore
+    from ragged.storage.vector_store import VectorStore
 
     if not filters:
         console.print("[yellow]No filters specified. Use --filter key=value.[/yellow]")

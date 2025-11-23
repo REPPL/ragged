@@ -15,8 +15,8 @@ from typing import Any
 import numpy as np
 from PIL import Image
 
-from src.retrieval.query_processor import MultiModalQueryProcessor, QueryEmbeddings, QueryType
-from src.storage.dual_store import DualEmbeddingStore
+from ragged.retrieval.query_processor import MultiModalQueryProcessor, QueryEmbeddings, QueryType
+from ragged.storage.dual_store import DualEmbeddingStore
 
 logger = logging.getLogger(__name__)
 

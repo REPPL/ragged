@@ -7,11 +7,11 @@ Handles query processing, embedding, and retrieval of relevant document chunks.
 from dataclasses import dataclass
 from typing import Any
 
-from src.config.settings import get_settings
-from src.embeddings.factory import get_embedder
-from src.retrieval.cache import QueryCache
-from src.storage.vector_store import VectorStore
-from src.utils.logging import get_logger
+from ragged.config.settings import get_settings
+from ragged.embeddings.factory import get_embedder
+from ragged.retrieval.cache import QueryCache
+from ragged.storage.vector_store import VectorStore
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

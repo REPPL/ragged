@@ -11,7 +11,7 @@ import re
 from pathlib import Path
 from typing import Any
 
-from src.retrieval.retriever import RetrievedChunk
+from ragged.retrieval.retriever import RetrievedChunk
 
 
 def extract_citation_numbers(text: str) -> list[int]:

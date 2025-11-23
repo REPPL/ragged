@@ -8,7 +8,7 @@ import click
 from rich.console import Console
 from rich.panel import Panel
 
-from src.utils.logging import get_logger
+from ragged.utils.logging import get_logger
 
 console = Console()
 logger = get_logger(__name__)

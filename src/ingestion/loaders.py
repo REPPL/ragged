@@ -12,17 +12,17 @@ import mimetypes
 import time
 from pathlib import Path
 
-from src.config.settings import get_settings
-from src.ingestion.models import Document
-from src.processing import (
+from ragged.config.settings import get_settings
+from ragged.ingestion.models import Document
+from ragged.processing import (
     ProcessingMetrics,
     ProcessorConfig,
     ProcessorFactory,
     ProcessorRouter,
     RouterConfig,
 )
-from src.utils.logging import get_logger
-from src.utils.security import (
+from ragged.utils.logging import get_logger
+from ragged.utils.security import (
     validate_file_path,
     validate_file_size,
 )

@@ -8,13 +8,13 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from src.utils.logging import get_logger
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
 # Type hint for RetrievedChunk (avoid circular import)
 try:
-    from src.retrieval.retriever import RetrievedChunk
+    from ragged.retrieval.retriever import RetrievedChunk
 except ImportError:
     RetrievedChunk = any  # type: ignore
 

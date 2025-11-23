@@ -14,7 +14,7 @@ import yaml
 from pydantic import BaseModel, Field
 from pydantic import ValidationError as PydanticValidationError
 
-from src.utils.logging import get_logger
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

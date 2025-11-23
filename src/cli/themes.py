@@ -6,7 +6,7 @@ v0.3.12: Customisable themes for inclusive design.
 from dataclasses import dataclass
 from typing import Literal
 
-from src.utils.logging import get_logger
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

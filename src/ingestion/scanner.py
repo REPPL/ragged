@@ -7,7 +7,7 @@ respecting ignore patterns and security constraints.
 import fnmatch
 from pathlib import Path
 
-from src.utils.logging import get_logger
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

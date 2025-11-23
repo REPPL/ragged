@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 from typing import Literal
 
-from src.cli.common import click, console
+from ragged.cli.common import click, console
 
 ShellType = Literal["bash", "zsh", "fish"]
 

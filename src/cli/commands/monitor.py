@@ -11,8 +11,8 @@ from rich.live import Live
 from rich.panel import Panel
 from rich.table import Table
 
-from src.cli.common import console
-from src.utils.metrics import get_metrics_collector
+from ragged.cli.common import console
+from ragged.utils.metrics import get_metrics_collector
 
 
 def create_system_panel(metrics: dict) -> Panel:

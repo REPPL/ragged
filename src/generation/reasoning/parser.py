@@ -6,13 +6,13 @@ v0.3.7b: Parse chain-of-thought reasoning with fallback strategies.
 
 import re
 
-from src.generation.reasoning.types import (
+from ragged.generation.reasoning.types import (
     ReasonedResponse,
     ReasoningMode,
     ReasoningStep,
     ValidationFlag,
 )
-from src.utils.logging import get_logger
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

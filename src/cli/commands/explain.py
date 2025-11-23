@@ -6,9 +6,9 @@ Provides transparency into ragged's decision-making and pipeline execution.
 
 import click
 
-from src.cli.common import console
-from src.config.config_manager import RaggedConfig
-from src.config.personas import PersonaManager
+from ragged.cli.common import console
+from ragged.config.config_manager import RaggedConfig
+from ragged.config.personas import PersonaManager
 
 
 @click.group()

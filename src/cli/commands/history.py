@@ -15,11 +15,11 @@ from typing import Any
 
 import click
 
-from src.cli.common import console
-from src.cli.formatters import FORMAT_CHOICES, print_formatted
-from src.config.settings import get_settings
-from src.security.encryption import get_encryption_manager
-from src.utils.logging import get_logger
+from ragged.cli.common import console
+from ragged.cli.formatters import FORMAT_CHOICES, print_formatted
+from ragged.config.settings import get_settings
+from ragged.security.encryption import get_encryption_manager
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
@@ -436,7 +436,7 @@ def replay_query(query_id: int, top_k: int | None) -> None:
         console.print(f"[bold]{query_text}[/bold]\n")
 
         # Import and execute query
-        from src.cli.commands.query import query as query_command
+        from ragged.cli.commands.query import query as query_command
 
         # Create a new context and invoke the query command
         ctx = click.get_current_context()

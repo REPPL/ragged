@@ -4,10 +4,10 @@ Chain-of-thought reasoning for transparent AI responses.
 v0.3.7b: Provides multiple levels of reasoning transparency.
 """
 
-from src.generation.reasoning.generator import ReasoningGenerator
-from src.generation.reasoning.parser import ReasoningParser
-from src.generation.reasoning.prompts import build_reasoning_prompt
-from src.generation.reasoning.types import (
+from ragged.generation.reasoning.generator import ReasoningGenerator
+from ragged.generation.reasoning.parser import ReasoningParser
+from ragged.generation.reasoning.prompts import build_reasoning_prompt
+from ragged.generation.reasoning.types import (
     ReasonedResponse,
     ReasoningMode,
     ReasoningStep,

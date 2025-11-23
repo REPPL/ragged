@@ -8,14 +8,14 @@ import re
 from pathlib import Path
 from typing import Any
 
-from src.chunking.splitters.page_tracking import (
+from ragged.chunking.splitters.page_tracking import (
     build_page_position_map,
     estimate_page_from_position,
     map_chunks_to_pages,
 )
-from src.chunking.token_counter import count_tokens
-from src.ingestion.models import Chunk, ChunkMetadata, Document
-from src.utils.logging import get_logger
+from ragged.chunking.token_counter import count_tokens
+from ragged.ingestion.models import Chunk, ChunkMetadata, Document
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
@@ -48,7 +48,7 @@ def chunk_document(document: Document, splitter: Any | None = None, strategy: st
     """
     # Lazy import to avoid circular dependencies
     if splitter is None:
-        from src.chunking.factory import ChunkerFactory
+        from ragged.chunking.factory import ChunkerFactory
         splitter = ChunkerFactory.create_chunker(strategy)
 
     logger.info(f"Chunking document: {document.document_id}")

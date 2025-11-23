@@ -11,7 +11,7 @@ import time
 from dataclasses import dataclass
 from typing import Callable, Optional
 
-from src.gpu.device_manager import DeviceInfo, DeviceManager, DeviceType
+from ragged.gpu.device_manager import DeviceInfo, DeviceManager, DeviceType
 
 logger = logging.getLogger(__name__)
 

@@ -13,8 +13,8 @@ from typing import Any, Literal
 from pydantic import Field, ValidationInfo, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-from src.config.feature_flags import FeatureFlags
-from src.utils.path_utils import ensure_directory
+from ragged.config.feature_flags import FeatureFlags
+from ragged.utils.path_utils import ensure_directory
 
 
 class EmbeddingModel(str, Enum):
@@ -285,7 +285,7 @@ class Settings(BaseSettings):
     def model_post_init(self, __context: Any) -> None:
         """Load user config if available (without creating directories as side effect)."""
         # Import here to avoid circular dependency
-        from src.utils.logging import get_logger
+        from ragged.utils.logging import get_logger
 
         logger = get_logger(__name__)
 

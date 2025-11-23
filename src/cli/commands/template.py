@@ -12,8 +12,8 @@ from rich.panel import Panel
 from rich.syntax import Syntax
 from rich.table import Table
 
-from src.templates import TemplateEngine, TemplateError
-from src.utils.logging import get_logger
+from ragged.templates import TemplateEngine, TemplateError
+from ragged.utils.logging import get_logger
 
 console = Console()
 logger = get_logger(__name__)

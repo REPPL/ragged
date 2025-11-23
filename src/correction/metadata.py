@@ -7,8 +7,8 @@ import json
 from datetime import UTC, datetime
 from pathlib import Path
 
-from src.correction.schemas import AnalysisResult, CorrectionResult, IssueType
-from src.utils.logging import get_logger
+from ragged.correction.schemas import AnalysisResult, CorrectionResult, IssueType
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

@@ -95,7 +95,7 @@ class MultiModalQueryProcessor:
             vision_embedder: Vision embedding model (ColPaliEmbedder)
         """
         if text_embedder is None:
-            from src.embeddings.factory import get_embedder
+            from ragged.embeddings.factory import get_embedder
 
             self.text_embedder = get_embedder()
         else:
@@ -166,7 +166,7 @@ class MultiModalQueryProcessor:
             # Convert to PIL Image if path provided
             if isinstance(image, (str, Path)):
                 # SECURITY FIX (CRITICAL-2): Validate file path to prevent path traversal
-                from src.utils.security import validate_file_path, validate_mime_type
+                from ragged.utils.security import validate_file_path, validate_mime_type
 
                 image_path = Path(image)
 

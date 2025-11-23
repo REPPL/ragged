@@ -18,8 +18,8 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any
 
-from src.processing.router import ProcessingRoute
-from src.utils.logging import get_logger
+from ragged.processing.router import ProcessingRoute
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

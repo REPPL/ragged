@@ -3,18 +3,18 @@
 v0.3.5: Automated detection and correction of PDF issues (rotation, ordering, duplicates).
 """
 
-from src.correction.analyzer import AnalysisResult, AnalyzerConfig, PDFAnalyzer
-from src.correction.corrector import CorrectorConfig, PDFCorrector
-from src.correction.metadata import MetadataGenerator
-from src.correction.pipeline import CorrectionPipeline
-from src.correction.schemas import (
+from ragged.correction.analyzer import AnalysisResult, AnalyzerConfig, PDFAnalyzer
+from ragged.correction.corrector import CorrectorConfig, PDFCorrector
+from ragged.correction.metadata import MetadataGenerator
+from ragged.correction.pipeline import CorrectionPipeline
+from ragged.correction.schemas import (
     CorrectionAction,
     CorrectionResult,
     IssueReport,
     IssueType,
     QualityGrade,
 )
-from src.correction.transformers import (
+from ragged.correction.transformers import (
     DuplicateRemover,
     PageReorderTransformer,
     RotationTransformer,

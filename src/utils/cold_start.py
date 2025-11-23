@@ -9,7 +9,7 @@ import time
 from collections.abc import Callable
 from typing import Any, Optional
 
-from src.utils.logging import get_logger
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
@@ -272,7 +272,7 @@ class ColdStartOptimizer:
         Returns:
             Embedder instance
         """
-        from src.embeddings.factory import get_embedder
+        from ragged.embeddings.factory import get_embedder
         return get_embedder()
 
     def _init_vector_store(self) -> Any:
@@ -281,7 +281,7 @@ class ColdStartOptimizer:
         Returns:
             VectorStore instance
         """
-        from src.storage.vector_store import VectorStore
+        from ragged.storage.vector_store import VectorStore
         return VectorStore()
 
     def _init_retriever(self) -> Any:
@@ -290,7 +290,7 @@ class ColdStartOptimizer:
         Returns:
             Retriever instance
         """
-        from src.retrieval.hybrid import HybridRetriever
+        from ragged.retrieval.hybrid import HybridRetriever
         return HybridRetriever()
 
     async def warmup(self) -> None:

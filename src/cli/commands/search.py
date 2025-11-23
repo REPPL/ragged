@@ -8,9 +8,9 @@ from typing import Any
 
 import click
 
-from src.cli.common import console
-from src.cli.formatters import FORMAT_CHOICES, print_formatted
-from src.utils.logging import get_logger
+from ragged.cli.common import console
+from ragged.cli.formatters import FORMAT_CHOICES, print_formatted
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
@@ -93,8 +93,8 @@ def search(
         # Export results as JSON
         ragged search "topic" --format json > results.json
     """
-    from src.retrieval.retriever import Retriever
-    from src.storage.vector_store import VectorStore
+    from ragged.retrieval.retriever import Retriever
+    from ragged.storage.vector_store import VectorStore
 
     if not query and not document_path and not metadata_filters:
         console.print("[yellow]Provide at least one of: query, --path, or --metadata[/yellow]")

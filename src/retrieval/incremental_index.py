@@ -12,9 +12,9 @@ from typing import Any
 
 from rank_bm25 import BM25Okapi
 
-from src.retrieval.bm25 import BM25Retriever
-from src.utils.logging import get_logger
-from src.utils.serialization import load_json, save_json
+from ragged.retrieval.bm25 import BM25Retriever
+from ragged.utils.logging import get_logger
+from ragged.utils.serialization import load_json, save_json
 
 logger = get_logger(__name__)
 

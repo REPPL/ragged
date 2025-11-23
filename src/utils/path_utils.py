@@ -6,7 +6,7 @@ like directory traversal and ensure consistent path handling.
 
 from pathlib import Path
 
-from src.exceptions import InvalidPathError, ResourceNotFoundError
+from ragged.exceptions import InvalidPathError, ResourceNotFoundError
 
 
 def normalize_path(path: str | Path) -> Path:

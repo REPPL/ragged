@@ -8,8 +8,8 @@ from pathlib import Path
 
 import click
 
-from src.cli.common import ProgressType, console
-from src.utils.logging import get_logger
+from ragged.cli.common import ProgressType, console
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
@@ -55,8 +55,8 @@ def info(verbose: bool) -> None:
         ragged storage info
         ragged storage info --verbose
     """
-    from src.storage.dual_storage import DualVectorStore
-    from src.storage.vector_store import VectorStore
+    from ragged.storage.dual_storage import DualVectorStore
+    from ragged.storage.vector_store import VectorStore
 
     try:
         console.print("[bold blue]Storage Information:[/bold blue]")
@@ -189,8 +189,8 @@ def migrate(dry_run: bool, backup: bool) -> None:
         ragged storage migrate
         ragged storage migrate --no-backup
     """
-    from src.storage.dual_storage import DualVectorStore
-    from src.storage.vector_store import VectorStore
+    from ragged.storage.dual_storage import DualVectorStore
+    from ragged.storage.vector_store import VectorStore
 
     try:
         console.print("[bold blue]Schema Migration: v0.4 → v0.5[/bold blue]")
@@ -322,8 +322,8 @@ def vacuum(dry_run: bool, orphaned_only: bool) -> None:
         ragged storage vacuum --dry-run
         ragged storage vacuum
     """
-    from src.storage.dual_storage import DualVectorStore
-    from src.storage.vector_store import VectorStore
+    from ragged.storage.dual_storage import DualVectorStore
+    from ragged.storage.vector_store import VectorStore
 
     try:
         console.print("[bold blue]Storage Vacuum[/bold blue]")

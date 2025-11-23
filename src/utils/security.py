@@ -8,7 +8,7 @@ like path traversal, file size attacks, and malicious content.
 import os
 from pathlib import Path
 
-from src.config.settings import get_settings
+from ragged.config.settings import get_settings
 
 
 class SecurityError(Exception):

@@ -11,9 +11,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from src.ingestion.loaders import load_document
-from src.ingestion.models import Document
-from src.utils.logging import get_logger
+from ragged.ingestion.loaders import load_document
+from ragged.ingestion.models import Document
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
