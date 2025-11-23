@@ -402,7 +402,7 @@ async def query(user_id: str, query: str) -> QueryResult:
 ## Known Risks
 
 - **Complexity:** Multi-user systems significantly more complex; extensive testing required
-- **Performance:** Permission checks may slow queries; optimize carefully
+- **Performance:** Permission checks may slow queries; optimise carefully
 - **Real-time reliability:** WebSocket connections can be unstable; implement reconnection logic
 - **Data migration:** Single-user → multi-user migration must be bulletproof; one mistake = data loss
 - **E2EE trade-offs:** Encryption limits search and analytics; users may not understand trade-offs

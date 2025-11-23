@@ -327,7 +327,7 @@ ragged agent tools test VectorSearchTool --params '{"query": "test"}'
 ## Known Risks
 
 - **Complexity:** Agent reasoning may be unpredictable; extensive testing needed
-- **Performance:** Multi-step workflows may be slow; optimize tool execution
+- **Performance:** Multi-step workflows may be slow; optimise tool execution
 - **User adoption:** Agents may be too complex for average users; provide good templates
 - **Privacy:** External tools (web search) compromise privacy—make optional and clearly documented
 - **Tool safety:** Python REPL and other powerful tools need sandboxing

@@ -455,7 +455,7 @@ ragged-airgap-v2.0.0/
 - **Desktop app maintenance:** Supporting multiple platforms (macOS/Windows/Linux) is significant ongoing effort
 - **Browser extension fragmentation:** Different browsers have different extension APIs; testing burden high
 - **Widget security:** Embedding in untrusted websites requires careful security design
-- **Observability overhead:** Comprehensive monitoring may impact performance; optimize instrumentation
+- **Observability overhead:** Comprehensive monitoring may impact performance; optimise instrumentation
 - **Enterprise sales:** Enterprise features may require enterprise support and sales process
 
 **Critical Decision:** v2.0 represents enterprise pivot. Validate market demand before full implementation. Consider offering "Enterprise Edition" as separate product to fund development.

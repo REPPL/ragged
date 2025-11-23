@@ -388,7 +388,7 @@ Version 0.9 completes the web UI transformation, bringing ragged from basic Grad
 
 ## Known Risks
 
-- **Performance:** Rich UI features may be slow on older devices; optimize carefully
+- **Performance:** Rich UI features may be slow on older devices; optimise carefully
 - **Offline sync:** Conflict resolution complex; defer advanced cases to v1.5
 - **Graph visualization:** Large graphs (10,000+ nodes) may require specialized rendering
 - **Mobile UX:** Desktop features may not translate well to mobile; prioritize ruthlessly

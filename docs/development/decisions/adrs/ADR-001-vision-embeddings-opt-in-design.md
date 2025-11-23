@@ -197,7 +197,7 @@ The opt-in design aligns with ragged's philosophy of **user control and predicta
 - [Vision Embeddings Implementation](../../implementation/version/v0.5/v0.5.0/README.md)
 - [GPU Configuration Guide](../../../guides/gpu-configuration-optimisation.md)
 - [ColPali Model Documentation](https://huggingface.co/vidore/colpali-v1.3-hf)
-- [Dual Embedding Storage Design](../../planning/version/v0.5/storage-architecture.md)
+- [ADR-005: Dual Embedding Storage Architecture](./ADR-005-dual-embedding-storage-architecture.md)
 
 ---
 
