@@ -165,8 +165,6 @@ Baseline audits should be conducted:
 
 - [../implementation/](../implementation/README.md) - Per-version security implementation audits
 - [../../README.md](../../README.md) - Overall audit documentation structure
-- [../../../../guides/security-monitoring.md](../../../../guides/security-monitoring.md) - Operational security monitoring
-- [Security Policy](../../../../SECURITY.md) - Vulnerability disclosure and security policy
 
 ---
 

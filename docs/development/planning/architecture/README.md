@@ -2281,7 +2281,6 @@ def test_rag_pipeline_quality():
 
 ragged development is driven by **user stories** that define functional requirements and user value across different personas.
 
-**Full Documentation**: [User Stories Index](../../requirements/user-stories/README.md)
 
 ### Primary User Stories
 

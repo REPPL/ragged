@@ -138,7 +138,7 @@ celerybeat.pid
 .env
 .env.local
 .env.*.local
-.envrc
+# .envrc is committed (project configuration, no secrets)
 .venv
 env/
 venv/
