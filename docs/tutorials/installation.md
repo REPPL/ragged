@@ -514,8 +514,9 @@ rm -rf ~/.cache/huggingface/hub/models--sentence-transformers*
 - [Getting Started Notebook](../../examples/notebooks/01-getting-started.ipynb) - Interactive tutorial
 - [Multi-Modal Workflow](./multimodal-workflow.md) - Vision embeddings workflow
 
-### Configuration & Optimization
+### Configuration & Optimisation
 - [GPU Configuration & Optimisation](../guides/gpu-configuration-optimisation.md) - GPU setup and performance tuning
+- [ADR-001: Vision Embeddings Opt-In Design](../development/decisions/adrs/ADR-001-vision-embeddings-opt-in-design.md) - Why `--vision` flag is required
 - [Configuration Guide](../guides/configuration.md) - General configuration options
 - [Docker Setup Guide](../guides/docker-setup.md) - Docker installation details
 

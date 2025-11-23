@@ -480,10 +480,11 @@ embedder = ColPaliEmbedder(
 
 ## Related Documentation
 
-- [Manual Testing: GPU Management](../../testing/manual-tests/gpu-management/README.md)
+- [ADR-001: Vision Embeddings Opt-In Design](../development/decisions/adrs/ADR-001-vision-embeddings-opt-in-design.md) - Why vision uses `--vision` flag
+- [Manual Testing: GPU Management](../testing/manual-tests/gpu-management/README.md)
 - [Example Notebook: GPU Optimisation](../../examples/notebooks/03-gpu-optimization.ipynb)
 - [Multi-Modal Workflow Tutorial](../tutorials/multimodal-workflow.md)
-- [Cross-Platform Tests](../../testing/manual-tests/cross-platform/README.md)
+- [Cross-Platform Tests](../testing/manual-tests/cross-platform/README.md)
 
 ---
 

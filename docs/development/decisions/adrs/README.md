@@ -1,6 +1,6 @@
 # Architecture Decision Records (ADRs)
 
-**Status:** 🚧 Awaiting Content
+**Status:** ✅ Active
 
 ## Overview
 
@@ -31,11 +31,17 @@ Each ADR follows the template at [adr-template.md](../../process/templates/adr-t
 
 ---
 
-## Coming Soon
+## Accepted ADRs
 
-ADRs will be added as architectural decisions are made during implementation, starting with v0.1.
+| ID | Title | Date | Status |
+|----|-------|------|--------|
+| [ADR-001](./ADR-001-vision-embeddings-opt-in-design.md) | Vision Embeddings Opt-In Design | 2025-11-23 | Accepted |
 
-Example decisions that may be documented:
+---
+
+## Future Decisions
+
+Decisions that may be documented as development progresses:
 - Choice of vector database (ChromaDB vs Qdrant)
 - Document chunking strategy
 - Web framework selection
