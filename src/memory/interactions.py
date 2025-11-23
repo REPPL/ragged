@@ -1,6 +1,7 @@
 """Interaction tracking for personal memory system.
 
 v0.4.5: SQLite-based interaction history storage
+v0.4.7: Behaviour learning integration
 
 Tracks all user interactions including:
 - Queries and responses
@@ -8,6 +9,7 @@ Tracks all user interactions including:
 - Model usage
 - Latency metrics
 - User feedback
+- Behaviour learning (optional)
 
 Privacy: All data stored locally with encryption at rest.
 """
@@ -18,12 +20,15 @@ import uuid
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from pydantic import BaseModel, Field
 
 from ragged.config.settings import get_settings
 from ragged.utils.logging import get_logger
+
+if TYPE_CHECKING:
+    from ragged.memory.behaviour import BehaviourLearner
 
 logger = get_logger(__name__)
 
@@ -126,12 +131,18 @@ class InteractionTracker:
         ... )
     """
 
-    def __init__(self, persona: str | None = None, storage_dir: Path | None = None):
+    def __init__(
+        self,
+        persona: str | None = None,
+        storage_dir: Path | None = None,
+        behaviour_learner: "BehaviourLearner | None" = None,
+    ):
         """Initialise interaction tracker.
 
         Args:
             persona: Default persona for interactions
             storage_dir: Custom storage directory (default: ~/.ragged/memory/interactions)
+            behaviour_learner: Optional behaviour learner for automatic profile updates (v0.4.7)
         """
         settings = get_settings()
         data_dir = Path(settings.data_dir)
@@ -139,11 +150,15 @@ class InteractionTracker:
         self.persona = persona
         self.storage_dir = storage_dir or (data_dir / "memory" / "interactions")
         self.storage_dir.mkdir(parents=True, exist_ok=True)
+        self.behaviour_learner = behaviour_learner
 
         self.db_path = self.storage_dir / "queries.db"
         self._init_database()
 
-        logger.info(f"InteractionTracker initialised for persona: {persona}")
+        logger.info(
+            f"InteractionTracker initialised for persona: {persona}, "
+            f"behaviour_learning={'enabled' if behaviour_learner else 'disabled'}"
+        )
 
     def _init_database(self) -> None:
         """Initialise SQLite database with schema."""
@@ -273,6 +288,16 @@ class InteractionTracker:
             conn.commit()
 
         logger.debug(f"Recorded interaction: {interaction.id}")
+
+        # Process with behaviour learner if enabled (v0.4.7)
+        if self.behaviour_learner:
+            try:
+                self.behaviour_learner.process_interaction(interaction)
+                logger.debug(f"Processed interaction {interaction.id} with behaviour learner")
+            except Exception as e:
+                # Don't fail interaction recording if behaviour learning fails
+                logger.warning(f"Behaviour learning failed for interaction {interaction.id}: {e}")
+
         return interaction
 
     def get_interaction(self, interaction_id: str) -> Interaction:

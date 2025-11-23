@@ -9,9 +9,9 @@
 
 ![ragged logo](docs/assets/img/logo.png)
 
-## Privacy-First Local RAG System
+## Your Private, Intelligent Document Assistant
 
-**Your private, intelligent document assistant that runs entirely on your computer:** `ragged` is a local RAG *(Retrieval-Augmented Generation)* system that lets you ask questions about your documents and get accurate answers with citations - all while keeping your data completely private and local.
+`ragged` is a local RAG *(Retrieval-Augmented Generation)* system that lets you ask questions about your documents and get accurate answers with citations -- all while keeping your data completely private and local.
 
 ### Principles
 
@@ -22,6 +22,8 @@
 5. **Continuous Improvement**: Each version adds value while maintaining stability.
 
 ### Aspirations
+
+`ragged` aspires to (a) see documents like a human, (b) fix quality issues automatically, and (c) keep your data truly private.
 
 - 📚 **Multi-Format Support**: Ingest PDF, TXT, Markdown, and HTML documents
 - 🧠 **Semantic Understanding**: Uses embeddings to understand meaning, not just keywords

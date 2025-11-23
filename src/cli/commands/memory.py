@@ -1,6 +1,7 @@
 """Memory/interaction management commands for ragged CLI.
 
 v0.4.5: Interaction history tracking and management.
+v0.4.7: Interest profile and behaviour learning commands.
 """
 
 import json
@@ -11,6 +12,8 @@ import click
 
 from ragged.cli.common import console
 from ragged.cli.formatters import FORMAT_CHOICES, print_formatted
+from ragged.config.settings import get_settings
+from ragged.memory.behaviour import create_behaviour_learner
 from ragged.memory.interactions import InteractionTracker
 from ragged.memory.persona import PersonaManager
 from ragged.utils.logging import get_logger
@@ -528,3 +531,492 @@ def memory_stats(persona: str | None, output_format: str) -> None:
         console.print(f"[bold red]✗[/bold red] Failed to get memory stats: {e}")
         logger.error(f"Memory stats failed: {e}", exc_info=True)
         sys.exit(1)
+
+
+# ============================================================================
+# v0.4.7: Interest Profile & Behaviour Learning Commands
+# ============================================================================
+
+
+@memory.command("profile")
+@click.option(
+    "--persona",
+    "-p",
+    help="Persona to view (uses active persona if not specified)",
+)
+@click.option(
+    "--format",
+    "-f",
+    "output_format",
+    type=click.Choice(FORMAT_CHOICES + ["text"], case_sensitive=False),
+    default="text",
+    help="Output format",
+)
+def show_profile(persona: str | None, output_format: str) -> None:
+    """Show interest profile for persona.
+
+    \b
+    Examples:
+        ragged memory profile
+        ragged memory profile --persona researcher
+        ragged memory profile --format json
+    """
+    try:
+        # Use active persona if not specified
+        persona = persona or _get_active_persona()
+
+        if not persona:
+            console.print(
+                "[bold red]✗[/bold red] No persona specified and no active persona set."
+            )
+            console.print("[dim]Use --persona or set an active persona first[/dim]")
+            sys.exit(1)
+
+        # Get behaviour learner
+        settings = get_settings()
+        data_dir = Path(settings.data_dir)
+        learner = create_behaviour_learner(data_dir / "memory")
+
+        # Get insights
+        insights = learner.get_persona_insights(persona)
+
+        if output_format == "text":
+            console.print(f"\n[bold]Interest Profile: {persona}[/bold]\n")
+
+            if insights["profile_age_days"] == 0:
+                console.print("Profile Age: Today")
+            elif insights["profile_age_days"] == 1:
+                console.print("Profile Age: 1 day")
+            else:
+                console.print(f"Profile Age: {insights['profile_age_days']} days")
+
+            console.print(f"Total Topics: {insights['total_topics']}\n")
+
+            if insights["top_topics"]:
+                console.print("[bold]Top Topics (by confidence):[/bold]")
+                from datetime import datetime
+
+                for idx, topic in enumerate(insights["top_topics"], start=1):
+                    last_seen = datetime.fromisoformat(topic["last_seen"])
+                    time_ago = _format_time_ago(last_seen)
+
+                    console.print(
+                        f"{idx}. [bold]{topic['topic']}[/bold] "
+                        f"(confidence: {topic['confidence']:.2f}, "
+                        f"frequency: {topic['frequency']}, "
+                        f"last seen: {time_ago})"
+                    )
+                console.print()
+            else:
+                console.print(
+                    "[yellow]No topics tracked yet. Start querying to build your profile![/yellow]\n"
+                )
+
+        else:
+            print_formatted(
+                [insights],
+                format_type=output_format,  # type: ignore
+                title="Interest Profile",
+                console=console,
+            )
+
+    except Exception as e:
+        console.print(f"[bold red]✗[/bold red] Failed to show profile: {e}")
+        logger.error(f"Show profile failed: {e}", exc_info=True)
+        sys.exit(1)
+
+
+@memory.command("topics")
+@click.option(
+    "--persona",
+    "-p",
+    help="Persona to view (uses active persona if not specified)",
+)
+@click.option(
+    "--min-confidence",
+    "-c",
+    type=float,
+    default=0.3,
+    help="Minimum confidence threshold (default: 0.3)",
+)
+@click.option(
+    "--limit",
+    "-l",
+    type=int,
+    default=20,
+    help="Maximum number of topics to show (default: 20)",
+)
+@click.option(
+    "--format",
+    "-f",
+    "output_format",
+    type=click.Choice(FORMAT_CHOICES + ["text"], case_sensitive=False),
+    default="text",
+    help="Output format",
+)
+def list_topics(
+    persona: str | None,
+    min_confidence: float,
+    limit: int,
+    output_format: str,
+) -> None:
+    """List topics from interest profile.
+
+    \b
+    Examples:
+        ragged memory topics
+        ragged memory topics --min-confidence 0.5
+        ragged memory topics --persona researcher --limit 10
+    """
+    try:
+        # Use active persona if not specified
+        persona = persona or _get_active_persona()
+
+        if not persona:
+            console.print(
+                "[bold red]✗[/bold red] No persona specified and no active persona set."
+            )
+            console.print("[dim]Use --persona or set an active persona first[/dim]")
+            sys.exit(1)
+
+        # Get behaviour learner
+        settings = get_settings()
+        data_dir = Path(settings.data_dir)
+        learner = create_behaviour_learner(data_dir / "memory")
+
+        profile = learner.profile_manager.get_profile(persona)
+        topics = profile.get_top_topics(limit=limit, min_confidence=min_confidence)
+
+        if not topics:
+            console.print(
+                f"\n[yellow]No topics found with confidence >= {min_confidence}[/yellow]\n"
+            )
+            return
+
+        topics_data = []
+        for topic in topics:
+            topics_data.append(
+                {
+                    "topic": topic.topic,
+                    "confidence": round(topic.confidence, 3),
+                    "frequency": topic.frequency,
+                    "recency": round(topic.recency, 3),
+                    "related_docs": len(topic.related_documents),
+                    "related_topics": len(topic.co_occurring_topics),
+                }
+            )
+
+        if output_format == "text":
+            console.print(f"\n[bold]Topics for {persona}[/bold] (showing {len(topics)})\n")
+
+            for idx, data in enumerate(topics_data, start=1):
+                console.print(
+                    f"{idx}. [bold]{data['topic']}[/bold] (conf: {data['confidence']:.2f}, "
+                    f"freq: {data['frequency']}, rec: {data['recency']:.2f})"
+                )
+                console.print(
+                    f"   {data['related_docs']} docs, {data['related_topics']} related topics"
+                )
+            console.print()
+        else:
+            print_formatted(
+                topics_data,
+                format_type=output_format,  # type: ignore
+                title="Topics",
+                console=console,
+            )
+
+    except Exception as e:
+        console.print(f"[bold red]✗[/bold red] Failed to list topics: {e}")
+        logger.error(f"List topics failed: {e}", exc_info=True)
+        sys.exit(1)
+
+
+@memory.command("topic-info")
+@click.argument("topic_name")
+@click.option(
+    "--persona",
+    "-p",
+    help="Persona to query (uses active persona if not specified)",
+)
+@click.option(
+    "--format",
+    "-f",
+    "output_format",
+    type=click.Choice(FORMAT_CHOICES + ["text"], case_sensitive=False),
+    default="text",
+    help="Output format",
+)
+def show_topic_info(topic_name: str, persona: str | None, output_format: str) -> None:
+    """Show detailed information about a topic.
+
+    \b
+    Examples:
+        ragged memory topic-info "RAG"
+        ragged memory topic-info "machine learning" --persona researcher
+    """
+    try:
+        # Use active persona if not specified
+        persona = persona or _get_active_persona()
+
+        if not persona:
+            console.print(
+                "[bold red]✗[/bold red] No persona specified and no active persona set."
+            )
+            console.print("[dim]Use --persona or set an active persona first[/dim]")
+            sys.exit(1)
+
+        # Get behaviour learner
+        settings = get_settings()
+        data_dir = Path(settings.data_dir)
+        learner = create_behaviour_learner(data_dir / "memory")
+
+        profile = learner.profile_manager.get_profile(persona)
+        topic = profile.get_topic(topic_name)
+
+        if not topic:
+            console.print(
+                f"\n[yellow]Topic '{topic_name}' not found in profile for {persona}[/yellow]\n"
+            )
+            return
+
+        topic_data = {
+            "topic": topic.topic,
+            "confidence": round(topic.confidence, 3),
+            "frequency": topic.frequency,
+            "recency": round(topic.recency, 3),
+            "first_seen": topic.first_seen.isoformat(),
+            "last_seen": topic.last_seen.isoformat(),
+            "related_documents": topic.related_documents,
+            "co_occurring_topics": topic.co_occurring_topics,
+        }
+
+        if output_format == "text":
+            from datetime import datetime
+
+            console.print(f"\n[bold]Topic: {topic.topic}[/bold]\n")
+            console.print(f"Confidence: {topic.confidence:.3f}")
+            console.print(f"Frequency: {topic.frequency}")
+            console.print(f"Recency: {topic.recency:.3f}")
+            console.print(
+                f"First Seen: {topic.first_seen.strftime('%Y-%m-%d %H:%M')}"
+            )
+            console.print(
+                f"Last Seen: {topic.last_seen.strftime('%Y-%m-%d %H:%M')} ({_format_time_ago(topic.last_seen)})"
+            )
+
+            if topic.related_documents:
+                console.print(f"\n[bold]Related Documents ({len(topic.related_documents)}):[/bold]")
+                for doc in topic.related_documents[:10]:  # Show first 10
+                    console.print(f"  • {doc}")
+                if len(topic.related_documents) > 10:
+                    console.print(f"  ... and {len(topic.related_documents) - 10} more")
+
+            if topic.co_occurring_topics:
+                console.print(f"\n[bold]Co-occurring Topics ({len(topic.co_occurring_topics)}):[/bold]")
+                sorted_topics = sorted(
+                    topic.co_occurring_topics.items(),
+                    key=lambda x: x[1],
+                    reverse=True,
+                )
+                for related_topic, count in sorted_topics[:10]:  # Show top 10
+                    console.print(f"  • {related_topic} ({count} times)")
+                if len(topic.co_occurring_topics) > 10:
+                    console.print(f"  ... and {len(topic.co_occurring_topics) - 10} more")
+
+            console.print()
+        else:
+            print_formatted(
+                [topic_data],
+                format_type=output_format,  # type: ignore
+                title="Topic Information",
+                console=console,
+            )
+
+    except Exception as e:
+        console.print(f"[bold red]✗[/bold red] Failed to show topic info: {e}")
+        logger.error(f"Show topic info failed: {e}", exc_info=True)
+        sys.exit(1)
+
+
+@memory.command("related-topics")
+@click.argument("topic_name")
+@click.option(
+    "--persona",
+    "-p",
+    help="Persona to query (uses active persona if not specified)",
+)
+@click.option(
+    "--limit",
+    "-l",
+    type=int,
+    default=10,
+    help="Maximum number of related topics to show (default: 10)",
+)
+def show_related_topics(topic_name: str, persona: str | None, limit: int) -> None:
+    """Show topics that co-occur with the specified topic.
+
+    \b
+    Examples:
+        ragged memory related-topics "RAG"
+        ragged memory related-topics "machine learning" --limit 5
+    """
+    try:
+        # Use active persona if not specified
+        persona = persona or _get_active_persona()
+
+        if not persona:
+            console.print(
+                "[bold red]✗[/bold red] No persona specified and no active persona set."
+            )
+            console.print("[dim]Use --persona or set an active persona first[/dim]")
+            sys.exit(1)
+
+        # Get behaviour learner
+        settings = get_settings()
+        data_dir = Path(settings.data_dir)
+        learner = create_behaviour_learner(data_dir / "memory")
+
+        profile = learner.profile_manager.get_profile(persona)
+        topic = profile.get_topic(topic_name)
+
+        if not topic:
+            console.print(
+                f"\n[yellow]Topic '{topic_name}' not found in profile for {persona}[/yellow]\n"
+            )
+            return
+
+        if not topic.co_occurring_topics:
+            console.print(
+                f"\n[yellow]No related topics found for '{topic_name}'[/yellow]\n"
+            )
+            return
+
+        # Sort by count (descending)
+        sorted_topics = sorted(
+            topic.co_occurring_topics.items(),
+            key=lambda x: x[1],
+            reverse=True,
+        )[:limit]
+
+        console.print(f"\n[bold]Topics related to '{topic.topic}':[/bold]\n")
+
+        for idx, (related_topic, count) in enumerate(sorted_topics, start=1):
+            # Get confidence for related topic if it exists
+            related_info = profile.get_topic(related_topic)
+            if related_info:
+                console.print(
+                    f"{idx}. {related_topic} "
+                    f"(co-occurred {count} times, confidence: {related_info.confidence:.2f})"
+                )
+            else:
+                console.print(f"{idx}. {related_topic} (co-occurred {count} times)")
+
+        console.print()
+
+    except Exception as e:
+        console.print(f"[bold red]✗[/bold red] Failed to show related topics: {e}")
+        logger.error(f"Show related topics failed: {e}", exc_info=True)
+        sys.exit(1)
+
+
+@memory.command("forget-topic")
+@click.argument("topic_name")
+@click.option(
+    "--persona",
+    "-p",
+    help="Persona to modify (uses active persona if not specified)",
+)
+@click.option(
+    "--yes",
+    "-y",
+    is_flag=True,
+    help="Skip confirmation prompt",
+)
+def forget_topic(topic_name: str, persona: str | None, yes: bool) -> None:
+    """Remove topic from interest profile (GDPR right to erasure).
+
+    \b
+    Examples:
+        ragged memory forget-topic "RAG"
+        ragged memory forget-topic "machine learning" --persona researcher --yes
+    """
+    try:
+        # Use active persona if not specified
+        persona = persona or _get_active_persona()
+
+        if not persona:
+            console.print(
+                "[bold red]✗[/bold red] No persona specified and no active persona set."
+            )
+            console.print("[dim]Use --persona or set an active persona first[/dim]")
+            sys.exit(1)
+
+        # Get behaviour learner
+        settings = get_settings()
+        data_dir = Path(settings.data_dir)
+        learner = create_behaviour_learner(data_dir / "memory")
+
+        # Check if topic exists
+        profile = learner.profile_manager.get_profile(persona)
+        topic = profile.get_topic(topic_name)
+
+        if not topic:
+            console.print(
+                f"\n[yellow]Topic '{topic_name}' not found in profile for {persona}[/yellow]\n"
+            )
+            return
+
+        # Confirm deletion
+        if not yes:
+            console.print(f"\n[yellow]About to remove topic:[/yellow] [bold]{topic.topic}[/bold]")
+            console.print(f"Persona: {persona}")
+            console.print(f"Frequency: {topic.frequency}")
+            console.print(f"Confidence: {topic.confidence:.3f}")
+            console.print("\n[bold red]⚠ This action cannot be undone![/bold red]")
+
+            if not click.confirm("\nContinue?"):
+                console.print("Cancelled.")
+                return
+
+        # Remove topic
+        removed = learner.forget_topic(persona, topic_name)
+
+        if removed:
+            console.print(
+                f"\n[green]✓[/green] Removed topic '[bold]{topic_name}[/bold]' from {persona}\n"
+            )
+        else:
+            console.print(
+                f"\n[yellow]Topic '{topic_name}' not found (may have been already removed)[/yellow]\n"
+            )
+
+    except Exception as e:
+        console.print(f"[bold red]✗[/bold red] Failed to forget topic: {e}")
+        logger.error(f"Forget topic failed: {e}", exc_info=True)
+        sys.exit(1)
+
+
+def _format_time_ago(timestamp) -> str:
+    """Format timestamp as human-readable 'time ago' string."""
+    from datetime import datetime
+
+    now = datetime.now()
+    diff = now - timestamp
+
+    if diff.days > 365:
+        years = diff.days // 365
+        return f"{years}y ago" if years > 1 else "1y ago"
+    elif diff.days > 30:
+        months = diff.days // 30
+        return f"{months}mo ago" if months > 1 else "1mo ago"
+    elif diff.days > 0:
+        return f"{diff.days}d ago" if diff.days > 1 else "1d ago"
+    elif diff.seconds > 3600:
+        hours = diff.seconds // 3600
+        return f"{hours}h ago" if hours > 1 else "1h ago"
+    elif diff.seconds > 60:
+        minutes = diff.seconds // 60
+        return f"{minutes}m ago" if minutes > 1 else "1m ago"
+    else:
+        return "just now"
