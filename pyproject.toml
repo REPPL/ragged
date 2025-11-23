@@ -96,8 +96,14 @@ dev = [
 ragged = "ragged.main:cli"
 
 [tool.setuptools]
-packages = ["ragged"]
-package-dir = {"ragged" = "src"}
+# Map root package directory to src/
+# This allows imports like "from ragged.web import ..." to find /src/web/
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+# Automatically discover all Python packages in src/
+# Finds ragged, ragged.web, ragged.chunking, ragged.embeddings, etc.
+where = ["src"]
 
 [tool.black]
 line-length = 100

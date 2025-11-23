@@ -505,7 +505,21 @@ rm -rf ~/.cache/huggingface/hub/models--sentence-transformers*
 
 ## Related Documentation
 
-- [Docker Setup Guide](../guides/docker-setup.md) - Docker installation
-- [Configuration Guide](../guides/configuration.md) - Configuration options
+### Next Steps
 - [Complete Beginner's Guide](./complete-beginners-guide.md) - First steps after installation
+- [Getting Started Notebook](../../examples/notebooks/01-getting-started.ipynb) - Interactive tutorial
+- [Multi-Modal Workflow](./multimodal-workflow.md) - Vision embeddings workflow
+
+### Configuration & Optimization
+- [GPU Configuration & Optimisation](../guides/gpu-configuration-optimisation.md) - GPU setup and performance tuning
+- [Configuration Guide](../guides/configuration.md) - General configuration options
+- [Docker Setup Guide](../guides/docker-setup.md) - Docker installation details
+
+### Advanced Resources
+- [Multi-Document Analysis Notebook](../../examples/notebooks/02-multi-document-analysis.ipynb) - Batch processing examples
+- [GPU Optimization Notebook](../../examples/notebooks/03-gpu-optimization.ipynb) - Performance tuning
+- [Manual Testing Framework](../testing/manual-tests/README.md) - Test procedures and validation
+
+### Support
 - [FAQ](../guides/faq.md) - Common questions
+- [Troubleshooting](../guides/troubleshooting.md) - Common issues and solutions

@@ -540,19 +540,40 @@ ragged storage vacuum
 
 ## Next Steps
 
-**Continue learning**:
-- [Advanced CLI Commands](../guides/cli/advanced.md) - GPU optimization
-- [Performance Tuning](../guides/performance-tuning.md) - Speed optimization
-- [Troubleshooting Guide](../guides/troubleshooting/README.md) - Common issues
+### Continue Learning
 
-**Experiment**:
-- Try different weight combinations for hybrid queries
-- Benchmark your specific GPU
-- Test with your own documents and images
+**Hands-On Tutorials**:
+- [Getting Started Notebook](../../examples/notebooks/01-getting-started.ipynb) - Interactive basics
+- [Multi-Document Analysis Notebook](../../examples/notebooks/02-multi-document-analysis.ipynb) - Batch processing
+- [GPU Optimization Notebook](../../examples/notebooks/03-gpu-optimization.ipynb) - Performance tuning
+
+**GPU Optimization**:
+- [GPU Configuration & Optimisation Guide](../guides/gpu-configuration-optimisation.md) - Complete GPU setup
+- [GPU Management Tests](../testing/manual-tests/gpu-management/README.md) - Validation procedures
+- [Performance Tuning](../guides/performance-tuning.md) - Speed optimization
+
+### Experiment & Validate
+
+**Try These**:
+- Adjust weight combinations for hybrid queries (`--text-weight`, `--vision-weight`)
+- Benchmark your specific GPU with `ragged gpu benchmark`
+- Test with your own documents using [Manual Testing Framework](../testing/manual-tests/README.md)
+
+**Test Scenarios**:
+- [Visual Content Tests](../testing/manual-tests/visual-content/README.md) - Vision embedding validation
+- [Multi-Modal Query Tests](../testing/manual-tests/multimodal-queries/README.md) - Query testing
+- [Cross-Platform Tests](../testing/manual-tests/cross-platform/README.md) - Platform compatibility
 
 ---
 
-**Related Documentation**:
-- [CLI Essentials](../guides/cli/essentials.md)
-- [Getting Started](./getting-started.md)
-- [GPU Management Guide](../guides/gpu-management.md)
+## Related Documentation
+
+### Getting Started
+- [Installation Guide](./installation.md) - Setup and requirements
+- [Complete Beginner's Guide](./complete-beginners-guide.md) - First steps
+- [Getting Started](./getting-started.md) - Quick start
+
+### Advanced Topics
+- [GPU Configuration & Optimisation](../guides/gpu-configuration-optimisation.md) - GPU setup
+- [CLI Advanced Commands](../guides/cli/advanced.md) - Power user features
+- [Troubleshooting Guide](../guides/troubleshooting/README.md) - Common issues
