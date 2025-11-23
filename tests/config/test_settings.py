@@ -132,7 +132,8 @@ class TestSettings:
         # Directory SHOULD exist after calling ensure_data_dir()
         result_dir = settings.ensure_data_dir()
         assert data_dir.exists()
-        assert result_dir == data_dir
+        # Compare resolved paths (handles macOS /var -> /private/var symlink)
+        assert result_dir.resolve() == data_dir.resolve()
 
     def test_get_settings_singleton(self) -> None:
         """Test that get_settings returns the same instance."""
