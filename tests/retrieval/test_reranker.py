@@ -5,8 +5,8 @@ from unittest.mock import MagicMock, patch
 import numpy as np
 import pytest
 
-from src.retrieval.reranker import Reranker, RerankResult
-from src.retrieval.retriever import RetrievedChunk
+from ragged.retrieval.reranker import Reranker, RerankResult
+from ragged.retrieval.retriever import RetrievedChunk
 
 
 @pytest.fixture

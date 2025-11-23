@@ -4,7 +4,7 @@ import pytest
 import time
 from datetime import datetime
 
-from src.retrieval.cache import LRUCache, QueryCache, CacheEntry
+from ragged.retrieval.cache import LRUCache, QueryCache, CacheEntry
 
 
 class TestCacheEntry:

@@ -4,7 +4,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from src.retrieval.query_decomposition import (
+from ragged.retrieval.query_decomposition import (
     DecomposedQuery,
     QueryDecomposer,
     DECOMPOSITION_PROMPT,

@@ -2,7 +2,7 @@
 
 import pytest
 
-from src.chunking.hierarchical_chunker import HierarchicalChunk, HierarchicalChunker
+from ragged.chunking.hierarchical_chunker import HierarchicalChunk, HierarchicalChunker
 
 
 class TestHierarchicalChunk:

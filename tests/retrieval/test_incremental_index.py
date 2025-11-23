@@ -8,7 +8,7 @@ import tempfile
 from pathlib import Path
 from unittest.mock import patch, Mock
 
-from src.retrieval.incremental_index import (
+from ragged.retrieval.incremental_index import (
     IncrementalBM25Retriever,
     IndexCheckpoint,
 )

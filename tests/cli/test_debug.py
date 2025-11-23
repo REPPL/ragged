@@ -8,7 +8,7 @@ from unittest.mock import Mock
 
 import pytest
 
-from src.cli.debug import (
+from ragged.cli.debug import (
     DebugLogger,
     DebugStep,
     DebugStepContext,

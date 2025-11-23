@@ -2,8 +2,8 @@
 
 import pytest
 
-from src.config.config_manager import RaggedConfig
-from src.config.personas import PersonaConfig, PersonaManager
+from ragged.config.config_manager import RaggedConfig
+from ragged.config.personas import PersonaConfig, PersonaManager
 
 
 class TestPersonaConfig:

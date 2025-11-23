@@ -1,7 +1,7 @@
 """Security tests for HIGH-4: SQL/NoSQL injection in metadata filters."""
 
 import pytest
-from src.retrieval.metadata_filter import (
+from ragged.retrieval.metadata_filter import (
     FilterCondition,
     MetadataFilter,
     FilterParser,

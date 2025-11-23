@@ -3,7 +3,7 @@
 import pytest
 from unittest.mock import Mock, patch, MagicMock
 import gradio as gr
-from src.web.gradio_ui import (
+from ragged.web.gradio_ui import (
     check_api_health,
     format_sources,
     upload_document,
@@ -279,7 +279,7 @@ class TestUIConfiguration:
 
     def test_api_base_url(self):
         """Test API base URL configuration."""
-        from src.web.gradio_ui import API_BASE_URL, API_QUERY
+        from ragged.web.gradio_ui import API_BASE_URL, API_QUERY
 
         assert "localhost:8000" in API_BASE_URL
         assert API_QUERY.startswith(API_BASE_URL)

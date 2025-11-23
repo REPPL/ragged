@@ -21,7 +21,7 @@ from typing import List, Set
 import pytest
 import numpy as np
 
-from src.utils.serialization import (
+from ragged.utils.serialization import (
     save_json,
     load_json,
     save_bm25_index,
@@ -371,7 +371,7 @@ class TestSecurityRegression:
     def test_json_serialization_preferred(self) -> None:
         """Verify that new code uses safe JSON serialization utilities.
 
-        Ensures imports from src.utils.serialization, not pickle/marshal.
+        Ensures imports from ragged.utils.serialization, not pickle/marshal.
         """
         # Check that serialization utilities are used in key modules
         modules_requiring_serialization = [
@@ -385,9 +385,9 @@ class TestSecurityRegression:
 
             content = module_file.read_text(encoding="utf-8")
 
-            # Verify it imports from src.utils.serialization
+            # Verify it imports from ragged.utils.serialization
             assert (
-                "from src.utils.serialization import" in content
+                "from ragged.utils.serialization import" in content
             ), f"{module_file.name} should use src.utils.serialization for safe serialization"
 
 

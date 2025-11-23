@@ -16,8 +16,8 @@ from typing import List
 
 import pytest
 
-from src.utils.path_utils import safe_join, normalize_path
-from src.utils.security import validate_file_size, sanitize_filename, validate_file_path
+from ragged.utils.path_utils import safe_join, normalize_path
+from ragged.utils.security import validate_file_size, sanitize_filename, validate_file_path
 
 
 class TestPathTraversal:
@@ -86,7 +86,7 @@ class TestFileSizeLimits:
         large_file.write_text("x" * (1024 * 1024 + 1))
 
         # Should be rejected (raises SecurityError for files exceeding limit)
-        from src.utils.security import SecurityError
+        from ragged.utils.security import SecurityError
 
         with pytest.raises(SecurityError):
             validate_file_size(large_file, max_size_mb=1)
@@ -121,7 +121,7 @@ class TestInputValidation:
             "file\rwhoami",
         ]
 
-        from src.utils.security import SecurityError
+        from ragged.utils.security import SecurityError
 
         for dangerous_name in dangerous_filenames:
             try:

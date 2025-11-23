@@ -18,10 +18,10 @@ from pathlib import Path
 from unittest.mock import Mock, patch, MagicMock
 from dataclasses import dataclass
 
-from src.processing.quality_assessor import QualityAssessor, QualityAssessment
-from src.processing.router import ProcessorRouter, RouterConfig
-from src.processing.metrics import ProcessingMetrics, RoutingMetric
-from src.utils.security import SecurityError
+from ragged.processing.quality_assessor import QualityAssessor, QualityAssessment
+from ragged.processing.router import ProcessorRouter, RouterConfig
+from ragged.processing.metrics import ProcessingMetrics, RoutingMetric
+from ragged.utils.security import SecurityError
 
 
 class TestQualityAssessorSecurity:
@@ -381,7 +381,7 @@ class TestSecurityHelpers:
 
         Expected: Should have utilities for size, MIME, path validation.
         """
-        from src.utils import security
+        from ragged.utils import security
 
         # Check that security utilities exist
         assert hasattr(security, 'validate_file_size'), "validate_file_size not available"
@@ -394,7 +394,7 @@ class TestSecurityHelpers:
 
         Expected: Should have custom SecurityError exception.
         """
-        from src.utils.security import SecurityError
+        from ragged.utils.security import SecurityError
 
         # Should be able to raise SecurityError
         with pytest.raises(SecurityError):

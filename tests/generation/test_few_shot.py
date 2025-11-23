@@ -5,7 +5,7 @@ import tempfile
 from pathlib import Path
 from unittest.mock import Mock
 import numpy as np
-from src.generation.few_shot import (
+from ragged.generation.few_shot import (
     FewShotExample,
     FewShotExampleStore,
     seed_default_examples,

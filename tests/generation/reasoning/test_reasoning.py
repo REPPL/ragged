@@ -5,7 +5,7 @@ v0.3.7b: Test reasoning parser, generator, and integration.
 
 import pytest
 
-from src.generation.reasoning import (
+from ragged.generation.reasoning import (
     ReasoningMode,
     ReasoningStep,
     ValidationFlag,

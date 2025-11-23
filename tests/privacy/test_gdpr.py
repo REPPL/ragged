@@ -12,7 +12,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict
 
-from src.privacy.gdpr import GDPRToolkit, get_gdpr_toolkit
+from ragged.privacy.gdpr import GDPRToolkit, get_gdpr_toolkit
 
 
 class TestGDPRToolkit:

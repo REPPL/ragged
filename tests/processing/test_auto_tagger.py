@@ -8,7 +8,7 @@ from unittest.mock import Mock
 
 import pytest
 
-from src.processing.auto_tagger import (
+from ragged.processing.auto_tagger import (
     AcademicLevel,
     AutoTagger,
     DocumentTags,

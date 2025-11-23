@@ -6,7 +6,7 @@ from unittest.mock import MagicMock, patch
 import pytest
 from click.testing import CliRunner
 
-from src.cli.commands.validate import validate
+from ragged.cli.commands.validate import validate
 
 
 class TestValidate:
@@ -21,7 +21,7 @@ class TestValidate:
     # Note: Full validation requires actual services running
     # These tests focus on validation logic that can be tested in isolation
 
-    @patch("src.cli.commands.validate.get_settings")
+    @patch("ragged.cli.commands.validate.get_settings")
     def test_validate_missing_directory(self, mock_settings, cli_runner: CliRunner, tmp_path):
         """Test validation with missing data directory."""
         settings = MagicMock()
@@ -34,7 +34,7 @@ class TestValidate:
         result = cli_runner.invoke(validate, [])
         assert "data directory" in result.output.lower() or "directory" in result.output.lower()
 
-    @patch("src.cli.commands.validate.get_settings")
+    @patch("ragged.cli.commands.validate.get_settings")
     def test_validate_fix_creates_directory(self, mock_settings, cli_runner: CliRunner, tmp_path):
         """Test --fix creates missing directories."""
         missing_dir = tmp_path / "missing_data"
@@ -51,7 +51,7 @@ class TestValidate:
 
     # ChromaDB connection tests require actual service or complex internal mocking
 
-    @patch("src.cli.commands.validate.get_settings")
+    @patch("ragged.cli.commands.validate.get_settings")
     def test_validate_invalid_chunk_size(self, mock_settings, cli_runner: CliRunner, temp_data_dir):
         """Test validation with invalid chunk size."""
         settings = MagicMock()
@@ -64,7 +64,7 @@ class TestValidate:
         result = cli_runner.invoke(validate, [])
         assert "chunk" in result.output.lower() or "size" in result.output.lower()
 
-    @patch("src.cli.commands.validate.get_settings")
+    @patch("ragged.cli.commands.validate.get_settings")
     def test_validate_overlap_larger_than_chunk(self, mock_settings, cli_runner: CliRunner, temp_data_dir):
         """Test validation when overlap > chunk_size."""
         settings = MagicMock()
@@ -77,7 +77,7 @@ class TestValidate:
         result = cli_runner.invoke(validate, [])
         assert "overlap" in result.output.lower() or "chunk" in result.output.lower()
 
-    @patch("src.cli.commands.validate.get_settings")
+    @patch("ragged.cli.commands.validate.get_settings")
     def test_validate_verbose_mode(self, mock_settings, cli_runner: CliRunner, temp_data_dir):
         """Test validation in verbose mode."""
         settings = MagicMock()

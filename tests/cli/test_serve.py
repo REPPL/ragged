@@ -6,7 +6,7 @@ v0.3.12: Test API server CLI integration.
 import pytest
 from click.testing import CliRunner
 
-from src.cli.commands.serve import serve
+from ragged.cli.commands.serve import serve
 
 
 class TestServeCommand:

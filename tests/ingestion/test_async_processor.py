@@ -7,14 +7,14 @@ from pathlib import Path
 from datetime import datetime
 import hashlib
 
-from src.ingestion.async_processor import (
+from ragged.ingestion.async_processor import (
     AsyncDocumentProcessor,
     ProcessingResult,
     load_documents_concurrent,
     process_documents_concurrent
 )
-from src.ingestion.models import Document, DocumentMetadata
-from src.chunking.splitters import RecursiveCharacterTextSplitter
+from ragged.ingestion.models import Document, DocumentMetadata
+from ragged.chunking.splitters import RecursiveCharacterTextSplitter
 
 
 @pytest.fixture

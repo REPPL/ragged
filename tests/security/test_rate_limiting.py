@@ -6,7 +6,7 @@ import threading
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-from src.plugins.rate_limiter import (
+from ragged.plugins.rate_limiter import (
     RateLimiter,
     RateLimitConfig,
     TokenBucket,

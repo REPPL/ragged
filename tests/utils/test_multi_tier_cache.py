@@ -10,7 +10,7 @@ import tempfile
 import shutil
 import time
 
-from src.utils.multi_tier_cache import (
+from ragged.utils.multi_tier_cache import (
     L1QueryEmbeddingCache,
     L2DocumentEmbeddingCache,
     MultiTierCache,
@@ -343,7 +343,7 @@ class TestL2DocumentEmbeddingCache:
             cache.get(doc_id)
 
         # Check access count in index
-        from src.utils.hashing import hash_content
+        from ragged.utils.hashing import hash_content
         key = hash_content(doc_id)
         assert cache._index[key]["access_count"] == 3
 

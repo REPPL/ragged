@@ -2,7 +2,7 @@
 
 import pytest
 from unittest.mock import Mock, patch, MagicMock
-from src.generation.ollama_client import OllamaClient
+from ragged.generation.ollama_client import OllamaClient
 
 
 class TestOllamaClient:
@@ -11,7 +11,7 @@ class TestOllamaClient:
     @pytest.fixture
     def mock_ollama(self):
         """Create a mock Ollama client."""
-        with patch("src.generation.ollama_client.ollama_module") as mock:
+        with patch("ragged.generation.ollama_client.ollama_module") as mock:
             yield mock
 
     def test_init_success(self, mock_ollama):

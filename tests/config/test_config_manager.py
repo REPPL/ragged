@@ -8,7 +8,7 @@ from unittest.mock import patch
 import pytest
 import yaml
 
-from src.config.config_manager import RaggedConfig, ConfigValidator
+from ragged.config.config_manager import RaggedConfig, ConfigValidator
 
 
 class TestRaggedConfig:

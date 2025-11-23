@@ -3,7 +3,7 @@
 import pytest
 from unittest.mock import patch, Mock
 
-from src.embeddings.batch_tuner import BatchTuner
+from ragged.embeddings.batch_tuner import BatchTuner
 
 
 class TestBatchTuner:

@@ -2,9 +2,9 @@
 
 import pytest
 from unittest.mock import Mock, MagicMock
-from src.retrieval.hybrid import HybridRetriever, HybridConfig
-from src.retrieval.retriever import RetrievedChunk
-from src.retrieval.bm25 import BM25Retriever
+from ragged.retrieval.hybrid import HybridRetriever, HybridConfig
+from ragged.retrieval.retriever import RetrievedChunk
+from ragged.retrieval.bm25 import BM25Retriever
 
 
 @pytest.fixture

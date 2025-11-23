@@ -6,13 +6,13 @@ v0.2.9: Tests for text chunking with recursive separators.
 import pytest
 from unittest.mock import patch, Mock
 
-from src.chunking.splitters.recursive_splitter import RecursiveCharacterTextSplitter
+from ragged.chunking.splitters.recursive_splitter import RecursiveCharacterTextSplitter
 
 
 @pytest.fixture
 def default_splitter():
     """Create splitter with default settings."""
-    with patch("src.chunking.splitters.recursive_splitter.get_settings") as mock_settings:
+    with patch("ragged.chunking.splitters.recursive_splitter.get_settings") as mock_settings:
         mock_settings.return_value = Mock(chunk_size=512, chunk_overlap=50)
         return RecursiveCharacterTextSplitter()
 
@@ -112,7 +112,7 @@ class TestSplitText:
         # Should split by space
         assert len(result) >= 2
 
-    @patch("src.chunking.splitters.recursive_splitter.count_tokens")
+    @patch("ragged.chunking.splitters.recursive_splitter.count_tokens")
     def test_split_by_character(self, mock_count_tokens):
         """Test splitting by character when text too long."""
         # Mock token counter to force character splitting
@@ -166,7 +166,7 @@ class TestOverlap:
 class TestRecursiveSplitting:
     """Tests for recursive splitting behavior."""
 
-    @patch("src.chunking.splitters.recursive_splitter.count_tokens")
+    @patch("ragged.chunking.splitters.recursive_splitter.count_tokens")
     def test_tries_separators_in_order(self, mock_count_tokens):
         """Test that separators are tried in order."""
         # Set up token counting to force splitting
@@ -191,7 +191,7 @@ class TestRecursiveSplitting:
         # Should split by \n\n first
         assert len(result) >= 2
 
-    @patch("src.chunking.splitters.recursive_splitter.count_tokens")
+    @patch("ragged.chunking.splitters.recursive_splitter.count_tokens")
     def test_falls_back_to_finer_separators(self, mock_count_tokens):
         """Test fallback to finer separators when needed."""
         # Make paragraphs too large individually
@@ -415,7 +415,7 @@ Final section content.
         assert "lazy" in combined
         assert "dog" in combined
 
-    @patch("src.chunking.splitters.recursive_splitter.count_tokens")
+    @patch("ragged.chunking.splitters.recursive_splitter.count_tokens")
     def test_respects_token_limits(self, mock_count_tokens):
         """Test that chunks respect token limits."""
         # Mock token counter with realistic values

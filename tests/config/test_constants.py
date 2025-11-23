@@ -4,7 +4,7 @@ v0.2.9: Test coverage for configuration constants.
 """
 
 import pytest
-from src.config import constants
+from ragged.config import constants
 
 
 class TestMemoryManagement:

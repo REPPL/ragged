@@ -9,7 +9,7 @@ from pathlib import Path
 import pytest
 from click.testing import CliRunner
 
-from src.cli.commands.template import template
+from ragged.cli.commands.template import template
 
 
 class TestTemplateCommands:

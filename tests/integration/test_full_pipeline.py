@@ -6,13 +6,13 @@ Tests end-to-end flow: document ingestion → chunking → embedding → storage
 
 import pytest
 from pathlib import Path
-from src.ingestion.loaders import load_document
-from src.chunking.splitters import RecursiveCharacterTextSplitter
-from src.embeddings.factory import create_embedder
-from src.storage.vector_store import VectorStore
-from src.retrieval.retriever import Retriever
-from src.generation.ollama_client import OllamaClient
-from src.config.settings import get_settings
+from ragged.ingestion.loaders import load_document
+from ragged.chunking.splitters import RecursiveCharacterTextSplitter
+from ragged.embeddings.factory import create_embedder
+from ragged.storage.vector_store import VectorStore
+from ragged.retrieval.retriever import Retriever
+from ragged.generation.ollama_client import OllamaClient
+from ragged.config.settings import get_settings
 
 
 class TestFullRAGPipeline:

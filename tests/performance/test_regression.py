@@ -6,8 +6,8 @@ v0.2.9: Automated benchmarking to detect >5% performance degradation.
 import pytest
 from pathlib import Path
 
-from src.utils.benchmarks import Benchmark
-from src.embeddings.factory import create_embedder, get_embedder
+from ragged.utils.benchmarks import Benchmark
+from ragged.embeddings.factory import create_embedder, get_embedder
 from tests.performance.baseline import BaselineManager, BenchmarkResult
 
 
@@ -200,7 +200,7 @@ def test_hash_computation():
     
     Target: <0.001s for typical document
     """
-    from src.utils.hashing import hash_content
+    from ragged.utils.hashing import hash_content
     
     content = "Sample document content. " * 100  # ~2.5KB
     

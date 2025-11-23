@@ -7,7 +7,7 @@ import pytest
 from unittest.mock import Mock, patch, MagicMock
 import psutil  # type: ignore[import-untyped]
 
-from src.utils.health import (
+from ragged.utils.health import (
     HealthChecker,
     HealthStatus,
     HealthCheckResult,

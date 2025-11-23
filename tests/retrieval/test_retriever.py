@@ -2,7 +2,7 @@
 
 import pytest
 from unittest.mock import Mock, MagicMock
-from src.retrieval.retriever import Retriever, RetrievedChunk
+from ragged.retrieval.retriever import Retriever, RetrievedChunk
 
 
 class TestRetriever:

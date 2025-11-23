@@ -10,13 +10,13 @@ from unittest.mock import MagicMock, patch
 import numpy as np
 import pytest
 
-from src.chunking.factory import ChunkerFactory
-from src.chunking.hierarchical_chunker import HierarchicalChunker
-from src.chunking.semantic_chunker import SemanticChunker
-from src.chunking.splitters.chunking import chunk_document
-from src.chunking.splitters.recursive_splitter import RecursiveCharacterTextSplitter
-from src.config.settings import Settings, get_settings
-from src.ingestion.models import Document, DocumentMetadata
+from ragged.chunking.factory import ChunkerFactory
+from ragged.chunking.hierarchical_chunker import HierarchicalChunker
+from ragged.chunking.semantic_chunker import SemanticChunker
+from ragged.chunking.splitters.chunking import chunk_document
+from ragged.chunking.splitters.recursive_splitter import RecursiveCharacterTextSplitter
+from ragged.config.settings import Settings, get_settings
+from ragged.ingestion.models import Document, DocumentMetadata
 
 
 # Valid SHA256 hash for testing (64 hex chars)
@@ -397,7 +397,7 @@ class TestChunkingCLIIntegration:
 
     def test_cli_chunking_strategy_option_validation(self):
         """Test that chunking_strategy option has correct choices."""
-        from src.cli.commands.add import add
+        from ragged.cli.commands.add import add
 
         # Check that the command has the chunking_strategy option
         param_names = [p.name for p in add.params]

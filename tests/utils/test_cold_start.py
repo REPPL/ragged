@@ -9,7 +9,7 @@ import time
 import threading
 from unittest.mock import patch, Mock, MagicMock
 
-from src.utils.cold_start import (
+from ragged.utils.cold_start import (
     ChromaDBConnectionPool,
     LazyLoader,
     parallel_init,

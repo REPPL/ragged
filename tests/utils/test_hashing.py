@@ -4,7 +4,7 @@ v0.2.9: Comprehensive tests for content hashing functions.
 """
 
 import pytest
-from src.utils.hashing import hash_content, hash_file_content, hash_query
+from ragged.utils.hashing import hash_content, hash_file_content, hash_query
 
 
 class TestHashContent:

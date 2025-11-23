@@ -2,7 +2,7 @@
 
 import pytest
 from pathlib import Path
-from src.generation.citation_formatter import (
+from ragged.generation.citation_formatter import (
     extract_citation_numbers,
     format_ieee_reference,
     format_reference_list,
@@ -14,7 +14,7 @@ from src.generation.citation_formatter import (
     format_response_with_enhanced_citations,
     deduplicate_citations,
 )
-from src.retrieval.retriever import RetrievedChunk
+from ragged.retrieval.retriever import RetrievedChunk
 
 
 class TestExtractCitationNumbers:

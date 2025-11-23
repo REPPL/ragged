@@ -26,7 +26,7 @@ def temp_data_dir(tmp_path: Path) -> Generator[Path, None, None]:
 @pytest.fixture
 def mock_vector_store():
     """Mock VectorStore for CLI tests."""
-    with patch("src.cli.commands.add.VectorStore") as mock:
+    with patch("ragged.cli.commands.add.VectorStore") as mock:
         store_instance = MagicMock()
         mock.return_value = store_instance
 
@@ -45,7 +45,7 @@ def mock_vector_store():
 @pytest.fixture
 def mock_ollama_client():
     """Mock OllamaClient for CLI tests."""
-    with patch("src.cli.commands.query.OllamaClient") as mock:
+    with patch("ragged.cli.commands.query.OllamaClient") as mock:
         client_instance = MagicMock()
         mock.return_value = client_instance
 
@@ -58,7 +58,7 @@ def mock_ollama_client():
 @pytest.fixture
 def mock_retriever():
     """Mock Retriever for CLI tests."""
-    with patch("src.cli.commands.query.Retriever") as mock:
+    with patch("ragged.cli.commands.query.Retriever") as mock:
         retriever_instance = MagicMock()
         mock.return_value = retriever_instance
 
@@ -71,7 +71,7 @@ def mock_retriever():
 @pytest.fixture
 def mock_settings(temp_data_dir: Path):
     """Mock settings with temporary directory."""
-    with patch("src.cli.commands.add.get_settings") as mock:
+    with patch("ragged.cli.commands.add.get_settings") as mock:
         settings = MagicMock()
         settings.data_dir = str(temp_data_dir)
         settings.chunk_size = 1000

@@ -5,13 +5,13 @@ Tests for DoclingProcessor.
 import pytest
 from pathlib import Path
 
-from src.processing.base import ProcessorConfig, ProcessorError
+from ragged.processing.base import ProcessorConfig, ProcessorError
 
 
 # Skip all tests if Docling is not installed
 pytest.importorskip("docling", reason="Docling not installed")
 
-from src.processing.docling_processor import DoclingProcessor
+from ragged.processing.docling_processor import DoclingProcessor
 
 
 class TestDoclingProcessor:

@@ -4,7 +4,7 @@ import pytest
 import json
 from fastapi.testclient import TestClient
 from unittest.mock import Mock, patch
-from src.web.api import app
+from ragged.web.api import app
 
 
 @pytest.fixture
@@ -373,7 +373,7 @@ class TestAPIIntegration:
     def test_startup_initializes_services(self):
         """Test that startup event initializes all services."""
         # Create a new test client which triggers startup
-        from src.web import api
+        from ragged.web import api
 
         # Mock the imports to prevent actual initialization
         with patch('src.web.api.get_embedder') as mock_embedder, \
@@ -402,7 +402,7 @@ class TestAPIIntegration:
 
     def test_query_without_initialized_services(self, client):
         """Test query returns 503 when services not initialized."""
-        from src.web import api
+        from ragged.web import api
 
         # Temporarily set services to None
         original_retriever = api._hybrid_retriever
@@ -427,7 +427,7 @@ class TestAPIIntegration:
 
     def test_upload_without_initialized_services(self, client):
         """Test upload returns 503 when services not initialized."""
-        from src.web import api
+        from ragged.web import api
 
         # Temporarily set services to None
         original_embedder = api._embedder
@@ -452,7 +452,7 @@ class TestAPIIntegration:
 
     def test_query_integration_with_mocked_services(self, client):
         """Test query endpoint uses real implementation logic."""
-        from src.web import api
+        from ragged.web import api
 
         # Mock the services
         mock_retriever = Mock()
@@ -499,7 +499,7 @@ class TestAPIIntegration:
 
     def test_query_with_no_results(self, client):
         """Test query when no documents match."""
-        from src.web import api
+        from ragged.web import api
 
         # Mock retriever to return empty results
         mock_retriever = Mock()
@@ -533,7 +533,7 @@ class TestAPIIntegration:
 
     def test_upload_integration_with_mocked_services(self, client, temp_dir):
         """Test upload endpoint uses real implementation logic."""
-        from src.web import api
+        from ragged.web import api
 
         # Create test content
         test_content = "# Test Document\n\nThis is test content.\n" * 20
@@ -575,7 +575,7 @@ class TestAPIIntegration:
 
     def test_health_reports_service_status(self, client):
         """Test health endpoint accurately reports service initialization status."""
-        from src.web import api
+        from ragged.web import api
 
         # Test with services initialized
         response = client.get("/api/health")

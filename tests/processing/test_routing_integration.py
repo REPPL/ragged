@@ -15,10 +15,10 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from src.ingestion.loaders import _get_metrics, _get_router, _load_pdf_with_routing
-from src.processing import ProcessorFactory, ProcessorRouter, RouterConfig
-from src.processing.base import ProcessedDocument, ProcessorConfig
-from src.processing.quality_assessor import QualityAssessment
+from ragged.ingestion.loaders import _get_metrics, _get_router, _load_pdf_with_routing
+from ragged.processing import ProcessorFactory, ProcessorRouter, RouterConfig
+from ragged.processing.base import ProcessedDocument, ProcessorConfig
+from ragged.processing.quality_assessor import QualityAssessment
 
 
 @pytest.fixture(autouse=True)
@@ -36,7 +36,7 @@ def clear_singletons():
 @pytest.fixture(autouse=True)
 def mock_fitz():
     """Mock PyMuPDF (fitz) to prevent actual PDF processing."""
-    with patch("src.processing.quality_assessor.QualityAssessor._assess_pdf") as mock_assess:
+    with patch("ragged.processing.quality_assessor.QualityAssessor._assess_pdf") as mock_assess:
         # Return a default quality assessment
         mock_assess.return_value = QualityAssessment(
             overall_score=0.75,
@@ -125,7 +125,7 @@ class TestRouterInitialisation:
 class TestEndToEndRouting:
     """Test complete routing workflow."""
 
-    @patch("src.ingestion.loaders.ProcessorFactory")
+    @patch("ragged.ingestion.loaders.ProcessorFactory")
     def test_load_pdf_with_routing_success(
         self,
         mock_factory,
@@ -157,8 +157,8 @@ class TestEndToEndRouting:
         assert result is not None
         assert result.content == "# Test Document\n\nTest content"
 
-    @patch("src.ingestion.loaders.ProcessorFactory")
-    @patch("src.processing.router.QualityAssessor")
+    @patch("ragged.ingestion.loaders.ProcessorFactory")
+    @patch("ragged.processing.router.QualityAssessor")
     def test_routing_metadata_attached(
         self,
         mock_assessor_class,
@@ -191,8 +191,8 @@ class TestEndToEndRouting:
         assert "quality_tier" in routing_meta
         assert "reasoning" in routing_meta
 
-    @patch("src.ingestion.loaders.ProcessorFactory")
-    @patch("src.processing.router.QualityAssessor")
+    @patch("ragged.ingestion.loaders.ProcessorFactory")
+    @patch("ragged.processing.router.QualityAssessor")
     def test_metrics_recorded_on_success(
         self,
         mock_assessor_class,
@@ -222,8 +222,8 @@ class TestEndToEndRouting:
         # Verify metric was recorded
         assert len(metrics._metrics) > initial_count
 
-    @patch("src.ingestion.loaders.ProcessorFactory")
-    @patch("src.processing.router.QualityAssessor")
+    @patch("ragged.ingestion.loaders.ProcessorFactory")
+    @patch("ragged.processing.router.QualityAssessor")
     def test_metrics_recorded_on_failure(
         self,
         mock_assessor_class,
@@ -255,8 +255,8 @@ class TestEndToEndRouting:
 class TestQualityTierRouting:
     """Test routing for different quality tiers."""
 
-    @patch("src.ingestion.loaders.ProcessorFactory")
-    @patch("src.processing.router.QualityAssessor")
+    @patch("ragged.ingestion.loaders.ProcessorFactory")
+    @patch("ragged.processing.router.QualityAssessor")
     def test_high_quality_routing(
         self,
         mock_assessor_class,
@@ -294,8 +294,8 @@ class TestQualityTierRouting:
         assert config.options["quality_tier"] == "high"
         assert config.options["processing_mode"] == "standard"
 
-    @patch("src.ingestion.loaders.ProcessorFactory")
-    @patch("src.processing.router.QualityAssessor")
+    @patch("ragged.ingestion.loaders.ProcessorFactory")
+    @patch("ragged.processing.router.QualityAssessor")
     def test_low_quality_routing(
         self,
         mock_assessor_class,
@@ -339,8 +339,8 @@ class TestQualityTierRouting:
 class TestProcessorConfiguration:
     """Test processor configuration based on document characteristics."""
 
-    @patch("src.ingestion.loaders.ProcessorFactory")
-    @patch("src.processing.router.QualityAssessor")
+    @patch("ragged.ingestion.loaders.ProcessorFactory")
+    @patch("ragged.processing.router.QualityAssessor")
     def test_table_extraction_enabled_for_tables(
         self,
         mock_assessor_class,
@@ -376,8 +376,8 @@ class TestProcessorConfiguration:
         config = call_args[0][0]
         assert config.enable_table_extraction is True
 
-    @patch("src.ingestion.loaders.ProcessorFactory")
-    @patch("src.processing.router.QualityAssessor")
+    @patch("ragged.ingestion.loaders.ProcessorFactory")
+    @patch("ragged.processing.router.QualityAssessor")
     def test_scanned_document_configuration(
         self,
         mock_assessor_class,
@@ -418,8 +418,8 @@ class TestProcessorConfiguration:
 class TestCaching:
     """Test quality assessment caching."""
 
-    @patch("src.ingestion.loaders.ProcessorFactory")
-    @patch("src.processing.router.QualityAssessor")
+    @patch("ragged.ingestion.loaders.ProcessorFactory")
+    @patch("ragged.processing.router.QualityAssessor")
     def test_quality_assessment_cached(
         self,
         mock_assessor_class,

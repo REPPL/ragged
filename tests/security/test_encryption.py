@@ -12,7 +12,7 @@ from pathlib import Path
 import pytest
 from cryptography.fernet import InvalidToken
 
-from src.security.encryption import EncryptionManager, get_encryption_manager
+from ragged.security.encryption import EncryptionManager, get_encryption_manager
 
 
 class TestEncryptionManager:

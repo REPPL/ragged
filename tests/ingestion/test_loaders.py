@@ -2,14 +2,14 @@
 
 import pytest
 from pathlib import Path
-from src.ingestion.loaders import (
+from ragged.ingestion.loaders import (
     load_document,
     load_txt,
     load_markdown,
     load_html,
     load_pdf,
 )
-from src.ingestion.models import Document
+from ragged.ingestion.models import Document
 
 try:
     import pymupdf

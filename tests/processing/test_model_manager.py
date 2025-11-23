@@ -5,7 +5,7 @@ Tests for ModelManager.
 import pytest
 from pathlib import Path
 
-from src.processing.model_manager import ModelManager
+from ragged.processing.model_manager import ModelManager
 
 
 class TestModelManager:

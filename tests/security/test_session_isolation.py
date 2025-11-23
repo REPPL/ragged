@@ -24,8 +24,8 @@ from typing import List
 import pytest
 import numpy as np
 
-from src.core.session import Session, SessionManager
-from src.retrieval.cache import QueryCache
+from ragged.core.session import Session, SessionManager
+from ragged.retrieval.cache import QueryCache
 
 
 class TestSession:

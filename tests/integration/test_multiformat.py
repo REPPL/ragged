@@ -6,9 +6,9 @@ Tests loading and processing of PDF, TXT, MD, HTML formats through the pipeline.
 
 import pytest
 from pathlib import Path
-from src.ingestion.loaders import load_document
-from src.chunking.splitters import RecursiveCharacterTextSplitter, chunk_document
-from src.config.settings import get_settings
+from ragged.ingestion.loaders import load_document
+from ragged.chunking.splitters import RecursiveCharacterTextSplitter, chunk_document
+from ragged.config.settings import get_settings
 
 
 class TestMultiFormatIngestion:

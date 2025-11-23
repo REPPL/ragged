@@ -14,8 +14,8 @@ import time
 from pathlib import Path
 from unittest.mock import Mock, patch, MagicMock
 
-from src.chunking.semantic_chunker import SemanticChunker
-from src.chunking.hierarchical_chunker import HierarchicalChunker
+from ragged.chunking.semantic_chunker import SemanticChunker
+from ragged.chunking.hierarchical_chunker import HierarchicalChunker
 
 
 class TestSemanticChunkerSecurity:

@@ -2,7 +2,7 @@
 
 import pytest
 from unittest.mock import Mock, MagicMock, patch
-from src.config.model_manager import ModelManager, ModelInfo
+from ragged.config.model_manager import ModelManager, ModelInfo
 
 
 @pytest.fixture

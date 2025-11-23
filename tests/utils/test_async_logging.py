@@ -9,7 +9,7 @@ import time
 import threading
 from unittest.mock import Mock, patch, MagicMock
 
-from src.utils.async_logging import (
+from ragged.utils.async_logging import (
     SamplingFilter,
     AdaptiveSamplingFilter,
     AsyncLogHandler,

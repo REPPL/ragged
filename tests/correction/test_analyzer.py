@@ -8,8 +8,8 @@ from pathlib import Path
 from unittest.mock import Mock, MagicMock, AsyncMock, patch
 import asyncio
 
-from src.correction.analyzer import PDFAnalyzer, AnalyzerConfig
-from src.correction.schemas import IssueReport, IssueType, QualityGrade
+from ragged.correction.analyzer import PDFAnalyzer, AnalyzerConfig
+from ragged.correction.schemas import IssueReport, IssueType, QualityGrade
 
 
 class TestAnalyzerConfig:

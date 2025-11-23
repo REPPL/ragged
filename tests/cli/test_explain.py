@@ -8,8 +8,8 @@ import pytest
 import yaml
 from click.testing import CliRunner
 
-from src.cli.commands.explain import explain
-from src.config.config_manager import RaggedConfig
+from ragged.cli.commands.explain import explain
+from ragged.config.config_manager import RaggedConfig
 
 
 @pytest.fixture
@@ -162,7 +162,7 @@ class TestExplainQueryCommand:
 
     def test_explain_query_with_hybrid_retrieval(self, cli_runner: CliRunner):
         """Test that hybrid retrieval shows weights."""
-        with patch("src.cli.commands.explain.RaggedConfig.load") as mock_load:
+        with patch("ragged.cli.commands.explain.RaggedConfig.load") as mock_load:
             config = RaggedConfig()
             config.retrieval_method = "hybrid"
             config.bm25_weight = 0.3
@@ -254,7 +254,7 @@ class TestExplainConfigCommand:
 
     def test_explain_config_with_custom_config(self, cli_runner: CliRunner):
         """Test config explanation with custom settings."""
-        with patch("src.cli.commands.explain.RaggedConfig.load") as mock_load:
+        with patch("ragged.cli.commands.explain.RaggedConfig.load") as mock_load:
             config = RaggedConfig()
             config.persona = "accuracy"
             config.retrieval_method = "vector"

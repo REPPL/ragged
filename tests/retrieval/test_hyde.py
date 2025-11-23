@@ -4,7 +4,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from src.retrieval.hyde import HyDEGenerator, HypotheticalDocument, HYDE_PROMPT
+from ragged.retrieval.hyde import HyDEGenerator, HypotheticalDocument, HYDE_PROMPT
 
 
 class TestHypotheticalDocument:

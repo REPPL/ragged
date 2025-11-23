@@ -4,15 +4,15 @@ import pytest
 import threading
 import time
 from unittest.mock import patch, Mock, MagicMock
-from src.embeddings.factory import (
+from ragged.embeddings.factory import (
     create_embedder,
     get_embedder,
     clear_embedder_cache,
     get_cache_stats,
     warmup_embedder_cache,
 )
-from src.embeddings.base import BaseEmbedder
-from src.config.settings import EmbeddingModel
+from ragged.embeddings.base import BaseEmbedder
+from ragged.config.settings import EmbeddingModel
 
 
 class TestEmbedderFactory:
@@ -20,7 +20,7 @@ class TestEmbedderFactory:
 
     def test_create_embedder_sentence_transformers(self):
         """Test creating sentence-transformers embedder."""
-        with patch("src.embeddings.factory.SentenceTransformerEmbedder") as mock_st:
+        with patch("ragged.embeddings.factory.SentenceTransformerEmbedder") as mock_st:
             mock_instance = Mock(spec=BaseEmbedder)
             mock_st.return_value = mock_instance
 
@@ -34,7 +34,7 @@ class TestEmbedderFactory:
 
     def test_create_embedder_ollama(self):
         """Test creating Ollama embedder."""
-        with patch("src.embeddings.factory.OllamaEmbedder") as mock_ollama:
+        with patch("ragged.embeddings.factory.OllamaEmbedder") as mock_ollama:
             mock_instance = Mock(spec=BaseEmbedder)
             mock_ollama.return_value = mock_instance
 
@@ -60,11 +60,11 @@ class TestEmbedderFactory:
 
     def test_create_embedder_default_model_name(self):
         """Test that default model names are used when not specified."""
-        with patch("src.embeddings.factory.SentenceTransformerEmbedder") as mock_st:
+        with patch("ragged.embeddings.factory.SentenceTransformerEmbedder") as mock_st:
             mock_instance = Mock(spec=BaseEmbedder)
             mock_st.return_value = mock_instance
 
-            with patch("src.embeddings.factory.get_settings") as mock_settings:
+            with patch("ragged.embeddings.factory.get_settings") as mock_settings:
                 # Mock settings to return default model name
                 mock_settings.return_value.embedding_model_name = "default-model"
 
@@ -76,7 +76,7 @@ class TestEmbedderFactory:
 
     def test_get_embedder_returns_embedder(self):
         """Test that get_embedder returns an embedder instance."""
-        with patch("src.embeddings.factory.create_embedder") as mock_create:
+        with patch("ragged.embeddings.factory.create_embedder") as mock_create:
             mock_instance = Mock(spec=BaseEmbedder)
             mock_create.return_value = mock_instance
 
@@ -88,7 +88,7 @@ class TestEmbedderFactory:
 
     def test_get_embedder_uses_config(self):
         """Test that get_embedder uses configuration."""
-        with patch("src.embeddings.factory.create_embedder") as mock_create:
+        with patch("ragged.embeddings.factory.create_embedder") as mock_create:
             mock_instance = Mock(spec=BaseEmbedder)
             mock_create.return_value = mock_instance
 
@@ -113,13 +113,13 @@ class TestEmbedderCaching:
 
     def test_caching_disabled_creates_new_instance_each_time(self):
         """Test that when caching is disabled, new instances are created."""
-        with patch("src.embeddings.factory.get_settings") as mock_settings:
+        with patch("ragged.embeddings.factory.get_settings") as mock_settings:
             # Disable caching
             mock_settings.return_value.feature_flags.enable_embedder_caching = False
             mock_settings.return_value.embedding_model = EmbeddingModel.SENTENCE_TRANSFORMERS
             mock_settings.return_value.embedding_model_name = "test-model"
 
-            with patch("src.embeddings.factory.create_embedder") as mock_create:
+            with patch("ragged.embeddings.factory.create_embedder") as mock_create:
                 mock_create.side_effect = [Mock(spec=BaseEmbedder), Mock(spec=BaseEmbedder)]
 
                 embedder1 = get_embedder()
@@ -131,13 +131,13 @@ class TestEmbedderCaching:
 
     def test_caching_enabled_returns_same_instance(self):
         """Test that when caching is enabled, the same instance is returned."""
-        with patch("src.embeddings.factory.get_settings") as mock_settings:
+        with patch("ragged.embeddings.factory.get_settings") as mock_settings:
             # Enable caching
             mock_settings.return_value.feature_flags.enable_embedder_caching = True
             mock_settings.return_value.embedding_model = EmbeddingModel.SENTENCE_TRANSFORMERS
             mock_settings.return_value.embedding_model_name = "test-model"
 
-            with patch("src.embeddings.factory.create_embedder") as mock_create:
+            with patch("ragged.embeddings.factory.create_embedder") as mock_create:
                 mock_instance = Mock(spec=BaseEmbedder)
                 mock_create.return_value = mock_instance
 
@@ -150,11 +150,11 @@ class TestEmbedderCaching:
 
     def test_lru_eviction_when_cache_full(self):
         """Test that LRU eviction occurs when cache is full."""
-        with patch("src.embeddings.factory.get_settings") as mock_settings:
+        with patch("ragged.embeddings.factory.get_settings") as mock_settings:
             mock_settings.return_value.feature_flags.enable_embedder_caching = True
             mock_settings.return_value.embedding_model = EmbeddingModel.SENTENCE_TRANSFORMERS
 
-            with patch("src.embeddings.factory.create_embedder") as mock_create:
+            with patch("ragged.embeddings.factory.create_embedder") as mock_create:
                 # Create 4 different mock instances
                 mocks = [Mock(spec=BaseEmbedder) for _ in range(4)]
                 mock_create.side_effect = mocks
@@ -187,11 +187,11 @@ class TestEmbedderCaching:
 
     def test_lru_moves_to_end_on_access(self):
         """Test that accessing a cached model moves it to the end (most recent)."""
-        with patch("src.embeddings.factory.get_settings") as mock_settings:
+        with patch("ragged.embeddings.factory.get_settings") as mock_settings:
             mock_settings.return_value.feature_flags.enable_embedder_caching = True
             mock_settings.return_value.embedding_model = EmbeddingModel.SENTENCE_TRANSFORMERS
 
-            with patch("src.embeddings.factory.create_embedder") as mock_create:
+            with patch("ragged.embeddings.factory.create_embedder") as mock_create:
                 mocks = [Mock(spec=BaseEmbedder) for _ in range(4)]
                 mock_create.side_effect = mocks
 
@@ -220,12 +220,12 @@ class TestEmbedderCaching:
 
     def test_clear_cache_removes_all_entries(self):
         """Test that clear_embedder_cache removes all cached embedders."""
-        with patch("src.embeddings.factory.get_settings") as mock_settings:
+        with patch("ragged.embeddings.factory.get_settings") as mock_settings:
             mock_settings.return_value.feature_flags.enable_embedder_caching = True
             mock_settings.return_value.embedding_model = EmbeddingModel.SENTENCE_TRANSFORMERS
             mock_settings.return_value.embedding_model_name = "test-model"
 
-            with patch("src.embeddings.factory.create_embedder") as mock_create:
+            with patch("ragged.embeddings.factory.create_embedder") as mock_create:
                 mock_create.return_value = Mock(spec=BaseEmbedder)
 
                 # Cache an embedder
@@ -244,11 +244,11 @@ class TestEmbedderCaching:
 
     def test_get_cache_stats_returns_correct_info(self):
         """Test that get_cache_stats returns accurate cache information."""
-        with patch("src.embeddings.factory.get_settings") as mock_settings:
+        with patch("ragged.embeddings.factory.get_settings") as mock_settings:
             mock_settings.return_value.feature_flags.enable_embedder_caching = True
             mock_settings.return_value.embedding_model = EmbeddingModel.SENTENCE_TRANSFORMERS
 
-            with patch("src.embeddings.factory.create_embedder") as mock_create:
+            with patch("ragged.embeddings.factory.create_embedder") as mock_create:
                 mock_create.return_value = Mock(spec=BaseEmbedder)
 
                 # Empty cache
@@ -267,7 +267,7 @@ class TestEmbedderCaching:
 
     def test_thread_safety_concurrent_access(self):
         """Test that concurrent access to cache is thread-safe."""
-        with patch("src.embeddings.factory.get_settings") as mock_settings:
+        with patch("ragged.embeddings.factory.get_settings") as mock_settings:
             mock_settings.return_value.feature_flags.enable_embedder_caching = True
             mock_settings.return_value.embedding_model = EmbeddingModel.SENTENCE_TRANSFORMERS
             mock_settings.return_value.embedding_model_name = "test-model"
@@ -282,7 +282,7 @@ class TestEmbedderCaching:
                 time.sleep(0.01)  # Simulate slow model loading
                 return Mock(spec=BaseEmbedder)
 
-            with patch("src.embeddings.factory.create_embedder", side_effect=mock_create):
+            with patch("ragged.embeddings.factory.create_embedder", side_effect=mock_create):
                 # Launch 10 threads trying to get the same embedder
                 threads = []
                 results = []
@@ -307,12 +307,12 @@ class TestEmbedderCaching:
 
     def test_warmup_with_caching_enabled(self):
         """Test that warm-up preloads embedder when caching is enabled."""
-        with patch("src.embeddings.factory.get_settings") as mock_settings:
+        with patch("ragged.embeddings.factory.get_settings") as mock_settings:
             mock_settings.return_value.feature_flags.enable_embedder_caching = True
             mock_settings.return_value.embedding_model = EmbeddingModel.SENTENCE_TRANSFORMERS
             mock_settings.return_value.embedding_model_name = "test-model"
 
-            with patch("src.embeddings.factory.create_embedder") as mock_create:
+            with patch("ragged.embeddings.factory.create_embedder") as mock_create:
                 mock_create.return_value = Mock(spec=BaseEmbedder)
 
                 # Call warm-up
@@ -330,10 +330,10 @@ class TestEmbedderCaching:
 
     def test_warmup_with_caching_disabled(self):
         """Test that warm-up does nothing when caching is disabled."""
-        with patch("src.embeddings.factory.get_settings") as mock_settings:
+        with patch("ragged.embeddings.factory.get_settings") as mock_settings:
             mock_settings.return_value.feature_flags.enable_embedder_caching = False
 
-            with patch("src.embeddings.factory.create_embedder") as mock_create:
+            with patch("ragged.embeddings.factory.create_embedder") as mock_create:
                 # Call warm-up
                 warmup_embedder_cache()
 
@@ -345,12 +345,12 @@ class TestEmbedderCaching:
 
     def test_warmup_is_idempotent(self):
         """Test that calling warm-up multiple times doesn't create multiple threads."""
-        with patch("src.embeddings.factory.get_settings") as mock_settings:
+        with patch("ragged.embeddings.factory.get_settings") as mock_settings:
             mock_settings.return_value.feature_flags.enable_embedder_caching = True
             mock_settings.return_value.embedding_model = EmbeddingModel.SENTENCE_TRANSFORMERS
             mock_settings.return_value.embedding_model_name = "test-model"
 
-            with patch("src.embeddings.factory.create_embedder") as mock_create:
+            with patch("ragged.embeddings.factory.create_embedder") as mock_create:
                 mock_create.return_value = Mock(spec=BaseEmbedder)
 
                 # Call warm-up multiple times
@@ -366,12 +366,12 @@ class TestEmbedderCaching:
 
     def test_warmup_handles_errors_gracefully(self):
         """Test that warm-up handles errors without crashing."""
-        with patch("src.embeddings.factory.get_settings") as mock_settings:
+        with patch("ragged.embeddings.factory.get_settings") as mock_settings:
             mock_settings.return_value.feature_flags.enable_embedder_caching = True
             mock_settings.return_value.embedding_model = EmbeddingModel.SENTENCE_TRANSFORMERS
             mock_settings.return_value.embedding_model_name = "test-model"
 
-            with patch("src.embeddings.factory.create_embedder") as mock_create:
+            with patch("ragged.embeddings.factory.create_embedder") as mock_create:
                 mock_create.side_effect = Exception("Model loading failed")
 
                 # Should not raise exception

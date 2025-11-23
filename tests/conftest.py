@@ -33,7 +33,7 @@ def clean_env() -> Generator[None, None, None]:
             del os.environ[key]
 
     # Import here to avoid circular dependency
-    from src.config.settings import get_settings
+    from ragged.config.settings import get_settings
 
     get_settings.cache_clear()
 

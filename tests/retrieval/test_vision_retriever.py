@@ -5,9 +5,9 @@ import numpy as np
 from PIL import Image
 import chromadb
 
-from src.retrieval.vision_retriever import VisionRetriever, RetrievalResult, RetrievalResponse
-from src.retrieval.query_processor import MultiModalQueryProcessor, QueryType
-from src.storage.dual_store import DualEmbeddingStore
+from ragged.retrieval.vision_retriever import VisionRetriever, RetrievalResult, RetrievalResponse
+from ragged.retrieval.query_processor import MultiModalQueryProcessor, QueryType
+from ragged.storage.dual_store import DualEmbeddingStore
 
 
 class MockTextEmbedder:

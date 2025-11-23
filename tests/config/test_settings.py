@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 from pydantic import ValidationError
 
-from src.config.settings import EmbeddingModel, Settings, get_settings
+from ragged.config.settings import EmbeddingModel, Settings, get_settings
 
 
 class TestSettings:

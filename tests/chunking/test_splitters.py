@@ -2,12 +2,12 @@
 
 import pytest
 
-from src.chunking.splitters import (
+from ragged.chunking.splitters import (
     RecursiveCharacterTextSplitter,
     chunk_document,
     create_chunk_metadata,
 )
-from src.ingestion.models import Document
+from ragged.ingestion.models import Document
 
 
 class TestRecursiveCharacterTextSplitter:
@@ -21,7 +21,7 @@ class TestRecursiveCharacterTextSplitter:
 
     def test_uses_config_defaults(self) -> None:
         """Test that config defaults are used."""
-        from src.config.settings import get_settings
+        from ragged.config.settings import get_settings
         splitter = RecursiveCharacterTextSplitter()
         settings = get_settings()
         assert splitter.chunk_size == settings.chunk_size
@@ -45,14 +45,14 @@ class TestRecursiveCharacterTextSplitter:
         # Should split into multiple chunks when lines exceed chunk size
         assert len(chunks) > 0
         # Verify each chunk respects token limits
-        from src.chunking.token_counter import count_tokens
+        from ragged.chunking.token_counter import count_tokens
         for chunk in chunks:
             # Allow some flexibility for overlap
             assert count_tokens(chunk) <= splitter.chunk_size + splitter.chunk_overlap
 
     def test_respects_chunk_size(self) -> None:
         """Test that chunks don't exceed chunk_size."""
-        from src.chunking.token_counter import count_tokens
+        from ragged.chunking.token_counter import count_tokens
         text = "word " * 1000
         splitter = RecursiveCharacterTextSplitter(chunk_size=100, chunk_overlap=0)
         chunks = splitter.split_text(text)
@@ -124,7 +124,7 @@ class TestChunkDocument:
         chunked_doc = chunk_document(doc, splitter=custom_splitter)
         assert len(chunked_doc.chunks) > 0
         # Verify custom chunk size was used
-        from src.chunking.token_counter import count_tokens
+        from ragged.chunking.token_counter import count_tokens
         for chunk in chunked_doc.chunks:
             # Chunks should respect the custom size (with some flexibility for overlap)
             assert count_tokens(chunk.text) <= 200 + custom_splitter.chunk_overlap

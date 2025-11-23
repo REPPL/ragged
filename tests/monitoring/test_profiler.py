@@ -7,7 +7,7 @@ import time
 
 import pytest
 
-from src.monitoring.profiler import (
+from ragged.monitoring.profiler import (
     PerformanceProfiler,
     ProfileStage,
     create_profiler,

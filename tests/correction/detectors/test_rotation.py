@@ -8,8 +8,8 @@ from pathlib import Path
 from unittest.mock import Mock, MagicMock, patch
 import pymupdf
 
-from src.correction.detectors.rotation import RotationDetector
-from src.correction.schemas import IssueType
+from ragged.correction.detectors.rotation import RotationDetector
+from ragged.correction.schemas import IssueType
 
 
 class TestRotationDetector:

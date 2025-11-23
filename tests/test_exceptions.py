@@ -1,7 +1,7 @@
 """Tests for custom exception system."""
 
 import pytest
-from src.exceptions import (
+from ragged.exceptions import (
     # Base
     RaggedError,
     # Ingestion

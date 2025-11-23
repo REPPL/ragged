@@ -17,10 +17,10 @@ from unittest.mock import Mock
 
 import pytest
 
-from src.processing.base import ProcessorConfig
-from src.processing.metrics import MetricsSummary, ProcessingMetrics, RoutingMetric
-from src.processing.quality_assessor import QualityAssessment
-from src.processing.router import ProcessingRoute
+from ragged.processing.base import ProcessorConfig
+from ragged.processing.metrics import MetricsSummary, ProcessingMetrics, RoutingMetric
+from ragged.processing.quality_assessor import QualityAssessment
+from ragged.processing.router import ProcessingRoute
 
 
 @pytest.fixture

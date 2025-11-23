@@ -5,7 +5,7 @@ import time
 import tempfile
 from pathlib import Path
 
-from src.utils.benchmarks import (
+from ragged.utils.benchmarks import (
     Timer,
     time_it,
     Benchmark,

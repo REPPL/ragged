@@ -4,12 +4,12 @@ import pytest
 from pathlib import Path
 from datetime import datetime
 import hashlib
-from src.chunking.contextual import (
+from ragged.chunking.contextual import (
     ContextualChunk,
     ContextualChunker,
     ContextCompressor
 )
-from src.ingestion.models import Document, DocumentMetadata
+from ragged.ingestion.models import Document, DocumentMetadata
 
 
 @pytest.fixture
@@ -353,7 +353,7 @@ class TestContextCompressor:
     @pytest.fixture
     def sample_chunks(self):
         """Sample chunks for compression."""
-        from src.ingestion.models import Chunk, ChunkMetadata
+        from ragged.ingestion.models import Chunk, ChunkMetadata
 
         return [
             Chunk(

@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pytest
 
-from src.monitoring.metrics import (
+from ragged.monitoring.metrics import (
     MetricsCollector,
     QualityMetrics,
     create_metrics_collector,

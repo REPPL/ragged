@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from src.templates.engine import (
+from ragged.templates.engine import (
     TemplateEngine,
     TemplateError,
     create_template_engine,

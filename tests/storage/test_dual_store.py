@@ -5,8 +5,8 @@ import numpy as np
 import chromadb
 from chromadb.api import ClientAPI
 
-from src.storage.dual_store import DualEmbeddingStore
-from src.storage.schema import EmbeddingType
+from ragged.storage.dual_store import DualEmbeddingStore
+from ragged.storage.schema import EmbeddingType
 
 
 @pytest.fixture

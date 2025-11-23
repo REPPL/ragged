@@ -14,8 +14,8 @@ from unittest.mock import AsyncMock, MagicMock, Mock, patch
 
 import pytest
 
-from src.correction import CorrectionPipeline, MetadataGenerator
-from src.correction.schemas import (
+from ragged.correction import CorrectionPipeline, MetadataGenerator
+from ragged.correction.schemas import (
     AnalysisResult,
     CorrectionAction,
     CorrectionResult,
@@ -348,7 +348,7 @@ class TestCLIIntegrationMocked:
 
     def test_cli_imports(self):
         """Test that CLI imports work correctly."""
-        from src.main import cli
+        from ragged.main import cli
 
         # Verify show command registered
         assert "show" in cli.commands
@@ -361,7 +361,7 @@ class TestCLIIntegrationMocked:
 
     def test_add_command_has_auto_correct_option(self):
         """Test add command has auto-correct-pdf option."""
-        from src.main import cli
+        from ragged.main import cli
 
         add_cmd = cli.commands["add"]
         param_names = [p.name for p in add_cmd.params]
@@ -378,7 +378,7 @@ class TestCLIIntegrationMocked:
 
     def test_show_quality_command_structure(self):
         """Test show quality command accepts document_id."""
-        from src.main import cli
+        from ragged.main import cli
 
         show_cmd = cli.commands["show"]
         quality_cmd = show_cmd.commands["quality"]
@@ -389,7 +389,7 @@ class TestCLIIntegrationMocked:
 
     def test_show_corrections_command_structure(self):
         """Test show corrections command accepts document_id."""
-        from src.main import cli
+        from ragged.main import cli
 
         show_cmd = cli.commands["show"]
         corrections_cmd = show_cmd.commands["corrections"]
@@ -399,7 +399,7 @@ class TestCLIIntegrationMocked:
 
     def test_show_uncertainties_command_structure(self):
         """Test show uncertainties command accepts document_id."""
-        from src.main import cli
+        from ragged.main import cli
 
         show_cmd = cli.commands["show"]
         uncertainties_cmd = show_cmd.commands["uncertainties"]

@@ -3,7 +3,7 @@
 import pytest
 from pathlib import Path
 
-from src.utils.validation import (
+from ragged.utils.validation import (
     ValidationError,
     validate_string,
     validate_integer,

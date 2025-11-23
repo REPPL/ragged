@@ -9,14 +9,14 @@ import time
 from unittest.mock import Mock, patch, AsyncMock
 from pathlib import Path
 
-from src.ingestion.backpressure import (
+from ragged.ingestion.backpressure import (
     AsyncProcessorWithBackpressure,
     BackpressureConfig,
     TaskPriority,
     PriorityTask,
     process_with_backpressure,
 )
-from src.ingestion.async_processor import ProcessingResult
+from ragged.ingestion.async_processor import ProcessingResult
 
 
 @pytest.fixture

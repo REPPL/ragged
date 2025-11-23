@@ -8,7 +8,7 @@ import threading
 import time
 from unittest.mock import patch, MagicMock
 
-from src.utils.resource_governor import (
+from ragged.utils.resource_governor import (
     ResourceGovernor,
     ResourcePriority,
     ResourceRequest,

@@ -4,7 +4,7 @@ import pytest
 import time
 from unittest.mock import Mock
 
-from src.utils.circuit_breaker import (
+from ragged.utils.circuit_breaker import (
     CircuitBreaker,
     CircuitBreakerOpenError,
     CircuitState,

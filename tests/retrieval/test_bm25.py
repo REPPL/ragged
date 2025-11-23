@@ -1,7 +1,7 @@
 """Tests for BM25 keyword-based retrieval."""
 
 import pytest
-from src.retrieval.bm25 import BM25Retriever
+from ragged.retrieval.bm25 import BM25Retriever
 
 
 @pytest.fixture

@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 from pydantic import ValidationError
 
-from src.ingestion.models import Chunk, ChunkMetadata, Document, DocumentMetadata
+from ragged.ingestion.models import Chunk, ChunkMetadata, Document, DocumentMetadata
 
 
 class TestDocumentMetadata:

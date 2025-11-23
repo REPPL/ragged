@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from src.storage.metadata_serializer import (
+from ragged.storage.metadata_serializer import (
     deserialize_batch_metadata,
     deserialize_metadata,
     serialize_batch_metadata,

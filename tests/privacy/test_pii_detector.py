@@ -7,7 +7,7 @@ Tests for detecting and redacting personally identifiable information.
 
 import pytest
 
-from src.privacy.pii_detector import (
+from ragged.privacy.pii_detector import (
     PIIDetector,
     PIIRedactor,
     contains_pii,

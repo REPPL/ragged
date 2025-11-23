@@ -4,7 +4,7 @@ v0.2.9: Tests for page position mapping and chunk-to-page assignment.
 """
 
 import pytest
-from src.chunking.splitters.page_tracking import (
+from ragged.chunking.splitters.page_tracking import (
     build_page_position_map,
     get_page_for_position,
     build_clean_to_orig_map,

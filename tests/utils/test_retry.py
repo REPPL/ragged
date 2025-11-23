@@ -4,7 +4,7 @@ import pytest
 import time
 from unittest.mock import Mock, patch
 
-from src.utils.retry import (
+from ragged.utils.retry import (
     should_retry,
     exponential_backoff,
     with_retry,
@@ -12,7 +12,7 @@ from src.utils.retry import (
     RETRYABLE_EXCEPTIONS,
     NON_RETRYABLE_EXCEPTIONS,
 )
-from src.exceptions import (
+from ragged.exceptions import (
     LLMConnectionError,
     VectorStoreConnectionError,
     ResourceExhaustedError,

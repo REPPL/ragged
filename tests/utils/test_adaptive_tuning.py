@@ -9,7 +9,7 @@ import threading
 from datetime import datetime, timedelta
 from unittest.mock import Mock, patch
 
-from src.utils.adaptive_tuning import (
+from ragged.utils.adaptive_tuning import (
     HardwareCapabilities,
     WorkloadProfile,
     TuningRecommendations,
@@ -298,8 +298,8 @@ class TestTuningRecommendations:
 class TestAdaptiveTuner:
     """Tests for AdaptiveTuner."""
 
-    @patch("src.utils.adaptive_tuning.os.cpu_count", return_value=8)
-    @patch("src.utils.adaptive_tuning.psutil.virtual_memory")
+    @patch("ragged.utils.adaptive_tuning.os.cpu_count", return_value=8)
+    @patch("ragged.utils.adaptive_tuning.psutil.virtual_memory")
     def test_initialization(self, mock_memory, mock_cpu):
         """Test tuner initialization."""
         mock_memory.return_value.total = 16 * (1024 ** 3)  # 16GB
@@ -311,8 +311,8 @@ class TestAdaptiveTuner:
         assert tuner.hardware.total_memory_gb == pytest.approx(16.0, abs=0.1)
         assert tuner.hardware.available_memory_gb == pytest.approx(8.0, abs=0.1)
 
-    @patch("src.utils.adaptive_tuning.os.cpu_count", return_value=4)
-    @patch("src.utils.adaptive_tuning.psutil.virtual_memory")
+    @patch("ragged.utils.adaptive_tuning.os.cpu_count", return_value=4)
+    @patch("ragged.utils.adaptive_tuning.psutil.virtual_memory")
     def test_record_query(self, mock_memory, mock_cpu):
         """Test recording query execution."""
         mock_memory.return_value.total = 8 * (1024 ** 3)
@@ -324,8 +324,8 @@ class TestAdaptiveTuner:
         assert len(tuner.workload.recent_queries) == 1
         assert tuner.workload.recent_queries[0]["duration"] == 0.5
 
-    @patch("src.utils.adaptive_tuning.os.cpu_count", return_value=4)
-    @patch("src.utils.adaptive_tuning.psutil.virtual_memory")
+    @patch("ragged.utils.adaptive_tuning.os.cpu_count", return_value=4)
+    @patch("ragged.utils.adaptive_tuning.psutil.virtual_memory")
     def test_record_ingestion(self, mock_memory, mock_cpu):
         """Test recording document ingestion."""
         mock_memory.return_value.total = 8 * (1024 ** 3)
@@ -337,8 +337,8 @@ class TestAdaptiveTuner:
         assert len(tuner.workload.recent_ingestions) == 1
         assert tuner.workload.recent_ingestions[0]["size_kb"] == 10.5
 
-    @patch("src.utils.adaptive_tuning.os.cpu_count", return_value=4)
-    @patch("src.utils.adaptive_tuning.psutil.virtual_memory")
+    @patch("ragged.utils.adaptive_tuning.os.cpu_count", return_value=4)
+    @patch("ragged.utils.adaptive_tuning.psutil.virtual_memory")
     def test_analyze_workload(self, mock_memory, mock_cpu):
         """Test workload analysis."""
         mock_memory.return_value.total = 8 * (1024 ** 3)
@@ -353,8 +353,8 @@ class TestAdaptiveTuner:
         mode = tuner.analyze_workload()
         assert mode == "bulk_ingestion"
 
-    @patch("src.utils.adaptive_tuning.os.cpu_count", return_value=4)
-    @patch("src.utils.adaptive_tuning.psutil.virtual_memory")
+    @patch("ragged.utils.adaptive_tuning.os.cpu_count", return_value=4)
+    @patch("ragged.utils.adaptive_tuning.psutil.virtual_memory")
     def test_generate_recommendations_bulk_mode(self, mock_memory, mock_cpu):
         """Test recommendations for bulk ingestion mode."""
         mock_memory.return_value.total = 8 * (1024 ** 3)
@@ -374,8 +374,8 @@ class TestAdaptiveTuner:
         assert rec.chunk_size == 1024  # Larger chunks
         assert rec.batch_size >= 100
 
-    @patch("src.utils.adaptive_tuning.os.cpu_count", return_value=4)
-    @patch("src.utils.adaptive_tuning.psutil.virtual_memory")
+    @patch("ragged.utils.adaptive_tuning.os.cpu_count", return_value=4)
+    @patch("ragged.utils.adaptive_tuning.psutil.virtual_memory")
     def test_generate_recommendations_interactive_mode(self, mock_memory, mock_cpu):
         """Test recommendations for interactive query mode."""
         mock_memory.return_value.total = 8 * (1024 ** 3)
@@ -394,8 +394,8 @@ class TestAdaptiveTuner:
         assert rec.enable_embedding_cache is True
         assert rec.chunk_size == 512  # Smaller chunks
 
-    @patch("src.utils.adaptive_tuning.os.cpu_count", return_value=4)
-    @patch("src.utils.adaptive_tuning.psutil.virtual_memory")
+    @patch("ragged.utils.adaptive_tuning.os.cpu_count", return_value=4)
+    @patch("ragged.utils.adaptive_tuning.psutil.virtual_memory")
     def test_get_recommendations(self, mock_memory, mock_cpu):
         """Test getting current recommendations."""
         mock_memory.return_value.total = 8 * (1024 ** 3)
@@ -414,8 +414,8 @@ class TestAdaptiveTuner:
         assert rec is not None
         assert isinstance(rec, TuningRecommendations)
 
-    @patch("src.utils.adaptive_tuning.os.cpu_count", return_value=4)
-    @patch("src.utils.adaptive_tuning.psutil.virtual_memory")
+    @patch("ragged.utils.adaptive_tuning.os.cpu_count", return_value=4)
+    @patch("ragged.utils.adaptive_tuning.psutil.virtual_memory")
     def test_get_stats(self, mock_memory, mock_cpu):
         """Test getting tuning statistics."""
         mock_memory.return_value.total = 8 * (1024 ** 3)
@@ -435,8 +435,8 @@ class TestAdaptiveTuner:
         assert stats["workload"]["query_rate"] >= 0
         assert stats["monitoring"]["active"] is False
 
-    @patch("src.utils.adaptive_tuning.os.cpu_count", return_value=4)
-    @patch("src.utils.adaptive_tuning.psutil.virtual_memory")
+    @patch("ragged.utils.adaptive_tuning.os.cpu_count", return_value=4)
+    @patch("ragged.utils.adaptive_tuning.psutil.virtual_memory")
     def test_start_stop_monitoring(self, mock_memory, mock_cpu):
         """Test starting and stopping background monitoring."""
         mock_memory.return_value.total = 8 * (1024 ** 3)
@@ -456,8 +456,8 @@ class TestAdaptiveTuner:
         tuner.stop_monitoring()
         assert tuner._monitoring_thread is None
 
-    @patch("src.utils.adaptive_tuning.os.cpu_count", return_value=4)
-    @patch("src.utils.adaptive_tuning.psutil.virtual_memory")
+    @patch("ragged.utils.adaptive_tuning.os.cpu_count", return_value=4)
+    @patch("ragged.utils.adaptive_tuning.psutil.virtual_memory")
     def test_monitoring_generates_recommendations(self, mock_memory, mock_cpu):
         """Test monitoring loop generates recommendations."""
         mock_memory.return_value.total = 8 * (1024 ** 3)
@@ -500,8 +500,8 @@ class TestSingletonTuner:
 class TestIntegrationScenarios:
     """Integration tests for realistic scenarios."""
 
-    @patch("src.utils.adaptive_tuning.os.cpu_count", return_value=8)
-    @patch("src.utils.adaptive_tuning.psutil.virtual_memory")
+    @patch("ragged.utils.adaptive_tuning.os.cpu_count", return_value=8)
+    @patch("ragged.utils.adaptive_tuning.psutil.virtual_memory")
     def test_bulk_ingestion_workflow(self, mock_memory, mock_cpu):
         """Test adaptive tuning during bulk ingestion."""
         mock_memory.return_value.total = 16 * (1024 ** 3)
@@ -522,8 +522,8 @@ class TestIntegrationScenarios:
         assert rec.enable_query_cache is False  # Save memory
         assert rec.chunk_size == 1024  # Larger chunks
 
-    @patch("src.utils.adaptive_tuning.os.cpu_count", return_value=4)
-    @patch("src.utils.adaptive_tuning.psutil.virtual_memory")
+    @patch("ragged.utils.adaptive_tuning.os.cpu_count", return_value=4)
+    @patch("ragged.utils.adaptive_tuning.psutil.virtual_memory")
     def test_interactive_query_workflow(self, mock_memory, mock_cpu):
         """Test adaptive tuning during interactive queries."""
         mock_memory.return_value.total = 8 * (1024 ** 3)
@@ -543,8 +543,8 @@ class TestIntegrationScenarios:
         assert rec.enable_query_cache is True  # Fast repeat queries
         assert rec.chunk_size == 512  # Smaller chunks for precision
 
-    @patch("src.utils.adaptive_tuning.os.cpu_count", return_value=8)
-    @patch("src.utils.adaptive_tuning.psutil.virtual_memory")
+    @patch("ragged.utils.adaptive_tuning.os.cpu_count", return_value=8)
+    @patch("ragged.utils.adaptive_tuning.psutil.virtual_memory")
     def test_workload_transition(self, mock_memory, mock_cpu):
         """Test transition from bulk to interactive workload."""
         mock_memory.return_value.total = 16 * (1024 ** 3)
@@ -567,8 +567,8 @@ class TestIntegrationScenarios:
         rec2 = tuner.generate_recommendations()
         assert rec2.mode in ["interactive_query", "mixed"]
 
-    @patch("src.utils.adaptive_tuning.os.cpu_count", return_value=2)
-    @patch("src.utils.adaptive_tuning.psutil.virtual_memory")
+    @patch("ragged.utils.adaptive_tuning.os.cpu_count", return_value=2)
+    @patch("ragged.utils.adaptive_tuning.psutil.virtual_memory")
     def test_low_resource_environment(self, mock_memory, mock_cpu):
         """Test recommendations for low-resource environment."""
         mock_memory.return_value.total = 2 * (1024 ** 3)  # 2GB
@@ -583,8 +583,8 @@ class TestIntegrationScenarios:
         assert rec.batch_size >= 10  # Minimum batch size
         assert rec.cache_size >= 50  # Minimum cache size
 
-    @patch("src.utils.adaptive_tuning.os.cpu_count", return_value=16)
-    @patch("src.utils.adaptive_tuning.psutil.virtual_memory")
+    @patch("ragged.utils.adaptive_tuning.os.cpu_count", return_value=16)
+    @patch("ragged.utils.adaptive_tuning.psutil.virtual_memory")
     def test_high_resource_environment(self, mock_memory, mock_cpu):
         """Test recommendations for high-resource environment."""
         mock_memory.return_value.total = 64 * (1024 ** 3)  # 64GB

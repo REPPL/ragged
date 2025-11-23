@@ -7,7 +7,7 @@ from unittest.mock import MagicMock, patch
 import pytest
 from click.testing import CliRunner
 
-from src.cli.commands.history import history, QueryHistory
+from ragged.cli.commands.history import history, QueryHistory
 
 
 class TestQueryHistoryClass:
@@ -99,7 +99,7 @@ class TestHistoryList:
         assert result.exit_code == 0
         assert "List query history" in result.output
 
-    @patch("src.cli.commands.history.QueryHistory")
+    @patch("ragged.cli.commands.history.QueryHistory")
     def test_history_list_empty(self, mock_history, cli_runner: CliRunner):
         """Test listing empty history."""
         history_instance = MagicMock()
@@ -110,7 +110,7 @@ class TestHistoryList:
         assert result.exit_code == 0
         assert "No query history found" in result.output
 
-    @patch("src.cli.commands.history.QueryHistory")
+    @patch("ragged.cli.commands.history.QueryHistory")
     def test_history_list_with_entries(self, mock_history, cli_runner: CliRunner):
         """Test listing history with entries."""
         history_instance = MagicMock()
@@ -123,7 +123,7 @@ class TestHistoryList:
         assert result.exit_code == 0
         assert "Test query" in result.output
 
-    @patch("src.cli.commands.history.QueryHistory")
+    @patch("ragged.cli.commands.history.QueryHistory")
     def test_history_list_with_limit(self, mock_history, cli_runner: CliRunner):
         """Test listing history with limit."""
         history_instance = MagicMock()
@@ -133,7 +133,7 @@ class TestHistoryList:
         result = cli_runner.invoke(history, ["list", "--limit", "10"])
         assert result.exit_code == 0
 
-    @patch("src.cli.commands.history.QueryHistory")
+    @patch("ragged.cli.commands.history.QueryHistory")
     def test_history_list_with_search(self, mock_history, cli_runner: CliRunner):
         """Test listing history with search."""
         history_instance = MagicMock()
@@ -143,7 +143,7 @@ class TestHistoryList:
         result = cli_runner.invoke(history, ["list", "--search", "ML"])
         assert result.exit_code == 0
 
-    @patch("src.cli.commands.history.QueryHistory")
+    @patch("ragged.cli.commands.history.QueryHistory")
     def test_history_list_json_format(self, mock_history, cli_runner: CliRunner):
         """Test listing history in JSON format."""
         history_instance = MagicMock()
@@ -165,7 +165,7 @@ class TestHistoryShow:
         assert result.exit_code == 0
         assert "Show full details" in result.output
 
-    @patch("src.cli.commands.history.QueryHistory")
+    @patch("ragged.cli.commands.history.QueryHistory")
     def test_history_show_not_found(self, mock_history, cli_runner: CliRunner):
         """Test showing non-existent query."""
         history_instance = MagicMock()
@@ -176,7 +176,7 @@ class TestHistoryShow:
         assert result.exit_code == 1
         assert "not found" in result.output.lower()
 
-    @patch("src.cli.commands.history.QueryHistory")
+    @patch("ragged.cli.commands.history.QueryHistory")
     def test_history_show_found(self, mock_history, cli_runner: CliRunner):
         """Test showing existing query."""
         history_instance = MagicMock()
@@ -204,7 +204,7 @@ class TestHistoryClear:
         assert result.exit_code == 0
         assert "Clear all query history" in result.output
 
-    @patch("src.cli.commands.history.QueryHistory")
+    @patch("ragged.cli.commands.history.QueryHistory")
     def test_history_clear_with_confirmation(self, mock_history, cli_runner: CliRunner):
         """Test clearing history with confirmation."""
         history_instance = MagicMock()
@@ -216,7 +216,7 @@ class TestHistoryClear:
         assert result.exit_code == 0
         assert "Cancelled" in result.output or "Abort" in result.output
 
-    @patch("src.cli.commands.history.QueryHistory")
+    @patch("ragged.cli.commands.history.QueryHistory")
     def test_history_clear_with_yes_flag(self, mock_history, cli_runner: CliRunner):
         """Test clearing history with --yes flag."""
         history_instance = MagicMock()
@@ -237,7 +237,7 @@ class TestHistoryExport:
         assert result.exit_code == 0
         assert "Export query history" in result.output
 
-    @patch("src.cli.commands.history.QueryHistory")
+    @patch("ragged.cli.commands.history.QueryHistory")
     def test_history_export_success(self, mock_history, cli_runner: CliRunner, tmp_path):
         """Test exporting history successfully."""
         export_file = tmp_path / "export.json"
@@ -259,7 +259,7 @@ class TestHistoryReplay:
         assert result.exit_code == 0
         assert "Replay a query" in result.output
 
-    @patch("src.cli.commands.history.QueryHistory")
+    @patch("ragged.cli.commands.history.QueryHistory")
     def test_history_replay_not_found(self, mock_history, cli_runner: CliRunner):
         """Test replaying non-existent query."""
         history_instance = MagicMock()

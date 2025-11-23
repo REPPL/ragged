@@ -2,7 +2,7 @@
 
 import pytest
 from abc import ABC
-from src.embeddings.base import BaseEmbedder
+from ragged.embeddings.base import BaseEmbedder
 
 
 class TestBaseEmbedder:

@@ -7,7 +7,7 @@ import pytest
 import time
 from unittest.mock import Mock, patch
 
-from src.utils.graceful_degradation import (
+from ragged.utils.graceful_degradation import (
     ServiceUnavailableError,
     FallbackStrategy,
     with_fallback,

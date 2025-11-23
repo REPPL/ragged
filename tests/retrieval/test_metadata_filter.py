@@ -6,7 +6,7 @@ v0.3.7d: Test filter parsing, query building, and faceted search.
 import pytest
 from datetime import datetime
 
-from src.retrieval.metadata_filter import (
+from ragged.retrieval.metadata_filter import (
     FilterCondition,
     MetadataFilter,
     FilterParser,

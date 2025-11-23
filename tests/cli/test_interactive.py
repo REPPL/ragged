@@ -8,7 +8,7 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from src.cli.interactive import InteractiveShell, start_interactive_mode
+from ragged.cli.interactive import InteractiveShell, start_interactive_mode
 
 
 class TestInteractiveShell:
@@ -354,7 +354,7 @@ class TestStartInteractiveMode:
 
     def test_start_interactive_mode(self):
         """Test starting interactive mode."""
-        with patch("src.cli.interactive.InteractiveShell") as MockShell:
+        with patch("ragged.cli.interactive.InteractiveShell") as MockShell:
             mock_shell = Mock()
             MockShell.return_value = mock_shell
 
@@ -366,7 +366,7 @@ class TestStartInteractiveMode:
 
     def test_start_interactive_mode_keyboard_interrupt(self):
         """Test handling keyboard interrupt."""
-        with patch("src.cli.interactive.InteractiveShell") as MockShell:
+        with patch("ragged.cli.interactive.InteractiveShell") as MockShell:
             mock_shell = Mock()
             mock_shell.cmdloop.side_effect = KeyboardInterrupt()
             MockShell.return_value = mock_shell
@@ -378,7 +378,7 @@ class TestStartInteractiveMode:
 
     def test_start_interactive_mode_exception(self):
         """Test handling general exceptions."""
-        with patch("src.cli.interactive.InteractiveShell") as MockShell:
+        with patch("ragged.cli.interactive.InteractiveShell") as MockShell:
             mock_shell = Mock()
             mock_shell.cmdloop.side_effect = Exception("Test error")
             MockShell.return_value = mock_shell

@@ -7,7 +7,7 @@ import pytest
 import time
 from unittest.mock import patch, Mock
 
-from src.utils.metrics import (
+from ragged.utils.metrics import (
     MetricsCollector,
     MetricSnapshot,
     get_metrics_collector,

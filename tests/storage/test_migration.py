@@ -4,8 +4,8 @@ import pytest
 import chromadb
 from chromadb.api import ClientAPI
 
-from src.storage.migration import StorageMigration
-from src.storage.schema import EmbeddingType
+from ragged.storage.migration import StorageMigration
+from ragged.storage.schema import EmbeddingType
 
 
 @pytest.fixture

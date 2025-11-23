@@ -9,8 +9,8 @@ from unittest.mock import AsyncMock, MagicMock, Mock, patch
 
 import pytest
 
-from src.correction.pipeline import CorrectionPipeline
-from src.correction.schemas import (
+from ragged.correction.pipeline import CorrectionPipeline
+from ragged.correction.schemas import (
     AnalysisResult,
     CorrectionAction,
     CorrectionResult,
@@ -126,8 +126,8 @@ class TestCorrectionPipeline:
 
     def test_pipeline_with_custom_config(self):
         """Test pipeline accepts custom configurations."""
-        from src.correction.analyzer import AnalyzerConfig
-        from src.correction.corrector import CorrectorConfig
+        from ragged.correction.analyzer import AnalyzerConfig
+        from ragged.correction.corrector import CorrectorConfig
 
         analyzer_config = AnalyzerConfig(parallel_execution=False, timeout_seconds=60.0)
         corrector_config = CorrectorConfig(keep_checkpoints=True, max_attempts=5)

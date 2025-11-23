@@ -1,7 +1,7 @@
 """Tests for fusion algorithms (RRF and weighted fusion)."""
 
 import pytest
-from src.retrieval.fusion import reciprocal_rank_fusion, weighted_fusion
+from ragged.retrieval.fusion import reciprocal_rank_fusion, weighted_fusion
 
 
 @pytest.fixture

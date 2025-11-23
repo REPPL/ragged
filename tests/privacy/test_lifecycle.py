@@ -10,7 +10,7 @@ import time
 from datetime import datetime, timedelta
 from typing import Any, Dict, List
 
-from src.privacy.lifecycle import (
+from ragged.privacy.lifecycle import (
     DataLifecycleManager,
     get_lifecycle_manager,
 )

@@ -7,8 +7,8 @@ import pytest
 from pathlib import Path
 from unittest.mock import Mock, MagicMock, patch
 
-from src.correction.detectors.quality import QualityDetector
-from src.correction.schemas import IssueType, QualityGrade
+from ragged.correction.detectors.quality import QualityDetector
+from ragged.correction.schemas import IssueType, QualityGrade
 
 
 class TestQualityDetector:

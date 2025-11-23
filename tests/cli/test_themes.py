@@ -5,7 +5,7 @@ v0.3.12: Test colour themes and accessibility.
 
 import pytest
 
-from src.cli.themes import (
+from ragged.cli.themes import (
     ThemeManager,
     ThemeColors,
     create_theme_manager,

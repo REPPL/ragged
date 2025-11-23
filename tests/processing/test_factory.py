@@ -4,8 +4,8 @@ Tests for ProcessorFactory.
 
 import pytest
 
-from src.processing.base import BaseProcessor, ProcessorConfig
-from src.processing.factory import ProcessorFactory
+from ragged.processing.base import BaseProcessor, ProcessorConfig
+from ragged.processing.factory import ProcessorFactory
 
 
 class TestProcessorFactory:
@@ -55,7 +55,7 @@ class TestProcessorFactory:
 
     def test_register_custom_processor(self):
         """Test registering a custom processor."""
-        from src.processing.base import ProcessedDocument
+        from ragged.processing.base import ProcessedDocument
         from pathlib import Path
 
         class CustomProcessor(BaseProcessor):

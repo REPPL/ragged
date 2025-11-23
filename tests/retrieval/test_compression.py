@@ -5,8 +5,8 @@ from unittest.mock import MagicMock, patch
 import numpy as np
 import pytest
 
-from src.retrieval.compression import ContextualCompressor, CompressionResult
-from src.retrieval.retriever import RetrievedChunk
+from ragged.retrieval.compression import ContextualCompressor, CompressionResult
+from ragged.retrieval.retriever import RetrievedChunk
 
 
 @pytest.fixture

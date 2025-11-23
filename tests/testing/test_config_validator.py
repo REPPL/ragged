@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from src.testing.config_validator import (
+from ragged.testing.config_validator import (
     ConfigValidator,
     ValidationError,
     ValidationIssue,

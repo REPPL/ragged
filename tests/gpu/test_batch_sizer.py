@@ -11,9 +11,9 @@ Tests cover:
 
 import pytest
 
-from src.gpu.batch_sizer import AdaptiveBatchSizer, BatchSizeConfig
-from src.gpu.device_manager import DeviceInfo, DeviceManager, DeviceType
-from src.gpu.memory_monitor import MemoryMonitor
+from ragged.gpu.batch_sizer import AdaptiveBatchSizer, BatchSizeConfig
+from ragged.gpu.device_manager import DeviceInfo, DeviceManager, DeviceType
+from ragged.gpu.memory_monitor import MemoryMonitor
 
 
 # Helper functions

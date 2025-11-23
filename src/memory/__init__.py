@@ -33,15 +33,13 @@ Example:
 """
 
 from ragged.memory.persona import Persona, PersonaManager
-
-# InteractionTracker will be added in next commit
-# from ragged.memory.interactions import Interaction, InteractionTracker
+from ragged.memory.interactions import Interaction, InteractionTracker
 
 __all__ = [
     "Persona",
     "PersonaManager",
-    # "Interaction",
-    # "InteractionTracker",
+    "Interaction",
+    "InteractionTracker",
 ]
 
 __version__ = "0.4.5"

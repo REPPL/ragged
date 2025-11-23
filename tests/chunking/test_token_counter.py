@@ -2,7 +2,7 @@
 
 import pytest
 
-from src.chunking.token_counter import (
+from ragged.chunking.token_counter import (
     count_tokens,
     estimate_tokens,
     get_tokenizer,

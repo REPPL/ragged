@@ -5,7 +5,7 @@ import numpy as np
 from pathlib import Path
 from PIL import Image
 
-from src.retrieval.query_processor import (
+from ragged.retrieval.query_processor import (
     MultiModalQueryProcessor,
     QueryEmbeddings,
     QueryType,

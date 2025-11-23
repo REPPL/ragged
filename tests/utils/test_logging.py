@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from src.utils.logging import (
+from ragged.utils.logging import (
     CustomJsonFormatter,
     PrivacyFilter,
     get_logger,

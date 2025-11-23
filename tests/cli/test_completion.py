@@ -5,7 +5,7 @@ from unittest.mock import MagicMock, patch
 import pytest
 from click.testing import CliRunner
 
-from src.cli.commands.completion import completion
+from ragged.cli.commands.completion import completion
 
 
 class TestCompletion:
@@ -51,7 +51,7 @@ class TestCompletion:
         assert result.exit_code == 0
         assert "bashrc" in result.output or "bash_profile" in result.output
 
-    @patch("src.cli.commands.completion.Path.home")
+    @patch("ragged.cli.commands.completion.Path.home")
     @patch("builtins.open", create=True)
     def test_completion_install_bash(self, mock_open, mock_home, cli_runner: CliRunner, tmp_path):
         """Test installing bash completion."""

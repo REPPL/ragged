@@ -15,9 +15,9 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from src.processing.base import ProcessorConfig
-from src.processing.quality_assessor import QualityAssessment
-from src.processing.router import ProcessingRoute, ProcessorRouter, RouterConfig
+from ragged.processing.base import ProcessorConfig
+from ragged.processing.quality_assessor import QualityAssessment
+from ragged.processing.router import ProcessingRoute, ProcessorRouter, RouterConfig
 
 
 @pytest.fixture
@@ -282,7 +282,7 @@ class TestProcessorRouter:
 class TestIntegration:
     """Integration tests for routing."""
 
-    @patch("src.processing.router.QualityAssessor")
+    @patch("ragged.processing.router.QualityAssessor")
     def test_full_routing_workflow(self, mock_assessor_class, tmp_path):
         """Test complete routing workflow."""
         test_file = tmp_path / "test.pdf"

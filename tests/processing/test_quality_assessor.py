@@ -16,7 +16,7 @@ from unittest.mock import MagicMock, Mock, patch
 
 import pytest
 
-from src.processing.quality_assessor import (
+from ragged.processing.quality_assessor import (
     PageQuality,
     QualityAssessment,
     QualityAssessor,
@@ -26,15 +26,15 @@ from src.processing.quality_assessor import (
 @pytest.fixture
 def mock_pymupdf():
     """Mock PyMuPDF for testing."""
-    with patch("src.processing.quality_assessor.QualityAssessor._pymupdf") as mock:
+    with patch("ragged.processing.quality_assessor.QualityAssessor._pymupdf") as mock:
         yield mock
 
 
 @pytest.fixture
 def mock_cv2():
     """Mock OpenCV for testing."""
-    with patch("src.processing.quality_assessor.QualityAssessor._cv2") as mock_cv2, \
-         patch("src.processing.quality_assessor.QualityAssessor._np") as mock_np:
+    with patch("ragged.processing.quality_assessor.QualityAssessor._cv2") as mock_cv2, \
+         patch("ragged.processing.quality_assessor.QualityAssessor._np") as mock_np:
         import numpy as np
         # Use real numpy for calculations
         mock_np.frombuffer = np.frombuffer

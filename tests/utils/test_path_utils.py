@@ -2,7 +2,7 @@
 
 import pytest
 from pathlib import Path
-from src.utils.path_utils import (
+from ragged.utils.path_utils import (
     normalize_path,
     validate_path_exists,
     safe_join,
@@ -15,7 +15,7 @@ from src.utils.path_utils import (
     get_file_size_mb,
     get_directory_size_mb,
 )
-from src.exceptions import InvalidPathError, ResourceNotFoundError
+from ragged.exceptions import InvalidPathError, ResourceNotFoundError
 
 
 @pytest.fixture

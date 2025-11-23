@@ -3,7 +3,7 @@
 import pytest
 from pathlib import Path
 from unittest.mock import Mock, MagicMock, patch
-from src.storage.vector_store import VectorStore
+from ragged.storage.vector_store import VectorStore
 
 
 class TestVectorStore:
@@ -13,8 +13,8 @@ class TestVectorStore:
     def mock_chroma_client(self):
         """Create a mock ChromaDB client."""
         # v0.3.6: Update patches to use chromadb_store module
-        with patch("src.storage.chromadb_store.chromadb.HttpClient") as mock_client_class, \
-             patch("src.storage.chromadb_store.get_settings") as mock_settings:
+        with patch("ragged.storage.chromadb_store.chromadb.HttpClient") as mock_client_class, \
+             patch("ragged.storage.chromadb_store.get_settings") as mock_settings:
             mock_client = MagicMock()
             mock_client_class.return_value = mock_client
 

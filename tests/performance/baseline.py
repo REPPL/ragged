@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Dict, Any, Optional
 from dataclasses import dataclass, asdict
 
-from src.utils.logging import get_logger
+from ragged.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

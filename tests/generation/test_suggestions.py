@@ -5,7 +5,7 @@ v0.3.12: Test query refinement and suggestions.
 
 import pytest
 
-from src.generation.suggestions import (
+from ragged.generation.suggestions import (
     QuerySuggester,
     QuerySuggestions,
     create_query_suggester,

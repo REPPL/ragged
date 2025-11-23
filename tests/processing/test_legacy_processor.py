@@ -5,8 +5,8 @@ Tests for LegacyProcessor.
 import pytest
 from pathlib import Path
 
-from src.processing.base import ProcessorConfig, ProcessorError
-from src.processing.legacy_processor import LegacyProcessor
+from ragged.processing.base import ProcessorConfig, ProcessorError
+from ragged.processing.legacy_processor import LegacyProcessor
 
 
 class TestLegacyProcessor:

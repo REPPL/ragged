@@ -1,7 +1,7 @@
 """Tests for response parsing utilities."""
 
 import pytest
-from src.generation.response_parser import (
+from ragged.generation.response_parser import (
     parse_response,
     format_response_for_cli,
     extract_citations

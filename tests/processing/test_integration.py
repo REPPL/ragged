@@ -8,8 +8,8 @@ from file loading through processing to final document output.
 import pytest
 from pathlib import Path
 
-from src.ingestion.loaders import load_pdf
-from src.processing import ProcessorConfig, ProcessorFactory
+from ragged.ingestion.loaders import load_pdf
+from ragged.processing import ProcessorConfig, ProcessorFactory
 
 
 class TestProcessingIntegration:

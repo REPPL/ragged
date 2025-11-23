@@ -79,8 +79,10 @@ from ragged.cli.commands.gpu import gpu  # v0.5.3: GPU management
 from ragged.cli.commands.health import health
 from ragged.cli.commands.history import history
 from ragged.cli.commands.ingest import ingest  # v0.5.3: Multi-modal ingestion
+from ragged.cli.commands.memory import memory  # v0.4.5: Memory/interaction management
 from ragged.cli.commands.metadata import metadata
 from ragged.cli.commands.monitor import monitor
+from ragged.cli.commands.persona import persona  # v0.4.5: Persona management
 from ragged.cli.commands.query_multimodal import query_group  # v0.5.3: Multi-modal query
 from ragged.cli.commands.search import search
 from ragged.cli.commands.serve import serve  # v0.3.12: API server
@@ -114,6 +116,8 @@ cli.add_command(versions)  # v0.3.7a: Document version tracking
 cli.add_command(template)  # v0.3.11: Template commands
 cli.add_command(test)  # v0.3.11: Testing commands
 cli.add_command(serve)  # v0.3.12: API server
+cli.add_command(persona)  # v0.4.5: Persona management
+cli.add_command(memory)  # v0.4.5: Memory/interaction management
 cli.add_command(ingest)  # v0.5.3: Multi-modal ingestion
 cli.add_command(gpu)  # v0.5.3: GPU management
 cli.add_command(storage)  # v0.5.3: Storage management

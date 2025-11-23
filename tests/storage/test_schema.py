@@ -3,7 +3,7 @@
 import pytest
 from datetime import datetime
 
-from src.storage.schema import (
+from ragged.storage.schema import (
     EmbeddingType,
     TextMetadata,
     VisionMetadata,

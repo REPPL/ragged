@@ -5,7 +5,7 @@ Tests for base processor interface and data models.
 import pytest
 from pathlib import Path
 
-from src.processing.base import (
+from ragged.processing.base import (
     BaseProcessor,
     ProcessedDocument,
     ProcessorConfig,

@@ -6,7 +6,7 @@ from unittest.mock import MagicMock, patch
 import pytest
 from click.testing import CliRunner
 
-from src.cli.commands.cache import cache
+from ragged.cli.commands.cache import cache
 
 
 class TestCacheInfo:
@@ -18,7 +18,7 @@ class TestCacheInfo:
         assert result.exit_code == 0
         assert "Show cache information" in result.output
 
-    @patch("src.cli.commands.cache.get_settings")
+    @patch("ragged.cli.commands.cache.get_settings")
     def test_cache_info_display(self, mock_settings, cli_runner: CliRunner, tmp_path):
         """Test displaying cache information."""
         settings = MagicMock()
@@ -29,7 +29,7 @@ class TestCacheInfo:
         assert result.exit_code == 0
         assert "Cache Information" in result.output
 
-    @patch("src.cli.commands.cache.get_settings")
+    @patch("ragged.cli.commands.cache.get_settings")
     def test_cache_info_json_format(self, mock_settings, cli_runner: CliRunner, tmp_path):
         """Test cache info in JSON format."""
         settings = MagicMock()
@@ -49,7 +49,7 @@ class TestCacheClear:
         assert result.exit_code == 0
         assert "Clear caches" in result.output
 
-    @patch("src.cli.commands.cache.get_settings")
+    @patch("ragged.cli.commands.cache.get_settings")
     def test_cache_clear_no_cache(self, mock_settings, cli_runner: CliRunner, tmp_path):
         """Test clearing when no cache exists."""
         settings = MagicMock()
@@ -60,7 +60,7 @@ class TestCacheClear:
         assert result.exit_code == 0
         assert "No" in result.output or "cache" in result.output.lower()
 
-    @patch("src.cli.commands.cache.get_settings")
+    @patch("ragged.cli.commands.cache.get_settings")
     def test_cache_clear_with_yes_flag(self, mock_settings, cli_runner: CliRunner, tmp_path):
         """Test clearing cache with --yes flag."""
         settings = MagicMock()
@@ -73,7 +73,7 @@ class TestCacheClear:
         result = cli_runner.invoke(cache, ["clear", "--type", "history", "--yes"])
         assert result.exit_code == 0
 
-    @patch("src.cli.commands.cache.get_settings")
+    @patch("ragged.cli.commands.cache.get_settings")
     def test_cache_clear_all_types(self, mock_settings, cli_runner: CliRunner, tmp_path):
         """Test clearing all cache types."""
         settings = MagicMock()
@@ -93,7 +93,7 @@ class TestCacheClean:
         assert result.exit_code == 0
         assert "Clean old cache files" in result.output
 
-    @patch("src.cli.commands.cache.get_settings")
+    @patch("ragged.cli.commands.cache.get_settings")
     def test_cache_clean_dry_run(self, mock_settings, cli_runner: CliRunner, tmp_path):
         """Test cache clean in dry-run mode."""
         settings = MagicMock()
@@ -105,7 +105,7 @@ class TestCacheClean:
         # Should mention dry run or no files
         assert "DRY RUN" in result.output or "No files" in result.output
 
-    @patch("src.cli.commands.cache.get_settings")
+    @patch("ragged.cli.commands.cache.get_settings")
     def test_cache_clean_with_threshold(self, mock_settings, cli_runner: CliRunner, tmp_path):
         """Test cache clean with age threshold."""
         settings = MagicMock()
@@ -125,7 +125,7 @@ class TestCacheStats:
         assert result.exit_code == 0
         assert "Show cache statistics" in result.output
 
-    @patch("src.cli.commands.cache.get_settings")
+    @patch("ragged.cli.commands.cache.get_settings")
     def test_cache_stats_display(self, mock_settings, cli_runner: CliRunner, tmp_path):
         """Test displaying cache statistics."""
         settings = MagicMock()
@@ -136,7 +136,7 @@ class TestCacheStats:
         assert result.exit_code == 0
         assert "Cache Statistics" in result.output
 
-    @patch("src.cli.commands.cache.get_settings")
+    @patch("ragged.cli.commands.cache.get_settings")
     def test_cache_stats_json_format(self, mock_settings, cli_runner: CliRunner, tmp_path):
         """Test cache stats in JSON format."""
         settings = MagicMock()

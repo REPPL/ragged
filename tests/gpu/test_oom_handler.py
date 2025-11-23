@@ -11,8 +11,8 @@ Tests cover:
 
 import pytest
 
-from src.gpu.device_manager import DeviceInfo, DeviceManager, DeviceType
-from src.gpu.oom_handler import OOMHandler
+from ragged.gpu.device_manager import DeviceInfo, DeviceManager, DeviceType
+from ragged.gpu.oom_handler import OOMHandler
 
 
 # Helper functions

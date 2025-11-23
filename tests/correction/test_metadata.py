@@ -9,8 +9,8 @@ from pathlib import Path
 
 import pytest
 
-from src.correction.metadata import MetadataGenerator
-from src.correction.schemas import (
+from ragged.correction.metadata import MetadataGenerator
+from ragged.correction.schemas import (
     AnalysisResult,
     CorrectionAction,
     CorrectionResult,

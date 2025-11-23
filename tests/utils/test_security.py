@@ -8,7 +8,7 @@ import tempfile
 from pathlib import Path
 from unittest.mock import patch, Mock
 
-from src.utils.security import (
+from ragged.utils.security import (
     SecurityError,
     validate_file_path,
     validate_file_size,
@@ -133,7 +133,7 @@ class TestValidateFileSize:
 
     def test_default_max_size_from_config(self, temp_file):
         """Test using default max size from config."""
-        with patch("src.utils.security.get_settings") as mock_settings:
+        with patch("ragged.utils.security.get_settings") as mock_settings:
             mock_settings.return_value = Mock(max_file_size_mb=10)
             size = validate_file_size(temp_file)
             assert size > 0

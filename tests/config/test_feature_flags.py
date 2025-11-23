@@ -6,7 +6,7 @@ v0.2.9: Comprehensive tests for runtime feature toggles.
 import pytest
 from pydantic import ValidationError
 
-from src.config.feature_flags import FeatureFlags
+from ragged.config.feature_flags import FeatureFlags
 
 
 class TestFeatureFlagsInitialization:

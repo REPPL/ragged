@@ -14,9 +14,9 @@ from pathlib import Path
 from unittest.mock import Mock, patch, MagicMock
 import tempfile
 
-from src.processing.docling_processor import DoclingProcessor
-from src.processing.base import ProcessorConfig
-from src.utils.security import SecurityError
+from ragged.processing.docling_processor import DoclingProcessor
+from ragged.processing.base import ProcessorConfig
+from ragged.utils.security import SecurityError
 
 
 class TestDoclingProcessorSecurity:
@@ -203,7 +203,7 @@ class TestModelManagerSecurity:
         Vulnerability: Models downloaded without checksum verification.
         Expected: Should verify model checksums if implemented.
         """
-        from src.processing.model_manager import ModelManager
+        from ragged.processing.model_manager import ModelManager
 
         manager = ModelManager(cache_dir=tmp_path)
 
@@ -228,7 +228,7 @@ class TestModelManagerSecurity:
 
         Expected: Cache directory should be created with restrictive permissions (0o700).
         """
-        from src.processing.model_manager import ModelManager
+        from ragged.processing.model_manager import ModelManager
 
         cache_dir = tmp_path / "cache"
         manager = ModelManager(cache_dir=cache_dir)

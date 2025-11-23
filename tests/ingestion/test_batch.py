@@ -7,7 +7,7 @@ from unittest.mock import Mock, MagicMock, patch
 from rich.console import Console
 from rich.progress import Progress
 
-from src.ingestion.batch import (
+from ragged.ingestion.batch import (
     BatchIngester,
     BatchSummary,
     IngestionResult,

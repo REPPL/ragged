@@ -15,8 +15,8 @@ from typing import Generator
 
 import pytest
 
-from src.core.session import SessionManager
-from src.retrieval.cache import QueryCache
+from ragged.core.session import SessionManager
+from ragged.retrieval.cache import QueryCache
 
 
 @pytest.fixture

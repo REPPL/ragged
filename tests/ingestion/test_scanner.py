@@ -2,7 +2,7 @@
 
 import pytest
 from pathlib import Path
-from src.ingestion.scanner import DocumentScanner, SUPPORTED_EXTENSIONS, DEFAULT_IGNORE_PATTERNS
+from ragged.ingestion.scanner import DocumentScanner, SUPPORTED_EXTENSIONS, DEFAULT_IGNORE_PATTERNS
 
 
 class TestDocumentScannerInit:

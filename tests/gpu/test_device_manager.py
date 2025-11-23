@@ -10,7 +10,7 @@ Tests cover:
 
 import pytest
 
-from src.gpu.device_manager import DeviceInfo, DeviceManager, DeviceType
+from ragged.gpu.device_manager import DeviceInfo, DeviceManager, DeviceType
 
 
 # Helper functions

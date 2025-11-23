@@ -13,8 +13,8 @@ import time
 
 import pytest
 
-from src.gpu.device_manager import DeviceInfo, DeviceManager, DeviceType
-from src.gpu.memory_monitor import MemoryMonitor, MemorySnapshot
+from ragged.gpu.device_manager import DeviceInfo, DeviceManager, DeviceType
+from ragged.gpu.memory_monitor import MemoryMonitor, MemorySnapshot
 
 
 # Helper functions
