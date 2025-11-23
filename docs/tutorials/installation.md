@@ -28,6 +28,19 @@ For vision-based document understanding (ColPali), additional requirements apply
 - **Disk Space:** Additional 1.2GB for ColPali model
 - **CPU Fallback:** Available but 10x+ slower (development only)
 
+### Scan Processing Requirements (v0.4.9+)
+
+For scan processing features (OCR, page reordering, metadata extraction), you need:
+
+- **Poppler**: System dependency for PDF to image conversion
+  - **macOS**: `brew install poppler`
+  - **Ubuntu/Debian**: `sudo apt-get install poppler-utils`
+  - **Windows**: Download from [poppler-windows](https://github.com/oschwartz10612/poppler-windows/releases/)
+- **OCR Libraries**: Automatically installed via pip (PaddleOCR, EasyOCR)
+- **Disk Space:** Additional 500MB-1GB for OCR models
+
+**Why poppler?** The `pdf2image` library requires poppler's `pdftoppm` tool to convert PDF pages to images for OCR processing.
+
 ---
 
 ## Installation Methods
@@ -467,6 +480,8 @@ embedder = ColPaliEmbedder()  # device=None → auto-detect → CPU
 
 ## System Dependencies
 
+**Note:** If you used the automated installation scripts (Option 2), most dependencies are already checked. This section is for manual installations or troubleshooting.
+
 ### pdf2image (Required for Vision RAG)
 
 pdf2image requires **poppler-utils** for PDF rendering.
@@ -542,6 +557,24 @@ Adjust batch size based on available VRAM:
 
 ## First Run
 
+### Activate Environment
+
+**Docker Installation:** Services are already running, access via web browser.
+
+**Local CLI Installation:** Activate the virtual environment:
+```bash
+# Linux/macOS
+source ~/.ragged/.venv/bin/activate
+
+# Windows
+~\.ragged\.venv\Scripts\Activate.ps1
+```
+
+**Development Installation:** If using direnv, environment activates automatically when entering the ragged directory. Otherwise:
+```bash
+source .venv/bin/activate
+```
+
 ### Download Models
 
 On first run, ragged downloads required models:
@@ -578,7 +611,59 @@ ragged ingest pdf path/to/document.pdf --vision
 
 ### Common Issues
 
-#### 1. "CUDA not available" on GPU system
+#### 1. Installation script fails with "Python 3.12 not found"
+
+**Cause:** Python 3.12 not installed or not in PATH
+
+**Fix:**
+```bash
+# macOS
+brew install python@3.12
+
+# Linux (Debian/Ubuntu)
+sudo apt install python3.12 python3.12-venv
+
+# Windows
+# Download from https://www.python.org/downloads/
+```
+
+#### 2. "direnv: command not found" during development setup
+
+**Cause:** direnv not installed (optional tool)
+
+**Fix:**
+```bash
+# macOS
+brew install direnv
+
+# Linux
+sudo apt install direnv
+
+# Then add to shell config (~/.bashrc or ~/.zshrc):
+eval "$(direnv hook bash)"  # or zsh
+```
+
+**Alternative:** Skip direnv and manually activate venv with `source .venv/bin/activate`
+
+#### 3. "just: command not found" during development setup
+
+**Cause:** just not installed (optional tool)
+
+**Fix:**
+```bash
+# macOS
+brew install just
+
+# Linux
+curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash
+
+# Windows
+choco install just
+```
+
+**Alternative:** Use commands directly instead of just recipes (e.g., `pytest` instead of `just test`)
+
+#### 4. "CUDA not available" on GPU system
 
 **Cause:** PyTorch not compiled with CUDA support
 
@@ -588,7 +673,7 @@ pip uninstall torch torchvision torchaudio
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 ```
 
-#### 2. "MPS not available" on Apple Silicon
+#### 5. "MPS not available" on Apple Silicon
 
 **Cause:** PyTorch 2.6.0 MPS bug
 
@@ -597,13 +682,13 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 pip install torch==2.5.1 torchvision torchaudio
 ```
 
-#### 3. "poppler not found" error
+#### 6. "poppler not found" error
 
 **Cause:** poppler-utils not installed
 
 **Fix:** Install poppler-utils (see System Dependencies above)
 
-#### 4. GPU out of memory (OOM)
+#### 7. GPU out of memory (OOM)
 
 **Cause:** Batch size too large for available VRAM
 
@@ -616,7 +701,7 @@ export RAGGED_VISION_BATCH_SIZE=2  # or 1 for 4GB GPUs
 ragged ingest pdf document.pdf --vision --vision-batch-size 2
 ```
 
-#### 5. Slow vision embedding on CPU
+#### 8. Slow vision embedding on CPU
 
 **Cause:** No GPU detected, falling back to CPU
 
@@ -628,8 +713,28 @@ ragged ingest pdf document.pdf --vision --vision-batch-size 2
 
 ### Upgrade to Latest Version
 
+**Docker Installation:**
 ```bash
-pip install --upgrade ragged
+cd ragged
+git pull origin main
+docker compose down
+docker compose build --no-cache
+docker compose up -d
+```
+
+**Local CLI Installation:**
+```bash
+cd ~/.ragged
+git pull origin main
+source .venv/bin/activate
+pip install --upgrade -e ".[dev]"
+```
+
+**Development Installation:**
+```bash
+cd ragged
+git pull origin main
+just update-deps  # or: pip install --upgrade -e ".[dev]"
 ```
 
 ### Upgrade from v0.4.x to v0.5.0 (Vision RAG)
@@ -660,21 +765,56 @@ Migration is automatic and preserves existing text embeddings.
 
 ## Uninstallation
 
-### Remove ragged
+### Docker Installation
 
 ```bash
-pip uninstall ragged
+# Stop and remove containers
+docker compose down
+
+# Remove images (optional)
+docker compose down --rmi all
+
+# Remove volumes (optional, deletes all data)
+docker compose down -v
+
+# Remove project directory
+cd ..
+rm -rf ragged
 ```
 
-### Remove All Data
+### Local CLI Installation
 
 ```bash
-# Remove storage
-rm -rf ~/.ragged/storage
+# Remove installation directory (includes venv and all data)
+rm -rf ~/.ragged
 
-# Remove model cache
+# Remove from PATH (if added)
+# Edit ~/.bashrc or ~/.zshrc and remove the ragged PATH line
+```
+
+### Development Installation
+
+```bash
+# Remove virtual environment
+rm -rf .venv
+
+# Remove ragged from pip
+pip uninstall ragged
+
+# Remove project directory (if desired)
+cd ..
+rm -rf ragged
+```
+
+### Remove Model Cache (All Methods)
+
+```bash
+# Remove downloaded models (Linux/macOS)
 rm -rf ~/.cache/huggingface/hub/models--*colpali*
 rm -rf ~/.cache/huggingface/hub/models--sentence-transformers*
+
+# Remove storage data
+rm -rf ~/.ragged/storage  # or ./data if using local development
 ```
 
 ---

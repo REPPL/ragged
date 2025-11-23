@@ -366,6 +366,38 @@ scan_enable_lineage_tracking: true
 
 ## Troubleshooting
 
+### "Unable to get page count. Is poppler installed and in PATH?"
+
+**Cause**: Poppler system dependency is not installed.
+
+**What is poppler?** Poppler provides command-line tools (`pdftoppm`, `pdfinfo`) required by `pdf2image` to convert PDF pages to images for OCR processing.
+
+**Solution**:
+
+**macOS:**
+```bash
+brew install poppler
+
+# Verify installation
+pdfinfo --version
+```
+
+**Ubuntu/Debian:**
+```bash
+sudo apt-get update
+sudo apt-get install poppler-utils
+
+# Verify installation
+pdfinfo --version
+```
+
+**Windows:**
+1. Download poppler from [poppler-windows releases](https://github.com/oschwartz10612/poppler-windows/releases/)
+2. Extract to `C:\Program Files\poppler`
+3. Add `C:\Program Files\poppler\Library\bin` to PATH
+
+After installing poppler, retry the scan command.
+
 ### "OCR failed" Error
 
 **Cause**: OCR engine couldn't process the image.
