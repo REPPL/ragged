@@ -137,7 +137,7 @@ ragged-ui:
 
 - [Gradio Documentation](https://www.gradio.app/docs)
 - [Gradio 6.0 Release Notes](https://github.com/gradio-app/gradio/releases/tag/v6.0.0)
-- [Web UI Implementation](../../../src/web/gradio/ui.py)
+- Web UI Implementation
 
 ---
 

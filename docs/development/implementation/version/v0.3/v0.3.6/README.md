@@ -115,10 +115,10 @@ Result: Easier to use than class-based factory
 - [v0.4 Roadmap](../../../../roadmap/version/v0.4/README.md) - LEANN integration (next)
 
 **Source Code:**
-- [VectorStore Interface](../../../../../src/storage/vectorstore_interface.py)
-- [ChromaDB Implementation](../../../../../src/storage/chromadb_store.py)
-- [Factory Function](../../../../../src/storage/vectorstore_factory.py)
-- [Backward Compatibility](../../../../../src/storage/vector_store.py)
+- VectorStore Interface
+- ChromaDB Implementation
+- Factory Function
+- Backward Compatibility
 
 ---
 

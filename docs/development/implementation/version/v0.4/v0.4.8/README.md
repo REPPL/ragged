@@ -346,9 +346,9 @@ Version 0.4.8 is successful if:
 
 ## Related Documentation
 
-- [v0.4.8 Roadmap](../../../roadmap/version/v0.4/v0.4.8.md) - Original plan
+- [v0.4.8 Roadmap](../../../../roadmap/version/v0.4/v0.4.8.md) - Original plan
 - [v0.4.7 Implementation](../v0.4.7/README.md) - Behaviour learning foundation
-- [v0.4 Overview](../../../roadmap/version/v0.4/README.md) - Release series
+- [v0.4 Overview](../../../../roadmap/version/v0.4/README.md) - Release series
 
 ---
 

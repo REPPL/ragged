@@ -116,7 +116,7 @@ How should ragged store and retrieve across both embedding types?
 ## References
 
 - [Reciprocal Rank Fusion Paper](https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf)
-- [DualEmbeddingStore Implementation](../../../src/storage/dual_store.py)
+- DualEmbeddingStore Implementation
 - [ADR-001: Vision Embeddings Opt-In](./ADR-001-vision-embeddings-opt-in-design.md)
 - [ADR-002: ChromaDB Choice](./ADR-002-chromadb-as-vector-database.md)
 

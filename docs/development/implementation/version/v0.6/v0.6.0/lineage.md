@@ -169,7 +169,7 @@ This document provides complete traceability from planning through implementatio
 
 ### Planning
 - [v0.6 Planning](../../../../planning/version/v0.6/README.md) - High-level design goals
-- [v0.5.8 Planning Continuation](../../../../planning/version/v0.5/v0.5.8.md) - Security strategy origin
+- [v0.5.8 Planning Continuation](../../../../roadmap/version/v0.5/) - Security strategy origin
 
 ### Roadmap
 - [v0.6.0 Roadmap](../../../../roadmap/version/v0.6/v0.6.0.md) - Full feature specification (5 feature groups)

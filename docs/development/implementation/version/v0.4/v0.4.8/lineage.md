@@ -15,7 +15,7 @@ This document traces v0.4.8 from initial conception through planning, detailed s
 **Location**: Not explicitly created for v0.4.8 (inherited from v0.4 series planning)
 
 **Inherited Context**:
-- [v0.4 Overview](../../../planning/version/v0.4/README.md) - Memory system vision
+- [v0.4 Overview](../../../../planning/version/v0.4/README.md) - Memory system vision
 - v0.4 planning documents establish behaviour learning and personalisation as core goals
 
 **Key Planning Decisions**:
@@ -30,7 +30,7 @@ This document traces v0.4.8 from initial conception through planning, detailed s
 
 ### Phase 2: Roadmap (How & When)
 
-**Location**: [v0.4.8 Roadmap](../../../roadmap/version/v0.4/v0.4.8.md)
+**Location**: [v0.4.8 Roadmap](../../../../roadmap/version/v0.4/v0.4.8.md)
 
 **Original Specification** (from roadmap):
 - **Hours Estimated**: 18-20 hours
@@ -209,15 +209,15 @@ This document traces v0.4.8 from initial conception through planning, detailed s
 ### Upstream Documentation (Planning → Roadmap)
 
 1. **v0.4 Series Planning**
-   - [v0.4 Overview](../../../planning/version/v0.4/README.md)
+   - [v0.4 Overview](../../../../planning/version/v0.4/README.md)
    - Context: Memory system vision and goals
 
 2. **v0.4.8 Roadmap**
-   - [v0.4.8 Specification](../../../roadmap/version/v0.4/v0.4.8.md)
+   - [v0.4.8 Specification](../../../../roadmap/version/v0.4/v0.4.8.md)
    - Details: Technical specifications, deliverables, estimates
 
 3. **v0.4 Detailed Spec**
-   - [v0.4 Detailed Specification](../../../roadmap/version/v0.4/v0.4-DETAILED-SPEC.md)
+   - [v0.4 Detailed Specification](../../../../roadmap/version/v0.4/v0.4-detailed-spec.md)
    - Context: Part 2, Milestone 2 - Behaviour Learning
 
 ### Downstream Documentation (Implementation → Process)
@@ -248,7 +248,7 @@ This document traces v0.4.8 from initial conception through planning, detailed s
 ### Successor Documentation (Next Steps)
 
 9. **v0.4.10 Roadmap** (next planned)
-   - [v0.4.10 Advanced Temporal](../../../roadmap/version/v0.4/v0.4.10.md)
+   - [v0.4.10 Advanced Temporal](../../../../roadmap/version/v0.4/v0.4.10/README.md)
    - Future: Timeline queries, temporal relationships
 
 10. **v0.5.x Series** (future enhancements)
@@ -403,9 +403,9 @@ This document traces v0.4.8 from initial conception through planning, detailed s
 ## Related Documentation
 
 ### Planning & Roadmap
-- [v0.4 Planning Overview](../../../planning/version/v0.4/README.md)
-- [v0.4.8 Roadmap Specification](../../../roadmap/version/v0.4/v0.4.8.md)
-- [v0.4 Detailed Specification](../../../roadmap/version/v0.4/v0.4-DETAILED-SPEC.md)
+- [v0.4 Planning Overview](../../../../planning/version/v0.4/README.md)
+- [v0.4.8 Roadmap Specification](../../../../roadmap/version/v0.4/v0.4.8.md)
+- [v0.4 Detailed Specification](../../../../roadmap/version/v0.4/v0.4-detailed-spec.md)
 
 ### Implementation
 - [v0.4.8 Implementation Record](README.md)
@@ -418,8 +418,8 @@ This document traces v0.4.8 from initial conception through planning, detailed s
 - Decision records: Captured in implementation record
 
 ### Future Releases
-- [v0.4.10 Roadmap](../../../roadmap/version/v0.4/v0.4.10.md) - Next planned
-- [v0.4 Series Overview](../../../roadmap/version/v0.4/README.md) - Complete series
+- [v0.4.10 Roadmap](../../../../roadmap/version/v0.4/v0.4.10/README.md) - Next planned
+- [v0.4 Series Overview](../../../../roadmap/version/v0.4/README.md) - Complete series
 
 ---
 

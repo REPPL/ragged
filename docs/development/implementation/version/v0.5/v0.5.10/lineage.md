@@ -377,7 +377,7 @@ v0.5.10 completes the v0.5.x series:
 - [v0.5.10 CHANGELOG](./CHANGELOG.md) - User-facing release notes
 - [v0.5.10 DELIVERABLES-SUMMARY](./DELIVERABLES-SUMMARY.md) - Complete deliverables record
 - [v0.5 Overview](../README.md) - Series overview
-- [Installation Guide](../../../../tutorials/installation.md) - Getting started
+- [Installation Guide](../../../../tutorials/) - Getting started
 
 ---
 

@@ -510,8 +510,8 @@ v0.5.10 successfully delivers comprehensive documentation and developer experien
 
 - [v0.5.10 README](./README.md) - Implementation overview
 - [v0.5.10 CHANGELOG](./CHANGELOG.md) - User-facing changelog
-- [v0.5.10 Roadmap](../../../roadmap/version/v0.5/v0.5.10.md) - Original plan
-- [Installation Guide](../../../../tutorials/installation.md) - Getting started
+- [v0.5.10 Roadmap](../../../../roadmap/version/v0.5/v0.5.10.md) - Original plan
+- [Installation Guide](../../../../tutorials/) - Getting started
 
 ---
 

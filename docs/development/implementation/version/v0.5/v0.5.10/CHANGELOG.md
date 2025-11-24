@@ -282,9 +282,9 @@ v0.5.10 represents the culmination of the v0.5.x series, building on the foundat
 
 - [v0.5.10 Implementation README](./README.md)
 - [v0.5.10 Deliverables Summary](./DELIVERABLES-SUMMARY.md)
-- [v0.5.10 Roadmap](../../../roadmap/version/v0.5/v0.5.10.md)
-- [Installation Guide](../../../../tutorials/installation.md)
-- [Troubleshooting Guide](../../../../guides/troubleshooting.md)
+- [v0.5.10 Roadmap](../../../../roadmap/version/v0.5/v0.5.10.md)
+- [Installation Guide](../../../../tutorials/)
+- [Troubleshooting Guide](../../../../guides/)
 
 ---
 

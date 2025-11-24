@@ -1,315 +1,170 @@
-# Ragged v0.7.0 Roadmap - Production Readiness
+# Ragged v0.7.x Series Overview - Installation & User Experience Excellence
 
 **Status:** Planned
 
-**Total Hours:** 150-200 hours (AI implementation)
-
-**Focus:** Scalability, enterprise features, and stable API guarantee
-
-**Breaking Changes:** None (final preparation for v1.0)
-
----
-
-## Overview
-
-Version 0.7.0 prepares ragged for production deployment with enterprise features, scalability improvements, and API stability guarantees. This is the final major version before v1.0.
+**Focus:** Transform ragged from "developer-friendly" to "everyone-friendly" installation
 
 **Dependencies:** Requires v0.6.0 completion (intelligent optimisation)
 
-**Purpose:** Production-ready system suitable for enterprise deployment
+---
+
+## Series Purpose
+
+The v0.7.x series addresses the most immediate barrier to ragged adoption: installation complexity. Whilst ragged is powerful for users who successfully install it, the installation process currently requires 15-30 minutes with multiple manual steps, making it inaccessible to non-technical users.
+
+This series prioritises **user experience** over **enterprise features**, recognising that widespread adoption requires an excellent first impression.
 
 ---
 
-## PROD-001: API Stability & Versioning (25-30 hours)
+## Series Focus: Installation & Onboarding
 
-**Problem:** No API versioning or stability guarantees, making integration risky for production use.
+**Problem Statement:**
+- Current installation requires deep technical knowledge
+- Python 3.12 strict requirement causes friction
+- Multiple external dependencies (Ollama, ChromaDB, Docker, Poppler)
+- Configuration has 100+ overwhelming options
+- No guided first-run experience
+- Error messages are technical (stack traces)
+- CLI has 30+ uncategorised commands
 
-**Implementation:**
-1. Design API versioning strategy (URL-based /api/v1/) [4-5 hours]
-2. Implement API version routing [6-8 hours]
-3. Create API compatibility layer [6-8 hours]
-4. Add deprecation warnings system [4-5 hours]
-5. Document API stability guarantees [5-6 hours]
-
-**API versions:**
-- `/api/v1/` - Stable, guaranteed compatible through v1.x
-- `/api/v2/` - Future experimental features
-
-**Files:** src/web/api.py, src/web/versioning.py (new), docs/api/
-
-**⚠️ MANUAL TEST:** Test API endpoints via /api/v1/, verify stability guarantees
-
-**Success:** Stable API with versioning, clear deprecation policy, comprehensive documentation
-
----
-
-## PROD-002: Horizontal Scalability (30-40 hours)
-
-**Problem:** Single-instance architecture cannot scale to handle high query loads.
-
-**Implementation:**
-1. Research distributed architecture patterns [4-5 hours]
-2. Implement stateless API layer for load balancing [10-12 hours]
-3. Add distributed caching (Redis support) [8-10 hours]
-4. Create connection pooling for ChromaDB [4-6 hours]
-5. Add load balancer configuration examples [4-5 hours]
-
-**Scaling strategies:**
-- Stateless API instances (Nginx load balancing)
-- Shared Redis cache across instances
-- ChromaDB connection pooling
-- Async query processing
-
-**Files:** src/web/api.py, src/caching/distributed_cache.py (new), docker-compose.yml
-
-**⚠️ MANUAL TEST:** Deploy multiple instances, test load distribution and cache sharing
-
-**Success:** System scales horizontally, cache shared across instances, no single point of failure
+**Target Outcomes:**
+- Installation in <10 minutes on fresh system
+- Interactive wizard with ≤3 questions
+- Clear prerequisite validation with actionable errors
+- Guided first-run experience with working demo
+- User-friendly error messages
+- Visual service health dashboard
+- Organised CLI help
 
 ---
 
-## PROD-003: Enterprise Authentication (25-35 hours)
+## Design Philosophy Change
 
-**Problem:** No authentication or authorisation, unsuitable for multi-user enterprise deployment.
+### Previous Direction (Deferred)
+The original v0.7.0 roadmap focused on **production readiness**:
+- API stability & versioning
+- Horizontal scalability
+- Enterprise authentication
+- Monitoring & observability
+- Rate limiting & quotas
 
-**Implementation:**
-1. Research authentication patterns (JWT, OAuth2) [3-4 hours]
-2. Implement JWT authentication layer [10-12 hours]
-3. Add role-based access control (RBAC) [8-10 hours]
-4. Create user management API [4-6 hours]
-5. Add API key support for programmatic access [2-3 hours]
+**Rationale for deferral:** These features are important for v1.0 but premature before ragged has broader adoption. Installation friction is the immediate blocker preventing users from experiencing ragged's capabilities.
 
-**User roles:**
-- Admin: Full system access, user management
-- User: Query and upload, own collections
-- Read-Only: Query only, no uploads
+### New Direction (v0.7.x)
+Focus on **state-of-the-art installation experience**:
+- Make installation trivial for all skill levels
+- Excellent error messages and troubleshooting
+- Smooth onboarding with guided first-run
+- Clear, concise documentation
+- Self-service problem resolution
 
-**Files:** src/auth/ (new directory), src/web/api.py, src/config/settings.py
-
-**⚠️ MANUAL TEST:** Test authentication, verify RBAC policies enforced correctly
-
-**Success:** Secure authentication, fine-grained access control, enterprise-ready
-
----
-
-## PROD-004: Monitoring & Observability (20-25 hours)
-
-**Problem:** No production-ready monitoring, difficult to troubleshoot issues in deployment.
-
-**Implementation:**
-1. Add structured logging (JSON format) [4-5 hours]
-2. Implement health check endpoints [3-4 hours]
-3. Add Prometheus metrics export [6-8 hours]
-4. Create alerting rules and examples [4-5 hours]
-5. Add distributed tracing support (OpenTelemetry) [3-4 hours]
-
-**Metrics to expose:**
-- Request rate, latency, errors (RED)
-- GPU utilisation, memory usage
-- Cache performance
-- Model routing decisions
-- Query queue depth
-
-**Files:** src/monitoring/ (new), src/web/api.py, prometheus.yml (example)
-
-**⚠️ MANUAL TEST:** Set up Prometheus + Grafana, verify metrics collected and dashboards work
-
-**Success:** Production monitoring ready, alerts configured, observability comprehensive
+**Rationale:** Better to have 1000 happy users with easy installation than 10 enterprise users with complex deployment. Production readiness will come after v1.0 when API is stable and user base is established.
 
 ---
 
-## PROD-005: Data Backup & Recovery (15-20 hours)
+## Minor Versions
 
-**Problem:** No backup or disaster recovery strategy, data loss risk in production.
+### v0.7.0 - State-of-the-Art Installation & User Onboarding
 
-**Implementation:**
-1. Design backup strategy for ChromaDB data [3-4 hours]
-2. Implement automated backup scheduling [4-5 hours]
-3. Create restore procedures and CLI commands [4-5 hours]
-4. Add backup verification and integrity checks [3-4 hours]
-5. Document disaster recovery procedures [1-2 hours]
+**Total Hours:** 58-82 hours (AI implementation)
 
-**Backup components:**
-- Vector database (ChromaDB collections)
-- Configuration files
-- User data (if stored)
-- Knowledge graphs (from v0.4.0)
+**Status:** Planned
 
-**Files:** src/backup/ (new), src/main.py
+**Features:** 13 focused installation improvements (INSTALL-001 through INSTALL-013)
 
-**⚠️ MANUAL TEST:** Perform backup and restore, verify data integrity
+**Highlights:**
+- Prerequisites validation system
+- CLI command categorisation
+- Quick start documentation (README <100 lines)
+- User-friendly error messages (no stack traces)
+- Interactive installation wizard (3 questions)
+- Enhanced health dashboard with auto-repair
+- First-run welcome experience
+- Smart service auto-start
+- Unified installation script
+- Model management CLI
+- Configuration presets
+- Installation troubleshooting matrix
+- Getting-started tutorial completion
 
-**Success:** Automated backups, tested restore procedures, comprehensive DR documentation
+**See:** [v0.7.0 Detailed Roadmap](./v0.7.0/README.md)
 
----
+### Future Minor Versions (Post-v0.7.0)
 
-## PROD-006: Rate Limiting & Quotas (15-20 hours)
+**Potential v0.7.1+ enhancements based on user feedback:**
+- Installation analytics (opt-in, privacy-preserving)
+- Embedded ChromaDB mode (no Docker requirement)
+- Installation video/screencasts
+- Automated dependency installation (with permission)
+- Additional configuration presets for niche use cases
 
-**Problem:** No rate limiting allows abuse, resource exhaustion in multi-tenant deployments.
-
-**Implementation:**
-1. Implement rate limiting middleware [6-8 hours]
-2. Add user quota management [4-5 hours]
-3. Create quota tracking and enforcement [3-4 hours]
-4. Add rate limit configuration [2-3 hours]
-
-**Rate limits:**
-- Queries per minute per user
-- Uploads per day per user
-- Total storage per user
-- GPU time per user (if applicable)
-
-**Files:** src/middleware/rate_limit.py (new), src/auth/quota.py (new)
-
-**⚠️ MANUAL TEST:** Test rate limiting, verify enforcement and error messages
-
-**Success:** Rate limits enforced, quotas tracked, abuse prevented
+**Note:** Minor versions determined by user feedback after v0.7.0 release.
 
 ---
 
-## PROD-007: Performance Optimisation (20-30 hours)
+## Success Criteria for v0.7.x Series
 
-**Problem:** Production workloads may reveal performance bottlenecks not visible in development.
+**Measurable Goals:**
+- Time-to-first-query: <15 minutes (target: <10 minutes)
+- Installation success rate: >95% on clean systems
+- User satisfaction: "Installation was easy" >4/5 rating
+- Support reduction: 50% fewer installation-related requests
+- Documentation: README <100 lines, getting-started <10 minutes
 
-**Implementation:**
-1. Conduct comprehensive performance profiling [4-6 hours]
-2. Optimise database queries and indexing [6-8 hours]
-3. Implement query batching for efficiency [4-6 hours]
-4. Add connection pooling and resource reuse [4-6 hours]
-5. Optimise memory usage in high-load scenarios [2-4 hours]
-
-**Performance targets:**
-- Query latency p95 <2 seconds
-- Handle 100+ concurrent users
-- Support 1M+ documents
-- GPU utilisation >80% when active
-
-**Files:** Multiple files across codebase
-
-**⚠️ MANUAL TEST:** Load testing with 100+ concurrent users, verify performance targets met
-
-**Success:** Performance targets achieved, system stable under high load
+**Qualitative Goals:**
+- Non-technical users can install without help
+- Error messages are actionable (user knows what to do)
+- First-run experience is confidence-building
+- Documentation structure is discoverable
+- CLI is approachable for beginners
 
 ---
 
-## PROD-008: Security Hardening (15-20 hours)
+## Impact on Roadmap
 
-**Problem:** Development-focused security not suitable for production deployment.
+### What This Means for Production Readiness
 
-**Implementation:**
-1. Conduct security audit of codebase [4-5 hours]
-2. Implement input validation and sanitisation [4-5 hours]
-3. Add SQL/NoSQL injection prevention [3-4 hours]
-4. Implement secure file upload handling [2-3 hours]
-5. Add security headers and CORS configuration [2-3 hours]
+The features originally planned for v0.7.0 (production readiness) are **deferred but not cancelled**:
 
-**Security measures:**
-- Input validation on all endpoints
-- Secure file upload (type checking, size limits)
-- SQL injection prevention
-- XSS protection
-- CSRF tokens
-- Security headers (CSP, HSTS, etc.)
+**New timeline:**
+- **v0.7.x:** Installation & user experience (current)
+- **v0.8.x:** Advanced features based on user feedback
+- **v0.9.x:** Production readiness (API stability, scalability, auth, monitoring)
+- **v1.0.0:** First stable release with API guarantees
 
-**Files:** src/web/api.py, src/security/ (new), src/middleware/
-
-**⚠️ MANUAL TEST:** Run security scanning tools, perform penetration testing
-
-**Success:** Security audit passed, no critical vulnerabilities, production-hardened
-
----
-
-## PROD-009: Documentation & Deployment Guides (20-25 hours)
-
-**Problem:** Limited production deployment documentation, difficult for enterprises to deploy.
-
-**Implementation:**
-1. Create production deployment guide [6-8 hours]
-2. Add Docker Compose production config [4-5 hours]
-3. Create Kubernetes deployment manifests [6-8 hours]
-4. Add infrastructure-as-code examples (Terraform) [2-3 hours]
-5. Document security best practices [2-3 hours]
-
-**Documentation to create:**
-- Production deployment guide
-- Kubernetes deployment
-- Docker Swarm deployment
-- Security hardening guide
-- Monitoring setup guide
-- Backup and recovery procedures
-
-**Files:** docs/deployment/, kubernetes/, docker/
-
-**⚠️ MANUAL TEST:** Follow deployment guides, verify complete and accurate
-
-**Success:** Comprehensive deployment documentation, enterprise-ready
-
----
-
-## Success Criteria (Test Checkpoints)
-
-**Automated:**
-- [ ] API versioning functional
-- [ ] Authentication and RBAC working
-- [ ] Rate limiting enforced
-- [ ] Monitoring metrics collected
-- [ ] Backup and restore tested
-- [ ] Security scan passed
-- [ ] Load tests passed
-- [ ] All existing tests pass
-
-**Manual Testing:**
-- [ ] ⚠️ MANUAL: Deploy to production environment
-- [ ] ⚠️ MANUAL: Verify horizontal scaling works
-- [ ] ⚠️ MANUAL: Test disaster recovery procedures
-- [ ] ⚠️ MANUAL: Monitor system under production load
-- [ ] ⚠️ MANUAL: Verify security hardening effective
-- [ ] ⚠️ MANUAL: Enterprise users can deploy successfully
-
-**Quality Gates:**
-- [ ] Query latency p95 <2 seconds
-- [ ] Support 100+ concurrent users
-- [ ] Support 1M+ documents
-- [ ] API stability guarantee documented
-- [ ] Zero critical security vulnerabilities
-- [ ] Comprehensive deployment documentation
-- [ ] Tested backup and recovery procedures
+**Rationale:** This sequencing ensures:
+1. Users can actually install ragged (v0.7.x)
+2. Feature set is validated with broader user base (v0.8.x)
+3. Production features built on stable foundation (v0.9.x)
+4. v1.0 represents truly production-ready, widely-adopted system
 
 ---
 
 ## Known Risks
 
-- Scaling architecture may require significant refactoring
-- Authentication integration complex
-- Performance optimisation may uncover deep issues
-- Enterprise deployment scenarios varied and complex
-- Security hardening ongoing process
-- Production workloads may reveal unforeseen issues
+- **Windows WSL support:** May need additional platform-specific work
+- **User testing dependency:** Need real non-technical users for validation
+- **Documentation maintenance:** Keeping docs in sync requires discipline
+- **Feature creep:** Must resist adding features over improving experience
+- **Delayed production readiness:** Enterprise users may need to wait for v0.9
 
 ---
 
-## Next Version
+## Next Major Version
 
-After v0.7.0 completion:
-- **v1.0.0:** First stable release with full API guarantees
-- Focus on stability, no new features
-- Comprehensive testing and validation
-- Production deployment success stories
-
----
-
-
-**Status:** Requires v0.6.0 completion first
-
-**Note:** v0.7.0 is the final preparation for v1.0 stable release
+After v0.7.x series completion:
+- **v0.8.0:** Advanced features (domain-specific enhancements, community requests)
+- Continue iterating on user feedback from improved installation
+- Prepare foundation for production readiness in v0.9
 
 ---
 
 ## Related Documentation
 
-- [Previous Version](../v0.6/README.md) - Intelligent optimisation
-- [Next Version](../../../planning/version/v1.0) - Production release planning
-- [Planning](.) - Design goals for v0.7
+- [v0.7.0 Detailed Roadmap](./v0.7.0/README.md) - Installation & onboarding features
+- [v0.6.0 Roadmap](../v0.6/README.md) - Intelligent optimisation (prerequisite)
+- [Current Installation Guide](../../../../tutorials/installation.md) - Existing documentation
+- [Troubleshooting Guide](../../../../guides/troubleshooting.md) - Current troubleshooting
 - [Version Overview](../README.md) - Complete version comparison
 
 ---

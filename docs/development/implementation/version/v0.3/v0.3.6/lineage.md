@@ -257,9 +257,9 @@ store = VectorStore(collection_name="docs")
 - **v0.3 Master Plan**: [v0.3 Roadmap](../../../../roadmap/version/v0.3/README.md)
 - **v0.4 LEANN Plan**: [v0.4 Roadmap](../../../../roadmap/version/v0.4/README.md)
 - **Source Code**:
-  - [VectorStore Interface](../../../../../src/storage/vectorstore_interface.py)
-  - [ChromaDB Implementation](../../../../../src/storage/chromadb_store.py)
-  - [Factory Function](../../../../../src/storage/vectorstore_factory.py)
+  - VectorStore Interface
+  - ChromaDB Implementation
+  - Factory Function
 
 ---
 

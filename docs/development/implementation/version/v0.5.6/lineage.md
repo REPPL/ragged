@@ -10,7 +10,7 @@
 
 ### 1. Planning Phase (WHAT & WHY)
 
-**Document:** [v0.5 Planning Overview](../../../../planning/version/v0.5/README.md)
+**Document:** [v0.5 Planning Overview](../../../../roadmap/version/v0.5/README.md)
 
 **Key Decisions:**
 - Implement vision embeddings for multi-modal RAG
@@ -130,12 +130,12 @@
 ## Cross-References
 
 **Planning Documents:**
-- [v0.5 Vision](../../../../planning/version/v0.5/README.md) - High-level objectives
-- [v0.5 Feature Specifications](../../../../roadmap/version/v0.5/features/) - Detailed VISION-* specs
+- [v0.5 Vision](../../../../roadmap/version/v0.5/README.md) - High-level objectives
+- [v0.5 Feature Specifications](../../../../roadmap/version/v0.5/) - Detailed VISION-* specs
 
 **Roadmap Documents:**
 - [v0.5 Roadmap](../../../../roadmap/version/v0.5/README.md) - Implementation plan
-- [VISION-001 through VISION-006](../../../../roadmap/version/v0.5/features/) - Feature roadmaps
+- [VISION-001 through VISION-006](../../../../roadmap/version/v0.5/) - Feature roadmaps
 
 **Implementation Records:**
 - [v0.5.6 README](./README.md) - What was built
@@ -143,9 +143,9 @@
 - [v0.5.6 DELIVERABLES-SUMMARY](./DELIVERABLES-SUMMARY.md) - Complete implementation record
 
 **Related Implementations:**
-- [v0.5.5 Implementation](../v0.5.5/) - Previous release
-- [v0.5.7 Implementation](../v0.5.7/) - Security hardening (next release)
-- [v0.5.8 Implementation](../v0.5.8/) - Security hardening continuation
+- [v0.5.5 Implementation](../v0.5/v0.5.5/) - Previous release
+- [v0.5.7 Implementation](../v0.5/v0.5.7/) - Security hardening (next release)
+- [v0.5.8 Implementation](../v0.5/v0.5.8/) - Security hardening continuation
 
 **Process Documentation:**
 - Git history: commits 99b5a28 through 73eb32f
