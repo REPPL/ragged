@@ -227,7 +227,7 @@ All middleware operations are lightweight with minimal overhead:
 ## Related Documentation
 
 - [v0.6.0 Roadmap](../../../../roadmap/version/v0.6/v0.6.0.md) - Full feature specification
-- [v0.5.8 Implementation](../v0.5.8/README.md) - Previous security hardening
+- [v0.5.8 Implementation](../../v0.5/v0.5.8/README.md) - Previous security hardening
 - [CHANGELOG v0.6.0](../../../../../../CHANGELOG.md) - User-facing release notes
 
 ---
@@ -235,5 +235,3 @@ All middleware operations are lightweight with minimal overhead:
 **Status:** Phase 1 Complete ✅
 **Release:** v0.6.0
 **Date:** 2025-11-24
-
-**Next:** Continue with remaining v0.6 roadmap features in future releases
