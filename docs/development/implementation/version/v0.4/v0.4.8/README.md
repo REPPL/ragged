@@ -325,7 +325,7 @@ Helper functions for scoring:
 
 ---
 
-##Success Criteria
+## Success Criteria
 
 Version 0.4.8 is successful if:
 
