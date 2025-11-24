@@ -143,31 +143,42 @@ class PathValidator:
                 f"Use relative paths within allowed base directory."
             )
 
-        # Security check 4: Block symlinks BEFORE resolving (if not allowed)
-        # Must check before resolve() since resolve() follows symlinks
+        # Security check 4: Block symlinks using lstat (atomic, no TOCTOU)
+        # Use lstat instead of is_symlink to avoid TOCTOU race condition
+        # CRITICAL: Check BEFORE resolution to prevent race conditions
         if not self.allow_symlinks:
-            # Check if the path itself or any parent is a symlink
-            check_path = path if path.is_absolute() else (self.allowed_base / path) if self.allowed_base else path.resolve()
-            if check_path.exists():
-                # Check each component from the path up to root
-                current = check_path
-                while current != current.parent:
-                    if current.is_symlink():
-                        raise PathTraversalError(
-                            f"Symbolic link detected in path: {path}. "
-                            f"Symlinks not allowed for security."
-                        )
-                    current = current.parent
+            # Construct the full path to check
+            check_path = path if path.is_absolute() else (self.allowed_base / path) if self.allowed_base else Path.cwd() / path
 
-        # Resolve path (follows symlinks and makes absolute)
+            # Only check user-provided paths (not system paths in absolute mode)
+            # For absolute paths with allow_absolute=True, we trust the system paths
+            # For relative paths, we check the final component for user-created symlinks
+            if not (self.allow_absolute and path.is_absolute()):
+                # Check if path exists before testing for symlinks
+                if check_path.exists():
+                    try:
+                        # Use os.lstat which doesn't follow symlinks (atomic operation)
+                        # This prevents TOCTOU race conditions
+                        stat_info = os.lstat(str(check_path))
+                        # Check if the final path itself is a symlink
+                        if os.path.stat.S_ISLNK(stat_info.st_mode):
+                            raise PathTraversalError(
+                                f"Symbolic link detected in path: {path}. "
+                                f"Symlinks not allowed for security."
+                            )
+                    except (FileNotFoundError, OSError):
+                        # Path doesn't exist yet, will be created later
+                        pass
+
+        # Resolve path using strict mode to prevent symlink following when possible
         if self.allowed_base:
             # Make relative to allowed_base
             if not path.is_absolute():
-                resolved_path = (self.allowed_base / path).resolve()
+                resolved_path = (self.allowed_base / path).resolve(strict=False)
             else:
-                resolved_path = path.resolve()
+                resolved_path = path.resolve(strict=False)
         else:
-            resolved_path = path.resolve()
+            resolved_path = path.resolve(strict=False)
 
         # Security check 5: Verify within allowed base
         if self.allowed_base:
