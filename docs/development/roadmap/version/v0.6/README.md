@@ -1,322 +1,250 @@
-# Ragged v0.6 Roadmap - Web UI Security & API Maturity
+# Ragged v0.6 Series - Query Optimisation & Modern Web UI
 
 **Status:** Planned
 
-**Duration:** 32-48 hours (AI implementation)
+**Total Duration:** 407-570 hours
 
-**Focus:** Web UI security enhancements, API improvements, Gradio interface refinements
+**Focus:** Query intelligence, streaming performance, modern Svelte UI, public API, production readiness
 
-**Breaking Changes:** None
-
----
-
-## Overview
-
-Version 0.6 focuses on securing and maturing the web interface and API layer. This release transitions from the security-focused v0.5.x series to user-facing improvements while maintaining architectural quality.
-
-**Dependencies:** Requires v0.5.x completion (security implementation, vision RAG, GPU management)
-
-**Strategic Context:** Prepares foundation for v0.6.7 Svelte UI redesign and v0.7.x query optimisation by ensuring secure, stable API and web layers.
-
-**Note:** Data connectivity features (Google Drive, Dropbox, Notion) deferred to v0.8.x or v0.9.x. Query optimisation features deferred to v0.7.x series.
+**Breaking Changes:** Acceptable (pre-1.0 development)
 
 ---
 
-## SECURITY-WEB-001: Web UI Security Enhancements (6-8 hours)
+## Series Overview
 
-**Problem:** Current Gradio web UI lacks enterprise-grade security headers and session management.
+Version 0.6 transforms ragged from a functional RAG system into an intelligent, production-ready platform. This series introduces query classification for automatic model routing, streaming and parallel retrieval for performance, a modern Svelte/SvelteKit web UI replacing Gradio, a public REST API with SDKs, comprehensive testing, and full security hardening.
 
-**Implementation:**
+**Key Achievements:**
+- **Query Intelligence:** Automatic query classification and model routing (30-50% latency reduction)
+- **Performance:** Streaming responses (<1s first token) and parallel retrieval (33-60% faster)
+- **Modern UI:** Complete Svelte/SvelteKit rebuild with PWA support
+- **Public API:** REST API with SDK and OAuth integration
+- **Production Ready:** Comprehensive testing, security hardening, deployment guides
 
-1. **Content Security Policy (CSP) Headers** (2 hours)
-   - Prevent XSS attacks
-   - Restrict resource loading
-   - Monitor violations
-
-2. **HTTP Strict Transport Security (HSTS)** (1 hour)
-   - Force HTTPS connections
-   - Prevent downgrade attacks
-   - Improve transport security
-
-3. **Session Security Improvements** (2 hours)
-   - Secure session storage
-   - Session timeout enforcement
-   - CSRF token improvements
-   - Session hijacking prevention
-
-4. **XSS Protection Enhancements** (1-2 hours)
-   - Input sanitization
-   - Output encoding
-   - DOM-based XSS prevention
-   - Template injection prevention
-
-**Implementation:**
-```python
-# CSP Headers
-@app.middleware("http")
-async def add_security_headers(request, call_next):
-    response = await call_next(request)
-    response.headers["Content-Security-Policy"] = (
-        "default-src 'self'; "
-        "script-src 'self' 'unsafe-inline'; "
-        "style-src 'self' 'unsafe-inline'; "
-        "img-src 'self' data:;"
-    )
-    response.headers["Strict-Transport-Security"] = (
-        "max-age=31536000; includeSubDomains"
-    )
-    return response
-```
-
-**Files:**
-- `src/web/api.py`
-- `src/web/middleware/security.py` (new)
-- `src/web/gradio_ui.py`
-
-**Success:** ✅ Security headers active, session management hardened, XSS protection enforced
+**Strategic Context:**
+- Builds on v0.5.x foundation (security, vision RAG, GPU management)
+- Prepares for v0.7.x advanced optimisation (agent-based RAG, knowledge graphs)
+- Enables v0.8.x data connectivity (Google Drive, Dropbox, Notion)
 
 ---
 
-## SECURITY-API-001: FastAPI Security Middleware (4-6 hours)
+## Version Sequence
 
-**Problem:** API layer needs comprehensive request validation and security middleware.
+### Phase 1: Query Optimisation (v0.6.0 - v0.6.6) • 152-210 hours
 
-**Implementation:**
+**v0.6.0: Web UI Security & API Maturity** (32-48h)
+- Security headers (CSP, HSTS), session management
+- FastAPI security middleware, rate limiting
+- Gradio interface refinements, error handling improvements
+- **Status:** In development
 
-1. **Request Validation Middleware** (2 hours)
-   - Schema validation
-   - Input sanitization
-   - Size limits enforcement
-   - Type checking
+**v0.6.1: Query Classification Foundation** (20-25h)
+- OPTIMISE-001: Query type detection (factual, conceptual, exploratory, multi-hop)
+- Complexity scoring (1-10), intent classification
+- Routing metadata preparation for v0.6.2
+- **Status:** Planned | **Depends:** v0.6.0
 
-2. **Response Sanitization Middleware** (1 hour)
-   - Remove sensitive headers
-   - Sanitize error messages
-   - Consistent response format
+**v0.6.2: Automatic Model Routing** (30-40h)
+- OPTIMISE-002: Intelligent model selection based on query classification
+- Route simple queries to fast models (3b), complex to quality models (70b)
+- 30-50% latency reduction for simple queries, routing accuracy >90%
+- **Status:** Planned | **Depends:** v0.6.1
 
-3. **API Versioning Security** (1-2 hours)
-   - Version-specific security policies
-   - Deprecation warnings
-   - Migration paths
+**v0.6.3: Domain Adaptation** (20-28h)
+- OPTIMISE-003: Domain-specific retrieval optimisation (code, academic, business, general)
+- Query expansion with domain dictionaries
+- Domain-specific reranking, 10-15% retrieval quality improvement
+- **Status:** Planned | **Depends:** v0.6.1
 
-4. **JWT Improvements** (1 hour)
-   - Token rotation
-   - Refresh token security
-   - Audience validation
-   - Claims verification
+**v0.6.4: Analytics & Caching** (20-27h)
+- OPTIMISE-004: Query performance analytics and pattern analysis
+- Intelligent caching with TTL, query similarity-based cache keys
+- 40-60% latency reduction for cached queries
+- **Status:** Planned | **Depends:** v0.6.1-v0.6.3
 
-**Implementation:**
-```python
-# Request Validation Middleware
-@app.middleware("http")
-async def validate_request(request, call_next):
-    # Validate content-type
-    # Check request size
-    # Sanitize input
-    # Validate JSON schema
-    response = await call_next(request)
-    return response
-```
+**v0.6.5: Streaming & Parallel Performance** (27-35h)
+- OPTIMISE-005: Streaming response generation (60-80% perceived latency reduction)
+- OPTIMISE-006: Parallel retrieval pipeline (33-60% actual latency reduction)
+- Time to first token <1s, concurrent vector + BM25 searches
+- **Status:** Planned | **Depends:** v0.6.0-v0.6.4
 
-**Files:**
-- `src/web/api.py`
-- `src/web/middleware/validation.py` (new)
-- `src/web/middleware/jwt.py`
+**v0.6.6: CLI Analytics Commands** (15-20h)
+- OPTIMISE-007: Performance metrics CLI (`ragged analytics`)
+- Routing, cache, domain, and context analytics
+- SQLite time-series storage, privacy-preserving (hashed queries)
+- **Status:** Planned | **Depends:** v0.6.0-v0.6.4
 
-**Success:** ✅ Request validation enforced, JWT security improved, API versioning operational
+### Phase 2: Modern Web UI (v0.6.7 - v0.6.10) • 107-152 hours
 
----
+**v0.6.7: FastAPI REST Layer** (32-42h)
+- Complete REST API replacing direct Ollama integration
+- Authentication (API keys), RBAC, comprehensive rate limiting
+- CORS, HTTPS enforcement, API documentation (OpenAPI/Swagger)
+- **Status:** Planned | **Depends:** v0.6.6
 
-## SECURITY-RATE-001: Advanced Rate Limiting (3-4 hours)
+**v0.6.8: Svelte Core UI** (25-35h)
+- SvelteKit foundation replacing Gradio UI
+- Document management, multi-modal query interfaces
+- XSS/CSRF protection, CSP headers, secure API communication
+- **Status:** Planned | **Depends:** v0.6.7
 
-**Problem:** Current rate limiting is basic in-memory; need distributed, per-user, per-endpoint support.
+**v0.6.9: Svelte Advanced Features** (25-35h)
+- Real-time analytics visualisation (D3.js charts)
+- Query history, document insights, performance dashboards
+- WebSocket streaming, advanced search/filter
+- **Status:** Planned | **Depends:** v0.6.8
 
-**Implementation:**
+**v0.6.10: Svelte Polish & PWA** (25-40h)
+- Dark mode, accessibility (WCAG 2.1 AA), responsive design
+- Progressive Web App (PWA) with offline support
+- Keyboard shortcuts, command palette, performance optimisation
+- **Status:** Planned | **Depends:** v0.6.9
 
-1. **Per-User Rate Limiting** (1 hour)
-   - User-specific quotas
-   - Role-based limits
-   - Custom tier support
+### Phase 3: Public API & Quality Gates (v0.6.11 - v0.6.14) • 128-180 hours
 
-2. **Per-Endpoint Limits** (1 hour)
-   - Different limits for different endpoints
-   - Cost-based limiting
-   - Burst handling
+**v0.6.11: Public API Launch** (20-30h)
+- Public API with versioning, comprehensive documentation
+- Python SDK, JavaScript SDK, OAuth 2.0 integration
+- API key management, tiered rate limiting, usage analytics
+- **Status:** Planned | **Depends:** v0.6.10
 
-3. **Redis-backed Storage** (1-2 hours)
-   - Distributed rate limiting
-   - Persistent state
-   - Better performance
+**v0.6.12: Integration Testing** (35-45h) • **Quality Gate**
+- End-to-end testing across all v0.6 features
+- Performance regression testing, security test validation
+- Cross-platform testing (Linux, macOS, Windows)
+- **Status:** Planned | **Depends:** v0.6.11
 
-4. **Advanced Features** (1 hour)
-   - Rate limit headers (X-RateLimit-*)
-   - Quota warnings
-   - Dynamic adjustment
+**v0.6.13: Documentation & Tutorials** (18-25h)
+- User guides, API tutorials, deployment documentation
+- Security best practices, troubleshooting guides
+- Video walkthroughs, example projects
+- **Status:** Planned | **Depends:** v0.6.12
 
-**Implementation:**
-```python
-# Redis-backed Rate Limiter
-class DistributedRateLimiter:
-    def __init__(self, redis_client):
-        self.redis = redis_client
+**v0.6.14: Security & Production Readiness** (40-50h) • **Quality Gate**
+- Comprehensive security audit, vulnerability remediation
+- Production configuration, monitoring/alerting setup
+- Deployment guides (Docker, Kubernetes), load testing
+- **Status:** Planned | **Depends:** v0.6.13
 
-    async def check_rate_limit(
-        self,
-        user_id: str,
-        endpoint: str,
-        limit: int,
-        window: int
-    ) -> bool:
-        key = f"rate_limit:{user_id}:{endpoint}"
-        count = await self.redis.incr(key)
-        if count == 1:
-            await self.redis.expire(key, window)
-        return count <= limit
-```
+### Phase 4: Experimental (v0.6.15) • 20-28 hours
 
-**Files:**
-- `src/web/middleware/rate_limit.py`
-- `src/config/rate_limits.py` (new)
-
-**Success:** ✅ Per-user and per-endpoint rate limiting operational, Redis integration complete
-
----
-
-## UI-GRADIO-001: Gradio UI Improvements (10-15 hours)
-
-**Problem:** Current Gradio UI is functional but lacks polish and real-time features.
-
-**Note:** Full Svelte UI redesign (from `docs/design/webUI/`) deferred to v0.6.7.
-
-**Implementation:**
-
-1. **Real-time Query Results** (4-5 hours)
-   - Streaming response display
-   - Progressive result loading
-   - Live status updates
-
-2. **Better Document Visualization** (3-4 hours)
-   - Improved result cards
-   - Source preview integration
-   - PDF thumbnail support
-
-3. **Improved Search UX** (2-3 hours)
-   - Enhanced error handling
-   - Better loading states
-   - Query history dropdown
-
-4. **Enhanced Upload Experience** (1-2 hours)
-   - Drag-and-drop improvements
-   - Upload progress indicators
-   - Batch upload support
-
-5. **Dashboard Metrics** (1-2 hours)
-   - Library statistics
-   - Query performance metrics
-   - System health indicators
-
-**Files:**
-- `src/web/gradio_ui.py`
-- `src/web/gradio/components/` (new directory)
-- `src/web/gradio/query.py`
-- `src/web/gradio/upload.py`
-
-**Success:** ✅ Real-time updates functional, document visualization improved, upload UX enhanced
+**v0.6.15: Speculative RAG** (20-28h) • **Experimental**
+- OPTIMISE-010: Predict and pre-generate responses for likely follow-up queries
+- Draft speculation strategies, verification and ranking
+- 30-50% latency reduction for predicted queries (when cache hit)
+- **Note:** Experimental feature, may be deferred to v0.7 or moved to experimental branch
+- **Status:** Planned | **Depends:** v0.6.14
 
 ---
 
-## API-ENHANCE-001: API Enhancements (9-15 hours)
+## Total Hours by Phase
 
-**Problem:** API needs WebSocket support, streaming, and batch operations for modern client requirements.
+| Phase | Versions | Hours | Focus |
+|-------|----------|-------|-------|
+| **1. Query Optimisation** | v0.6.0 - v0.6.6 | 152-210h | Intelligence, performance, analytics |
+| **2. Modern Web UI** | v0.6.7 - v0.6.10 | 107-152h | Svelte rebuild, PWA, accessibility |
+| **3. Public API & Quality** | v0.6.11 - v0.6.14 | 128-180h | API, SDKs, testing, security, docs |
+| **4. Experimental** | v0.6.15 | 20-28h | Speculative RAG (optional) |
+| **Total** | 15 versions | **407-570h** | Complete modern RAG platform |
 
-**Implementation:**
+---
 
-1. **GraphQL API Exploration** (3-4 hours)
-   - Research GraphQL benefits for ragged
-   - Create prototype schema
-   - Evaluate integration with existing REST API
-   - **Note:** Full implementation deferred to v0.7.0
+## Feature Distribution
 
-2. **WebSocket Support** (3-4 hours)
-   - Real-time query updates
-   - Live document ingestion status
-   - System event streaming
+### OPTIMISE-Series Features (Query Intelligence)
 
-3. **Streaming Responses** (2-3 hours)
-   - Server-Sent Events (SSE) implementation
-   - Progressive query results
-   - Chunk-by-chunk processing
+- **OPTIMISE-001:** Query Classification (v0.6.1) - Foundation
+- **OPTIMISE-002:** Automatic Model Routing (v0.6.2) - 30-50% latency reduction
+- **OPTIMISE-003:** Domain Adaptation (v0.6.3) - 10-15% quality improvement
+- **OPTIMISE-004:** Analytics & Caching (v0.6.4) - 40-60% cached latency reduction
+- **OPTIMISE-005:** Streaming Responses (v0.6.5) - 60-80% perceived latency reduction
+- **OPTIMISE-006:** Parallel Retrieval (v0.6.5) - 33-60% actual latency reduction
+- **OPTIMISE-007:** CLI Analytics (v0.6.6) - Visibility and tuning
+- **OPTIMISE-010:** Speculative RAG (v0.6.15) - 30-50% for predicted queries (experimental)
 
-4. **Batch Operations** (1-2 hours)
-   - Batch document ingestion endpoint
-   - Bulk query processing
-   - Parallel processing support
+### Web UI Evolution
 
-**Files:**
-- `src/web/api.py`
-- `src/web/websocket.py` (new)
-- `src/web/streaming.py` (new)
-- `src/web/batch.py` (new)
+- **v0.5.4:** Gradio demo UI (current)
+- **v0.6.0:** Gradio security enhancements
+- **v0.6.7:** FastAPI REST API layer
+- **v0.6.8-v0.6.10:** Complete Svelte/SvelteKit rebuild with PWA
 
-**Success:** ✅ WebSocket operational, streaming responses working, batch endpoints functional
+### API Maturity
+
+- **v0.6.0:** Internal FastAPI security
+- **v0.6.7:** REST API with authentication
+- **v0.6.11:** Public API with SDKs and OAuth
+
+### Quality Gates
+
+- **v0.6.12:** Integration testing across all features
+- **v0.6.14:** Security audit and production readiness
 
 ---
 
 ## Success Criteria
 
-**Automated Tests:**
-- [ ] Security headers active and tested
-- [ ] Session security improvements verified
-- [ ] Request validation enforcing schemas
-- [ ] Rate limiting per-user and per-endpoint working
-- [ ] WebSocket connections stable
-- [ ] All existing tests pass
+**Query Performance:**
+- [ ] 30-50% latency reduction for simple queries (model routing)
+- [ ] 60-80% perceived latency reduction (streaming)
+- [ ] 33-60% actual retrieval latency reduction (parallel retrieval)
+- [ ] 40-60% latency reduction for cached queries
+- [ ] 10-15% retrieval quality improvement (domain adaptation)
 
-**Manual Testing:**
-- [ ] Gradio UI real-time updates working
-- [ ] Document visualization improved
-- [ ] Upload experience enhanced
-- [ ] Security headers present in all responses
-- [ ] Rate limiting triggers correctly
-- [ ] WebSocket events streaming properly
+**Web UI:**
+- [ ] Modern Svelte/SvelteKit UI replacing Gradio
+- [ ] PWA with offline support
+- [ ] WCAG 2.1 AA accessibility compliance
+- [ ] <3s time to interactive, <1.5s first contentful paint
 
-**Quality Gates:**
-- [ ] No security regressions
-- [ ] Performance maintained or improved
-- [ ] All documentation updated
-- [ ] API versioning operational
-- [ ] Zero breaking API changes
+**API & SDKs:**
+- [ ] Public REST API with comprehensive documentation
+- [ ] Python and JavaScript SDKs published
+- [ ] OAuth 2.0 integration functional
+- [ ] API rate limiting and key management operational
 
----
-
-## Known Risks
-
-- **Security Configuration:** Overly strict CSP may break existing functionality
-- **Rate Limiting:** Redis dependency adds complexity
-- **WebSocket Support:** Connection management can be challenging
-- **Gradio Limitations:** Some UI improvements constrained by Gradio framework
-- **API Changes:** Streaming and batch operations require client updates
+**Security & Production:**
+- [ ] Comprehensive security audit passed
+- [ ] All integration tests passing (85%+ coverage)
+- [ ] Production deployment guides complete
+- [ ] Monitoring and alerting configured
 
 ---
 
-## Next Steps
+## Migration Notes
 
-After v0.6 completion:
-- **v0.6.7:** Svelte UI Redesign (implementation of `docs/design/webUI/` mockups)
-- **v0.7.x:** Query Optimisation (context management, classification, model routing)
-- **v0.8.x or v0.9.x:** Data Connectivity (Google Drive, Dropbox, Notion connectors)
+**Pre-1.0 Development:** Breaking changes are acceptable and expected in the v0.6 series. No backward compatibility guarantees or migration layers required until v1.0.
 
-See: `roadmap/version/v0.7/README.md`, `roadmap/version/v0.8/README.md`
+**Key Changes from v0.5.x:**
+- Gradio UI → Svelte/SvelteKit (v0.6.8-v0.6.10)
+- Direct Ollama integration → FastAPI REST API (v0.6.7)
+- Manual model selection → Automatic routing (v0.6.2)
+- Basic queries → Intelligent classification and optimization (v0.6.1-v0.6.6)
+
+**Deprecations:**
+- Gradio UI deprecated in v0.6.8 (replaced by Svelte)
+- Direct Ollama API calls deprecated in v0.6.7 (use FastAPI REST API)
+- Manual model specification discouraged (use automatic routing)
 
 ---
 
 ## Related Documentation
 
-- [Previous Version](../v0.5/README.md) - Security implementation and vision RAG
-- [Planning](../../../planning/version/v0.6/) - Design goals for v0.6
-- [Version Overview](../README.md) - Complete version comparison
-- [Web UI Design](../../../../design/webUI) - Svelte UI mockups (v0.6.7 implementation)
+**Planning:**
+- [v0.6 Planning Overview](../../planning/version/v0.6/) - High-level design goals
+
+**Implementation:**
+- [v0.5 Implementation](../../implementation/version/v0.5/) - Previous release series
+- [v0.6 Implementation](../../implementation/version/v0.6/) - Implementation records (post-release)
+
+**Process:**
+- [Development Methodology](../../process/methodology/) - How v0.6 is being built
+
+**Decisions:**
+- [ADRs](../../decisions/adrs/) - Architecture decisions for v0.6 features
 
 ---
 
-**Status:** Planned - Web UI security and API maturity focus
+**Last Updated:** 2025-11-24
+
+**Status:** Planned - Comprehensive refactoring complete, ready for implementation
