@@ -45,6 +45,7 @@ dependencies = [
     "chardet>=5.2.0",
     "httpx>=0.25.0",
     "requests>=2.31.0",
+    "python-magic>=0.4.27",  # v0.6.1 SECURITY-001: Enhanced MIME type validation
     # Security: Minimum versions for transitive dependencies (v0.4 mid-series audit 2025-11-23)
     "urllib3>=2.5.0",  # CVE-2025-50182, CVE-2025-50181 (redirect bypass, SSRF)
     "langchain-core>=1.0.7",  # CVE-2025-65106 (template injection)

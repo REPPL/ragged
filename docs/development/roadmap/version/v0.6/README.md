@@ -1,10 +1,10 @@
-# Ragged v0.6 Series - Query Optimisation & Modern Web UI
+# Ragged v0.6 Series - Query Optimisation, Modern Web UI & Security Hardening
 
 **Status:** Planned
 
-**Total Duration:** 407-570 hours
+**Total Duration:** 427-608 hours (407-570h original + 20-38h security hardening)
 
-**Focus:** Query intelligence, streaming performance, modern Svelte UI, public API, production readiness
+**Focus:** Query intelligence, streaming performance, modern Svelte UI, public API, production readiness, comprehensive security hardening
 
 **Breaking Changes:** Acceptable (pre-1.0 development)
 
@@ -12,14 +12,15 @@
 
 ## Series Overview
 
-Version 0.6 transforms ragged from a functional RAG system into an intelligent, production-ready platform. This series introduces query classification for automatic model routing, streaming and parallel retrieval for performance, a modern Svelte/SvelteKit web UI replacing Gradio, a public REST API with SDKs, comprehensive testing, and full security hardening.
+Version 0.6 transforms ragged from a functional RAG system into an intelligent, production-ready platform. This series introduces query classification for automatic model routing, streaming and parallel retrieval for performance, a modern Svelte/SvelteKit web UI replacing Gradio, a public REST API with SDKs, comprehensive testing, and full security hardening based on the v0.6.0 security audit.
 
 **Key Achievements:**
 - **Query Intelligence:** Automatic query classification and model routing (30-50% latency reduction)
 - **Performance:** Streaming responses (<1s first token) and parallel retrieval (33-60% faster)
 - **Modern UI:** Complete Svelte/SvelteKit rebuild with PWA support
 - **Public API:** REST API with SDK and OAuth integration
-- **Production Ready:** Comprehensive testing, security hardening, deployment guides
+- **Security Hardening:** Enhanced MIME validation, session persistence, sandbox verification, monitoring
+- **Production Ready:** Comprehensive testing, security audit remediation, deployment guides
 
 **Strategic Context:**
 - Builds on v0.5.x foundation (security, vision RAG, GPU management)
@@ -30,7 +31,7 @@ Version 0.6 transforms ragged from a functional RAG system into an intelligent, 
 
 ## Version Sequence
 
-### Phase 1: Query Optimisation (v0.6.0 - v0.6.6) • 152-210 hours
+### Phase 1: Query Optimisation & Security (v0.6.0 - v0.6.6) • 172-248 hours
 
 **v0.6.0: Web UI Security & API Maturity** (32-48h)
 - Security headers (CSP, HSTS), session management
@@ -38,16 +39,21 @@ Version 0.6 transforms ragged from a functional RAG system into an intelligent, 
 - Gradio interface refinements, error handling improvements
 - **Status:** In development
 
-**v0.6.1: Query Classification Foundation** (20-25h)
+**v0.6.1: Query Classification Foundation & Security Hardening** (26-33h)
 - OPTIMISE-001: Query type detection (factual, conceptual, exploratory, multi-hop)
 - Complexity scoring (1-10), intent classification
 - Routing metadata preparation for v0.6.2
+- **SECURITY-001:** Enhanced MIME type validation (python-magic)
+- **SECURITY-002:** Fix path validation test failures
 - **Status:** Planned | **Depends:** v0.6.0
 
-**v0.6.2: Automatic Model Routing** (30-40h)
+**v0.6.2: Automatic Model Routing & Security Enhancements** (44-64h)
 - OPTIMISE-002: Intelligent model selection based on query classification
 - Route simple queries to fast models (3b), complex to quality models (70b)
 - 30-50% latency reduction for simple queries, routing accuracy >90%
+- **SECURITY-003:** Redis-backed session persistence
+- **SECURITY-004:** Session monitoring & Prometheus metrics
+- **SECURITY-005:** Plugin sandbox enforcement verification
 - **Status:** Planned | **Depends:** v0.6.1
 
 **v0.6.3: Domain Adaptation** (20-28h)
@@ -141,11 +147,11 @@ Version 0.6 transforms ragged from a functional RAG system into an intelligent, 
 
 | Phase | Versions | Hours | Focus |
 |-------|----------|-------|-------|
-| **1. Query Optimisation** | v0.6.0 - v0.6.6 | 152-210h | Intelligence, performance, analytics |
+| **1. Query Optimisation & Security** | v0.6.0 - v0.6.6 | 172-248h | Intelligence, performance, analytics, security hardening |
 | **2. Modern Web UI** | v0.6.7 - v0.6.10 | 107-152h | Svelte rebuild, PWA, accessibility |
-| **3. Public API & Quality** | v0.6.11 - v0.6.14 | 128-180h | API, SDKs, testing, security, docs |
+| **3. Public API & Quality** | v0.6.11 - v0.6.14 | 128-180h | API, SDKs, testing, security audit, docs |
 | **4. Experimental** | v0.6.15 | 20-28h | Speculative RAG (optional) |
-| **Total** | 15 versions | **407-570h** | Complete modern RAG platform |
+| **Total** | 15 versions | **427-608h** | Complete modern RAG platform with security hardening |
 
 ---
 
@@ -162,23 +168,34 @@ Version 0.6 transforms ragged from a functional RAG system into an intelligent, 
 - **OPTIMISE-007:** CLI Analytics (v0.6.6) - Visibility and tuning
 - **OPTIMISE-010:** Speculative RAG (v0.6.15) - 30-50% for predicted queries (experimental)
 
+### Security Hardening (New - Based on v0.6.0 Audit)
+
+- **v0.6.1 HIGH Priority:**
+  - SECURITY-001: Enhanced MIME type validation (python-magic)
+  - SECURITY-002: Fix path validation test failures
+- **v0.6.2 MEDIUM Priority:**
+  - SECURITY-003: Redis-backed session persistence
+  - SECURITY-004: Session monitoring & Prometheus metrics
+  - SECURITY-005: Plugin sandbox enforcement verification
+- **v0.6.3+ LOW Priority:** Structured errors, enhanced rate limiting, Docker hardening (deferred to v0.6.15+)
+
 ### Web UI Evolution
 
 - **v0.5.4:** Gradio demo UI (current)
-- **v0.6.0:** Gradio security enhancements
+- **v0.6.0:** Gradio security enhancements (CSP, HSTS, session security)
 - **v0.6.7:** FastAPI REST API layer
 - **v0.6.8-v0.6.10:** Complete Svelte/SvelteKit rebuild with PWA
 
 ### API Maturity
 
-- **v0.6.0:** Internal FastAPI security
+- **v0.6.0:** Internal FastAPI security (middleware, rate limiting)
 - **v0.6.7:** REST API with authentication
 - **v0.6.11:** Public API with SDKs and OAuth
 
 ### Quality Gates
 
 - **v0.6.12:** Integration testing across all features
-- **v0.6.14:** Security audit and production readiness
+- **v0.6.14:** Security audit verification and production readiness
 
 ---
 
@@ -204,10 +221,13 @@ Version 0.6 transforms ragged from a functional RAG system into an intelligent, 
 - [ ] API rate limiting and key management operational
 
 **Security & Production:**
-- [ ] Comprehensive security audit passed
+- [ ] Comprehensive security audit passed (v0.6.0 baseline complete)
+- [ ] HIGH-priority security items implemented (v0.6.1: MIME validation, path validation)
+- [ ] MEDIUM-priority security items implemented (v0.6.2: session persistence, monitoring, sandbox)
 - [ ] All integration tests passing (85%+ coverage)
+- [ ] Security test suite 100% passing
 - [ ] Production deployment guides complete
-- [ ] Monitoring and alerting configured
+- [ ] Monitoring and alerting configured (Prometheus/Grafana)
 
 ---
 
@@ -243,8 +263,13 @@ Version 0.6 transforms ragged from a functional RAG system into an intelligent, 
 **Decisions:**
 - [ADRs](../../decisions/adrs/) - Architecture decisions for v0.6 features
 
+**Security:**
+- [v0.6.0 Security Audit](../../../audit/security/baseline/v0.6.0-security-audit.md) - Comprehensive baseline assessment
+- [Security Improvements Roadmap](../security-improvements-v0.6.x.md) - Detailed change requests with implementation
+- [Security Test Suite](../../../../tests/security/) - Comprehensive security tests
+
 ---
 
 **Last Updated:** 2025-11-24
 
-**Status:** Planned - Comprehensive refactoring complete, ready for implementation
+**Status:** Planned - Comprehensive refactoring complete, security audit integrated, ready for implementation

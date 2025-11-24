@@ -99,6 +99,9 @@ def validate_mime_type(file_path: Path, expected_types: list[str] | None = None)
     """
     Validate file MIME type based on content (magic bytes) not just extension.
 
+    Uses python-magic library for robust file type detection with graceful
+    fallback to basic magic byte detection if python-magic is unavailable.
+
     Args:
         file_path: Path to file
         expected_types: List of expected MIME types (e.g., ['application/pdf', 'text/plain'])
@@ -109,13 +112,59 @@ def validate_mime_type(file_path: Path, expected_types: list[str] | None = None)
 
     Raises:
         SecurityError: If MIME type doesn't match expected types
+        FileNotFoundError: If file doesn't exist
 
     Note:
-        This is a basic implementation. For production, consider using python-magic
-        library for more robust MIME type detection.
+        v0.6.1 SECURITY-001: Enhanced MIME type validation using python-magic
+        for comprehensive file type detection beyond simple 8-byte headers.
     """
     if not file_path.exists():
         raise FileNotFoundError(f"File not found: {file_path}")
+
+    mime_type = "application/octet-stream"  # Default
+
+    # Try python-magic first for robust detection
+    try:
+        import magic
+
+        # Create magic instance for MIME type detection
+        mime_detector = magic.Magic(mime=True)
+        mime_type = mime_detector.from_file(str(file_path))
+
+    except (ImportError, OSError, Exception):
+        # Fallback to basic magic byte detection
+        # ImportError: python-magic not installed
+        # OSError: libmagic library not found
+        # Exception: catches magic.MagicException and other magic errors
+        mime_type = _basic_mime_detection(file_path)
+
+    # Validate against expected types if provided
+    if expected_types is not None:
+        if mime_type not in expected_types:
+            raise SecurityError(
+                f"File type {mime_type} not in allowed types {expected_types}: {file_path}"
+            )
+
+    return mime_type
+
+
+def _basic_mime_detection(file_path: Path) -> str:
+    """
+    Basic MIME type detection using magic bytes (fallback).
+
+    This is a simplified fallback for when python-magic is unavailable.
+    Limited to detecting common file types from first 8 bytes.
+
+    Args:
+        file_path: Path to file
+
+    Returns:
+        Detected MIME type (or 'application/octet-stream' if unknown)
+    """
+    # Check for empty file
+    file_size = file_path.stat().st_size
+    if file_size == 0:
+        return "application/x-empty"
 
     # Read first few bytes to detect file type
     with open(file_path, "rb") as f:
@@ -127,7 +176,7 @@ def validate_mime_type(file_path: Path, expected_types: list[str] | None = None)
     if header.startswith(b"%PDF"):
         mime_type = "application/pdf"
     elif header.startswith(b"PK\x03\x04"):  # ZIP-based formats
-        # Could be DOCX, but we'll treat as generic zip
+        # Could be DOCX, XLSX, etc., but we'll treat as generic zip
         mime_type = "application/zip"
     elif header.startswith(b"\x89PNG"):
         mime_type = "image/png"
@@ -138,19 +187,18 @@ def validate_mime_type(file_path: Path, expected_types: list[str] | None = None)
     else:
         # Try to detect text files
         try:
-            f.seek(0)
-            content = f.read(512)
-            content.decode("utf-8")
-            mime_type = "text/plain"
+            with open(file_path, "rb") as f:
+                content = f.read(512)
+                # Only treat as text if it's valid UTF-8 AND contains printable characters
+                decoded = content.decode("utf-8")
+                # Check if at least 90% of non-whitespace characters are printable
+                non_ws = decoded.strip()
+                if non_ws and sum(c.isprintable() or c.isspace() for c in decoded) / len(
+                    decoded
+                ) > 0.9:
+                    mime_type = "text/plain"
         except (UnicodeDecodeError, OSError):
             pass
-
-    # Validate against expected types if provided
-    if expected_types is not None:
-        if mime_type not in expected_types:
-            raise SecurityError(
-                f"File type {mime_type} not in allowed types {expected_types}: {file_path}"
-            )
 
     return mime_type
 

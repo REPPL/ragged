@@ -57,8 +57,8 @@ class TestPathValidator:
         # Should not raise
         validated = validator.validate(safe_path)
 
-        # Should resolve within base
-        assert str(validated).startswith(str(safe_base_dir))
+        # Should resolve within base (use resolved base for macOS /private/var compatibility)
+        assert str(validated).startswith(str(safe_base_dir.resolve()))
         assert "cache/models" in str(validated)
 
     def test_validate_parent_traversal_blocked(self, validator):
@@ -142,7 +142,9 @@ class TestPathValidator:
         with pytest.raises(PathTraversalError) as exc_info:
             validator.validate(malicious_path)
 
-        assert "outside allowed base" in str(exc_info.value).lower()
+        # Accept either "parent directory traversal" (caught early) or "outside allowed base"
+        error_msg = str(exc_info.value).lower()
+        assert "parent directory traversal" in error_msg or "outside allowed base" in error_msg
 
     def test_validate_symlink_blocked_when_not_allowed(self, validator, safe_base_dir):
         """Test that symbolic links are blocked when not allowed."""
@@ -225,7 +227,7 @@ class TestConvenienceFunctions:
             allow_absolute=False,
         )
 
-        assert str(validated).startswith(str(safe_base_dir))
+        assert str(validated).startswith(str(safe_base_dir.resolve()))
 
     def test_validate_path_rejects_traversal(self, safe_base_dir):
         """Test convenience function rejects path traversal."""
@@ -259,7 +261,7 @@ class TestConvenienceFunctions:
                 validated = validate_cli_path(safe_path, create_if_missing=True)
 
                 assert validated.exists()
-                assert str(validated).startswith(tmpdir)
+                assert str(validated).startswith(str(Path(tmpdir).resolve()))
 
             finally:
                 os.chdir(original_cwd)
@@ -360,7 +362,7 @@ class TestCLIIntegrationScenarios:
 
                 assert validated.exists()
                 assert validated.is_dir()
-                assert str(validated).startswith(tmpdir)
+                assert str(validated).startswith(str(Path(tmpdir).resolve()))
 
             finally:
                 os.chdir(original_cwd)

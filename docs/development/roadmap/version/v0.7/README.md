@@ -89,24 +89,153 @@ Focus on **state-of-the-art installation experience**:
 
 **See:** [v0.7.0 Detailed Roadmap](./v0.7.0/README.md)
 
-### Future Minor Versions (Post-v0.7.0)
+### v0.7.1 - Post-Launch Refinements & User Feedback
 
-**Potential v0.7.1+ enhancements based on user feedback:**
+**Total Hours:** 15-25 hours (AI implementation)
+
+**Status:** Planned
+
+**Features:** 4 refinement features (REFINE-001 through REFINE-004)
+
+**Highlights:**
 - Installation analytics (opt-in, privacy-preserving)
-- Embedded ChromaDB mode (no Docker requirement)
-- Installation video/screencasts
-- Automated dependency installation (with permission)
-- Additional configuration presets for niche use cases
+- Enhanced error recovery based on real user issues
+- Installation resume/checkpoint system
+- Configuration migration tools
 
-**Note:** Minor versions determined by user feedback after v0.7.0 release.
+**Delivers:** Refined installation based on real user experiences
+
+**Dependencies:** Requires v0.7.0 completion and 2-4 weeks of user feedback
+
+**See:** [v0.7.1 Roadmap](./v0.7.1.md)
+
+### v0.7.2 - Platform-Specific Enhancements & Native Installers
+
+**Total Hours:** 20-30 hours (AI implementation)
+
+**Status:** Planned (conditional on user demand)
+
+**Features:** 3 platform features (PLATFORM-001 through PLATFORM-003)
+
+**Highlights:**
+- macOS DMG installer (drag-and-drop, code signing, menu bar)
+- Windows MSI installer (native, PATH, Start Menu)
+- Linux DEB/RPM packages (apt/yum compatibility, systemd)
+
+**Delivers:** Professional native installers for all major platforms
+
+**Decision Criteria:** Implement if GitHub requests >10 OR enterprise adoption requires OR analytics show script friction >20%
+
+**Dependencies:** Requires v0.7.1 completion
+
+**See:** [v0.7.2 Roadmap](./v0.7.2.md)
+
+### v0.7.3 - Embedded ChromaDB Option (Optional)
+
+**Total Hours:** 18-28 hours (AI implementation)
+
+**Status:** Conditional (implement only if Docker is major pain point)
+
+**Features:** 2 embedded features (EMBED-001 through EMBED-002)
+
+**Highlights:**
+- Embedded ChromaDB mode (no Docker required)
+- Performance optimisations for embedded mode
+- Migration tools between Docker and embedded modes
+- Backup and restore for embedded database
+
+**Delivers:** Docker-free installation option
+
+**Decision Criteria:** Implement if Docker causes >30% of failures OR strong user demand (>15 requests) OR embedded achieves 80%+ performance
+
+**Dependencies:** Requires v0.7.1 completion and Docker pain point validation
+
+**See:** [v0.7.3 Roadmap](./v0.7.3.md)
+
+### v0.7.4 - Testing & Quality Assurance (Conditional)
+
+**Total Hours:** 12-18 hours (AI implementation)
+
+**Status:** Conditional (implement only if v0.7.3 is built)
+
+**Features:** 3 QA features (QA-001 through QA-003)
+
+**Highlights:**
+- Automated installation testing (CI/CD matrix across platforms)
+- Installation documentation polish (platform guides, videos)
+- Performance benchmarking (Docker vs embedded comparison)
+
+**Delivers:** Quality gate for complete v0.7.x series
+
+**Decision Criteria:** Automatic - implement if v0.7.3 exists, skip otherwise
+
+**Dependencies:** Only implement if v0.7.3 is built
+
+**See:** [v0.7.4 Roadmap](./v0.7.4.md)
+
+---
+
+## Decision Framework for v0.7.x Minor Versions
+
+### v0.7.0 (Foundation)
+**Status:** ✓ Committed - detailed roadmap exists
+
+**Decision:** No decision required - this is the foundation version
+
+### v0.7.1 (Post-Launch Refinements)
+**Status:** ✓ Recommended - essential for addressing real user feedback
+
+**When to implement:** After v0.7.0 release and 2-4 weeks of user feedback
+
+**Decision criteria:** Always implement (address real user pain points)
+
+### v0.7.2 (Platform Installers)
+**Status:** ⚠️ Conditional - implement if user demand justifies
+
+**When to implement:** After v0.7.1 release and feedback analysis
+
+**Decision criteria:**
+- ✓ GitHub requests for native installers (>10 independent requests)
+- ✓ Enterprise adoption feedback requires professional installers
+- ✓ Analytics show script friction (>20% abandon installation)
+- ✗ Skip if script-based installation proves sufficient (<5% abandonment)
+
+**Decision point:** After v0.7.1 release and 2-3 weeks of feedback
+
+### v0.7.3 (Embedded ChromaDB)
+**Status:** ⚠️ Optional - implement only if Docker is major barrier
+
+**When to implement:** After v0.7.1 analytics review, prototype validation
+
+**Decision criteria:**
+- ✓ Docker failures account for >30% of installation issues (from v0.7.1 analytics)
+- ✓ Strong user demand (>15 independent GitHub issues/requests)
+- ✓ Embedded mode achieves 80%+ of Docker performance (prototype validation)
+- ✗ Skip if Docker installation proves unproblematic (<10% failures)
+- ✗ Skip if performance gap too large (embedded >30% slower)
+
+**Decision point:** After v0.7.1 analytics review, before v0.7.2 development
+
+### v0.7.4 (Quality Gate)
+**Status:** ⚠️ Automatic - implement if v0.7.3 built, skip otherwise
+
+**When to implement:** Immediately after v0.7.3 completion (if v0.7.3 exists)
+
+**Decision criteria:**
+- ✓ Implement if v0.7.3 is built (provides quality gate for extended series)
+- ✗ Skip if v0.7.3 not built (core series doesn't need separate QA version)
+
+**Decision point:** Automatic based on v0.7.3 implementation status
 
 ---
 
 ## Success Criteria for v0.7.x Series
 
+### Core Series (v0.7.0-v0.7.1)
+
 **Measurable Goals:**
-- Time-to-first-query: <15 minutes (target: <10 minutes)
-- Installation success rate: >95% on clean systems
+- Time-to-first-query: <10 minutes (from current 20-30 minutes)
+- Installation success rate: >98% on clean systems (up from v0.7.0's 95% target)
 - User satisfaction: "Installation was easy" >4/5 rating
 - Support reduction: 50% fewer installation-related requests
 - Documentation: README <100 lines, getting-started <10 minutes
@@ -117,6 +246,15 @@ Focus on **state-of-the-art installation experience**:
 - First-run experience is confidence-building
 - Documentation structure is discoverable
 - CLI is approachable for beginners
+
+### Extended Series (if v0.7.2-v0.7.4 built)
+
+**Additional Goals:**
+- Native installer adoption: >40% of users choose DMG/MSI/DEB over script (v0.7.2)
+- Embedded mode adoption: >20% of users where Docker is pain point (v0.7.3)
+- Embedded mode performance: 80-90% of Docker performance (v0.7.3)
+- Installation testing coverage: 100% of all paths (v0.7.4)
+- Documentation accuracy: 100% match with implementation (v0.7.4)
 
 ---
 
@@ -161,10 +299,19 @@ After v0.7.x series completion:
 
 ## Related Documentation
 
-- [v0.7.0 Detailed Roadmap](./v0.7.0/README.md) - Installation & onboarding features
+### v0.7.x Minor Versions
+- [v0.7.0 Detailed Roadmap](./v0.7.0/README.md) - Installation & onboarding features (foundation)
+- [v0.7.1 Roadmap](./v0.7.1.md) - Post-launch refinements & user feedback
+- [v0.7.2 Roadmap](./v0.7.2.md) - Platform-specific installers (conditional)
+- [v0.7.3 Roadmap](./v0.7.3.md) - Embedded ChromaDB option (optional)
+- [v0.7.4 Roadmap](./v0.7.4.md) - Testing & quality assurance (conditional)
+
+### Related Versions
 - [v0.6.0 Roadmap](../v0.6/README.md) - Intelligent optimisation (prerequisite)
-- [Current Installation Guide](../../../../tutorials/installation.md) - Existing documentation
-- [Troubleshooting Guide](../../../../guides/troubleshooting.md) - Current troubleshooting
 - [Version Overview](../README.md) - Complete version comparison
+
+### Current Documentation
+- [Installation Guide](../../../../tutorials/installation.md) - Existing documentation
+- [Troubleshooting Guide](../../../../guides/troubleshooting.md) - Current troubleshooting
 
 ---

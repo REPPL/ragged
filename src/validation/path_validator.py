@@ -143,6 +143,22 @@ class PathValidator:
                 f"Use relative paths within allowed base directory."
             )
 
+        # Security check 4: Block symlinks BEFORE resolving (if not allowed)
+        # Must check before resolve() since resolve() follows symlinks
+        if not self.allow_symlinks:
+            # Check if the path itself or any parent is a symlink
+            check_path = path if path.is_absolute() else (self.allowed_base / path) if self.allowed_base else path.resolve()
+            if check_path.exists():
+                # Check each component from the path up to root
+                current = check_path
+                while current != current.parent:
+                    if current.is_symlink():
+                        raise PathTraversalError(
+                            f"Symbolic link detected in path: {path}. "
+                            f"Symlinks not allowed for security."
+                        )
+                    current = current.parent
+
         # Resolve path (follows symlinks and makes absolute)
         if self.allowed_base:
             # Make relative to allowed_base
@@ -153,28 +169,17 @@ class PathValidator:
         else:
             resolved_path = path.resolve()
 
-        # Security check 4: Verify within allowed base
+        # Security check 5: Verify within allowed base
         if self.allowed_base:
             try:
                 # Check if resolved path is within allowed_base
+                # Both must be resolved to handle symlinks in base path correctly
                 resolved_path.relative_to(self.allowed_base)
             except ValueError:
                 raise PathTraversalError(
                     f"Path {path} resolves outside allowed base directory. "
                     f"Resolved: {resolved_path}, Allowed base: {self.allowed_base}"
                 )
-
-        # Security check 5: Block symlinks (if not allowed)
-        if not self.allow_symlinks and resolved_path.exists():
-            # Check if any component in the path is a symlink
-            current = resolved_path
-            while current != current.parent:
-                if current.is_symlink():
-                    raise PathTraversalError(
-                        f"Symbolic link detected in path: {path} -> {resolved_path}. "
-                        f"Symlinks not allowed for security."
-                    )
-                current = current.parent
 
         # Create directory if requested and doesn't exist
         if create_if_missing and not resolved_path.exists():
