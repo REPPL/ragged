@@ -1,10 +1,14 @@
 """
-Query optimisation module (v0.6.1+).
+Query optimisation module (v0.6.1+ OPTIMISE-001, OPTIMISE-002).
 
-This module provides query classification and routing optimisation for
+This module provides query classification and automatic model routing for
 intelligent model selection and performance improvements.
+
+v0.6.1 OPTIMISE-001: Query classification foundation
+v0.6.2 OPTIMISE-002: Automatic model routing
 """
 
+from ragged.optimisation.model_router import ModelRouter, ModelSelection
 from ragged.optimisation.query_classifier import (
     QueryClassification,
     QueryClassifier,
@@ -19,4 +23,6 @@ __all__ = [
     "QueryType",
     "QueryIntent",
     "RoutingMetadata",
+    "ModelRouter",
+    "ModelSelection",
 ]
