@@ -5,9 +5,9 @@ A document question-answering system that runs entirely locally using
 Retrieval-Augmented Generation (RAG) technology.
 """
 
-__version__ = "0.5.10"
+__version__ = "0.6.0"
 __author__ = "ragged contributors"
 __license__ = "GPL-3.0"
 
 # Version info tuple
-VERSION = (0, 5, 10)
+VERSION = (0, 6, 0)

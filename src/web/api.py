@@ -1,4 +1,7 @@
-"""FastAPI application for ragged v0.2."""
+"""FastAPI application for ragged v0.2.
+
+v0.6.0: Added security middleware (CSP, HSTS, session security, XSS protection).
+"""
 
 import json
 import tempfile
@@ -22,6 +25,16 @@ from ragged.retrieval.hybrid import HybridRetriever
 from ragged.retrieval.retriever import Retriever
 from ragged.storage.vector_store import VectorStore
 from ragged.utils.logging import get_logger
+from ragged.web.middleware.jwt import APIVersionMiddleware, JWTSecurityMiddleware
+from ragged.web.middleware.security import (
+    SecurityHeadersMiddleware,
+    SessionSecurityMiddleware,
+    XSSProtectionMiddleware,
+)
+from ragged.web.middleware.validation import (
+    RequestValidationMiddleware,
+    ResponseSanitizationMiddleware,
+)
 from ragged.web.models import (
     HealthResponse,
     QueryRequest,
@@ -34,18 +47,76 @@ logger = get_logger(__name__)
 
 app = FastAPI(
     title="ragged API",
-    version="0.2.0",
-    description="Privacy-first local RAG system with hybrid retrieval"
+    version="0.6.0",
+    description="Privacy-first local RAG system with hybrid retrieval and multi-modal support"
 )
 
-# SECURITY FIX (v0.5.7 HIGH-2): Secure CORS configuration
-# - Replace wildcard "*" with explicit allowed origins
-# - Restrict methods and headers to only what's needed
-# - Prevents CSRF attacks
-
-# Get settings early for CORS configuration
+# Get settings early for configuration
 _temp_settings = get_settings()
 
+# v0.6.0 Middleware Stack (order matters - outer to inner):
+# 1. Response sanitization (outermost)
+# 2. Security headers
+# 3. API versioning
+# 4. Request validation
+# 5. JWT authentication
+# 6. Session security
+# 7. XSS protection
+# 8. CORS (innermost)
+
+# v0.6.0 SECURITY-API-001: Response Sanitization
+app.add_middleware(
+    ResponseSanitizationMiddleware,
+    remove_server_header=True,
+    sanitize_errors=True,
+)
+
+# v0.6.0 SECURITY-WEB-001: Security Headers (CSP, HSTS, etc.)
+app.add_middleware(
+    SecurityHeadersMiddleware,
+    enable_csp=True,
+    enable_hsts=True,
+    hsts_max_age=31536000,  # 1 year
+)
+
+# v0.6.0 SECURITY-API-001: API Versioning
+app.add_middleware(
+    APIVersionMiddleware,
+    current_version="0.6.0",
+    supported_versions=["0.6.0", "0.5.0"],
+)
+
+# v0.6.0 SECURITY-API-001: Request Validation
+app.add_middleware(
+    RequestValidationMiddleware,
+    max_request_size=10 * 1024 * 1024,  # 10 MB
+    max_json_depth=20,
+    enable_strict_validation=True,
+)
+
+# v0.6.0 SECURITY-API-001: JWT Security (optional - not enabled by default)
+# Uncomment to enable JWT authentication:
+# app.add_middleware(
+#     JWTSecurityMiddleware,
+#     token_expiry=3600,  # 1 hour
+#     refresh_expiry=86400,  # 24 hours
+#     enable_rotation=True,
+# )
+
+# v0.6.0 SECURITY-WEB-001: Session Security
+app.add_middleware(
+    SessionSecurityMiddleware,
+    session_timeout=3600,  # 1 hour
+    enable_csrf=True,
+)
+
+# v0.6.0 SECURITY-WEB-001: XSS Protection
+app.add_middleware(
+    XSSProtectionMiddleware,
+    enable_input_sanitization=True,
+)
+
+# v0.5.7 HIGH-2: CORS (Secure configuration)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=_temp_settings.cors_allowed_origins,  # Explicit whitelist (no "*")
