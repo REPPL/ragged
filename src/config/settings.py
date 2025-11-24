@@ -8,7 +8,7 @@ and validation.
 import functools
 from enum import Enum
 from pathlib import Path
-from typing import Any, Literal
+from typing import Any, Literal, Optional
 
 from pydantic import Field, ValidationInfo, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -184,7 +184,7 @@ class Settings(BaseSettings):
         le=600,
         description="DPI for PDF to image conversion (150 recommended, higher=slower)"
     )
-    vision_cache_dir: Path | None = Field(
+    vision_cache_dir: Optional[Path] = Field(
         default=None,
         description="Custom directory for vision model cache (None = HuggingFace default)"
     )
@@ -260,7 +260,7 @@ class Settings(BaseSettings):
         default=True,
         description="Keep backup copies of original scanned files"
     )
-    scan_output_dir: Path | None = Field(
+    scan_output_dir: Optional[Path] = Field(
         default=None,
         description="Output directory for processed scans (None = ~/.ragged/documents)"
     )

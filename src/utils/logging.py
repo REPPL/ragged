@@ -8,9 +8,9 @@ no sensitive information (PII, file contents, API keys) is logged.
 import logging
 import logging.handlers
 import sys
-from datetime import UTC
+from datetime import timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, Optional, Union
 
 from pythonjsonlogger import json as jsonlogger
 
@@ -79,12 +79,12 @@ class CustomJsonFormatter(jsonlogger.JsonFormatter):
         if not log_record.get("timestamp"):
             from datetime import datetime
 
-            log_record["timestamp"] = datetime.now(UTC).isoformat()
+            log_record["timestamp"] = datetime.now(timezone.utc).isoformat()
 
 
 def setup_logging(
-    log_level: str | None = None,
-    log_file: Path | None = None,
+    log_level: Optional[str] = None,
+    log_file: Optional[Path] = None,
     json_format: bool = True,
 ) -> None:
     """
@@ -114,7 +114,7 @@ def setup_logging(
     console_handler.setLevel(level)
     console_handler.addFilter(privacy_filter)
 
-    console_formatter: CustomJsonFormatter | logging.Formatter
+    console_formatter: Union[CustomJsonFormatter, logging.Formatter]
     if json_format:
         console_formatter = CustomJsonFormatter(
             "%(timestamp)s %(level)s %(logger)s %(message)s"
@@ -142,7 +142,7 @@ def setup_logging(
         file_handler.setLevel(level)
         file_handler.addFilter(privacy_filter)
 
-        file_formatter: CustomJsonFormatter | logging.Formatter
+        file_formatter: Union[CustomJsonFormatter, logging.Formatter]
         if json_format:
             file_formatter = CustomJsonFormatter(
                 "%(timestamp)s %(level)s %(logger)s %(module)s %(function)s %(message)s"

@@ -1,6 +1,6 @@
 """Personal memory system for ragged.
 
-v0.4.8: Personalised Retrieval & Ranking
+v0.4.10: Advanced Temporal Features
 
 This module implements a privacy-first personal memory system that enables ragged to:
 - Remember user context and preferences
@@ -9,6 +9,9 @@ This module implements a privacy-first personal memory system that enables ragge
 - Support multiple user personas for context switching
 - Learn from behaviour patterns (v0.4.7)
 - Personalise retrieval ranking (v0.4.8)
+- Store and query temporal facts (v0.4.10)
+- Track activity timelines (v0.4.10)
+- Analyse trending topics (v0.4.10)
 
 All data is stored locally with encryption and full user control.
 
@@ -20,6 +23,8 @@ Components:
 - Profile: Interest profile management (v0.4.7)
 - Behaviour: Behaviour learning system (v0.4.7)
 - Personalisation: Personalised ranking (v0.4.8)
+- Temporal Facts: Time-based fact storage (v0.4.10)
+- Temporal Query: Timeline and trend analysis (v0.4.10)
 
 Privacy Guarantees:
 - 100% local storage (no cloud dependencies)
@@ -49,6 +54,14 @@ from ragged.memory.persona import Persona, PersonaManager
 from ragged.memory.personalisation import PersonalisationConfig, PersonalisedRanker
 from ragged.memory.profile import InterestProfile, ProfileManager, TopicInterest
 from ragged.memory.topics import Topic, TopicExtractor
+from ragged.memory.temporal_facts import TemporalFact, FactVersion, TemporalFactStore
+from ragged.memory.temporal_query import (
+    TemporalQueryEngine,
+    Timeline,
+    TimelineEntry,
+    TrendingTopic,
+    PeriodComparison
+)
 
 __all__ = [
     "Persona",
@@ -65,6 +78,15 @@ __all__ = [
     "BehaviourLearner",
     "PersonalisedRanker",
     "PersonalisationConfig",
+    # v0.4.10 Temporal Features
+    "TemporalFact",
+    "FactVersion",
+    "TemporalFactStore",
+    "TemporalQueryEngine",
+    "Timeline",
+    "TimelineEntry",
+    "TrendingTopic",
+    "PeriodComparison",
 ]
 
-__version__ = "0.4.8"
+__version__ = "0.4.10"
