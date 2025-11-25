@@ -6,6 +6,7 @@ intelligent model selection and performance improvements.
 
 v0.6.1 OPTIMISE-001: Query classification foundation
 v0.6.2 OPTIMISE-002: Automatic model routing and lifecycle management
+v0.6.2 OPTIMISE-002: Integrated routing service
 """
 
 from ragged.optimisation.model_manager import ModelInfo, ModelManager
@@ -17,6 +18,7 @@ from ragged.optimisation.query_classifier import (
     QueryType,
 )
 from ragged.optimisation.routing_metadata import RoutingMetadata
+from ragged.optimisation.routing_service import RoutingDecision, RoutingService
 
 __all__ = [
     "QueryClassifier",
@@ -28,4 +30,6 @@ __all__ = [
     "ModelSelection",
     "ModelManager",
     "ModelInfo",
+    "RoutingService",
+    "RoutingDecision",
 ]
