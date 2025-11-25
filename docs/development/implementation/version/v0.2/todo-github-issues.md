@@ -1,6 +1,5 @@
 # GitHub Issues for Deferred TODOs (v0.2.5)
 
-**Created**: 2025-11-17
 **Context**: v0.2.5 QUALITY-009 - TODO cleanup Part 3
 
 ---

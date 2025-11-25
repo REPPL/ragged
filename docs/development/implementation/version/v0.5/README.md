@@ -8,13 +8,52 @@ Implementation records for ragged version 0.5 series: Multi-Modal Vision RAG
 
 The v0.5 series introduces multi-modal capabilities to ragged, enabling visual document understanding through ColPali vision embeddings. This series represents a fundamental architectural evolution from text-only to multi-modal RAG, supporting queries over diagrams, tables, charts, and visual content.
 
-**Status:** 🔄 In Progress (5/12 releases completed)
+**Status:** 🔄 In Progress (8/12 releases completed)
 **Started:** 23 November 2025
 **Completion:** Estimated Q1 2026
 
 ---
 
 ## Completed Versions
+
+### v0.5.0 - ColPali + Dual Storage Foundation
+**Completion Date:** November 2025 (retroactive documentation)
+**Implementation:** 1,951 lines (4 core files)
+
+Foundation for multi-modal document understanding with ColPali vision embedder and dual embedding storage architecture.
+
+**Key Deliverables:**
+- ColPali vision embedder (882 lines) - 128-dim vision embeddings
+- Dual embedding store (830 lines) - Text+vision storage with encryption
+- Storage schema (239 lines) - Type-safe metadata structures
+
+[View v0.5.0 Documentation →](./v0.5.0/README.md)
+
+### v0.5.1 - GPU Resource Management
+**Completion Date:** November 2025 (retroactive documentation)
+**Implementation:** 1,143 lines (5 files in src/gpu/)
+
+Comprehensive GPU resource management with device detection, memory monitoring, OOM recovery, and adaptive batch sizing.
+
+**Key Deliverables:**
+- Device manager (343 lines) - CUDA/MPS/CPU detection
+- OOM handler (284 lines) - Multi-strategy recovery
+- Memory monitor (266 lines) - Real-time tracking
+- Batch sizer (210 lines) - Adaptive sizing
+
+[View v0.5.1 Documentation →](./v0.5.1/README.md)
+
+### v0.5.2 - Multi-Modal Vision Queries
+**Completion Date:** November 2025 (retroactive documentation)
+**Implementation:** 660 lines (2 core files)
+
+Multi-modal retrieval system supporting text, image, and hybrid queries with RRF score fusion.
+
+**Key Deliverables:**
+- Vision retriever (407 lines) - Multi-modal retrieval engine
+- Query processor (253 lines) - Query type detection and embedding
+
+[View v0.5.2 Documentation →](./v0.5.2/README.md)
 
 ### v0.5.8 - Security Hardening (CLI & Supply Chain)
 **Completion Date:** 23 November 2025
@@ -98,9 +137,9 @@ Comprehensive CLI exposing all vision features through intuitive command-line in
 ## Planned Versions
 
 ### Vision Foundation (v0.5.0-v0.5.2)
-- v0.5.0: ColPali Integration & Dual Storage - Planned
-- v0.5.1: Vision-Aware Document Processing - Planned
-- v0.5.2: Multi-Modal Retrieval Engine - Planned
+- ✅ v0.5.0: ColPali Integration & Dual Storage - **COMPLETED**
+- ✅ v0.5.1: GPU Resource Management - **COMPLETED**
+- ✅ v0.5.2: Multi-Modal Vision Queries - **COMPLETED**
 
 ### User Interfaces (v0.5.3-v0.5.5)
 - ✅ v0.5.3: Multi-Modal CLI Commands - **COMPLETED**
@@ -209,15 +248,18 @@ Comprehensive CLI exposing all vision features through intuitive command-line in
 - [v0.5.3 Roadmap](../../../roadmap/version/v0.5/v0.5.3.md) - CLI implementation plan
 
 ### Implementation
-- [v0.5.8 Implementation](./v0.5.8/README.md) - Security Hardening (CLI & Supply Chain)
-- [v0.5.7 Implementation](./v0.5.7/README.md) - Security Hardening (Vision Features)
-- [v0.5.5 Implementation](./v0.5.5/README.md) - Test Coverage & Import Fixes
-- [v0.5.4 Implementation](./v0.5.4/README.md) - Legacy Command Removal
+- [v0.5.0 Implementation](./v0.5.0/README.md) - ColPali + Dual Storage Foundation
+- [v0.5.1 Implementation](./v0.5.1/README.md) - GPU Resource Management
+- [v0.5.2 Implementation](./v0.5.2/README.md) - Multi-Modal Vision Queries
 - [v0.5.3 Implementation](./v0.5.3/README.md) - Multi-Modal CLI Commands
+- [v0.5.4 Implementation](./v0.5.4/README.md) - Legacy Command Removal
+- [v0.5.5 Implementation](./v0.5.5/README.md) - Test Coverage & Import Fixes
+- [v0.5.7 Implementation](./v0.5.7/README.md) - Security Hardening (Vision Features)
+- [v0.5.8 Implementation](./v0.5.8/README.md) - Security Hardening (CLI & Supply Chain)
 
 ### Architecture Decisions
 
 ---
 
-**Status:** v0.5.3-v0.5.5, v0.5.7-v0.5.8 Completed ✅ (5/12 releases)
-**Next:** v0.5.0-v0.5.2 (Vision foundation) or v0.5.6 (Quality metrics) or v0.5.9+ (Enhanced features)
+**Status:** v0.5.0-v0.5.5, v0.5.7-v0.5.8 Completed ✅ (8/12 releases)
+**Next:** v0.5.6 (Quality metrics), v0.5.9+ (Enhanced features), or dedicated vision tests

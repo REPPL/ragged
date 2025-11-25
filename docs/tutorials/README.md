@@ -20,6 +20,16 @@ Tutorials are **learning-oriented** guides that take you through hands-on exerci
 
 ## Available Tutorials
 
+### Vision & Multi-Modal
+
+**[Multi-Modal Workflow Tutorial](./multimodal-workflow.md)** (v0.5.3+)
+
+How to use ragged's vision capabilities for documents with diagrams, charts, and visual content.
+
+- **Topics**: Vision embeddings, hybrid queries, ColPali, GPU management
+- **Level**: Intermediate
+- **Time**: 20-25 minutes
+
 ### Memory System
 
 **[Getting Started with Personas](./personas-quickstart.md)** (v0.4.5+)

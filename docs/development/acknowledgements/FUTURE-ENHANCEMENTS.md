@@ -104,5 +104,4 @@ fi
 
 ---
 
-**Created**: 2025-11-18
 **Review**: When considering documentation-auditor enhancements (post v0.4.10)

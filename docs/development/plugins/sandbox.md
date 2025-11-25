@@ -34,7 +34,7 @@ The plugin sandbox provides isolated execution of untrusted plugins with enforce
 **Resource Limits:**
 - **Memory (RLIMIT_AS):** Not reliably enforced - limit set but may not trigger OOM
 - **CPU Time (RLIMIT_CPU):** Enforced - SIGXCPU delivered correctly
-- **Process Count (RLIMIT_NPROC):** Partially enforced - behavior differs from Linux
+- **Process Count (RLIMIT_NPROC):** Partially enforced - behaviour differs from Linux
 - **Execution Timeout:** Enforced via process timeout
 
 **Security Isolation:**

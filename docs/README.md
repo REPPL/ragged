@@ -1,7 +1,5 @@
 # ragged Documentation
 
-**Status:** Early Development (v0.4.9)
-
 ---
 
 ## Table of Contents
@@ -323,9 +321,6 @@ All developer-facing documentation is now organised under [development/](./devel
 ---
 
 ## Current Project Status
-
-
-**Date:** 2025-11-13
 
 **What Exists:**
 - ✅ Comprehensive technical design (v0.1 through v1.0)
