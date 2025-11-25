@@ -7,6 +7,15 @@ v0.6.4 OPTIMISE-004: Performance Analytics
 """
 
 from ragged.analytics.collector import MetricsCollector, get_metrics_collector
+from ragged.analytics.export import (
+    ASCIIVisualiser,
+    MetricsExporter,
+    export_query_metrics_to_csv,
+    export_summary_to_json,
+    visualise_cache_effectiveness,
+    visualise_latency_distribution,
+    visualise_model_usage,
+)
 from ragged.analytics.models import (
     CacheMetrics,
     ModelMetrics,
@@ -24,6 +33,14 @@ __all__ = [
     # Queries
     "MetricsQuery",
     "get_metrics_query",
+    # Export
+    "MetricsExporter",
+    "ASCIIVisualiser",
+    "export_summary_to_json",
+    "export_query_metrics_to_csv",
+    "visualise_latency_distribution",
+    "visualise_model_usage",
+    "visualise_cache_effectiveness",
     # Models
     "QueryMetrics",
     "RetrievalMetrics",
