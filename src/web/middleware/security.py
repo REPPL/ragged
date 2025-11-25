@@ -1,13 +1,16 @@
 """Security middleware for web UI and API.
 
 v0.6.0 SECURITY-WEB-001: Enterprise-grade security headers and session management.
+v0.6.2 SECURITY-003: Redis-backed session persistence with graceful fallback.
 
 Implements:
 - Content Security Policy (CSP) headers
 - HTTP Strict Transport Security (HSTS)
-- Session security improvements
+- Session security improvements with pluggable storage backends
 - XSS protection enhancements
 """
+
+from __future__ import annotations
 
 import secrets
 import time
@@ -18,6 +21,7 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.types import ASGIApp
 
 from ragged.utils.logging import get_logger
+from ragged.web.session import SessionStore, SessionStoreFactory
 
 logger = get_logger(__name__)
 
@@ -133,12 +137,14 @@ class SessionSecurityMiddleware(BaseHTTPMiddleware):
     """Middleware for session security improvements.
 
     v0.6.0 SECURITY-WEB-001: Session hijacking prevention and timeout enforcement.
+    v0.6.2 SECURITY-003: Pluggable session storage (in-memory or Redis).
 
     Features:
     - Session timeout enforcement
     - Session ID rotation
-    - Secure session storage
+    - Secure session storage with Redis support
     - CSRF token validation
+    - Graceful fallback to in-memory if Redis unavailable
     """
 
     def __init__(
@@ -146,6 +152,8 @@ class SessionSecurityMiddleware(BaseHTTPMiddleware):
         app: ASGIApp,
         session_timeout: int = 3600,  # 1 hour
         enable_csrf: bool = True,
+        session_store: SessionStore | None = None,
+        redis_url: str | None = None,
     ):
         """Initialise session security middleware.
 
@@ -153,14 +161,40 @@ class SessionSecurityMiddleware(BaseHTTPMiddleware):
             app: ASGI application
             session_timeout: Session timeout in seconds
             enable_csrf: Enable CSRF token validation
+            session_store: Custom SessionStore (None = auto-create)
+            redis_url: Redis URL for session persistence (None = in-memory)
+
+        Example:
+            >>> # Development (in-memory)
+            >>> middleware = SessionSecurityMiddleware(app)
+            >>>
+            >>> # Production (Redis with fallback)
+            >>> middleware = SessionSecurityMiddleware(
+            ...     app,
+            ...     redis_url="redis://localhost:6379/0"
+            ... )
         """
         super().__init__(app)
         self.session_timeout = session_timeout
         self.enable_csrf = enable_csrf
-        self._sessions: dict[str, dict[str, Any]] = {}
+
+        # Create or use provided session store
+        if session_store is not None:
+            self.session_store = session_store
+            logger.info("Using provided SessionStore")
+        else:
+            self.session_store = SessionStoreFactory.create(
+                redis_url=redis_url, fallback_to_memory=True
+            )
+
+        logger.info(
+            f"SessionSecurityMiddleware initialised: "
+            f"store={type(self.session_store).__name__}, "
+            f"timeout={session_timeout}s, csrf={enable_csrf}"
+        )
 
     async def dispatch(self, request: Request, call_next: Callable) -> Response:
-        """Enforce session security.
+        """Enforce session security with pluggable storage backend.
 
         Args:
             request: Incoming HTTP request
@@ -168,40 +202,54 @@ class SessionSecurityMiddleware(BaseHTTPMiddleware):
 
         Returns:
             Response with session security enforced
+
+        v0.6.2 SECURITY-003: Uses SessionStore for Redis or in-memory storage
         """
         # Get session ID from cookie
         session_id = request.cookies.get("session_id")
+        session_data = None
 
         if session_id:
-            # Check session timeout
-            session = self._sessions.get(session_id)
-            if session:
-                last_activity = session.get("last_activity", 0)
-                if time.time() - last_activity > self.session_timeout:
-                    # Session expired
-                    logger.warning(f"Session {session_id[:8]}... expired")
-                    del self._sessions[session_id]
-                    session_id = None
-                else:
-                    # Update last activity
-                    session["last_activity"] = time.time()
+            # Try to retrieve session from store
+            session_data = self.session_store.get_session(session_id)
+
+            if session_data is None:
+                # Session not found or expired
+                logger.debug(f"Session {session_id[:8]}... not found or expired")
+                session_id = None
 
         # Create new session if needed
         if not session_id:
             session_id = secrets.token_urlsafe(32)
-            self._sessions[session_id] = {
+            session_data = {
                 "created_at": time.time(),
                 "last_activity": time.time(),
                 "csrf_token": secrets.token_urlsafe(32) if self.enable_csrf else None,
             }
-            logger.info(f"Created new session: {session_id[:8]}...")
+
+            # Store in session backend
+            success = self.session_store.create_session(
+                session_id, session_data, self.session_timeout
+            )
+
+            if success:
+                logger.info(f"Created new session: {session_id[:8]}...")
+            else:
+                logger.error(f"Failed to create session in store")
 
         # Add session to request state
         request.state.session_id = session_id
-        request.state.session = self._sessions.get(session_id, {})
+        request.state.session = session_data or {}
 
         # Process request
         response = await call_next(request)
+
+        # Update session in store (refresh TTL and last_activity)
+        if session_data:
+            session_data["last_activity"] = time.time()
+            self.session_store.create_session(
+                session_id, session_data, self.session_timeout
+            )
 
         # Set session cookie (secure by default)
         response.set_cookie(

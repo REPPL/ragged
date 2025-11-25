@@ -38,6 +38,10 @@ class Settings(BaseSettings):
     # Service URLs
     ollama_url: str = "http://localhost:11434"
     chroma_url: str = "http://localhost:8001"
+    redis_url: Optional[str] = Field(
+        default=None,
+        description="Redis URL for session persistence (None = in-memory sessions)"
+    )
 
     # Embedding Model Configuration
     embedding_model: EmbeddingModel = EmbeddingModel.SENTENCE_TRANSFORMERS

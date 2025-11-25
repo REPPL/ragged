@@ -14,6 +14,8 @@ Security Context:
 - GDPR: User data isolation requirement
 """
 
+from __future__ import annotations
+
 import threading
 import uuid
 from dataclasses import dataclass, field

@@ -15,6 +15,7 @@ services:
     environment:
       - OLLAMA_URL=${OLLAMA_URL:-http://host.docker.internal:11434}
       - CHROMA_URL=${CHROMA_URL:-http://chromadb:8001}
+      - REDIS_URL=${REDIS_URL:-redis://redis:6379/0}
       - PYTHONUNBUFFERED=${PYTHONUNBUFFERED:-1}
       - ENVIRONMENT=${ENVIRONMENT:-development}
       - PYTHONPATH=/app  # Ensure Python can find the ragged package
@@ -22,6 +23,8 @@ services:
       - "host.docker.internal:host-gateway"
     depends_on:
       chromadb:
+        condition: service_healthy
+      redis:
         condition: service_healthy
     networks:
       - ragged-network
@@ -87,6 +90,25 @@ services:
       retries: 5
       start_period: 10s
 
+  # Redis session store (v0.6.2 SECURITY-003)
+  redis:
+    image: redis:7-alpine
+    container_name: ragged-redis
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis-data:/data  # Persistent session storage
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    networks:
+      - ragged-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+
 networks:
   ragged-network:
     driver: bridge
@@ -94,3 +116,5 @@ networks:
 volumes:
   chroma-data:
     name: ragged-chroma-data
+  redis-data:
+    name: ragged-redis-data
