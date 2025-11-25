@@ -233,3 +233,4 @@ docker-data/
 .mailmap
 DOCSTRING_AUDIT_FINDINGS.md
 chroma/
+docs/api/_build/
