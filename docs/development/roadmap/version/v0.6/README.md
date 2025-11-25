@@ -239,7 +239,7 @@ Version 0.6 transforms ragged from a functional RAG system into an intelligent, 
 - Gradio UI → Svelte/SvelteKit (v0.6.8-v0.6.10)
 - Direct Ollama integration → FastAPI REST API (v0.6.7)
 - Manual model selection → Automatic routing (v0.6.2)
-- Basic queries → Intelligent classification and optimization (v0.6.1-v0.6.6)
+- Basic queries → Intelligent classification and optimisation (v0.6.1-v0.6.6)
 
 **Deprecations:**
 - Gradio UI deprecated in v0.6.8 (replaced by Svelte)
