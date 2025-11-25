@@ -13,6 +13,7 @@ from ragged.analytics.models import (
     QueryMetrics,
     RetrievalMetrics,
 )
+from ragged.analytics.queries import MetricsQuery, get_metrics_query
 from ragged.analytics.storage import MetricsStorage
 
 __all__ = [
@@ -20,6 +21,9 @@ __all__ = [
     "MetricsCollector",
     "get_metrics_collector",
     "MetricsStorage",
+    # Queries
+    "MetricsQuery",
+    "get_metrics_query",
     # Models
     "QueryMetrics",
     "RetrievalMetrics",
