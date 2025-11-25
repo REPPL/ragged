@@ -6,6 +6,7 @@ v0.2.9: Automatic retry logic for transient failures, achieving >98% recovery su
 import functools
 import time
 from collections.abc import Callable
+from typing import Optional
 
 from ragged.exceptions import (
     EmbeddingError,
@@ -102,8 +103,8 @@ def with_retry(
     max_attempts: int = 3,
     base_delay: float = 1.0,
     max_delay: float = 60.0,
-    retryable_exceptions: tuple[type[Exception], ...] | None = None,
-    on_retry: Callable[[Exception, int], None] | None = None,
+    retryable_exceptions: Optional[tuple[type[Exception], ...]] = None,
+    on_retry: Optional[Callable[[Exception, int], None]] = None,
 ) -> Callable:
     """
     Decorator to add retry logic with exponential backoff.

@@ -6,10 +6,13 @@ query matching and retrieval accuracy.
 v0.6.3 OPTIMISE-003 Phase 2: Terminology Management
 """
 
+from __future__ import annotations
+
 import json
 import logging
 import re
 from pathlib import Path
+from typing import Optional
 
 from ragged.optimisation.domain_adapter import Domain
 
@@ -19,7 +22,7 @@ logger = logging.getLogger(__name__)
 class TerminologyManager:
     """Manages domain-specific terminology expansion and normalization."""
 
-    def __init__(self, dictionaries_dir: Path | None = None):
+    def __init__(self, dictionaries_dir: Optional[Path] = None):
         """Initialize terminology manager with domain dictionaries.
 
         Args:

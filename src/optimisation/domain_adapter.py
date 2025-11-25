@@ -6,11 +6,14 @@ retrieval strategies to improve accuracy with domain-specific terminology.
 v0.6.3 OPTIMISE-003: Domain Adaptation
 """
 
+from __future__ import annotations
+
 import logging
 import re
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
+from typing import Optional, Union
 
 logger = logging.getLogger(__name__)
 
@@ -199,7 +202,7 @@ class DomainAdapter:
         self.detector = DomainDetector()
         self._terminology_manager = terminology_manager
 
-    def tag_document_domain(self, content: str) -> dict[str, str | float]:
+    def tag_document_domain(self, content: str) -> dict[str, Union[str, float]]:
         """Tag document with detected domain metadata.
 
         Args:
@@ -216,7 +219,7 @@ class DomainAdapter:
             "domain_indicators": ", ".join(result.indicators[:5]),  # Top 5
         }
 
-    def adapt_query_for_domain(self, query: str, domain: Domain | None = None) -> str:
+    def adapt_query_for_domain(self, query: str, domain: Optional[Domain] = None) -> str:
         """Adapt query based on domain characteristics.
 
         If domain is not provided, detects domain from query.
