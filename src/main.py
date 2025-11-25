@@ -93,6 +93,7 @@ from ragged.cli.commands.test import test  # v0.3.11: Testing commands
 from ragged.cli.commands.validate import validate
 from ragged.cli.commands.versions import versions  # v0.3.7a: Document version tracking
 from ragged.cli.commands.scan import scan  # v0.4.9: Scan processing
+from ragged.cli.commands.agent import agent  # v0.6: Agent framework
 
 # Register commands
 cli.add_command(query_group)  # v0.5.3: Multi-modal query group
@@ -123,6 +124,7 @@ cli.add_command(ingest)  # v0.5.3: Multi-modal ingestion
 cli.add_command(gpu)  # v0.5.3: GPU management
 cli.add_command(storage)  # v0.5.3: Storage management
 cli.add_command(scan)  # v0.4.9: Scan processing
+cli.add_command(agent)  # v0.6: Agent framework
 
 
 def main() -> None:
