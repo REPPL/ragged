@@ -189,9 +189,15 @@ class DomainDetector:
 class DomainAdapter:
     """Adapts retrieval strategies based on detected domain."""
 
-    def __init__(self):
-        """Initialize domain adapter."""
+    def __init__(self, terminology_manager=None):
+        """Initialize domain adapter.
+
+        Args:
+            terminology_manager: Optional TerminologyManager instance.
+                                 If None, will be lazily initialized.
+        """
         self.detector = DomainDetector()
+        self._terminology_manager = terminology_manager
 
     def tag_document_domain(self, content: str) -> dict[str, str | float]:
         """Tag document with detected domain metadata.
@@ -220,16 +226,22 @@ class DomainAdapter:
             domain: Optional domain hint
 
         Returns:
-            Adapted query (may include synonyms, expansions)
+            Adapted query with terminology expansion
         """
         if domain is None:
             result = self.detector.detect_domain(query)
             domain = result.primary_domain
 
-        # For now, return original query
-        # Phase 2 will add terminology expansion
-        logger.debug(f"Query domain detected as {domain.value}")
-        return query
+        # Use terminology manager for expansion (lazy initialization)
+        if self._terminology_manager is None:
+            # Avoid circular import
+            from ragged.optimisation.terminology import get_terminology_manager
+            self._terminology_manager = get_terminology_manager()
+
+        # Expand query with domain-specific terminology
+        adapted = self._terminology_manager.expand_query(query, domain)
+        logger.debug(f"Query adapted for {domain.value} domain")
+        return adapted
 
     def get_domain_weight_multiplier(self, domain: Domain) -> float:
         """Get scoring weight multiplier for domain-specific results.
