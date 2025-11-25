@@ -7,6 +7,79 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.3] - 2025-11-25
+
+### Added - WebUI Foundation Infrastructure
+
+Complete implementation of modern SvelteKit-based WebUI infrastructure for ragged.
+
+**Phase 1: Foundation Infrastructure**:
+- SvelteKit 2.0 with TypeScript configuration
+- Design system with CSS custom properties (colours, typography, spacing, shadows)
+- Primitive components (Button, Input, Card, Badge, Modal, Toast, Spinner)
+- Dark/light theme support with system preference detection
+
+**Phase 2: Application Shell**:
+- Main layout with Header, Sidebar, and responsive navigation
+- Route structure: Query (/), Documents, Collections, History, Settings, Analytics
+- Type-safe API client with comprehensive endpoint coverage
+- Svelte stores for theme, toast, query, and authentication state
+
+**Phase 3: Core Feature Components**:
+- **Query Interface**: QueryInput, QueryOptions, QueryResults, ResultCard
+- **Document Management**: DocumentCard, DocumentList, UploadZone (drag-and-drop)
+- **Collections**: CollectionCard, CollectionForm
+- **History**: HistoryItem for query history tracking
+
+**Phase 4: Advanced Features**:
+- **Analytics Dashboard**: MetricCard, StorageChart, PerformanceChart
+- **Command Palette**: Cmd+K quick navigation with fuzzy search
+- **Keyboard Navigation**: Global shortcuts and accessibility support
+- **Settings**: SettingsSection, SettingsRow, Toggle components
+
+**Phase 5: Security & Authentication UI**:
+- AuthForm component with login/register modes
+- Auth store with JWT token management
+- Open redirect vulnerability prevention (validated redirect URLs)
+- Content Security Policy (CSP) configuration in svelte.config.js
+- CSRF protection via SvelteKit built-in features
+
+**Phase 6: Testing Infrastructure**:
+- Vitest configuration with jsdom environment
+- Component tests (Button)
+- Store tests (theme, toast)
+- API client tests with mocked fetch
+
+**Phase 7: Integration & Deployment**:
+- Vite build configuration with sourcemaps
+- Node adapter for production deployment
+- API proxy configuration for development
+- Environment variable support (RAGGED_ prefix)
+
+**Security Audit Findings & Fixes**:
+- [HIGH] Fixed open redirect vulnerability in login page
+- [MEDIUM] Added CSP headers configuration
+- [MEDIUM] Validated DOMPurify integration for XSS prevention
+
+**New Files**:
+- `src/webui/` - Complete SvelteKit application (~50 files)
+  - Components: primitives, layout, feature-specific
+  - Routes: authentication, main application pages
+  - Stores: state management for theme, auth, toast, query
+  - API client: type-safe backend communication
+  - Tests: component, store, and API tests
+
+### Changed
+
+- Updated version to 0.7.3
+
+### Dependencies
+
+- SvelteKit 2.0, Svelte 4.2
+- Vite 5.0, Vitest 1.0
+- Chart.js 4.4, D3 7.8 for visualisations
+- DOMPurify 3.0 for XSS prevention
+
 ## [0.6.0] - 2025-11-24
 
 ### Added - Web UI Security & API Maturity (Phase 1)
