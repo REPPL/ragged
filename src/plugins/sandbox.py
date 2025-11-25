@@ -43,12 +43,17 @@ class SandboxConfig:
     # Timeout settings
     execution_timeout_seconds: int = 30
 
+    # Additional allowed directories (primarily for testing)
+    additional_allowed_dirs: list[Path] = None
+
     def __post_init__(self):
         """Initialise default paths if not provided."""
         if self.allowed_read_paths is None:
             self.allowed_read_paths = []
         if self.allowed_write_paths is None:
             self.allowed_write_paths = []
+        if self.additional_allowed_dirs is None:
+            self.additional_allowed_dirs = []
 
 
 class SandboxResult(Enum):
@@ -127,15 +132,26 @@ class PluginSandbox:
 
         # Set resource limits preexec function
         def set_limits():
-            # Memory limit
-            mem_bytes = self.config.max_memory_mb * 1024 * 1024
-            resource.setrlimit(resource.RLIMIT_AS, (mem_bytes, mem_bytes))
+            # Memory limit (platform-dependent support)
+            try:
+                mem_bytes = self.config.max_memory_mb * 1024 * 1024
+                resource.setrlimit(resource.RLIMIT_AS, (mem_bytes, mem_bytes))
+            except (ValueError, OSError) as e:
+                # macOS and some systems may not support RLIMIT_AS reliably
+                logger.warning(f"Memory limit enforcement unavailable: {e}")
 
             # CPU time limit
-            resource.setrlimit(resource.RLIMIT_CPU, (self.config.max_cpu_seconds, self.config.max_cpu_seconds))
+            try:
+                resource.setrlimit(resource.RLIMIT_CPU, (self.config.max_cpu_seconds, self.config.max_cpu_seconds))
+            except (ValueError, OSError) as e:
+                logger.warning(f"CPU time limit enforcement unavailable: {e}")
 
-            # Process limit
-            resource.setrlimit(resource.RLIMIT_NPROC, (self.config.max_processes, self.config.max_processes))
+            # Process limit (platform-dependent behavior)
+            try:
+                resource.setrlimit(resource.RLIMIT_NPROC, (self.config.max_processes, self.config.max_processes))
+            except (ValueError, OSError) as e:
+                # macOS handles RLIMIT_NPROC differently than Linux
+                logger.warning(f"Process limit enforcement unavailable: {e}")
 
             # SECURITY FIX (CRITICAL-3): Network isolation on Linux
             if self.config.block_network and sys.platform == "linux":
@@ -248,6 +264,10 @@ class PluginSandbox:
                 Path("/usr/local/lib/ragged/plugins"),  # System-wide plugins
                 Path.cwd() / "plugins",  # Development plugins
             ]
+
+            # Add any additional allowed directories from config
+            if self.config.additional_allowed_dirs:
+                allowed_plugin_dirs.extend(self.config.additional_allowed_dirs)
 
             # Check if executable is within allowed paths
             is_allowed = any(
