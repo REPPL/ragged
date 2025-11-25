@@ -6,6 +6,11 @@ Roadmap audits review planning documentation, task organisation, and version roa
 
 All audit reports use the format: `YYYY-MM-DD-description.md`
 
+| Date | Audit | Status |
+|------|-------|--------|
+| 2025-11-25 | [Feature-Centric Restructuring](./2025-11-25-restructuring-plan.md) | Documented (pending execution) |
+| 2025-11-22 | [Initial Restructuring](./2025-11-22-restructuring.md) | Superseded |
+
 ### Planning Structure Audits
 
 Assess the organisation and structure of planning documentation:
@@ -62,6 +67,7 @@ Key questions to address:
 
 ## Related Documentation
 
+- [Feature-Centric Roadmap Standard](../../development/process/methodology/feature-centric-roadmaps.md) - Target methodology
 - Planning decision tree: `~/Development/.claude/CLAUDE.md`
 - Roadmap templates: `docs/development/roadmap/version/`
 - Planning templates: `docs/development/planning/version/`

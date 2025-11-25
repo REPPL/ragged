@@ -35,7 +35,12 @@ This project treats the AI coding assistant as a senior developer where:
 
 ## Acknowledgments
 
-This AI assistance policy was developed with assistance from **Claude Code** (Anthropic, model: claude-sonnet-4-5-20250929) during `ragged`'s planning phase (November 2025). This project is informed by:
+This AI assistance policy was developed with assistance from **Claude Code** (Anthropic) during `ragged`'s planning phase (November 2025). Models used include:
+
+- **Claude Sonnet 4.5** (claude-sonnet-4-5-20250929) - Primary development model
+- **Claude Opus 4.5** (claude-opus-4-5-20251101) - Complex tasks and architecture
+
+This project is informed by:
 
 - Ghostty project's AI disclosure requirements
 - AIDA (AI Included Disclosure Acknowledgment) framework
@@ -48,7 +53,10 @@ This AI assistance policy was developed with assistance from **Claude Code** (An
 
 ### Claude Code (Primary tool)
 
-**Version**: claude-sonnet-4-5-20250929
+**Models Used**:
+- Claude Sonnet 4.5 (claude-sonnet-4-5-20250929) - Primary development
+- Claude Opus 4.5 (claude-opus-4-5-20251101) - Complex architecture and planning
+
 **Usage**: Primary AI assistant for `ragged` development
 
 **Owns**:

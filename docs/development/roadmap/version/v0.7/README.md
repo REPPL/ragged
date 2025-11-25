@@ -1,317 +1,348 @@
-# Ragged v0.7.x Series Overview - Installation & User Experience Excellence
+# Ragged v0.7.x Series Overview - User Interface Enhancement & Refinement
 
 **Status:** Planned
 
-**Focus:** Transform ragged from "developer-friendly" to "everyone-friendly" installation
+**Focus:** Complete the WebUI foundation started in v0.6, delivering production-ready user interfaces
 
-**Dependencies:** Requires v0.6.0 completion (intelligent optimisation)
+**Dependencies:** Requires v0.6.10 completion (Svelte UI foundation)
 
 ---
 
 ## Series Purpose
 
-The v0.7.x series addresses the most immediate barrier to ragged adoption: installation complexity. Whilst ragged is powerful for users who successfully install it, the installation process currently requires 15-30 minutes with multiple manual steps, making it inaccessible to non-technical users.
+The v0.7.x series builds upon the Svelte UI foundation delivered in v0.6.7-v0.6.10, completing the user interface layer to deliver a production-ready, feature-complete web application alongside enhanced CLI experiences.
 
-This series prioritises **user experience** over **enterprise features**, recognising that widespread adoption requires an excellent first impression.
+Whilst v0.6 established the technical foundation (FastAPI REST layer, SvelteKit application, basic visualisations, PWA capabilities), v0.7 focuses on **user-facing completeness**: missing UI features, advanced visualisations, collaboration capabilities, and security hardening.
+
+This series prioritises **interface excellence** over **backend infrastructure**, recognising that a polished, secure, feature-complete UI is essential for user adoption and retention before expanding to advanced agent capabilities in v0.9.
 
 ---
 
-## Series Focus: Installation & Onboarding
+## Series Focus: User Interface Completion
 
 **Problem Statement:**
-- Current installation requires deep technical knowledge
-- Python 3.12 strict requirement causes friction
-- Multiple external dependencies (Ollama, ChromaDB, Docker, Poppler)
-- Configuration has 100+ overwhelming options
-- No guided first-run experience
-- Error messages are technical (stack traces)
-- CLI has 30+ uncategorised commands
+- v0.6 delivers WebUI foundation but lacks critical features
+- Missing: advanced query filters, document organisation, query history
+- Collaboration features absent (multi-user scenarios)
+- Security hardening needed before production deployment
+- CLI integration with WebUI incomplete
+- Advanced visualisations only partially implemented
 
 **Target Outcomes:**
-- Installation in <10 minutes on fresh system
-- Interactive wizard with ≤3 questions
-- Clear prerequisite validation with actionable errors
-- Guided first-run experience with working demo
-- User-friendly error messages
-- Visual service health dashboard
-- Organised CLI help
+- Feature-complete WebUI with all essential capabilities
+- Advanced visualisations for knowledge exploration
+- Optional collaboration features for team environments
+- Security-hardened UI suitable for production
+- Seamless CLI-WebUI integration
+- Comprehensive testing and quality assurance
+- Accessibility compliance (WCAG 2.1 AA)
 
 ---
 
-## Design Philosophy Change
+## Design Philosophy
 
-### Previous Direction (Deferred)
-The original v0.7.0 roadmap focused on **production readiness**:
-- API stability & versioning
-- Horizontal scalability
-- Enterprise authentication
-- Monitoring & observability
-- Rate limiting & quotas
+### Building on v0.6 Foundation
 
-**Rationale for deferral:** These features are important for v1.0 but premature before ragged has broader adoption. Installation friction is the immediate blocker preventing users from experiencing ragged's capabilities.
+**v0.6 Delivered:**
+- **v0.6.7:** FastAPI REST layer with authentication, RBAC, rate limiting
+- **v0.6.8:** Svelte Core UI with document management and basic queries
+- **v0.6.9:** Advanced features (knowledge graph, GPU monitoring, WebSockets)
+- **v0.6.10:** PWA with dark/light mode, mobile-responsive, accessibility
 
-### New Direction (v0.7.x)
-Focus on **state-of-the-art installation experience**:
-- Make installation trivial for all skill levels
-- Excellent error messages and troubleshooting
-- Smooth onboarding with guided first-run
-- Clear, concise documentation
-- Self-service problem resolution
+**v0.7 Completes:**
+- Missing UI features → v0.7.1 (query filters, collections, history, preferences)
+- Advanced visualisations → v0.7.2 (similarity graphs, analytics dashboards)
+- Collaboration → v0.7.3 (authentication UI, shared collections, annotations)
+- Security → v0.7.4 (hardening, vulnerability scanning, secure defaults)
+- Quality → v0.7.5 (comprehensive testing, accessibility audit, performance)
 
-**Rationale:** Better to have 1000 happy users with easy installation than 10 enterprise users with complex deployment. Production readiness will come after v1.0 when API is stable and user base is established.
+### Why UI Completion Before Installation Excellence?
+
+**Rationale:** Users who successfully complete v0.6 installation can immediately benefit from enhanced UI. Installation improvements (planned for v0.8) are important but less urgent than delivering feature completeness to existing users.
+
+**Strategic Sequence:**
+- v0.6: UI foundation (technical capabilities)
+- v0.7: UI completion (user-facing features) ← **Current focus**
+- v0.8: Installation excellence (broader accessibility)
+- v0.9: Agent capabilities (advanced features)
+- v1.0: Production-ready with API stability
 
 ---
 
 ## Minor Versions
 
-### v0.7.0 - State-of-the-Art Installation & User Onboarding
+### v0.7.0 - CLI User Experience & WebUI Integration
 
-**Total Hours:** 58-82 hours (AI implementation)
+**Total Hours:** 35-45 hours (AI implementation)
 
 **Status:** Planned
 
-**Features:** 13 focused installation improvements (INSTALL-001 through INSTALL-013)
+**Features:** CLI enhancements and WebUI integration (UI-001 through UI-006)
 
 **Highlights:**
-- Prerequisites validation system
-- CLI command categorisation
-- Quick start documentation (README <100 lines)
+- CLI command categorisation and improved help
 - User-friendly error messages (no stack traces)
-- Interactive installation wizard (3 questions)
-- Enhanced health dashboard with auto-repair
-- First-run welcome experience
-- Smart service auto-start
-- Unified installation script
-- Model management CLI
+- Enhanced health dashboard with WebUI status
+- WebUI launch commands from CLI
+- Model management CLI improvements
 - Configuration presets
-- Installation troubleshooting matrix
-- Getting-started tutorial completion
+- Documentation updates (CLI + WebUI coverage)
 
 **See:** [v0.7.0 Detailed Roadmap](./v0.7.0/README.md)
 
-### v0.7.1 - Post-Launch Refinements & User Feedback
+### v0.7.1 - WebUI Feature Completeness
 
-**Total Hours:** 15-25 hours (AI implementation)
+**Total Hours:** 35-50 hours (AI implementation)
 
 **Status:** Planned
 
-**Features:** 4 refinement features (REFINE-001 through REFINE-004)
+**Features:** 10 missing WebUI features (WEB-001 through WEB-010)
 
 **Highlights:**
-- Installation analytics (opt-in, privacy-preserving)
-- Enhanced error recovery based on real user issues
-- Installation resume/checkpoint system
-- Configuration migration tools
+- Advanced query filters and facets UI
+- Document collections and organisation UI
+- Query history management UI
+- Bulk document operations UI
+- User preferences and settings panel
+- Keyboard shortcuts UI
+- Error boundaries and fallback UI
+- Loading states optimisation
+- Empty states design
+- Help and documentation overlay
 
-**Delivers:** Refined installation based on real user experiences
+**Delivers:** Feature parity with desktop RAG applications
 
-**Dependencies:** Requires v0.7.0 completion and 2-4 weeks of user feedback
+**Dependencies:** Requires v0.7.0 completion
 
 **See:** [v0.7.1 Roadmap](./v0.7.1.md)
 
-### v0.7.2 - Platform-Specific Enhancements & Native Installers
+### v0.7.2 - WebUI Advanced Visualisations
 
-**Total Hours:** 20-30 hours (AI implementation)
+**Total Hours:** 30-40 hours (AI implementation)
 
-**Status:** Planned (conditional on user demand)
+**Status:** Planned
 
-**Features:** 3 platform features (PLATFORM-001 through PLATFORM-003)
+**Features:** 6 advanced visualisation features (VIZ-001 through VIZ-006)
 
 **Highlights:**
-- macOS DMG installer (drag-and-drop, code signing, menu bar)
-- Windows MSI installer (native, PATH, Start Menu)
-- Linux DEB/RPM packages (apt/yum compatibility, systemd)
+- Document similarity graph (interactive network visualisation)
+- Query performance trends over time
+- Storage analytics dashboard
+- Model performance comparison UI
+- Cache effectiveness visualisation
+- Embedding space exploration (dimensionality reduction)
 
-**Delivers:** Professional native installers for all major platforms
+**Delivers:** Enhanced knowledge exploration and system insights
 
-**Decision Criteria:** Implement if GitHub requests >10 OR enterprise adoption requires OR analytics show script friction >20%
-
-**Dependencies:** Requires v0.7.1 completion
+**Dependencies:** Requires v0.7.1 completion, builds on v0.6.9 visualisations
 
 **See:** [v0.7.2 Roadmap](./v0.7.2.md)
 
-### v0.7.3 - Embedded ChromaDB Option (Optional)
+### v0.7.3 - WebUI Collaboration Features (Conditional)
 
-**Total Hours:** 18-28 hours (AI implementation)
+**Total Hours:** 25-35 hours (AI implementation)
 
-**Status:** Conditional (implement only if Docker is major pain point)
+**Status:** Conditional (implement only if multi-user demand exists)
 
-**Features:** 2 embedded features (EMBED-001 through EMBED-002)
+**Features:** 5 collaboration features (COLLAB-001 through COLLAB-005)
 
 **Highlights:**
-- Embedded ChromaDB mode (no Docker required)
-- Performance optimisations for embedded mode
-- Migration tools between Docker and embedded modes
-- Backup and restore for embedded database
+- User authentication UI (login, registration, profile)
+- Shared document collections (team knowledge bases)
+- Collaborative annotations (comments, highlights, tags)
+- Activity feed and audit log UI
+- User management dashboard (admin interface)
 
-**Delivers:** Docker-free installation option
+**Delivers:** Multi-user collaboration capabilities
 
-**Decision Criteria:** Implement if Docker causes >30% of failures OR strong user demand (>15 requests) OR embedded achieves 80%+ performance
+**Decision Criteria:** Implement if user demand >15 requests OR enterprise adoption requires OR team use cases identified
 
-**Dependencies:** Requires v0.7.1 completion and Docker pain point validation
+**Dependencies:** Requires v0.7.2 completion and v0.6.7 authentication backend
 
 **See:** [v0.7.3 Roadmap](./v0.7.3.md)
 
-### v0.7.4 - Testing & Quality Assurance (Conditional)
+### v0.7.4 - WebUI Security Hardening
 
-**Total Hours:** 12-18 hours (AI implementation)
+**Total Hours:** 20-30 hours (AI implementation)
 
-**Status:** Conditional (implement only if v0.7.3 is built)
+**Status:** Planned
 
-**Features:** 3 QA features (QA-001 through QA-003)
+**Features:** 10 security hardening features (SEC-001 through SEC-010)
 
 **Highlights:**
-- Automated installation testing (CI/CD matrix across platforms)
-- Installation documentation polish (platform guides, videos)
-- Performance benchmarking (Docker vs embedded comparison)
+- Input validation and sanitisation for all forms
+- XSS prevention (Content Security Policy)
+- CSRF protection for API endpoints
+- Authentication security (JWT handling, session management)
+- Authorization enforcement in UI
+- Secure WebSocket connections
+- Rate limiting on WebUI endpoints
+- Security headers configuration
+- Dependency vulnerability scanning for frontend
+- Secret management in frontend configuration
+
+**Delivers:** Production-ready security posture for WebUI
+
+**Dependencies:** Requires v0.7.1 completion (or v0.7.3 if implemented)
+
+**See:** [v0.7.4 Roadmap](./v0.7.4.md)
+
+### v0.7.5 - WebUI Testing & Quality Assurance
+
+**Total Hours:** 20-25 hours (AI implementation)
+
+**Status:** Planned
+
+**Features:** 4 quality assurance features (QA-001 through QA-004)
+
+**Highlights:**
+- End-to-end testing for WebUI (Playwright/Cypress)
+- Accessibility audit (WCAG 2.1 AA compliance)
+- Performance benchmarking (Lighthouse, Core Web Vitals)
+- Cross-browser testing (Chrome, Firefox, Safari)
+- Visual regression testing
+- Test coverage reporting
 
 **Delivers:** Quality gate for complete v0.7.x series
 
-**Decision Criteria:** Automatic - implement if v0.7.3 exists, skip otherwise
+**Dependencies:** Requires v0.7.4 completion
 
-**Dependencies:** Only implement if v0.7.3 is built
-
-**See:** [v0.7.4 Roadmap](./v0.7.4.md)
+**See:** [v0.7.5 Roadmap](./v0.7.5.md)
 
 ---
 
 ## Decision Framework for v0.7.x Minor Versions
 
 ### v0.7.0 (Foundation)
-**Status:** ✓ Committed - detailed roadmap exists
+**Status:** ✓ Committed - CLI enhancements and WebUI integration
 
 **Decision:** No decision required - this is the foundation version
 
-### v0.7.1 (Post-Launch Refinements)
-**Status:** ✓ Recommended - essential for addressing real user feedback
+### v0.7.1 (Feature Completeness)
+**Status:** ✓ Committed - essential missing features
 
-**When to implement:** After v0.7.0 release and 2-4 weeks of user feedback
+**Decision:** Always implement (fills critical gaps in v0.6 UI)
 
-**Decision criteria:** Always implement (address real user pain points)
+### v0.7.2 (Advanced Visualisations)
+**Status:** ✓ Committed - builds on v0.6.9 foundation
 
-### v0.7.2 (Platform Installers)
-**Status:** ⚠️ Conditional - implement if user demand justifies
+**Decision:** Always implement (enhances knowledge exploration)
 
-**When to implement:** After v0.7.1 release and feedback analysis
+### v0.7.3 (Collaboration Features)
+**Status:** ⚠️ Conditional - implement if multi-user demand exists
 
-**Decision criteria:**
-- ✓ GitHub requests for native installers (>10 independent requests)
-- ✓ Enterprise adoption feedback requires professional installers
-- ✓ Analytics show script friction (>20% abandon installation)
-- ✗ Skip if script-based installation proves sufficient (<5% abandonment)
-
-**Decision point:** After v0.7.1 release and 2-3 weeks of feedback
-
-### v0.7.3 (Embedded ChromaDB)
-**Status:** ⚠️ Optional - implement only if Docker is major barrier
-
-**When to implement:** After v0.7.1 analytics review, prototype validation
+**When to implement:** After v0.7.2 release and demand analysis
 
 **Decision criteria:**
-- ✓ Docker failures account for >30% of installation issues (from v0.7.1 analytics)
-- ✓ Strong user demand (>15 independent GitHub issues/requests)
-- ✓ Embedded mode achieves 80%+ of Docker performance (prototype validation)
-- ✗ Skip if Docker installation proves unproblematic (<10% failures)
-- ✗ Skip if performance gap too large (embedded >30% slower)
+- ✓ User requests for collaboration features (>15 independent requests)
+- ✓ Enterprise adoption feedback requires multi-user support
+- ✓ Team use cases identified in user research
+- ✗ Skip if single-user scenarios dominate (<5 collaboration requests)
 
-**Decision point:** After v0.7.1 analytics review, before v0.7.2 development
+**Decision point:** After v0.7.2 release and 2-3 weeks of feedback
 
-### v0.7.4 (Quality Gate)
-**Status:** ⚠️ Automatic - implement if v0.7.3 built, skip otherwise
+### v0.7.4 (Security Hardening)
+**Status:** ✓ Committed - essential for production deployment
 
-**When to implement:** Immediately after v0.7.3 completion (if v0.7.3 exists)
+**Decision:** Always implement (security is non-negotiable for v1.0)
 
-**Decision criteria:**
-- ✓ Implement if v0.7.3 is built (provides quality gate for extended series)
-- ✗ Skip if v0.7.3 not built (core series doesn't need separate QA version)
+### v0.7.5 (Testing & QA)
+**Status:** ✓ Committed - quality gate for series
 
-**Decision point:** Automatic based on v0.7.3 implementation status
+**Decision:** Always implement (ensures v0.7.x completeness)
 
 ---
 
 ## Success Criteria for v0.7.x Series
 
-### Core Series (v0.7.0-v0.7.1)
+### Core Series (v0.7.0-v0.7.2, v0.7.4-v0.7.5)
 
 **Measurable Goals:**
-- Time-to-first-query: <10 minutes (from current 20-30 minutes)
-- Installation success rate: >98% on clean systems (up from v0.7.0's 95% target)
-- User satisfaction: "Installation was easy" >4/5 rating
-- Support reduction: 50% fewer installation-related requests
-- Documentation: README <100 lines, getting-started <10 minutes
+- Feature completeness: 100% of essential UI features implemented
+- Accessibility: WCAG 2.1 AA compliance (verified by audit)
+- Performance: Lighthouse scores >90 (all categories)
+- Security: Zero high/critical vulnerabilities
+- Test coverage: >80% for UI components
+- Cross-browser support: Chrome, Firefox, Safari (latest 2 versions)
 
 **Qualitative Goals:**
-- Non-technical users can install without help
-- Error messages are actionable (user knows what to do)
-- First-run experience is confidence-building
-- Documentation structure is discoverable
-- CLI is approachable for beginners
+- Non-technical users can navigate UI without help
+- Advanced users can access all features efficiently
+- Knowledge exploration is intuitive and insightful
+- UI feels polished and professional
+- Documentation covers all UI features
 
-### Extended Series (if v0.7.2-v0.7.4 built)
+### Extended Series (if v0.7.3 built)
 
 **Additional Goals:**
-- Native installer adoption: >40% of users choose DMG/MSI/DEB over script (v0.7.2)
-- Embedded mode adoption: >20% of users where Docker is pain point (v0.7.3)
-- Embedded mode performance: 80-90% of Docker performance (v0.7.3)
-- Installation testing coverage: 100% of all paths (v0.7.4)
-- Documentation accuracy: 100% match with implementation (v0.7.4)
+- Collaboration adoption: >30% of teams use shared collections
+- Multi-user conflicts handled gracefully
+- Activity feed provides useful audit trail
+- User management is intuitive for admins
 
 ---
 
 ## Impact on Roadmap
 
-### What This Means for Production Readiness
+### Natural Progression from v0.6
 
-The features originally planned for v0.7.0 (production readiness) are **deferred but not cancelled**:
+The v0.7.x series completes the user interface layer started in v0.6:
 
-**New timeline:**
-- **v0.7.x:** Installation & user experience (current)
-- **v0.8.x:** Advanced features based on user feedback
-- **v0.9.x:** Production readiness (API stability, scalability, auth, monitoring)
-- **v1.0.0:** First stable release with API guarantees
+**Progression:**
+- **v0.6.7-v0.6.10:** UI foundation (100-140 hours)
+- **v0.7.0-v0.7.5:** UI completion (130-185 hours) ← **Current**
+- **v0.8.x:** Installation & deployment excellence
+- **v0.9.x:** Agent capabilities and advanced features
+- **v1.0.0:** Production-ready with complete feature set
 
 **Rationale:** This sequencing ensures:
-1. Users can actually install ragged (v0.7.x)
-2. Feature set is validated with broader user base (v0.8.x)
-3. Production features built on stable foundation (v0.9.x)
-4. v1.0 represents truly production-ready, widely-adopted system
+1. UI is feature-complete before expanding to agents (v0.7.x)
+2. Installation is perfected for broader adoption (v0.8.x)
+3. Advanced features build on solid UI foundation (v0.9.x)
+4. v1.0 represents truly production-ready, polished system
 
 ---
 
 ## Known Risks
 
-- **Windows WSL support:** May need additional platform-specific work
-- **User testing dependency:** Need real non-technical users for validation
-- **Documentation maintenance:** Keeping docs in sync requires discipline
-- **Feature creep:** Must resist adding features over improving experience
-- **Delayed production readiness:** Enterprise users may need to wait for v0.9
+- **Design consistency:** Multiple versions may introduce UI inconsistencies (mitigate: design system adherence)
+- **Feature creep:** v0.7.1 scope may expand beyond core features (mitigate: strict feature prioritisation)
+- **Browser compatibility:** Cross-browser testing may reveal platform-specific issues
+- **Accessibility compliance:** WCAG 2.1 AA may require significant refactoring
+- **Security vulnerabilities:** Third-party dependencies may introduce new CVEs during development
 
 ---
 
 ## Next Major Version
 
 After v0.7.x series completion:
-- **v0.8.0:** Advanced features (domain-specific enhancements, community requests)
-- Continue iterating on user feedback from improved installation
-- Prepare foundation for production readiness in v0.9
+- **v0.8.0:** Installation & deployment excellence (perfect setup for non-technical users)
+- Continue with installation improvements deferred from original v0.7 planning
+- Prepare foundation for agent capabilities in v0.9
 
 ---
 
 ## Related Documentation
 
 ### v0.7.x Minor Versions
-- [v0.7.0 Detailed Roadmap](./v0.7.0/README.md) - Installation & onboarding features (foundation)
-- [v0.7.1 Roadmap](./v0.7.1.md) - Post-launch refinements & user feedback
-- [v0.7.2 Roadmap](./v0.7.2.md) - Platform-specific installers (conditional)
-- [v0.7.3 Roadmap](./v0.7.3.md) - Embedded ChromaDB option (optional)
-- [v0.7.4 Roadmap](./v0.7.4.md) - Testing & quality assurance (conditional)
+- [v0.7.0 Detailed Roadmap](./v0.7.0/README.md) - CLI UX & WebUI integration (foundation)
+- [v0.7.1 Roadmap](./v0.7.1.md) - WebUI feature completeness
+- [v0.7.2 Roadmap](./v0.7.2.md) - WebUI advanced visualisations
+- [v0.7.3 Roadmap](./v0.7.3.md) - WebUI collaboration features (conditional)
+- [v0.7.4 Roadmap](./v0.7.4.md) - WebUI security hardening
+- [v0.7.5 Roadmap](./v0.7.5.md) - WebUI testing & quality assurance
 
 ### Related Versions
 - [v0.6.0 Roadmap](../v0.6/README.md) - Intelligent optimisation (prerequisite)
+- [v0.8.0 Roadmap](../v0.8/README.md) - Installation & deployment excellence (next series)
 - [Version Overview](../README.md) - Complete version comparison
 
+### Design Assets
+- [WebUI Design](../../../../design/webUI/README.md) - Design system and wireframes
+- [WebUI Wireframe](../../../../design/webUI/wireframe/webUI--wireframe.svg) - Visual mockup
+
 ### Current Documentation
-- [Installation Guide](../../../../tutorials/installation.md) - Existing documentation
-- [Troubleshooting Guide](../../../../guides/troubleshooting.md) - Current troubleshooting
+- [WebUI Guide](../../../../guides/webui.md) - User guide for web interface (to be created in v0.7.1)
+- [CLI Reference](../../../../reference/cli.md) - Command-line interface reference
 
 ---

@@ -65,6 +65,23 @@ Explains how we track actual development time:
 - What counts as "development time"
 - How to use time tracking templates
 
+### [Feature-Centric Roadmaps](./feature-centric-roadmaps.md)
+
+Defines the mandatory structure for roadmap documentation:
+
+- Features as primary unit of work
+- Status tracking by folder location
+- Feature and milestone document templates
+- Migration guidance from version-centric structures
+
+### [Version Lifecycle](./version-lifecycle.md)
+
+Documents how versions progress through stages:
+
+- Planning → Implementation → Release
+- Status transitions
+- Quality gates
+
 ---
 
 ## For Contributors

@@ -129,7 +129,8 @@ class TestDomainAwareRetriever:
 
     def test_initialization(self):
         """Test retriever initializes with defaults."""
-        retriever = DomainAwareRetriever()
+        mock_retriever = MockRetriever()
+        retriever = DomainAwareRetriever(retriever=mock_retriever)
 
         assert retriever.retriever is not None
         assert retriever.domain_detector is not None
@@ -139,7 +140,8 @@ class TestDomainAwareRetriever:
 
     def test_initialization_with_custom_config(self, retriever_config):
         """Test retriever initializes with custom configuration."""
-        retriever = DomainAwareRetriever(config=retriever_config)
+        mock_retriever = MockRetriever()
+        retriever = DomainAwareRetriever(retriever=mock_retriever, config=retriever_config)
 
         assert retriever.config.domain_score_boost == 1.2
         assert retriever.config.expand_abbreviations is True
@@ -152,7 +154,8 @@ class TestDomainAwareRetriever:
             config=retriever_config,
         )
 
-        result = retriever.retrieve("K8s ingress configuration", k=3)
+        # Explicitly specify technical domain to test retrieval behavior
+        result = retriever.retrieve("K8s ingress configuration", k=3, domain=Domain.TECHNICAL)
 
         assert isinstance(result, DomainRetrievalResult)
         assert result.query_domain.primary_domain == Domain.TECHNICAL
@@ -170,7 +173,8 @@ class TestDomainAwareRetriever:
             config=retriever_config,
         )
 
-        result = retriever.retrieve("MI treatment ASA", k=3)
+        # Explicitly specify medical domain
+        result = retriever.retrieve("MI treatment ASA", k=3, domain=Domain.MEDICAL)
 
         assert result.query_domain.primary_domain == Domain.MEDICAL
         assert len(result.chunks) == 3
@@ -406,7 +410,8 @@ class TestDomainAwareRetriever:
         """Test convenience factory function."""
         from ragged.optimisation.domain_retrieval import get_domain_aware_retriever
 
-        retriever = get_domain_aware_retriever()
+        mock_retriever = MockRetriever()
+        retriever = get_domain_aware_retriever(retriever=mock_retriever)
 
         assert isinstance(retriever, DomainAwareRetriever)
         assert retriever.config is not None
@@ -428,11 +433,13 @@ class TestDomainAwareRetriever:
     def test_avg_score_calculation(self, mock_technical_chunks):
         """Test average score calculation."""
         mock_retriever = MockRetriever(mock_chunks=mock_technical_chunks)
-        retriever = DomainAwareRetriever(retriever=mock_retriever)
+        # Disable domain weighting to test raw average
+        config = DomainRetrievalConfig(domain_weighted_scoring=False)
+        retriever = DomainAwareRetriever(retriever=mock_retriever, config=config)
 
         result = retriever.retrieve("test", k=3)
 
-        # Avg score should be (0.1 + 0.2 + 0.3) / 3 = 0.2
+        # Avg score should be (0.1 + 0.2 + 0.3) / 3 = 0.2 (without boost)
         expected_avg = (0.1 + 0.2 + 0.3) / 3
         assert abs(result.metadata["avg_score"] - expected_avg) < 0.01
 

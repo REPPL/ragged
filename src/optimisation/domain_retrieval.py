@@ -155,10 +155,9 @@ class DomainAwareRetriever:
             # Manual domain specification
             query_domain = DomainDetectionResult(
                 primary_domain=domain,
-                all_domains={domain: 1.0},
+                domain_scores={domain: 1.0},
                 confidence=1.0,
-                keywords=[],
-                patterns_matched=[],
+                indicators=[],
             )
             logger.debug(f"Using manual domain: {domain}")
 
@@ -303,7 +302,7 @@ class DomainAwareRetriever:
         """
         if not chunks:
             return 0.0
-        return sum(c.score for c in chunks) / len(c)
+        return sum(c.score for c in chunks) / len(chunks)
 
     def _fallback_retrieval(
         self,

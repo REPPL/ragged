@@ -46,6 +46,9 @@ Documentation audits assess documentation quality, coverage, accuracy, and adher
 
 Roadmap audits review planning documentation, task organisation, and version roadmaps for completeness and feasibility.
 
+**Current Audits:**
+- [Feature-Centric Restructuring Plan](./roadmap/2025-11-25-restructuring-plan.md) - Migration from version-centric to feature-centric roadmap structure
+
 ## Relationship to Other Documentation
 
 - **User Guides** (`docs/guides/`): How to *use* security features
@@ -123,5 +126,6 @@ ls -l security/baseline/v*.md
 
 - [Implementation Documentation](../development/implementation/) - What was built
 - [Roadmap Documentation](../development/roadmap/) - What will be built
+- [Feature-Centric Roadmap Standard](../development/process/methodology/feature-centric-roadmaps.md) - Target methodology for roadmaps
 - [Security Guides](../guides/) - How to use security features
 - [Testing Documentation](../testing/) - Test procedures and manual tests
