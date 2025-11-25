@@ -2,8 +2,6 @@
 
 Tools for measuring and comparing system performance.
 """
-from __future__ import annotations
-
 
 import json
 import statistics

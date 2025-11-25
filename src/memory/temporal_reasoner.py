@@ -5,8 +5,6 @@ recency scoring for documents.
 
 Part of v0.4.11 Advanced Temporal Features.
 """
-from __future__ import annotations
-
 
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone

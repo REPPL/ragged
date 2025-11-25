@@ -2,8 +2,6 @@
 
 v0.2.9: Unified metrics collection for monitoring and dashboards.
 """
-from __future__ import annotations
-
 
 import threading
 import time

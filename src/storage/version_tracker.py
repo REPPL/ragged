@@ -6,8 +6,6 @@ Enables version-specific queries and version comparison.
 
 v0.3.7a: Initial version tracking implementation.
 """
-from __future__ import annotations
-
 
 import hashlib
 import sqlite3

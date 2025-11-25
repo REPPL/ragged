@@ -2,8 +2,6 @@
 
 v0.3.5: Orchestrates correction transformers with quality verification and rollback.
 """
-from __future__ import annotations
-
 
 import shutil
 import tempfile

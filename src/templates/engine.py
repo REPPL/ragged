@@ -3,8 +3,6 @@ Jinja2-based template engine for RAG workflows.
 
 v0.3.10: Repeatable query templates with custom functions.
 """
-from __future__ import annotations
-
 
 from collections.abc import Callable
 from pathlib import Path

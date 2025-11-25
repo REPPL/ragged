@@ -10,8 +10,6 @@ NEW in v0.5.7:
 - VisualPIIDetector: Detect PII in images using OCR
 - Strict mode: Block images containing PII (GDPR/HIPAA compliance)
 """
-from __future__ import annotations
-
 
 import hashlib
 import logging

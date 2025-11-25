@@ -3,8 +3,6 @@ Query decomposition for complex multi-part queries.
 
 Breaks complex queries into sub-queries, retrieves for each, then merges results.
 """
-from __future__ import annotations
-
 
 import hashlib
 from dataclasses import dataclass

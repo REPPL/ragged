@@ -3,8 +3,6 @@ Data types for chain-of-thought reasoning.
 
 v0.3.7b: Transparent reasoning process with validation.
 """
-from __future__ import annotations
-
 
 from dataclasses import dataclass, field
 from enum import Enum

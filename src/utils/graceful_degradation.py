@@ -2,8 +2,6 @@
 
 v0.2.9: Fallback strategies to maintain >99% service availability.
 """
-from __future__ import annotations
-
 
 from collections.abc import Callable
 from functools import wraps

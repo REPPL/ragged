@@ -3,8 +3,6 @@
 LEANN provides 97% storage savings through graph-based selective recomputation.
 Platform support: macOS, Linux (not available on Windows).
 """
-from __future__ import annotations
-
 
 import logging
 from pathlib import Path

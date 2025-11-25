@@ -2,8 +2,6 @@
 
 v0.2.9: Implements circuit breaker to protect services from repeated failures.
 """
-from __future__ import annotations
-
 
 import enum
 import functools

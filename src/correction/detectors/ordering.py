@@ -2,8 +2,6 @@
 
 v0.3.5: Detects misordered pages using multi-signal analysis.
 """
-from __future__ import annotations
-
 
 import re
 from pathlib import Path

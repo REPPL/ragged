@@ -3,8 +3,6 @@ Chunker factory for instantiating different chunking strategies.
 
 v0.3.3: Intelligent Chunking integration
 """
-from __future__ import annotations
-
 
 from typing import Union
 

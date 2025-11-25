@@ -3,8 +3,6 @@
 v0.6.0 SECURITY-RATE-001: Advanced rate limiting configuration.
 """
 
-from __future__ import annotations
-
 from dataclasses import dataclass
 
 

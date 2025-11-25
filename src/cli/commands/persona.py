@@ -2,8 +2,6 @@
 
 v0.4.5: User persona management for context switching.
 """
-from __future__ import annotations
-
 
 import sys
 from pathlib import Path

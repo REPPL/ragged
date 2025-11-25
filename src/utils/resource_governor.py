@@ -2,8 +2,6 @@
 
 v0.2.9: Prevents resource starvation through reservation system with queueing.
 """
-from __future__ import annotations
-
 
 import gc
 import threading

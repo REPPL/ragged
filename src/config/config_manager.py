@@ -7,8 +7,6 @@ Provides a configuration system with proper precedence ordering:
 3. CLI flags (handled by Click)
 4. Environment variables (highest priority)
 """
-from __future__ import annotations
-
 
 import os
 from dataclasses import asdict, dataclass

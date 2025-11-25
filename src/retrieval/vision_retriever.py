@@ -5,8 +5,6 @@ queries, integrating with the dual embedding storage layer.
 
 v0.5.1: Initial vision-aware retrieval
 """
-from __future__ import annotations
-
 
 import logging
 import time

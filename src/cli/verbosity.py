@@ -2,8 +2,6 @@
 
 Provides helpers for commands to respect --verbose, --debug, and --quiet flags.
 """
-from __future__ import annotations
-
 
 from typing import Literal
 

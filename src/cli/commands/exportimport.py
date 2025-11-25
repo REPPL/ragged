@@ -2,8 +2,6 @@
 
 Enables data backup, migration, and portability.
 """
-from __future__ import annotations
-
 
 import json
 import sys

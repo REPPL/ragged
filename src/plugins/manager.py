@@ -2,8 +2,6 @@
 
 Central registry and lifecycle management for all plugins.
 """
-from __future__ import annotations
-
 
 import json
 import logging

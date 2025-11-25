@@ -9,8 +9,6 @@ other factors to inform intelligent processor routing.
 v0.3.4b: Intelligent Routing
 """
 
-from __future__ import annotations
-
 import hashlib
 import time
 from dataclasses import dataclass, field

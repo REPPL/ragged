@@ -4,8 +4,6 @@ Security utilities for input validation and sanitization.
 This module provides security functions to prevent common vulnerabilities
 like path traversal, file size attacks, and malicious content.
 """
-from __future__ import annotations
-
 
 import os
 from pathlib import Path

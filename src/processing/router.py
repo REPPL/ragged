@@ -8,8 +8,6 @@ adaptive processing strategies that match document characteristics.
 v0.3.4b: Intelligent Routing
 """
 
-from __future__ import annotations
-
 from dataclasses import dataclass, field
 from pathlib import Path
 

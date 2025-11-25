@@ -1,6 +1,4 @@
 """Recursive character text splitter implementation."""
-from __future__ import annotations
-
 
 
 from ragged.chunking.token_counter import count_tokens

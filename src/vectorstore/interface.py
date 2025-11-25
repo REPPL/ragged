@@ -2,8 +2,6 @@
 
 Defines the contract that all vector database implementations must follow.
 """
-from __future__ import annotations
-
 
 from abc import ABC, abstractmethod
 from dataclasses import dataclass

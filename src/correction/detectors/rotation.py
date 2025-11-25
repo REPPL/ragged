@@ -2,8 +2,6 @@
 
 v0.3.5: Detects incorrectly rotated pages using hybrid text and image analysis.
 """
-from __future__ import annotations
-
 
 import re
 from pathlib import Path

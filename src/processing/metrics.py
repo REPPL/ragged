@@ -8,8 +8,6 @@ are used to monitor system behaviour and optimise routing strategies.
 v0.3.4b: Intelligent Routing
 """
 
-from __future__ import annotations
-
 import json
 import os
 import time

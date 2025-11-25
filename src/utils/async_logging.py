@@ -2,8 +2,6 @@
 
 v0.2.9: Non-blocking logging with sampling for high-frequency events.
 """
-from __future__ import annotations
-
 
 import logging
 import threading

@@ -5,8 +5,6 @@ and forensic analysis.
 
 SECURITY FIX (HIGH-3): Safe JSON parsing with depth and size limits
 """
-from __future__ import annotations
-
 
 import json
 import logging

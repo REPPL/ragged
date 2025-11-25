@@ -9,8 +9,6 @@ Responsibilities:
 - Manage GPU memory allocation
 - Provide fallback logic when models unavailable
 """
-from __future__ import annotations
-
 
 import logging
 from dataclasses import dataclass

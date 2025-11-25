@@ -7,8 +7,6 @@ Future: NLP/LLM-based extraction (v0.5.x)
 
 Privacy: All extraction performed locally, no external API calls.
 """
-from __future__ import annotations
-
 
 import re
 from dataclasses import dataclass, field

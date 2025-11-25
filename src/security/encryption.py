@@ -10,8 +10,6 @@ Security:
 - Fernet provides authenticated encryption (prevents tampering)
 - File permissions set to 0o600 (user read/write only)
 """
-from __future__ import annotations
-
 import logging
 import os
 import sys

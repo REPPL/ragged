@@ -14,8 +14,6 @@ Usage:
 
 v0.4.9: Initial scan preprocessing implementation
 """
-from __future__ import annotations
-
 
 import logging
 import re

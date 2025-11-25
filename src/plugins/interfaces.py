@@ -3,8 +3,6 @@
 Defines the core plugin types that can be implemented to extend ragged's
 functionality: Embedder, Retriever, Processor, and Command plugins.
 """
-from __future__ import annotations
-
 
 from abc import ABC, abstractmethod
 from dataclasses import dataclass

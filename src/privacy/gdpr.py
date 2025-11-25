@@ -9,8 +9,6 @@ Implements GDPR user rights:
 
 Security: All operations logged for audit trail.
 """
-from __future__ import annotations
-
 
 import json
 import logging

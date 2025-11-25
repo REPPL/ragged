@@ -3,8 +3,6 @@ Document retrieval using vector similarity search.
 
 Handles query processing, embedding, and retrieval of relevant document chunks.
 """
-from __future__ import annotations
-
 
 from dataclasses import dataclass
 from typing import Any

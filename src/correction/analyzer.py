@@ -2,8 +2,6 @@
 
 v0.3.5: Orchestrates parallel detection of rotation, ordering, duplicates, and quality issues.
 """
-from __future__ import annotations
-
 
 import asyncio
 import time

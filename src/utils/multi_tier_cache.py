@@ -8,8 +8,6 @@ Tiers:
 - L2: Document embedding cache (medium, disk-backed with LRU)
 - L3: Retrieved results cache (comprehensive, existing QueryCache)
 """
-from __future__ import annotations
-
 
 import threading
 from collections import OrderedDict

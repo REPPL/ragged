@@ -2,8 +2,6 @@
 
 v0.2.9: Enhanced async processing with queue depth limits and dynamic scaling.
 """
-from __future__ import annotations
-
 
 import asyncio
 import time

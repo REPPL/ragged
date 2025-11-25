@@ -2,8 +2,6 @@
 
 v0.3.7a: Document version tracking and querying.
 """
-from __future__ import annotations
-
 
 from pathlib import Path
 

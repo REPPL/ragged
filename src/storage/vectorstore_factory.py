@@ -6,8 +6,6 @@ configuration, enabling easy switching between different backends.
 
 v0.3.6: Initial factory implementation for multi-backend support.
 """
-from __future__ import annotations
-
 
 
 from ragged.config.settings import get_settings

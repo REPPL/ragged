@@ -3,8 +3,6 @@ Quality metrics collection and tracking.
 
 v0.3.9: RAGAS scores and performance metrics.
 """
-from __future__ import annotations
-
 
 import json
 from dataclasses import dataclass, field

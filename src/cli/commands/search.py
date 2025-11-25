@@ -2,8 +2,6 @@
 
 Provides powerful search and filtering across documents and chunks.
 """
-from __future__ import annotations
-
 
 import sys
 from typing import Any

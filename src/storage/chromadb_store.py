@@ -8,8 +8,6 @@ keep-alive mechanism, and metadata serialisation.
 v0.3.6: Refactored to implement VectorStore interface for multi-backend support.
 v0.5.6: Added connection keep-alive for long-running operations.
 """
-from __future__ import annotations
-
 
 import os
 import threading

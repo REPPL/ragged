@@ -11,8 +11,6 @@ Security: Validates images before GPU processing to prevent:
 - Slow processing (DoS)
 - Resource abuse
 """
-from __future__ import annotations
-
 
 import logging
 from pathlib import Path

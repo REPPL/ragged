@@ -4,8 +4,6 @@ Automated security checks for plugins before execution.
 
 SECURITY FIX (HIGH-1): Added strict manifest validation
 """
-from __future__ import annotations
-
 
 import logging
 import re

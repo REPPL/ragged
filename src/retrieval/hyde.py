@@ -4,8 +4,6 @@ HyDE (Hypothetical Document Embeddings) for enhanced retrieval.
 Generates a hypothetical answer to the query, embeds it, and uses it for retrieval.
 Rationale: Answers are semantically closer to document chunks than questions.
 """
-from __future__ import annotations
-
 
 import hashlib
 from dataclasses import dataclass

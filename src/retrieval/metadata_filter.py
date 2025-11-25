@@ -5,8 +5,6 @@ v0.3.7d: Rich metadata queries with filter parsing and faceted search.
 
 SECURITY FIX (HIGH-4): Safe query construction to prevent NoSQL injection
 """
-from __future__ import annotations
-
 
 import re
 from dataclasses import dataclass, field

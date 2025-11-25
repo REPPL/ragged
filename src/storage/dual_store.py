@@ -14,8 +14,6 @@ Supports:
 v0.5.0: Initial dual embedding storage
 v0.5.7: Encryption at rest for GDPR compliance
 """
-from __future__ import annotations
-
 
 import base64
 import logging

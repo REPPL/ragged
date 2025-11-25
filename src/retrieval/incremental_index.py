@@ -3,8 +3,6 @@
 v0.2.9: Differential updates, atomic swap, and background compaction for BM25.
 v0.2.10: Replaced pickle with safe JSON serialization (FEAT-SEC-001).
 """
-from __future__ import annotations
-
 
 import threading
 import time

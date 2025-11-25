@@ -13,8 +13,6 @@ Tracks all user interactions including:
 
 Privacy: All data stored locally with encryption at rest.
 """
-from __future__ import annotations
-
 
 import json
 import sqlite3

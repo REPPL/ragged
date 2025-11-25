@@ -8,8 +8,6 @@ Implements:
 - Audience validation
 - Claims verification
 """
-from __future__ import annotations
-
 
 import secrets
 import time

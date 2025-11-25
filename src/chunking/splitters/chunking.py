@@ -3,8 +3,6 @@ Document chunking orchestration and metadata creation.
 
 v0.3.3: Updated to support intelligent chunking strategies (semantic, hierarchical)
 """
-from __future__ import annotations
-
 
 import re
 from pathlib import Path

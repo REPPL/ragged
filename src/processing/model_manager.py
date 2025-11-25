@@ -4,8 +4,6 @@ Model manager for lazy loading and caching of ML models.
 This module handles downloading, caching, and loading of ML models used
 by document processors (primarily Docling models like DocLayNet and TableFormer).
 """
-from __future__ import annotations
-
 
 import hashlib
 import time

@@ -3,8 +3,6 @@
 Provides shell completion installation for bash, zsh, and fish shells.
 Uses Click's built-in shell completion support (Click 8.0+).
 """
-from __future__ import annotations
-
 
 import os
 import sys

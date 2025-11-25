@@ -3,8 +3,6 @@ Prompt templates for RAG generation.
 
 Provides prompt engineering templates for answer generation with citations.
 """
-from __future__ import annotations
-
 
 
 from ragged.generation.few_shot import FewShotExampleStore, format_few_shot_prompt

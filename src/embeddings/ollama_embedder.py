@@ -4,8 +4,6 @@ Ollama-based embedding implementation.
 Uses Ollama API to generate embeddings using models like nomic-embed-text.
 """
 
-from __future__ import annotations
-
 from typing import TYPE_CHECKING
 
 import numpy as np

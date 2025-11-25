@@ -9,8 +9,6 @@ Tracks relationships between:
 
 Privacy: All data stored locally with full user control.
 """
-from __future__ import annotations
-
 
 import shutil
 from datetime import datetime

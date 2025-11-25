@@ -14,8 +14,6 @@ Security Context:
 - Memory exhaustion prevention via TTL and Redis
 """
 
-from __future__ import annotations
-
 import json
 import logging
 import time

@@ -2,8 +2,6 @@
 
 v0.2.9: Real-time metrics monitoring.
 """
-from __future__ import annotations
-
 
 import time
 

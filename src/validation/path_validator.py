@@ -9,8 +9,6 @@ Prevents path traversal attacks by validating user-provided paths:
 
 Security: Prevents malicious paths from accessing sensitive files.
 """
-from __future__ import annotations
-
 
 import logging
 import os

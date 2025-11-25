@@ -3,8 +3,6 @@
 Recursively finds supported documents in directories while
 respecting ignore patterns and security constraints.
 """
-from __future__ import annotations
-
 
 import fnmatch
 from pathlib import Path

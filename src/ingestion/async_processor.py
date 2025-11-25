@@ -2,8 +2,6 @@
 
 Enables concurrent document loading, chunking, and embedding.
 """
-from __future__ import annotations
-
 
 import asyncio
 import time

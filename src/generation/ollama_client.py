@@ -3,8 +3,6 @@ Ollama LLM client for text generation.
 
 Provides interface to Ollama for generating answers using local LLMs.
 """
-from __future__ import annotations
-
 
 from collections.abc import Generator
 from typing import TYPE_CHECKING

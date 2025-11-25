@@ -5,8 +5,6 @@ and generates appropriate embeddings for retrieval.
 
 v0.5.1: Initial multi-modal query processing
 """
-from __future__ import annotations
-
 
 import logging
 from dataclasses import dataclass

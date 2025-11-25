@@ -24,8 +24,6 @@ Usage:
 
 v0.4.9: Initial output organization implementation
 """
-from __future__ import annotations
-
 
 import hashlib
 import json

@@ -12,8 +12,6 @@ Confidence Formula:
 
 Privacy: All calculations performed locally, no external dependencies.
 """
-from __future__ import annotations
-
 
 import math
 from datetime import datetime, timedelta

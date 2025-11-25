@@ -3,8 +3,6 @@
 v0.6.0: Added security middleware (CSP, HSTS, session security, XSS protection).
 v0.6.2: Added session monitoring with Prometheus metrics (SECURITY-004).
 """
-from __future__ import annotations
-
 
 import json
 import tempfile

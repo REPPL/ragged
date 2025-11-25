@@ -3,8 +3,6 @@
 v0.3.5: Reorders pages based on detected ordering issues.
 v0.4.9: Enhanced automatic reordering based on logical page numbers.
 """
-from __future__ import annotations
-
 
 import re
 from pathlib import Path

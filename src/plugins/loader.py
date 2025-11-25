@@ -3,8 +3,6 @@
 Discovers and loads plugins using Python entry points and validates them
 before making them available to the system.
 """
-from __future__ import annotations
-
 
 import logging
 

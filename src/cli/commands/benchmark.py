@@ -2,8 +2,6 @@
 
 v0.2.9: Performance profiling tools integration.
 """
-from __future__ import annotations
-
 
 import tracemalloc
 from pathlib import Path

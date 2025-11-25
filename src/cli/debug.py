@@ -3,8 +3,6 @@ Debug logging for RAG pipeline visualization.
 
 v0.3.8: Step-by-step execution visualisation for understanding RAG pipeline.
 """
-from __future__ import annotations
-
 
 import time
 from dataclasses import dataclass, field

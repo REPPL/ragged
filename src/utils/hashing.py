@@ -2,8 +2,6 @@
 
 Provides consistent SHA-256 hashing functions used throughout the codebase.
 """
-from __future__ import annotations
-
 
 import hashlib
 
