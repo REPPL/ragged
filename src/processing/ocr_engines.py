@@ -22,6 +22,8 @@ Usage:
 
 v0.4.9: Initial OCR engine abstraction
 """
+from __future__ import annotations
+
 
 import logging
 from abc import ABC, abstractmethod

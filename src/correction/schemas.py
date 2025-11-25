@@ -2,6 +2,8 @@
 
 v0.3.5: Data models for issue detection and correction tracking.
 """
+from __future__ import annotations
+
 
 from datetime import UTC, datetime
 from enum import Enum

@@ -5,6 +5,8 @@ ensuring plugins can only access explicitly granted permissions.
 
 SECURITY FIX (HIGH-2): Added thread-safe locking for permission operations
 """
+from __future__ import annotations
+
 
 import json
 import logging

@@ -3,6 +3,8 @@ Configuration validation for ragged.
 
 v0.3.10: Validate YAML configs for syntax, schema, and security.
 """
+from __future__ import annotations
+
 
 import os
 import re

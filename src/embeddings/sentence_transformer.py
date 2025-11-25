@@ -5,6 +5,8 @@ Uses the sentence-transformers library to generate embeddings locally
 on CPU or GPU.
 """
 
+from __future__ import annotations
+
 from typing import TYPE_CHECKING, cast
 
 import numpy as np

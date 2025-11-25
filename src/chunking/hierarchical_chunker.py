@@ -7,6 +7,8 @@ Creates two levels of chunks:
 
 Child chunks link to their parent for improved context during generation.
 """
+from __future__ import annotations
+
 
 import re
 from dataclasses import dataclass

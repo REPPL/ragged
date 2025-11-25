@@ -2,6 +2,8 @@
 
 Handles user consent workflow for granting permissions to plugins.
 """
+from __future__ import annotations
+
 
 import json
 import logging

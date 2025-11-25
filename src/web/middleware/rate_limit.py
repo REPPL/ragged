@@ -8,6 +8,8 @@ Features:
 - Redis-backed storage (optional)
 - Rate limit headers (X-RateLimit-*)
 """
+from __future__ import annotations
+
 
 import time
 from collections import defaultdict

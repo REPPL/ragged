@@ -1,4 +1,6 @@
 """Pydantic models for API requests and responses."""
+from __future__ import annotations
+
 
 from typing import Literal
 

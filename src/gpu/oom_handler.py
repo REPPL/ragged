@@ -5,6 +5,8 @@ batch size reduction, and CPU fallback strategies.
 
 v0.5.2: OOM handling (VISION-004 Phase 2)
 """
+from __future__ import annotations
+
 
 import logging
 from functools import wraps

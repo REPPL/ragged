@@ -4,6 +4,8 @@ Base processor interface and data models for document processing.
 This module defines the abstract interface that all document processors must
 implement, along with standardised data models for configuration and output.
 """
+from __future__ import annotations
+
 
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field

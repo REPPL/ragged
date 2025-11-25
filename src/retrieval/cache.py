@@ -4,6 +4,8 @@ Improves query performance by caching retrieval results.
 
 v0.2.10 FEAT-SEC-002: Added session isolation to prevent cross-user data leakage.
 """
+from __future__ import annotations
+
 
 from collections import OrderedDict
 from dataclasses import dataclass, field

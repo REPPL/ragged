@@ -2,6 +2,8 @@
 
 v0.3.5: Integrates PDF analysis and correction into document ingestion.
 """
+from __future__ import annotations
+
 
 from pathlib import Path
 

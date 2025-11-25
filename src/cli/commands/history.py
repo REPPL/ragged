@@ -4,6 +4,8 @@ Stores and manages query history for easy replay and analysis.
 
 v0.2.11 FEAT-PRIV-001: Query history now encrypted at rest.
 """
+from __future__ import annotations
+
 
 import json
 import os

@@ -1,4 +1,6 @@
 """CLI commands for managing v0.2.9 feature flags."""
+from __future__ import annotations
+
 
 
 import click

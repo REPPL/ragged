@@ -6,6 +6,8 @@ based on application settings, with optional singleton caching
 for 4-30x performance improvement (v0.2.9).
 """
 
+from __future__ import annotations
+
 import threading
 from collections import OrderedDict
 

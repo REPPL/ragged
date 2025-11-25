@@ -3,6 +3,8 @@ Template CLI commands.
 
 v0.3.11: CLI integration for query templates.
 """
+from __future__ import annotations
+
 
 from pathlib import Path
 

@@ -3,6 +3,8 @@
 v0.2.9: Automatic retry logic for transient failures, achieving >98% recovery success.
 """
 
+from __future__ import annotations
+
 import functools
 import time
 from collections.abc import Callable

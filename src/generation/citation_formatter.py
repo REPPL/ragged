@@ -6,6 +6,8 @@ with a formatted reference list in IEEE style.
 
 v0.3.7c: Enhanced citations with quotes, confidence scores, and chunk IDs.
 """
+from __future__ import annotations
+
 
 import re
 from pathlib import Path

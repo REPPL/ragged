@@ -3,6 +3,8 @@ Performance profiling for RAG pipeline.
 
 v0.3.9: Timing and bottleneck identification.
 """
+from __future__ import annotations
+
 
 import time
 from contextlib import contextmanager

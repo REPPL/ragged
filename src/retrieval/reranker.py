@@ -3,6 +3,8 @@ Cross-encoder reranking for improved retrieval precision.
 
 Uses cross-encoder models to rerank retrieved chunks for better top-k accuracy.
 """
+from __future__ import annotations
+
 
 from dataclasses import dataclass
 

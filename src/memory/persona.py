@@ -11,6 +11,8 @@ Provides user persona system enabling:
 
 Privacy: All persona data stored locally in ~/.ragged/memory/profiles/
 """
+from __future__ import annotations
+
 
 import json
 from dataclasses import dataclass, field

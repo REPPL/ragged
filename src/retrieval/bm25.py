@@ -1,4 +1,6 @@
 """BM25 keyword-based retrieval for ragged v0.2."""
+from __future__ import annotations
+
 
 import logging
 from typing import Any

@@ -1,4 +1,6 @@
 """ChromaDB implementation of VectorStore interface."""
+from __future__ import annotations
+
 
 import logging
 from pathlib import Path

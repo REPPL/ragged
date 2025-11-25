@@ -3,6 +3,8 @@
 Provides functionality to discover available models, calculate suitability scores
 for RAG tasks, and recommend the best model for the user's needs.
 """
+from __future__ import annotations
+
 
 from dataclasses import dataclass
 

@@ -2,6 +2,8 @@
 
 v0.5.3: Text, image, and hybrid query modes with interactive REPL.
 """
+from __future__ import annotations
+
 
 import json
 import sys

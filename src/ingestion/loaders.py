@@ -7,6 +7,8 @@ with security validation and error handling.
 v0.3.4a: PDF loading now uses the new processor architecture (Docling or legacy).
 v0.3.4b: Added intelligent routing with quality assessment.
 """
+from __future__ import annotations
+
 
 import mimetypes
 import time

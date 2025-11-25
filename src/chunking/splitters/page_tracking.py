@@ -1,4 +1,6 @@
 """Page tracking and mapping for document chunks."""
+from __future__ import annotations
+
 
 import re
 

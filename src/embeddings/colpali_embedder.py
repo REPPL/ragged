@@ -21,6 +21,8 @@ Example:
     >>> embedding.shape
     (128,)
 """
+from __future__ import annotations
+
 
 import logging
 from pathlib import Path

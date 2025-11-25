@@ -8,6 +8,8 @@ Features:
 - Hardware capability detection (CPU, memory, disk)
 - Adaptive adjustment of batch sizes, cache sizes, worker pools
 """
+from __future__ import annotations
+
 
 import os
 import threading

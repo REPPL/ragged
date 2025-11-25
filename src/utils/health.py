@@ -2,6 +2,8 @@
 
 v0.2.9: Enhanced health checks for proactive issue detection.
 """
+from __future__ import annotations
+
 
 import time
 from dataclasses import dataclass

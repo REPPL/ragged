@@ -1,7 +1,10 @@
 """FastAPI application for ragged v0.2.
 
 v0.6.0: Added security middleware (CSP, HSTS, session security, XSS protection).
+v0.6.2: Added session monitoring with Prometheus metrics (SECURITY-004).
 """
+from __future__ import annotations
+
 
 import json
 import tempfile
@@ -11,7 +14,8 @@ from typing import Any, Literal
 
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
+from fastapi.responses import Response, StreamingResponse
+from prometheus_client import CONTENT_TYPE_LATEST, generate_latest
 
 from ragged.chunking.splitters import chunk_document
 from ragged.config.settings import Settings, get_settings
@@ -189,6 +193,28 @@ async def health() -> HealthResponse:
         status=status,
         version="0.2.0",
         services=services
+    )
+
+
+@app.get("/metrics")
+async def metrics() -> Response:
+    """Prometheus metrics endpoint.
+
+    v0.6.2 SECURITY-004: Session monitoring metrics
+
+    Returns Prometheus-formatted metrics for:
+    - Session creation/expiry/deletion counters
+    - Active session count gauge
+    - Session creation rate per minute
+    - Session duration histogram
+    - Anomaly detection status
+
+    Example:
+        curl http://localhost:8000/metrics
+    """
+    return Response(
+        content=generate_latest(),
+        media_type=CONTENT_TYPE_LATEST,
     )
 
 

@@ -2,6 +2,8 @@
 
 v0.3.12: Intelligent query refinement to improve retrieval quality.
 """
+from __future__ import annotations
+
 
 import re
 from dataclasses import dataclass

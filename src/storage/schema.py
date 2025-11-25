@@ -12,6 +12,8 @@ The schema supports:
 
 v0.5.0: Initial dual embedding schema
 """
+from __future__ import annotations
+
 
 import re
 from datetime import datetime

@@ -8,6 +8,8 @@ Unified interface for automatic model routing combining:
 
 Provides single entry point for intelligent query routing.
 """
+from __future__ import annotations
+
 
 import logging
 import time

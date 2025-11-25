@@ -2,6 +2,8 @@
 
 v0.3.12: Customisable themes for inclusive design.
 """
+from __future__ import annotations
+
 
 from dataclasses import dataclass
 from typing import Literal

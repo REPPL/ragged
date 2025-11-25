@@ -21,6 +21,8 @@ Usage:
 
 v0.4.9: Initial metadata extraction implementation
 """
+from __future__ import annotations
+
 
 import logging
 import re

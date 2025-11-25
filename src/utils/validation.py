@@ -10,6 +10,8 @@ Provides reusable validation functions for:
 - String patterns
 - Collection sizes
 """
+from __future__ import annotations
+
 
 import logging
 import os

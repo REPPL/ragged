@@ -2,6 +2,8 @@
 
 v0.2.9: Reduce cold start time through pooling, lazy init, and parallelization.
 """
+from __future__ import annotations
+
 
 import asyncio
 import threading

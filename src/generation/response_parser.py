@@ -3,6 +3,8 @@ Parse LLM responses to extract answers and citations.
 
 Handles parsing of generated text to extract structured information.
 """
+from __future__ import annotations
+
 
 import re
 from dataclasses import dataclass

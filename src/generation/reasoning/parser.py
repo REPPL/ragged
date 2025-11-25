@@ -3,6 +3,8 @@ Parser for extracting reasoning from LLM responses.
 
 v0.3.7b: Parse chain-of-thought reasoning with fallback strategies.
 """
+from __future__ import annotations
+
 
 import re
 

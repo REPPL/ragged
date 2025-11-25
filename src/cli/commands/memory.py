@@ -3,6 +3,8 @@
 v0.4.5: Interaction history tracking and management.
 v0.4.7: Interest profile and behaviour learning commands.
 """
+from __future__ import annotations
+
 
 import json
 import sys

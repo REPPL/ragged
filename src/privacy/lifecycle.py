@@ -5,6 +5,8 @@ v0.2.11 FEAT-PRIV-003: Data Lifecycle Management
 Implements TTL (Time-To-Live) and automatic deletion for persistent user data.
 Ensures compliance with data minimisation principles (GDPR Article 5).
 """
+from __future__ import annotations
+
 
 import logging
 import threading

@@ -3,6 +3,8 @@
 Provides functionality to ingest multiple documents with progress tracking,
 duplicate detection, graceful error handling, and memory management.
 """
+from __future__ import annotations
+
 
 import gc
 from dataclasses import dataclass

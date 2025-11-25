@@ -21,6 +21,7 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.types import ASGIApp
 
 from ragged.utils.logging import get_logger
+from ragged.web.middleware.metrics import get_session_metrics
 from ragged.web.session import SessionStore, SessionStoreFactory
 
 logger = get_logger(__name__)
@@ -154,6 +155,7 @@ class SessionSecurityMiddleware(BaseHTTPMiddleware):
         enable_csrf: bool = True,
         session_store: SessionStore | None = None,
         redis_url: str | None = None,
+        enable_metrics: bool = True,
     ):
         """Initialise session security middleware.
 
@@ -163,6 +165,7 @@ class SessionSecurityMiddleware(BaseHTTPMiddleware):
             enable_csrf: Enable CSRF token validation
             session_store: Custom SessionStore (None = auto-create)
             redis_url: Redis URL for session persistence (None = in-memory)
+            enable_metrics: Enable Prometheus metrics tracking
 
         Example:
             >>> # Development (in-memory)
@@ -177,6 +180,7 @@ class SessionSecurityMiddleware(BaseHTTPMiddleware):
         super().__init__(app)
         self.session_timeout = session_timeout
         self.enable_csrf = enable_csrf
+        self.enable_metrics = enable_metrics
 
         # Create or use provided session store
         if session_store is not None:
@@ -187,10 +191,17 @@ class SessionSecurityMiddleware(BaseHTTPMiddleware):
                 redis_url=redis_url, fallback_to_memory=True
             )
 
+        # Initialize metrics tracking (v0.6.2 SECURITY-004)
+        if self.enable_metrics:
+            self.metrics = get_session_metrics()
+        else:
+            self.metrics = None
+
         logger.info(
             f"SessionSecurityMiddleware initialised: "
             f"store={type(self.session_store).__name__}, "
-            f"timeout={session_timeout}s, csrf={enable_csrf}"
+            f"timeout={session_timeout}s, csrf={enable_csrf}, "
+            f"metrics={enable_metrics}"
         )
 
     async def dispatch(self, request: Request, call_next: Callable) -> Response:
@@ -234,8 +245,16 @@ class SessionSecurityMiddleware(BaseHTTPMiddleware):
 
             if success:
                 logger.info(f"Created new session: {session_id[:8]}...")
+
+                # Track session creation metric (v0.6.2 SECURITY-004)
+                if self.metrics:
+                    self.metrics.record_session_created(success=True)
             else:
                 logger.error(f"Failed to create session in store")
+
+                # Track failed session creation (v0.6.2 SECURITY-004)
+                if self.metrics:
+                    self.metrics.record_session_created(success=False)
 
         # Add session to request state
         request.state.session_id = session_id
@@ -250,6 +269,11 @@ class SessionSecurityMiddleware(BaseHTTPMiddleware):
             self.session_store.create_session(
                 session_id, session_data, self.session_timeout
             )
+
+        # Update active session count gauge (v0.6.2 SECURITY-004)
+        if self.metrics:
+            active_count = self.session_store.get_active_session_count()
+            self.metrics.update_active_session_count(active_count)
 
         # Set session cookie (secure by default)
         response.set_cookie(

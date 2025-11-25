@@ -2,6 +2,8 @@
 
 v0.3.5: Detects duplicate pages using quick hash, perceptual hash, and text similarity.
 """
+from __future__ import annotations
+
 
 import hashlib
 from collections import defaultdict

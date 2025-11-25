@@ -3,6 +3,8 @@ Automatic document tagging and classification.
 
 v0.3.7e: LLM-based classification with rule-based fallback.
 """
+from __future__ import annotations
+
 
 import json
 import re

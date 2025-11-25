@@ -8,6 +8,8 @@ Implements token bucket algorithm for rate limiting with:
 - Thread-safe operations
 - Automatic token replenishment
 """
+from __future__ import annotations
+
 
 import json
 import logging

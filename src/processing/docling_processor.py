@@ -4,6 +4,8 @@ Docling-based document processor for state-of-the-art document processing.
 This processor uses IBM Research's Docling framework for advanced document
 processing with layout analysis, table extraction, and reading order preservation.
 """
+from __future__ import annotations
+
 
 import time
 from pathlib import Path

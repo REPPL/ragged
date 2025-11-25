@@ -2,6 +2,8 @@
 
 Enhances chunks with surrounding context for better retrieval and generation.
 """
+from __future__ import annotations
+
 
 import re
 from dataclasses import dataclass

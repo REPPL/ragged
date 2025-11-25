@@ -4,6 +4,8 @@ Data models for document ingestion.
 This module defines Pydantic models for documents, chunks, and metadata
 with validation and type safety.
 """
+from __future__ import annotations
+
 
 from datetime import UTC, datetime
 from pathlib import Path

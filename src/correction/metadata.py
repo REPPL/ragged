@@ -2,6 +2,8 @@
 
 v0.3.5: Generates JSON metadata files documenting corrections and quality.
 """
+from __future__ import annotations
+
 
 import json
 from datetime import UTC, datetime
