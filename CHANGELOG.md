@@ -7,6 +7,86 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.5] - 2025-11-26
+
+### Added - Installation Security Hardening
+
+Comprehensive security hardening for the installation process with dependency verification, secure defaults, secrets management, security auditing, and vulnerability scanning.
+
+**INSTALL-SEC-001: Dependency Verification**:
+- VerificationResult dataclass with status, file path, hash comparison
+- verify_checksum function for SHA256 hash verification
+- verify_gpg_signature function for GPG signature validation
+- DownloadVerifier class for managing checksum database
+- DependencyChecksum dataclass for known dependency hashes
+- Platform detection for OS-specific dependency selection
+- HTTPS enforcement for all downloads
+
+**INSTALL-SEC-002: Secure Defaults**:
+- SecureDefaults dataclass with security-first configuration values
+- SecurityLevel enum: STRICT, STANDARD, RELAXED
+- apply_secure_defaults function for automatic security configuration
+- validate_security_config with SecurityWarning generation
+- Authentication enabled by default
+- Localhost binding (127.0.0.1) by default
+- HTTPS and HSTS enabled by default
+- Restrictive CORS configuration
+- Rate limiting enabled
+
+**INSTALL-SEC-003: Secrets Management**:
+- generate_jwt_secret using cryptographic random (256 bits)
+- generate_admin_password with configurable length and character sets
+- generate_api_key with customisable prefix
+- generate_encryption_key for symmetric encryption
+- generate_fernet_key for Fernet encryption
+- SecretStrength enum and validate_secret_strength function
+- calculate_entropy for entropy validation
+- SecretStore class for secure .env file management
+- Restrictive file permissions (600) for secrets
+- redact_secret for safe display
+
+**INSTALL-SEC-004: Security Audit Automation**:
+- AuditCategory enum: SYSTEM_HARDENING, NETWORK_SECURITY, FILESYSTEM_SECURITY, USER_PERMISSIONS
+- AuditSeverity enum: CRITICAL, HIGH, MEDIUM, LOW
+- AuditFinding dataclass with recommendations and fix commands
+- SecurityAuditor class with pluggable audit checks
+- SystemHardeningAudit: firewall status, SELinux, system updates, root usage
+- NetworkSecurityAudit: open ports, exposed services, DNS configuration
+- format_audit_report with severity-sorted output
+- Security score calculation (0-100)
+- Audit log persistence
+
+**INSTALL-SEC-005: Vulnerability Scanning**:
+- VulnSeverity enum: CRITICAL, HIGH, MEDIUM, LOW, UNKNOWN
+- Vulnerability dataclass with CVE ID, package info, fix version
+- scan_python_dependencies using pip-audit or safety
+- scan_docker_images using trivy
+- format_vuln_report with severity-sorted output
+- run_full_scan for comprehensive scanning
+
+**New Files**:
+- `src/install/security/__init__.py` - Security module exports
+- `src/install/security/verification.py` - Checksum and signature verification
+- `src/install/security/checksums.py` - Dependency checksum database
+- `src/install/security/secrets.py` - Secure secret generation
+- `src/install/security/secure_defaults.py` - Security-first configuration
+- `src/install/security/permissions.py` - File permission management
+- `src/install/security/audit/__init__.py` - Audit module exports
+- `src/install/security/audit/framework.py` - Audit framework
+- `src/install/security/audit/system.py` - System hardening checks
+- `src/install/security/audit/network.py` - Network security checks
+- `src/install/security/audit/report.py` - Audit reporting
+- `src/install/security/vuln_scan.py` - Vulnerability scanning
+
+### Changed
+
+- Updated version to 0.8.5
+- Enhanced install module with security exports
+
+### Note
+
+v0.8.3 and v0.8.4 are conditional releases (platform-specific installers and embedded ChromaDB) that will be implemented based on user demand.
+
 ## [0.8.2] - 2025-11-26
 
 ### Added - Post-Launch Refinements & Error Recovery

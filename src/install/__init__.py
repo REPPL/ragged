@@ -4,6 +4,7 @@ ragged Installation System.
 v0.8.0 - Installation Foundation & Prerequisites System
 v0.8.1 - Interactive Installation Wizard
 v0.8.2 - Post-Launch Refinements & Error Recovery
+v0.8.5 - Installation Security Hardening
 
 This module provides comprehensive installation management for ragged:
 - Prerequisite detection (Docker, Python, Ollama)
@@ -19,6 +20,9 @@ This module provides comprehensive installation management for ragged:
 - Automated recovery (v0.8.2)
 - Health monitoring (v0.8.2)
 - Upgrade & migrations (v0.8.2)
+- Security hardening (v0.8.5)
+- Dependency verification (v0.8.5)
+- Vulnerability scanning (v0.8.5)
 """
 
 from ragged.install.detection import (
@@ -133,6 +137,51 @@ from ragged.install.upgrade import (
     MigrationRunner,
     run_migrations,
 )
+# v0.8.5 - Security
+from ragged.install.security import (
+    # Verification
+    verify_checksum,
+    verify_download,
+    VerificationResult,
+    VerificationStatus,
+    DownloadVerifier,
+    # Checksums
+    DependencyChecksum,
+    get_checksum,
+    # Secrets
+    generate_jwt_secret,
+    generate_admin_password,
+    generate_api_key,
+    SecretStrength,
+    validate_secret_strength,
+    SecretStore,
+    # Secure Defaults
+    SecureDefaults,
+    SecurityLevel,
+    SecurityWarning,
+    apply_secure_defaults,
+    validate_security_config,
+    is_config_secure,
+    # Permissions
+    PermissionLevel,
+    PermissionIssue,
+    set_secure_permissions,
+    verify_permissions,
+    fix_permissions,
+    # Audit
+    AuditCategory,
+    AuditSeverity,
+    AuditFinding,
+    AuditResult,
+    run_security_audit,
+    format_audit_report,
+    # Vulnerability Scanning
+    VulnSeverity,
+    Vulnerability,
+    VulnScanResult,
+    scan_python_dependencies,
+    format_vuln_report,
+)
 
 __all__ = [
     # Detection
@@ -231,4 +280,40 @@ __all__ = [
     "Migration",
     "MigrationRunner",
     "run_migrations",
+    # Security (v0.8.5)
+    "verify_checksum",
+    "verify_download",
+    "VerificationResult",
+    "VerificationStatus",
+    "DownloadVerifier",
+    "DependencyChecksum",
+    "get_checksum",
+    "generate_jwt_secret",
+    "generate_admin_password",
+    "generate_api_key",
+    "SecretStrength",
+    "validate_secret_strength",
+    "SecretStore",
+    "SecureDefaults",
+    "SecurityLevel",
+    "SecurityWarning",
+    "apply_secure_defaults",
+    "validate_security_config",
+    "is_config_secure",
+    "PermissionLevel",
+    "PermissionIssue",
+    "set_secure_permissions",
+    "verify_permissions",
+    "fix_permissions",
+    "AuditCategory",
+    "AuditSeverity",
+    "AuditFinding",
+    "AuditResult",
+    "run_security_audit",
+    "format_audit_report",
+    "VulnSeverity",
+    "Vulnerability",
+    "VulnScanResult",
+    "scan_python_dependencies",
+    "format_vuln_report",
 ]
