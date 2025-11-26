@@ -7,6 +7,96 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.2] - 2025-11-26
+
+### Added - Post-Launch Refinements & Error Recovery
+
+Comprehensive error diagnostics, automated recovery, health monitoring, and upgrade/migration system.
+
+**REFINE-001: Error Diagnostic System**:
+- DiagnosticCategory enum: CONNECTIVITY, PERMISSIONS, RESOURCES, DEPENDENCIES, CONFIGURATION, SERVICES
+- DiagnosticSeverity enum: INFO, WARNING, ERROR, CRITICAL
+- DiagnosticIssue dataclass with category, severity, message, suggestions, fix commands
+- DiagnosticPipeline with pluggable diagnostic checks
+- ConnectivityDiagnostics: port conflict detection, network connectivity, firewall checks
+- PermissionsDiagnostics: file permissions, SELinux/AppArmor context, ownership
+- ResourcesDiagnostics: disk space, memory, CPU usage analysis
+- Diagnostic report generation with text, JSON, Markdown formats
+- Support bundle creation for troubleshooting
+
+**REFINE-002: Automated Recovery Strategies**:
+- RecoveryAction enum: RESTART, REPAIR, RECREATE, CLEAR, FIX_PERMISSIONS, REGENERATE, KILL_PROCESS, DOWNLOAD
+- RecoveryResult dataclass with success, action, message, details, rollback info
+- RecoveryStrategy abstract base class with execute and can_rollback methods
+- RecoveryPipeline with rollback capability and dry-run mode
+- ServiceRecovery: restart services, repair databases, recreate containers
+- FilesystemRecovery: fix permissions, recreate directories, clear cache
+- ConfigurationRecovery: repair configs, regenerate secrets, restore backups
+- Recovery report formatting with Rich output
+
+**REFINE-003: Health Check Improvements**:
+- HealthLevel enum: HEALTHY, DEGRADED, UNHEALTHY, UNKNOWN
+- CheckCategory enum: CONNECTIVITY, PERFORMANCE, STORAGE, SECURITY
+- HealthCheckResult with name, passed, message, category, latency
+- ServiceHealth aggregating multiple checks per service
+- HealthCheckSuite running all service checks (Ollama, ChromaDB, API, WebUI, filesystem, config)
+- Background HealthMonitor with configurable intervals and alerting
+- MonitoringConfig for alert thresholds and history limits
+- HealthEvent tracking for status changes
+- HealthDashboard with Rich Live rendering
+- Real-time service status table with connectivity and performance indicators
+
+**REFINE-004: Upgrade & Migration Paths**:
+- UpgradeStrategy enum: IN_PLACE, CLEAN_INSTALL, SIDE_BY_SIDE
+- UpgradeStatus enum: SUCCESS, FAILED, ROLLED_BACK, CANCELLED
+- VersionInfo dataclass with version, release date, notes, download URL
+- UpgradeResult with status, versions, migrations applied, backup path
+- Upgrader class: version detection via pip, update checking, backup creation
+- Pre-upgrade checks: disk space validation
+- In-place upgrade via pip install --upgrade
+- Clean install upgrade via uninstall/reinstall
+- Automatic rollback on failure
+- Migration dataclass with version, name, description
+- MigrationRunner with version-ordered execution
+- Migration handlers for v0.8.1 (directories) and v0.8.2 (config format)
+
+**REFINE-005: Enhanced Uninstall Capability**:
+- UninstallMode enum: FULL, KEEP_DATA, KEEP_CONFIG, MINIMAL
+- Enhanced UninstallResult with mode, export path, config preserved flag
+- UninstallWizard for interactive uninstall experience
+- Installation info gathering: components, data size, config files
+- Data export before uninstall with manifest generation
+- Interactive mode selection with Rich prompts
+- Final confirmation for destructive operations
+- get_uninstall_preview for programmatic inspection
+
+**New Files**:
+- `src/install/diagnostics/__init__.py` - Diagnostics module exports
+- `src/install/diagnostics/framework.py` - Diagnostic pipeline framework
+- `src/install/diagnostics/connectivity.py` - Network and port diagnostics
+- `src/install/diagnostics/permissions.py` - File permission diagnostics
+- `src/install/diagnostics/resources.py` - System resource diagnostics
+- `src/install/diagnostics/report.py` - Report generation and support bundles
+- `src/install/recovery/__init__.py` - Recovery module exports
+- `src/install/recovery/framework.py` - Recovery pipeline framework
+- `src/install/recovery/services.py` - Service recovery strategies
+- `src/install/recovery/filesystem.py` - Filesystem recovery strategies
+- `src/install/recovery/configuration.py` - Config recovery strategies
+- `src/install/recovery/report.py` - Recovery report formatting
+- `src/install/health/__init__.py` - Health monitoring module exports
+- `src/install/health/checks.py` - Enhanced health check suite
+- `src/install/health/monitoring.py` - Background health monitoring
+- `src/install/health/dashboard.py` - Rich health dashboard
+- `src/install/upgrade/__init__.py` - Upgrade module exports
+- `src/install/upgrade/upgrade.py` - Core upgrade logic
+- `src/install/upgrade/migrations.py` - Database/config migrations
+
+### Changed
+
+- Updated version to 0.8.2
+- Enhanced install module with diagnostics, recovery, health, and upgrade exports
+- Enhanced uninstall with interactive wizard, data export, and mode selection
+
 ## [0.8.1] - 2025-11-26
 
 ### Added - Interactive Installation Wizard

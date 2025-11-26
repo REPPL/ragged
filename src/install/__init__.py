@@ -3,6 +3,7 @@ ragged Installation System.
 
 v0.8.0 - Installation Foundation & Prerequisites System
 v0.8.1 - Interactive Installation Wizard
+v0.8.2 - Post-Launch Refinements & Error Recovery
 
 This module provides comprehensive installation management for ragged:
 - Prerequisite detection (Docker, Python, Ollama)
@@ -14,6 +15,10 @@ This module provides comprehensive installation management for ragged:
 - One-command bootstrap scripts
 - Progress tracking
 - Post-install verification
+- Error diagnostics (v0.8.2)
+- Automated recovery (v0.8.2)
+- Health monitoring (v0.8.2)
+- Upgrade & migrations (v0.8.2)
 """
 
 from ragged.install.detection import (
@@ -49,6 +54,10 @@ from ragged.install.scaffolding import (
     run_initial_setup,
     verify_installation,
     uninstall_ragged,
+    UninstallResult,
+    UninstallMode,
+    interactive_uninstall,
+    get_uninstall_preview,
 )
 from ragged.install.scripts import (
     generate_bootstrap_script,
@@ -80,6 +89,49 @@ from ragged.install.post_install import (
     Doctor,
     DiagnosticResult,
     run_doctor,
+)
+# v0.8.2 - Diagnostics
+from ragged.install.diagnostics import (
+    DiagnosticCategory,
+    DiagnosticSeverity,
+    DiagnosticIssue,
+    DiagnosticPipeline,
+    run_diagnostics,
+    generate_diagnostic_report,
+    create_support_bundle,
+)
+# v0.8.2 - Recovery
+from ragged.install.recovery import (
+    RecoveryAction,
+    RecoveryResult,
+    RecoveryStrategy,
+    RecoveryPipeline,
+    auto_recover,
+    format_recovery_report,
+)
+# v0.8.2 - Health Monitoring
+from ragged.install.health import (
+    HealthLevel,
+    CheckCategory,
+    HealthCheckSuite,
+    ServiceHealth,
+    HealthMonitor,
+    MonitoringConfig,
+    HealthDashboard,
+    start_monitoring,
+    stop_monitoring,
+    display_health_dashboard,
+)
+# v0.8.2 - Upgrade & Migrations
+from ragged.install.upgrade import (
+    Upgrader,
+    UpgradeStrategy,
+    UpgradeResult,
+    upgrade_ragged,
+    check_for_updates,
+    Migration,
+    MigrationRunner,
+    run_migrations,
 )
 
 __all__ = [
@@ -113,6 +165,10 @@ __all__ = [
     "run_initial_setup",
     "verify_installation",
     "uninstall_ragged",
+    "UninstallResult",
+    "UninstallMode",
+    "interactive_uninstall",
+    "get_uninstall_preview",
     # Scripts (v0.8.1)
     "generate_bootstrap_script",
     "BootstrapOptions",
@@ -140,4 +196,39 @@ __all__ = [
     "Doctor",
     "DiagnosticResult",
     "run_doctor",
+    # Diagnostics (v0.8.2)
+    "DiagnosticCategory",
+    "DiagnosticSeverity",
+    "DiagnosticIssue",
+    "DiagnosticPipeline",
+    "run_diagnostics",
+    "generate_diagnostic_report",
+    "create_support_bundle",
+    # Recovery (v0.8.2)
+    "RecoveryAction",
+    "RecoveryResult",
+    "RecoveryStrategy",
+    "RecoveryPipeline",
+    "auto_recover",
+    "format_recovery_report",
+    # Health Monitoring (v0.8.2)
+    "HealthLevel",
+    "CheckCategory",
+    "HealthCheckSuite",
+    "ServiceHealth",
+    "HealthMonitor",
+    "MonitoringConfig",
+    "HealthDashboard",
+    "start_monitoring",
+    "stop_monitoring",
+    "display_health_dashboard",
+    # Upgrade & Migrations (v0.8.2)
+    "Upgrader",
+    "UpgradeStrategy",
+    "UpgradeResult",
+    "upgrade_ragged",
+    "check_for_updates",
+    "Migration",
+    "MigrationRunner",
+    "run_migrations",
 ]
