@@ -1,0 +1,227 @@
+name: Installation Tests
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'src/install/**'
+      - 'tests/install/**'
+      - '.github/workflows/install-tests.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/install/**'
+      - 'tests/install/**'
+  workflow_dispatch:
+    inputs:
+      run_full_suite:
+        description: 'Run full test suite including slow tests'
+        required: false
+        default: 'false'
+
+jobs:
+  # Quick tests that run on every push
+  quick-tests:
+    name: Quick Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Run quick tests
+        run: |
+          pytest tests/install/ -v \
+            -m "not slow and not integration" \
+            --tb=short \
+            --durations=10
+
+  # Cross-platform tests
+  cross-platform:
+    name: Cross-Platform (${{ matrix.os }}, Python ${{ matrix.python-version }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: ['3.10', '3.11', '3.12']
+        exclude:
+          # Reduce matrix size for faster CI
+          - os: windows-latest
+            python-version: '3.10'
+          - os: macos-latest
+            python-version: '3.10'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Run cross-platform tests
+        run: |
+          pytest tests/install/cross_platform/ -v \
+            --tb=short \
+            --durations=10
+
+      - name: Run scenario tests
+        run: |
+          pytest tests/install/scenarios/ -v \
+            --tb=short
+
+  # Error injection tests
+  error-injection:
+    name: Error Injection Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Run error injection tests
+        run: |
+          pytest tests/install/error_injection/ -v \
+            --tb=short \
+            --durations=10
+
+  # Performance benchmarks
+  performance:
+    name: Performance Benchmarks
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event.inputs.run_full_suite == 'true'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Run performance tests
+        run: |
+          pytest tests/install/performance/ -v \
+            --tb=short \
+            --durations=20
+
+  # Regression tests
+  regression:
+    name: Regression Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Run regression tests
+        run: |
+          pytest tests/install/regression/ -v \
+            --tb=short \
+            --durations=10
+
+  # Full installation test (requires explicit enable)
+  full-install:
+    name: Full Installation Test
+    runs-on: ubuntu-latest
+    if: github.event.inputs.run_full_suite == 'true'
+    env:
+      RAGGED_TEST_INSTALL: "1"
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Run full installation tests
+        run: |
+          pytest tests/install/ -v \
+            --tb=short \
+            --durations=20
+
+  # Coverage report
+  coverage:
+    name: Test Coverage
+    runs-on: ubuntu-latest
+    needs: [quick-tests, cross-platform, error-injection, regression]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+          pip install pytest-cov
+
+      - name: Run tests with coverage
+        run: |
+          pytest tests/install/ \
+            --cov=ragged/install \
+            --cov-report=xml \
+            --cov-report=term-missing \
+            -v \
+            -m "not slow"
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          file: ./coverage.xml
+          flags: install-tests
+          name: install-coverage
+          fail_ci_if_error: false

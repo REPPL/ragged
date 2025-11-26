@@ -7,6 +7,122 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.6] - 2025-11-26
+
+### Added - Installation Testing & Quality Assurance
+
+Comprehensive test framework for the installation system with cross-platform tests, scenario testing, error injection, performance benchmarks, and regression tests.
+
+**INSTALL-TEST-001: Cross-Platform Automated Tests**:
+- `TestPlatformDetection` class: system, architecture, Python version detection
+- Platform-specific version tests: macOS 11+, Linux distribution, Windows 10/11
+- `TestPlatformCapabilities`: Docker, venv, pip availability
+- `TestNetworkCapabilities`: localhost resolution, port availability, HTTPS connectivity
+- `TestFilesystemCapabilities`: home directory access, temp directory, disk space
+- `TestDetectionSystem`: Docker, Python, Ollama, Environment detectors
+- `TestValidationSystem`: port, filesystem, version validators
+- `TestScaffoldingSystem`: directory structure, uninstall preview
+
+**INSTALL-TEST-002: Installation Scenario Testing**:
+- `TestCleanInstallDetection`: no existing installation, empty home directory
+- `TestCleanInstallPrerequisites`: Python version, all prerequisites
+- `TestCleanInstallScaffolding`: directory creation, permissions, default config
+- `TestCleanInstallValidation`: empty environment, critical issue identification
+- `TestCleanInstallWorkflow`: full clean installation, idempotent install
+- `TestUpgradeDetection`: existing installation, legacy config detection
+- `TestDataPreservation`: documents, custom files preserved
+- `TestConfigMigration`: legacy JSON, new YAML format
+- `TestUpgradeWorkflow`: full upgrade, rollback capability
+- `TestVersionSpecificUpgrades`: v0.5, v0.6, v0.7 upgrade paths
+- `TestCorruptionDetection`: missing directories, corrupted config, permissions
+- `TestPartialInstallRecovery`: complete structure, preserve content
+- `TestCorruptedConfigRecovery`: YAML, missing config, default creation
+- `TestRecoveryWorkflow`: full recovery, idempotent recovery
+- `TestEdgeCases`: empty files, binary garbage, symlinks, deep nesting
+
+**INSTALL-TEST-003: Error Recovery Validation**:
+- `TestDiskSpaceErrors`: disk full simulation, low space warning
+- `TestPermissionErrors`: read-only directory, no write, no execute
+- `TestFileLockErrors`: locked config, concurrent access
+- `TestPathErrors`: very long paths, special characters, Unicode
+- `TestSymlinkErrors`: broken symlinks, circular symlinks
+- `TestIOErrors`: I/O errors on read, OS errors on stat
+- `TestDNSErrors`: DNS failure, DNS timeout
+- `TestConnectionErrors`: connection refused, connection timeout
+- `TestPortAvailabilityErrors`: port in use, privileged port access
+- `TestDockerNetworkErrors`: Docker not running, socket errors
+- `TestOfflineOperation`: installation, detection, validation offline
+- `TestProxyErrors`: invalid proxy, proxy auth failure
+- `TestMemoryErrors`: memory pressure, allocation failure
+- `TestProcessErrors`: subprocess failure, timeout, command not found
+- `TestResourceLimitErrors`: file descriptor limit, max path depth
+- `TestEnvironmentErrors`: missing, invalid, Unicode env vars
+- `TestDependencyErrors`: missing optional, incompatible versions
+- `TestConcurrencyErrors`: concurrent installation, concurrent validation
+
+**INSTALL-TEST-004: Performance Benchmarking**:
+- `TestPythonDetectionPerformance`: speed (<100ms), consistency
+- `TestDockerDetectionPerformance`: speed (<2s), timeout respect
+- `TestOllamaDetectionPerformance`: speed (<2s)
+- `TestEnvironmentDetectionPerformance`: speed (<500ms)
+- `TestFullDetectionPerformance`: all prerequisites (<5s), parallelisation potential
+- `TestPortValidationPerformance`: validation speed (<1s), individual check (<50ms)
+- `TestFilesystemValidationPerformance`: speed (<500ms), many files (<2s)
+- `TestVersionValidationPerformance`: speed (<200ms)
+- `TestFullValidationPerformance`: speed (<3s), linear scaling
+- `TestDirectoryCreationPerformance`: structure creation (<500ms), idempotent (<200ms)
+- `TestUninstallPerformance`: preview speed (<200ms), with data (<1s)
+- `TestFullWorkflowPerformance`: complete installation (<10s), breakdown
+
+**INSTALL-TEST-005: Regression Testing**:
+- `TestPathHandlingRegressions`: spaces, Unicode, very long paths, symlinks
+- `TestConfigurationRegressions`: empty config, malformed YAML, missing keys
+- `TestPermissionRegressions`: restrictive umask, read-only parent
+- `TestDetectionRegressions`: Docker not in PATH, Python version accuracy, disk space
+- `TestValidationRegressions`: IPv6 port validation, special files
+- `TestConcurrencyRegressions`: concurrent directory creation, concurrent detection
+- `TestLegacyConfigFormats`: v0.5 JSON, v0.6 YAML, v0.7 new fields
+- `TestLegacyDirectoryStructures`: v0.5 minimal, v0.6 ChromaDB, data preservation
+- `TestAPICompatibility`: detection, validation, scaffolding API stability
+- `TestDataMigration`: ChromaDB data, cache preservation
+
+**CI/CD Pipeline**:
+- GitHub Actions workflow for installation tests
+- Quick tests on every push
+- Cross-platform matrix: Ubuntu, macOS, Windows × Python 3.10-3.12
+- Error injection test job
+- Performance benchmark job
+- Regression test job
+- Full installation test (manual trigger)
+- Coverage report with Codecov integration
+
+**New Files**:
+- `tests/install/__init__.py` - Installation test module
+- `tests/install/conftest.py` - Shared fixtures and configuration
+- `tests/install/cross_platform/__init__.py` - Cross-platform tests
+- `tests/install/cross_platform/test_platform_detection.py` - Platform detection
+- `tests/install/cross_platform/test_installation.py` - Installation tests
+- `tests/install/scenarios/__init__.py` - Scenario tests
+- `tests/install/scenarios/test_clean_install.py` - Clean installation
+- `tests/install/scenarios/test_upgrade_install.py` - Upgrade installation
+- `tests/install/scenarios/test_recovery_install.py` - Recovery installation
+- `tests/install/error_injection/__init__.py` - Error injection tests
+- `tests/install/error_injection/test_filesystem_errors.py` - Filesystem errors
+- `tests/install/error_injection/test_network_errors.py` - Network errors
+- `tests/install/error_injection/test_resource_errors.py` - Resource errors
+- `tests/install/performance/__init__.py` - Performance tests
+- `tests/install/performance/test_detection_performance.py` - Detection benchmarks
+- `tests/install/performance/test_validation_performance.py` - Validation benchmarks
+- `tests/install/performance/test_scaffolding_performance.py` - Scaffolding benchmarks
+- `tests/install/regression/__init__.py` - Regression tests
+- `tests/install/regression/test_known_issues.py` - Known issues
+- `tests/install/regression/test_version_compatibility.py` - Version compatibility
+- `.github/workflows/install-tests.yml` - CI/CD pipeline
+
+### Changed
+
+- Updated version to 0.8.6
+
 ## [0.8.5] - 2025-11-26
 
 ### Added - Installation Security Hardening
