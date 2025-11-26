@@ -7,6 +7,79 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.1] - 2025-11-26
+
+### Added - Interactive Installation Wizard
+
+Comprehensive interactive installation wizard with Rich terminal UI, one-command installers, and post-install verification.
+
+**WIZARD-001: Interactive CLI Wizard**:
+- Wizard framework with screen management, navigation, and state persistence
+- NavigationAction enum: NEXT, BACK, SKIP, ABORT, RETRY
+- WizardState dataclass with JSON serialisation for resume capability
+- WizardScreen abstract base class with lifecycle hooks (on_enter, on_exit)
+- Wizard controller with progress display and abort handling
+- Six wizard screens: Welcome, Prerequisites, Installation, Configuration, Verification, Success
+- Resume interrupted installations with `ragged install --resume`
+
+**WIZARD-002: One-Command Installer Script**:
+- Bootstrap script generator for Bash and PowerShell
+- BootstrapOptions dataclass for customisation
+- Bash script with platform detection, package manager detection
+- Docker, Ollama, Python installation automation
+- Colour-coded output with logging functions
+- PowerShell script for Windows with winget integration
+- Dry-run mode for testing without changes
+
+**WIZARD-003: Progress Tracking & Status Updates**:
+- ProgressTracker with phase management and callbacks
+- InstallationPhase enum: INITIALISING, DETECTING, VALIDATING, INSTALLING_*, etc.
+- PhaseStatus enum: PENDING, IN_PROGRESS, COMPLETED, SKIPPED, FAILED
+- PhaseInfo dataclass with timing, progress percentage, error tracking
+- ProgressDisplay with Rich Live rendering
+- Multiple callback implementations: LoggingCallback, ConsoleCallback, RichCallback, FileCallback
+
+**WIZARD-004: Configuration File Generation**:
+- ConfigWizard for interactive configuration setup
+- ConfigWizardOptions for wizard customisation
+- Interactive configuration prompts for all settings
+- Configuration summary display with Rich tables
+- generate_config_from_dict for programmatic configuration
+- quick_configure for non-interactive setup
+- Backup existing configuration before overwriting
+
+**WIZARD-005: Post-Install Verification & Setup**:
+- HealthCheck with comprehensive health checks (directories, config, Docker, Ollama, ChromaDB, permissions, disk space)
+- HealthStatus enum: HEALTHY, DEGRADED, UNHEALTHY, UNKNOWN
+- ServiceChecker for service status monitoring
+- PostInstallSetup wizard with model pulling, example collection, shell integration
+- Doctor diagnostic tool with auto-fix capabilities
+- DiagnosticLevel: OK, INFO, WARNING, ERROR, CRITICAL
+- Fix suggestions and automated remediation commands
+
+**New Files**:
+- `src/cli/wizard/__init__.py` - Wizard module exports
+- `src/cli/wizard/framework.py` - Core wizard framework
+- `src/cli/wizard/runner.py` - Wizard entry point
+- `src/cli/wizard/screens/` - Wizard screen implementations (6 files)
+- `src/install/scripts/__init__.py` - Script module exports
+- `src/install/scripts/bootstrap.py` - Bootstrap script generator
+- `src/install/progress/__init__.py` - Progress module exports
+- `src/install/progress/tracker.py` - Progress tracker
+- `src/install/progress/display.py` - Rich progress display
+- `src/install/progress/callbacks.py` - Progress callbacks
+- `src/install/config_wizard.py` - Configuration wizard
+- `src/install/post_install/__init__.py` - Post-install module exports
+- `src/install/post_install/health_check.py` - Health check system
+- `src/install/post_install/service_checker.py` - Service status checker
+- `src/install/post_install/setup_wizard.py` - Post-install setup wizard
+- `src/install/post_install/doctor.py` - Diagnostic tool
+
+### Changed
+
+- Updated version to 0.8.1
+- Enhanced install module with wizard, scripts, progress, and post-install exports
+
 ## [0.8.0] - 2025-11-26
 
 ### Added - Installation Foundation & Prerequisites System

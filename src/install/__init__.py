@@ -2,6 +2,7 @@
 ragged Installation System.
 
 v0.8.0 - Installation Foundation & Prerequisites System
+v0.8.1 - Interactive Installation Wizard
 
 This module provides comprehensive installation management for ragged:
 - Prerequisite detection (Docker, Python, Ollama)
@@ -9,6 +10,10 @@ This module provides comprehensive installation management for ragged:
 - Environment validation
 - Configuration management
 - Installation scaffolding
+- Interactive installation wizard
+- One-command bootstrap scripts
+- Progress tracking
+- Post-install verification
 """
 
 from ragged.install.detection import (
@@ -45,6 +50,37 @@ from ragged.install.scaffolding import (
     verify_installation,
     uninstall_ragged,
 )
+from ragged.install.scripts import (
+    generate_bootstrap_script,
+    BootstrapOptions,
+)
+from ragged.install.progress import (
+    ProgressTracker,
+    InstallationPhase,
+    PhaseStatus,
+    ProgressDisplay,
+    create_progress_display,
+)
+from ragged.install.config_wizard import (
+    ConfigWizard,
+    ConfigWizardOptions,
+    generate_config_from_dict,
+    quick_configure,
+)
+from ragged.install.post_install import (
+    HealthCheck,
+    HealthCheckResult,
+    HealthStatus,
+    run_health_checks,
+    ServiceChecker,
+    ServiceStatus,
+    check_all_services,
+    PostInstallSetup,
+    run_post_install_setup,
+    Doctor,
+    DiagnosticResult,
+    run_doctor,
+)
 
 __all__ = [
     # Detection
@@ -77,4 +113,31 @@ __all__ = [
     "run_initial_setup",
     "verify_installation",
     "uninstall_ragged",
+    # Scripts (v0.8.1)
+    "generate_bootstrap_script",
+    "BootstrapOptions",
+    # Progress (v0.8.1)
+    "ProgressTracker",
+    "InstallationPhase",
+    "PhaseStatus",
+    "ProgressDisplay",
+    "create_progress_display",
+    # Config Wizard (v0.8.1)
+    "ConfigWizard",
+    "ConfigWizardOptions",
+    "generate_config_from_dict",
+    "quick_configure",
+    # Post-Install (v0.8.1)
+    "HealthCheck",
+    "HealthCheckResult",
+    "HealthStatus",
+    "run_health_checks",
+    "ServiceChecker",
+    "ServiceStatus",
+    "check_all_services",
+    "PostInstallSetup",
+    "run_post_install_setup",
+    "Doctor",
+    "DiagnosticResult",
+    "run_doctor",
 ]
