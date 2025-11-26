@@ -7,6 +7,73 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.7] - 2025-11-26
+
+### Added - Installation Documentation Excellence
+
+Comprehensive documentation for the installation system covering platform guides, troubleshooting knowledge base, video tutorials, quick start, and FAQ.
+
+**INSTALL-DOC-001: Comprehensive Installation Guides**:
+- `docs/installation/README.md` - Installation hub with decision tree
+- `docs/installation/windows.md` - Complete Windows 10/11 guide (~400 lines)
+  - One-command and manual installation methods
+  - WSL 2, Docker Desktop, Ollama setup
+  - Troubleshooting: virtualisation, firewall, permissions
+- `docs/installation/macos.md` - Complete macOS guide (~350 lines)
+  - Homebrew and manual installation
+  - Apple Silicon (M1/M2/M3) notes
+  - Gatekeeper, permissions troubleshooting
+- `docs/installation/linux.md` - Complete Linux guide (~450 lines)
+  - Ubuntu, Debian, Fedora, Arch, openSUSE
+  - Docker Engine setup, systemd service
+  - SELinux, AppArmor, firewall configuration
+- `docs/installation/enterprise.md` - Enterprise deployment (~500 lines)
+  - Silent installation, Ansible/Puppet
+  - LDAP/Active Directory integration
+  - NFS/SMB network storage, high availability
+- `docs/installation/offline.md` - Air-gapped installation (~250 lines)
+  - Dependency bundling, verification
+  - Platform-specific offline instructions
+
+**INSTALL-DOC-002: Troubleshooting Knowledge Base**:
+- `docs/troubleshooting/README.md` - Troubleshooting hub
+- `docs/troubleshooting/prerequisites.md` - Docker, Python, Ollama issues
+- `docs/troubleshooting/network.md` - Ports, firewalls, proxy, SSL
+- `docs/troubleshooting/permissions.md` - File access, SELinux, Gatekeeper
+- `docs/troubleshooting/resources.md` - Disk, memory, CPU, GPU issues
+- `docs/troubleshooting/services.md` - Service startup, crashes, communication
+- `docs/troubleshooting/platform-specific.md` - Windows, macOS, Linux specifics
+- `docs/troubleshooting/error-index.md` - Searchable error message index
+
+**INSTALL-DOC-003: Video Tutorial Scripts**:
+- `docs/videos/README.md` - Video library index
+- `docs/videos/scripts/windows-install.md` - 12-minute Windows tutorial script
+- `docs/videos/scripts/macos-install.md` - 10-minute macOS tutorial script
+- `docs/videos/scripts/first-steps.md` - 7-minute getting started script
+
+**INSTALL-DOC-004: Quick Start Guide**:
+- `docs/quick-start.md` - 5-minute installation to first query
+  - One-command install for all platforms
+  - Verification, document upload, first query
+  - Quick troubleshooting tips
+
+**INSTALL-DOC-005: FAQ & Common Questions**:
+- `docs/faq.md` - 50+ frequently asked questions
+  - Installation, configuration, usage sections
+  - Troubleshooting quick answers
+  - Privacy and advanced topics
+
+**Documentation Features**:
+- Platform-specific installation decision tree (Mermaid)
+- Step-by-step instructions with commands
+- Common issues with solutions
+- Cross-referenced documentation
+- Video script templates for community contributions
+
+### Changed
+
+- Updated version to 0.8.7
+
 ## [0.8.6] - 2025-11-26
 
 ### Added - Installation Testing & Quality Assurance
