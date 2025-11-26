@@ -14,7 +14,8 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+# Python packaging lib directories (not SvelteKit's src/lib)
+/lib/
 lib64/
 parts/
 sdist/

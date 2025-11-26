@@ -1,0 +1,262 @@
+/**
+ * ragged Design System Tokens
+ * Based on webUI.svg specifications
+ * v0.7.3 WebUI Infrastructure
+ */
+
+:root {
+	/* ============================================
+	 * COLOUR PALETTE
+	 * ============================================ */
+
+	/* Primary */
+	--color-primary: #4c6ef5;
+	--color-primary-hover: #4263eb;
+	--color-primary-active: #3b5bdb;
+	--color-primary-light: #e7f5ff;
+
+	/* Background */
+	--color-bg: #ffffff;
+	--color-bg-secondary: #f8f9fa;
+	--color-bg-tertiary: #f1f3f5;
+	--color-bg-elevated: #ffffff;
+
+	/* Text */
+	--color-text-primary: #1e1e1e;
+	--color-text-secondary: #495057;
+	--color-text-tertiary: #868e96;
+	--color-text-muted: #adb5bd;
+	--color-text-inverse: #ffffff;
+
+	/* Semantic */
+	--color-success: #2b8a3e;
+	--color-success-light: #d3f9d8;
+	--color-warning: #fab005;
+	--color-warning-light: #fff3bf;
+	--color-danger: #c92a2a;
+	--color-danger-light: #ffe3e3;
+	--color-info: #1c7ed6;
+	--color-info-light: #d0ebff;
+
+	/* Borders */
+	--color-border-light: #e9ecef;
+	--color-border-medium: #dee2e6;
+	--color-border-dark: #ced4da;
+	--color-border-focus: var(--color-primary);
+
+	/* Domain Tags (from design) */
+	--color-tag-technical-bg: #e7f5ff;
+	--color-tag-technical-text: #4c6ef5;
+	--color-tag-academic-bg: #fff3bf;
+	--color-tag-academic-text: #fab005;
+	--color-tag-research-bg: #d3f9d8;
+	--color-tag-research-text: #37b24d;
+	--color-tag-filter-bg: #ffc9c9;
+	--color-tag-filter-border: #fa5252;
+	--color-tag-filter-text: #c92a2a;
+
+	/* Score Badges */
+	--color-score-high-bg: #d3f9d8;
+	--color-score-high-text: #2b8a3e;
+	--color-score-medium-bg: #fff3bf;
+	--color-score-medium-text: #f76707;
+	--color-score-low-bg: #ffe3e3;
+	--color-score-low-text: #c92a2a;
+
+	/* ============================================
+	 * TYPOGRAPHY
+	 * ============================================ */
+
+	/* Font Families */
+	--font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+		Arial, sans-serif;
+	--font-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Liberation Mono',
+		Menlo, monospace;
+
+	/* Font Sizes */
+	--font-size-2xs: 0.625rem; /* 10px */
+	--font-size-xs: 0.6875rem; /* 11px */
+	--font-size-sm: 0.8125rem; /* 13px */
+	--font-size-base: 0.875rem; /* 14px */
+	--font-size-lg: 0.9375rem; /* 15px */
+	--font-size-xl: 1.125rem; /* 18px */
+	--font-size-2xl: 1.5rem; /* 24px */
+	--font-size-3xl: 1.875rem; /* 30px */
+
+	/* Font Weights */
+	--font-weight-normal: 400;
+	--font-weight-medium: 500;
+	--font-weight-semibold: 600;
+	--font-weight-bold: 700;
+
+	/* Line Heights */
+	--line-height-tight: 1.25;
+	--line-height-normal: 1.5;
+	--line-height-relaxed: 1.75;
+
+	/* ============================================
+	 * SPACING (4px base unit)
+	 * ============================================ */
+
+	--space-0: 0;
+	--space-1: 0.25rem; /* 4px */
+	--space-2: 0.5rem; /* 8px */
+	--space-3: 0.75rem; /* 12px */
+	--space-4: 1rem; /* 16px */
+	--space-5: 1.25rem; /* 20px */
+	--space-6: 1.5rem; /* 24px */
+	--space-8: 2rem; /* 32px */
+	--space-10: 2.5rem; /* 40px */
+	--space-12: 3rem; /* 48px */
+	--space-16: 4rem; /* 64px */
+	--space-20: 5rem; /* 80px */
+
+	/* ============================================
+	 * LAYOUT (from webUI.svg)
+	 * ============================================ */
+
+	--header-height: 72px;
+	--sidebar-width: 320px;
+	--sidebar-collapsed-width: 64px;
+	--main-max-width: 1560px;
+	--content-max-width: 1500px;
+
+	/* Document Card (272x96px) */
+	--card-document-width: 272px;
+	--card-document-height: 96px;
+
+	/* Upload Zone (272x120px) */
+	--upload-zone-width: 272px;
+	--upload-zone-height: 120px;
+
+	/* Query Input (1500x100px) */
+	--query-input-width: 100%;
+	--query-input-max-width: 1500px;
+	--query-input-height: 100px;
+
+	/* Result Card */
+	--card-result-width: 100%;
+	--card-result-max-width: 1500px;
+	--card-result-height-collapsed: 100px;
+	--card-result-height-expanded: 140px;
+
+	/* Score Badge (40px diameter) */
+	--badge-score-size: 40px;
+
+	/* Mode Tab (100x32px) */
+	--tab-mode-width: 100px;
+	--tab-mode-height: 32px;
+
+	/* Filter Tag (55x24px) */
+	--tag-filter-width: 55px;
+	--tag-filter-height: 24px;
+
+	/* ============================================
+	 * BORDERS
+	 * ============================================ */
+
+	--radius-none: 0;
+	--radius-sm: 4px;
+	--radius-md: 8px;
+	--radius-lg: 12px;
+	--radius-xl: 16px;
+	--radius-full: 9999px;
+
+	--border-width-thin: 1px;
+	--border-width-medium: 2px;
+	--border-width-thick: 4px;
+
+	/* ============================================
+	 * SHADOWS
+	 * ============================================ */
+
+	--shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+	--shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+	--shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.05);
+	--shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.05);
+	--shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+	--shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+	--shadow-focus: 0 0 0 3px rgba(76, 110, 245, 0.3);
+
+	/* ============================================
+	 * TRANSITIONS
+	 * ============================================ */
+
+	--transition-fast: 100ms ease;
+	--transition-base: 150ms ease;
+	--transition-slow: 250ms ease;
+	--transition-slower: 350ms ease;
+
+	/* ============================================
+	 * Z-INDEX SCALE
+	 * ============================================ */
+
+	--z-base: 0;
+	--z-dropdown: 100;
+	--z-sticky: 200;
+	--z-overlay: 300;
+	--z-modal: 400;
+	--z-popover: 500;
+	--z-tooltip: 600;
+	--z-toast: 700;
+}
+
+/* ============================================
+ * DARK THEME
+ * ============================================ */
+
+[data-theme='dark'] {
+	/* Background */
+	--color-bg: #1a1b1e;
+	--color-bg-secondary: #25262b;
+	--color-bg-tertiary: #2c2e33;
+	--color-bg-elevated: #2c2e33;
+
+	/* Text */
+	--color-text-primary: #f8f9fa;
+	--color-text-secondary: #dee2e6;
+	--color-text-tertiary: #adb5bd;
+	--color-text-muted: #868e96;
+
+	/* Borders */
+	--color-border-light: #373a40;
+	--color-border-medium: #495057;
+	--color-border-dark: #5c5f66;
+
+	/* Adjusted semantic colours for dark mode */
+	--color-success-light: rgba(43, 138, 62, 0.2);
+	--color-warning-light: rgba(250, 176, 5, 0.2);
+	--color-danger-light: rgba(201, 42, 42, 0.2);
+	--color-info-light: rgba(28, 126, 214, 0.2);
+
+	/* Adjusted tag colours */
+	--color-tag-technical-bg: rgba(76, 110, 245, 0.2);
+	--color-tag-academic-bg: rgba(250, 176, 5, 0.2);
+	--color-tag-research-bg: rgba(55, 178, 77, 0.2);
+	--color-tag-filter-bg: rgba(250, 82, 82, 0.2);
+
+	/* Adjusted score colours */
+	--color-score-high-bg: rgba(43, 138, 62, 0.2);
+	--color-score-medium-bg: rgba(247, 103, 7, 0.2);
+	--color-score-low-bg: rgba(201, 42, 42, 0.2);
+
+	/* Shadows for dark mode */
+	--shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
+	--shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+	--shadow-md: 0 4px 6px rgba(0, 0, 0, 0.35), 0 2px 4px rgba(0, 0, 0, 0.25);
+	--shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4), 0 4px 6px rgba(0, 0, 0, 0.3);
+	--shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.5), 0 10px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================
+ * REDUCED MOTION
+ * ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+	:root {
+		--transition-fast: 0ms;
+		--transition-base: 0ms;
+		--transition-slow: 0ms;
+		--transition-slower: 0ms;
+	}
+}

@@ -1,6 +1,6 @@
 {
   "name": "ragged-webui",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "private": true,
   "scripts": {
     "dev": "vite dev --port 5173",
@@ -10,12 +10,16 @@
     "test:unit": "vitest run",
     "test:e2e": "playwright test",
     "test:coverage": "vitest run --coverage",
+    "test:security": "vitest run src/tests/security/",
     "lint": "eslint . --ext .ts,.svelte && prettier --check .",
     "format": "prettier --write .",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "prepare": "svelte-kit sync",
     "start": "node build",
-    "clean": "rm -rf .svelte-kit build node_modules/.vite"
+    "clean": "rm -rf .svelte-kit build node_modules/.vite",
+    "audit": "npm audit --audit-level=moderate",
+    "audit:fix": "npm audit fix",
+    "security:check": "npm run audit && npm run test:security"
   },
   "devDependencies": {
     "@playwright/test": "^1.40.0",

@@ -7,6 +7,85 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.4] - 2025-11-26
+
+### Added - WebUI Security Hardening
+
+Comprehensive security hardening for the WebUI following OWASP guidelines.
+
+**SEC-001: Input Validation & Sanitisation**:
+- `validation.ts` - Comprehensive validation utilities with DOMPurify integration
+- Email, password, text, URL, number validators with sanitisation
+- File upload validation with MIME type and extension checks
+- Form validation helpers for login and registration
+
+**SEC-002: XSS Prevention & CSP Enhancement**:
+- Safe href attribute handling to block javascript: and data: URLs
+- HTML sanitisation with configurable allowed tags
+- Enhanced Content Security Policy configuration
+
+**SEC-003: CSRF Protection**:
+- CSRF token management (get, set, clear)
+- Automatic CSRF header injection for state-changing requests
+- Server-side CSRF validation in hooks.server.ts
+
+**SEC-004: Authentication Security (JWT)**:
+- Client-side JWT payload parsing (for UX only, not security)
+- Token expiration detection with clock skew handling
+- Session timeout management with activity tracking
+- Session warning and auto-logout callbacks
+
+**SEC-005: Authorization Enforcement in UI**:
+- Role-based permission system (admin, editor, viewer, guest)
+- `AuthGuard.svelte` component for conditional rendering
+- `hasPermission`, `hasAllPermissions`, `hasAnyPermission` helpers
+- Permission-based UI hiding
+
+**SEC-006: Secure WebSocket Connections**:
+- `SecureWebSocket` class with automatic WSS upgrade
+- Exponential backoff reconnection strategy
+- Heartbeat/ping-pong keep-alive
+- Connection state management via Svelte store
+- Message validation and sanitisation
+
+**SEC-007: Rate Limiting**:
+- Client-side rate limiter for UX improvement
+- Per-endpoint rate limit configurations
+- Server-side rate limiting in hooks.server.ts
+- 429 response handling with retry-after
+
+**SEC-008: Security Headers Configuration**:
+- `hooks.server.ts` with security headers middleware
+- X-Content-Type-Options, X-Frame-Options, X-XSS-Protection
+- Referrer-Policy, Permissions-Policy
+- HSTS for HTTPS connections
+
+**SEC-009: Dependency Vulnerability Scanning**:
+- npm audit scripts in package.json
+- `npm run audit` for vulnerability checking
+- `npm run security:check` for combined audit and test
+
+**SEC-010: Secure Secret Management**:
+- `secureStorage` utility for safe data storage
+- Preference storage (localStorage) vs session storage (sessionStorage)
+- Session clearing on logout
+- Secure random ID generation
+
+**New Files**:
+- `src/webui/src/lib/utils/validation.ts` - Input validation utilities
+- `src/webui/src/lib/utils/security.ts` - Security utilities
+- `src/webui/src/lib/utils/websocket.ts` - Secure WebSocket client
+- `src/webui/src/lib/utils/index.ts` - Utility exports
+- `src/webui/src/lib/components/auth/AuthGuard.svelte` - Authorization guard
+- `src/webui/src/hooks.server.ts` - Server-side security hooks
+- `src/webui/src/tests/security/validation.test.ts` - Validation tests
+- `src/webui/src/tests/security/security.test.ts` - Security tests
+
+### Changed
+
+- Updated API client with CSRF token injection and rate limiting
+- Updated version to 0.7.4
+
 ## [0.7.3] - 2025-11-25
 
 ### Added - WebUI Foundation Infrastructure
