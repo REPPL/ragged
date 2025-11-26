@@ -7,6 +7,65 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.0] - 2025-11-26
+
+### Added - Installation Foundation & Prerequisites System
+
+Comprehensive installation infrastructure for automated dependency detection, installation, and environment validation.
+
+**PREREQ-001: Prerequisite Detection System**:
+- Base detector architecture with platform-specific detection (Windows, macOS, Linux)
+- Docker detector: binary location, daemon status, version, Docker Compose detection
+- Python detector: binary location, version validation (3.10-3.12), pip, venv capability
+- Ollama detector: binary location, service status, installed models, storage info
+- Environment detector: port availability, disk space, filesystem permissions, OS info
+- Result caching and version parsing utilities
+
+**PREREQ-002: Automated Dependency Installation**:
+- Base installer framework with step management and rollback capability
+- Docker installer: Homebrew, DMG (macOS), apt/dnf (Linux), Desktop (Windows)
+- Python installer: Homebrew (macOS), apt/dnf/pacman (Linux), official installer (Windows)
+- Ollama installer: official script (macOS/Linux), installer (Windows), model pulling
+- Download utilities with progress tracking and hash verification
+- Service wait and health check utilities
+
+**PREREQ-003: Environment Validation**:
+- Port validator: checks ports 8000, 5173, 8001, 11434 availability
+- Filesystem validator: disk space (min 2GB, recommended 10GB), permissions, ownership
+- Version validator: Docker ≥20.10, Compose ≥2.0, Python 3.10-3.12, Ollama ≥0.1.0
+- System validator: RAM (min 4GB, recommended 8GB), CPU cores, OS version
+- Validation report generator with text, JSON, and Markdown formats
+- Severity levels: INFO, WARNING, CRITICAL with fix suggestions
+
+**PREREQ-004: Configuration Management**:
+- Configuration profiles: DEFAULT, PRODUCTION, DOCKER, MINIMAL
+- Configuration dataclasses: Server, Database, LLM, Storage, Security, WebUI
+- YAML configuration generation with inline comments
+- Environment file generation with JWT secret
+- Secure JWT secret generation (64-char cryptographic random)
+- Configuration validation and backup functionality
+
+**PREREQ-005: Installation Scaffolding**:
+- Directory structure creation: documents, chromadb, cache, logs, models, backups
+- README.md and .gitignore generation for ragged home
+- Docker Compose file generation for ChromaDB service
+- Docker service manager: pull, start, stop, status, health checks
+- Initial setup: default collection creation, example document seeding
+- Installation verification: directory, config, Ollama, ChromaDB, API health
+- Uninstall functionality: stop services, remove Docker, remove data
+
+**New Files**:
+- `src/install/__init__.py` - Installation module exports
+- `src/install/detection/` - Prerequisite detection system (5 files)
+- `src/install/installers/` - Automated installers (5 files)
+- `src/install/validation/` - Environment validation (6 files)
+- `src/install/config_manager.py` - Configuration management
+- `src/install/scaffolding/` - Installation scaffolding (5 files)
+
+### Changed
+
+- Updated version to 0.8.0
+
 ## [0.7.5] - 2025-11-26
 
 ### Added - WebUI Testing & Quality Assurance
