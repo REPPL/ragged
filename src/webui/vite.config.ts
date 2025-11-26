@@ -13,12 +13,29 @@ export default defineConfig({
 			'$stores': '/src/lib/stores',
 			'$api': '/src/lib/api',
 			'$types': '/src/lib/types',
-			'$components': '/src/lib/components'
+			'$components': '/src/lib/components',
+			'$utils': '/src/lib/utils'
 		},
 		coverage: {
 			provider: 'v8',
-			reporter: ['text', 'json', 'html'],
-			exclude: ['node_modules/', 'src/**/*.d.ts', '**/*.config.*']
+			reporter: ['text', 'json', 'html', 'lcov'],
+			reportsDirectory: './coverage',
+			exclude: [
+				'node_modules/',
+				'src/**/*.d.ts',
+				'**/*.config.*',
+				'src/tests/**',
+				'tests/**',
+				'.svelte-kit/**'
+			],
+			include: ['src/lib/**/*.{ts,svelte}'],
+			// Quality gates - fail if coverage drops below thresholds
+			thresholds: {
+				statements: 70,
+				branches: 65,
+				functions: 70,
+				lines: 70
+			}
 		}
 	},
 	server: {
@@ -33,6 +50,13 @@ export default defineConfig({
 	build: {
 		target: 'esnext',
 		minify: 'esbuild',
-		sourcemap: true
+		sourcemap: true,
+		rollupOptions: {
+			output: {
+				manualChunks: {
+					vendor: ['chart.js', 'd3', 'dompurify']
+				}
+			}
+		}
 	}
 });

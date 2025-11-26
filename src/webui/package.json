@@ -1,6 +1,6 @@
 {
   "name": "ragged-webui",
-  "version": "0.7.4",
+  "version": "0.7.5",
   "private": true,
   "scripts": {
     "dev": "vite dev --port 5173",
@@ -9,8 +9,15 @@
     "test": "vitest",
     "test:unit": "vitest run",
     "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:chromium": "playwright test --project=chromium",
+    "test:e2e:firefox": "playwright test --project=firefox",
+    "test:e2e:webkit": "playwright test --project=webkit",
+    "test:a11y": "playwright test tests/e2e/accessibility.spec.ts",
+    "test:visual": "playwright test tests/visual/",
     "test:coverage": "vitest run --coverage",
     "test:security": "vitest run src/tests/security/",
+    "test:all": "npm run test:unit && npm run test:e2e",
     "lint": "eslint . --ext .ts,.svelte && prettier --check .",
     "format": "prettier --write .",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -19,9 +26,13 @@
     "clean": "rm -rf .svelte-kit build node_modules/.vite",
     "audit": "npm audit --audit-level=moderate",
     "audit:fix": "npm audit fix",
-    "security:check": "npm run audit && npm run test:security"
+    "security:check": "npm run audit && npm run test:security",
+    "lighthouse": "lhci autorun",
+    "qa": "npm run lint && npm run check && npm run test:all && npm run test:a11y"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.8.0",
+    "@lhci/cli": "^0.13.0",
     "@playwright/test": "^1.40.0",
     "@sveltejs/adapter-node": "^2.0.0",
     "@sveltejs/kit": "^2.0.0",

@@ -7,6 +7,99 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.5] - 2025-11-26
+
+### Added - WebUI Testing & Quality Assurance
+
+Comprehensive testing and quality assurance infrastructure for production-ready WebUI.
+
+**QA-001: E2E Testing Framework (Playwright)**:
+- Page object models for all major pages (Login, Query, Documents, Collections, Settings, History, Analytics)
+- Test utilities and data generators
+- Authentication workflow tests (login, logout, session management)
+- Query workflow tests (submission, validation, results, history)
+- Document management tests (upload, list, delete, preview)
+- Keyboard navigation and accessibility tests
+
+**QA-002: Accessibility Compliance Audit (WCAG 2.1 AA)**:
+- Automated axe-core accessibility scans for all pages
+- Keyboard navigation verification
+- Focus indicator visibility tests
+- Modal focus trapping tests
+- Heading hierarchy validation
+- Landmark region verification
+- Form label accessibility tests
+- Dynamic content announcement (ARIA live regions)
+- Colour contrast verification
+- Screen reader accessibility checks
+
+**QA-003: Performance Benchmarking (Lighthouse CI)**:
+- Lighthouse CI configuration with performance budgets
+- First Contentful Paint <1.5s threshold
+- Largest Contentful Paint <2.5s threshold
+- Time to Interactive <3.5s threshold
+- Cumulative Layout Shift <0.1 threshold
+- Total Blocking Time <200ms threshold
+
+**QA-004: Cross-Browser & Cross-Platform Testing**:
+- Desktop browsers: Chromium, Firefox, WebKit
+- Mobile browsers: Mobile Chrome (Pixel 5), Mobile Safari (iPhone 12)
+- Tablet: iPad (gen 7)
+- Playwright device emulation profiles
+- Parallel test execution support
+
+**QA-005: Visual Regression Testing**:
+- Screenshot comparison tests for all major pages
+- Light and dark theme variants
+- Empty, loading, and error state screenshots
+- Responsive layout screenshots (desktop, tablet, mobile)
+- Interactive component state captures (hover, focus, open)
+- 1% pixel difference threshold
+
+**QA-006: Test Coverage Reporting & Quality Gates**:
+- Vitest coverage with v8 provider
+- Coverage thresholds: 70% statements, 65% branches, 70% functions, 70% lines
+- LCOV, HTML, JSON, and text reporters
+- Vendor chunk splitting for build optimisation
+- Quality gates integrated into test run
+
+**QA-007: Load Testing (k6)**:
+- k6 load testing scenarios
+- Ramping user load (10 → 50 → 100 → 0)
+- API endpoint stress testing
+- Custom metrics (error rate, query duration, upload duration)
+- Pass/fail thresholds (95% under 2s, <1% error rate)
+- Health check, document list, query, collections, history, analytics endpoints
+
+**New Files**:
+- `tests/e2e/fixtures/test-utils.ts` - Page objects and test utilities
+- `tests/e2e/workflows/auth.spec.ts` - Authentication tests
+- `tests/e2e/workflows/query.spec.ts` - Query workflow tests
+- `tests/e2e/workflows/documents.spec.ts` - Document management tests
+- `tests/e2e/accessibility.spec.ts` - WCAG 2.1 AA compliance tests
+- `tests/visual/visual-regression.spec.ts` - Visual regression tests
+- `tests/load/scenarios.js` - k6 load testing scenarios
+- `lighthouserc.json` - Lighthouse CI configuration
+
+**New npm Scripts**:
+- `test:e2e:headed` - Run E2E tests with browser visible
+- `test:e2e:chromium/firefox/webkit` - Browser-specific test runs
+- `test:a11y` - Run accessibility tests
+- `test:visual` - Run visual regression tests
+- `test:all` - Run unit and E2E tests
+- `lighthouse` - Run Lighthouse CI
+- `qa` - Full quality assurance pipeline
+
+**New Dependencies**:
+- `@axe-core/playwright` - Accessibility testing
+- `@lhci/cli` - Lighthouse CI
+
+### Changed
+
+- Updated Playwright configuration for cross-browser and visual testing
+- Enhanced Vite/Vitest configuration with coverage thresholds
+- Updated version to 0.7.5
+
 ## [0.7.4] - 2025-11-26
 
 ### Added - WebUI Security Hardening
