@@ -1,6 +1,6 @@
 <!--
   Header Component
-  ragged WebUI v0.9.3
+  ragged WebUI v0.9.4
 
   Main application header (72px height from design)
 -->
@@ -49,6 +49,7 @@
 		<a href="/" class="header__link" aria-current={undefined}>Query</a>
 		<a href="/documents" class="header__link">Documents</a>
 		<a href="/graph" class="header__link">Graph</a>
+		<a href="/workflows" class="header__link">Workflows</a>
 		<a href="/analytics" class="header__link">Analytics</a>
 	</nav>
 
