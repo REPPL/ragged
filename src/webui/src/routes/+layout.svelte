@@ -1,6 +1,6 @@
 <!--
   Root Layout
-  ragged WebUI v0.7.3
+  ragged WebUI v0.9.5
 
   Main application layout with header, sidebar, and content area
 -->
@@ -15,6 +15,8 @@
 	import Sidebar from '$lib/components/layout/Sidebar.svelte';
 	import ToastContainer from '$lib/components/layout/ToastContainer.svelte';
 	import CommandPalette from '$lib/components/CommandPalette.svelte';
+	import { InstallBanner, OfflineIndicator, UpdateBanner } from '$lib/components/pwa';
+	import { pwa } from '$lib/stores/pwa';
 	import { sidebarOpen, sidebarWidth, isMobile } from '$stores';
 
 	let commandPaletteOpen = false;
@@ -26,6 +28,9 @@
 				document.documentElement.setAttribute('data-theme', value);
 			}
 		});
+
+		// Initialise PWA
+		pwa.init();
 
 		// Check for mobile on mount and resize
 		const checkMobile = () => {
@@ -52,6 +57,10 @@
 </svelte:head>
 
 <div class="app">
+	<OfflineIndicator />
+	<InstallBanner />
+	<UpdateBanner />
+
 	<Header />
 
 	<div class="app__body">
@@ -71,6 +80,7 @@
 		display: flex;
 		flex-direction: column;
 		min-height: 100vh;
+		min-height: 100dvh;
 		background-color: var(--color-bg);
 	}
 
@@ -90,6 +100,15 @@
 	@media (max-width: 768px) {
 		.app__main {
 			padding: var(--space-4);
+		}
+	}
+
+	/* Safe area insets for notched devices */
+	@supports (padding: env(safe-area-inset-bottom)) {
+		.app {
+			padding-left: env(safe-area-inset-left);
+			padding-right: env(safe-area-inset-right);
+			padding-bottom: env(safe-area-inset-bottom);
 		}
 	}
 </style>

@@ -1,6 +1,6 @@
 /**
  * Global Styles
- * ragged WebUI v0.7.3
+ * ragged WebUI v0.9.5
  */
 
 @import './tokens.css';
@@ -472,4 +472,215 @@ hr {
 		--sidebar-width: 100%;
 		--header-height: 56px;
 	}
+}
+
+/* ============================================
+ * PWA & MOBILE OPTIMISATIONS
+ * ============================================ */
+
+/* Touch optimisations */
+@media (hover: none) and (pointer: coarse) {
+	/* Larger touch targets */
+	button,
+	a,
+	input,
+	select,
+	textarea,
+	[role='button'] {
+		min-height: 44px;
+		min-width: 44px;
+	}
+
+	/* Disable hover states on touch devices */
+	.hover\:bg-secondary:hover {
+		background-color: inherit;
+	}
+
+	/* Better tap feedback */
+	button:active,
+	a:active,
+	[role='button']:active {
+		opacity: 0.7;
+	}
+}
+
+/* Disable text selection on interactive elements */
+button,
+[role='button'],
+.no-select {
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+/* Pull-to-refresh prevention (PWA) */
+html,
+body {
+	overscroll-behavior-y: contain;
+}
+
+/* Safe areas for notched devices */
+@supports (padding: env(safe-area-inset-top)) {
+	.safe-top {
+		padding-top: env(safe-area-inset-top);
+	}
+	.safe-bottom {
+		padding-bottom: env(safe-area-inset-bottom);
+	}
+	.safe-left {
+		padding-left: env(safe-area-inset-left);
+	}
+	.safe-right {
+		padding-right: env(safe-area-inset-right);
+	}
+}
+
+/* Mobile viewport units (avoiding 100vh issues) */
+.h-screen-safe {
+	height: 100vh;
+	height: 100dvh;
+}
+
+.min-h-screen-safe {
+	min-height: 100vh;
+	min-height: 100dvh;
+}
+
+/* Touch scrolling improvements */
+.scroll-touch {
+	-webkit-overflow-scrolling: touch;
+	scroll-behavior: smooth;
+}
+
+/* Prevent iOS zoom on input focus */
+@media (max-width: 767px) {
+	input,
+	select,
+	textarea {
+		font-size: 16px !important;
+	}
+}
+
+/* Hide scrollbar on mobile while keeping functionality */
+.hide-scrollbar {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+	display: none;
+}
+
+/* ============================================
+ * MOBILE NAVIGATION
+ * ============================================ */
+
+/* Bottom navigation for mobile */
+@media (max-width: 767px) {
+	.mobile-nav {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		display: flex;
+		justify-content: space-around;
+		padding: var(--space-2) var(--space-4);
+		padding-bottom: calc(var(--space-2) + env(safe-area-inset-bottom, 0px));
+		background-color: var(--color-bg);
+		border-top: 1px solid var(--color-border-light);
+		z-index: var(--z-sticky);
+	}
+
+	.mobile-nav__item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: var(--space-1);
+		padding: var(--space-2);
+		font-size: var(--font-size-xs);
+		color: var(--color-text-muted);
+		text-decoration: none;
+		border-radius: var(--radius-md);
+		transition: color var(--transition-fast);
+	}
+
+	.mobile-nav__item--active {
+		color: var(--color-primary);
+	}
+
+	.mobile-nav__item:active {
+		background-color: var(--color-bg-secondary);
+	}
+}
+
+/* ============================================
+ * RESPONSIVE HIDE/SHOW UTILITIES
+ * ============================================ */
+
+/* Hide on mobile */
+@media (max-width: 767px) {
+	.hide-mobile {
+		display: none !important;
+	}
+}
+
+/* Show only on mobile */
+@media (min-width: 768px) {
+	.show-mobile-only {
+		display: none !important;
+	}
+}
+
+/* Hide on tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+	.hide-tablet {
+		display: none !important;
+	}
+}
+
+/* Hide on desktop */
+@media (min-width: 1024px) {
+	.hide-desktop {
+		display: none !important;
+	}
+}
+
+/* ============================================
+ * GESTURE FEEDBACK
+ * ============================================ */
+
+/* Swipe hint animation */
+@keyframes swipeHint {
+	0%,
+	100% {
+		transform: translateX(0);
+	}
+	50% {
+		transform: translateX(10px);
+	}
+}
+
+.swipe-hint {
+	animation: swipeHint 1.5s ease-in-out 2;
+}
+
+/* Long press indicator */
+.long-press-indicator {
+	position: relative;
+}
+
+.long-press-indicator::after {
+	content: '';
+	position: absolute;
+	inset: -4px;
+	border: 2px solid var(--color-primary);
+	border-radius: inherit;
+	opacity: 0;
+	transform: scale(1.1);
+	transition: all 0.3s ease;
+	pointer-events: none;
+}
+
+.long-press-indicator:active::after {
+	opacity: 1;
+	transform: scale(1);
 }
