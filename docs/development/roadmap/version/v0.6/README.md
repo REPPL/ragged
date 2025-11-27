@@ -1,6 +1,6 @@
 # Ragged v0.6 Series - Query Optimisation, Modern Web UI & Security Hardening
 
-**Status:** Planned
+**Status:** ✅ Complete (v0.6.0-v0.6.15 released)
 
 **Total Duration:** 427-608 hours (407-570h original + 20-38h security hardening)
 

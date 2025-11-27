@@ -71,7 +71,7 @@ ragged scan process ~/scans/philosophy-book.pdf --dry-run
 │ ✓ Correct rotation and page order                     │
 │ ✓ Extract metadata (title, author, year)              │
 │ ✓ Export to markdown                                  │
-│ ✓ Organize with semantic filename                     │
+│ ✓ Organise with semantic filename                     │
 │                                                        │
 │ Output: ~/.ragged/documents/corrected/                 │
 │                                                        │

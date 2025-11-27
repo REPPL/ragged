@@ -20,25 +20,16 @@ This document provides a unified view of all planned ragged versions. Each versi
 ## Timeline Summary
 
 ```
-Completed   v0.2.2 ━━━ Base System ✅
-            v0.2.3 ━━━ SKIPPED (resolved in v0.2.4-v0.2.5)
-            v0.2.4 ━━━ High Priority Bugs ✅ (2025-11-17)
-            v0.2.5 ━━━ Code Quality ✅ (2025-11-17)
-            v0.2.6 ━━━ SKIPPED/DEFERRED
-Current     v0.2.7 ━━━ CLI Refactoring (in progress)
-            v0.2.8 ━━━ CLI Enhancements (in progress)
-            ═════════════════════════════════════════ STABILITY
-Next        v0.2.9 ━━━ Performance & Stability (42-53h)
-            ═════════════════════════════════════════ FOUNDATION
-            v0.3.x ━━━━━━━━━━━━━ Advanced RAG (437-501h, 13 releases)
-            ═════════════════════════════════════════ ADVANCED
-            v0.4.x ━━━━━━━━━━━━━ Personal Memory (195-242h, 10 releases)
-            v0.5.0 ━━━━━━━━━━━━━ ColPali Vision (140-180h)
-            ═════════════════════════════════════════ DATA & UI
-            v0.6.0 ━━━━━━━━━━━━━ Data Connectivity & UI Foundation (80-120h)
-            v0.7.0 ━━━━━━━━━━━━━ Enterprise Foundation (150-200h)
-            v0.8.0 ━━━━━━━━━━━━━ Agent Capabilities (60-80h)
-            v0.9.0 ━━━━━━━━━━━━━ Web UI Completion (120-180h)
+Completed   v0.2.x ━━━ Foundation & Stability ✅ (v0.2.2-v0.2.11)
+            v0.3.x ━━━ Enhanced RAG System ✅ (v0.3.0-v0.3.12)
+            v0.4.x ━━━ Plugin System & Vector Abstraction ✅ (v0.4.0-v0.4.12)
+            v0.5.x ━━━ Vision, Memory & Operations ✅ (v0.5.0-v0.5.10)
+            v0.6.x ━━━ Query Intelligence & Modern UI ✅ (v0.6.0-v0.6.15)
+            v0.7.x ━━━ User Interface Enhancement ✅ (v0.7.0-v0.7.5)
+            v0.8.x ━━━ Installation & Deployment Excellence ✅ (v0.8.0-v0.8.7)
+            ═════════════════════════════════════════ CURRENT: v0.8.7
+Next        v0.9.x ━━━━━━━━━━━━━ Agent Capabilities (120-180h)
+            v1.0   ━━━━━━━━━━━━━ Production Release
             ═════════════════════════════════════════ COLLABORATION
 Future      v1.5.0 ━━━━━━━━━━━━━ Collaboration & Multi-User (100-150h)
             ═════════════════════════════════════════ ENTERPRISE

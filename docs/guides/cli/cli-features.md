@@ -270,9 +270,7 @@ That's enough to be productive. Learn more features as needed.
 
 ## Version Information
 
-**Current version**: 0.2.8
-
-These guides document features available in ragged v0.2.8. Some features mentioned as "future" or "planned" will arrive in upcoming versions:
+These guides document features available in ragged. Some features mentioned as "future" or "planned" will arrive in upcoming versions:
 
 - **v0.2.9** (next): Embedder caching, batch optimisation, performance improvements
 - **v0.3.0**: Citations with page numbers, import functionality, configuration UI

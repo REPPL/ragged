@@ -1,7 +1,7 @@
 # ragged v0.3.0 Implementation Roadmap
 
 
-**Status:** Ready for Implementation
+**Status:** ✅ Complete (v0.3.0-v0.3.12 released)
 
 ---
 

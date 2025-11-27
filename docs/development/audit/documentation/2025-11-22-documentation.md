@@ -44,10 +44,10 @@ The ragged project documentation has undergone significant improvements and now 
 - Security documentation
 
 **Standards Applied:**
-1. Global standards from `~/.claude/CLAUDE.md`
-2. Development standards from `~/Development/.claude/CLAUDE.md`
-3. Sandboxed project standards from `~/Development/Sandboxed/.claude/CLAUDE.md`
-4. Project-specific standards from `ragged/.claude/CLAUDE.md`
+1. Global documentation standards (British English, SSOT)
+2. Development documentation standards (directory structure, naming)
+3. Sandboxed project standards (Docker, experimental workflows)
+4. Project-specific standards (AI transparency, versioning)
 
 ---
 

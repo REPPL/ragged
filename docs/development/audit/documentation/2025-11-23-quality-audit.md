@@ -44,16 +44,16 @@ The ragged project documentation is in **excellent overall condition** with a co
   - All `/docs/` subdirectories
 
 ### Standards Applied
-- **Global Standards:** `~/.claude/CLAUDE.md`
+- **Global Standards:**
   - Single Source of Truth (SSOT)
   - British English compliance
   - Working files directory (.work/)
-- **Development Standards:** `~/Development/.claude/CLAUDE.md`
+- **Development Standards:**
   - Documentation structure
   - Directory naming (singular vs plural)
   - Complete directory coverage
   - Cross-reference standards
-- **Project Standards:** `ragged/.claude/CLAUDE.md`
+- **Project Standards:**
   - AI transparency
   - Python code vs documentation spelling split
   - Versioning strategy

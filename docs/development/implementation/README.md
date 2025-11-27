@@ -22,7 +22,13 @@ implementation/
 ├── README.md           ← This file
 └── version/            ← Version-specific implementation records
     ├── v0.1/          ← MVP implementation (complete)
-    └── v0.2/          ← Enhanced retrieval (in progress)
+    ├── v0.2/          ← Foundation & stability (complete)
+    ├── v0.3/          ← Enhanced RAG system (complete)
+    ├── v0.4/          ← Plugin system & vector abstraction (complete)
+    ├── v0.5/          ← Vision, memory & operations (complete)
+    ├── v0.6/          ← Query intelligence & modern UI (complete)
+    ├── v0.7/          ← User interface enhancement (complete)
+    └── v0.8/          ← Installation & deployment (complete)
 ```
 
 ---
@@ -47,21 +53,79 @@ implementation/
 - [Testing Results](./version/v0.1/testing.md) - Test coverage and quality
 - [Lineage](./version/v0.1/lineage.md) - Complete traceability from planning to implementation
 
-### [version/v0.2/](./version/v0.2/) - Enhanced Retrieval
+### [version/v0.2/](./version/v0.2/) - Foundation & Stability
 
-**Status:** In progress
+**Status:** ✅ Complete (v0.2.0-v0.2.11)
 
-**What's being built:**
-- Advanced retrieval strategies
-- Query understanding improvements
-- Enhanced chunking methods
-- Multi-query retrieval
+**What was built:**
+- Bug fixes and stability improvements
+- Security hardening (v0.2.10)
+- Privacy infrastructure (v0.2.11)
+- CLI structure refactoring
+- Enhanced chunking and retrieval
 
-**Key documents:**
-- [Implementation Plan](./version/v0.2/implementation-plan.md) - Development guide
-- [v0.2.1 Release Notes](./version/v0.2/v0.2.1.md) - Chunking enhancements
-- [v0.2.2 Release Notes](./version/v0.2/v0.2.2.md) - Retrieval enhancements
-- [Lineage](./version/v0.2/lineage.md) - Traceability from planning to implementation (partial)
+### [version/v0.3/](./version/v0.3/) - Enhanced RAG System
+
+**Status:** ✅ Complete (v0.3.0-v0.3.12)
+
+**What was built:**
+- RAGAS evaluation framework
+- Configuration transparency
+- Advanced query processing
+- Intelligent chunking
+- Docling integration
+
+### [version/v0.4/](./version/v0.4/) - Plugin System & Vector Abstraction
+
+**Status:** ✅ Complete (v0.4.0-v0.4.12)
+
+**What was built:**
+- Plugin architecture with security sandboxing
+- VectorStore abstraction layer
+- LEANN backend integration
+- Personal memory system foundation
+
+### [version/v0.5/](./version/v0.5/) - Vision, Memory & Operations
+
+**Status:** ✅ Complete (v0.5.0-v0.5.10)
+
+**What was built:**
+- ColPali vision integration
+- GPU management system
+- Operational tooling (direnv, just)
+- Cross-platform installation scripts
+
+### [version/v0.6/](./version/v0.6/) - Query Intelligence & Modern UI
+
+**Status:** ✅ Complete (v0.6.0-v0.6.15)
+
+**What was built:**
+- Query classification and routing
+- Streaming responses
+- Svelte/SvelteKit web UI
+- Security middleware
+
+### [version/v0.7/](./version/v0.7/) - User Interface Enhancement
+
+**Status:** ✅ Complete (v0.7.0-v0.7.5)
+
+**What was built:**
+- CLI UX improvements
+- WebUI feature completeness
+- Advanced visualisations
+- Security hardening
+
+### [version/v0.8/](./version/v0.8/) - Installation & Deployment Excellence
+
+**Status:** ✅ Complete (v0.8.0-v0.8.7)
+
+**What was built:**
+- Installation foundation and prerequisites
+- Interactive installation wizard
+- Post-launch refinements
+- Security hardening
+- Installation testing framework
+- Comprehensive documentation
 
 ---
 

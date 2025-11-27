@@ -58,7 +58,7 @@ Version 0.7.0 bridges the gap between ragged's command-line interface and the Sv
      - **System & Services:** health, start, stop, restart, logs
      - **WebUI:** webui, launch-webui, webui-status
      - **Models:** model-list, model-download, model-remove, model-info
-     - **Maintenance:** cache-clear, optimize, backup, restore
+     - **Maintenance:** cache-clear, optimise, backup, restore
    - Create command groups in CLI framework
    - Add category metadata to each command
 

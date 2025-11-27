@@ -38,7 +38,7 @@ Verify adherence to planning documentation standards:
 
 ## Planning Documentation Standards
 
-From `~/Development/.claude/CLAUDE.md`:
+From the project's development documentation standards:
 
 **planning/** = WHAT to build & WHY
 - High-level design goals
@@ -67,7 +67,6 @@ Key questions to address:
 
 ## Related Documentation
 
-- [Feature-Centric Roadmap Standard](../../development/process/methodology/feature-centric-roadmaps.md) - Target methodology
-- Planning decision tree: `~/Development/.claude/CLAUDE.md`
-- Roadmap templates: `docs/development/roadmap/version/`
-- Planning templates: `docs/development/planning/version/`
+- [Feature-Centric Roadmap Standard](../../process/methodology/feature-centric-roadmaps.md) - Target methodology
+- [Roadmap Templates](../../roadmap/version/) - Version roadmap templates
+- [Planning Templates](../../planning/version/) - Version planning templates

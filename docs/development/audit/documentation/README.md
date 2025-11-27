@@ -39,11 +39,7 @@ Documentation audits verify adherence to:
 - Cross-reference standards
 - Footer standards (minimal metadata)
 
-For complete standards, see:
-- `~/.claude/CLAUDE.md` - Global standards
-- `~/Development/.claude/CLAUDE.md` - Development standards
-- `~/Development/Sandboxed/.claude/CLAUDE.md` - Sandboxed project standards
-- `project/.claude/CLAUDE.md` - Ragged-specific standards
+For complete standards, see the project's documentation standards hierarchy (global → development → sandboxed → project-specific).
 
 ## Conducting Documentation Audits
 
@@ -57,5 +53,5 @@ Use the `/verify-docs` command or documentation-auditor agent to:
 
 ## Related Documentation
 
-- Documentation decision tree: `~/Development/.claude/CLAUDE.md`
-- Documentation standards: Project `.claude/CLAUDE.md` files
+- [Documentation Hub](../../../README.md) - Main documentation entry point
+- [Development Documentation](../../README.md) - Development documentation overview

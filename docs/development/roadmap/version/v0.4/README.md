@@ -2,7 +2,7 @@
 
 **Version Series:** v0.4.0 - v0.4.13
 
-**Status:** Planned
+**Status:** ✅ Complete (v0.4.0-v0.4.12 released)
 
 **Total Hours:** 272-330 hours (across 14 incremental releases)
 

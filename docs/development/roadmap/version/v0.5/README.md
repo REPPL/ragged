@@ -1,6 +1,6 @@
 # Ragged v0.5.x Roadmap - ColPali Vision Integration
 
-**Status:** Planned (restructured into 7-8 minor versions)
+**Status:** ✅ Complete (v0.5.0-v0.5.10 released)
 
 **Total Hours:** 191-257 hours across 7-8 minor versions
 

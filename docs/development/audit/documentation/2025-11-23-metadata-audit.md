@@ -3,7 +3,7 @@
 **Audit Date**: 2025-11-23
 **Auditor**: Claude Code (documentation-auditor agent)
 **Scope**: Full ragged project documentation (`./docs/`)
-**Primary Focus**: Forbidden footer metadata per `~/Development/.claude/CLAUDE.md` standards
+**Primary Focus**: Forbidden footer metadata per project documentation standards
 
 ---
 

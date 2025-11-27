@@ -252,7 +252,7 @@ Goodbye!
 
 ---
 
-## Step 4: Monitor and Optimize
+## Step 4: Monitor and Optimise
 
 ### Check Storage Statistics
 
