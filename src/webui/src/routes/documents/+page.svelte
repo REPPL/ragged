@@ -1,37 +1,99 @@
 <!--
   Documents Page
-  ragged WebUI v0.7.3
+  ragged WebUI v0.9.2
 
-  Document management interface
+  Advanced document management with faceted search and preview
 -->
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import type { Document } from '$types';
+	import type { Document, DocumentFilters, Collection } from '$types';
 	import { addToast } from '$stores';
 	import { api } from '$api';
-	import { DocumentList, UploadZone } from '$lib/components/documents';
+	import {
+		DocumentList,
+		UploadZone,
+		FilterPanel,
+		PreviewPane
+	} from '$lib/components/documents';
 	import Modal from '$lib/components/Modal.svelte';
 	import Button from '$lib/components/Button.svelte';
 
 	let documents: Document[] = [];
+	let collections: Collection[] = [];
+	let availableTags: string[] = [];
 	let loading = true;
 	let error: string | null = null;
 	let uploading = false;
+
+	// Filter state
+	let filters: DocumentFilters = {
+		collection: null,
+		tags: [],
+		types: [],
+		dateRange: null,
+		search: ''
+	};
+	let filterPanelCollapsed = false;
+
+	// Preview state
+	let previewDocument: Document | null = null;
 
 	// Modal state
 	let showDeleteModal = false;
 	let documentsToDelete: Document[] = [];
 	let deleting = false;
 
-	// View modal
-	let showViewModal = false;
-	let viewingDocument: Document | null = null;
+	// Filtered documents
+	$: filteredDocuments = documents.filter((doc) => {
+		// Collection filter
+		if (filters.collection && doc.collection !== filters.collection) {
+			return false;
+		}
+
+		// Type filter
+		if (filters.types.length > 0 && !filters.types.includes(doc.type)) {
+			return false;
+		}
+
+		// Tag filter
+		if (filters.tags.length > 0) {
+			const docTags = doc.tags || [];
+			if (!filters.tags.some((tag) => docTags.includes(tag))) {
+				return false;
+			}
+		}
+
+		// Date range filter
+		if (filters.dateRange) {
+			const docDate = new Date(doc.created_at);
+			if (docDate < filters.dateRange.start || docDate > filters.dateRange.end) {
+				return false;
+			}
+		}
+
+		// Search filter (handled by DocumentList internally)
+		return true;
+	});
+
+	// Extract unique tags from documents
+	$: {
+		const tagSet = new Set<string>();
+		documents.forEach((doc) => {
+			(doc.tags || []).forEach((tag) => tagSet.add(tag));
+		});
+		availableTags = Array.from(tagSet).sort();
+	}
 
 	async function loadDocuments() {
 		loading = true;
 		error = null;
 		try {
-			documents = await api.documents.list();
+			const [docs, cols] = await Promise.all([
+				api.documents.list(),
+				api.collections.list().catch(() => [])
+			]);
+			documents = docs;
+			collections = cols;
 		} catch (err) {
 			error = err instanceof Error ? err.message : 'Failed to load documents';
 			addToast({
@@ -96,6 +158,12 @@
 			});
 			showDeleteModal = false;
 			documentsToDelete = [];
+
+			// Clear preview if deleted document was being viewed
+			if (previewDocument && documentsToDelete.some((d) => d.id === previewDocument?.id)) {
+				previewDocument = null;
+			}
+
 			await loadDocuments();
 		} catch (err) {
 			const message = err instanceof Error ? err.message : 'Delete failed';
@@ -110,8 +178,16 @@
 	}
 
 	function handleView(event: CustomEvent<{ document: Document }>) {
-		viewingDocument = event.detail.document;
-		showViewModal = true;
+		previewDocument = event.detail.document;
+	}
+
+	function handleFilterChange(event: CustomEvent<DocumentFilters>) {
+		filters = event.detail;
+	}
+
+	function handlePreviewDelete(event: CustomEvent<{ document: Document }>) {
+		documentsToDelete = [event.detail.document];
+		showDeleteModal = true;
 	}
 
 	onMount(() => {
@@ -125,28 +201,49 @@
 
 <div class="documents-page">
 	<div class="documents-page__header">
-		<h1 class="documents-page__title">Documents</h1>
-		<p class="documents-page__subtitle">
-			Manage your knowledge base documents
-		</p>
+		<div class="documents-page__header-content">
+			<h1 class="documents-page__title">Documents</h1>
+			<p class="documents-page__subtitle">
+				Manage your knowledge base ({filteredDocuments.length} of {documents.length} documents)
+			</p>
+		</div>
+		<div class="documents-page__upload-compact">
+			<UploadZone
+				disabled={uploading}
+				compact
+				on:upload={handleUpload}
+				on:error={handleUploadError}
+			/>
+		</div>
 	</div>
 
-	<div class="documents-page__upload">
-		<UploadZone
-			disabled={uploading}
-			on:upload={handleUpload}
-			on:error={handleUploadError}
+	<div class="documents-page__layout">
+		<!-- Filter Panel -->
+		<FilterPanel
+			{filters}
+			{collections}
+			{availableTags}
+			collapsed={filterPanelCollapsed}
+			on:change={handleFilterChange}
 		/>
-	</div>
 
-	<div class="documents-page__list">
-		<DocumentList
-			{documents}
-			{loading}
-			{error}
-			on:delete={handleDeleteRequest}
-			on:view={handleView}
-			on:refresh={loadDocuments}
+		<!-- Document List -->
+		<main class="documents-page__main">
+			<DocumentList
+				documents={filteredDocuments}
+				{loading}
+				{error}
+				on:delete={handleDeleteRequest}
+				on:view={handleView}
+				on:refresh={loadDocuments}
+			/>
+		</main>
+
+		<!-- Preview Pane -->
+		<PreviewPane
+			document={previewDocument}
+			on:close={() => (previewDocument = null)}
+			on:delete={handlePreviewDelete}
 		/>
 	</div>
 </div>
@@ -180,83 +277,57 @@
 	</div>
 </Modal>
 
-<!-- Document View Modal -->
-<Modal
-	open={showViewModal}
-	title={viewingDocument?.filename ?? 'Document'}
-	size="large"
-	on:close={() => (showViewModal = false)}
->
-	{#if viewingDocument}
-		<div class="view-modal__content">
-			<div class="view-modal__meta">
-				<div class="view-modal__meta-item">
-					<span class="view-modal__meta-label">Status:</span>
-					<span class="view-modal__meta-value">{viewingDocument.status}</span>
-				</div>
-				<div class="view-modal__meta-item">
-					<span class="view-modal__meta-label">Size:</span>
-					<span class="view-modal__meta-value">
-						{(viewingDocument.size / 1024).toFixed(1)} KB
-					</span>
-				</div>
-				<div class="view-modal__meta-item">
-					<span class="view-modal__meta-label">Chunks:</span>
-					<span class="view-modal__meta-value">{viewingDocument.chunk_count}</span>
-				</div>
-				<div class="view-modal__meta-item">
-					<span class="view-modal__meta-label">Created:</span>
-					<span class="view-modal__meta-value">
-						{new Date(viewingDocument.created_at).toLocaleString('en-GB')}
-					</span>
-				</div>
-				{#if viewingDocument.collection}
-					<div class="view-modal__meta-item">
-						<span class="view-modal__meta-label">Collection:</span>
-						<span class="view-modal__meta-value">{viewingDocument.collection}</span>
-					</div>
-				{/if}
-			</div>
-		</div>
-	{/if}
-
-	<div slot="footer">
-		<Button variant="ghost" on:click={() => (showViewModal = false)}>
-			Close
-		</Button>
-	</div>
-</Modal>
-
 <style>
 	.documents-page {
 		display: flex;
 		flex-direction: column;
-		gap: var(--space-8);
-		max-width: 1200px;
-		margin: 0 auto;
+		gap: var(--space-6);
+		height: 100%;
+		min-height: 0;
 	}
 
 	.documents-page__header {
-		text-align: center;
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: var(--space-4);
+		flex-wrap: wrap;
+	}
+
+	.documents-page__header-content {
+		flex: 1;
+		min-width: 200px;
 	}
 
 	.documents-page__title {
 		margin: 0;
-		font-size: var(--font-size-3xl);
+		font-size: var(--font-size-2xl);
 		font-weight: var(--font-weight-bold);
 		color: var(--color-text-primary);
 	}
 
 	.documents-page__subtitle {
-		margin: var(--space-2) 0 0;
-		font-size: var(--font-size-lg);
+		margin: var(--space-1) 0 0;
+		font-size: var(--font-size-sm);
 		color: var(--color-text-muted);
 	}
 
-	.documents-page__upload {
-		max-width: 600px;
-		margin: 0 auto;
-		width: 100%;
+	.documents-page__upload-compact {
+		flex-shrink: 0;
+	}
+
+	.documents-page__layout {
+		display: flex;
+		gap: var(--space-6);
+		flex: 1;
+		min-height: 0;
+	}
+
+	.documents-page__main {
+		flex: 1;
+		min-width: 0;
+		display: flex;
+		flex-direction: column;
 	}
 
 	.delete-modal__message {
@@ -277,30 +348,19 @@
 		gap: var(--space-3);
 	}
 
-	.view-modal__content {
-		min-height: 200px;
+	@media (max-width: 1280px) {
+		.documents-page__layout {
+			flex-wrap: wrap;
+		}
 	}
 
-	.view-modal__meta {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-		gap: var(--space-4);
-	}
+	@media (max-width: 768px) {
+		.documents-page__header {
+			flex-direction: column;
+		}
 
-	.view-modal__meta-item {
-		display: flex;
-		flex-direction: column;
-		gap: var(--space-1);
-	}
-
-	.view-modal__meta-label {
-		font-size: var(--font-size-sm);
-		color: var(--color-text-muted);
-	}
-
-	.view-modal__meta-value {
-		font-size: var(--font-size-base);
-		font-weight: var(--font-weight-medium);
-		color: var(--color-text-primary);
+		.documents-page__upload-compact {
+			width: 100%;
+		}
 	}
 </style>
