@@ -1,6 +1,6 @@
 <!--
   Settings Row Component
-  ragged WebUI v0.7.3
+  ragged WebUI v0.9.0
 
   Individual setting row with label and control
 -->

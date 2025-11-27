@@ -1,15 +1,17 @@
 <!--
   Settings Page
-  ragged WebUI v0.7.3
+  ragged WebUI v0.9.0
 
-  Application settings interface
+  Application settings interface with theme selection
+  WCAG 2.1 AA compliant high-contrast modes
 -->
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import type { UserSettings } from '$types';
 	import { addToast, theme } from '$stores';
 	import { api } from '$api';
-	import { SettingsSection, SettingsRow, Toggle } from '$lib/components/settings';
+	import { SettingsSection, SettingsRow, Toggle, ThemePreview } from '$lib/components/settings';
+	import type { ThemeMode } from '$lib/stores/theme';
 	import Select from '$lib/components/Select.svelte';
 	import Input from '$lib/components/Input.svelte';
 	import Button from '$lib/components/Button.svelte';
@@ -21,7 +23,7 @@
 	let error: string | null = null;
 
 	// Local state for form
-	let localTheme: 'light' | 'dark' | 'system' = 'system';
+	let localTheme: 'light' | 'dark' | 'high-contrast' | 'high-contrast-dark' | 'system' = 'system';
 	let sidebarCollapsed = false;
 	let animations = true;
 	let defaultTopK = 5;
@@ -32,6 +34,8 @@
 	const themeOptions = [
 		{ value: 'light', label: 'Light' },
 		{ value: 'dark', label: 'Dark' },
+		{ value: 'high-contrast', label: 'High Contrast' },
+		{ value: 'high-contrast-dark', label: 'High Contrast Dark' },
 		{ value: 'system', label: 'System' }
 	];
 
@@ -94,7 +98,7 @@
 			await api.settings.update(updatedSettings);
 
 			// Apply theme immediately
-			theme.set(localTheme);
+			theme.setTheme(localTheme);
 
 			addToast({
 				type: 'success',
@@ -115,9 +119,15 @@
 
 	function handleThemeChange(event: Event) {
 		const target = event.target as HTMLSelectElement;
-		localTheme = target.value as 'light' | 'dark' | 'system';
+		localTheme = target.value as ThemeMode;
 		// Apply immediately for preview
-		theme.set(localTheme);
+		theme.setTheme(localTheme);
+	}
+
+	function handleThemeSelect(selectedTheme: ThemeMode) {
+		localTheme = selectedTheme;
+		// Apply immediately for preview
+		theme.setTheme(localTheme);
 	}
 
 	function handleTopKChange(event: Event) {
@@ -157,18 +167,18 @@
 		<div class="settings-page__sections">
 			<!-- Appearance -->
 			<SettingsSection title="Appearance" description="Customise how ragged looks">
-				<SettingsRow
-					label="Theme"
-					description="Choose your preferred colour scheme"
-					htmlFor="theme-select"
-				>
-					<Select
-						id="theme-select"
-						value={localTheme}
-						options={themeOptions}
-						on:change={handleThemeChange}
+				<div class="theme-selection">
+					<div class="theme-selection__header">
+						<span class="theme-selection__label">Theme</span>
+						<span class="theme-selection__description">
+							Choose your preferred colour scheme. High contrast modes are WCAG 2.1 AA compliant.
+						</span>
+					</div>
+					<ThemePreview
+						currentTheme={localTheme}
+						onSelect={handleThemeSelect}
 					/>
-				</SettingsRow>
+				</div>
 
 				<SettingsRow
 					label="Animations"
@@ -253,7 +263,7 @@
 			<!-- About -->
 			<SettingsSection title="About" description="Information about ragged">
 				<SettingsRow label="Version">
-					<span class="settings-page__version">v0.7.3</span>
+					<span class="settings-page__version">v0.9.0</span>
 				</SettingsRow>
 
 				<SettingsRow label="Documentation">
@@ -366,5 +376,28 @@
 	.settings-page__license {
 		font-size: var(--font-size-sm);
 		color: var(--color-text-secondary);
+	}
+
+	.theme-selection {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-4);
+	}
+
+	.theme-selection__header {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-1);
+	}
+
+	.theme-selection__label {
+		font-size: var(--font-size-sm);
+		font-weight: var(--font-weight-medium);
+		color: var(--color-text-primary);
+	}
+
+	.theme-selection__description {
+		font-size: var(--font-size-sm);
+		color: var(--color-text-muted);
 	}
 </style>

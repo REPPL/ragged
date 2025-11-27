@@ -1,6 +1,6 @@
 /**
  * TypeScript type definitions for ragged WebUI
- * v0.7.3
+ * v0.9.0
  */
 
 // ============================================
@@ -252,7 +252,7 @@ export interface UserSettings {
 }
 
 export interface GeneralSettings {
-	theme: 'light' | 'dark' | 'system';
+	theme: 'light' | 'dark' | 'high-contrast' | 'high-contrast-dark' | 'system';
 	sidebarCollapsed: boolean;
 	animations: boolean;
 }

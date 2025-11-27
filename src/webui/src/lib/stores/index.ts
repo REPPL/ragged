@@ -1,6 +1,6 @@
 /**
  * Stores Index
- * ragged WebUI v0.7.3
+ * ragged WebUI v0.9.0
  *
  * Barrel export for all stores
  */
@@ -9,7 +9,9 @@ export {
 	themeMode,
 	themeMode as theme, // Alias for backwards compatibility
 	resolvedTheme,
-	isDark
+	isDark,
+	isHighContrast,
+	getThemeLabel
 } from './theme';
 export { toasts, addToast, dismissToast, dismissAllToasts, toastCount } from './toast';
 export {
