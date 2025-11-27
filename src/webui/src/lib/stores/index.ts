@@ -1,6 +1,6 @@
 /**
  * Stores Index
- * ragged WebUI v0.9.0
+ * ragged WebUI v0.9.1
  *
  * Barrel export for all stores
  */
@@ -31,3 +31,11 @@ export {
 	isEditor,
 	canView
 } from './auth';
+export {
+	commandsStore,
+	recentCommands,
+	commandPaletteOpen,
+	openCommandPalette,
+	closeCommandPalette,
+	toggleCommandPalette
+} from './commands';
