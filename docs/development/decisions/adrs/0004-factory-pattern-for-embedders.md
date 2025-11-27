@@ -286,11 +286,8 @@ This implementation demonstrates several design principles:
 **Other Principles:**
 - **DRY:** Factory eliminates repeated instantiation code
 - **Separation of Concerns:** Interface vs. implementation
-- **Configuration over Code:** Behavior driven by config
+- **Configuration over Code:** Behaviour driven by config
 
----
-
-**Last Updated:** 2025-11-13
 
 **Supersedes:** None
 

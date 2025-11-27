@@ -60,8 +60,3 @@ This directory contains documentation for production operations, including monit
 - [v0.6.2 Roadmap](../development/roadmap/version/v0.6/v0.6.2.md) - Security enhancements
 - [Security Audit](../audit/security/baseline/v0.6.0-security-audit.md) - Security assessment
 
----
-
-**Last Updated:** v0.6.2 (2025-11-25)
-
-**Maintained By:** ragged operations team

@@ -54,5 +54,5 @@ def profile_memory(operation):
 - Configurable runs and warmup iterations
 - Throughput calculations
 - Memory allocation tracking
-- Color-coded performance ratings
+- Colour-coded performance ratings
 - Detailed profiling modes

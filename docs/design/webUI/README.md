@@ -77,7 +77,7 @@ docs/design/webUI/
   - Query options bar (mode tabs, context, top-k, search button)
   - Results section (expandable cards with metadata)
 
-#### Color Palette
+#### Colour Palette
 ```
 Primary:     #4c6ef5  (Blue - buttons, active states)
 Background:  #ffffff  (White)

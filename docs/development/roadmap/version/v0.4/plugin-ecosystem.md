@@ -127,7 +127,7 @@ ragged config set plugins.embedder "openai-embedder"
 
 **Benefits**:
 - Multilingual support
-- Specialized models (e.g., `embed-english-light-v3.0`)
+- Specialised models (e.g., `embed-english-light-v3.0`)
 - Competitive pricing
 
 **Implementation**: Similar to OpenAI plugin (3-4 hours)

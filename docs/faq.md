@@ -313,7 +313,7 @@ embeddings:
 
 **Yes!** Ragged exposes a REST API at `http://localhost:8000`.
 
-See [API Reference](./reference/api.md) for documentation.
+See [API Reference](./reference/api/README.md) for documentation.
 
 ---
 
@@ -324,7 +324,7 @@ Yes:
 docker run -p 8000:8000 -v ~/.ragged:/data ragged/ragged
 ```
 
-See [Docker Guide](./guides/docker.md) for details.
+See [Docker Guide](./guides/docker-setup.md) for details.
 
 ---
 
@@ -351,6 +351,6 @@ Please include:
 
 ### How can I contribute?
 
-See [Contributing Guide](./development/contributing.md).
+See [Contributing Guide](../CONTRIBUTING.md).
 
 ---

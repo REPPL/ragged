@@ -26,7 +26,7 @@ ragged v3.0+ transforms from a product into a **platform**, enabling community i
 
 **Use Cases**:
 - Custom embedders (domain-specific: legal, medical, code)
-- Specialized retrievers
+- Specialised retrievers
 - Integration plugins (Zotero, Obsidian sync, Notion import)
 - UI themes and custom layouts
 

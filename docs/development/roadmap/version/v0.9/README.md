@@ -390,8 +390,8 @@ Version 0.9 completes the web UI transformation, bringing ragged from basic Grad
 
 - **Performance:** Rich UI features may be slow on older devices; optimise carefully
 - **Offline sync:** Conflict resolution complex; defer advanced cases to v1.5
-- **Graph visualization:** Large graphs (10,000+ nodes) may require specialized rendering
-- **Mobile UX:** Desktop features may not translate well to mobile; prioritize ruthlessly
+- **Graph visualisation:** Large graphs (10,000+ nodes) may require specialised rendering
+- **Mobile UX:** Desktop features may not translate well to mobile; prioritise ruthlessly
 - **Browser compatibility:** PWA features vary by browser; test extensively
 - **Accessibility:** Rich interactions must remain keyboard-navigable and screen-reader friendly
 
