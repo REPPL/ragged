@@ -44,6 +44,7 @@ from ragged.web.models import (
     Source,
     UploadResponse,
 )
+from ragged.web.routers import documents_router, graph_router, workflows_router
 
 logger = get_logger(__name__)
 
@@ -123,9 +124,14 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=_temp_settings.cors_allowed_origins,  # Explicit whitelist (no "*")
     allow_credentials=True,  # Safe with explicit origins
-    allow_methods=["GET", "POST", "DELETE"],  # Only needed methods
+    allow_methods=["GET", "POST", "DELETE", "PATCH"],  # Only needed methods
     allow_headers=["Content-Type", "Authorization"],  # Only needed headers
 )
+
+# v0.9.0: Include routers
+app.include_router(documents_router)
+app.include_router(graph_router)
+app.include_router(workflows_router)
 
 # Global state (initialized on startup)
 _settings: Settings | None = None
