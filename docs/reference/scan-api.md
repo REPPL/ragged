@@ -12,7 +12,7 @@ The scan processing system consists of 5 main modules:
 2. **Scan Preprocessor** (`ragged.processing.scan_preprocessor`) - PDF/image processing
 3. **Page Reordering** (`ragged.correction.transformers.ordering`) - Automatic page correction
 4. **Metadata Extractor** (`ragged.processing.metadata_extractor`) - Bibliographic metadata extraction
-5. **Output Organizer** (`ragged.processing.output_organizer`) - File organization and lineage tracking
+5. **Output Organizer** (`ragged.processing.output_organizer`) - File organisation and lineage tracking
 
 ---
 
@@ -505,7 +505,7 @@ class ExtractedMetadata:
 
 #### `OutputOrganizer`
 
-Organize processed outputs with semantic naming and lineage tracking.
+Organise processed outputs with semantic naming and lineage tracking.
 
 **Initialization:**
 
@@ -539,7 +539,7 @@ def organize(
     markdown: Path | None = None,
     metadata: dict[str, Any] | None = None
 ) -> OrganizedOutput:
-    """Organize processed outputs.
+    """Organise processed outputs.
 
     Args:
         original: Path to original file

@@ -32,7 +32,6 @@
 
 **Commit:** `955ae96345907e221c80039a4c68376fe912d830`
 **Date:** 23 November 2025 09:14:20 +0000
-**Author:** REPPL (AI-assisted)
 **Files Changed:** 301 files
 **Lines Changed:** +4,963 -2,359 (net +2,604)
 
