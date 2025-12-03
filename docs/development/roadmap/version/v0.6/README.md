@@ -265,7 +265,7 @@ Version 0.6 transforms ragged from a functional RAG system into an intelligent, 
 
 **Security:**
 - [v0.6.0 Security Audit](../../../audit/security/baseline/v0.6.0-security-audit.md) - Comprehensive baseline assessment
-- [Security Improvements Roadmap](./version/v0.6/v0.6.1.md) - Detailed change requests with implementation
+- [Security Improvements Roadmap](./v0.6.1.md) - Detailed change requests with implementation
 - [Security Test Suite](../../../../tests/security/) - Comprehensive security tests
 
 ---

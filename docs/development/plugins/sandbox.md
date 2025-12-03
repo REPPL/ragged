@@ -226,7 +226,5 @@ if config.block_network and sys.platform == "linux":
 ## Related Documentation
 
 - [Plugin System Overview](./README.md) - Overview of plugin architecture
-- [Plugin Development Guide](./development.md) - Guide for plugin developers
-- [Security Enforcement Tests](../../tests/security/test_plugin_sandbox_enforcement.py) - Test suite
 
 ---

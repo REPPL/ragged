@@ -415,6 +415,5 @@ volumes:
 ## Related Documentation
 
 - [v0.6.2 Roadmap](../../development/roadmap/version/v0.6/v0.6.2.md) - SECURITY-004 implementation plan
-- [Session Persistence](../development/implementation/version/v0.6/v0.6.2/session-persistence.md) - SECURITY-003 session storage
 - [v0.6.0 Security Audit](../../development/audit/security/baseline/v0.6.0-security-audit.md) - Audit findings
 
