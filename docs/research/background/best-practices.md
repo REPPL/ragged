@@ -392,7 +392,7 @@ researcher:
 - Knowledge-intensive applications
 
 **Architecture**:
-- Maintain entity IDs synchronized between vector DB and Neo4j
+- Maintain entity IDs synchronised between vector DB and Neo4j
 - Semantic search first, then graph traversal for context
 - Gather entity relationships before generation
 

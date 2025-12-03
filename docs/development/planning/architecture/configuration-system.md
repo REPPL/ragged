@@ -160,8 +160,8 @@ See [ADR-012: Configuration Inheritance](../../decisions/adrs/0012-ollama-for-ll
 - **Layered Customization**: Start with sensible defaults, override as needed
 - **Domain Optimisation**: Topic profiles provide out-of-the-box optimisation
 - **Context Awareness**: Personas enable appropriate communication style
-- **Flexibility**: Every layer can be customized independently
-- **Simplicity**: Simple cases work with defaults, complex cases support deep customization
+- **Flexibility**: Every layer can be customised independently
+- **Simplicity**: Simple cases work with defaults, complex cases support deep customisation
 
 ## Related Documentation
 

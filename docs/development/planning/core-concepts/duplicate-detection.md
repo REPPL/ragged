@@ -406,7 +406,7 @@ image classification benchmarks like ImageNet.
 
 **Document B** (Popular science article):
 ```markdown
-# How AI Learns to Recognize Pictures
+# How AI Learns to Recognise Pictures
 
 Artificial intelligence uses special algorithms called
 convolutional networks that can identify objects in photos

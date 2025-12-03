@@ -17,7 +17,7 @@ Current challenges with existing RAG solutions:
 1. **Privacy Concerns**: Most RAG systems require sending data to external APIs
 2. **Cost**: Cloud-based solutions can be expensive for personal use
 3. **Complexity**: Enterprise RAG tools are often overly complex for individual users
-4. **Control**: Limited ability to customize and experiment with RAG components
+4. **Control**: Limited ability to customise and experiment with RAG components
 5. **Vendor Lock-in**: Dependence on specific LLM providers or platforms
 
 ### Solution
