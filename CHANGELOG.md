@@ -7,6 +7,67 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.9.2] - 2025-12-03
+
+### Fixed - Bug Fix Release
+
+Production readiness improvements with configuration hardening, test suite cleanup, and technical debt reduction.
+
+**Configuration Hardening**:
+- Removed development dependencies from production Docker image
+- Removed `--reload` flag from production uvicorn command
+- Documentation: Fixed remaining British English violation in v0.4.7 README
+
+**Test Suite Cleanup**:
+- Removed legacy v0.3.x test files that referenced obsolete APIs:
+  - `test_v0_3_3_chunking.py`
+  - `test_v0_3_4a_docling.py`
+  - `test_v0_3_4b_routing.py`
+  - `test_v0_3_5_correction_integration.py`
+
+**Code Quality Improvements**:
+- `src/api/core.py`: Replaced TODO stubs with proper documentation and NotImplementedError
+- `src/plugins/consent.py`: Documented intentional auto-grant behaviour for testing
+- `src/gpu/oom_handler.py`: Added warning for incomplete OOM handling decorator
+
+### Changed
+
+- Updated version to 0.9.2
+
+## [0.9.1] - 2025-12-02
+
+### Added - Block Editor MVP
+
+TipTap-based rich text editor for document content editing with collaborative features foundation.
+
+**Block Editor Features**:
+- TipTap integration with Svelte
+- Rich text formatting (bold, italic, headings, lists)
+- Document block structure support
+- Real-time preview
+- Collaborative editing foundation
+
+### Changed
+
+- Updated version to 0.9.1
+
+## [0.9.0] - 2025-12-01
+
+### Added - Web API Foundation
+
+Foundation for the web interface with Document Library, Knowledge Graph, and Workflow APIs.
+
+**Web API Features**:
+- Document Library API with upload, listing, and management endpoints
+- Knowledge Graph API for entity relationships and visualisation
+- Workflow API for document processing pipelines
+- FastAPI integration with OpenAPI documentation
+- CORS configuration for web frontend
+
+### Changed
+
+- Updated version to 0.9.0
+
 ## [0.8.7] - 2025-11-26
 
 ### Added - Installation Documentation Excellence

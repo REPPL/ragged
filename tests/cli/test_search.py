@@ -126,7 +126,8 @@ class TestSearch:
         )
         assert result.exit_code in [0, 1]
 
-    def test_search_invalid_metadata_format(self, cli_runner: CliRunner):
+    @patch("ragged.storage.vector_store.VectorStore")
+    def test_search_invalid_metadata_format(self, mock_vector_store, cli_runner: CliRunner):
         """Test search with invalid metadata format."""
         result = cli_runner.invoke(search, ["--metadata", "invalidformat"])
         assert result.exit_code == 1

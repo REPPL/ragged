@@ -490,7 +490,7 @@ interaction = tracker.record_interaction(query="What is RAG?")
 - **Flexible**: Easy to disable for testing or privacy concerns
 
 **Alternative**: Mandatory integration
-**Rejected**: Would break existing code and force behavior learning on all users
+**Rejected**: Would break existing code and force behaviour learning on all users
 
 ### Why TYPE_CHECKING for Circular Imports?
 

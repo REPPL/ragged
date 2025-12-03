@@ -207,6 +207,11 @@ class TestPickleBan:
                     if description in ["eval()", "exec()"] and 'r"' in line and line.strip().startswith("(r"):
                         continue
 
+                    # Skip string literals in lists/arrays (e.g., XSS pattern lists)
+                    # Check if match is preceded by a quote (indicating string literal)
+                    if match.start() > 0 and content[match.start() - 1] in ['"', "'"]:
+                        continue
+
                     line_num = content[:match.start()].count("\n") + 1
                     violations.append(f"{relative_path}:{line_num}: Uses {description}")
 

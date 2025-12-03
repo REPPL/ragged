@@ -272,10 +272,12 @@ def with_oom_handling(device_param: str = "device", batch_size_param: str = "bat
                 # No OOM handling needed for CPU
                 return func(*args, **kwargs)
 
-            # TODO: Get device_manager from global context or args
-            # For now, execute without OOM handling
-            # (Full implementation requires dependency injection)
-            logger.debug(f"@with_oom_handling decorator on {func.__name__}")
+            # OOM handling bypassed - dependency injection planned for v1.0
+            # Currently executes without recovery (falls back to device's default behaviour)
+            logger.warning(
+                f"@with_oom_handling on {func.__name__}: OOM recovery not active. "
+                "Full implementation requires device manager dependency injection."
+            )
 
             return func(*args, **kwargs)
 

@@ -1,10 +1,10 @@
-# Multi-stage Dockerfile for ragged v0.2
+# Multi-stage Dockerfile for ragged v0.8.7
 # Stage 1: Builder - compile dependencies and prepare environment
 FROM python:3.12-slim as builder
 
 LABEL maintainer="ragged"
-LABEL description="Privacy-first local RAG system v0.2"
-LABEL version="0.2.0"
+LABEL description="Privacy-first local RAG system v0.9.2"
+LABEL version="0.9.2"
 
 # Set working directory
 WORKDIR /app
@@ -23,7 +23,7 @@ COPY src/ src/
 # Install Python dependencies
 # Dependencies are installed here, editable install happens in runtime stage
 RUN pip install --no-cache-dir --upgrade pip setuptools wheel && \
-    pip install --no-cache-dir ".[dev]"
+    pip install --no-cache-dir .
 
 # Stage 2: Runtime - minimal image for running the application
 FROM python:3.12-slim
@@ -64,4 +64,4 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
     CMD curl -f http://localhost:8000/health || exit 1
 
 # Default command (can be overridden in docker-compose.yml)
-CMD ["python", "-m", "uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+CMD ["python", "-m", "uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]

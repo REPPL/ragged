@@ -634,8 +634,8 @@ class RAGService:
         """
         self._ensure_initialized()
 
-        # For now, return default collection
-        # TODO: Implement proper collection management
+        # Single-collection implementation (multi-collection planned for v1.0)
+        # Currently returns a unified default collection
         return [
             CollectionInfo(
                 name="default",
@@ -670,9 +670,11 @@ class RAGService:
         """
         self._ensure_initialized()
 
-        # TODO: Implement proper collection clearing
-        logger.warning(f"Collection clearing not yet implemented: {name}")
-        return False
+        # Collection clearing not yet implemented (planned for v1.0)
+        raise NotImplementedError(
+            f"Collection clearing not yet implemented: {name}. "
+            "Multi-collection support planned for v1.0."
+        )
 
     # === Health & Status ===
 

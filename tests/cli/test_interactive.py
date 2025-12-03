@@ -1,11 +1,15 @@
 """Tests for interactive REPL mode.
 
-v0.3.8: Test interactive shell functionality.
+v0.8.8: Test interactive shell functionality with full implementations.
 """
 
+import json
+import tempfile
 from io import StringIO
-from unittest.mock import Mock, patch
+from pathlib import Path
+from unittest.mock import MagicMock, Mock, patch
 
+import numpy as np
 import pytest
 
 from ragged.cli.interactive import InteractiveShell, start_interactive_mode
@@ -102,17 +106,42 @@ class TestInteractiveShell:
             output = fake_out.getvalue()
 
         assert "System Status" in output
-        assert "0.3.8" in output
+        assert "0.8.8" in output
         assert "3" in output  # Command count
 
     def test_do_add_valid_file(self, shell):
         """Test add command with valid file."""
+        # Mock the required modules (import path must match where they're imported)
+        mock_document = Mock()
+        mock_document.text = "Test document content"
+        mock_document.metadata = {"source": "test.txt"}
+
+        mock_chunk = Mock()
+        mock_chunk.text = "Test chunk"
+        mock_chunk.metadata = {"source": "test.txt"}
+
         with patch("sys.stdout", new=StringIO()) as fake_out:
             with patch("pathlib.Path.exists", return_value=True):
-                shell.do_add("test.pdf")
-                output = fake_out.getvalue()
+                with patch(
+                    "ragged.ingestion.loaders.load_document",
+                    return_value=mock_document,
+                ):
+                    with patch(
+                        "ragged.chunking.splitters.chunk_document",
+                        return_value=[mock_chunk],
+                    ):
+                        # Mock the embedder and store via shell properties
+                        shell._embedder = Mock()
+                        shell._embedder.embed_documents.return_value = [
+                            [0.1] * 384
+                        ]
+                        shell._store = Mock()
+                        shell._store.add.return_value = None
 
-        assert "Would add" in output or "✓" in output
+                        shell.do_add("test.txt")
+                        output = fake_out.getvalue()
+
+        assert "✓" in output or "Added" in output
 
     def test_do_add_missing_file(self, shell):
         """Test add command with missing file."""
@@ -133,11 +162,23 @@ class TestInteractiveShell:
 
     def test_do_remove(self, shell):
         """Test remove command."""
-        with patch("sys.stdout", new=StringIO()) as fake_out:
-            shell.do_remove("test.pdf")
-            output = fake_out.getvalue()
+        # Mock the store with documents (flat lists, not nested)
+        shell._store = Mock()
+        shell._store.list.return_value = {
+            "ids": ["doc_test_1", "doc_test_2"],
+            "metadatas": [
+                {"document_path": "/path/test.pdf", "file_name": "test.pdf"},
+                {"document_path": "/path/test.pdf", "file_name": "test.pdf"},
+            ],
+        }
+        shell._store.delete.return_value = None
 
-        assert "Would remove" in output or "✓" in output
+        with patch("sys.stdout", new=StringIO()) as fake_out:
+            with patch("builtins.input", return_value="y"):
+                shell.do_remove("test.pdf")
+                output = fake_out.getvalue()
+
+        assert "✓" in output or "Removed" in output
 
     def test_do_remove_no_arg(self, shell):
         """Test remove command without argument."""
@@ -149,14 +190,45 @@ class TestInteractiveShell:
 
     def test_do_list(self, shell):
         """Test list command."""
+        # Mock the store with documents (flat lists)
+        shell._store = Mock()
+        shell._store.list.return_value = {
+            "ids": ["doc1", "doc2"],
+            "metadatas": [
+                {"document_path": "/path/file1.pdf", "file_name": "file1.pdf"},
+                {"document_path": "/path/file2.pdf", "file_name": "file2.pdf"},
+            ],
+        }
+
         with patch("sys.stdout", new=StringIO()) as fake_out:
             shell.do_list("")
             output = fake_out.getvalue()
 
-        assert "Documents" in output
+        assert "Documents" in output or "file1.pdf" in output
+
+    def test_do_list_empty(self, shell):
+        """Test list command with empty store."""
+        shell._store = Mock()
+        shell._store.list.return_value = {"ids": [], "metadatas": []}
+
+        with patch("sys.stdout", new=StringIO()) as fake_out:
+            shell.do_list("")
+            output = fake_out.getvalue()
+
+        assert "No documents" in output or "empty" in output.lower()
 
     def test_do_show(self, shell):
         """Test show command."""
+        shell._store = Mock()
+        shell._store.list.return_value = {
+            "ids": ["doc1", "doc2"],
+            "metadatas": [
+                {"document_path": "/path/test.pdf", "file_name": "test.pdf"},
+                {"document_path": "/path/test.pdf", "file_name": "test.pdf"},
+            ],
+            "documents": ["chunk 1 content", "chunk 2 content"],
+        }
+
         with patch("sys.stdout", new=StringIO()) as fake_out:
             shell.do_show("test.pdf")
             output = fake_out.getvalue()
@@ -173,11 +245,35 @@ class TestInteractiveShell:
 
     def test_do_query(self, shell):
         """Test query command."""
-        with patch("sys.stdout", new=StringIO()) as fake_out:
-            shell.do_query("what are the main findings?")
-            output = fake_out.getvalue()
+        # Mock retriever
+        mock_chunk = Mock()
+        mock_chunk.text = "This is relevant content"
+        mock_chunk.metadata = {"source": "doc.pdf"}
+        mock_chunk.score = 0.95
 
-        assert "Querying" in output or "what are the main findings?" in output
+        shell._retriever = Mock()
+        shell._retriever.retrieve.return_value = [mock_chunk]
+
+        with patch("sys.stdout", new=StringIO()) as fake_out:
+            with patch(
+                "ragged.generation.ollama_client.OllamaClient"
+            ) as mock_client_class:
+                mock_client = Mock()
+                mock_client.generate.return_value = "Based on the documents, the answer is..."
+                mock_client_class.return_value = mock_client
+
+                with patch(
+                    "ragged.generation.prompts.build_rag_prompt",
+                    return_value="prompt",
+                ):
+                    with patch(
+                        "ragged.generation.citation_formatter.format_response_with_references",
+                        return_value="Formatted answer",
+                    ):
+                        shell.do_query("what are the main findings?")
+                        output = fake_out.getvalue()
+
+        assert "Answer" in output or "Formatted" in output
 
     def test_do_query_no_arg(self, shell):
         """Test query command without argument."""
@@ -189,11 +285,20 @@ class TestInteractiveShell:
 
     def test_do_search(self, shell):
         """Test search command."""
+        # Mock retriever
+        mock_chunk = Mock()
+        mock_chunk.text = "Machine learning content"
+        mock_chunk.metadata = {"source": "ml_paper.pdf"}
+        mock_chunk.score = 0.92
+
+        shell._retriever = Mock()
+        shell._retriever.retrieve.return_value = [mock_chunk]
+
         with patch("sys.stdout", new=StringIO()) as fake_out:
             shell.do_search("machine learning")
             output = fake_out.getvalue()
 
-        assert "Searching" in output or "machine learning" in output
+        assert "Search Results" in output or "machine learning" in output.lower()
 
     def test_do_search_no_arg(self, shell):
         """Test search command without argument."""
@@ -209,8 +314,8 @@ class TestInteractiveShell:
             shell.do_set("retrieval.top_k 10")
             output = fake_out.getvalue()
 
-        # Should be stored in config changes
-        assert shell.config_changes["retrieval.top_k"] == "10"
+        # Should be stored in config changes (as int after parsing)
+        assert shell.config_changes["retrieval.top_k"] == 10
         assert "✓" in output or "retrieval.top_k" in output
 
     def test_do_set_invalid_syntax(self, shell):
@@ -270,11 +375,29 @@ class TestInteractiveShell:
 
     def test_do_save_session(self, shell):
         """Test save session command."""
-        with patch("sys.stdout", new=StringIO()) as fake_out:
-            shell.do_save("session test.json")
-            output = fake_out.getvalue()
+        with tempfile.NamedTemporaryFile(
+            mode="w", suffix=".json", delete=False
+        ) as f:
+            temp_path = f.name
 
-        assert "saved" in output or "✓" in output
+        try:
+            # Add some state to save
+            shell.history = ["cmd1", "cmd2"]
+            shell.config_changes = {"key": "value"}
+
+            with patch("sys.stdout", new=StringIO()) as fake_out:
+                shell.do_save(f"session {temp_path}")
+                output = fake_out.getvalue()
+
+            assert "✓" in output or "saved" in output.lower()
+
+            # Verify file content
+            with open(temp_path) as f:
+                saved = json.load(f)
+            assert saved["history"] == ["cmd1", "cmd2"]
+            assert saved["config_changes"] == {"key": "value"}
+        finally:
+            Path(temp_path).unlink(missing_ok=True)
 
     def test_do_save_invalid_syntax(self, shell):
         """Test save command with invalid syntax."""
@@ -286,19 +409,34 @@ class TestInteractiveShell:
 
     def test_do_load_session(self, shell):
         """Test load session command."""
-        with patch("sys.stdout", new=StringIO()) as fake_out:
-            with patch("pathlib.Path.exists", return_value=True):
-                shell.do_load("session test.json")
+        with tempfile.NamedTemporaryFile(
+            mode="w", suffix=".json", delete=False
+        ) as f:
+            session_data = {
+                "version": "0.8.8",
+                "history": ["loaded_cmd1", "loaded_cmd2"],
+                "config_changes": {"loaded_key": "loaded_value"},
+                "context": {},
+            }
+            json.dump(session_data, f)
+            temp_path = f.name
+
+        try:
+            with patch("sys.stdout", new=StringIO()) as fake_out:
+                shell.do_load(f"session {temp_path}")
                 output = fake_out.getvalue()
 
-        assert "loaded" in output or "✓" in output
+            assert "✓" in output or "loaded" in output.lower()
+            assert shell.history == ["loaded_cmd1", "loaded_cmd2"]
+            assert shell.config_changes == {"loaded_key": "loaded_value"}
+        finally:
+            Path(temp_path).unlink(missing_ok=True)
 
     def test_do_load_missing_file(self, shell):
         """Test load session with missing file."""
         with patch("sys.stdout", new=StringIO()) as fake_out:
-            with patch("pathlib.Path.exists", return_value=False):
-                shell.do_load("session missing.json")
-                output = fake_out.getvalue()
+            shell.do_load("session /nonexistent/path/missing.json")
+            output = fake_out.getvalue()
 
         assert "Error" in output or "not found" in output
 
@@ -332,12 +470,13 @@ class TestInteractiveShell:
         assert "value1" in output
 
     def test_do_config_no_changes(self, shell):
-        """Test config command with no changes."""
+        """Test config command with no changes shows defaults."""
         with patch("sys.stdout", new=StringIO()) as fake_out:
             shell.do_config("")
             output = fake_out.getvalue()
 
-        assert "No configuration changes" in output
+        # Config always shows defaults, even with no session changes
+        assert "Current Configuration" in output or "Default Settings" in output
 
     def test_default_unknown_command(self, shell):
         """Test default handler for unknown commands."""
@@ -387,3 +526,119 @@ class TestStartInteractiveMode:
                 start_interactive_mode()
 
             assert exc_info.value.code == 1
+
+
+class TestLazyLoading:
+    """Test lazy loading of services."""
+
+    @pytest.fixture
+    def shell(self):
+        """Create interactive shell for testing."""
+        return InteractiveShell()
+
+    def test_store_not_loaded_on_init(self, shell):
+        """Test store is not loaded on initialisation."""
+        assert shell._store is None
+
+    def test_retriever_not_loaded_on_init(self, shell):
+        """Test retriever is not loaded on initialisation."""
+        assert shell._retriever is None
+
+    def test_embedder_not_loaded_on_init(self, shell):
+        """Test embedder is not loaded on initialisation."""
+        assert shell._embedder is None
+
+    def test_store_lazy_loads(self, shell):
+        """Test store loads lazily on first access."""
+        with patch("ragged.storage.vector_store.VectorStore") as MockStore:
+            mock_store = Mock()
+            MockStore.return_value = mock_store
+
+            # Access store property
+            _ = shell.store
+
+            MockStore.assert_called_once()
+            assert shell._store is mock_store
+
+    def test_retriever_lazy_loads(self, shell):
+        """Test retriever loads lazily on first access."""
+        with patch("ragged.retrieval.hybrid.HybridRetriever") as MockHybrid:
+            with patch("ragged.retrieval.bm25.BM25Retriever") as MockBM25:
+                with patch("ragged.retrieval.retriever.Retriever") as MockVector:
+                    mock_retriever = Mock()
+                    MockHybrid.return_value = mock_retriever
+
+                    # Access retriever property
+                    _ = shell.retriever
+
+                    MockHybrid.assert_called_once()
+                    MockBM25.assert_called_once()
+                    MockVector.assert_called_once()
+                    assert shell._retriever is mock_retriever
+
+    def test_embedder_lazy_loads(self, shell):
+        """Test embedder loads lazily on first access."""
+        with patch("ragged.embeddings.factory.get_embedder") as mock_get:
+            mock_embedder = Mock()
+            mock_get.return_value = mock_embedder
+
+            # Access embedder property
+            _ = shell.embedder
+
+            mock_get.assert_called_once()
+            assert shell._embedder is mock_embedder
+
+    def test_services_cached_after_first_load(self, shell):
+        """Test services are cached after first load."""
+        with patch("ragged.storage.vector_store.VectorStore") as MockStore:
+            mock_store = Mock()
+            MockStore.return_value = mock_store
+
+            # Access store multiple times
+            _ = shell.store
+            _ = shell.store
+            _ = shell.store
+
+            # Should only be created once
+            MockStore.assert_called_once()
+
+
+class TestSessionRoundTrip:
+    """Test full session save/load workflow."""
+
+    @pytest.fixture
+    def shell(self):
+        """Create interactive shell for testing."""
+        return InteractiveShell()
+
+    def test_session_round_trip(self, shell):
+        """Test saving and loading session preserves state."""
+        with tempfile.NamedTemporaryFile(
+            mode="w", suffix=".json", delete=False
+        ) as f:
+            temp_path = f.name
+
+        try:
+            # Set up initial state
+            shell.history = ["add doc.pdf", "query what is this?", "search AI"]
+            shell.config_changes = {
+                "retrieval.top_k": "10",
+                "generation.temperature": "0.7",
+            }
+            shell.context = {"last_query": "what is this?"}
+
+            # Save session
+            with patch("sys.stdout", new=StringIO()):
+                shell.do_save(f"session {temp_path}")
+
+            # Create new shell and load session
+            new_shell = InteractiveShell()
+            with patch("sys.stdout", new=StringIO()):
+                new_shell.do_load(f"session {temp_path}")
+
+            # Verify state preserved
+            assert new_shell.history == shell.history
+            assert new_shell.config_changes == shell.config_changes
+            assert new_shell.context.get("last_query") == "what is this?"
+        finally:
+            Path(temp_path).unlink(missing_ok=True)
