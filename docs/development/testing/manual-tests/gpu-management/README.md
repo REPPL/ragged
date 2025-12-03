@@ -1,6 +1,6 @@
 # GPU Management Tests
 
-**Purpose:** Validate GPU detection, optimization, and monitoring
+**Purpose:** Validate GPU detection, optimisation, and monitoring
 
 ---
 
@@ -14,7 +14,7 @@ These tests validate ragged's GPU management capabilities across different hardw
 |------|---------|----------|
 | **GPU-01** | Device detection | CUDA/MPS/CPU |
 | **GPU-02** | Performance benchmarking | GPU required |
-| **GPU-03** | Batch size optimization | GPU required |
+| **GPU-03** | Batch size optimisation | GPU required |
 
 ---
 

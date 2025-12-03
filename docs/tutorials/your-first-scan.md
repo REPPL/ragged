@@ -162,7 +162,7 @@ ragged scan process ~/scans/philosophy-book.pdf
 - Preserved structure (headings, paragraphs)
 - Usable for note-taking, analysis, etc.
 
-### Phase 5: Organization (1-2 seconds)
+### Phase 5: Organisation (1-2 seconds)
 ```
 [5/5] Organizing...
   ✓ Generated semantic filename
@@ -382,7 +382,7 @@ ragged scan process ~/scans/ --batch
 
 Each book will be processed independently.
 
-### Customize Settings
+### Customise Settings
 
 Create `~/.ragged/config.yml`:
 ```yaml

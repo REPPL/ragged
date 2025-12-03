@@ -12,7 +12,7 @@ Ragged's scan processing pipeline transforms your scanned books and documents th
 2. **Auto-Correction**: Page rotation, reordering, and duplicate detection
 3. **Metadata Extraction**: Title, author, year, publisher from title pages
 4. **Markdown Export**: Convert to markdown for text analysis
-5. **Organization**: Semantic file naming and lineage tracking
+5. **Organisation**: Semantic file naming and lineage tracking
 
 **Privacy**: All processing happens 100% locally on your computer. No internet connection required, no data leaves your device.
 

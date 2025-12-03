@@ -646,7 +646,7 @@ for record in results:
 
 #### `OrganizedOutput`
 
-Result from organization operation.
+Result from organisation operation.
 
 ```python
 @dataclass

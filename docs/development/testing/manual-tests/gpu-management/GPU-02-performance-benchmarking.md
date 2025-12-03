@@ -32,7 +32,7 @@ ragged ingest pdf examples/sample_documents/data_visualization.pdf --vision
 
 - Benchmark completes without errors
 - Performance metrics reported (throughput, latency)
-- GPU utilization shown
+- GPU utilisation shown
 - Memory usage tracked
 - Recommendations provided
 
@@ -40,6 +40,6 @@ ragged ingest pdf examples/sample_documents/data_visualization.pdf --vision
 
 - [ ] Benchmark runs successfully
 - [ ] Metrics appear reasonable
-- [ ] GPU utilization > 0% during processing
+- [ ] GPU utilisation > 0% during processing
 - [ ] Memory usage within limits
 - [ ] No out-of-memory errors

@@ -71,7 +71,7 @@ Understanding ragged's privacy-first approach and GDPR compliance for the memory
 - [x] **[Scanning Books with Ragged](./scanning-books.md)** (v0.4.9) - Convert messy scans into perfect PDFs with OCR, page reordering, and metadata extraction
 - [ ] Managing document collections
 
-**Customization**:
+**Customisation**:
 - [ ] Configuring chunking strategies
 - [ ] Choosing embedding models
 - [ ] Tuning retrieval parameters

@@ -162,7 +162,7 @@ docs/development/
 
 ---
 
-## Customization
+## Customisation
 
 Templates can be adapted for project-specific needs:
 - Add sections relevant to Ragged

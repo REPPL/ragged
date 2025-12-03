@@ -376,7 +376,7 @@ ragged query hybrid "microservice architecture" reference-diagram.png
 
 ### Example 2: Research Paper Analysis
 
-**Scenario**: Analyzing ML research papers with charts and experimental results.
+**Scenario**: Analysing ML research papers with charts and experimental results.
 
 ```bash
 # Ingest research papers
@@ -547,10 +547,10 @@ ragged storage vacuum
 - [Multi-Document Analysis Notebook](../../examples/notebooks/02-multi-document-analysis.ipynb) - Batch processing
 - [GPU Optimization Notebook](../../examples/notebooks/03-gpu-optimization.ipynb) - Performance tuning
 
-**GPU Optimization**:
+**GPU Optimisation**:
 - [GPU Configuration & Optimisation Guide](../guides/gpu-configuration-optimisation.md) - Complete GPU setup
 - [GPU Management Tests](../testing/manual-tests/gpu-management/README.md) - Validation procedures
-- [Performance Tuning](../guides/performance-tuning.md) - Speed optimization
+- [Performance Tuning](../guides/performance-tuning.md) - Speed optimisation
 
 ### Experiment & Validate
 

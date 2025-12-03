@@ -1,4 +1,4 @@
-# Test: Batch Size Optimization
+# Test: Batch Size Optimisation
 
 **Test ID:** GPU-03 | **Category:** gpu-management | **Status:** Pending
 
@@ -6,7 +6,7 @@
 
 ## Objective
 
-Verify automatic batch size optimization based on available GPU memory.
+Verify automatic batch size optimisation based on available GPU memory.
 
 ## Prerequisites
 

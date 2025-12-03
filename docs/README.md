@@ -195,7 +195,7 @@ All developer-facing documentation is now organised under [development/](./devel
 - **decisions/** - Decision rationale (why we chose)
   - adrs/ (Architecture Decision Records), rfcs/ (Request for Comments)
 - **roadmap/** - Development timelines (when to build)
-  - features/, version/ (with current symlink → v0.3.0)
+  - features/, version/ (with current symlink → v0.9)
 - **implementation/** - Implementation records (what was built)
   - version/ (v0.1/, v0.2/)
 - **process/** - Development methodology (how we built)
@@ -205,7 +205,7 @@ All developer-facing documentation is now organised under [development/](./devel
 - [Product Vision](./development/planning/vision/product-vision.md) - Goals and principles
 - [Architecture Overview](./development/planning/architecture/README.md) - System architecture
 - [Roadmaps](./development/roadmap/README.md) - Version roadmaps and timelines
-- [Current Roadmap](./development/roadmap/version/current/) - Active development plan (v0.3.0)
+- [Current Roadmap](./development/roadmap/version/current/) - Active development plan (v0.9)
 - [CLI Enhancements Catalogue](./development/planning/interfaces/cli/enhancements.md) - Complete CLI feature catalogue
 - [Web UI Design](./development/planning/interfaces/web/) - Web interface evolution
 - [ADRs](./development/decisions/adrs/) - Key architectural decisions
@@ -299,7 +299,7 @@ All developer-facing documentation is now organised under [development/](./devel
 
 **See what's planned next**
 → Check [Roadmaps](./development/roadmap/) for version plans and timelines
-→ Or [Current Roadmap](./development/roadmap/version/current/) for active development (v0.3.0)
+→ Or [Current Roadmap](./development/roadmap/version/current/) for active development (v0.9)
 → Or [Version Design Plans](./development/planning/version/) for detailed feature specifications
 
 **Contribute code or documentation**

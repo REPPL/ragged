@@ -15,7 +15,7 @@ These tests ensure ragged works correctly across:
 
 | Test | Platform | Focus |
 |------|----------|-------|
-| **CP-01** | macOS (MPS) | Apple Silicon optimization |
+| **CP-01** | macOS (MPS) | Apple Silicon optimisation |
 | **CP-02** | Linux (CUDA) | NVIDIA GPU support |
 | **CP-03** | CPU fallback | Universal compatibility |
 

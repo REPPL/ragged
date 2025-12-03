@@ -1,6 +1,6 @@
 # CLI Essentials: Core Commands for Beginners
 
-**What you'll learn**: The 6 essential commands to start using ragged effectively.
+**What you'll learn**: The 7 essential commands to start using ragged effectively.
 
 **Prerequisites**:
 - ragged installed (see [Getting Started](../../tutorials/getting-started.md))
@@ -13,7 +13,7 @@
 
 ## The Essential Commands
 
-You can accomplish 90% of common tasks with just these 6 commands:
+You can accomplish 90% of common tasks with just these 7 commands:
 
 1. **`ragged health`** - Check if everything is working
 2. **`ragged ingest pdf`** - Add documents (v0.5.3+)
@@ -21,6 +21,7 @@ You can accomplish 90% of common tasks with just these 6 commands:
 4. **`ragged list`** - See what you've added
 5. **`ragged config`** - Manage settings
 6. **`ragged gpu list`** - Check GPU availability (v0.5.3+)
+7. **`ragged interactive`** - Launch interactive REPL shell (v0.8.8+)
 
 Let's learn each one.
 
@@ -385,6 +386,118 @@ Recommended device: mps
 
 ---
 
+## 8. ragged interactive - Interactive REPL Mode (v0.8.8+)
+
+**Purpose**: Launch an interactive shell for conversational RAG workflows.
+
+### Basic usage
+
+```bash
+ragged interactive
+```
+
+### Welcome screen
+
+```
+ragged Interactive Mode v0.8.8
+Type 'help' for available commands, 'exit' to quit.
+
+ragged>
+```
+
+### Available commands in interactive mode
+
+**Document Management:**
+- `add <file>` - Add a document to the library
+- `remove <pattern>` - Remove documents matching pattern
+- `list` - Show all documents
+- `show <document>` - Display document details
+
+**Query & Search:**
+- `query <question>` - Ask questions with RAG (LLM generation)
+- `search <terms>` - Semantic search (no LLM)
+
+**Configuration:**
+- `set <key> <value>` - Change session settings
+- `get <key>` - View current setting value
+- `config` - Show all configuration
+
+**Session Management:**
+- `save session <file.json>` - Save current session state
+- `load session <file.json>` - Restore a saved session
+- `history` - Show command history
+- `status` - Display system status
+
+**Utilities:**
+- `help` - Show available commands
+- `clear` - Clear screen
+- `exit` / `quit` - Exit interactive mode
+
+### Example workflow
+
+```bash
+ragged> status
+┌─ System Status ──────────────────┐
+│ Version: 0.8.8                   │
+│ Commands this session: 0         │
+│ Configuration changes: 0         │
+│                                  │
+│ Services:                        │
+│   Ollama: ✓ Connected           │
+│   ChromaDB: ✓ Connected         │
+└──────────────────────────────────┘
+
+ragged> add research-paper.pdf
+Processing research-paper.pdf...
+Chunking with fixed strategy...
+Generating embeddings...
+✓ Added 47 chunks from 'research-paper.pdf'
+
+ragged> list
+📄 Documents in Library (1 documents, 47 chunks)
+
+  • research-paper.pdf
+    Path: /path/to/research-paper.pdf
+    Chunks: 47
+
+ragged> query what are the key findings?
+Retrieving relevant chunks...
+Generating response...
+
+🔍 Answer:
+Based on the document, the key findings are...
+
+Sources:
+  [1] research-paper.pdf (page 3, score: 0.94)
+  [2] research-paper.pdf (page 7, score: 0.89)
+
+ragged> set retrieval.top_k 10
+✓ Set retrieval.top_k = 10
+
+ragged> save session my-research.json
+✓ Session saved to my-research.json
+
+ragged> exit
+Goodbye!
+```
+
+### When to use interactive mode
+
+✅ **Use interactive mode for**:
+- Exploratory research sessions
+- Iterative query refinement
+- Building up a knowledge base interactively
+- Trying different settings without re-typing commands
+- Saving and resuming research sessions
+
+❌ **Use regular CLI for**:
+- Scripting and automation
+- Single queries
+- CI/CD pipelines
+- Batch operations
+
+---
+
 ## Quick Reference Card
 
 ```bash
@@ -394,6 +507,13 @@ ragged gpu list                                # 2. Check GPU (for vision)
 ragged ingest pdf document.pdf --vision        # 3. Add document
 ragged query text "your question"              # 4. Ask questions
 ragged list                                    # 5. View documents
+
+# Interactive mode
+ragged interactive                             # Launch REPL shell
+# Then in the shell:
+#   add document.pdf                           # Add docs
+#   query "what is this about?"                # Ask questions
+#   save session work.json                     # Save progress
 
 # Advanced workflow
 ragged ingest batch ./docs/ --vision           # Batch ingest
@@ -409,10 +529,10 @@ ragged storage info                            # Check storage
 **Beginners**: Move on to [Intermediate Commands](./intermediate.md) to learn about:
 - Storage management (`storage info`, `storage vacuum`)
 - GPU monitoring (`gpu stats --watch`)
-- Interactive query mode (`query interactive`)
+- Advanced query options and filtering
 
 **Advanced users**: See [Advanced CLI](./advanced.md) for:
-- GPU benchmarking and optimization
+- GPU benchmarking and optimisation
 - Custom retrieval configurations
 - Storage migration and maintenance
 

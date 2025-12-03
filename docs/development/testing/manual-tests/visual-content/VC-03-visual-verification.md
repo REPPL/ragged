@@ -71,7 +71,7 @@ ragged query vision "table with numerical data" --limit 5
 
 **Expected Result:**
 - Results include pages with tables
-- Table structure recognized
+- Table structure recognised
 - Relevant pages ranked higher
 
 **Actual Result:**

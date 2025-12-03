@@ -48,7 +48,7 @@ ragged gpu stats --watch
 ## Verification
 
 - [ ] CUDA detected (not CPU fallback)
-- [ ] GPU utilization > 0% during processing
+- [ ] GPU utilisation > 0% during processing
 - [ ] VRAM usage tracked
 - [ ] No "CUDA out of memory" errors
 - [ ] Performance meets expectations
