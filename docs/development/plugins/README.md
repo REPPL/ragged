@@ -117,7 +117,3 @@ Test plugins available:
 - [Sandbox Implementation](sandbox.md) - Detailed sandbox documentation
 
 ---
-
-**Last Updated:** v0.6.2 (2025-11-25)
-
-**Maintained By:** ragged development team

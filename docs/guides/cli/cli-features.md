@@ -81,7 +81,8 @@ All ragged CLI commands organised by category:
 
 ### Core Operations
 - `ragged ingest` - Add documents (pdf, batch, status commands) (Essentials)
-- `ragged query` - Ask questions (text, image, hybrid, interactive modes) (Essentials)
+- `ragged query` - Ask questions (text, image, hybrid modes) (Essentials)
+- `ragged interactive` - Launch interactive REPL shell (Essentials, v0.8.8+)
 - `ragged list` - View documents (Essentials)
 - `ragged clear` - Remove documents (Essentials)
 - `ragged health` - Check service status (Essentials)
@@ -170,7 +171,7 @@ All ragged CLI commands organised by category:
 ### ...ask questions
 - **Simple query**: Essentials: Querying
 - **With filters**: Intermediate: Advanced Search
-- **Interactive mode**: Essentials: Interactive Mode
+- **Interactive shell**: Essentials: Interactive REPL Mode (`ragged interactive`)
 
 ### ...organise my collection
 - **Tag documents**: Intermediate: Metadata Management

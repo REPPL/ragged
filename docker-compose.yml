@@ -71,7 +71,7 @@ services:
 
   # ChromaDB vector database
   chromadb:
-    image: chromadb/chroma:latest
+    image: chromadb/chroma:0.5.0
     container_name: ragged-chromadb
     ports:
       - "${CHROMA_PORT:-8001}:8000"  # ChromaDB default port (mapped to 8001 to avoid conflict)

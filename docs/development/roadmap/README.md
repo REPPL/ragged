@@ -13,8 +13,6 @@ This directory contains detailed roadmaps for all ragged versions from v0.2.3 th
 - **v0.7.x** - User Interface Enhancement ✅ Complete (v0.7.0-v0.7.5)
 - **v0.8.x** - Installation & Deployment Excellence ✅ Complete (v0.8.0-v0.8.7)
 
-**Current Version:** v0.8.7
-
 **Next Versions:**
 - **[v0.9.0](version/v0.9/README.md)** - Agent Capabilities & Automation - START HERE
 - **[v1.0](version/v1.0/README.md)** - Production Release
