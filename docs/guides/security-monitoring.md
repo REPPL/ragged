@@ -252,6 +252,4 @@ If `pip-audit` reports a vulnerability that doesn't apply:
 
 ---
 
-**Maintained by:** ragged security team
-**Last updated:** 2025-11-23
 **Introduced:** v0.5.7 HIGH-6

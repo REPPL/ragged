@@ -425,7 +425,7 @@ This document captures the research conducted to inform ragged's web interface d
 const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 ```
 
-**Color palette**:
+**Colour palette**:
 - Light mode: Default
 - Dark mode: OLED-friendly blacks (for battery savings)
 

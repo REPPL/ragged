@@ -83,7 +83,7 @@ Primary:     #4c6ef5  (Blue - buttons, active states)
 Background:  #ffffff  (White)
 Sidebar:     #f8f9fa  (Light grey)
 
-Text Colors:
+Text Colours:
 - Dark:      #1e1e1e  (Headings)
 - Medium:    #495057  (Body text)
 - Light:     #868e96  (Secondary text)
@@ -161,7 +161,7 @@ Sizes:
 
 ### Phase 2: High-Fidelity Mockup (Complete)
 ✅ Production-ready SVG generated from wireframe
-✅ Color palette applied
+✅ Colour palette applied
 ✅ Typography specified
 ✅ Component states designed
 ✅ Penpot-compatible (no filters, clean elements)
