@@ -380,7 +380,7 @@ All features maintain backward compatibility:
 
 ## Related Documentation
 
-- [v0.5.7 Roadmap](../../../../roadmap/version/v0.5/v0.5.7.md) - Original planning
+- [v0.5.7 Roadmap](./README.md) - Original planning
 - [Security Monitoring Guide](../../../../../guides/security-monitoring.md) - Operational procedures
 - v0.5.6 Implementation - Previous version context
 

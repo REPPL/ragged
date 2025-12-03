@@ -171,7 +171,7 @@ This version was implemented using AI agent-based code generation. The agent was
 
 - [Development Log](../../../devlogs/version/v0.3.4a/summary.md)
 - [Implementation Summary](../../../../implementation/version/v0.3/v0.3.4a/summary.md)
-- [Security Audit](../../../../../audit/security/baseline/v0.3.4a-security-audit.md)
+- [Security Audit](../../../../audit/security/baseline/v0.3.4a-security-audit.md)
 
 ---
 

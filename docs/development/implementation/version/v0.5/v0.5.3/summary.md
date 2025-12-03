@@ -299,6 +299,6 @@
 
 - [README](./README.md) - Implementation overview
 - [Lineage](./lineage.md) - Planning → Roadmap → Implementation traceability
-- [v0.5.3 Roadmap](../../../../roadmap/version/v0.5/v0.5.3.md) - Original plan
+- [v0.5.3 Roadmap](./README.md) - Original plan
 
 ---

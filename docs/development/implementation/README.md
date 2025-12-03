@@ -105,7 +105,7 @@ implementation/
 - Svelte/SvelteKit web UI
 - Security middleware
 
-### [version/v0.7/](./version/v0.7/) - User Interface Enhancement
+### [version/v0.7/](../roadmap/version/v0.7) - User Interface Enhancement
 
 **Status:** ✅ Complete (v0.7.0-v0.7.5)
 
@@ -115,7 +115,7 @@ implementation/
 - Advanced visualisations
 - Security hardening
 
-### [version/v0.8/](./version/v0.8/) - Installation & Deployment Excellence
+### [version/v0.8/](../roadmap/version/v0.8) - Installation & Deployment Excellence
 
 **Status:** ✅ Complete (v0.8.0-v0.8.7)
 

@@ -240,7 +240,7 @@ Implementation audits use the same severity classification as baseline audits:
 
 - [../baseline/](../baseline/README.md) - Comprehensive security baseline audits
 - [../../README.md](../../README.md) - Overall audit documentation structure
-- [implementation/](../../../development/implementation/) - Feature implementation documentation
+- [implementation/](.) - Feature implementation documentation
 
 ---
 

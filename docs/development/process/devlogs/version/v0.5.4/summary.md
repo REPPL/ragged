@@ -424,7 +424,7 @@ v0.5.4 represents a strategic pivot from the original roadmap. Instead of delive
 - [Time Log](../../../time-logs/version/v0.5.4/time-tracking.md)
 - [CLI Essentials Guide](../../../../../guides/cli/essentials.md)
 - [Multi-Modal Workflow Tutorial](../../../../../tutorials/multimodal-workflow.md)
-- [v0.5.4 Roadmap](../../../../roadmap/version/v0.5/v0.5.4.md) - Original plan (Gradio UI)
+- [v0.5.4 Roadmap](./README.md) - Original plan (Gradio UI)
 
 ---
 

@@ -303,7 +303,7 @@ When contributing to ragged:
 4. **Significant time investment?** Create time log in [time-logs/](./time-logs/)
 5. **Daily development?** Log in [devlog/daily/](devlogs/daily)
 
-See [Contributing Guide](../../../CONTRIBUTING.md) for details.
+See [Contributing Guide](../../../README.md) for details.
 
 ---
 

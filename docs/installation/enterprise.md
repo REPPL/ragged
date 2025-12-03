@@ -474,7 +474,7 @@ logging:
 
 ## Security Hardening
 
-See [Installation Security](../reference/security.md) for comprehensive security configuration.
+See [Installation Security](../guides/security/) for comprehensive security configuration.
 
 Key enterprise security settings:
 
@@ -503,8 +503,8 @@ security:
 
 ## Related Documentation
 
-- [Security Reference](../reference/security.md)
-- [API Reference](../reference/api.md)
+- [Security Reference](../guides/security/)
+- [API Reference](../reference/api/)
 - [Troubleshooting](../troubleshooting/README.md)
 - [Offline Installation](./offline.md)
 

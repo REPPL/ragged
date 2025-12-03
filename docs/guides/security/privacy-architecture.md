@@ -1118,9 +1118,9 @@ async def query_documents(request: QueryRequest, req: Request):
 ## Related Documentation
 
 - [Security Policy](./policy.md) - Comprehensive security policy
-- [v0.2.10 Roadmap](../development/roadmap/version/v0.2/v0.2.10) - Security Hardening implementation
-- [v0.2.11 Roadmap](../development/roadmap/version/v0.2/v0.2.11) - Privacy Infrastructure implementation
-- [v0.3 README](../development/roadmap/version/v0.3/README.md) - How v0.3.x uses privacy foundation
+- [v0.2.10 Roadmap](../../development/implementation/version/v0.2/v0.2.10) - Security Hardening implementation
+- [v0.2.11 Roadmap](../../development/implementation/version/v0.2/v0.2.11) - Privacy Infrastructure implementation
+- [v0.3 README](../../development/implementation/README.md) - How v0.3.x uses privacy foundation
 
 ---
 

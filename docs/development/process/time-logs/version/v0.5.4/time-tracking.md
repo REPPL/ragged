@@ -381,7 +381,7 @@ Unlike v0.5.3 (+95%), v0.5.4 had **net reduction**:
 - v0.5.4 Development Log - Development narrative
 - v0.5.4 Implementation Summary - Technical metrics
 - v0.5.4 Lineage - Planning to implementation traceability
-- [v0.5.4 Roadmap](../../../../roadmap/version/v0.5/v0.5.4.md) - Original estimate (Gradio UI)
+- [v0.5.4 Roadmap](./README.md) - Original estimate (Gradio UI)
 
 ---
 

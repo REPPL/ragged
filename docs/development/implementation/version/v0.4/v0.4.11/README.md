@@ -563,8 +563,8 @@ tests/memory/test_temporal_reasoner.py ........     [100%]
 ## Related Documentation
 
 ### Planning & Design
-- [v0.4.x Planning Overview](../../../planning/version/v0.4/README.md)
-- [v0.4.11 Roadmap](../../../roadmap/version/v0.4/v0.4.11.md)
+- [v0.4.x Planning Overview](../../../README.md)
+- [v0.4.11 Roadmap](../../../../roadmap/version/v0.4/v0.4.11.md)
 
 ### Related Implementations
 - [v0.4.10: Temporal Memory Part 1](../v0.4.10/README.md) - Foundation (facts, timelines)

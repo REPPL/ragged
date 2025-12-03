@@ -389,8 +389,8 @@ Output: Perfect PDFs (Title-Author-Year.pdf)
 - [v0.4.9 Roadmap](../../../../roadmap/version/v0.4/v0.4.9.md) - Original plan (refactoring focus)
 - [v0.4.8 Implementation](../v0.4.8/README.md) - Previous version (LEANN backend)
 - [v0.5.7 Implementation](../../v0.5/v0.5.7/README.md) - Security review implementation
-- [Scan Processing Tutorial](../../../../tutorials/) - User guide
-- [Scanning Books Guide](../../../../guides/) - Best practices
+- [Scan Processing Tutorial](../../../../../tutorials/) - User guide
+- [Scanning Books Guide](../../../../../guides/) - Best practices
 
 ---
 

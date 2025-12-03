@@ -109,8 +109,8 @@ Use the **[TEMPLATE.md](./TEMPLATE.md)** file as the starting point for creating
 
 - [v0.3 Master Roadmap](../README.md) - Complete v0.3 overview
 - v0.3 Planning - High-level design goals
-- [Security Policy](../../../../../security/policy.md) - Security requirements
-- [Privacy Architecture](../../../../../security/privacy-architecture.md) - Privacy implementation details
+- [Security Policy](../../../../../guides/security/policy.md) - Security requirements
+- [Privacy Architecture](../../../../../guides/security/privacy-architecture.md) - Privacy implementation details
 
 ---
 

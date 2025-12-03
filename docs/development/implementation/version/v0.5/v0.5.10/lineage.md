@@ -40,7 +40,7 @@ Complete the v0.5.x series with comprehensive documentation and operational guid
 
 ## Roadmap Phase
 
-**Document:** [v0.5.10 Roadmap](../../../../roadmap/version/v0.5/v0.5.10.md)
+**Document:** [v0.5.10 Roadmap](./README.md)
 
 **Core Deliverables:**
 1. Developer experience tools (direnv, just, installation scripts)
@@ -372,12 +372,12 @@ v0.5.10 completes the v0.5.x series:
 ## Related Documentation
 
 - [v0.5 Planning](../../../../planning/version/v0.5/README.md)
-- [v0.5.10 Roadmap](../../../../roadmap/version/v0.5/v0.5.10.md)
+- [v0.5.10 Roadmap](./README.md)
 - [v0.5.10 README](./README.md) - Implementation overview
 - [v0.5.10 CHANGELOG](./CHANGELOG.md) - User-facing release notes
 - [v0.5.10 DELIVERABLES-SUMMARY](./DELIVERABLES-SUMMARY.md) - Complete deliverables record
 - [v0.5 Overview](../README.md) - Series overview
-- [Installation Guide](../../../../tutorials/) - Getting started
+- [Installation Guide](../../../../../tutorials/) - Getting started
 
 ---
 

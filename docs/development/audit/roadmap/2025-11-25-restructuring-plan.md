@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-This document provides a detailed migration plan to convert ragged's current version-centric roadmap structure to a feature-centric approach, as defined in the [Feature-Centric Roadmap Standard](../../development/process/methodology/feature-centric-roadmaps.md).
+This document provides a detailed migration plan to convert ragged's current version-centric roadmap structure to a feature-centric approach, as defined in the [Feature-Centric Roadmap Standard](../../process/methodology/feature-centric-roadmaps.md).
 
 ### Current State
 
@@ -396,8 +396,8 @@ roadmap/
 
 ## Quick Links
 
-- [All Features](features/README.md)
-- [Milestone Timeline](milestones/README.md)
+- [All Features](../../implementation/README.md)
+- [Milestone Timeline](../../implementation/README.md)
 - [v0.7 Milestone](milestones/v0.7.md)
 
 ---
@@ -580,8 +580,8 @@ If migration fails at any point:
 
 ## Related Documentation
 
-- [Feature-Centric Roadmap Standard](../../development/process/methodology/feature-centric-roadmaps.md) - Target methodology
-- [Current Roadmap](../../development/roadmap/) - Structure being migrated
+- [Feature-Centric Roadmap Standard](../../process/methodology/feature-centric-roadmaps.md) - Target methodology
+- [Current Roadmap](.) - Structure being migrated
 - [Previous Assessment](./2025-11-22-restructuring.md) - Superseded by this plan
 
 ---

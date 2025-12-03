@@ -617,8 +617,8 @@ Community (public advisory if needed)
 
 **Internal:**
 - [Privacy Architecture](./privacy-architecture.md)
-- [v0.2.10 Security Roadmap](../development/roadmap/version/v0.2/v0.2.10)
-- [v0.2.11 Privacy Roadmap](../development/roadmap/version/v0.2/v0.2.11)
+- [v0.2.10 Security Roadmap](../../development/implementation/version/v0.2/v0.2.10)
+- [v0.2.11 Privacy Roadmap](../../development/implementation/version/v0.2/v0.2.11)
 
 **External:**
 - [OWASP Top 10](https://owasp.org/www-project-top-ten/)

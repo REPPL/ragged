@@ -134,7 +134,7 @@ Version 0.5.0 established the foundation for multi-modal document understanding 
 
 ## Related Documentation
 
-- [v0.5.0 Roadmap](../../../../roadmap/version/v0.5/v0.5.0.md) - Original specification
+- [v0.5.0 Roadmap](./README.md) - Original specification
 - [v0.5.1 Implementation](../v0.5.1/README.md) - GPU management (next version)
 - [v0.5.2 Implementation](../v0.5.2/README.md) - Vision retrieval (builds on this)
 - [v0.5 Overview](../README.md) - Series overview

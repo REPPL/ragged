@@ -505,15 +505,15 @@ tests/memory/test_temporal_facts.py .................     [100%]
 ## Related Documentation
 
 ### Planning & Design
-- [v0.4.x Planning Overview](../../../planning/version/v0.4/README.md)
-- [v0.4.10 Roadmap](../../../roadmap/version/v0.4.10/README.md)
+- [v0.4.x Planning Overview](../../../README.md)
+- [v0.4.10 Roadmap](../../../README.md)
 
 ### Related Implementations
 - [v0.4.7: Behaviour Learning](../v0.4.7/README.md) - Profile system
 - [v0.4.8: Personalised Retrieval](../v0.4.8/README.md) - Uses profiles
 
 ### Future Work
-- [v0.5.x Planning](../../../planning/version/v0.5/README.md) - Advanced features
+- [v0.5.x Planning](../../../README.md) - Advanced features
 
 ---
 

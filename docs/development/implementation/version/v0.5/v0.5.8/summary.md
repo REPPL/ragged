@@ -65,4 +65,4 @@ v0.5.9+ will focus on:
 - [v0.5.8 Lineage](./lineage.md) - Traceability from planning through implementation
 - [CHANGELOG v0.5.8](../../../../../../CHANGELOG.md#058---2025-11-23) - User-facing release notes
 - [v0.5.7 Implementation](../v0.5.7/README.md) - Previous security hardening release
-- [Security Audit 2025-11-23](../../../../../audit/security/2025-11-23-security-audit.md) - Security findings that informed this release
+- [Security Audit 2025-11-23](../../../../audit/security/2025-11-23-security-audit.md) - Security findings that informed this release

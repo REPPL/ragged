@@ -549,7 +549,7 @@ ragged storage vacuum
 
 **GPU Optimisation**:
 - [GPU Configuration & Optimisation Guide](../guides/gpu-configuration-optimisation.md) - Complete GPU setup
-- [GPU Management Tests](../testing/manual-tests/gpu-management/README.md) - Validation procedures
+- [GPU Management Tests](../development/testing/manual-tests/gpu-management/README.md) - Validation procedures
 - [Performance Tuning](../guides/performance-tuning.md) - Speed optimisation
 
 ### Experiment & Validate
@@ -557,12 +557,12 @@ ragged storage vacuum
 **Try These**:
 - Adjust weight combinations for hybrid queries (`--text-weight`, `--vision-weight`)
 - Benchmark your specific GPU with `ragged gpu benchmark`
-- Test with your own documents using [Manual Testing Framework](../testing/manual-tests/README.md)
+- Test with your own documents using [Manual Testing Framework](../development/testing/manual-tests/README.md)
 
 **Test Scenarios**:
-- [Visual Content Tests](../testing/manual-tests/visual-content/README.md) - Vision embedding validation
-- [Multi-Modal Query Tests](../testing/manual-tests/multimodal-queries/README.md) - Query testing
-- [Cross-Platform Tests](../testing/manual-tests/cross-platform/README.md) - Platform compatibility
+- [Visual Content Tests](../development/testing/manual-tests/visual-content/README.md) - Vision embedding validation
+- [Multi-Modal Query Tests](../development/testing/manual-tests/multimodal-queries/README.md) - Query testing
+- [Cross-Platform Tests](../development/testing/manual-tests/cross-platform/README.md) - Platform compatibility
 
 ---
 

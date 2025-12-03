@@ -111,7 +111,7 @@
 
 **Planning Documents:**
 - v0.2.10 Roadmap - Planning + execution plan (combined)
-- [Baseline Security Audit](../../../../../audit/security/baseline/baseline-audit-pre-v0.2.10.md) - Pre-implementation vulnerabilities
+- [Baseline Security Audit](../../../../audit/security/baseline/baseline-audit-pre-v0.2.10.md) - Pre-implementation vulnerabilities
 - v0.2 Planning - Series-level design goals (if exists)
 
 **Roadmap Documents:**
@@ -123,9 +123,9 @@
 - [v0.2 Implementation Index](../README.md) - All v0.2.x implementations
 
 **Security Documentation:**
-- [Baseline Audit](../../../../../audit/security/baseline/baseline-audit-pre-v0.2.10.md) - Before v0.2.10
-- [Post-Implementation Audit](../../../../../audit/security/baseline/post-v0.2.10-audit.md) - After v0.2.10
-- [Security Policy](../../../../../security/policy.md) - Overall security policy (if exists)
+- [Baseline Audit](../../../../audit/security/baseline/baseline-audit-pre-v0.2.10.md) - Before v0.2.10
+- [Post-Implementation Audit](../../../../audit/security/baseline/post-v0.2.10-audit.md) - After v0.2.10
+- [Security Policy](../../../../../guides/security/policy.md) - Overall security policy (if exists)
 
 **Process Documentation:**
 - [DevLogs](../../../../process/devlogs) - Development narratives (if created)

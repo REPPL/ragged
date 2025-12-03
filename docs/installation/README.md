@@ -13,7 +13,7 @@ Comprehensive installation guides for ragged across all supported platforms.
 - [Quick Start](../quick-start.md) - Get running in 5 minutes
 - [Enterprise Installation](./enterprise.md) - Silent install, multi-user, LDAP
 - [Offline Installation](./offline.md) - Air-gapped environments
-- [Docker-Only Mode](./docker-only.md) - Minimal dependencies
+- [Docker-Only Mode](./linux.md) - Minimal dependencies
 
 ## Installation Decision Tree
 

@@ -40,7 +40,7 @@ Make all multi-modal vision capabilities accessible via command-line interface f
 
 ## Roadmap Phase
 
-**Document:** [v0.5.3 Roadmap](../../../../roadmap/version/v0.5/v0.5.3.md)
+**Document:** [v0.5.3 Roadmap](./README.md)
 
 **Core Deliverables:**
 1. Enhanced ingestion commands (ingest pdf, batch, status)
@@ -295,7 +295,7 @@ Make all multi-modal vision capabilities accessible via command-line interface f
 ## Related Documentation
 
 - v0.5 Planning
-- [v0.5.3 Roadmap](../../../../roadmap/version/v0.5/v0.5.3.md)
+- [v0.5.3 Roadmap](./README.md)
 - [v0.5.3 README](./README.md)
 - [v0.5.3 Summary](./summary.md)
 - [v0.5 Overview](../README.md)

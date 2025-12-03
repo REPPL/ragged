@@ -148,7 +148,7 @@ All checked links are valid!
 ```markdown
 ## Related Documentation
 
-- [CLI Enhancements](../../development/planning/interfaces/cli/enhancements.md) - Complete specs
+- [CLI Enhancements](../../planning/interfaces/cli/enhancements.md) - Complete specs
 
 ---
 ```

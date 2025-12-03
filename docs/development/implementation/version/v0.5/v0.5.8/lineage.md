@@ -77,7 +77,7 @@ This document provides complete traceability from planning through implementatio
 ## Security Audit Trail
 
 ### Pre-Implementation Audits
-- [2025-11-23 Security Audit](../../../../../audit/security/2025-11-23-security-audit.md) - Identified security gaps
+- [2025-11-23 Security Audit](../../../../audit/security/2025-11-23-security-audit.md) - Identified security gaps
 
 ### Implementation Verification
 - **Test Results:** All security tests passing

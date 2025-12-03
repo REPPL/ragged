@@ -84,7 +84,7 @@
    - Mock-based quality assessment tests
 
 3. **Security Audit**
-   - [v0.3.4b Security Audit](../../../../../audit/security/baseline/v0.3.4b-security-audit.md)
+   - [v0.3.4b Security Audit](../../../../audit/security/baseline/v0.3.4b-security-audit.md)
    - Grade: C (moderate risk)
    - 3 CRITICAL, 7 HIGH, 12 MEDIUM issues
    - Remediation: 62 hours across 4 phases
@@ -163,7 +163,7 @@
 
 ### Critical Security Gaps
 
-From [security audit](../../../../../audit/security/baseline/v0.3.4b-security-audit.md):
+From [security audit](../../../../audit/security/baseline/v0.3.4b-security-audit.md):
 
 **CRITICAL-1**: MD5 cache keys (collision attacks)
 **CRITICAL-2**: Uncontrolled page rendering (DoS)
@@ -217,7 +217,7 @@ From [security audit](../../../../../audit/security/baseline/v0.3.4b-security-au
 
 **Development Logs**: [v0.3.4b DevLog](../../../../process/devlogs/version/v0.3.4b/summary.md)
 **Time Tracking**: [v0.3.4b Time Log](../../../../process/time-logs/version/v0.3.4b/time-tracking.md)
-**Security Audit**: [v0.3.4b Security Audit](../../../../../audit/security/baseline/v0.3.4b-security-audit.md)
+**Security Audit**: [v0.3.4b Security Audit](../../../../audit/security/baseline/v0.3.4b-security-audit.md)
 
 ---
 
@@ -277,7 +277,7 @@ From [security audit](../../../../../audit/security/baseline/v0.3.4b-security-au
 - **Planning**: [v0.3.4 Planning](../../../../roadmap/version/v0.3/v0.3.4/README.md)
 - **Roadmap**: [v0.3.4b Roadmap](../../../../roadmap/version/v0.3/v0.3.4/v0.3.4b.md)
 - **Implementation**: [v0.3.4b Summary](./summary.md)
-- **Security**: [v0.3.4b Security Audit](../../../../../audit/security/baseline/v0.3.4b-security-audit.md)
+- **Security**: [v0.3.4b Security Audit](../../../../audit/security/baseline/v0.3.4b-security-audit.md)
 - **Predecessor**: [v0.3.4a Lineage](../v0.3.4a/lineage.md)
 - **Parent Version**: [v0.3 Overview](../../README.md)
 

@@ -128,7 +128,7 @@ from ragged.gpu.oom_handler import OOMHandler
 
 ## Related Documentation
 
-- [v0.5.1 Roadmap](../../../../roadmap/version/v0.5/v0.5.1.md) - Original specification
+- [v0.5.1 Roadmap](./README.md) - Original specification
 - [v0.5.0 Implementation](../v0.5.0/README.md) - ColPali foundation (prerequisite)
 - [v0.5.2 Implementation](../v0.5.2/README.md) - Vision retrieval (builds on this)
 - [v0.5 Overview](../README.md) - Series overview

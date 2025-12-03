@@ -333,7 +333,7 @@ See individual version roadmaps for detailed implementation plans.
 - v0.3.X Roadmap - Detailed implementation for version X
 - v0.3 Planning - High-level design goals
 - [v0.3 Master Roadmap](../README.md) - Complete v0.3 overview
-- [Security Policy](../../../../../security/policy.md) - Security requirements
+- [Security Policy](../../../../../guides/security/policy.md) - Security requirements
 - ADR-XXX - Related architectural decision
 
 ---

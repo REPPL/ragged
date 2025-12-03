@@ -123,7 +123,7 @@
 - [v0.2 Implementation Index](../README.md) - All v0.2.x implementations
 
 **Security Documentation:**
-- [Post-v0.2.10 Audit](../../../../../audit/security/baseline/post-v0.2.10-audit.md) - Security foundation before privacy work
+- [Post-v0.2.10 Audit](../../../../audit/security/baseline/post-v0.2.10-audit.md) - Security foundation before privacy work
 
 **Process Documentation:**
 - [DevLogs](../../../../process/devlogs) - Development narratives

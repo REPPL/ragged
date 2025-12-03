@@ -41,7 +41,7 @@ Implementation records for all v0.6.x releases documenting:
 - **Planning:** Use [v0.6 Planning](../../../planning/version/v0.6/) for design goals
 - **Roadmaps:** Use [v0.6 Roadmap](../../../roadmap/version/v0.6/) for implementation plans
 - **Development Logs:** Use [DevLogs](../../../process/devlogs/) for narrative
-- **User Guides:** Use [Tutorials](../../../../../tutorials/) and [Guides](../../../../../guides/)
+- **User Guides:** Use [Tutorials](../../../../tutorials/) and [Guides](../../../../guides/)
 
 ---
 

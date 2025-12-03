@@ -130,7 +130,7 @@ User Query (text, image, or both)
 
 ## Related Documentation
 
-- [v0.5.2 Roadmap](../../../../roadmap/version/v0.5/v0.5.2.md) - Original specification
+- [v0.5.2 Roadmap](./README.md) - Original specification
 - [v0.5.0 Implementation](../v0.5.0/README.md) - ColPali + DualStore (prerequisite)
 - [v0.5.1 Implementation](../v0.5.1/README.md) - GPU management (prerequisite)
 - [v0.5.3 Implementation](../v0.5.3/README.md) - CLI commands (builds on this)

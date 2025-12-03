@@ -79,7 +79,7 @@ From here you can:
 
 ### Learn More
 - [Full Installation Guide](./installation/README.md) - Detailed setup instructions
-- [CLI Reference](./reference/cli.md) - All available commands
+- [CLI Reference](./reference/cli/) - All available commands
 - [Configuration Guide](./guides/configuration.md) - Customise ragged
 
 ### Having Problems?

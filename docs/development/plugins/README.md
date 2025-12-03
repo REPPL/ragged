@@ -112,7 +112,7 @@ Test plugins available:
 
 ## Related Documentation
 
-- [Security Audit Baseline](../../audit/security/baseline/v0.6.0-security-audit.md) - Security assessment and findings
+- [Security Audit Baseline](../../development/audit/security/baseline/v0.6.0-security-audit.md) - Security assessment and findings
 - [v0.6.2 Roadmap](../roadmap/version/v0.6/v0.6.2.md) - Security enhancements (SECURITY-003, SECURITY-004, SECURITY-005)
 - [Sandbox Implementation](sandbox.md) - Detailed sandbox documentation
 

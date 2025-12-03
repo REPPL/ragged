@@ -219,15 +219,15 @@ Tests are version-specific:
 ## Related Documentation
 
 - [Automated Tests](../../../tests/) - Pytest test suite
-- [Multi-Modal Workflow Tutorial](../../tutorials/multimodal-workflow.md) - User guide
-- [GPU Configuration Guide](../../guides/gpu-configuration-optimisation.md) - GPU setup
-- [API Reference](../../reference/api/) - Technical specifications
+- [Multi-Modal Workflow Tutorial](../../../tutorials/multimodal-workflow.md) - User guide
+- [GPU Configuration Guide](../../../guides/gpu-configuration-optimisation.md) - GPU setup
+- [API Reference](../../../../reference/api/) - Technical specifications
 
 ---
 
 ## Questions?
 
 For questions about:
-- **Running tests:** See [Installation Guide](../../tutorials/installation.md)
-- **Test failures:** Check [Troubleshooting](../../guides/troubleshooting.md)
-- **Contributing tests:** See [Contributing Guide](../../../CONTRIBUTING.md)
+- **Running tests:** See [Installation Guide](../../../tutorials/installation.md)
+- **Test failures:** Check [Troubleshooting](../../../guides/troubleshooting.md)
+- **Contributing tests:** See [Contributing Guide](../../../README.md)

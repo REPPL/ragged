@@ -387,7 +387,7 @@ Despite simpler scope (unit tests vs integration), code volume higher because:
 - v0.5.5 Development Log - Development narrative
 - v0.5.5 Implementation Summary - Technical metrics
 - v0.5.5 Lineage - Planning to implementation traceability
-- [v0.5.5 Roadmap](../../../../roadmap/version/v0.5/v0.5.5.md) - Original estimate (integration tests)
+- [v0.5.5 Roadmap](./README.md) - Original estimate (integration tests)
 
 ---
 

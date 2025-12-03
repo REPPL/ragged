@@ -280,8 +280,8 @@ See [v0.3.0 roadmap](../v0.3.0.md) for detailed implementation with privacy sect
 - [v0.3.0 Roadmap](../v0.3.0.md) - Detailed implementation with privacy sections
 - v0.3 Planning - Design goals
 - [v0.3 Master Roadmap](../README.md) - Complete v0.3 overview
-- [Security Policy](../../../../../security/policy.md) - Session security requirements
-- [Privacy Architecture](../../../../../security/privacy-architecture.md) - Session encryption
+- [Security Policy](../../../../../guides/security/policy.md) - Session security requirements
+- [Privacy Architecture](../../../../../guides/security/privacy-architecture.md) - Session encryption
 
 ---
 

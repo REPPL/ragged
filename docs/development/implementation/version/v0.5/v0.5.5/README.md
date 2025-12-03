@@ -361,7 +361,7 @@ Integration and E2E testing deferred to v0.5.6 or later. The foundation is now i
 
 - [Summary](./summary.md) - Detailed implementation metrics
 - [Lineage](./lineage.md) - Planning to implementation traceability
-- [v0.5.5 Roadmap](../../../../roadmap/version/v0.5/v0.5.5.md) - Original plan (integration tests)
+- [v0.5.5 Roadmap](./README.md) - Original plan (integration tests)
 - v0.5.5 Development Log - Development narrative
 - [v0.5.3 Implementation](../v0.5.3/README.md) - Features being tested
 

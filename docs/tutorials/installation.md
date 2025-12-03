@@ -835,7 +835,7 @@ rm -rf ~/.ragged/storage  # or ./data if using local development
 ### Advanced Resources
 - [Multi-Document Analysis Notebook](../../examples/notebooks/02-multi-document-analysis.ipynb) - Batch processing examples
 - [GPU Optimization Notebook](../../examples/notebooks/03-gpu-optimization.ipynb) - Performance tuning
-- [Manual Testing Framework](../testing/manual-tests/README.md) - Test procedures and validation
+- [Manual Testing Framework](../development/testing/manual-tests/README.md) - Test procedures and validation
 
 ### Support
 - [FAQ](../guides/faq.md) - Common questions

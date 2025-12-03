@@ -80,8 +80,8 @@ Traceability from planning to implementation:
 **Related Documentation:**
 - Roadmap: v0.2.10 - Original plan
 - [v0.2 Index](../README.md) - All v0.2.x implementations
-- [Baseline Security Audit](../../../../../audit/security/baseline/baseline-audit-pre-v0.2.10.md) - Pre-implementation
-- [Post-Implementation Audit](../../../../../audit/security/baseline/post-v0.2.10-audit.md) - Verification
+- [Baseline Security Audit](../../../../audit/security/baseline/baseline-audit-pre-v0.2.10.md) - Pre-implementation
+- [Post-Implementation Audit](../../../../audit/security/baseline/post-v0.2.10-audit.md) - Verification
 
 **Previous/Next Implementations:**
 - [v0.2.x Earlier Versions](../README.md) - Previous v0.2 releases

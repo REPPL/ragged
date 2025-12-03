@@ -342,7 +342,7 @@ After v0.7.x series completion:
 - [WebUI Wireframe](../../../../design/webUI/wireframe/webUI--wireframe.svg) - Visual mockup
 
 ### Current Documentation
-- [WebUI Guide](../../../../guides/webui.md) - User guide for web interface (to be created in v0.7.1)
-- [CLI Reference](../../../../reference/cli.md) - Command-line interface reference
+- [WebUI Guide](../../../../guides/README.md) - User guide for web interface (to be created in v0.7.1)
+- [CLI Reference](../../../../reference/cli/) - Command-line interface reference
 
 ---

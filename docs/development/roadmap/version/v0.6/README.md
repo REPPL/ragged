@@ -251,21 +251,21 @@ Version 0.6 transforms ragged from a functional RAG system into an intelligent, 
 ## Related Documentation
 
 **Planning:**
-- [v0.6 Planning Overview](../../planning/version/v0.6/) - High-level design goals
+- [v0.6 Planning Overview](../../../implementation/version/v0.6) - High-level design goals
 
 **Implementation:**
-- [v0.5 Implementation](../../implementation/version/v0.5/) - Previous release series
-- [v0.6 Implementation](../../implementation/version/v0.6/) - Implementation records (post-release)
+- [v0.5 Implementation](../../../implementation/version/v0.5) - Previous release series
+- [v0.6 Implementation](../../../implementation/version/v0.6) - Implementation records (post-release)
 
 **Process:**
-- [Development Methodology](../../process/methodology/) - How v0.6 is being built
+- [Development Methodology](../../../process/methodology) - How v0.6 is being built
 
 **Decisions:**
-- [ADRs](../../decisions/adrs/) - Architecture decisions for v0.6 features
+- [ADRs](../../../decisions/adrs) - Architecture decisions for v0.6 features
 
 **Security:**
 - [v0.6.0 Security Audit](../../../audit/security/baseline/v0.6.0-security-audit.md) - Comprehensive baseline assessment
-- [Security Improvements Roadmap](../security-improvements-v0.6.x.md) - Detailed change requests with implementation
+- [Security Improvements Roadmap](./version/v0.6/v0.6.1.md) - Detailed change requests with implementation
 - [Security Test Suite](../../../../tests/security/) - Comprehensive security tests
 
 ---

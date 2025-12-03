@@ -41,7 +41,7 @@ Implement comprehensive security hardening for all vision-enabled RAG features t
 
 ## Roadmap Phase
 
-**Document:** [v0.5.7 Roadmap](../../../../roadmap/version/v0.5/v0.5.7.md)
+**Document:** [v0.5.7 Roadmap](./README.md)
 
 **Core Deliverables:**
 1. **Phase 1: Security Audit** (8-10 hours)
@@ -408,9 +408,9 @@ max_image_memory_mb: float = 500.0
 ## Related Documentation
 
 - [v0.5 Planning](../../../../planning/version/v0.5/README.md)
-- [v0.5.7 Roadmap](../../../../roadmap/version/v0.5/v0.5.7.md)
+- [v0.5.7 Roadmap](./README.md)
 - [v0.5.7 README](./README.md) - Implementation details
-- [Security Monitoring Guide](../../../../guides/) - Operational procedures
+- [Security Monitoring Guide](../../../../../guides/) - Operational procedures
 - [v0.5.6 Implementation](../../v0.5.6/README.md) - Previous version (documentation focus)
 - [v0.5.8 Implementation](../v0.5.8/README.md) - Next version (security integration)
 

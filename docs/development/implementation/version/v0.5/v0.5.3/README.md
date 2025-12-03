@@ -317,7 +317,7 @@ Version 0.5.3 delivers comprehensive CLI functionality exposing all v0.5 multi-m
 
 ## Related Documentation
 
-- [v0.5.3 Roadmap](../../../../roadmap/version/v0.5/v0.5.3.md) - Original plan
+- [v0.5.3 Roadmap](./README.md) - Original plan
 - [v0.5 Overview](../README.md) - v0.5 series summary
 - [v0.5.3 Summary](./summary.md) - Detailed implementation metrics
 - [v0.5.3 Lineage](./lineage.md) - Traceability from planning to implementation

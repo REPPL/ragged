@@ -20,13 +20,13 @@ Actual hours spent implementing v0.5.3 CLI features.
 ## What Doesn't Belong Here
 
 - **Development narratives** → See `../../../devlogs/version/v0.5.3/`
-- **Implementation specifications** → See `../../../../implementation/version/v0.5/v0.5.3/`
-- **Roadmap estimates** → See `../../../../roadmap/version/v0.5/v0.5.3.md`
+- **Implementation specifications** → See `../v0.5.3/`
+- **Roadmap estimates** → See `./README.md`
 
 ## Related Documentation
 
 - [v0.5.3 Development Logs](../../../devlogs/version/v0.5.3/) - Daily development narratives
-- [v0.5.3 Implementation](../../../../implementation/version/v0.5/v0.5.3/) - Technical record
+- [v0.5.3 Implementation](../v0.5.3/) - Technical record
 - [Time Logs Overview](../../README.md) - All time tracking
 
 ---

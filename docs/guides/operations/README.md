@@ -57,6 +57,6 @@ This directory contains documentation for production operations, including monit
 ## Related Documentation
 
 - [Session Monitoring](./monitoring.md) - Prometheus/Grafana setup (v0.6.2)
-- [v0.6.2 Roadmap](../development/roadmap/version/v0.6/v0.6.2.md) - Security enhancements
-- [Security Audit](../audit/security/baseline/v0.6.0-security-audit.md) - Security assessment
+- [v0.6.2 Roadmap](../../development/roadmap/version/v0.6/v0.6.2.md) - Security enhancements
+- [Security Audit](../../development/audit/security/baseline/v0.6.0-security-audit.md) - Security assessment
 

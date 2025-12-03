@@ -324,8 +324,8 @@ The `roadmap/README.md` MUST serve as a status dashboard:
 
 ## Quick Links
 
-- [All Features](features/README.md)
-- [Milestone Timeline](milestones/README.md)
+- [All Features](../../implementation/README.md)
+- [Milestone Timeline](../../implementation/README.md)
 - [v0.X Milestone](milestones/v0.X.md)
 ```
 

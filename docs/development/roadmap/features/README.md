@@ -59,7 +59,7 @@ Features that span multiple versions or have complex multi-phase implementation 
 
 Detailed feature specifications for individual versions.
 
-### [v0.3](./v0.3/)
+### [v0.3](../../implementation/version/v0.3)
 Advanced RAG techniques and features planned for v0.3 series.
 
 **Features:**
@@ -70,7 +70,7 @@ Advanced RAG techniques and features planned for v0.3 series.
 - Multi-Modal Support
 - Query Processing
 
-**See:** [v0.3 Features README](./v0.3/README.md)
+**See:** [v0.3 Features README](../../implementation/README.md)
 
 ---
 

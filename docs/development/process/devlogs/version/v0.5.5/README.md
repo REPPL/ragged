@@ -20,13 +20,13 @@ Development narrative documenting the decision to deviate from the roadmap and p
 ## What Doesn't Belong Here
 
 - **Time tracking** → See `../../../time-logs/version/v0.5.5/`
-- **Implementation specifications** → See `../../../../implementation/version/v0.5/v0.5.5/`
+- **Implementation specifications** → See `../v0.5.5/`
 - **Architecture decisions** → See `../../../../decisions/adrs/`
 
 ## Related Documentation
 
-- [v0.5.5 Implementation](../../../../implementation/version/v0.5/v0.5.5/) - Technical implementation record
-- [v0.5.5 Roadmap](../../../../roadmap/version/v0.5/v0.5.5.md) - Original plan (integration tests)
+- [v0.5.5 Implementation](../v0.5.5/) - Technical implementation record
+- [v0.5.5 Roadmap](./README.md) - Original plan (integration tests)
 - [Development Logs Overview](../../README.md) - All development logs
 
 ---

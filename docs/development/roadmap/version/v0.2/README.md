@@ -209,8 +209,8 @@ v0.2.10 (Security) → v0.2.11 (Privacy) → v0.3.1 (First v0.3 Feature)
 ### Security & Privacy Documentation
 
 **Core Documents:**
-- [Security Policy](../../../../security/policy.md) - Comprehensive security policy
-- [Privacy Architecture](../../../../security/privacy-architecture.md) - Technical privacy documentation
+- [Security Policy](../../../../guides/security/policy.md) - Comprehensive security policy
+- [Privacy Architecture](../../../../guides/security/privacy-architecture.md) - Technical privacy documentation
 
 **Roadmap Documents:**
 - [v0.2.10 Roadmap](./v0.2.10/) - Security Hardening implementation plan
@@ -227,8 +227,8 @@ After completing each version, document in:
 ## Related Documentation
 
 ### Security & Privacy
-- [Security Policy](../../../../security/policy.md)
-- [Privacy Architecture](../../../../security/privacy-architecture.md)
+- [Security Policy](../../../../guides/security/policy.md)
+- [Privacy Architecture](../../../../guides/security/privacy-architecture.md)
 
 ### Planning Documentation
 - [v0.2 Planning](../../../planning/version/v0.2/) - Design goals and requirements

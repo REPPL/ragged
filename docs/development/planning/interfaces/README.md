@@ -245,7 +245,7 @@ Contributions to UI design and implementation are welcome!
 **For CLI enhancements:**
 1. Review [CLI Enhancements Catalogue](./cli/enhancements.md)
 2. Check roadmap for current version
-3. See [Contributing Guide](../../../../CONTRIBUTING.md)
+3. See [Contributing Guide](../../../../README.md)
 
 **For Web UI improvements:**
 1. Review version-specific design documents

@@ -10,7 +10,7 @@
 
 ### 1. Planning Phase (WHAT & WHY)
 
-**Document:** [v0.5 Planning Overview](../../../../roadmap/version/v0.5/README.md)
+**Document:** [v0.5 Planning Overview](../README.md)
 
 **Key Decisions:**
 - Implement vision embeddings for multi-modal RAG
@@ -29,7 +29,7 @@
 
 ### 2. Roadmap Phase (HOW & WHEN)
 
-**Document:** [v0.5 Roadmap](../../../../roadmap/version/v0.5/README.md)
+**Document:** [v0.5 Roadmap](../README.md)
 
 **Implementation Plan:**
 - **VISION-001:** ColPali Integration (vision embeddings)
@@ -130,12 +130,12 @@
 ## Cross-References
 
 **Planning Documents:**
-- [v0.5 Vision](../../../../roadmap/version/v0.5/README.md) - High-level objectives
-- [v0.5 Feature Specifications](../../../../roadmap/version/v0.5/) - Detailed VISION-* specs
+- [v0.5 Vision](../README.md) - High-level objectives
+- [v0.5 Feature Specifications](../) - Detailed VISION-* specs
 
 **Roadmap Documents:**
-- [v0.5 Roadmap](../../../../roadmap/version/v0.5/README.md) - Implementation plan
-- [VISION-001 through VISION-006](../../../../roadmap/version/v0.5/) - Feature roadmaps
+- [v0.5 Roadmap](../README.md) - Implementation plan
+- [VISION-001 through VISION-006](../) - Feature roadmaps
 
 **Implementation Records:**
 - [v0.5.6 README](./README.md) - What was built

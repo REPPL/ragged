@@ -259,7 +259,7 @@ curl -sSf https://...install-local.sh | bash
 
 ## Development Timeline
 
-**Planning:** [v0.5.10 Roadmap](../../../../roadmap/version/v0.5/v0.5.10.md)
+**Planning:** [v0.5.10 Roadmap](./README.md)
 **Implementation:** This directory
 
 **Key Milestones:**
@@ -276,8 +276,8 @@ curl -sSf https://...install-local.sh | bash
 
 - [CHANGELOG.md](./CHANGELOG.md) - User-facing release notes
 - [DELIVERABLES-SUMMARY.md](./DELIVERABLES-SUMMARY.md) - Complete implementation record
-- [v0.5.10 Roadmap](../../../../roadmap/version/v0.5/v0.5.10.md) - Implementation plan
-- [Installation Guide](../../../../tutorials/) - Getting started
+- [v0.5.10 Roadmap](./README.md) - Implementation plan
+- [Installation Guide](../../../../../tutorials/) - Getting started
 - [justfile](../../../../../../justfile) - Task runner commands
 - [.envrc](../../../../../../.envrc) - direnv configuration
 

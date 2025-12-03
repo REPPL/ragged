@@ -328,6 +328,6 @@ sha256sum ragged-offline-bundle.tar.gz > ragged-offline-bundle.tar.gz.sha256
 
 - [Enterprise Installation](./enterprise.md)
 - [Troubleshooting](../troubleshooting/README.md)
-- [Security](../reference/security.md)
+- [Security](../guides/security/)
 
 ---

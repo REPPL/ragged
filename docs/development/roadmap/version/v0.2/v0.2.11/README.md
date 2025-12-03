@@ -2281,8 +2281,8 @@ Task(
 - [v0.2.10 - Security Hardening](../v0.2.10/) - Previous version (security foundation)
 - [v0.3.9 - REPL](../../v0.3/v0.3.9.md) - Builds on encrypted session storage
 - [v0.3.10 - Metrics](../../v0.3/v0.3.10.md) - Builds on PII redaction and TTL
-- [Security Policy](../../../../../security/policy.md) - Overall security policy
-- [Privacy Architecture](../../../../../security/privacy-architecture.md) - Privacy design
+- [Security Policy](../../../../../guides/security/policy.md) - Overall security policy
+- [Privacy Architecture](../../../../../guides/security/privacy-architecture.md) - Privacy design
 
 ---
 

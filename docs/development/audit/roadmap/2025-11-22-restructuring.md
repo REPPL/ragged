@@ -493,10 +493,10 @@ v0.4.13 (production deployment with observability)
 ## Related Documentation
 
 - [v0.4 Overview README](./README.md) - Complete series overview (updated with new sequence)
-- [v0.4.9](../../development/roadmap/version/v0.4/v0.4.9.md) - Enhanced with mid-series security review
-- [v0.4.11](../../development/roadmap/version/v0.4/v0.4.11.md) - Temporal memory Part 2 (advanced features)
-- [v0.4.12](../../development/roadmap/version/v0.4/v0.4.12.md) - Backend optimisation & migration (merged)
-- [v0.4.13](../../development/roadmap/version/v0.4/v0.4.13.md) - Production deployment & observability (enhanced)
+- [v0.4.9](../../roadmap/version/v0.4/v0.4.9.md) - Enhanced with mid-series security review
+- [v0.4.11](../../roadmap/version/v0.4/v0.4.11.md) - Temporal memory Part 2 (advanced features)
+- [v0.4.12](../../roadmap/version/v0.4/v0.4.12.md) - Backend optimisation & migration (merged)
+- [v0.4.13](../../roadmap/version/v0.4/v0.4.13.md) - Production deployment & observability (enhanced)
 
 ---
 

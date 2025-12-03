@@ -61,8 +61,8 @@ Roadmap audits review planning documentation, task organisation, and version roa
 ### Security Audits
 
 For guidance on conducting security audits, see:
-- [Security Monitoring Guide](../guides/security-monitoring.md) - Operational monitoring procedures
-- [Security Policy](../security/policy.md) - Security policies and procedures
+- [Security Monitoring Guide](../../guides/security-monitoring.md) - Operational monitoring procedures
+- [Security Policy](../../guides/security/policy.md) - Security policies and procedures
 - [Baseline README](./security/baseline/README.md) - Baseline audit procedures
 - [Implementation README](./security/implementation/README.md) - Implementation audit procedures
 
@@ -124,8 +124,8 @@ ls -l security/baseline/v*.md
 
 ## Related Documentation
 
-- [Implementation Documentation](../development/implementation/) - What was built
-- [Roadmap Documentation](../development/roadmap/) - What will be built
-- [Feature-Centric Roadmap Standard](../development/process/methodology/feature-centric-roadmaps.md) - Target methodology for roadmaps
-- [Security Guides](../guides/) - How to use security features
+- [Implementation Documentation](security/implementation) - What was built
+- [Roadmap Documentation](roadmap) - What will be built
+- [Feature-Centric Roadmap Standard](../process/methodology/feature-centric-roadmaps.md) - Target methodology for roadmaps
+- [Security Guides](../../guides/) - How to use security features
 - [Testing Documentation](../testing/) - Test procedures and manual tests

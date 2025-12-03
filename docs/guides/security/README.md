@@ -38,6 +38,6 @@ ragged follows these security principles:
 
 ## Related Documentation
 
-- [Privacy Design](../explanation/privacy-design.md) - Privacy architecture
-- [ADR-0001: Local-Only Processing](../development/decisions/adrs/0001-local-only-processing.md) - Privacy decision rationale
+- [Privacy Design](./privacy-architecture.md) - Privacy architecture
+- [ADR-0001: Local-Only Processing](../../development/decisions/adrs/0001-local-only-processing.md) - Privacy decision rationale
 - Contributing Security Issues - How to report vulnerabilities

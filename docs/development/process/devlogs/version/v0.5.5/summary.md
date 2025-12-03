@@ -403,8 +403,8 @@ v0.5.5 represents a strategic pivot from planned integration testing to addressi
 - Implementation Summary
 - Lineage
 - [Time Log](../../../time-logs/version/v0.5.5/time-tracking.md)
-- [v0.5.5 Roadmap](../../../../roadmap/version/v0.5/v0.5.5.md) - Original plan
-- [v0.5.3 Implementation](../../../../implementation/version/v0.5/README.md) - Features tested
+- [v0.5.5 Roadmap](./README.md) - Original plan
+- [v0.5.3 Implementation](../README.md) - Features tested
 
 ---
 

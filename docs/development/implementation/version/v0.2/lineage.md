@@ -223,8 +223,8 @@ This document traces the lineage from planning through decisions to implementati
 - All 4 planned security features successfully implemented
 
 **Security Audits:**
-- [Baseline Security Audit](../../../../audit/security/baseline/baseline-audit-pre-v0.2.10.md) - 18 issues identified (3 CRITICAL)
-- [Post-Implementation Audit](../../../../audit/security/baseline/post-v0.2.10-audit.md) - All CRITICAL issues resolved, 9 issues remaining
+- [Baseline Security Audit](../../../audit/security/baseline/baseline-audit-pre-v0.2.10.md) - 18 issues identified (3 CRITICAL)
+- [Post-Implementation Audit](../../../audit/security/baseline/post-v0.2.10-audit.md) - All CRITICAL issues resolved, 9 issues remaining
 
 ### Traceability Matrix
 
