@@ -1,6 +1,20 @@
+![Status: Historical Reference](https://img.shields.io/badge/status-historical%20reference-red)
+![Maintenance: No](https://img.shields.io/badge/maintained-no-red)
+[![Use: ragd instead](https://img.shields.io/badge/use-ragd%20instead-blue)](https://github.com/REPPL/ragd)
+
+> [!CAUTION]
+> **HISTORICAL REFERENCE ONLY**
+>
+> This repository is preserved for transparency and reproducibility purposes only.
+> It documents the development of RAG concepts that became [ragd](https://github.com/REPPL/ragd).
+>
+> **This code may not work.** Do not use it for anything other than reference.
+> For the production version, see [ragd](https://github.com/REPPL/ragd).
+
+---
+
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
-[![Status: Alpha](https://img.shields.io/badge/status-alpha-red.svg)]()
 
 
 *This project is my attempt to learn fully AI-based 'vibe' coding and to document my use of AI coding assistants [transparently](./docs/development/process/methodology/ai-assistance.md). Expect breaking changes before v1.0.*

@@ -14,7 +14,7 @@ authors = [
 ]
 keywords = ["rag", "llm", "retrieval", "embeddings", "local", "privacy"]
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 7 - Inactive",
     "Intended Audience :: Developers",
     "Intended Audience :: Science/Research",
     "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
